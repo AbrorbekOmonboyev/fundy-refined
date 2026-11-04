@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
-import { useApp } from '../context/AppContext';
-import { formatUZS, getModelLabel } from '../utils/formatters';
-import { ProjectCard } from '../components/ProjectCard';
+import { useApp } from '@/context/AppContext';
+import { formatUZS, getModelLabel } from '@/lib/formatters';
+import { ProjectCard } from '@/components/ProjectCard';
 import { 
   DollarSign, 
   Gift, 
   TrendingUp, 
   Bookmark, 
-  Clock, 
   ArrowUpRight, 
-  CheckCircle2, 
   Package, 
-  FileCheck,
-  CreditCard,
-  Layers
 } from 'lucide-react';
 
 export const BackerDashboardPage: React.FC = () => {
@@ -107,7 +102,7 @@ export const BackerDashboardPage: React.FC = () => {
         ].map(tab => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
+            onClick={() => setActiveTab(tab.id as typeof activeTab)}
             className={`py-3 px-3 text-xs font-semibold whitespace-nowrap border-b-2 transition-colors cursor-pointer ${
               activeTab === tab.id
                 ? 'border-emerald-600 text-emerald-700'

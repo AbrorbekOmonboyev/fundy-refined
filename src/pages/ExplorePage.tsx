@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { useApp } from '../context/AppContext';
-import { ProjectCard } from '../components/ProjectCard';
-import { CrowdfundingModel, ProjectCategory } from '../types';
+import { useApp } from '@/context/AppContext';
+import { ProjectCard } from '@/components/ProjectCard';
+import { CrowdfundingModel, ProjectCategory } from '@/types';
 import { Search, Filter, SlidersHorizontal, ArrowUpDown, X } from 'lucide-react';
 
 const CATEGORIES: ('All' | ProjectCategory)[] = [
@@ -128,7 +128,7 @@ export const ExplorePage: React.FC = () => {
             ].map(tab => (
               <button
                 key={tab.id}
-                onClick={() => setSelectedModel(tab.id as any)}
+                onClick={() => setSelectedModel(tab.id as typeof selectedModel)}
                 className={`px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-colors cursor-pointer ${
                   selectedModel === tab.id
                     ? 'bg-white text-slate-900 shadow-sm'
@@ -145,7 +145,7 @@ export const ExplorePage: React.FC = () => {
             <ArrowUpDown className="w-3.5 h-3.5 text-slate-500" />
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
+              onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
               className="text-xs font-medium bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer"
             >
               <option value="most_funded">Most Funded (%)</option>

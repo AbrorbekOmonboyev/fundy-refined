@@ -1,0 +1,62 @@
+{
+  "languages": {
+    "uz": "O'zbekcha",
+    "ru": "Русский",
+    "en": "English"
+  },
+  "nav": {
+    "explore": "Loyihalar",
+    "howItWorks": "Qanday ishlaydi",
+    "learn": "Ta'lim va mushoraka",
+    "trustSafety": "Ishonch va xavfsizlik",
+    "dashboard": "Kabinet",
+    "startProject": "Loyiha boshlash"
+  },
+  "roles": {
+    "backer": "Homiy",
+    "founder": "Asoschi"
+  },
+  "header": {
+    "notifications": "Bildirishnomalar",
+    "markAllRead": "Hammasini o'qilgan deb belgilash",
+    "noNotifications": "Hozircha bildirishnomalar yo'q.",
+    "toggleMenu": "Menyuni ochish yoki yopish",
+    "language": "Til"
+  },
+  "banner": {
+    "label": "Demo versiya:",
+    "full": "O'zbekiston bozori uchun ishlab chiqilgan. Barcha to'lovlar, foyda taqsimoti va loyihalar — simulyatsiya.",
+    "short": "Demo versiya (UZS).",
+    "viewAs": "Ko'rinish:",
+    "reset": "Demoni tiklash",
+    "resetTitle": "Demo ma'lumotlarini tiklash",
+    "resetConfirm": "Demo ma'lumotlarini boshlang'ich holatga qaytarasizmi?"
+  },
+  "footer": {
+    "about": "O'zbekistonning shaffof, foizsiz kraudfanding ekotizimi. Tadbirkorlar, hunarmandlar va ijtimoiy tashabbuskorlarni xayriya, mukofot va mushoraka orqali homiylar bilan bog'laydi.",
+    "simulated": "Demo versiya · O'zbekiston uchun yaratilgan",
+    "models": "Modellar",
+    "platform": "Platforma",
+    "trust": "Ishonch va xavfsizlik",
+    "donation": "Xayriya",
+    "reward": "Mukofotli",
+    "musharakah": "Mushoraka (ulush)",
+    "calculator": "Foyda taqsimoti kalkulyatori",
+    "discover": "Loyihalarni ko'rish",
+    "startCampaign": "Kampaniya boshlash",
+    "founderDashboard": "Asoschi kabineti",
+    "backerDashboard": "Homiy kabineti",
+    "verification": "Tekshiruv standartlari",
+    "aiEvaluation": "Loyihalarni AI orqali baholash",
+    "risk": "Risklar haqida ma'lumot",
+    "terms": "Foydalanish shartlari va maxfiylik",
+    "copyright": "© {{year}} Fundy (demo versiya). Barcha huquqlar himoyalangan.",
+    "madeWith": "Mehr bilan yaratildi",
+    "forEntrepreneurs": "O'zbekiston tadbirkorlari uchun."
+  },
+  "notFound": {
+    "title": "Sahifa topilmadi",
+    "message": "Bu sahifa mavjud emas yoki boshqa joyga ko'chirilgan.",
+    "home": "Bosh sahifaga qaytish"
+  }
+}

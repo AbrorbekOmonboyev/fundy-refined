@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useApp } from '../context/AppContext';
-import { ProjectCard } from '../components/ProjectCard';
-import { CrowdfundingModel } from '../types';
-import { formatUZS } from '../utils/formatters';
+import { useApp } from '@/context/AppContext';
+import { ProjectCard } from '@/components/ProjectCard';
+import { CrowdfundingModel } from '@/types';
+import { formatUZS } from '@/lib/formatters';
 import { 
   ArrowRight, 
   ShieldCheck, 
@@ -10,7 +10,6 @@ import {
   TrendingUp, 
   Gift, 
   HeartHandshake, 
-  Users, 
   Building2, 
   Sparkles,
   ChevronDown,
@@ -27,7 +26,6 @@ export const HomePage: React.FC = () => {
   // Compute live prototype metrics
   const totalRaised = projects.reduce((acc, p) => acc + p.raisedAmount, 0);
   const totalBackers = projects.reduce((acc, p) => acc + p.backerCount, 0);
-  const activeProjectsCount = projects.filter(p => p.status === 'active').length;
 
   const filteredProjects = activeModelTab === 'all'
     ? projects.slice(0, 6)
@@ -119,7 +117,7 @@ export const HomePage: React.FC = () => {
             <div className="lg:col-span-5 relative">
               <div className="relative rounded-2xl overflow-hidden shadow-xl border border-slate-200 aspect-[4/3] bg-slate-900">
                 <img
-                  src="/images/hero_fundy_fintech_1793748701470.jpg"
+                  src="/images/hero.jpg"
                   alt="Fundy innovation and crowdfunding ecosystem in Tashkent"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover"

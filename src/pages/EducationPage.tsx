@@ -1,20 +1,14 @@
 import React, { useState } from 'react';
-import { useApp } from '../context/AppContext';
-import { formatUZS } from '../utils/formatters';
+import { formatUZS } from '@/lib/formatters';
 import { 
   BookOpen, 
   TrendingUp, 
   Gift, 
   HeartHandshake, 
-  ShieldCheck, 
   Calculator, 
-  Scale, 
-  HelpCircle,
-  ArrowRight
 } from 'lucide-react';
 
 export const EducationPage: React.FC = () => {
-  const { navigateTo } = useApp();
 
   // Interactive Profit-Sharing Calculator State
   const [projectCapital, setProjectCapital] = useState<number>(240_000_000); // 240M UZS

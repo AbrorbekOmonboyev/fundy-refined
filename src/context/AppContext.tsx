@@ -1,16 +1,10 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Project, Contribution, NotificationItem, ProjectUpdate, ProjectComment } from '../types';
-import { INITIAL_PROJECTS } from '../data/mockProjects';
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { useLocation, useNavigate } from 'react-router';
+import { pathFor, resolvePage, type PageView } from '@/app/routes';
+import type { Project, Contribution, NotificationItem, ProjectUpdate, ProjectComment } from '@/types';
+import { INITIAL_PROJECTS } from '@/data/mockProjects';
 
-export type PageView = 
-  | 'home' 
-  | 'explore' 
-  | 'project-detail' 
-  | 'start-project' 
-  | 'founder-dashboard' 
-  | 'backer-dashboard' 
-  | 'education' 
-  | 'trust-safety';
+export type { PageView };
 
 interface UserProfile {
   id: string;
@@ -64,7 +58,7 @@ const LOCAL_STORAGE_KEY_PROJECTS = 'fundy_projects_v1';
 const LOCAL_STORAGE_KEY_SAVED = 'fundy_saved_ids_v1';
 const LOCAL_STORAGE_KEY_CONTRIBUTIONS = 'fundy_contributions_v1';
 
-export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export function AppProvider({ children }: { children: ReactNode }) {
   // Load initial projects from localStorage or default
   const [projects, setProjects] = useState<Project[]>(() => {
     try {
@@ -122,8 +116,11 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     ];
   });
 
-  const [currentPage, setCurrentPage] = useState<PageView>('home');
-  const [selectedProjectId, setSelectedProjectId] = useState<string | null>('project-1');
+  // The current page and selected project come from the URL (see src/app/routes.ts).
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { page: currentPage, slug } = resolvePage(location.pathname);
+  const selectedProjectId = slug ? (projects.find(p => p.slug === slug)?.id ?? null) : null;
   const [contributionModalProject, setContributionModalProject] = useState<Project | null>(null);
   const [selectedRewardId, setSelectedRewardId] = useState<string | null>(null);
 
@@ -189,11 +186,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }, [contributions]);
 
   const navigateTo = (page: PageView, projectId?: string) => {
-    if (projectId) {
-      setSelectedProjectId(projectId);
-    }
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const projectSlug = projectId ? projects.find(p => p.id === projectId)?.slug : undefined;
+    navigate(pathFor(page, projectSlug)); // ScrollManager scrolls to top
   };
 
   const toggleSaveProject = (projectId: string) => {
@@ -298,7 +292,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       model: projectData.model || 'reward',
       category: projectData.category || 'Technology',
       location: projectData.location || 'Tashkent, Uzbekistan',
-      imageUrl: projectData.imageUrl || '/images/hero_fundy_fintech_1793748701470.jpg',
+      imageUrl: projectData.imageUrl || '/images/hero.jpg',
       targetAmount: projectData.targetAmount || 50_000_000,
       raisedAmount: 0,
       backerCount: 0,
@@ -478,7 +472,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       {children}
     </AppContext.Provider>
   );
-};
+}
 
 export const useApp = () => {
   const context = useContext(AppContext);

@@ -1,0 +1,62 @@
+{
+  "languages": {
+    "uz": "O'zbekcha",
+    "ru": "Русский",
+    "en": "English"
+  },
+  "nav": {
+    "explore": "Explore Projects",
+    "howItWorks": "How It Works",
+    "learn": "Education & Musharakah",
+    "trustSafety": "Trust & Safety",
+    "dashboard": "Dashboard",
+    "startProject": "Start a Project"
+  },
+  "roles": {
+    "backer": "Backer",
+    "founder": "Founder"
+  },
+  "header": {
+    "notifications": "Notifications",
+    "markAllRead": "Mark all read",
+    "noNotifications": "No notifications yet.",
+    "toggleMenu": "Toggle navigation menu",
+    "language": "Language"
+  },
+  "banner": {
+    "label": "Demonstration Prototype:",
+    "full": "Designed for the Uzbekistan market. All transactions, profit distributions, and projects are simulations.",
+    "short": "Uzbekistan simulation (UZS).",
+    "viewAs": "View as:",
+    "reset": "Reset Demo",
+    "resetTitle": "Reset simulated data",
+    "resetConfirm": "Reset prototype data to original demo state?"
+  },
+  "footer": {
+    "about": "Uzbekistan's transparent, interest-free crowdfunding ecosystem. Connecting entrepreneurs, artisans, and social champions with community backers through Donations, Rewards, and Musharakah profit-sharing.",
+    "simulated": "Simulated Prototype · Built for Uzbekistan",
+    "models": "Models",
+    "platform": "Platform",
+    "trust": "Trust & Safety",
+    "donation": "Donation-Based",
+    "reward": "Reward-Based Perks",
+    "musharakah": "Musharakah (Equity)",
+    "calculator": "Profit-Sharing Calculator",
+    "discover": "Discover Projects",
+    "startCampaign": "Start a Campaign",
+    "founderDashboard": "Founder Dashboard",
+    "backerDashboard": "Backer Dashboard",
+    "verification": "Verification Standards",
+    "aiEvaluation": "AI Project Evaluation",
+    "risk": "Risk Disclosures",
+    "terms": "Prototype Terms & Privacy",
+    "copyright": "© {{year}} Fundy Platform (Demonstration Prototype). All rights reserved.",
+    "madeWith": "Crafted with",
+    "forEntrepreneurs": "for entrepreneurs across Uzbekistan."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "message": "This page doesn't exist or has been moved.",
+    "home": "Go to home page"
+  }
+}

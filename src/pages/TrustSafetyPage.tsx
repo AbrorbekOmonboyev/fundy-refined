@@ -3,11 +3,8 @@ import {
   ShieldCheck, 
   Sparkles, 
   AlertTriangle, 
-  FileText, 
   Lock, 
-  HelpCircle, 
   CheckCircle2,
-  Scale
 } from 'lucide-react';
 
 export const TrustSafetyPage: React.FC = () => {
@@ -41,7 +38,7 @@ export const TrustSafetyPage: React.FC = () => {
         ].map(tab => (
           <button
             key={tab.id}
-            onClick={() => setActiveSection(tab.id as any)}
+            onClick={() => setActiveSection(tab.id as typeof activeSection)}
             className={`py-2 px-3 text-xs font-semibold rounded-lg whitespace-nowrap transition-colors cursor-pointer ${
               activeSection === tab.id
                 ? 'bg-emerald-600 text-white shadow-sm'

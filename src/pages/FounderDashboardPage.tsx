@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
-import { useApp } from '../context/AppContext';
-import { formatUZS, formatPercentage, getModelLabel } from '../utils/formatters';
+import { useApp } from '@/context/AppContext';
+import { formatUZS, formatPercentage, getModelLabel } from '@/lib/formatters';
 import { 
   Plus, 
-  CheckCircle, 
-  Clock, 
   Send, 
   AlertCircle, 
   ArrowUpRight, 
-  FileText,
   DollarSign,
   Users,
   Layers,
   Sparkles,
-  BarChart3
 } from 'lucide-react';
 
 export const FounderDashboardPage: React.FC = () => {
@@ -132,7 +128,7 @@ export const FounderDashboardPage: React.FC = () => {
         ].map(tab => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
+            onClick={() => setActiveTab(tab.id as typeof activeTab)}
             className={`py-3 px-3 text-xs font-semibold whitespace-nowrap border-b-2 transition-colors cursor-pointer ${
               activeTab === tab.id
                 ? 'border-emerald-600 text-emerald-700'

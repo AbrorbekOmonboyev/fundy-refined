@@ -1,8 +1,21 @@
+# Dependencies
 node_modules/
-build/
+
+# Build output
 dist/
+build/
 coverage/
-.DS_Store
-*.log
+
+# Environment (secrets) — only the example is committed
 .env*
 !.env.example
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/

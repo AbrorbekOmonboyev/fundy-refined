@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useApp } from '../context/AppContext';
-import { CrowdfundingModel, ProjectCategory, BudgetItem, Milestone, RewardTier } from '../types';
-import { formatUZS } from '../utils/formatters';
+import { useApp } from '@/context/AppContext';
+import { CrowdfundingModel, ProjectCategory, BudgetItem, Milestone, RewardTier } from '@/types';
+import { formatUZS } from '@/lib/formatters';
 import { 
   CheckCircle2, 
   ArrowLeft, 
   ArrowRight, 
   Plus, 
   Trash2, 
-  AlertCircle, 
   Sparkles,
   TrendingUp,
   Gift,
@@ -28,9 +27,9 @@ export const StartProjectPage: React.FC = () => {
   const [tagline, setTagline] = useState('');
   const [category, setCategory] = useState<ProjectCategory>('Technology');
   const [location, setLocation] = useState('Tashkent, Uzbekistan');
-  const [imageUrl, setImageUrl] = useState('/images/hero_fundy_fintech_1793748701470.jpg');
+  const [imageUrl, setImageUrl] = useState('/images/hero.jpg');
 
-  const [description, setDescription] = useState('');
+  const [description] = useState('');
   const [story, setStory] = useState('');
 
   const [model, setModel] = useState<CrowdfundingModel>('reward');
@@ -68,7 +67,7 @@ export const StartProjectPage: React.FC = () => {
   const [organization, setOrganization] = useState('InnoCraft Technologies MCHJ');
   const [tinOrRegistration, setTinOrRegistration] = useState('MCHJ #309819203 (Registered Tashkent City)');
   const [bio, setBio] = useState('Passionate builder with 6 years experience in hardware and consumer products across Central Asia.');
-  const [experienceYears, setExperienceYears] = useState<number>(6);
+  const [experienceYears] = useState<number>(6);
 
   // Load from local draft
   useEffect(() => {
@@ -117,7 +116,7 @@ export const StartProjectPage: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    const newProjectId = addNewProject({
+    addNewProject({
       title,
       tagline,
       description: tagline,
@@ -235,7 +234,7 @@ export const StartProjectPage: React.FC = () => {
                 </label>
                 <select
                   value={category}
-                  onChange={(e) => setCategory(e.target.value as any)}
+                  onChange={(e) => setCategory(e.target.value as typeof category)}
                   className="w-full text-xs px-3.5 py-2.5 rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 >
                   <option value="Technology">Technology & Hardware</option>
@@ -267,10 +266,10 @@ export const StartProjectPage: React.FC = () => {
               </label>
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { label: 'Fintech Hub', url: '/images/hero_fundy_fintech_1793748701470.jpg' },
-                  { label: 'Fergana Greenhouse', url: '/images/project_fergana_agro_1793748701669.jpg' },
-                  { label: 'Samarkand Crafts', url: '/images/project_samarkand_craft_1793748703114.jpg' },
-                  { label: 'Tashkent Robotics', url: '/images/project_tashkent_robotics_1793748703989.jpg' }
+                  { label: 'Fintech Hub', url: '/images/hero.jpg' },
+                  { label: 'Fergana Greenhouse', url: '/images/fergana-agro.jpg' },
+                  { label: 'Samarkand Crafts', url: '/images/samarkand-craft.jpg' },
+                  { label: 'Tashkent Robotics', url: '/images/tashkent-robotics.jpg' }
                 ].map((preset, i) => (
                   <div
                     key={i}
@@ -687,7 +686,7 @@ export const StartProjectPage: React.FC = () => {
                   </label>
                   <select
                     value={distributionSchedule}
-                    onChange={(e) => setDistributionSchedule(e.target.value as any)}
+                    onChange={(e) => setDistributionSchedule(e.target.value as typeof distributionSchedule)}
                     className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs bg-white"
                   >
                     <option value="Quarterly">Quarterly (Audited Books)</option>

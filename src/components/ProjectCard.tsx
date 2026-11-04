@@ -1,8 +1,8 @@
 import React from 'react';
-import { Project } from '../types';
-import { useApp } from '../context/AppContext';
-import { formatUZS, formatPercentage, getModelLabel } from '../utils/formatters';
-import { Bookmark, CheckCircle, Clock, Users, ArrowUpRight } from 'lucide-react';
+import { Project } from '@/types';
+import { useApp } from '@/context/AppContext';
+import { formatUZS, formatPercentage, getModelLabel } from '@/lib/formatters';
+import { Bookmark, CheckCircle, Users, ArrowUpRight } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;

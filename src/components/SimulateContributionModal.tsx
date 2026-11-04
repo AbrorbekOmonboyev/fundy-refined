@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useApp } from '../context/AppContext';
-import { formatUZS, getModelLabel } from '../utils/formatters';
+import { useApp } from '@/context/AppContext';
+import { formatUZS, getModelLabel } from '@/lib/formatters';
 import { X, CheckCircle2, ShieldCheck, AlertCircle, CreditCard, ChevronRight } from 'lucide-react';
 
 export const SimulateContributionModal: React.FC = () => {
@@ -345,7 +345,7 @@ export const SimulateContributionModal: React.FC = () => {
                     <button
                       key={method.id}
                       type="button"
-                      onClick={() => setPaymentMethod(method.id as any)}
+                      onClick={() => setPaymentMethod(method.id as typeof paymentMethod)}
                       className={`p-3 rounded-lg border text-left text-xs font-medium transition-all flex items-center gap-2 cursor-pointer ${
                         paymentMethod === method.id
                           ? 'border-emerald-600 bg-emerald-50/70 text-emerald-950 font-semibold'
