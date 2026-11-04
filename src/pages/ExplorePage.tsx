@@ -68,15 +68,15 @@ export function ExplorePage() {
 
   const chip = (active: boolean) =>
     `px-2.5 py-1 text-xs rounded-md transition-colors whitespace-nowrap cursor-pointer ${
-      active ? 'bg-emerald-600 text-white font-semibold' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+      active ? 'bg-ink text-white font-semibold' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
     }`;
   const select =
-    'text-xs font-medium bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer';
+    'text-xs font-medium bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand cursor-pointer';
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
       <header className="border-b border-slate-200 pb-6">
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">{t('explore.title')}</h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">{t('explore.title')}</h1>
         <p className="text-sm text-slate-600 mt-1">{t('explore.subtitle')}</p>
       </header>
 
@@ -90,7 +90,7 @@ export function ExplorePage() {
               onChange={e => setSearchInput(e.target.value)}
               placeholder={t('explore.searchPlaceholder')}
               aria-label={t('explore.search')}
-              className="w-full pl-9 pr-8 py-2 text-sm rounded-lg border border-slate-200 bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full pl-9 pr-8 py-2 text-sm rounded-lg border border-slate-200 bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand"
             />
             {searchInput && (
               <button
@@ -116,7 +116,7 @@ export function ExplorePage() {
                 aria-pressed={filters.model === model}
                 onClick={() => setFilter('model', model)}
                 className={`px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-colors cursor-pointer ${
-                  filters.model === model ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                  filters.model === model ? 'bg-white text-ink shadow-sm' : 'text-slate-600 hover:text-ink'
                 }`}
               >
                 {model ? t(`models.${model}.name`) : t('explore.allModels')}
@@ -210,14 +210,14 @@ export function ExplorePage() {
             <SlidersHorizontal className="w-6 h-6" aria-hidden />
           </div>
           <div>
-            <h2 className="text-base font-bold text-slate-900">{t('explore.emptyTitle')}</h2>
+            <h2 className="text-base font-bold text-ink">{t('explore.emptyTitle')}</h2>
             <p className="text-xs text-slate-500 mt-1">{t('explore.emptyText')}</p>
           </div>
           {hasFilters && (
             <button
               type="button"
               onClick={clearAll}
-              className="px-4 py-2 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg"
+              className="px-4 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand rounded-lg"
             >
               {t('explore.clearFilters')}
             </button>

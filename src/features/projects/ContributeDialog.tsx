@@ -93,7 +93,7 @@ export function ContributeDialog({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-slate-950/50 p-0 sm:p-4"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-ink/50 p-0 sm:p-4"
       onMouseDown={e => e.target === e.currentTarget && onClose()}
     >
       <div
@@ -106,7 +106,7 @@ export function ContributeDialog({
       >
         <header className="sticky top-0 bg-white border-b border-slate-100 px-5 py-4 flex items-start justify-between gap-4">
           <div>
-            <h2 id="contribute-title" className="text-base font-bold text-slate-900">
+            <h2 id="contribute-title" className="text-base font-bold text-ink">
               {t(`contribute.title.${project.model}`)}
             </h2>
             <p className="text-xs text-slate-500 line-clamp-1">{title}</p>
@@ -123,8 +123,8 @@ export function ContributeDialog({
 
         {done ? (
           <div className="p-6 space-y-4 text-center">
-            <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" aria-hidden />
-            <h3 className="text-lg font-bold text-slate-900">{t('contribute.successTitle')}</h3>
+            <CheckCircle2 className="w-12 h-12 text-ink mx-auto" aria-hidden />
+            <h3 className="text-lg font-bold text-ink">{t('contribute.successTitle')}</h3>
             <p className="text-sm text-slate-600">
               {t('contribute.successText', { amount: formatMoney(amount), project: title })}
             </p>
@@ -145,7 +145,7 @@ export function ContributeDialog({
                     <label
                       key={r?.id ?? 'none'}
                       className={`flex items-start gap-2.5 rounded-lg border p-3 text-sm ${soldOut ? 'opacity-50' : 'cursor-pointer'} ${
-                        rewardId === (r?.id ?? null) ? 'border-emerald-500 bg-emerald-50/60' : 'border-slate-200'
+                        rewardId === (r?.id ?? null) ? 'border-ink bg-brand-soft' : 'border-slate-200'
                       }`}
                     >
                       <input
@@ -154,15 +154,13 @@ export function ContributeDialog({
                         disabled={soldOut}
                         checked={rewardId === (r?.id ?? null)}
                         onChange={() => chooseReward(r?.id ?? null)}
-                        className="mt-0.5 accent-emerald-600"
+                        className="mt-0.5 accent-ink"
                       />
                       <span className="flex-1">
-                        <span className="flex justify-between gap-2 font-medium text-slate-900">
+                        <span className="flex justify-between gap-2 font-medium text-ink">
                           <span>{r ? r.title : t('contribute.noReward')}</span>
                           {r && (
-                            <span className="font-mono-numbers text-emerald-700 shrink-0">
-                              {formatMoney(r.amount, true)}
-                            </span>
+                            <span className="font-mono-numbers text-ink shrink-0">{formatMoney(r.amount, true)}</span>
                           )}
                         </span>
                         {soldOut && <span className="text-xs text-rose-600">{t('project.soldOut')}</span>}
@@ -184,7 +182,7 @@ export function ContributeDialog({
                     aria-pressed={amount === p}
                     className={`py-2 rounded-lg border text-xs font-semibold font-mono-numbers ${
                       amount === p
-                        ? 'border-emerald-500 bg-emerald-50 text-emerald-800'
+                        ? 'border-ink bg-brand-soft text-ink'
                         : 'border-slate-200 text-slate-700 hover:bg-slate-50'
                     }`}
                   >
@@ -201,14 +199,14 @@ export function ContributeDialog({
                   step={1000}
                   value={amount || ''}
                   onChange={e => setAmount(Math.round(Number(e.target.value)))}
-                  className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm font-mono-numbers focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm font-mono-numbers focus:outline-none focus:ring-2 focus:ring-brand"
                 />
               </label>
               <p className="text-xs text-slate-500">{t('contribute.minimum', { min: formatMoney(minimum) })}</p>
             </fieldset>
 
             {project.equity && (
-              <div className="rounded-lg bg-emerald-50 border border-emerald-100 p-3 text-xs text-emerald-900">
+              <div className="rounded-lg bg-brand-soft border border-brand p-3 text-xs text-ink">
                 {t('contribute.equityShare', {
                   share: share.toLocaleString(undefined, { maximumFractionDigits: 2 }),
                   pool: project.equity.investor_profit_share_pct,
@@ -227,7 +225,7 @@ export function ContributeDialog({
                     onClick={() => setMethod(m)}
                     className={`px-3 py-1.5 rounded-lg border text-xs font-semibold ${
                       method === m
-                        ? 'border-emerald-500 bg-emerald-50 text-emerald-800'
+                        ? 'border-ink bg-brand-soft text-ink'
                         : 'border-slate-200 text-slate-700 hover:bg-slate-50'
                     }`}
                   >
@@ -242,7 +240,7 @@ export function ContributeDialog({
                 type="checkbox"
                 checked={anonymous}
                 onChange={e => setAnonymous(e.target.checked)}
-                className="mt-0.5 accent-emerald-600"
+                className="mt-0.5 accent-ink"
               />
               {t('contribute.anonymous')}
             </label>
@@ -253,7 +251,7 @@ export function ContributeDialog({
                   type="checkbox"
                   checked={acceptedRisk}
                   onChange={e => setAcceptedRisk(e.target.checked)}
-                  className="mt-0.5 accent-emerald-600"
+                  className="mt-0.5 accent-ink"
                 />
                 <span className="flex gap-1.5">
                   <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0" aria-hidden />

@@ -84,7 +84,7 @@ export function LoginPage() {
       subtitle={
         <>
           {t('auth.login.noAccount')}{' '}
-          <Link to={`${paths.signup}${nextQuery}`} className="font-semibold text-emerald-700 hover:underline">
+          <Link to={`${paths.signup}${nextQuery}`} className="font-semibold text-ink hover:underline">
             {t('auth.login.signupLink')}
           </Link>
         </>
@@ -113,7 +113,7 @@ export function LoginPage() {
               onChange={e => setPassword(e.target.value)}
             />
             <div className="text-right">
-              <Link to={paths.forgotPassword} className="text-xs font-medium text-emerald-700 hover:underline">
+              <Link to={paths.forgotPassword} className="text-xs font-medium text-ink hover:underline">
                 {t('auth.login.forgot')}
               </Link>
             </div>

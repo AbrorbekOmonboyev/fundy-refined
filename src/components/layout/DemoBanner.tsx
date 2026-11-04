@@ -8,13 +8,10 @@ export function DemoBanner() {
   const { resetToDefaultData } = useApp();
 
   return (
-    <aside
-      aria-label={t('banner.label')}
-      className="bg-slate-900 text-slate-300 border-b border-slate-800 text-xs py-2 px-4"
-    >
+    <aside aria-label={t('banner.label')} className="bg-ink text-slate-300 border-b border-white/10 text-xs py-2 px-4">
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+          <ShieldCheck className="w-4 h-4 text-brand shrink-0" />
           <span className="font-medium text-slate-200">{t('banner.label')}</span>
           <span className="text-slate-400 hidden sm:inline">{t('banner.full')}</span>
           <span className="text-slate-400 sm:hidden">{t('banner.short')}</span>

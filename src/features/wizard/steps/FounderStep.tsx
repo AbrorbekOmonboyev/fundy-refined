@@ -141,7 +141,7 @@ export function FounderStep({ draft }: { draft: Draft }) {
       />
 
       <section className="space-y-3 pt-4 border-t border-slate-100">
-        <h2 className="text-sm font-semibold text-slate-900">{t('wizard.founder.documents')}</h2>
+        <h2 className="text-sm font-semibold text-ink">{t('wizard.founder.documents')}</h2>
         <p className="text-xs text-slate-500">{t('wizard.founder.documentsHint')}</p>
         {draft.documents.length > 0 && (
           <ul className="divide-y divide-slate-100 border border-slate-200 rounded-lg">
@@ -150,7 +150,7 @@ export function FounderStep({ draft }: { draft: Draft }) {
                 <button
                   type="button"
                   onClick={async () => window.open(await documentUrl(doc), '_blank', 'noopener')}
-                  className="flex items-center gap-2 min-w-0 text-left text-slate-700 hover:text-emerald-700"
+                  className="flex items-center gap-2 min-w-0 text-left text-slate-700 hover:text-ink"
                 >
                   <FileText className="w-4 h-4 shrink-0 text-slate-400" aria-hidden />
                   <span className="truncate">{doc.file_name}</span>

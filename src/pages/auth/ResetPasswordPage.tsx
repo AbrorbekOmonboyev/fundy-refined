@@ -38,7 +38,7 @@ export function ResetPasswordPage() {
       {done ? (
         <>
           <Alert variant="success">{t('auth.reset.done')}</Alert>
-          <Link to={paths.home} className="block text-center text-sm font-semibold text-emerald-700 hover:underline">
+          <Link to={paths.home} className="block text-center text-sm font-semibold text-ink hover:underline">
             {t('notFound.home')}
           </Link>
         </>

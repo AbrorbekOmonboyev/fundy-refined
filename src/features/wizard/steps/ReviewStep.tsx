@@ -79,17 +79,17 @@ export function ReviewStep({ draft }: { draft: Draft }) {
                 {issue ? (
                   <CircleAlert className="w-4 h-4 text-amber-500 mt-0.5 shrink-0" aria-hidden />
                 ) : (
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" aria-hidden />
+                  <CheckCircle2 className="w-4 h-4 text-ink mt-0.5 shrink-0" aria-hidden />
                 )}
                 <span>
-                  <span className="font-medium text-slate-900">{t(`wizard.step.${step}`)}</span>
+                  <span className="font-medium text-ink">{t(`wizard.step.${step}`)}</span>
                   {issue && <span className="block text-xs text-amber-700">{issue}</span>}
                 </span>
               </span>
               {editable && (
                 <Link
                   to={paths.editProject(draft.project.id, step)}
-                  className="text-xs font-semibold text-emerald-700 hover:underline shrink-0"
+                  className="text-xs font-semibold text-ink hover:underline shrink-0"
                 >
                   {t('wizard.review.edit')}
                 </Link>

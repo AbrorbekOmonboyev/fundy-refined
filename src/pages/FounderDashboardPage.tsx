@@ -18,8 +18,8 @@ const STATUS_STYLE: Record<string, string> = {
   pending_review: 'bg-amber-100 text-amber-800',
   changes_requested: 'bg-orange-100 text-orange-800',
   rejected: 'bg-rose-100 text-rose-800',
-  active: 'bg-emerald-100 text-emerald-800',
-  funded: 'bg-emerald-600 text-white',
+  active: 'bg-brand text-ink',
+  funded: 'bg-ink text-white',
   unsuccessful: 'bg-slate-200 text-slate-700',
   completed: 'bg-sky-100 text-sky-800',
 };
@@ -36,10 +36,10 @@ export function FounderDashboardPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
       <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-6">
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">{t('account.projects')}</h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-ink">{t('account.projects')}</h1>
         <Link
           to={paths.startProject}
-          className="px-4 py-2 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg self-start sm:self-auto"
+          className="px-4 py-2 text-xs font-semibold text-white bg-ink hover:bg-ink-soft rounded-lg self-start sm:self-auto"
         >
           + {t('dashboard.founder.newProject')}
         </Link>
@@ -53,12 +53,12 @@ export function FounderDashboardPage() {
         <Alert variant="error">{t('errors.generic')}</Alert>
       ) : data.length === 0 ? (
         <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 space-y-4">
-          <Rocket className="w-10 h-10 text-emerald-600 mx-auto" aria-hidden />
-          <h2 className="text-lg font-bold text-slate-900">{t('dashboard.founder.emptyTitle')}</h2>
+          <Rocket className="w-10 h-10 text-ink mx-auto" aria-hidden />
+          <h2 className="text-lg font-bold text-ink">{t('dashboard.founder.emptyTitle')}</h2>
           <p className="text-sm text-slate-600 max-w-md mx-auto">{t('dashboard.founder.emptyText')}</p>
           <Link
             to={paths.startProject}
-            className="inline-block px-4 py-2 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg"
+            className="inline-block px-4 py-2 text-xs font-semibold text-white bg-ink hover:bg-ink-soft rounded-lg"
           >
             {t('nav.startProject')}
           </Link>
@@ -104,9 +104,9 @@ function ProjectRow({ project: p }: { project: MyProject }) {
           <span className={`text-[11px] font-semibold px-2 py-0.5 rounded ${STATUS_STYLE[p.status]}`}>
             {t(`status.${p.status}`)}
           </span>
-          <p className="mt-1.5 font-semibold text-slate-900">
+          <p className="mt-1.5 font-semibold text-ink">
             {isLive ? (
-              <Link to={paths.project(p.slug)} className="hover:text-emerald-700">
+              <Link to={paths.project(p.slug)} className="hover:text-ink">
                 {title}
               </Link>
             ) : (
@@ -131,7 +131,7 @@ function ProjectRow({ project: p }: { project: MyProject }) {
         {editable && (
           <Link
             to={paths.editProject(p.id, 'review')}
-            className="px-3 py-1.5 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg"
+            className="px-3 py-1.5 text-xs font-semibold text-white bg-ink hover:bg-ink-soft rounded-lg"
           >
             {t('dashboard.founder.continue')}
           </Link>

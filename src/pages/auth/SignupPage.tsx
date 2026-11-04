@@ -58,7 +58,7 @@ export function SignupPage() {
       <AuthCard title={t('auth.signup.checkEmailTitle')}>
         <Alert variant="success">{t('auth.signup.checkEmail', { email: sentTo })}</Alert>
         <p className="text-sm text-slate-600">{t('auth.signup.checkEmailHint')}</p>
-        <Link to={paths.login} className="block text-center text-sm font-semibold text-emerald-700 hover:underline">
+        <Link to={paths.login} className="block text-center text-sm font-semibold text-ink hover:underline">
           {t('auth.signup.backToLogin')}
         </Link>
       </AuthCard>
@@ -71,7 +71,7 @@ export function SignupPage() {
       subtitle={
         <>
           {t('auth.signup.haveAccount')}{' '}
-          <Link to={paths.login} className="font-semibold text-emerald-700 hover:underline">
+          <Link to={paths.login} className="font-semibold text-ink hover:underline">
             {t('auth.signup.loginLink')}
           </Link>
         </>
@@ -114,11 +114,11 @@ export function SignupPage() {
               type="checkbox"
               checked={acceptedTerms}
               onChange={e => setAcceptedTerms(e.target.checked)}
-              className="mt-0.5 accent-emerald-600"
+              className="mt-0.5 accent-ink"
             />
             <span>
               {t('auth.signup.terms')}{' '}
-              <Link to={paths.trustSafety} target="_blank" className="font-medium text-emerald-700 hover:underline">
+              <Link to={paths.trustSafety} target="_blank" className="font-medium text-ink hover:underline">
                 {t('auth.signup.termsLink')}
               </Link>
             </span>

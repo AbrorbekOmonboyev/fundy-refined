@@ -35,7 +35,7 @@ export function AuthCallbackPage() {
     return (
       <AuthCard title={t('auth.callback.failedTitle')}>
         <Alert variant="error">{t(errorKey({ code: errorCode ?? 'otp_expired' }))}</Alert>
-        <Link to={paths.login} className="block text-center text-sm font-semibold text-emerald-700 hover:underline">
+        <Link to={paths.login} className="block text-center text-sm font-semibold text-ink hover:underline">
           {t('auth.signup.backToLogin')}
         </Link>
       </AuthCard>

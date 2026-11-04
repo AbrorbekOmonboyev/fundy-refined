@@ -15,7 +15,7 @@ export function Avatar({ name, url, size = 'md' }: { name: string; url: string |
   ) : (
     <span
       aria-hidden
-      className={`${SIZES[size]} rounded-full bg-emerald-100 text-emerald-800 font-semibold flex items-center justify-center shrink-0`}
+      className={`${SIZES[size]} rounded-full bg-brand text-ink font-semibold flex items-center justify-center shrink-0`}
     >
       {initials}
     </span>

@@ -34,9 +34,9 @@ export function AdminPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10 space-y-6">
       <header className="flex items-center gap-3">
-        <ShieldCheck className="w-7 h-7 text-emerald-600" aria-hidden />
+        <ShieldCheck className="w-7 h-7 text-ink" aria-hidden />
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">{t('admin.title')}</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-ink">{t('admin.title')}</h1>
           <p className="text-sm text-slate-600">{t('admin.greeting', { name: profile?.full_name })}</p>
         </div>
       </header>
@@ -45,9 +45,7 @@ export function AdminPage() {
         {tiles.map(tile => (
           <div key={tile.key} className="bg-white rounded-xl border border-slate-200 p-4">
             <p className="text-xs font-medium uppercase tracking-wide text-slate-500">{tile.label}</p>
-            <p className="mt-1 text-2xl font-bold text-slate-900 font-mono-numbers">
-              {counts ? counts[tile.key] : '…'}
-            </p>
+            <p className="mt-1 text-2xl font-bold text-ink font-mono-numbers">{counts ? counts[tile.key] : '…'}</p>
           </div>
         ))}
       </div>

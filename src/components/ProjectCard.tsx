@@ -18,7 +18,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
   const days = daysLeft(project.endsAt);
 
   return (
-    <article className="group relative bg-white rounded-xl border border-slate-200 overflow-hidden flex flex-col hover:border-slate-300 hover:shadow-md transition-all duration-200">
+    <article className="group relative bg-white rounded-3xl border border-slate-200/70 overflow-hidden flex flex-col hover:border-slate-300 hover:shadow-md transition-all duration-200">
       <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
         {project.coverUrl ? (
           <img
@@ -44,7 +44,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
           <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`} />
         </button>
 
-        <span className="absolute bottom-2 left-3 text-[11px] font-semibold text-white px-2 py-0.5 rounded bg-slate-900/80 backdrop-blur-sm">
+        <span className="absolute bottom-3 left-3 text-[11px] font-semibold text-ink px-2.5 py-1 rounded-full bg-brand">
           {t(`models.${project.model}.name`)}
         </span>
       </div>
@@ -65,7 +65,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
             </span>
           </div>
 
-          <h3 className="text-base font-bold text-slate-900 group-hover:text-emerald-700 transition-colors line-clamp-2 leading-snug">
+          <h3 className="text-base font-bold text-ink group-hover:text-ink transition-colors line-clamp-2 leading-snug">
             {/* The whole card is clickable through this link's stretched area. */}
             <Link to={href} className="after:absolute after:inset-0 after:z-10">
               {title}
@@ -77,7 +77,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
           <div className="mt-3 flex flex-wrap items-center gap-1.5 text-xs text-slate-600">
             <span>{t('project.by', { name: project.founderName })}</span>
             {project.founderVerified && (
-              <CheckCircle className="w-3.5 h-3.5 text-emerald-600" aria-label={t('project.verifiedFounder')} />
+              <CheckCircle className="w-3.5 h-3.5 text-ink" aria-label={t('project.verifiedFounder')} />
             )}
             {project.score !== null && (
               <>
@@ -94,7 +94,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
 
         <div className="mt-5 pt-4 border-t border-slate-100">
           <div
-            className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden mb-2.5"
+            className="w-full bg-track rounded-full h-2 overflow-hidden mb-2.5"
             role="progressbar"
             aria-valuenow={project.fundedPercent}
             aria-valuemin={0}
@@ -102,20 +102,20 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
             aria-label={t('project.funded', { percent: project.fundedPercent })}
           >
             <div
-              className="h-full rounded-full bg-emerald-500"
+              className="h-full rounded-full bg-brand"
               style={{ width: `${Math.min(project.fundedPercent, 100)}%` }}
             />
           </div>
           <div className="flex items-baseline justify-between text-xs">
             <div>
-              <span className="font-bold text-slate-900 font-mono-numbers text-sm">
+              <span className="font-bold text-ink font-mono-numbers text-sm">
                 {formatMoney(project.raisedAmount, true)}
               </span>
               <span className="text-slate-500 text-[11px] ml-1">
                 {t('project.ofGoal', { goal: formatMoney(project.targetAmount, true) })}
               </span>
             </div>
-            <span className="font-bold text-emerald-700 font-mono-numbers">{project.fundedPercent}%</span>
+            <span className="font-bold text-ink font-mono-numbers">{project.fundedPercent}%</span>
           </div>
           <div className="mt-2 flex items-center gap-1 text-xs text-slate-500 font-mono-numbers">
             <Users className="w-3.5 h-3.5 text-slate-400" aria-hidden />

@@ -31,7 +31,7 @@ import { publicFileUrl } from '@/lib/supabase';
 import { usePageMeta } from '@/lib/usePageMeta';
 
 type Tab = 'story' | 'budget' | 'milestones' | 'evaluation' | 'risks' | 'updates' | 'comments';
-const BUDGET_COLORS = ['bg-emerald-600', 'bg-blue-600', 'bg-amber-500', 'bg-purple-600', 'bg-slate-600', 'bg-rose-500'];
+const BUDGET_COLORS = ['bg-brand', 'bg-ink', 'bg-brand-deep', 'bg-slate-400', 'bg-ink-soft', 'bg-track'];
 
 export function ProjectDetailPage() {
   const { t } = useTranslation();
@@ -105,26 +105,26 @@ function ProjectView({ project }: { project: ProjectDetail }) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-12">
       <nav aria-label={t('project.breadcrumb')} className="flex items-center gap-2 text-xs text-slate-500 min-w-0">
-        <Link to={paths.home} className="hover:text-slate-800 shrink-0">
+        <Link to={paths.home} className="hover:text-ink shrink-0">
           {t('project.home')}
         </Link>
         <span aria-hidden>/</span>
-        <Link to={paths.explore} className="hover:text-slate-800 shrink-0">
+        <Link to={paths.explore} className="hover:text-ink shrink-0">
           {t('nav.explore')}
         </Link>
         <span aria-hidden>/</span>
-        <Link to={`${paths.explore}?category=${project.categoryId}`} className="hover:text-slate-800 shrink-0">
+        <Link to={`${paths.explore}?category=${project.categoryId}`} className="hover:text-ink shrink-0">
           {nameOf(project.categoryId)}
         </Link>
         <span aria-hidden>/</span>
-        <span className="text-slate-900 font-medium truncate">{title}</span>
+        <span className="text-ink font-medium truncate">{title}</span>
       </nav>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         {/* Left: story header */}
         <div className="lg:col-span-7 space-y-4">
           <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-            <span className="font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded">
+            <span className="font-semibold text-ink bg-brand-soft px-2 py-0.5 rounded">
               {t(`models.${project.model}.name`)}
             </span>
             <span aria-hidden>·</span>
@@ -136,7 +136,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
               </>
             )}
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">{title}</h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-ink leading-tight">{title}</h1>
           <p className="text-sm text-slate-600 leading-relaxed">{text?.tagline}</p>
 
           {isFallback && text && (
@@ -157,10 +157,10 @@ function ProjectView({ project }: { project: ProjectDetail }) {
             <div className="flex items-center gap-3 min-w-0">
               <Avatar name={project.founderName} url={project.founderAvatarUrl} />
               <div className="text-xs min-w-0">
-                <p className="flex items-center gap-1.5 font-bold text-slate-900">
+                <p className="flex items-center gap-1.5 font-bold text-ink">
                   {project.founderName}
                   {project.founderVerified && (
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600" aria-label={t('project.verifiedFounder')} />
+                    <CheckCircle className="w-3.5 h-3.5 text-ink" aria-label={t('project.verifiedFounder')} />
                   )}
                 </p>
                 {(project.founder?.role_title || project.founder?.organization) && (
@@ -190,18 +190,18 @@ function ProjectView({ project }: { project: ProjectDetail }) {
             <div className="space-y-2">
               <div className="flex items-baseline justify-between gap-3">
                 <div>
-                  <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono-numbers">
+                  <p className="text-2xl sm:text-3xl font-extrabold text-ink font-mono-numbers">
                     {formatMoney(project.raisedAmount)}
                   </p>
                   <p className="text-xs text-slate-500 mt-0.5">
                     {t('project.raisedOf', { goal: formatMoney(project.targetAmount) })}
                   </p>
                 </div>
-                <span className="text-2xl font-bold text-emerald-700 font-mono-numbers">{project.fundedPercent}%</span>
+                <span className="text-2xl font-bold text-ink font-mono-numbers">{project.fundedPercent}%</span>
               </div>
-              <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden" aria-hidden>
+              <div className="w-full bg-track rounded-full h-2.5 overflow-hidden" aria-hidden>
                 <div
-                  className="bg-emerald-600 h-full rounded-full"
+                  className="bg-brand h-full rounded-full"
                   style={{ width: `${Math.min(project.fundedPercent, 100)}%` }}
                 />
               </div>
@@ -210,7 +210,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                   <dt className="text-slate-400 flex items-center gap-1">
                     <Users className="w-3.5 h-3.5" aria-hidden /> {t('project.backersLabel')}
                   </dt>
-                  <dd className="text-base font-bold text-slate-900 font-mono-numbers mt-0.5">
+                  <dd className="text-base font-bold text-ink font-mono-numbers mt-0.5">
                     {formatNumber(project.backerCount)}
                   </dd>
                 </div>
@@ -219,7 +219,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                     <Clock className="w-3.5 h-3.5" aria-hidden />{' '}
                     {isLive ? t('project.timeLeft') : t('project.statusLabel')}
                   </dt>
-                  <dd className="text-base font-bold text-slate-900 font-mono-numbers mt-0.5">
+                  <dd className="text-base font-bold text-ink font-mono-numbers mt-0.5">
                     {isLive
                       ? t('project.daysLeft', { count: daysLeft(project.endsAt) })
                       : t(`status.${project.status}`)}
@@ -229,9 +229,9 @@ function ProjectView({ project }: { project: ProjectDetail }) {
             </div>
 
             {project.equity && (
-              <div className="p-4 bg-emerald-50/70 border border-emerald-100 rounded-xl text-xs space-y-2">
-                <p className="flex items-center gap-1.5 font-bold text-emerald-800">
-                  <TrendingUp className="w-4 h-4 text-emerald-600" aria-hidden />
+              <div className="p-4 bg-brand-soft border border-brand rounded-xl text-xs space-y-2">
+                <p className="flex items-center gap-1.5 font-bold text-ink">
+                  <TrendingUp className="w-4 h-4 text-ink" aria-hidden />
                   {t(`project.contract.${project.equity.contract_type}`)}
                 </p>
                 <p className="text-slate-700 leading-relaxed text-[11px]">
@@ -241,7 +241,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                     years: project.equity.exit_horizon_years,
                   })}
                 </p>
-                <div className="pt-1 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-600 border-t border-emerald-100">
+                <div className="pt-1 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-600 border-t border-brand">
                   <span>{t('project.minInvestment', { amount: formatMoney(project.equity.min_investment) })}</span>
                   {project.equity.projected_annual_return && (
                     <span>{t('project.projectedReturn', { value: project.equity.projected_annual_return })}</span>
@@ -298,15 +298,15 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                 className="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between text-left hover:border-slate-300"
               >
                 <span className="flex items-center gap-2 text-xs">
-                  <Sparkles className="w-4 h-4 text-emerald-600" aria-hidden />
+                  <Sparkles className="w-4 h-4 text-ink" aria-hidden />
                   <span>
-                    <span className="block font-bold text-slate-800">{t('project.evaluationScore')}</span>
+                    <span className="block font-bold text-ink">{t('project.evaluationScore')}</span>
                     <span className="text-[11px] text-slate-500">
                       {t(`project.confidence.${project.evaluation.confidence}`)}
                     </span>
                   </span>
                 </span>
-                <span className="text-base font-extrabold text-emerald-700 font-mono-numbers">
+                <span className="text-base font-extrabold text-ink font-mono-numbers">
                   {project.evaluation.overall_score}/100
                 </span>
               </button>
@@ -330,9 +330,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                 aria-selected={tab === x.id}
                 onClick={() => setTab(x.id)}
                 className={`py-3 px-3 text-xs font-semibold whitespace-nowrap border-b-2 -mb-px cursor-pointer ${
-                  tab === x.id
-                    ? 'border-emerald-600 text-emerald-700'
-                    : 'border-transparent text-slate-500 hover:text-slate-800'
+                  tab === x.id ? 'border-ink text-ink' : 'border-transparent text-slate-500 hover:text-ink'
                 }`}
               >
                 {x.label}
@@ -344,13 +342,11 @@ function ProjectView({ project }: { project: ProjectDetail }) {
           {tab === 'story' && (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
               <div className="lg:col-span-8 space-y-6 text-sm text-slate-700 leading-relaxed">
-                <h2 className="text-lg font-bold text-slate-900">{t('project.about')}</h2>
+                <h2 className="text-lg font-bold text-ink">{t('project.about')}</h2>
                 <div className="whitespace-pre-line text-slate-600">{text?.story}</div>
                 {project.founder?.bio && (
                   <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <h3 className="font-bold text-slate-900 text-xs uppercase tracking-wider">
-                      {t('project.founderBio')}
-                    </h3>
+                    <h3 className="font-bold text-ink text-xs uppercase tracking-wider">{t('project.founderBio')}</h3>
                     <p className="text-xs text-slate-600 leading-relaxed">{project.founder.bio}</p>
                   </div>
                 )}
@@ -363,8 +359,8 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                     return (
                       <div key={r.id} className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-sm">
                         <div className="flex justify-between items-baseline gap-2">
-                          <span className="font-bold text-slate-900 text-xs">{r.title}</span>
-                          <span className="text-xs font-bold text-emerald-700 font-mono-numbers shrink-0">
+                          <span className="font-bold text-ink text-xs">{r.title}</span>
+                          <span className="text-xs font-bold text-ink font-mono-numbers shrink-0">
                             {formatMoney(r.amount)}
                           </span>
                         </div>
@@ -373,7 +369,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                           <ul className="text-[11px] text-slate-500 space-y-1 pt-1">
                             {r.items.map(item => (
                               <li key={item} className="flex items-center gap-1.5">
-                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" aria-hidden />
+                                <span className="w-1.5 h-1.5 rounded-full bg-brand shrink-0" aria-hidden />
                                 {item}
                               </li>
                             ))}
@@ -392,7 +388,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                             type="button"
                             disabled={soldOut}
                             onClick={() => openContribute(r.id)}
-                            className="w-full mt-2 py-2 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 disabled:opacity-50 rounded-lg"
+                            className="w-full mt-2 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand disabled:opacity-50 rounded-lg"
                           >
                             {soldOut ? t('project.soldOut') : t('project.selectReward')}
                           </button>
@@ -408,7 +404,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
           {tab === 'budget' && (
             <div className="space-y-6 max-w-4xl">
               <div>
-                <h2 className="text-lg font-bold text-slate-900">{t('project.budgetTitle')}</h2>
+                <h2 className="text-lg font-bold text-ink">{t('project.budgetTitle')}</h2>
                 <p className="text-xs text-slate-500 mt-1">
                   {t('project.budgetText', { goal: formatMoney(project.targetAmount) })}
                 </p>
@@ -436,7 +432,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                   <tbody className="divide-y divide-slate-100">
                     {project.budget.map(item => (
                       <tr key={item.id}>
-                        <td className="py-3 px-4 font-semibold text-slate-900">{item.category}</td>
+                        <td className="py-3 px-4 font-semibold text-ink">{item.category}</td>
                         <td className="py-3 px-4 text-slate-600">{item.description}</td>
                         <td className="py-3 px-4 text-right font-mono-numbers whitespace-nowrap">
                           {formatMoney(item.amount)}
@@ -447,12 +443,12 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                       </tr>
                     ))}
                   </tbody>
-                  <tfoot className="bg-slate-50 border-t border-slate-200 font-bold text-slate-900">
+                  <tfoot className="bg-slate-50 border-t border-slate-200 font-bold text-ink">
                     <tr>
                       <td className="py-3 px-4" colSpan={2}>
                         {t('project.budgetTotal')}
                       </td>
-                      <td className="py-3 px-4 text-right font-mono-numbers text-emerald-700 whitespace-nowrap">
+                      <td className="py-3 px-4 text-right font-mono-numbers text-ink whitespace-nowrap">
                         {formatMoney(project.targetAmount)}
                       </td>
                       <td className="py-3 px-4 text-right font-mono-numbers">100%</td>
@@ -466,7 +462,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
           {tab === 'milestones' && (
             <div className="space-y-6 max-w-3xl">
               <div>
-                <h2 className="text-lg font-bold text-slate-900">{t('project.milestonesTitle')}</h2>
+                <h2 className="text-lg font-bold text-ink">{t('project.milestonesTitle')}</h2>
                 <p className="text-xs text-slate-500 mt-1">{t('project.milestonesText')}</p>
               </div>
               <ol className="space-y-4">
@@ -475,22 +471,22 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                   return (
                     <li
                       key={m.id}
-                      className={`p-4 rounded-xl border ${approved ? 'bg-emerald-50/40 border-emerald-200' : 'bg-white border-slate-200'}`}
+                      className={`p-4 rounded-xl border ${approved ? 'bg-brand-soft border-brand' : 'bg-white border-slate-200'}`}
                     >
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex items-start gap-3">
                           <span
                             className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold ${
-                              approved ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-600'
+                              approved ? 'bg-ink text-white' : 'bg-slate-200 text-slate-600'
                             }`}
                           >
                             {approved ? '✓' : i + 1}
                           </span>
                           <div>
-                            <h3 className="font-bold text-slate-900 text-sm flex flex-wrap items-center gap-2">
+                            <h3 className="font-bold text-ink text-sm flex flex-wrap items-center gap-2">
                               {m.title}
                               <span
-                                className={`text-[11px] px-1.5 py-0.5 rounded font-medium ${approved ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}`}
+                                className={`text-[11px] px-1.5 py-0.5 rounded font-medium ${approved ? 'bg-brand text-ink' : 'bg-slate-100 text-slate-600'}`}
                               >
                                 {t(`project.milestoneStatus.${m.status}`)}
                               </span>
@@ -500,9 +496,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                         </div>
                         <div className="text-right text-xs shrink-0 font-mono-numbers">
                           {m.target_label && <span className="text-slate-400 block">{m.target_label}</span>}
-                          <strong className="text-slate-800">
-                            {t('project.release', { percent: m.release_percent })}
-                          </strong>
+                          <strong className="text-ink">{t('project.release', { percent: m.release_percent })}</strong>
                         </div>
                       </div>
                     </li>
@@ -516,7 +510,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
 
           {tab === 'risks' && (
             <div className="space-y-4 max-w-3xl">
-              <h2 className="text-lg font-bold text-slate-900">{t('project.risksTitle')}</h2>
+              <h2 className="text-lg font-bold text-ink">{t('project.risksTitle')}</h2>
               <p className="text-xs text-slate-500">{t('project.risksText')}</p>
               <div className="p-5 bg-white rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed shadow-sm whitespace-pre-line">
                 {text?.risks}
@@ -526,7 +520,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
 
           {tab === 'updates' && (
             <div className="space-y-6 max-w-3xl">
-              <h2 className="text-lg font-bold text-slate-900">{t('project.updatesTitle')}</h2>
+              <h2 className="text-lg font-bold text-ink">{t('project.updatesTitle')}</h2>
               {project.updates.length === 0 ? (
                 <p className="p-8 text-center text-xs text-slate-500 bg-white rounded-xl border border-slate-200">
                   {t('project.noUpdates')}
@@ -535,7 +529,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                 project.updates.map(u => (
                   <article key={u.id} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
                     <header className="flex items-start justify-between gap-3 text-xs">
-                      <h3 className="font-bold text-slate-900 text-sm">{u.title}</h3>
+                      <h3 className="font-bold text-ink text-sm">{u.title}</h3>
                       <time className="text-slate-400 shrink-0">{formatDate(u.created_at)}</time>
                     </header>
                     <p className="text-xs text-slate-600 leading-relaxed whitespace-pre-line">{u.body}</p>
@@ -559,10 +553,10 @@ function ProjectView({ project }: { project: ProjectDetail }) {
       {related.data && related.data.items.length > 0 && (
         <section className="pt-10 border-t border-slate-200 space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold text-slate-900">{t('project.related')}</h2>
+            <h2 className="text-xl font-bold text-ink">{t('project.related')}</h2>
             <Link
               to={`${paths.explore}?category=${project.categoryId}`}
-              className="text-xs font-semibold text-emerald-700 hover:text-emerald-800"
+              className="text-xs font-semibold text-ink hover:text-ink"
             >
               {t('project.viewAll')}
             </Link>
@@ -607,14 +601,14 @@ function EvaluationPanel({ project }: { project: ProjectDetail }) {
       <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
         <div className="flex items-center justify-between pb-6 border-b border-slate-200 gap-4">
           <div>
-            <h2 className="text-xl font-bold text-slate-900">{t('project.evaluationTitle')}</h2>
+            <h2 className="text-xl font-bold text-ink">{t('project.evaluationTitle')}</h2>
             <p className="text-xs text-slate-500 mt-0.5">
               {t('project.evaluatedOn', { date: formatDate(e.evaluated_at) })} ·{' '}
               {t(`project.confidence.${e.confidence}`)}
             </p>
           </div>
           <p>
-            <span className="text-3xl font-extrabold text-emerald-700 font-mono-numbers">{e.overall_score}</span>
+            <span className="text-3xl font-extrabold text-ink font-mono-numbers">{e.overall_score}</span>
             <span className="text-slate-400 text-sm"> / 100</span>
           </p>
         </div>
@@ -623,10 +617,10 @@ function EvaluationPanel({ project }: { project: ProjectDetail }) {
             <div key={p.key} className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
               <div className="flex justify-between text-xs font-semibold text-slate-700">
                 <span>{t(`project.pillars.${p.key}`)}</span>
-                <span className="font-mono-numbers text-slate-900">{p.score} / 20</span>
+                <span className="font-mono-numbers text-ink">{p.score} / 20</span>
               </div>
-              <div className="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden" aria-hidden>
-                <div className="bg-emerald-600 h-full rounded-full" style={{ width: `${(p.score / 20) * 100}%` }} />
+              <div className="w-full bg-track rounded-full h-1.5 overflow-hidden" aria-hidden>
+                <div className="bg-brand h-full rounded-full" style={{ width: `${(p.score / 20) * 100}%` }} />
               </div>
             </div>
           ))}
@@ -634,17 +628,17 @@ function EvaluationPanel({ project }: { project: ProjectDetail }) {
         <div className="pt-4 border-t border-slate-100 space-y-4 text-xs">
           {e.summary && (
             <div>
-              <h3 className="font-bold text-slate-800">{t('project.evaluatorSummary')}</h3>
+              <h3 className="font-bold text-ink">{t('project.evaluatorSummary')}</h3>
               <p className="text-slate-600 mt-1 leading-relaxed">{e.summary}</p>
             </div>
           )}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="bg-emerald-50/50 p-3 rounded-lg border border-emerald-100">
-              <h3 className="font-bold text-emerald-900 mb-1.5">{t('project.strengths')}</h3>
+            <div className="bg-brand-soft p-3 rounded-lg border border-brand">
+              <h3 className="font-bold text-ink mb-1.5">{t('project.strengths')}</h3>
               <ul className="space-y-1 text-slate-600">
                 {e.strengths.map(s => (
                   <li key={s} className="flex items-start gap-1.5">
-                    <span className="text-emerald-600 font-bold" aria-hidden>
+                    <span className="text-ink font-bold" aria-hidden>
                       ✓
                     </span>
                     {s}
@@ -705,7 +699,7 @@ function CommentsPanel({ project, isOwner }: { project: ProjectDetail; isOwner: 
   return (
     <div className="space-y-6 max-w-3xl">
       <div>
-        <h2 className="text-lg font-bold text-slate-900">{t('project.commentsTitle')}</h2>
+        <h2 className="text-lg font-bold text-ink">{t('project.commentsTitle')}</h2>
         <p className="text-xs text-slate-500 mt-1">{t('project.commentsText')}</p>
       </div>
 
@@ -721,7 +715,7 @@ function CommentsPanel({ project, isOwner }: { project: ProjectDetail; isOwner: 
             placeholder={t('project.commentPlaceholder')}
             value={body}
             onChange={e => setBody(e.target.value)}
-            className="w-full text-sm p-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="w-full text-sm p-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand"
           />
           {error && <Alert variant="error">{error}</Alert>}
           <div className="flex justify-end">
@@ -735,7 +729,7 @@ function CommentsPanel({ project, isOwner }: { project: ProjectDetail; isOwner: 
         <p className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-sm text-slate-600">
           <Link
             to={`${paths.login}?next=${encodeURIComponent(location.pathname)}`}
-            className="font-semibold text-emerald-700 hover:underline"
+            className="font-semibold text-ink hover:underline"
           >
             {t('account.login')}
           </Link>
@@ -780,10 +774,10 @@ function CommentItem({
             url={publicFileUrl('avatars', comment.author?.avatar_path)}
             size="sm"
           />
-          <strong className="text-slate-900 truncate">{comment.author?.full_name}</strong>
+          <strong className="text-ink truncate">{comment.author?.full_name}</strong>
           {comment.author?.city && <span className="hidden sm:inline">({comment.author.city})</span>}
           {comment.is_backer && (
-            <span className="text-[10px] bg-emerald-50 text-emerald-700 font-semibold px-1.5 py-0.5 rounded">
+            <span className="text-[10px] bg-brand-soft text-ink font-semibold px-1.5 py-0.5 rounded">
               {t('project.backerBadge')}
             </span>
           )}
@@ -793,9 +787,9 @@ function CommentItem({
       <p className="text-slate-700 leading-relaxed whitespace-pre-line">{comment.body}</p>
 
       {comment.replies.map(r => (
-        <div key={r.id} className="mt-2 pl-3 border-l-2 border-emerald-500 space-y-1 bg-slate-50/60 p-2 rounded-r-lg">
+        <div key={r.id} className="mt-2 pl-3 border-l-2 border-ink space-y-1 bg-slate-50/60 p-2 rounded-r-lg">
           <div className="flex items-center justify-between text-[11px] text-slate-600">
-            <strong className="text-emerald-800">{t('project.founderReply', { name: r.author?.full_name })}</strong>
+            <strong className="text-ink">{t('project.founderReply', { name: r.author?.full_name })}</strong>
             <time className="text-slate-400">{formatDate(r.created_at)}</time>
           </div>
           <p className="text-slate-600 text-[11px] leading-relaxed whitespace-pre-line">{r.body}</p>
@@ -820,7 +814,7 @@ function CommentItem({
               value={reply}
               onChange={e => setReply(e.target.value)}
               aria-label={t('project.reply')}
-              className="w-full text-xs p-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full text-xs p-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand"
             />
             <div className="flex justify-end gap-2">
               <Button variant="secondary" onClick={() => setReplying(false)}>

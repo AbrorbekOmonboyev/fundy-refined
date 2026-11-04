@@ -78,3 +78,11 @@ Supabase (Postgres, login, file storage). Schema, security rules, demo data and 
 ```bash
 npm run db:test    # check the database rules (no account needed)
 ```
+
+## Brand
+
+Logo, colours and fonts follow the Fundy brand kit ([docs/brand](docs/brand/README.txt), brand sheet included).
+Colours and fonts are defined once in `src/index.css` and used as Tailwind classes:
+`bg-brand` (chartreuse), `text-ink` / `bg-ink`, `bg-brand-soft`, `bg-page`, `bg-track`, `font-display` (Unbounded).
+Logos are in `public/brand/` and used through `src/components/Logo.tsx`.
+Rule of thumb from the brand kit: text and buttons are ink — chartreuse is for backgrounds, highlights and progress.

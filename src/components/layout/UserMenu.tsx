@@ -51,7 +51,7 @@ export function UserMenu() {
           className="absolute right-0 mt-2 w-60 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50 text-sm"
         >
           <div className="px-4 py-2 border-b border-slate-100">
-            <p className="font-semibold text-slate-900 truncate">{profile?.full_name}</p>
+            <p className="font-semibold text-ink truncate">{profile?.full_name}</p>
             <p className="text-xs text-slate-500 truncate">{user?.email}</p>
           </div>
           {links.map(({ to, label, Icon }) => (

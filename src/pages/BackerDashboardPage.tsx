@@ -40,14 +40,14 @@ export function BackerDashboardPage() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
       <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-6">
         <div>
-          <p className="text-xs font-semibold text-emerald-700">{t('account.contributions')}</p>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+          <p className="text-xs font-semibold text-ink">{t('account.contributions')}</p>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-ink mt-1">
             {t('dashboard.backer.title', { name: profile?.full_name })}
           </h1>
         </div>
         <Link
           to={paths.explore}
-          className="px-4 py-2 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg self-start sm:self-auto"
+          className="px-4 py-2 text-xs font-semibold text-white bg-ink hover:bg-ink-soft rounded-lg self-start sm:self-auto"
         >
           {t('home.hero.explore')}
         </Link>
@@ -57,10 +57,10 @@ export function BackerDashboardPage() {
         {tiles.map(({ Icon, label, value }) => (
           <div key={label} className="bg-white rounded-xl border border-slate-200 p-4">
             <dt className="flex items-center gap-1.5 text-xs text-slate-500">
-              <Icon className="w-3.5 h-3.5 text-emerald-600" aria-hidden />
+              <Icon className="w-3.5 h-3.5 text-ink" aria-hidden />
               {label}
             </dt>
-            <dd className="mt-1 text-xl font-bold text-slate-900 font-mono-numbers">
+            <dd className="mt-1 text-xl font-bold text-ink font-mono-numbers">
               {contributions.isPending ? '…' : value}
             </dd>
           </div>
@@ -76,9 +76,7 @@ export function BackerDashboardPage() {
             aria-selected={tab === id}
             onClick={() => setTab(id)}
             className={`py-3 px-3 text-xs font-semibold border-b-2 -mb-px cursor-pointer ${
-              tab === id
-                ? 'border-emerald-600 text-emerald-700'
-                : 'border-transparent text-slate-500 hover:text-slate-800'
+              tab === id ? 'border-ink text-ink' : 'border-transparent text-slate-500 hover:text-ink'
             }`}
           >
             {id === 'contributions'
@@ -121,10 +119,7 @@ export function BackerDashboardPage() {
                       <td className="py-3 px-4 whitespace-nowrap text-slate-500">{formatDate(c.created_at)}</td>
                       <td className="py-3 px-4">
                         {c.project ? (
-                          <Link
-                            to={paths.project(c.project.slug)}
-                            className="font-semibold text-slate-900 hover:text-emerald-700"
-                          >
+                          <Link to={paths.project(c.project.slug)} className="font-semibold text-ink hover:text-ink">
                             {title}
                           </Link>
                         ) : (
@@ -154,7 +149,7 @@ export function BackerDashboardPage() {
                         {t(`contribute.methods.${c.payment_method}`)}
                         <span className="block text-[11px] text-slate-400">{t('dashboard.backer.simulated')}</span>
                       </td>
-                      <td className="py-3 px-4 text-right font-mono-numbers font-semibold text-slate-900 whitespace-nowrap">
+                      <td className="py-3 px-4 text-right font-mono-numbers font-semibold text-ink whitespace-nowrap">
                         {formatMoney(c.amount)}
                       </td>
                     </tr>
@@ -188,7 +183,7 @@ function Empty({ text }: { text: string }) {
       <p className="text-sm text-slate-600">{text}</p>
       <Link
         to={paths.explore}
-        className="inline-block px-4 py-2 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg"
+        className="inline-block px-4 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand rounded-lg"
       >
         {t('home.hero.explore')}
       </Link>

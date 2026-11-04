@@ -44,11 +44,7 @@ export function WizardShell({
               <span className="flex items-center gap-2">
                 <span
                   className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 ${
-                    current
-                      ? 'bg-emerald-600 text-white'
-                      : done
-                        ? 'bg-emerald-100 text-emerald-700'
-                        : 'bg-slate-200 text-slate-600'
+                    current ? 'bg-ink text-white' : done ? 'bg-brand text-ink' : 'bg-slate-200 text-slate-600'
                   }`}
                 >
                   {done && !current ? <Check className="w-3.5 h-3.5" aria-hidden /> : i + 1}
@@ -56,7 +52,7 @@ export function WizardShell({
                 <span className="whitespace-nowrap">{t(`wizard.step.${s}`)}</span>
               </span>
             );
-            const style = `block rounded-lg px-2 py-1.5 text-xs font-medium ${current ? 'bg-emerald-50 text-emerald-800' : 'text-slate-600'}`;
+            const style = `block rounded-lg px-2 py-1.5 text-xs font-medium ${current ? 'bg-brand-soft text-ink' : 'text-slate-600'}`;
             return (
               <li key={s} aria-current={current ? 'step' : undefined}>
                 {draft ? (
@@ -78,10 +74,10 @@ export function WizardShell({
         className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-8 space-y-6 min-w-0"
       >
         <header>
-          <p className="text-xs font-semibold text-emerald-700">
+          <p className="text-xs font-semibold text-ink">
             {t('wizard.stepOf', { step: index + 1, total: STEPS.length })}
           </p>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 mt-1">{title}</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-ink mt-1">{title}</h1>
           {hint && <p className="text-sm text-slate-600 mt-1">{hint}</p>}
         </header>
 
@@ -100,12 +96,12 @@ export function WizardShell({
             {draft && previous ? (
               <Link
                 to={paths.editProject(draft.project.id, previous)}
-                className="text-sm font-semibold text-slate-600 hover:text-slate-900"
+                className="text-sm font-semibold text-slate-600 hover:text-ink"
               >
                 ← {t('wizard.back')}
               </Link>
             ) : (
-              <Link to={paths.founderDashboard} className="text-sm font-semibold text-slate-600 hover:text-slate-900">
+              <Link to={paths.founderDashboard} className="text-sm font-semibold text-slate-600 hover:text-ink">
                 {t('common.cancel')}
               </Link>
             )}

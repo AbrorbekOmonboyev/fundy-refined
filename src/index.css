@@ -1,17 +1,58 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+ * Fundy brand (see docs/brand/README.txt)
+ *   Chartreuse  #B5F23D  backgrounds, highlights, progress bars — never for text on white
+ *   Ink         #15122B  text and buttons (also text on chartreuse)
+ *   Shadow      #90D508  the layer behind the f; deeper chartreuse
+ *   Grey        #F4F6FB  page background
+ * Fonts: Unbounded Bold for headlines, Plus Jakarta Sans for everything else.
+ *
+ * Use as Tailwind classes: bg-brand, text-ink, bg-brand-soft, font-display, bg-page …
+ */
+@theme {
+  --color-brand: #b5f23d;
+  --color-brand-deep: #90d508;
+  --color-brand-soft: #effcd6; /* light chartreuse tint for selected / highlighted areas */
+  --color-ink: #15122b;
+  --color-ink-soft: #2a2647; /* slightly lighter ink for surfaces on dark sections */
+  --color-page: #f4f6fb;
+  --color-track: #e3e7f1; /* empty part of progress bars, image placeholders */
+
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Unbounded', 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
 @layer base {
   body {
-    font-family:
-      'Plus Jakarta Sans',
-      system-ui,
-      -apple-system,
-      sans-serif;
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background-color: var(--color-page);
   }
 
+  /* Headlines use the brand display font. */
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    overflow-wrap: break-word; /* long Uzbek words never overflow on phones */
+    hyphens: auto;
+  }
+
+  ::selection {
+    background-color: var(--color-brand);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  /* Numbers that should line up (money, percentages). */
   .font-mono-numbers {
-    font-family: 'JetBrains Mono', monospace;
     font-variant-numeric: tabular-nums;
   }
 }

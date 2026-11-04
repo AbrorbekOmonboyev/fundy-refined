@@ -57,7 +57,7 @@ export function ForgotPasswordPage() {
           </Button>
         </form>
       )}
-      <Link to={paths.login} className="block text-center text-sm font-semibold text-emerald-700 hover:underline">
+      <Link to={paths.login} className="block text-center text-sm font-semibold text-ink hover:underline">
         {t('auth.signup.backToLogin')}
       </Link>
     </AuthCard>

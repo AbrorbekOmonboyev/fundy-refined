@@ -1,0 +1,24 @@
+Chartreuse
+  HEX #B5F23D
+  RGB 181, 242, 61
+  CMYK 38, 0, 89, 0  (coated paper, FOGRA39)
+  Use: Main brand colour: backgrounds, highlights, progress bars
+
+Ink
+  HEX #15122B
+  RGB 21, 18, 43
+  CMYK 95, 80, 0, 89  (coated paper, FOGRA39)
+  Use: Text, buttons, the f on light backgrounds
+
+Shadow green
+  HEX #90D508
+  RGB 144, 213, 8
+  CMYK 51, 0, 99, 0  (coated paper, FOGRA39)
+  Use: The layer behind the f on chartreuse and dark backgrounds
+
+White
+  HEX #FFFFFF
+  RGB 255, 255, 255
+  CMYK 0, 0, 0, 0  (coated paper, FOGRA39)
+  Use: Page backgrounds and text on ink
+

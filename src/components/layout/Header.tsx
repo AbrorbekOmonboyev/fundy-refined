@@ -6,14 +6,15 @@ import { useApp } from '@/context/AppContext';
 import { useAuth } from '@/features/auth/AuthContext';
 import { paths } from '@/app/routes';
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
+import { Logo } from '@/components/Logo';
 import { UserMenu } from '@/components/layout/UserMenu';
 import { useAccountLinks } from '@/components/layout/useAccountLinks';
 
 const desktopLink = ({ isActive }: { isActive: boolean }) =>
-  `hover:text-emerald-700 transition-colors whitespace-nowrap ${isActive ? 'text-emerald-600 font-semibold' : ''}`;
+  `hover:text-ink transition-colors whitespace-nowrap ${isActive ? 'text-ink font-semibold underline decoration-brand decoration-[3px] underline-offset-[10px]' : ''}`;
 
 const mobileLink = ({ isActive }: { isActive: boolean }) =>
-  `text-left py-2 px-3 rounded-lg hover:bg-slate-100 ${isActive ? 'text-emerald-700 bg-emerald-50' : 'text-slate-700'}`;
+  `text-left py-2 px-3 rounded-lg hover:bg-slate-100 ${isActive ? 'text-ink bg-brand-soft' : 'text-slate-700'}`;
 
 export function Header() {
   const { t } = useTranslation();
@@ -42,13 +43,8 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-6 h-16">
           {/* Logo */}
-          <Link to={paths.home} className="group flex items-center gap-2 shrink-0">
-            <span className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold text-lg shadow-sm">
-              F
-            </span>
-            <span className="text-xl font-bold tracking-tight text-slate-900 group-hover:text-emerald-700 transition-colors">
-              Fundy
-            </span>
+          <Link to={paths.home} className="shrink-0" aria-label="Fundy">
+            <Logo className="h-7 sm:h-8" />
           </Link>
 
           {/* Desktop navigation */}
@@ -78,14 +74,12 @@ export function Header() {
                     setShowNotifications(!showNotifications);
                     if (!showNotifications) markNotificationsAsRead();
                   }}
-                  className="p-2 text-slate-500 hover:text-slate-800 rounded-lg hover:bg-slate-100 transition-colors relative cursor-pointer"
+                  className="p-2 text-slate-500 hover:text-ink rounded-lg hover:bg-slate-100 transition-colors relative cursor-pointer"
                   title={t('header.notifications')}
                   aria-label={t('header.notifications')}
                 >
                   <Bell className="w-5 h-5" />
-                  {unreadCount > 0 && (
-                    <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-emerald-600" />
-                  )}
+                  {unreadCount > 0 && <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-ink" />}
                 </button>
 
                 {showNotifications && (
@@ -97,7 +91,7 @@ export function Header() {
                       <button
                         type="button"
                         onClick={markNotificationsAsRead}
-                        className="text-xs text-emerald-600 hover:text-emerald-800 font-medium"
+                        className="text-xs text-ink hover:text-ink font-medium"
                       >
                         {t('header.markAllRead')}
                       </button>
@@ -109,9 +103,9 @@ export function Header() {
                         notifications.map(n => (
                           <div key={n.id} className="p-3 text-xs hover:bg-slate-50 transition-colors">
                             <div className="flex items-start gap-2">
-                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                              <CheckCircle2 className="w-3.5 h-3.5 text-ink shrink-0 mt-0.5" />
                               <div>
-                                <p className="font-semibold text-slate-800">{n.title}</p>
+                                <p className="font-semibold text-ink">{n.title}</p>
                                 <p className="text-slate-600 mt-0.5">{n.message}</p>
                                 <p className="text-slate-400 mt-1 text-[10px]">{n.time}</p>
                               </div>
@@ -127,7 +121,7 @@ export function Header() {
 
             <Link
               to={paths.startProject}
-              className="hidden sm:inline-block px-4 py-2 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 rounded-lg shadow-sm transition-colors whitespace-nowrap"
+              className="hidden sm:inline-block px-4 py-2 text-xs font-semibold text-white bg-ink hover:bg-ink-soft active:bg-ink rounded-lg shadow-sm transition-colors whitespace-nowrap"
             >
               {t('nav.startProject')}
             </Link>
@@ -136,7 +130,7 @@ export function Header() {
             {showLogin && (
               <Link
                 to={paths.login}
-                className="hidden sm:inline-block px-3 py-2 text-xs font-semibold text-slate-700 hover:text-emerald-700 whitespace-nowrap"
+                className="hidden sm:inline-block px-3 py-2 text-xs font-semibold text-slate-700 hover:text-ink whitespace-nowrap"
               >
                 {t('account.login')}
               </Link>
@@ -145,7 +139,7 @@ export function Header() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors"
+              className="xl:hidden p-2 text-slate-600 hover:text-ink rounded-lg hover:bg-slate-100 transition-colors"
               aria-label={t('header.toggleMenu')}
               aria-expanded={mobileMenuOpen}
             >
@@ -204,7 +198,7 @@ export function Header() {
                 <Link
                   to={paths.signup}
                   onClick={closeMenu}
-                  className="py-2.5 text-center text-sm font-semibold text-emerald-700 border border-emerald-300 rounded-lg"
+                  className="py-2.5 text-center text-sm font-semibold text-ink border border-brand rounded-lg"
                 >
                   {t('account.signup')}
                 </Link>
@@ -213,7 +207,7 @@ export function Header() {
             <Link
               to={paths.startProject}
               onClick={closeMenu}
-              className="block w-full py-2.5 text-center text-sm font-semibold text-white bg-emerald-600 rounded-lg shadow-sm"
+              className="block w-full py-2.5 text-center text-sm font-semibold text-white bg-ink rounded-lg shadow-sm"
             >
               {t('nav.startProject')}
             </Link>

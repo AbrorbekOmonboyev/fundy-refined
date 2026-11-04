@@ -27,7 +27,7 @@ import { GuestOnly, RequireAdmin, RequireAuth } from '@/features/auth/guards';
 
 export function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="min-h-screen flex flex-col bg-page text-ink font-sans">
       <ScrollManager />
       <DemoBanner />
       <Header />

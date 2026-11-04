@@ -19,13 +19,11 @@ export const EducationPage: React.FC = () => {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-12">
       {/* Page Header */}
       <div className="border-b border-slate-200 pb-6">
-        <div className="flex items-center gap-2 text-xs font-semibold text-emerald-800 uppercase tracking-wide">
-          <BookOpen className="w-4 h-4 text-emerald-600 inline" />
+        <div className="flex items-center gap-2 text-xs font-semibold text-ink uppercase tracking-wide">
+          <BookOpen className="w-4 h-4 text-ink inline" />
           <span>Fundy Knowledge & Islamic Finance Academy</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
-          Understanding Crowdfunding & Musharakah
-        </h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-ink mt-1">Understanding Crowdfunding & Musharakah</h1>
         <p className="text-sm text-slate-600 mt-1 max-w-2xl">
           Everything you need to know about ethical, interest-free capital formation, profit-and-loss sharing, and
           backer protections in Uzbekistan.
@@ -36,8 +34,8 @@ export const EducationPage: React.FC = () => {
       <section className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
         <div className="flex items-center justify-between border-b border-slate-100 pb-4">
           <div className="flex items-center gap-2">
-            <Calculator className="w-5 h-5 text-emerald-600" />
-            <h2 className="text-base font-bold text-slate-900">Interactive Musharakah Profit-Sharing Simulator</h2>
+            <Calculator className="w-5 h-5 text-ink" />
+            <h2 className="text-base font-bold text-ink">Interactive Musharakah Profit-Sharing Simulator</h2>
           </div>
           <span className="text-xs text-slate-500">Uzbekistan Market Model (UZS)</span>
         </div>
@@ -52,7 +50,7 @@ export const EducationPage: React.FC = () => {
           <div>
             <label className="block font-semibold text-slate-700 mb-1">
               Your Investment Ticket:{' '}
-              <strong className="font-mono-numbers text-slate-900">{formatUZS(investorTicket)}</strong>
+              <strong className="font-mono-numbers text-ink">{formatUZS(investorTicket)}</strong>
             </label>
             <input
               type="range"
@@ -61,7 +59,7 @@ export const EducationPage: React.FC = () => {
               step="1000000"
               value={investorTicket}
               onChange={e => setInvestorTicket(parseInt(e.target.value))}
-              className="w-full accent-emerald-600"
+              className="w-full accent-ink"
             />
             <div className="flex justify-between text-[10px] text-slate-400 mt-1">
               <span>2M UZS</span>
@@ -72,7 +70,7 @@ export const EducationPage: React.FC = () => {
           <div>
             <label className="block font-semibold text-slate-700 mb-1">
               Total Venture Target Capital:{' '}
-              <strong className="font-mono-numbers text-slate-900">{formatUZS(projectCapital)}</strong>
+              <strong className="font-mono-numbers text-ink">{formatUZS(projectCapital)}</strong>
             </label>
             <input
               type="range"
@@ -81,7 +79,7 @@ export const EducationPage: React.FC = () => {
               step="10000000"
               value={projectCapital}
               onChange={e => setProjectCapital(parseInt(e.target.value))}
-              className="w-full accent-emerald-600"
+              className="w-full accent-ink"
             />
             <div className="flex justify-between text-[10px] text-slate-400 mt-1">
               <span>50M UZS</span>
@@ -92,7 +90,7 @@ export const EducationPage: React.FC = () => {
           <div>
             <label className="block font-semibold text-slate-700 mb-1">
               Investor Pool Profit Share:{' '}
-              <strong className="font-mono-numbers text-emerald-700">{investorPoolSharePct}% of net profits</strong>
+              <strong className="font-mono-numbers text-ink">{investorPoolSharePct}% of net profits</strong>
             </label>
             <input
               type="range"
@@ -101,7 +99,7 @@ export const EducationPage: React.FC = () => {
               step="1"
               value={investorPoolSharePct}
               onChange={e => setInvestorPoolSharePct(parseInt(e.target.value))}
-              className="w-full accent-emerald-600"
+              className="w-full accent-ink"
             />
             <div className="flex justify-between text-[10px] text-slate-400 mt-1">
               <span>15%</span>
@@ -112,7 +110,7 @@ export const EducationPage: React.FC = () => {
           <div>
             <label className="block font-semibold text-slate-700 mb-1">
               Projected Annual Business Net Profit:{' '}
-              <strong className="font-mono-numbers text-slate-900">{formatUZS(projectedAnnualProfit)}</strong>
+              <strong className="font-mono-numbers text-ink">{formatUZS(projectedAnnualProfit)}</strong>
             </label>
             <input
               type="range"
@@ -121,7 +119,7 @@ export const EducationPage: React.FC = () => {
               step="5000000"
               value={projectedAnnualProfit}
               onChange={e => setProjectedAnnualProfit(parseInt(e.target.value))}
-              className="w-full accent-emerald-600"
+              className="w-full accent-ink"
             />
             <div className="flex justify-between text-[10px] text-slate-400 mt-1">
               <span>20M UZS</span>
@@ -131,10 +129,10 @@ export const EducationPage: React.FC = () => {
         </div>
 
         {/* Calculated Results Box */}
-        <div className="p-5 bg-emerald-50/80 rounded-xl border border-emerald-200 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-emerald-950">
+        <div className="p-5 bg-brand-soft rounded-xl border border-brand grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-ink">
           <div>
             <span className="text-slate-600 block">Your Effective Profit Share:</span>
-            <strong className="text-lg font-extrabold text-emerald-800 font-mono-numbers block mt-0.5">
+            <strong className="text-lg font-extrabold text-ink font-mono-numbers block mt-0.5">
               {yourEffectiveSharePct.toFixed(2)}%
             </strong>
             <span className="text-[10px] text-slate-500">of company's net earnings</span>
@@ -142,7 +140,7 @@ export const EducationPage: React.FC = () => {
 
           <div>
             <span className="text-slate-600 block">Simulated Annual Dividend:</span>
-            <strong className="text-lg font-extrabold text-emerald-800 font-mono-numbers block mt-0.5">
+            <strong className="text-lg font-extrabold text-ink font-mono-numbers block mt-0.5">
               {formatUZS(Math.round(yourProjectedAnnualDividend))}
             </strong>
             <span className="text-[10px] text-slate-500">distributed quarterly</span>
@@ -150,7 +148,7 @@ export const EducationPage: React.FC = () => {
 
           <div>
             <span className="text-slate-600 block">Simulated Annual ROI:</span>
-            <strong className="text-lg font-extrabold text-emerald-800 font-mono-numbers block mt-0.5">
+            <strong className="text-lg font-extrabold text-ink font-mono-numbers block mt-0.5">
               ~{projectedROI.toFixed(1)}% p.a.
             </strong>
             <span className="text-[10px] text-slate-500">relative to ticket</span>
@@ -160,17 +158,17 @@ export const EducationPage: React.FC = () => {
 
       {/* Guide Content: The 3 Models */}
       <section className="space-y-6">
-        <h2 className="text-xl font-bold text-slate-900">The Three Crowdfunding Models Deep Dive</h2>
+        <h2 className="text-xl font-bold text-ink">The Three Crowdfunding Models Deep Dive</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-700">
           <div className="bg-white p-6 rounded-2xl border border-slate-200 space-y-3 shadow-sm">
             <HeartHandshake className="w-6 h-6 text-blue-600" />
-            <h3 className="font-bold text-slate-900 text-sm">Donation Crowdfunding</h3>
+            <h3 className="font-bold text-ink text-sm">Donation Crowdfunding</h3>
             <p className="leading-relaxed text-slate-600">
               In donation crowdfunding, individuals pool small to moderate gifts to fund community-wide benefit. Backers
               do not receive financial payouts or physical goods.
             </p>
-            <h4 className="font-semibold text-slate-800">Best used for:</h4>
+            <h4 className="font-semibold text-ink">Best used for:</h4>
             <p className="text-slate-500">
               Public school computer labs, ecological plantings, free health diagnostics, and cultural museums.
             </p>
@@ -178,25 +176,25 @@ export const EducationPage: React.FC = () => {
 
           <div className="bg-white p-6 rounded-2xl border border-slate-200 space-y-3 shadow-sm">
             <Gift className="w-6 h-6 text-amber-600" />
-            <h3 className="font-bold text-slate-900 text-sm">Reward Crowdfunding</h3>
+            <h3 className="font-bold text-ink text-sm">Reward Crowdfunding</h3>
             <p className="leading-relaxed text-slate-600">
               Backers act as early customers and patrons. They pledge funds in exchange for tiered physical rewards or
               services upon completion.
             </p>
-            <h4 className="font-semibold text-slate-800">Best used for:</h4>
+            <h4 className="font-semibold text-ink">Best used for:</h4>
             <p className="text-slate-500">
               Handcrafted ceramics, silk textiles, books, designer kitchenware, and specialty roasted coffees.
             </p>
           </div>
 
           <div className="bg-white p-6 rounded-2xl border border-slate-200 space-y-3 shadow-sm">
-            <TrendingUp className="w-6 h-6 text-emerald-600" />
-            <h3 className="font-bold text-slate-900 text-sm">Equity / Musharakah</h3>
+            <TrendingUp className="w-6 h-6 text-ink" />
+            <h3 className="font-bold text-ink text-sm">Equity / Musharakah</h3>
             <p className="leading-relaxed text-slate-600">
               Investors contribute risk capital into a commercially viable enterprise. Profit and enterprise risk are
               shared according to transparent contractual ratios.
             </p>
-            <h4 className="font-semibold text-slate-800">Best used for:</h4>
+            <h4 className="font-semibold text-ink">Best used for:</h4>
             <p className="text-slate-500">
               High-tech hydroponic greenhouses, solar cold storage, electric vehicles, and SaaS software.
             </p>
@@ -207,8 +205,8 @@ export const EducationPage: React.FC = () => {
       {/* What is Musharakah vs Conventional Loans? */}
       <section className="bg-slate-50 rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-6">
         <div>
-          <span className="text-xs font-semibold text-emerald-700 uppercase">Shariah Alignment</span>
-          <h2 className="text-xl font-bold text-slate-900 mt-1">How Musharakah Differs from Conventional Debt Loans</h2>
+          <span className="text-xs font-semibold text-ink uppercase">Shariah Alignment</span>
+          <h2 className="text-xl font-bold text-ink mt-1">How Musharakah Differs from Conventional Debt Loans</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
@@ -222,8 +220,8 @@ export const EducationPage: React.FC = () => {
             </ul>
           </div>
 
-          <div className="bg-white p-5 rounded-xl border border-emerald-200 space-y-2">
-            <h3 className="font-bold text-emerald-900 text-sm">Musharakah Partnership (Fundy)</h3>
+          <div className="bg-white p-5 rounded-xl border border-brand space-y-2">
+            <h3 className="font-bold text-ink text-sm">Musharakah Partnership (Fundy)</h3>
             <ul className="space-y-2 text-slate-600">
               <li>• Zero interest. Returns are strictly tied to real audited commercial profits.</li>
               <li>• Investors and founders share business risk equitably.</li>
@@ -236,7 +234,7 @@ export const EducationPage: React.FC = () => {
 
       {/* Risks & Mitigation */}
       <section className="space-y-4 text-xs text-slate-700">
-        <h2 className="text-xl font-bold text-slate-900">Understanding the Risks of Crowdfunding</h2>
+        <h2 className="text-xl font-bold text-ink">Understanding the Risks of Crowdfunding</h2>
         <p className="leading-relaxed text-slate-600">
           All entrepreneurial ventures face execution risk. Product prototypes can experience manufacturing delays;
           agricultural projects can face climatic variations; consumer demand can shift.

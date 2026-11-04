@@ -10,11 +10,11 @@ export const TrustSafetyPage: React.FC = () => {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-10">
       {/* Header */}
       <div className="border-b border-slate-200 pb-6">
-        <div className="flex items-center gap-2 text-xs font-semibold text-emerald-800 uppercase tracking-wide">
-          <ShieldCheck className="w-4 h-4 text-emerald-600 inline" />
+        <div className="flex items-center gap-2 text-xs font-semibold text-ink uppercase tracking-wide">
+          <ShieldCheck className="w-4 h-4 text-ink inline" />
           <span>Integrity, Verification & Governance</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Trust & Safety Center</h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-ink mt-1">Trust & Safety Center</h1>
         <p className="text-sm text-slate-600 mt-1 max-w-2xl">
           Learn how Fundy verifies creators, evaluates project feasibility, protects backer capital through milestone
           escrow, and ensures transparent Islamic compliance.
@@ -36,7 +36,7 @@ export const TrustSafetyPage: React.FC = () => {
             onClick={() => setActiveSection(tab.id as typeof activeSection)}
             className={`py-2 px-3 text-xs font-semibold rounded-lg whitespace-nowrap transition-colors cursor-pointer ${
               activeSection === tab.id
-                ? 'bg-emerald-600 text-white shadow-sm'
+                ? 'bg-ink text-white shadow-sm'
                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
@@ -51,7 +51,7 @@ export const TrustSafetyPage: React.FC = () => {
         {activeSection === 'verification' && (
           <div className="space-y-6">
             <div>
-              <h2 className="text-lg font-bold text-slate-900">How Project & Founder Verification Works</h2>
+              <h2 className="text-lg font-bold text-ink">How Project & Founder Verification Works</h2>
               <p className="text-slate-500 mt-1">
                 Before any campaign appears publicly in Uzbekistan, it completes our 4-stage integrity pipeline.
               </p>
@@ -59,8 +59,8 @@ export const TrustSafetyPage: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                <h3 className="font-bold text-slate-900 text-sm">Stage 1: Identity & TIN Audit</h3>
+                <CheckCircle2 className="w-5 h-5 text-ink" />
+                <h3 className="font-bold text-ink text-sm">Stage 1: Identity & TIN Audit</h3>
                 <p className="text-slate-600 leading-relaxed text-[11px]">
                   Verification of founder government identity documents (passport/ID card) and official enterprise tax
                   registration (MCHJ or YaTT) via Uzbekistan Ministry of Justice public registries.
@@ -68,8 +68,8 @@ export const TrustSafetyPage: React.FC = () => {
               </div>
 
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                <h3 className="font-bold text-slate-900 text-sm">Stage 2: Budget Itemization Audit</h3>
+                <CheckCircle2 className="w-5 h-5 text-ink" />
+                <h3 className="font-bold text-ink text-sm">Stage 2: Budget Itemization Audit</h3>
                 <p className="text-slate-600 leading-relaxed text-[11px]">
                   All spending categories must match verifiable market supplier estimates in Uzbekistan (e.g. quotes for
                   steel frames, solar PV panels, or Marghilan silk cocoons).
@@ -77,8 +77,8 @@ export const TrustSafetyPage: React.FC = () => {
               </div>
 
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                <h3 className="font-bold text-slate-900 text-sm">Stage 3: Shariah Ethical Audit</h3>
+                <CheckCircle2 className="w-5 h-5 text-ink" />
+                <h3 className="font-bold text-ink text-sm">Stage 3: Shariah Ethical Audit</h3>
                 <p className="text-slate-600 leading-relaxed text-[11px]">
                   Confirmation that the venture is free from Riba (usury/interest), gambling (Maysir), and excessive
                   uncertainty (Gharar), conforming to standard Musharakah rules.
@@ -86,8 +86,8 @@ export const TrustSafetyPage: React.FC = () => {
               </div>
 
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                <h3 className="font-bold text-slate-900 text-sm">Stage 4: Milestone Agreement</h3>
+                <CheckCircle2 className="w-5 h-5 text-ink" />
+                <h3 className="font-bold text-ink text-sm">Stage 4: Milestone Agreement</h3>
                 <p className="text-slate-600 leading-relaxed text-[11px]">
                   Contractual alignment on phased deliverable thresholds and release percentages prior to public
                   campaign launch.
@@ -101,11 +101,11 @@ export const TrustSafetyPage: React.FC = () => {
         {activeSection === 'scoring' && (
           <div className="space-y-6">
             <div>
-              <div className="flex items-center gap-1.5 text-emerald-700 font-bold mb-1">
+              <div className="flex items-center gap-1.5 text-ink font-bold mb-1">
                 <Sparkles className="w-4 h-4" />
                 <span>Deterministic Scoring Engine</span>
               </div>
-              <h2 className="text-lg font-bold text-slate-900">How the 100-Point Project Evaluation System Works</h2>
+              <h2 className="text-lg font-bold text-ink">How the 100-Point Project Evaluation System Works</h2>
               <p className="text-slate-500 mt-1">
                 Our simulated evaluation framework provides community backers with an objective health score broken down
                 into 5 critical pillars.
@@ -136,7 +136,7 @@ export const TrustSafetyPage: React.FC = () => {
                 },
               ].map((p, idx) => (
                 <div key={idx} className="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
-                  <h3 className="font-bold text-slate-900 text-xs">{p.title}</h3>
+                  <h3 className="font-bold text-ink text-xs">{p.title}</h3>
                   <p className="text-slate-600 mt-1 text-[11px] leading-relaxed">{p.desc}</p>
                 </div>
               ))}
@@ -152,7 +152,7 @@ export const TrustSafetyPage: React.FC = () => {
         {/* 3. RISK DISCLOSURE */}
         {activeSection === 'risk' && (
           <div className="space-y-4">
-            <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+            <h2 className="text-lg font-bold text-ink flex items-center gap-2">
               <AlertTriangle className="w-5 h-5 text-amber-600" />
               <span>Comprehensive Risk Disclosure</span>
             </h2>
@@ -184,8 +184,8 @@ export const TrustSafetyPage: React.FC = () => {
         {/* 4. REFUNDS & ESCROW */}
         {activeSection === 'refunds' && (
           <div className="space-y-4">
-            <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-              <Lock className="w-5 h-5 text-emerald-600" />
+            <h2 className="text-lg font-bold text-ink flex items-center gap-2">
+              <Lock className="w-5 h-5 text-ink" />
               <span>Milestone Escrow & Cancellation Policy</span>
             </h2>
             <p className="text-slate-600 leading-relaxed">Under Fundy's proposed milestone escrow system:</p>
@@ -208,7 +208,7 @@ export const TrustSafetyPage: React.FC = () => {
         {/* 5. TERMS OF USE */}
         {activeSection === 'terms' && (
           <div className="space-y-4 leading-relaxed text-slate-600">
-            <h2 className="text-lg font-bold text-slate-900">Prototype Terms of Use (Illustrative)</h2>
+            <h2 className="text-lg font-bold text-ink">Prototype Terms of Use (Illustrative)</h2>
             <p>
               This website is an interactive concept prototype created to demonstrate the Fundy product vision for the
               Uzbekistan market.
@@ -224,7 +224,7 @@ export const TrustSafetyPage: React.FC = () => {
         {/* 6. PRIVACY */}
         {activeSection === 'privacy' && (
           <div className="space-y-4 leading-relaxed text-slate-600">
-            <h2 className="text-lg font-bold text-slate-900">Privacy & Data Protection Principles</h2>
+            <h2 className="text-lg font-bold text-ink">Privacy & Data Protection Principles</h2>
             <p>
               In our full production architecture, Fundy commits to strict compliance with the Law of the Republic of
               Uzbekistan "On Personal Data" (No. ZRU-547).

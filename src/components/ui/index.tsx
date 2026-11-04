@@ -24,10 +24,10 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const BUTTON_STYLES = {
-  primary: 'bg-emerald-600 text-white hover:bg-emerald-700 active:bg-emerald-800 shadow-sm',
+  primary: 'bg-ink text-white hover:bg-ink-soft active:bg-ink',
   secondary: 'bg-white text-slate-700 border border-slate-300 hover:bg-slate-50',
   danger: 'bg-rose-600 text-white hover:bg-rose-700',
-  link: 'text-emerald-700 hover:text-emerald-900 underline-offset-2 hover:underline px-0 py-0',
+  link: 'text-ink hover:text-ink underline-offset-2 hover:underline px-0 py-0',
 };
 
 export function Button({
@@ -45,7 +45,7 @@ export function Button({
       type={type}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
-      className={`inline-flex items-center justify-center gap-2 rounded-lg text-sm font-semibold transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${
+      className={`inline-flex items-center justify-center gap-2 rounded-full text-sm font-semibold transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${
         variant === 'link' ? '' : 'px-4 py-2.5'
       } ${BUTTON_STYLES[variant]} ${fullWidth ? 'w-full' : ''} ${className}`}
       {...rest}
@@ -82,7 +82,7 @@ function FieldShell({ id, label, error, hint, children }: FieldShellProps) {
 }
 
 const INPUT_STYLES =
-  'block w-full rounded-lg border bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 disabled:bg-slate-100';
+  'block w-full rounded-lg border bg-white px-3 py-2.5 text-sm text-ink placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand focus:border-ink disabled:bg-slate-100';
 
 type TextFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'id'> & {
   label: string;
@@ -172,7 +172,7 @@ export function ChoiceGroup<T extends string>({
           <label
             key={o.value}
             className={`flex items-start gap-2.5 rounded-lg border p-3 cursor-pointer text-sm transition-colors ${
-              value === o.value ? 'border-emerald-500 bg-emerald-50/60' : 'border-slate-200 hover:border-slate-300'
+              value === o.value ? 'border-ink bg-brand-soft' : 'border-slate-200 hover:border-slate-300'
             }`}
           >
             <input
@@ -181,10 +181,10 @@ export function ChoiceGroup<T extends string>({
               value={o.value}
               checked={value === o.value}
               onChange={() => onChange(o.value)}
-              className="mt-0.5 accent-emerald-600"
+              className="mt-0.5 accent-ink"
             />
             <span>
-              <span className="block font-medium text-slate-900">{o.label}</span>
+              <span className="block font-medium text-ink">{o.label}</span>
               {o.description && <span className="block text-xs text-slate-500 mt-0.5">{o.description}</span>}
             </span>
           </label>
@@ -199,7 +199,7 @@ export function ChoiceGroup<T extends string>({
 // ---------------------------------------------------------------------------
 const ALERT_STYLES = {
   info: { box: 'bg-sky-50 border-sky-200 text-sky-900', Icon: Info },
-  success: { box: 'bg-emerald-50 border-emerald-200 text-emerald-900', Icon: CheckCircle2 },
+  success: { box: 'bg-brand-soft border-brand text-ink', Icon: CheckCircle2 },
   warning: { box: 'bg-amber-50 border-amber-200 text-amber-900', Icon: TriangleAlert },
   error: { box: 'bg-rose-50 border-rose-200 text-rose-900', Icon: AlertCircle },
 };
@@ -221,7 +221,7 @@ export function PageSpinner() {
   const { t } = useTranslation();
   return (
     <div className="flex justify-center py-24" role="status">
-      <Loader2 className="w-6 h-6 animate-spin text-emerald-600" aria-hidden />
+      <Loader2 className="w-6 h-6 animate-spin text-ink" aria-hidden />
       <span className="sr-only">{t('common.loading')}</span>
     </div>
   );
@@ -233,7 +233,7 @@ export function AuthCard({ title, subtitle, children }: { title: string; subtitl
     <section className="px-4 py-12 sm:py-16">
       <div className="mx-auto w-full max-w-md bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
         <header className="space-y-1.5">
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">{title}</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-ink">{title}</h1>
           {subtitle && <p className="text-sm text-slate-600">{subtitle}</p>}
         </header>
         {children}
@@ -267,7 +267,7 @@ export function TextAreaField({ label, error, hint, minChars, value, rows = 4, .
         {...rest}
       />
       {minChars !== undefined && (
-        <p className={`text-[11px] text-right ${length >= minChars ? 'text-emerald-700' : 'text-slate-400'}`}>
+        <p className={`text-[11px] text-right ${length >= minChars ? 'text-ink' : 'text-slate-400'}`}>
           {length} / {minChars}
         </p>
       )}

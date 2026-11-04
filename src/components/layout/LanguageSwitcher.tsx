@@ -22,7 +22,7 @@ export function LanguageSwitcher({ className = '' }: { className?: string }) {
           aria-pressed={current === lng}
           title={t(`languages.${lng}`)}
           className={`px-1.5 py-1 rounded uppercase transition-colors cursor-pointer ${
-            current === lng ? 'bg-emerald-50 text-emerald-700' : 'text-slate-500 hover:text-slate-900'
+            current === lng ? 'bg-brand-soft text-ink' : 'text-slate-500 hover:text-ink'
           }`}
         >
           {lng}

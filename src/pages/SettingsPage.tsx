@@ -21,7 +21,7 @@ function Section({ title, description, children }: { title: string; description?
   return (
     <section className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 space-y-4">
       <header>
-        <h2 className="text-lg font-semibold text-slate-900">{title}</h2>
+        <h2 className="text-lg font-semibold text-ink">{title}</h2>
         {description && <p className="text-sm text-slate-600 mt-0.5">{description}</p>}
       </header>
       {children}
@@ -151,7 +151,7 @@ export function SettingsPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-10 space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900">{t('settings.title')}</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-ink">{t('settings.title')}</h1>
         <Button variant="secondary" onClick={handleSignOut}>
           <LogOut className="w-4 h-4" aria-hidden />
           {t('account.signOut')}
