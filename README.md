@@ -36,7 +36,8 @@ src/
   components/
     layout/             Header, Footer, DemoBanner, LanguageSwitcher
     *.tsx               Shared pieces (ProjectCard, contribution modal)
-  context/AppContext.tsx  App state (demo data in localStorage; replaced by Supabase in Phase 1–2)
+  lib/supabase.ts       Connection to Supabase (database, login, files)
+  context/AppContext.tsx  App state (demo data in localStorage; switched to Supabase in Phases 2–3)
   data/mockProjects.ts  Demo projects (becomes the database seed in Phase 1)
   types/index.ts        Data shapes: Project, Contribution, …
   lib/formatters.ts     Money / percentage formatting
@@ -69,3 +70,11 @@ return <h1>{t('nav.explore')}</h1>;
 ```
 
 TypeScript reports an error for any key missing from `en.json`. So far the header, footer, banner and 404 page are translated. Page content is translated as each page is rebuilt with the final design (Phase 3+).
+
+## Database
+
+Supabase (Postgres, login, file storage). Schema, security rules, demo data and tests are in [`supabase/`](supabase/README.md).
+
+```bash
+npm run db:test    # check the database rules (no account needed)
+```
