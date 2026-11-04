@@ -49,15 +49,16 @@ Errors come back as short keys (e.g. `amount_below_minimum`) for the app to tran
 
 ## Commands
 
-| Command                    | What it does                                             |
-| -------------------------- | -------------------------------------------------------- |
-| `npm run db:test`          | Build a throw-away database in memory and run all checks |
-| `npm run db:seed:generate` | Regenerate `seed.sql` after changing the demo projects   |
-| `npm run db:login`         | Log the Supabase CLI into your account (once)            |
-| `npm run db:link`          | Connect this folder to your Supabase project (once)      |
-| `npm run db:push`          | Apply new migrations to the linked project               |
-| `npm run db:seed:push`     | Apply migrations **and** load demo data                  |
-| `npm run db:types`         | Generate TypeScript types from the live database         |
+| Command                    | What it does                                                   |
+| -------------------------- | -------------------------------------------------------------- |
+| `npm run db:test`          | Build a throw-away database in memory and run all checks       |
+| `npm run db:check`         | Check the live project as a visitor would (needs `.env.local`) |
+| `npm run db:seed:generate` | Regenerate `seed.sql` after changing the demo projects         |
+| `npm run db:login`         | Log the Supabase CLI into your account (once)                  |
+| `npm run db:link`          | Connect this folder to your Supabase project (once)            |
+| `npm run db:push`          | Apply new migrations to the linked project                     |
+| `npm run db:seed:push`     | Apply migrations **and** load demo data                        |
+| `npm run db:types`         | Generate TypeScript types from the live database               |
 
 ## Connecting a Supabase project (first time)
 
