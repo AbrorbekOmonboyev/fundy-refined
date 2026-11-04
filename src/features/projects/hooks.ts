@@ -7,6 +7,8 @@ import { useNavigate, useLocation } from 'react-router';
 import { useAuth } from '@/features/auth/AuthContext';
 import { paths } from '@/app/routes';
 import {
+  getMyContributions,
+  getMyProjects,
   getPlatformStats,
   getProject,
   getSavedProjectIds,
@@ -81,4 +83,43 @@ export function useSavedProjects() {
       toggle.mutate({ projectId, save: !ids.has(projectId) });
     },
   };
+}
+
+export function useMyContributions() {
+  const { user } = useAuth();
+  return useQuery({
+    queryKey: ['projects', 'my-contributions', user?.id ?? null],
+    queryFn: () => getMyContributions(user!.id),
+    enabled: !!user,
+  });
+}
+
+export function useMyProjects() {
+  const { user } = useAuth();
+  return useQuery({
+    queryKey: ['projects', 'mine', user?.id ?? null],
+    queryFn: () => getMyProjects(user!.id),
+    enabled: !!user,
+  });
+}
+
+/** Full cards for the user's saved projects. */
+export function useSavedProjectCards() {
+  const { user } = useAuth();
+  const ids = useQuery({
+    queryKey: projectKeys.saved(user?.id ?? null),
+    queryFn: () => getSavedProjectIds(user!.id),
+    enabled: !!user,
+  });
+  const list = useProjectListFor(ids.data);
+  const hasSaved = (ids.data?.length ?? 0) > 0;
+  return { isPending: ids.isPending || (hasSaved && list.isPending), items: hasSaved ? (list.data?.items ?? []) : [] };
+}
+
+function useProjectListFor(ids: string[] | undefined) {
+  return useQuery({
+    queryKey: projectKeys.list({ ids: ids ?? [], pageSize: 60 }),
+    queryFn: () => listProjects({ ids, status: 'all', sort: 'newest', pageSize: 60 }),
+    enabled: !!ids && ids.length > 0,
+  });
 }

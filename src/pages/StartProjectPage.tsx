@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '@/context/AppContext';
 import { CrowdfundingModel, ProjectCategory, BudgetItem, Milestone, RewardTier } from '@/types';
+import { PreviewNotice } from '@/features/projects/PreviewNotice';
 import { formatUZS } from '@/lib/formatters';
 import {
   CheckCircle2,
@@ -210,6 +211,8 @@ export const StartProjectPage: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
+      {/* TODO(Phase 4): replace this prototype form with the real project wizard. */}
+      <PreviewNotice />
       {/* Wizard Header & Progress */}
       <div className="space-y-4">
         <div className="flex items-center justify-between text-xs text-slate-500">

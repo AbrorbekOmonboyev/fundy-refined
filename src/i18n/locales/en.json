@@ -508,5 +508,31 @@
     "successTitle": "Thank you!",
     "successText": "Your {{amount}} for “{{project}}” has been recorded.",
     "successReward": "Reward: {{reward}}"
+  },
+  "dashboard": {
+    "backer": {
+      "title": "Hello, {{name}}",
+      "total": "Total given",
+      "projects": "Projects supported",
+      "musharakah": "In Musharakah",
+      "rewards": "Rewards chosen",
+      "historyTab": "Contributions ({{count}})",
+      "savedTab": "Saved ({{count}})",
+      "date": "Date",
+      "project": "Project",
+      "details": "Details",
+      "share": "Profit share: {{share}}%",
+      "anonymous": "Hidden from public",
+      "refunded": "Refunded",
+      "simulated": "simulated",
+      "emptyContributions": "You haven't backed any project yet.",
+      "emptySaved": "No saved projects yet. Tap the bookmark on any project to save it."
+    },
+    "founder": {
+      "emptyTitle": "You don't have any projects yet",
+      "emptyText": "Your projects will appear here with their review status and funding progress. The full project form arrives in the next update.",
+      "previewTitle": "Preview only.",
+      "previewText": "This form is still the prototype: what you enter here is NOT saved to the database or sent for review. The real project form comes in the next update."
+    }
   }
 }

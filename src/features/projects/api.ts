@@ -120,6 +120,8 @@ export type ProjectFilters = {
   sort?: ProjectSort;
   featured?: boolean;
   excludeId?: string;
+  /** Only these projects (e.g. the user's saved ones). */
+  ids?: string[];
   page?: number; // 1-based
   pageSize?: number;
 };
@@ -143,6 +145,7 @@ export async function listProjects(filters: ProjectFilters): Promise<{ items: Pr
   else if (filters.status === 'funded') query = query.in('status', ['funded', 'completed']);
   else query = query.in('status', ['active', 'funded', 'completed', 'unsuccessful']);
   if (ids) query = query.in('id', ids);
+  if (filters.ids) query = query.in('id', filters.ids);
   if (filters.model) query = query.eq('model', filters.model);
   if (filters.category) query = query.eq('category_id', filters.category);
   if (filters.region) query = query.eq('region_id', filters.region);
@@ -349,4 +352,53 @@ export async function contribute(args: {
   });
   if (error) throw error;
   return data;
+}
+
+// ---------------------------------------------------------------------------
+// Dashboards
+// ---------------------------------------------------------------------------
+export type MyContribution = {
+  id: string;
+  amount: number;
+  payment_method: Enums['payment_method'];
+  equity_share_pct: number | null;
+  status: Enums['contribution_status'];
+  is_anonymous: boolean;
+  created_at: string;
+  reward: { title: string } | null;
+  project: {
+    slug: string;
+    model: FundingModel;
+    status: ProjectStatus;
+    original_language: Language;
+    project_translations: Translation[];
+  } | null;
+};
+
+/** The signed-in user's contributions, newest first. */
+export async function getMyContributions(userId: string): Promise<MyContribution[]> {
+  const { data, error } = await client()
+    .from('contributions')
+    .select(
+      `id, amount, payment_method, equity_share_pct, status, is_anonymous, created_at,
+       reward:reward_tiers ( title ),
+       project:projects ( slug, model, status, original_language, project_translations ( language, title, tagline ) )`,
+    )
+    .eq('backer_id', userId)
+    .order('created_at', { ascending: false })
+    .returns<MyContribution[]>();
+  if (error) throw error;
+  return data ?? [];
+}
+
+/** Projects the user owns, in every status (drafts included), newest first. */
+export async function getMyProjects(userId: string): Promise<ProjectCardData[]> {
+  const { data, error } = await client()
+    .from('projects')
+    .select(CARD_COLUMNS)
+    .eq('owner_id', userId)
+    .order('created_at', { ascending: false })
+    .returns<CardRow[]>();
+  if (error) throw error;
+  return (data ?? []).map(toCard);
 }

@@ -508,5 +508,31 @@
     "successTitle": "Rahmat!",
     "successText": "“{{project}}” uchun {{amount}} qayd etildi.",
     "successReward": "Mukofot: {{reward}}"
+  },
+  "dashboard": {
+    "backer": {
+      "title": "Salom, {{name}}",
+      "total": "Jami hissa",
+      "projects": "Qo'llab-quvvatlangan loyihalar",
+      "musharakah": "Mushorakada",
+      "rewards": "Tanlangan mukofotlar",
+      "historyTab": "Hissalar ({{count}})",
+      "savedTab": "Saqlangan ({{count}})",
+      "date": "Sana",
+      "project": "Loyiha",
+      "details": "Tafsilotlar",
+      "share": "Foyda ulushi: {{share}}%",
+      "anonymous": "Ochiq ko'rsatilmaydi",
+      "refunded": "Qaytarilgan",
+      "simulated": "simulyatsiya",
+      "emptyContributions": "Siz hali hech bir loyihani qo'llab-quvvatlamagansiz.",
+      "emptySaved": "Saqlangan loyihalar yo'q. Saqlash uchun loyihadagi xatcho'p belgisini bosing."
+    },
+    "founder": {
+      "emptyTitle": "Sizda hali loyihalar yo'q",
+      "emptyText": "Loyihalaringiz shu yerda ko'rib chiqish holati va mablag' to'planishi bilan ko'rinadi. To'liq loyiha formasi keyingi yangilanishda qo'shiladi.",
+      "previewTitle": "Faqat ko'rinish.",
+      "previewText": "Bu forma hali prototip: bu yerga kiritilgan ma'lumotlar ma'lumotlar bazasiga SAQLANMAYDI va ko'rib chiqishga yuborilmaydi. Haqiqiy forma keyingi yangilanishda bo'ladi."
+    }
   }
 }
