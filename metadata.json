@@ -1,0 +1,6 @@
+{
+  "name": "Fundy — Interest-Free Crowdfunding Platform",
+  "description": "Ethical, interest-free crowdfunding and Musharakah profit-sharing platform for Uzbekistan's creators, startups, and community initiatives.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
