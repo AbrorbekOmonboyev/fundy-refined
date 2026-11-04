@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
 import { formatUZS } from '@/lib/formatters';
-import { 
-  BookOpen, 
-  TrendingUp, 
-  Gift, 
-  HeartHandshake, 
-  Calculator, 
-} from 'lucide-react';
+import { BookOpen, TrendingUp, Gift, HeartHandshake, Calculator } from 'lucide-react';
 
 export const EducationPage: React.FC = () => {
-
   // Interactive Profit-Sharing Calculator State
   const [projectCapital, setProjectCapital] = useState<number>(240_000_000); // 240M UZS
   const [investorTicket, setInvestorTicket] = useState<number>(12_000_000); // 12M UZS
@@ -17,7 +10,7 @@ export const EducationPage: React.FC = () => {
   const [projectedAnnualProfit, setProjectedAnnualProfit] = useState<number>(80_000_000); // 80M UZS
 
   // Calculation
-  const yourProportionOfPool = (investorTicket / projectCapital);
+  const yourProportionOfPool = investorTicket / projectCapital;
   const yourEffectiveSharePct = yourProportionOfPool * investorPoolSharePct;
   const yourProjectedAnnualDividend = projectedAnnualProfit * (yourEffectiveSharePct / 100);
   const projectedROI = investorTicket > 0 ? (yourProjectedAnnualDividend / investorTicket) * 100 : 0;
@@ -34,7 +27,8 @@ export const EducationPage: React.FC = () => {
           Understanding Crowdfunding & Musharakah
         </h1>
         <p className="text-sm text-slate-600 mt-1 max-w-2xl">
-          Everything you need to know about ethical, interest-free capital formation, profit-and-loss sharing, and backer protections in Uzbekistan.
+          Everything you need to know about ethical, interest-free capital formation, profit-and-loss sharing, and
+          backer protections in Uzbekistan.
         </p>
       </div>
 
@@ -43,22 +37,22 @@ export const EducationPage: React.FC = () => {
         <div className="flex items-center justify-between border-b border-slate-100 pb-4">
           <div className="flex items-center gap-2">
             <Calculator className="w-5 h-5 text-emerald-600" />
-            <h2 className="text-base font-bold text-slate-900">
-              Interactive Musharakah Profit-Sharing Simulator
-            </h2>
+            <h2 className="text-base font-bold text-slate-900">Interactive Musharakah Profit-Sharing Simulator</h2>
           </div>
           <span className="text-xs text-slate-500">Uzbekistan Market Model (UZS)</span>
         </div>
 
         <p className="text-xs text-slate-600 leading-relaxed">
-          In a Musharakah agreement, investors do not earn fixed interest. Instead, you share in actual business profits proportionally. Test how changes in investment size and business profits affect annual returns:
+          In a Musharakah agreement, investors do not earn fixed interest. Instead, you share in actual business profits
+          proportionally. Test how changes in investment size and business profits affect annual returns:
         </p>
 
         {/* Inputs */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
           <div>
             <label className="block font-semibold text-slate-700 mb-1">
-              Your Investment Ticket: <strong className="font-mono-numbers text-slate-900">{formatUZS(investorTicket)}</strong>
+              Your Investment Ticket:{' '}
+              <strong className="font-mono-numbers text-slate-900">{formatUZS(investorTicket)}</strong>
             </label>
             <input
               type="range"
@@ -66,7 +60,7 @@ export const EducationPage: React.FC = () => {
               max="50000000"
               step="1000000"
               value={investorTicket}
-              onChange={(e) => setInvestorTicket(parseInt(e.target.value))}
+              onChange={e => setInvestorTicket(parseInt(e.target.value))}
               className="w-full accent-emerald-600"
             />
             <div className="flex justify-between text-[10px] text-slate-400 mt-1">
@@ -77,7 +71,8 @@ export const EducationPage: React.FC = () => {
 
           <div>
             <label className="block font-semibold text-slate-700 mb-1">
-              Total Venture Target Capital: <strong className="font-mono-numbers text-slate-900">{formatUZS(projectCapital)}</strong>
+              Total Venture Target Capital:{' '}
+              <strong className="font-mono-numbers text-slate-900">{formatUZS(projectCapital)}</strong>
             </label>
             <input
               type="range"
@@ -85,7 +80,7 @@ export const EducationPage: React.FC = () => {
               max="500000000"
               step="10000000"
               value={projectCapital}
-              onChange={(e) => setProjectCapital(parseInt(e.target.value))}
+              onChange={e => setProjectCapital(parseInt(e.target.value))}
               className="w-full accent-emerald-600"
             />
             <div className="flex justify-between text-[10px] text-slate-400 mt-1">
@@ -96,7 +91,8 @@ export const EducationPage: React.FC = () => {
 
           <div>
             <label className="block font-semibold text-slate-700 mb-1">
-              Investor Pool Profit Share: <strong className="font-mono-numbers text-emerald-700">{investorPoolSharePct}% of net profits</strong>
+              Investor Pool Profit Share:{' '}
+              <strong className="font-mono-numbers text-emerald-700">{investorPoolSharePct}% of net profits</strong>
             </label>
             <input
               type="range"
@@ -104,7 +100,7 @@ export const EducationPage: React.FC = () => {
               max="40"
               step="1"
               value={investorPoolSharePct}
-              onChange={(e) => setInvestorPoolSharePct(parseInt(e.target.value))}
+              onChange={e => setInvestorPoolSharePct(parseInt(e.target.value))}
               className="w-full accent-emerald-600"
             />
             <div className="flex justify-between text-[10px] text-slate-400 mt-1">
@@ -115,7 +111,8 @@ export const EducationPage: React.FC = () => {
 
           <div>
             <label className="block font-semibold text-slate-700 mb-1">
-              Projected Annual Business Net Profit: <strong className="font-mono-numbers text-slate-900">{formatUZS(projectedAnnualProfit)}</strong>
+              Projected Annual Business Net Profit:{' '}
+              <strong className="font-mono-numbers text-slate-900">{formatUZS(projectedAnnualProfit)}</strong>
             </label>
             <input
               type="range"
@@ -123,7 +120,7 @@ export const EducationPage: React.FC = () => {
               max="200000000"
               step="5000000"
               value={projectedAnnualProfit}
-              onChange={(e) => setProjectedAnnualProfit(parseInt(e.target.value))}
+              onChange={e => setProjectedAnnualProfit(parseInt(e.target.value))}
               className="w-full accent-emerald-600"
             />
             <div className="flex justify-between text-[10px] text-slate-400 mt-1">
@@ -163,39 +160,46 @@ export const EducationPage: React.FC = () => {
 
       {/* Guide Content: The 3 Models */}
       <section className="space-y-6">
-        <h2 className="text-xl font-bold text-slate-900">
-          The Three Crowdfunding Models Deep Dive
-        </h2>
+        <h2 className="text-xl font-bold text-slate-900">The Three Crowdfunding Models Deep Dive</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-700">
           <div className="bg-white p-6 rounded-2xl border border-slate-200 space-y-3 shadow-sm">
             <HeartHandshake className="w-6 h-6 text-blue-600" />
             <h3 className="font-bold text-slate-900 text-sm">Donation Crowdfunding</h3>
             <p className="leading-relaxed text-slate-600">
-              In donation crowdfunding, individuals pool small to moderate gifts to fund community-wide benefit. Backers do not receive financial payouts or physical goods.
+              In donation crowdfunding, individuals pool small to moderate gifts to fund community-wide benefit. Backers
+              do not receive financial payouts or physical goods.
             </p>
             <h4 className="font-semibold text-slate-800">Best used for:</h4>
-            <p className="text-slate-500">Public school computer labs, ecological plantings, free health diagnostics, and cultural museums.</p>
+            <p className="text-slate-500">
+              Public school computer labs, ecological plantings, free health diagnostics, and cultural museums.
+            </p>
           </div>
 
           <div className="bg-white p-6 rounded-2xl border border-slate-200 space-y-3 shadow-sm">
             <Gift className="w-6 h-6 text-amber-600" />
             <h3 className="font-bold text-slate-900 text-sm">Reward Crowdfunding</h3>
             <p className="leading-relaxed text-slate-600">
-              Backers act as early customers and patrons. They pledge funds in exchange for tiered physical rewards or services upon completion.
+              Backers act as early customers and patrons. They pledge funds in exchange for tiered physical rewards or
+              services upon completion.
             </p>
             <h4 className="font-semibold text-slate-800">Best used for:</h4>
-            <p className="text-slate-500">Handcrafted ceramics, silk textiles, books, designer kitchenware, and specialty roasted coffees.</p>
+            <p className="text-slate-500">
+              Handcrafted ceramics, silk textiles, books, designer kitchenware, and specialty roasted coffees.
+            </p>
           </div>
 
           <div className="bg-white p-6 rounded-2xl border border-slate-200 space-y-3 shadow-sm">
             <TrendingUp className="w-6 h-6 text-emerald-600" />
             <h3 className="font-bold text-slate-900 text-sm">Equity / Musharakah</h3>
             <p className="leading-relaxed text-slate-600">
-              Investors contribute risk capital into a commercially viable enterprise. Profit and enterprise risk are shared according to transparent contractual ratios.
+              Investors contribute risk capital into a commercially viable enterprise. Profit and enterprise risk are
+              shared according to transparent contractual ratios.
             </p>
             <h4 className="font-semibold text-slate-800">Best used for:</h4>
-            <p className="text-slate-500">High-tech hydroponic greenhouses, solar cold storage, electric vehicles, and SaaS software.</p>
+            <p className="text-slate-500">
+              High-tech hydroponic greenhouses, solar cold storage, electric vehicles, and SaaS software.
+            </p>
           </div>
         </div>
       </section>
@@ -204,9 +208,7 @@ export const EducationPage: React.FC = () => {
       <section className="bg-slate-50 rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-6">
         <div>
           <span className="text-xs font-semibold text-emerald-700 uppercase">Shariah Alignment</span>
-          <h2 className="text-xl font-bold text-slate-900 mt-1">
-            How Musharakah Differs from Conventional Debt Loans
-          </h2>
+          <h2 className="text-xl font-bold text-slate-900 mt-1">How Musharakah Differs from Conventional Debt Loans</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
@@ -234,14 +236,16 @@ export const EducationPage: React.FC = () => {
 
       {/* Risks & Mitigation */}
       <section className="space-y-4 text-xs text-slate-700">
-        <h2 className="text-xl font-bold text-slate-900">
-          Understanding the Risks of Crowdfunding
-        </h2>
+        <h2 className="text-xl font-bold text-slate-900">Understanding the Risks of Crowdfunding</h2>
         <p className="leading-relaxed text-slate-600">
-          All entrepreneurial ventures face execution risk. Product prototypes can experience manufacturing delays; agricultural projects can face climatic variations; consumer demand can shift.
+          All entrepreneurial ventures face execution risk. Product prototypes can experience manufacturing delays;
+          agricultural projects can face climatic variations; consumer demand can shift.
         </p>
         <p className="leading-relaxed text-slate-600">
-          Fundy minimizes risk through <strong>staged milestone disbursements</strong> (founders only receive money after verifying earlier stages), <strong>legal identity verification</strong> across Uzbekistan registries, and <strong>100-point multi-variable evaluations</strong>. Backers should always diversify their support across multiple initiatives.
+          Fundy minimizes risk through <strong>staged milestone disbursements</strong> (founders only receive money
+          after verifying earlier stages), <strong>legal identity verification</strong> across Uzbekistan registries,
+          and <strong>100-point multi-variable evaluations</strong>. Backers should always diversify their support
+          across multiple initiatives.
         </p>
       </section>
     </div>

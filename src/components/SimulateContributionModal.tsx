@@ -4,13 +4,8 @@ import { formatUZS, getModelLabel } from '@/lib/formatters';
 import { X, CheckCircle2, ShieldCheck, AlertCircle, CreditCard, ChevronRight } from 'lucide-react';
 
 export const SimulateContributionModal: React.FC = () => {
-  const { 
-    contributionModalProject, 
-    selectedRewardId, 
-    closeContributionModal, 
-    recordContribution,
-    navigateTo 
-  } = useApp();
+  const { contributionModalProject, selectedRewardId, closeContributionModal, recordContribution, navigateTo } =
+    useApp();
 
   const project = contributionModalProject;
 
@@ -43,13 +38,13 @@ export const SimulateContributionModal: React.FC = () => {
 
   if (!project) return null;
 
-  const finalAmount = isCustom ? (parseInt(customAmountStr) || 0) : selectedAmount;
+  const finalAmount = isCustom ? parseInt(customAmountStr) || 0 : selectedAmount;
 
   // Calculate simulated equity share
   let calculatedShare = 0;
   if (project.model === 'equity' && project.equityTerms && finalAmount > 0) {
     calculatedShare = parseFloat(
-      ((finalAmount / project.targetAmount) * project.equityTerms.investorProfitSharePercent).toFixed(2)
+      ((finalAmount / project.targetAmount) * project.equityTerms.investorProfitSharePercent).toFixed(2),
     );
   }
 
@@ -74,7 +69,7 @@ export const SimulateContributionModal: React.FC = () => {
         amount: finalAmount,
         paymentMethod,
         rewardId: chosenReward?.id,
-        rewardTitle: chosenReward?.title
+        rewardTitle: chosenReward?.title,
       });
       setIsSubmitting(false);
       setStep('success');
@@ -92,9 +87,7 @@ export const SimulateContributionModal: React.FC = () => {
                 {getModelLabel(project.model)} Simulation
               </span>
             </div>
-            <h3 className="text-sm font-bold text-slate-900 mt-1 line-clamp-1">
-              {project.title}
-            </h3>
+            <h3 className="text-sm font-bold text-slate-900 mt-1 line-clamp-1">{project.title}</h3>
           </div>
           <button
             onClick={closeContributionModal}
@@ -122,8 +115,8 @@ export const SimulateContributionModal: React.FC = () => {
                     <span className="text-emerald-700">{project.equityTerms.contractType}</span>
                   </div>
                   <p className="text-slate-600">
-                    Total Investor Pool: {project.equityTerms.investorProfitSharePercent}% of net profits.
-                    Distributions scheduled {project.equityTerms.distributionSchedule.toLowerCase()}.
+                    Total Investor Pool: {project.equityTerms.investorProfitSharePercent}% of net profits. Distributions
+                    scheduled {project.equityTerms.distributionSchedule.toLowerCase()}.
                   </p>
                   <p className="text-slate-500 text-[11px]">
                     Minimum participation ticket: {formatUZS(project.equityTerms.minInvestment)}
@@ -154,13 +147,9 @@ export const SimulateContributionModal: React.FC = () => {
                       >
                         <div className="flex justify-between items-baseline">
                           <span className="font-semibold text-slate-900">{rew.title}</span>
-                          <span className="font-bold text-emerald-700 font-mono-numbers">
-                            {formatUZS(rew.amount)}
-                          </span>
+                          <span className="font-bold text-emerald-700 font-mono-numbers">{formatUZS(rew.amount)}</span>
                         </div>
-                        <p className="text-slate-600 mt-1 text-[11px] line-clamp-2">
-                          {rew.description}
-                        </p>
+                        <p className="text-slate-600 mt-1 text-[11px] line-clamp-2">{rew.description}</p>
                         <div className="mt-2 text-[10px] text-slate-400 flex items-center justify-between">
                           <span>Est. Delivery: {rew.estimatedDelivery}</span>
                           <span className="font-mono-numbers">{rew.claimedCount} claimed</span>
@@ -179,23 +168,22 @@ export const SimulateContributionModal: React.FC = () => {
 
                 {/* Presets */}
                 <div className="grid grid-cols-3 gap-2 mb-3">
-                  {(project.model === 'equity' 
-                    ? [2_500_000, 5_000_000, 10_000_000] 
-                    : [100_000, 350_000, 850_000]
-                  ).map(amt => (
-                    <button
-                      key={amt}
-                      type="button"
-                      onClick={() => handlePresetSelect(amt)}
-                      className={`py-2 px-3 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
-                        !isCustom && selectedAmount === amt
-                          ? 'border-emerald-600 bg-emerald-600 text-white'
-                          : 'border-slate-200 text-slate-700 hover:bg-slate-50'
-                      }`}
-                    >
-                      {formatUZS(amt, true)}
-                    </button>
-                  ))}
+                  {(project.model === 'equity' ? [2_500_000, 5_000_000, 10_000_000] : [100_000, 350_000, 850_000]).map(
+                    amt => (
+                      <button
+                        key={amt}
+                        type="button"
+                        onClick={() => handlePresetSelect(amt)}
+                        className={`py-2 px-3 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
+                          !isCustom && selectedAmount === amt
+                            ? 'border-emerald-600 bg-emerald-600 text-white'
+                            : 'border-slate-200 text-slate-700 hover:bg-slate-50'
+                        }`}
+                      >
+                        {formatUZS(amt, true)}
+                      </button>
+                    ),
+                  )}
                 </div>
 
                 {/* Custom input */}
@@ -207,12 +195,12 @@ export const SimulateContributionModal: React.FC = () => {
                       value={isCustom ? customAmountStr : ''}
                       onChange={handleCustomChange}
                       className={`w-full px-3 py-2.5 rounded-lg border text-sm font-mono-numbers text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ${
-                        isCustom ? 'border-emerald-500 bg-white ring-1 ring-emerald-500' : 'border-slate-200 bg-slate-50'
+                        isCustom
+                          ? 'border-emerald-500 bg-white ring-1 ring-emerald-500'
+                          : 'border-slate-200 bg-slate-50'
                       }`}
                     />
-                    <span className="absolute right-3 top-2.5 text-xs font-semibold text-slate-400">
-                      UZS
-                    </span>
+                    <span className="absolute right-3 top-2.5 text-xs font-semibold text-slate-400">UZS</span>
                   </div>
                 </div>
               </div>
@@ -285,7 +273,8 @@ export const SimulateContributionModal: React.FC = () => {
                   <span>Important Entrepreneurial Risk Notice:</span>
                 </p>
                 <p className="text-[11px] leading-relaxed">
-                  Musharakah is a genuine profit-and-loss sharing partnership, NOT a guaranteed interest loan or bank deposit. Returns depend upon commercial business performance and audited quarterly earnings.
+                  Musharakah is a genuine profit-and-loss sharing partnership, NOT a guaranteed interest loan or bank
+                  deposit. Returns depend upon commercial business performance and audited quarterly earnings.
                 </p>
               </div>
 
@@ -293,11 +282,12 @@ export const SimulateContributionModal: React.FC = () => {
                 <input
                   type="checkbox"
                   checked={agreedToRisk}
-                  onChange={(e) => setAgreedToRisk(e.target.checked)}
+                  onChange={e => setAgreedToRisk(e.target.checked)}
                   className="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
                 />
                 <span>
-                  I understand that this is a simulated equity investment on Fundy under Musharakah principles, subject to business performance risks.
+                  I understand that this is a simulated equity investment on Fundy under Musharakah principles, subject
+                  to business performance risks.
                 </span>
               </label>
 
@@ -326,9 +316,7 @@ export const SimulateContributionModal: React.FC = () => {
             <div className="space-y-4">
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs flex justify-between items-center">
                 <span className="text-slate-600">Simulated Total:</span>
-                <span className="text-base font-bold text-slate-900 font-mono-numbers">
-                  {formatUZS(finalAmount)}
-                </span>
+                <span className="text-base font-bold text-slate-900 font-mono-numbers">{formatUZS(finalAmount)}</span>
               </div>
 
               <div>
@@ -340,7 +328,7 @@ export const SimulateContributionModal: React.FC = () => {
                     { id: 'Click', label: 'Click (Simulated)' },
                     { id: 'Payme', label: 'Payme (Simulated)' },
                     { id: 'Uzcard', label: 'Uzcard (Simulated)' },
-                    { id: 'Humo', label: 'Humo (Simulated)' }
+                    { id: 'Humo', label: 'Humo (Simulated)' },
                   ].map(method => (
                     <button
                       key={method.id}
@@ -360,7 +348,8 @@ export const SimulateContributionModal: React.FC = () => {
               </div>
 
               <div className="text-[11px] text-slate-500 bg-slate-100 p-2.5 rounded-lg">
-                Simulation Notice: Clicking confirm will immediately update project funding statistics and add this transaction to your simulated Backer/Investor portfolio.
+                Simulation Notice: Clicking confirm will immediately update project funding statistics and add this
+                transaction to your simulated Backer/Investor portfolio.
               </div>
 
               <div className="pt-2 flex items-center justify-between">
@@ -390,12 +379,11 @@ export const SimulateContributionModal: React.FC = () => {
               </div>
 
               <div>
-                <h4 className="text-base font-bold text-slate-900">
-                  Simulated Contribution Confirmed!
-                </h4>
+                <h4 className="text-base font-bold text-slate-900">Simulated Contribution Confirmed!</h4>
                 <p className="text-xs text-slate-600 mt-1 max-w-sm mx-auto">
                   Thank you for testing Fundy. Your simulated pledge of{' '}
-                  <strong className="text-slate-900 font-mono-numbers">{formatUZS(finalAmount)}</strong> has been recorded in the platform's local database.
+                  <strong className="text-slate-900 font-mono-numbers">{formatUZS(finalAmount)}</strong> has been
+                  recorded in the platform's local database.
                 </p>
               </div>
 

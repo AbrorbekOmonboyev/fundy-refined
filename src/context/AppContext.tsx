@@ -25,10 +25,10 @@ interface AppContextType {
   userProfile: UserProfile;
   contributionModalProject: Project | null;
   selectedRewardId: string | null;
-  
+
   // Navigation
   navigateTo: (page: PageView, projectId?: string) => void;
-  
+
   // Interactions
   toggleSaveProject: (projectId: string) => void;
   openContributionModal: (project: Project, rewardId?: string) => void;
@@ -40,12 +40,12 @@ interface AppContextType {
     rewardId?: string;
     rewardTitle?: string;
   }) => void;
-  
+
   // Founder actions
   addNewProject: (projectData: Partial<Project>) => string;
   publishProjectUpdate: (projectId: string, title: string, content: string) => void;
   addProjectComment: (projectId: string, content: string) => void;
-  
+
   // Profile Switcher (Backer vs Founder perspective)
   setUserRole: (role: 'backer' | 'founder') => void;
   markNotificationsAsRead: () => void;
@@ -99,7 +99,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         date: '2026-10-25',
         equityShare: 1.75,
         simulatedPaymentMethod: 'Click',
-        status: 'Confirmed (Simulated)'
+        status: 'Confirmed (Simulated)',
       },
       {
         id: 'contrib-demo-2',
@@ -111,8 +111,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         rewardId: 'r-2',
         rewardTitle: 'Hand-Woven Pure Silk Ikat Scarf (180x50cm)',
         simulatedPaymentMethod: 'Payme',
-        status: 'Confirmed (Simulated)'
-      }
+        status: 'Confirmed (Simulated)',
+      },
     ];
   });
 
@@ -130,7 +130,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     email: 'alisher.v@example.uz',
     role: 'backer',
     city: 'Tashkent',
-    balanceUZS: 50_000_000
+    balanceUZS: 50_000_000,
   });
 
   const [notifications, setNotifications] = useState<NotificationItem[]>([
@@ -140,7 +140,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       message: 'AgroSmart Fergana completed Milestone 2 (Solar Commissioning). 40% funds released.',
       time: '2 hours ago',
       read: false,
-      type: 'milestone'
+      type: 'milestone',
     },
     {
       id: 'notif-2',
@@ -148,7 +148,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       message: 'Samarkand Artisan Studio completed first test firing of electric kilns.',
       time: '1 day ago',
       read: false,
-      type: 'project'
+      type: 'project',
     },
     {
       id: 'notif-3',
@@ -156,8 +156,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
       message: 'Andijan Mobility Electric Trikes opened for community equity participation.',
       time: '3 days ago',
       read: true,
-      type: 'system'
-    }
+      type: 'system',
+    },
   ]);
 
   // Persist to localStorage
@@ -191,11 +191,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   };
 
   const toggleSaveProject = (projectId: string) => {
-    setSavedProjectIds(prev => 
-      prev.includes(projectId) 
-        ? prev.filter(id => id !== projectId) 
-        : [...prev, projectId]
-    );
+    setSavedProjectIds(prev => (prev.includes(projectId) ? prev.filter(id => id !== projectId) : [...prev, projectId]));
   };
 
   const openContributionModal = (project: Project, rewardId?: string) => {
@@ -213,7 +209,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     amount,
     paymentMethod,
     rewardId,
-    rewardTitle
+    rewardTitle,
   }: {
     projectId: string;
     amount: number;
@@ -242,24 +238,26 @@ export function AppProvider({ children }: { children: ReactNode }) {
       rewardTitle,
       equityShare,
       simulatedPaymentMethod: paymentMethod,
-      status: 'Confirmed (Simulated)'
+      status: 'Confirmed (Simulated)',
     };
 
     setContributions(prev => [newContribution, ...prev]);
 
     // Update project raised amount and backer count
-    setProjects(prev => prev.map(p => {
-      if (p.id === projectId) {
-        const newRaised = p.raisedAmount + amount;
-        return {
-          ...p,
-          raisedAmount: newRaised,
-          backerCount: p.backerCount + 1,
-          status: newRaised >= p.targetAmount ? 'funded' : p.status
-        };
-      }
-      return p;
-    }));
+    setProjects(prev =>
+      prev.map(p => {
+        if (p.id === projectId) {
+          const newRaised = p.raisedAmount + amount;
+          return {
+            ...p,
+            raisedAmount: newRaised,
+            backerCount: p.backerCount + 1,
+            status: newRaised >= p.targetAmount ? 'funded' : p.status,
+          };
+        }
+        return p;
+      }),
+    );
 
     // Add notification
     setNotifications(prev => [
@@ -269,9 +267,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         message: `Your simulated support of ${amount.toLocaleString()} UZS to "${project.title}" has been recorded.`,
         time: 'Just now',
         read: false,
-        type: 'contribution'
+        type: 'contribution',
       },
-      ...prev
+      ...prev,
     ]);
   };
 
@@ -308,15 +306,41 @@ export function AppProvider({ children }: { children: ReactNode }) {
         verifiedIdentity: true,
         tinOrRegistration: 'Pending Municipal Verification',
         bio: 'Founder on Fundy platform.',
-        experienceYears: 4
+        experienceYears: 4,
       },
       budgetBreakdown: projectData.budgetBreakdown || [
-        { id: 'b-init-1', category: 'Direct Production Equipment', amount: (projectData.targetAmount || 50_000_000) * 0.7, description: 'Core hardware & tooling', percentage: 70 },
-        { id: 'b-init-2', category: 'Operational & Packaging', amount: (projectData.targetAmount || 50_000_000) * 0.3, description: 'Logistics and execution', percentage: 30 }
+        {
+          id: 'b-init-1',
+          category: 'Direct Production Equipment',
+          amount: (projectData.targetAmount || 50_000_000) * 0.7,
+          description: 'Core hardware & tooling',
+          percentage: 70,
+        },
+        {
+          id: 'b-init-2',
+          category: 'Operational & Packaging',
+          amount: (projectData.targetAmount || 50_000_000) * 0.3,
+          description: 'Logistics and execution',
+          percentage: 30,
+        },
       ],
       milestones: projectData.milestones || [
-        { id: 'm-init-1', title: 'Phase 1 Tooling & Setup', description: 'Procure primary supplies', targetMonth: 'Month 1', fundReleasePercentage: 50, completed: false },
-        { id: 'm-init-2', title: 'Phase 2 Deliveries & Impact', description: 'Deliver to community', targetMonth: 'Month 3', fundReleasePercentage: 50, completed: false }
+        {
+          id: 'm-init-1',
+          title: 'Phase 1 Tooling & Setup',
+          description: 'Procure primary supplies',
+          targetMonth: 'Month 1',
+          fundReleasePercentage: 50,
+          completed: false,
+        },
+        {
+          id: 'm-init-2',
+          title: 'Phase 2 Deliveries & Impact',
+          description: 'Deliver to community',
+          targetMonth: 'Month 3',
+          fundReleasePercentage: 50,
+          completed: false,
+        },
       ],
       rewards: projectData.rewards,
       equityTerms: projectData.equityTerms,
@@ -329,14 +353,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
         riskScore: 17,
         status: 'In Review',
         lastEvaluatedDate: new Date().toISOString().split('T')[0],
-        summaryNotes: 'Newly submitted campaign undergoing initial Shariah ethical compliance audit and identity verification checks.',
+        summaryNotes:
+          'Newly submitted campaign undergoing initial Shariah ethical compliance audit and identity verification checks.',
         keyStrengths: ['Clear community focus', 'Coherent budget outline'],
-        keyRisks: ['Early stage roadmap execution verification needed']
+        keyRisks: ['Early stage roadmap execution verification needed'],
       },
-      risksAndChallenges: projectData.risksAndChallenges || 'Project execution is dependent on timely supplier deliveries within Uzbekistan.',
+      risksAndChallenges:
+        projectData.risksAndChallenges ||
+        'Project execution is dependent on timely supplier deliveries within Uzbekistan.',
       updates: [],
       comments: [],
-      createdAt: new Date().toISOString().split('T')[0]
+      createdAt: new Date().toISOString().split('T')[0],
     };
 
     setProjects(prev => [fullProject, ...prev]);
@@ -348,9 +375,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         message: `"${fullProject.title}" has been successfully submitted and is under verification in your Founder Dashboard.`,
         time: 'Just now',
         read: false,
-        type: 'system'
+        type: 'system',
       },
-      ...prev
+      ...prev,
     ]);
 
     return newId;
@@ -363,18 +390,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
       content,
       date: new Date().toISOString().split('T')[0],
       author: userProfile.name,
-      likesCount: 0
+      likesCount: 0,
     };
 
-    setProjects(prev => prev.map(p => {
-      if (p.id === projectId) {
-        return {
-          ...p,
-          updates: [newUpdate, ...p.updates]
-        };
-      }
-      return p;
-    }));
+    setProjects(prev =>
+      prev.map(p => {
+        if (p.id === projectId) {
+          return {
+            ...p,
+            updates: [newUpdate, ...p.updates],
+          };
+        }
+        return p;
+      }),
+    );
 
     setNotifications(prev => [
       {
@@ -383,9 +412,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         message: `Your project update "${title}" was published to all backers.`,
         time: 'Just now',
         read: false,
-        type: 'project'
+        type: 'project',
       },
-      ...prev
+      ...prev,
     ]);
   };
 
@@ -396,18 +425,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
       authorCity: userProfile.city,
       date: new Date().toISOString().split('T')[0],
       content,
-      isBacker: contributions.some(c => c.projectId === projectId)
+      isBacker: contributions.some(c => c.projectId === projectId),
     };
 
-    setProjects(prev => prev.map(p => {
-      if (p.id === projectId) {
-        return {
-          ...p,
-          comments: [newComment, ...p.comments]
-        };
-      }
-      return p;
-    }));
+    setProjects(prev =>
+      prev.map(p => {
+        if (p.id === projectId) {
+          return {
+            ...p,
+            comments: [newComment, ...p.comments],
+          };
+        }
+        return p;
+      }),
+    );
   };
 
   const setUserRole = (role: 'backer' | 'founder') => {
@@ -415,7 +446,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       ...prev,
       role,
       name: role === 'founder' ? 'Azizbek Rakhimov' : 'Alisher Vohidov',
-      city: role === 'founder' ? 'Fergana' : 'Tashkent'
+      city: role === 'founder' ? 'Fergana' : 'Tashkent',
     }));
   };
 
@@ -439,8 +470,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         date: '2026-10-25',
         equityShare: 1.75,
         simulatedPaymentMethod: 'Click',
-        status: 'Confirmed (Simulated)'
-      }
+        status: 'Confirmed (Simulated)',
+      },
     ]);
   };
 
@@ -466,7 +497,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         addProjectComment,
         setUserRole,
         markNotificationsAsRead,
-        resetToDefaultData
+        resetToDefaultData,
       }}
     >
       {children}

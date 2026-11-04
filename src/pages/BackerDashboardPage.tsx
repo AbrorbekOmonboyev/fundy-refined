@@ -2,14 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '@/context/AppContext';
 import { formatUZS, getModelLabel } from '@/lib/formatters';
 import { ProjectCard } from '@/components/ProjectCard';
-import { 
-  DollarSign, 
-  Gift, 
-  TrendingUp, 
-  Bookmark, 
-  ArrowUpRight, 
-  Package, 
-} from 'lucide-react';
+import { DollarSign, Gift, TrendingUp, Bookmark, ArrowUpRight, Package } from 'lucide-react';
 
 export const BackerDashboardPage: React.FC = () => {
   const { contributions, projects, savedProjectIds, navigateTo, userProfile } = useApp();
@@ -32,9 +25,7 @@ export const BackerDashboardPage: React.FC = () => {
             </span>
             <span className="text-xs text-slate-400">· {userProfile.city}, Uzbekistan</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
-            Portfolio of {userProfile.name}
-          </h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Portfolio of {userProfile.name}</h1>
           <p className="text-xs text-slate-500 mt-0.5">
             Monitor your simulated contributions, reward delivery timelines, and Musharakah profit-sharing agreements.
           </p>
@@ -98,7 +89,7 @@ export const BackerDashboardPage: React.FC = () => {
           { id: 'contributions', label: `All Contributions (${contributions.length})` },
           { id: 'portfolio', label: `Musharakah Portfolio (${equityContributions.length})` },
           { id: 'rewards', label: `Reward Tracking (${rewardContributions.length})` },
-          { id: 'saved', label: `Saved Projects (${savedProjects.length})` }
+          { id: 'saved', label: `Saved Projects (${savedProjects.length})` },
         ].map(tab => (
           <button
             key={tab.id}
@@ -148,9 +139,7 @@ export const BackerDashboardPage: React.FC = () => {
                           {getModelLabel(c.projectModel)}
                         </span>
                       </td>
-                      <td className="py-3 px-4 text-slate-600">
-                        {c.simulatedPaymentMethod} (Simulated)
-                      </td>
+                      <td className="py-3 px-4 text-slate-600">{c.simulatedPaymentMethod} (Simulated)</td>
                       <td className="py-3 px-4 text-right font-mono-numbers font-bold text-slate-900">
                         {formatUZS(c.amount)}
                       </td>
@@ -178,7 +167,8 @@ export const BackerDashboardPage: React.FC = () => {
               <div>
                 <strong className="font-semibold">Musharakah Co-Ownership Principles:</strong>
                 <p className="text-[11px] text-emerald-800 mt-0.5 leading-relaxed">
-                  As an equity partner, you share in actual audited profits and enterprise risk. Dividends are paid proportionally to your investment share following quarterly financial audits.
+                  As an equity partner, you share in actual audited profits and enterprise risk. Dividends are paid
+                  proportionally to your investment share following quarterly financial audits.
                 </p>
               </div>
             </div>
@@ -190,13 +180,9 @@ export const BackerDashboardPage: React.FC = () => {
                     <span className="text-[10px] uppercase font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
                       Active Musharakah Agreement
                     </span>
-                    <h3 className="text-base font-bold text-slate-900 mt-1">
-                      {eq.projectTitle}
-                    </h3>
+                    <h3 className="text-base font-bold text-slate-900 mt-1">{eq.projectTitle}</h3>
                   </div>
-                  <span className="text-xs text-slate-400 font-mono-numbers">
-                    Contract Date: {eq.date}
-                  </span>
+                  <span className="text-xs text-slate-400 font-mono-numbers">Contract Date: {eq.date}</span>
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
@@ -216,16 +202,12 @@ export const BackerDashboardPage: React.FC = () => {
 
                   <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
                     <span className="text-slate-400 block">Distribution Cycle:</span>
-                    <strong className="text-slate-900 block mt-0.5">
-                      Quarterly (Q4 2026)
-                    </strong>
+                    <strong className="text-slate-900 block mt-0.5">Quarterly (Q4 2026)</strong>
                   </div>
 
                   <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
                     <span className="text-slate-400 block">Buyout Horizon:</span>
-                    <strong className="text-slate-900 block mt-0.5">
-                      5 Years (Diminishing)
-                    </strong>
+                    <strong className="text-slate-900 block mt-0.5">5 Years (Diminishing)</strong>
                   </div>
                 </div>
 
@@ -261,9 +243,7 @@ export const BackerDashboardPage: React.FC = () => {
                     </h3>
                     <p className="text-slate-500 text-xs">{r.projectTitle}</p>
                   </div>
-                  <span className="font-mono-numbers font-bold text-slate-900">
-                    {formatUZS(r.amount)}
-                  </span>
+                  <span className="font-mono-numbers font-bold text-slate-900">{formatUZS(r.amount)}</span>
                 </div>
 
                 {/* Tracking Progress */}

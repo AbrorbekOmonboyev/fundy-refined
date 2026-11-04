@@ -11,7 +11,7 @@ const CATEGORIES: ('All' | ProjectCategory)[] = [
   'Artisanal & Crafts',
   'Education',
   'Clean Energy',
-  'Social Impact'
+  'Social Impact',
 ];
 
 export const ExplorePage: React.FC = () => {
@@ -58,7 +58,7 @@ export const ExplorePage: React.FC = () => {
       })
       .sort((a, b) => {
         if (sortBy === 'most_funded') {
-          return (b.raisedAmount / b.targetAmount) - (a.raisedAmount / a.targetAmount);
+          return b.raisedAmount / b.targetAmount - a.raisedAmount / a.targetAmount;
         }
         if (sortBy === 'ending_soon') {
           return a.daysRemaining - b.daysRemaining;
@@ -81,7 +81,8 @@ export const ExplorePage: React.FC = () => {
     setSortBy('most_funded');
   };
 
-  const hasActiveFilters = searchQuery !== '' || selectedCategory !== 'All' || selectedModel !== 'All' || selectedStatus !== 'all';
+  const hasActiveFilters =
+    searchQuery !== '' || selectedCategory !== 'All' || selectedModel !== 'All' || selectedStatus !== 'all';
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
@@ -91,7 +92,8 @@ export const ExplorePage: React.FC = () => {
           Explore Projects in Uzbekistan
         </h1>
         <p className="text-sm text-slate-600 mt-1">
-          Discover vetted initiatives across agriculture, tech, crafts, and green energy powered by interest-free community capital.
+          Discover vetted initiatives across agriculture, tech, crafts, and green energy powered by interest-free
+          community capital.
         </p>
       </div>
 
@@ -105,7 +107,7 @@ export const ExplorePage: React.FC = () => {
               type="text"
               placeholder="Search by project, founder, city (e.g. Fergana, Samarkand)..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={e => setSearchQuery(e.target.value)}
               className="w-full pl-9 pr-8 py-2 text-xs rounded-lg border border-slate-200 bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all"
             />
             {searchQuery && (
@@ -124,15 +126,13 @@ export const ExplorePage: React.FC = () => {
               { id: 'All', label: 'All Models' },
               { id: 'equity', label: 'Musharakah Equity' },
               { id: 'reward', label: 'Rewards' },
-              { id: 'donation', label: 'Donations' }
+              { id: 'donation', label: 'Donations' },
             ].map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setSelectedModel(tab.id as typeof selectedModel)}
                 className={`px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-colors cursor-pointer ${
-                  selectedModel === tab.id
-                    ? 'bg-white text-slate-900 shadow-sm'
-                    : 'text-slate-600 hover:text-slate-900'
+                  selectedModel === tab.id ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 {tab.label}
@@ -145,7 +145,7 @@ export const ExplorePage: React.FC = () => {
             <ArrowUpDown className="w-3.5 h-3.5 text-slate-500" />
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
+              onChange={e => setSortBy(e.target.value as typeof sortBy)}
               className="text-xs font-medium bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer"
             >
               <option value="most_funded">Most Funded (%)</option>

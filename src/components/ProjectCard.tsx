@@ -22,16 +22,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           alt={project.title}
           referrerPolicy="no-referrer"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          onError={(e) => {
+          onError={e => {
             // High-fidelity SVG fallback if image fails
             (e.target as HTMLElement).style.display = 'none';
           }}
         />
-        
+
         {/* Top actions overlay */}
         <div className="absolute top-3 right-3 flex items-center gap-1.5 z-10">
           <button
-            onClick={(e) => {
+            onClick={e => {
               e.stopPropagation();
               toggleSaveProject(project.id);
             }}
@@ -72,19 +72,21 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </h3>
 
           {/* Tagline */}
-          <p className="mt-2 text-xs text-slate-600 line-clamp-2 leading-relaxed">
-            {project.tagline}
-          </p>
+          <p className="mt-2 text-xs text-slate-600 line-clamp-2 leading-relaxed">{project.tagline}</p>
 
           {/* Founder line */}
           <div className="mt-3 flex items-center gap-1.5 text-xs text-slate-600">
-            <span>by <strong className="font-medium text-slate-800">{project.founder.name}</strong></span>
+            <span>
+              by <strong className="font-medium text-slate-800">{project.founder.name}</strong>
+            </span>
             {project.founder.verifiedIdentity && (
               <span title="Identity Verified by Fundy" className="inline-flex items-center text-emerald-600">
                 <CheckCircle className="w-3.5 h-3.5" />
               </span>
             )}
-            <span aria-hidden="true" className="text-slate-300">·</span>
+            <span aria-hidden="true" className="text-slate-300">
+              ·
+            </span>
             <span className="text-[11px] text-slate-500 font-mono-numbers">
               Score: <strong className="font-semibold text-slate-700">{project.evaluation.overallScore}/100</strong>
             </span>
@@ -109,13 +111,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               <span className="font-bold text-slate-900 font-mono-numbers text-sm">
                 {formatUZS(project.raisedAmount, true)}
               </span>
-              <span className="text-slate-500 text-[11px] ml-1">
-                of {formatUZS(project.targetAmount, true)}
-              </span>
+              <span className="text-slate-500 text-[11px] ml-1">of {formatUZS(project.targetAmount, true)}</span>
             </div>
-            <span className="font-bold text-emerald-700 font-mono-numbers">
-              {percentage}%
-            </span>
+            <span className="font-bold text-emerald-700 font-mono-numbers">{percentage}%</span>
           </div>
 
           {/* Card footer details: backers + quick support button */}
@@ -127,7 +125,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
             <div className="flex items-center gap-2">
               <button
-                onClick={(e) => {
+                onClick={e => {
                   e.stopPropagation();
                   openContributionModal(project);
                 }}
@@ -135,7 +133,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               >
                 {project.model === 'equity' ? 'Invest' : 'Back'}
               </button>
-              
+
               <button
                 onClick={() => navigateTo('project-detail', project.id)}
                 className="p-1 text-slate-400 hover:text-slate-700 transition-colors"

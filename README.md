@@ -12,14 +12,14 @@ npm install
 npm run dev        # http://localhost:3000
 ```
 
-| Command | What it does |
-|---|---|
-| `npm run dev` | Start the dev server with live reload |
-| `npm run build` | Type-check and build the production site into `dist/` |
-| `npm run preview` | Serve the built site locally |
-| `npm run typecheck` | Check TypeScript types only |
-| `npm run lint` | Check code for mistakes (ESLint) |
-| `npm run format` | Auto-format all files (Prettier) |
+| Command             | What it does                                          |
+| ------------------- | ----------------------------------------------------- |
+| `npm run dev`       | Start the dev server with live reload                 |
+| `npm run build`     | Type-check and build the production site into `dist/` |
+| `npm run preview`   | Serve the built site locally                          |
+| `npm run typecheck` | Check TypeScript types only                           |
+| `npm run lint`      | Check code for mistakes (ESLint)                      |
+| `npm run format`    | Auto-format all files (Prettier)                      |
 
 Copy `.env.example` to `.env.local` when environment values are needed (Supabase, from Phase 1).
 
@@ -48,16 +48,16 @@ public/images/          Static images
 
 ## URLs
 
-| Page | URL |
-|---|---|
-| Home | `/` |
-| Explore | `/explore` |
-| Project | `/projects/:slug` |
-| Start a project | `/start` |
-| Backer dashboard | `/dashboard/backer` |
-| Founder dashboard | `/dashboard/founder` |
-| Education & Musharakah | `/learn` |
-| Trust & Safety | `/trust-and-safety` |
+| Page                   | URL                  |
+| ---------------------- | -------------------- |
+| Home                   | `/`                  |
+| Explore                | `/explore`           |
+| Project                | `/projects/:slug`    |
+| Start a project        | `/start`             |
+| Backer dashboard       | `/dashboard/backer`  |
+| Founder dashboard      | `/dashboard/founder` |
+| Education & Musharakah | `/learn`             |
+| Trust & Safety         | `/trust-and-safety`  |
 
 ## Translations
 

@@ -5,8 +5,10 @@ export const INITIAL_PROJECTS: Project[] = [
     id: 'project-1',
     slug: 'agrosmart-fergana-greenhouse',
     title: 'AgroSmart Fergana: Solar-Powered Hydroponic Greenhouses',
-    tagline: 'High-yield, water-efficient drip greenhouse producing organic vegetables for Fergana and Tashkent markets.',
-    description: 'AgroSmart Fergana is deploying automated climate-controlled hydroponic growing bays powered by rooftop solar collectors in Kuva district, Fergana. We reduce groundwater usage by 78% while doubling seasonal tomato and bell pepper yields.',
+    tagline:
+      'High-yield, water-efficient drip greenhouse producing organic vegetables for Fergana and Tashkent markets.',
+    description:
+      'AgroSmart Fergana is deploying automated climate-controlled hydroponic growing bays powered by rooftop solar collectors in Kuva district, Fergana. We reduce groundwater usage by 78% while doubling seasonal tomato and bell pepper yields.',
     story: `The Fergana Valley is Uzbekistan's agricultural heartland, yet changing precipitation patterns and traditional furrow irrigation have strained local water tables. AgroSmart combines closed-loop hydroponics with IoT soil moisture telemetry and localized solar power. 
 
 Our prototype facility in Kuva has already completed two successful growing cycles with 0% chemical runoff. With this Musharakah equity campaign, we are constructing three commercial-scale 1,200 sq. meter greenhouses equipped with automated nutrient dosing and thermal shade curtains.
@@ -31,20 +33,78 @@ Under the Musharakah contract, investor capital directly funds the structural gr
       verifiedIdentity: true,
       tinOrRegistration: 'MCHJ #309812490 (Registered Fergana City)',
       bio: 'Tashkent State Agrarian University alumnus with 11 years experience in precision greenhouse systems across Uzbekistan and Turkey.',
-      experienceYears: 11
+      experienceYears: 11,
     },
     budgetBreakdown: [
-      { id: 'b-1', category: 'Greenhouse Frames & Glazing', amount: 96_000_000, description: 'Galvanized steel arches and UV-stabilized polycarbonate panels', percentage: 40 },
-      { id: 'b-2', category: 'Solar Generation & Storage', amount: 60_000_000, description: '15kW solar PV arrays, hybrid inverters, and battery bank', percentage: 25 },
-      { id: 'b-3', category: 'IoT Drip & Fertigation Units', amount: 48_000_000, description: 'Automated dosers, peristaltic pumps, EC/pH inline sensors', percentage: 20 },
-      { id: 'b-4', category: 'Seedlings & Initial Substrate', amount: 24_000_000, description: 'Certified Dutch non-GMO seed stock and rockwool blocks', percentage: 10 },
-      { id: 'b-5', category: 'Working Capital & Logistics', amount: 12_000_000, description: 'Local labor, installation supervision, and transport', percentage: 5 }
+      {
+        id: 'b-1',
+        category: 'Greenhouse Frames & Glazing',
+        amount: 96_000_000,
+        description: 'Galvanized steel arches and UV-stabilized polycarbonate panels',
+        percentage: 40,
+      },
+      {
+        id: 'b-2',
+        category: 'Solar Generation & Storage',
+        amount: 60_000_000,
+        description: '15kW solar PV arrays, hybrid inverters, and battery bank',
+        percentage: 25,
+      },
+      {
+        id: 'b-3',
+        category: 'IoT Drip & Fertigation Units',
+        amount: 48_000_000,
+        description: 'Automated dosers, peristaltic pumps, EC/pH inline sensors',
+        percentage: 20,
+      },
+      {
+        id: 'b-4',
+        category: 'Seedlings & Initial Substrate',
+        amount: 24_000_000,
+        description: 'Certified Dutch non-GMO seed stock and rockwool blocks',
+        percentage: 10,
+      },
+      {
+        id: 'b-5',
+        category: 'Working Capital & Logistics',
+        amount: 12_000_000,
+        description: 'Local labor, installation supervision, and transport',
+        percentage: 5,
+      },
     ],
     milestones: [
-      { id: 'm-1', title: 'Site Leveling & Foundation Footings', description: 'Complete concrete anchors and drainage canal alignment at Kuva plot.', targetMonth: 'Month 1', fundReleasePercentage: 30, completed: true },
-      { id: 'm-2', title: 'Structural Assembly & Solar Commissioning', description: 'Erect steel framing, mount polycarbonate sheets, and connect solar arrays.', targetMonth: 'Month 2', fundReleasePercentage: 40, completed: true },
-      { id: 'm-3', title: 'Hydroponic Plumbing & Sensor Calibration', description: 'Install automated drip loops, run baseline nutrient testing, and seed first crop.', targetMonth: 'Month 3', fundReleasePercentage: 20, completed: false },
-      { id: 'm-4', title: 'First Commercial Harvest & Market Delivery', description: 'Harvest 12 tonnes of grade-A produce for Tashkent supermarket partners.', targetMonth: 'Month 5', fundReleasePercentage: 10, completed: false }
+      {
+        id: 'm-1',
+        title: 'Site Leveling & Foundation Footings',
+        description: 'Complete concrete anchors and drainage canal alignment at Kuva plot.',
+        targetMonth: 'Month 1',
+        fundReleasePercentage: 30,
+        completed: true,
+      },
+      {
+        id: 'm-2',
+        title: 'Structural Assembly & Solar Commissioning',
+        description: 'Erect steel framing, mount polycarbonate sheets, and connect solar arrays.',
+        targetMonth: 'Month 2',
+        fundReleasePercentage: 40,
+        completed: true,
+      },
+      {
+        id: 'm-3',
+        title: 'Hydroponic Plumbing & Sensor Calibration',
+        description: 'Install automated drip loops, run baseline nutrient testing, and seed first crop.',
+        targetMonth: 'Month 3',
+        fundReleasePercentage: 20,
+        completed: false,
+      },
+      {
+        id: 'm-4',
+        title: 'First Commercial Harvest & Market Delivery',
+        description: 'Harvest 12 tonnes of grade-A produce for Tashkent supermarket partners.',
+        targetMonth: 'Month 5',
+        fundReleasePercentage: 10,
+        completed: false,
+      },
     ],
     equityTerms: {
       investorProfitSharePercent: 28,
@@ -53,7 +113,7 @@ Under the Musharakah contract, investor capital directly funds the structural gr
       projectedAnnualReturn: '21.5% - 26.0% p.a.',
       contractType: 'Musharakah',
       distributionSchedule: 'Quarterly',
-      exitHorizonYears: 5
+      exitHorizonYears: 5,
     },
     evaluation: {
       overallScore: 92,
@@ -64,27 +124,30 @@ Under the Musharakah contract, investor capital directly funds the structural gr
       riskScore: 18,
       status: 'Verified High Confidence',
       lastEvaluatedDate: '2026-10-24',
-      summaryNotes: 'Sound agricultural unit economics backed by confirmed supply contracts with regional wholesale markets in Fergana and Tashkent. Verified land lease title and clean credit history.',
+      summaryNotes:
+        'Sound agricultural unit economics backed by confirmed supply contracts with regional wholesale markets in Fergana and Tashkent. Verified land lease title and clean credit history.',
       keyStrengths: [
         'Experienced agricultural founder with verified prior greenhouse projects in Kuva',
         'Direct water savings reduce recurring utility overhead by ~70%',
-        'Off-take pre-agreements with 2 Tashkent retail distributors'
+        'Off-take pre-agreements with 2 Tashkent retail distributors',
       ],
       keyRisks: [
         'Seasonal winter temperature drops require auxiliary heating reserves',
-        'Logistical transit spoilage if refrigerated transport encounters highway delays'
-      ]
+        'Logistical transit spoilage if refrigerated transport encounters highway delays',
+      ],
     },
-    risksAndChallenges: 'Extreme winter temperatures in Fergana can occasionally dip below -10°C. We mitigate this through dual-layer thermal insulation and automated biomass pellet heaters alongside solar storage. Transit delays are mitigated via vacuum packaging protocols.',
+    risksAndChallenges:
+      'Extreme winter temperatures in Fergana can occasionally dip below -10°C. We mitigate this through dual-layer thermal insulation and automated biomass pellet heaters alongside solar storage. Transit delays are mitigated via vacuum packaging protocols.',
     updates: [
       {
         id: 'u-1',
         title: 'Foundation poured and 15kW solar array hardware arrived',
-        content: 'We are thrilled to share that the foundation footings in Kuva are 100% cured. The solar panels and hybrid inverters were inspected by our technical team yesterday and passed all electrical checks.',
+        content:
+          'We are thrilled to share that the foundation footings in Kuva are 100% cured. The solar panels and hybrid inverters were inspected by our technical team yesterday and passed all electrical checks.',
         date: '2026-10-28',
         author: 'Azizbek Rakhimov',
-        likesCount: 29
-      }
+        likesCount: 29,
+      },
     ],
     comments: [
       {
@@ -92,23 +155,27 @@ Under the Musharakah contract, investor capital directly funds the structural gr
         authorName: 'Farrukh Temirov',
         authorCity: 'Tashkent',
         date: '2026-10-29',
-        content: 'Impressive progress on the foundation. What is the expected delivery frequency for the quarterly profit distributions?',
+        content:
+          'Impressive progress on the foundation. What is the expected delivery frequency for the quarterly profit distributions?',
         isBacker: true,
         reply: {
           author: 'Azizbek Rakhimov',
           date: '2026-10-30',
-          content: 'Assalomu alaykum Farrukh! Distributions occur within 15 calendar days following the close of each financial quarter, accompanied by full audited sales books.'
-        }
-      }
+          content:
+            'Assalomu alaykum Farrukh! Distributions occur within 15 calendar days following the close of each financial quarter, accompanied by full audited sales books.',
+        },
+      },
     ],
-    createdAt: '2026-09-15'
+    createdAt: '2026-09-15',
   },
   {
     id: 'project-2',
     slug: 'silkroad-samarkand-ikat-weavers',
     title: 'SilkRoad Artisan Studio: Preserving Samarkand Ikat & Ceramics',
-    tagline: 'Supporting 24 generational master weavers and ceramicists with modern studio equipment and fair global logistics.',
-    description: 'Empowering master craftsmen in Samarkand to scale natural-dyed silk abrbandi textiles and traditional cobalt ceramic wares while training 18 young apprentices.',
+    tagline:
+      'Supporting 24 generational master weavers and ceramicists with modern studio equipment and fair global logistics.',
+    description:
+      'Empowering master craftsmen in Samarkand to scale natural-dyed silk abrbandi textiles and traditional cobalt ceramic wares while training 18 young apprentices.',
     story: `Uzbekistan's handmade silk ikat and glazed ceramics represent centuries of Silk Road heritage. However, master artisans frequently lack the working capital needed for bulk natural raw silk purchases, energy-efficient electric kilns, and secure packaging.
 
 Our studio cooperative in Samarkand brings together 24 generational craftsmen under one modernized workspace. By pooling resources, we source top-grade Marghilan silk cocoons directly and introduce smokeless electric kilns that reduce carbon emissions while maintaining historic glaze formulations.
@@ -133,52 +200,118 @@ Backers receive bespoke, numbered artisan collector pieces: hand-woven pure silk
       verifiedIdentity: true,
       tinOrRegistration: 'YaTT #419203814 (Samarkand Craft Chamber)',
       bio: 'Award-winning master weaver with 19 years experience, representing Uzbek applied arts at UNESCO exhibitions across Central Asia.',
-      experienceYears: 19
+      experienceYears: 19,
     },
     budgetBreakdown: [
-      { id: 'b-201', category: 'Raw Marghilan Silk & Natural Indigo Dyes', amount: 38_250_000, description: 'Direct purchase of untreated cocoon silk and botanical mineral pigments', percentage: 45 },
-      { id: 'b-202', category: 'High-Efficiency Ceramic Electric Kiln', amount: 21_250_000, description: '1200°C precision ceramic kiln with digital temperature controllers', percentage: 25 },
-      { id: 'b-203', category: 'Apprentice Stipends & Training Materials', amount: 12_750_000, description: 'Monthly living support for 18 young apprentices for 6 months', percentage: 15 },
-      { id: 'b-204', category: 'Protective Packaging & Export Quality Boxes', amount: 8_500_000, description: 'Cushioned wooden gift boxes and international shipping cartons', percentage: 10 },
-      { id: 'b-205', category: 'Photography & Documentation Archive', amount: 4_250_000, description: 'Cataloging traditional pattern names and provenance cards', percentage: 5 }
+      {
+        id: 'b-201',
+        category: 'Raw Marghilan Silk & Natural Indigo Dyes',
+        amount: 38_250_000,
+        description: 'Direct purchase of untreated cocoon silk and botanical mineral pigments',
+        percentage: 45,
+      },
+      {
+        id: 'b-202',
+        category: 'High-Efficiency Ceramic Electric Kiln',
+        amount: 21_250_000,
+        description: '1200°C precision ceramic kiln with digital temperature controllers',
+        percentage: 25,
+      },
+      {
+        id: 'b-203',
+        category: 'Apprentice Stipends & Training Materials',
+        amount: 12_750_000,
+        description: 'Monthly living support for 18 young apprentices for 6 months',
+        percentage: 15,
+      },
+      {
+        id: 'b-204',
+        category: 'Protective Packaging & Export Quality Boxes',
+        amount: 8_500_000,
+        description: 'Cushioned wooden gift boxes and international shipping cartons',
+        percentage: 10,
+      },
+      {
+        id: 'b-205',
+        category: 'Photography & Documentation Archive',
+        amount: 4_250_000,
+        description: 'Cataloging traditional pattern names and provenance cards',
+        percentage: 5,
+      },
     ],
     milestones: [
-      { id: 'm-201', title: 'Silk Sourcing & Dye Batch Preparation', description: 'Acquire 140kg raw silk yarn and prepare walnut, madder, and pomegranate vat baths.', targetMonth: 'Month 1', fundReleasePercentage: 35, completed: true },
-      { id: 'm-202', title: 'Kiln Installation & Test Firing', description: 'Connect electric kiln in Samarkand studio and test cobalt glaze vitrification.', targetMonth: 'Month 2', fundReleasePercentage: 35, completed: true },
-      { id: 'm-203', title: 'Weaving of Backer Rewards & Quality Audit', description: 'Complete hand-weaving of all backer scarves and stamp collector ceramic plates.', targetMonth: 'Month 3', fundReleasePercentage: 20, completed: false },
-      { id: 'm-204', title: 'Packaging & Nationwide Courier Delivery', description: 'Dispatch insured packages to backers across Uzbekistan and international destinations.', targetMonth: 'Month 4', fundReleasePercentage: 10, completed: false }
+      {
+        id: 'm-201',
+        title: 'Silk Sourcing & Dye Batch Preparation',
+        description: 'Acquire 140kg raw silk yarn and prepare walnut, madder, and pomegranate vat baths.',
+        targetMonth: 'Month 1',
+        fundReleasePercentage: 35,
+        completed: true,
+      },
+      {
+        id: 'm-202',
+        title: 'Kiln Installation & Test Firing',
+        description: 'Connect electric kiln in Samarkand studio and test cobalt glaze vitrification.',
+        targetMonth: 'Month 2',
+        fundReleasePercentage: 35,
+        completed: true,
+      },
+      {
+        id: 'm-203',
+        title: 'Weaving of Backer Rewards & Quality Audit',
+        description: 'Complete hand-weaving of all backer scarves and stamp collector ceramic plates.',
+        targetMonth: 'Month 3',
+        fundReleasePercentage: 20,
+        completed: false,
+      },
+      {
+        id: 'm-204',
+        title: 'Packaging & Nationwide Courier Delivery',
+        description: 'Dispatch insured packages to backers across Uzbekistan and international destinations.',
+        targetMonth: 'Month 4',
+        fundReleasePercentage: 10,
+        completed: false,
+      },
     ],
     rewards: [
       {
         id: 'r-1',
         title: 'Samarkand Cobalt Glaze Teacup & Saucer',
         amount: 350_000,
-        description: 'Authentic hand-thrown ceramic tea bowl with traditional Samarkand geometric spiral glaze, signed by master craftsman.',
+        description:
+          'Authentic hand-thrown ceramic tea bowl with traditional Samarkand geometric spiral glaze, signed by master craftsman.',
         items: ['Ceramic Piyola (Teacup)', 'Matching Saucer', 'Certificate of Provenance'],
         estimatedDelivery: 'December 2026',
         claimedCount: 38,
-        availableCount: 100
+        availableCount: 100,
       },
       {
         id: 'r-2',
         title: 'Hand-Woven Pure Silk Ikat Scarf (180x50cm)',
         amount: 850_000,
-        description: 'Bespoke pure silk scarf featuring the historic "Bodom" almond motif woven on traditional wooden foot-looms with natural vegetable dyes.',
+        description:
+          'Bespoke pure silk scarf featuring the historic "Bodom" almond motif woven on traditional wooden foot-looms with natural vegetable dyes.',
         items: ['Pure Silk Ikat Scarf', 'Artisan Studio Wooden Gift Box', 'Story Booklet of Samarkand Weavers'],
         estimatedDelivery: 'January 2027',
         claimedCount: 32,
-        availableCount: 50
+        availableCount: 50,
       },
       {
         id: 'r-3',
         title: 'VIP Masterclass & 7-Piece Master Ceramic Dinner Set',
         amount: 2_500_000,
-        description: 'Full 7-piece celebratory dinner set including Lagan plov platter, plus a private half-day workshop in our Samarkand workshop.',
-        items: ['Grand Lagan (38cm Platter)', '6 Matching Piyola bowls', 'Private 4-Hour Studio Workshop pass', 'Lifetime 15% guild discount'],
+        description:
+          'Full 7-piece celebratory dinner set including Lagan plov platter, plus a private half-day workshop in our Samarkand workshop.',
+        items: [
+          'Grand Lagan (38cm Platter)',
+          '6 Matching Piyola bowls',
+          'Private 4-Hour Studio Workshop pass',
+          'Lifetime 15% guild discount',
+        ],
         estimatedDelivery: 'January 2027',
         claimedCount: 18,
-        availableCount: 20
-      }
+        availableCount: 20,
+      },
     ],
     evaluation: {
       overallScore: 94,
@@ -189,27 +322,30 @@ Backers receive bespoke, numbered artisan collector pieces: hand-woven pure silk
       riskScore: 18,
       status: 'Verified High Confidence',
       lastEvaluatedDate: '2026-10-18',
-      summaryNotes: 'Distinguished craft lineage with proven production output. Clear reward unit economics and tangible cultural preservation value in line with national artisan development goals.',
+      summaryNotes:
+        'Distinguished craft lineage with proven production output. Clear reward unit economics and tangible cultural preservation value in line with national artisan development goals.',
       keyStrengths: [
         'Nationally recognized artisan founder with UNESCO recognition',
         'Strong demand from both domestic diaspora and international travelers',
-        'Direct relationship with Marghilan raw silk producers eliminates middleman markups'
+        'Direct relationship with Marghilan raw silk producers eliminates middleman markups',
       ],
       keyRisks: [
         'Natural dye processes require careful climate control to avoid color drift',
-        'Ceramic transport requires customized reinforced bubble packaging'
-      ]
+        'Ceramic transport requires customized reinforced bubble packaging',
+      ],
     },
-    risksAndChallenges: 'Hand-weaving each meter of silk requires 4-6 hours of master labor. We have distributed looms across 8 senior weavers to ensure all backer rewards ship strictly on schedule.',
+    risksAndChallenges:
+      'Hand-weaving each meter of silk requires 4-6 hours of master labor. We have distributed looms across 8 senior weavers to ensure all backer rewards ship strictly on schedule.',
     updates: [
       {
         id: 'u-201',
         title: 'First test firing of electric kiln completed with zero defects',
-        content: 'Yesterday our master ceramicist Mahmud-aka opened the kiln door after the inaugural 1,180°C glaze cycle. The cobalt luster on the prototype lagans is breathtakingly vivid.',
+        content:
+          'Yesterday our master ceramicist Mahmud-aka opened the kiln door after the inaugural 1,180°C glaze cycle. The cobalt luster on the prototype lagans is breathtakingly vivid.',
         date: '2026-10-26',
         author: 'Dilnoza Karimova',
-        likesCount: 41
-      }
+        likesCount: 41,
+      },
     ],
     comments: [
       {
@@ -222,18 +358,21 @@ Backers receive bespoke, numbered artisan collector pieces: hand-woven pure silk
         reply: {
           author: 'Dilnoza Karimova',
           date: '2026-10-28',
-          content: 'Albatta, Gulnora xonim! All backers are welcome for complimentary tea and sweets whenever visiting Samarkand.'
-        }
-      }
+          content:
+            'Albatta, Gulnora xonim! All backers are welcome for complimentary tea and sweets whenever visiting Samarkand.',
+        },
+      },
     ],
-    createdAt: '2026-09-20'
+    createdAt: '2026-09-20',
   },
   {
     id: 'project-3',
     slug: 'tashkent-stem-robotics-lab',
     title: 'Tashkent Robotics: Community STEM Maker Lab for Youth',
-    tagline: 'Equipping 600+ secondary students across Tashkent public schools with free micro-controller and robotics education.',
-    description: 'A non-profit open-access maker laboratory in Chilanzar district offering free hands-on robotics, 3D printing, and IoT coding workshops for children from underprivileged families.',
+    tagline:
+      'Equipping 600+ secondary students across Tashkent public schools with free micro-controller and robotics education.',
+    description:
+      'A non-profit open-access maker laboratory in Chilanzar district offering free hands-on robotics, 3D printing, and IoT coding workshops for children from underprivileged families.',
     story: `As Uzbekistan's digital economy surges, tens of thousands of school students in Tashkent dream of becoming software engineers and hardware roboticists. However, quality maker spaces with oscilloscopes, soldering stations, and 3D prototyping tools are out of reach for many public school families.
 
 Tashkent Robotics Lab is converting a 320 sq. meter municipal facility in Chilanzar into a community innovation hub. All workshops, hardware kits, and mentor sessions are provided 100% tuition-free.
@@ -258,20 +397,78 @@ Through this donation-based campaign, 100% of community contributions are spent 
       verifiedIdentity: true,
       tinOrRegistration: 'NGO Registry #1948203 (Ministry of Justice UZ)',
       bio: 'Inha University Tashkent graduate and FIRST Robotics mentor with 7 years organizing youth engineering olympiads.',
-      experienceYears: 7
+      experienceYears: 7,
     },
     budgetBreakdown: [
-      { id: 'b-301', category: '20 Workstations & Micro-controller Kits', amount: 54_000_000, description: 'ESP32 development boards, sensor kits, multimeters, soldering stations', percentage: 45 },
-      { id: 'b-302', category: '3D Printers & Rapid Prototyping Tools', amount: 30_000_000, description: '6 CoreXY 3D printers and 100kg biodegradable PLA filament', percentage: 25 },
-      { id: 'b-303', category: 'Open-Source Uzbek Curriculum & Workbooks', amount: 18_000_000, description: 'Illustrated engineering guides and interactive online challenges', percentage: 15 },
-      { id: 'b-304', category: 'Lab Safety & Ergonomic Furniture', amount: 12_000_000, description: 'Anti-static benches, fume extractors, eye protection, surge protection', percentage: 10 },
-      { id: 'b-305', category: 'Annual Student Competition Fund', amount: 6_000_000, description: 'Materials for annual Tashkent youth autonomous rover challenge', percentage: 5 }
+      {
+        id: 'b-301',
+        category: '20 Workstations & Micro-controller Kits',
+        amount: 54_000_000,
+        description: 'ESP32 development boards, sensor kits, multimeters, soldering stations',
+        percentage: 45,
+      },
+      {
+        id: 'b-302',
+        category: '3D Printers & Rapid Prototyping Tools',
+        amount: 30_000_000,
+        description: '6 CoreXY 3D printers and 100kg biodegradable PLA filament',
+        percentage: 25,
+      },
+      {
+        id: 'b-303',
+        category: 'Open-Source Uzbek Curriculum & Workbooks',
+        amount: 18_000_000,
+        description: 'Illustrated engineering guides and interactive online challenges',
+        percentage: 15,
+      },
+      {
+        id: 'b-304',
+        category: 'Lab Safety & Ergonomic Furniture',
+        amount: 12_000_000,
+        description: 'Anti-static benches, fume extractors, eye protection, surge protection',
+        percentage: 10,
+      },
+      {
+        id: 'b-305',
+        category: 'Annual Student Competition Fund',
+        amount: 6_000_000,
+        description: 'Materials for annual Tashkent youth autonomous rover challenge',
+        percentage: 5,
+      },
     ],
     milestones: [
-      { id: 'm-301', title: 'Chilanzar Lab Space Renovation', description: 'Install dedicated electrical wiring, surge protection, and anti-static flooring.', targetMonth: 'Month 1', fundReleasePercentage: 25, completed: true },
-      { id: 'm-302', title: 'Hardware Procurement & Setup', description: 'Unpack 20 soldering stations, assemble 3D printers, and test all ESP32 kits.', targetMonth: 'Month 2', fundReleasePercentage: 45, completed: true },
-      { id: 'm-303', title: 'First Cohort Enrollment (150 Students)', description: 'Launch open applications with quota reserved for public school students.', targetMonth: 'Month 3', fundReleasePercentage: 20, completed: false },
-      { id: 'm-304', title: 'Public Demo Day & Student Expo', description: 'Showcase student-built smart greenhouse sensors and mini-rovers to parents and sponsors.', targetMonth: 'Month 5', fundReleasePercentage: 10, completed: false }
+      {
+        id: 'm-301',
+        title: 'Chilanzar Lab Space Renovation',
+        description: 'Install dedicated electrical wiring, surge protection, and anti-static flooring.',
+        targetMonth: 'Month 1',
+        fundReleasePercentage: 25,
+        completed: true,
+      },
+      {
+        id: 'm-302',
+        title: 'Hardware Procurement & Setup',
+        description: 'Unpack 20 soldering stations, assemble 3D printers, and test all ESP32 kits.',
+        targetMonth: 'Month 2',
+        fundReleasePercentage: 45,
+        completed: true,
+      },
+      {
+        id: 'm-303',
+        title: 'First Cohort Enrollment (150 Students)',
+        description: 'Launch open applications with quota reserved for public school students.',
+        targetMonth: 'Month 3',
+        fundReleasePercentage: 20,
+        completed: false,
+      },
+      {
+        id: 'm-304',
+        title: 'Public Demo Day & Student Expo',
+        description: 'Showcase student-built smart greenhouse sensors and mini-rovers to parents and sponsors.',
+        targetMonth: 'Month 5',
+        fundReleasePercentage: 10,
+        completed: false,
+      },
     ],
     evaluation: {
       overallScore: 96,
@@ -282,26 +479,27 @@ Through this donation-based campaign, 100% of community contributions are spent 
       riskScore: 19,
       status: 'Verified High Confidence',
       lastEvaluatedDate: '2026-10-20',
-      summaryNotes: 'Outstanding educational impact. Fully audited non-profit status with verified municipal partnership providing rent-free venue in Chilanzar.',
+      summaryNotes:
+        'Outstanding educational impact. Fully audited non-profit status with verified municipal partnership providing rent-free venue in Chilanzar.',
       keyStrengths: [
         'Dedicated team of Inha and Turin University graduate volunteers',
         'Zero tuition barrier ensures maximum social mobility for Tashkent youth',
-        'Hardware kits designed for 5+ years of multi-cohort reuse'
+        'Hardware kits designed for 5+ years of multi-cohort reuse',
       ],
-      keyRisks: [
-        'Consumable component wear (soldering tips, gears) requires ongoing replenishment'
-      ]
+      keyRisks: ['Consumable component wear (soldering tips, gears) requires ongoing replenishment'],
     },
-    risksAndChallenges: 'Equipment wear and tear is common with young students. We have budgeted 15% spare parts and conduct mandatory lab safety orientations before students handle soldering equipment.',
+    risksAndChallenges:
+      'Equipment wear and tear is common with young students. We have budgeted 15% spare parts and conduct mandatory lab safety orientations before students handle soldering equipment.',
     updates: [
       {
         id: 'u-301',
         title: 'Anti-static flooring installed and 20 soldering benches delivered',
-        content: 'Thanks to your generous contributions, the Chilanzar workshop has transformed into a real technical lab! The first shipment of ESP32 and Arduino boards cleared customs without delay.',
+        content:
+          'Thanks to your generous contributions, the Chilanzar workshop has transformed into a real technical lab! The first shipment of ESP32 and Arduino boards cleared customs without delay.',
         date: '2026-10-31',
         author: 'Jasur Bekmuradov',
-        likesCount: 57
-      }
+        likesCount: 57,
+      },
     ],
     comments: [
       {
@@ -310,17 +508,18 @@ Through this donation-based campaign, 100% of community contributions are spent 
         authorCity: 'Tashkent',
         date: '2026-11-01',
         content: 'My 12-year-old daughter cannot wait for the classes to begin! Proud to support this initiative.',
-        isBacker: true
-      }
+        isBacker: true,
+      },
     ],
-    createdAt: '2026-09-10'
+    createdAt: '2026-09-10',
   },
   {
     id: 'project-4',
     slug: 'aral-oasis-reforestation-saxaul',
     title: 'Aral Oasis: Green Barrier Saxaul Reforestation',
     tagline: 'Planting 50,000 drought-resilient saxaul trees on the exposed Aralkum seabed in Karakalpakstan.',
-    description: 'Combating toxic salt dust storms and desertification in Muynak district by establishing deep-rooted black saxaul tree barriers that stabilize soil and restore local biodiversity.',
+    description:
+      'Combating toxic salt dust storms and desertification in Muynak district by establishing deep-rooted black saxaul tree barriers that stabilize soil and restore local biodiversity.',
     story: `The retreat of the Aral Sea created the Aralkum Desert, which releases over 75 million tons of salt and fine mineral dust annually into Central Asian skies. Black saxaul (Haloxylon aphyllum) is a miraculous native desert plant whose roots penetrate up to 12 meters, binding sand dunes and capturing airborne moisture.
 
 Our scientific team from Karakalpak State University has perfected automated GPS-guided furrow planting techniques that boast an 82% sapling survival rate under extreme conditions.
@@ -345,19 +544,71 @@ Every 13,000 UZS donated plants and monitors one certified saxaul sapling for tw
       verifiedIdentity: true,
       tinOrRegistration: 'Academic Research Center #049281',
       bio: '24 years studying arid zone ecology and soil remediation across Karakalpakstan and Ustyurt plateau.',
-      experienceYears: 24
+      experienceYears: 24,
     },
     budgetBreakdown: [
-      { id: 'b-401', category: '50,000 Certified Saxaul Seedlings', amount: 32_500_000, description: 'Grown in specialized desert nursery beds in Kungrad', percentage: 50 },
-      { id: 'b-402', category: 'Tractor Fuel & All-Terrain Furrowing', amount: 16_250_000, description: 'Machinery fuel and maintenance for sand dune planting rigs', percentage: 25 },
-      { id: 'b-403', category: 'Local Community Planting Teams', amount: 9_750_000, description: 'Fair seasonal wages for 30 residents of Muynak fishing villages', percentage: 15 },
-      { id: 'b-404', category: 'Satellite Monitoring & Drone Mapping', amount: 6_500_000, description: 'Multispectral drone flights and Sentinel-2 NDVI analysis', percentage: 10 }
+      {
+        id: 'b-401',
+        category: '50,000 Certified Saxaul Seedlings',
+        amount: 32_500_000,
+        description: 'Grown in specialized desert nursery beds in Kungrad',
+        percentage: 50,
+      },
+      {
+        id: 'b-402',
+        category: 'Tractor Fuel & All-Terrain Furrowing',
+        amount: 16_250_000,
+        description: 'Machinery fuel and maintenance for sand dune planting rigs',
+        percentage: 25,
+      },
+      {
+        id: 'b-403',
+        category: 'Local Community Planting Teams',
+        amount: 9_750_000,
+        description: 'Fair seasonal wages for 30 residents of Muynak fishing villages',
+        percentage: 15,
+      },
+      {
+        id: 'b-404',
+        category: 'Satellite Monitoring & Drone Mapping',
+        amount: 6_500_000,
+        description: 'Multispectral drone flights and Sentinel-2 NDVI analysis',
+        percentage: 10,
+      },
     ],
     milestones: [
-      { id: 'm-401', title: 'Seedling Hardening in Kungrad Nursery', description: 'Sort 50,000 two-year rootstock seedlings for field endurance.', targetMonth: 'Month 1', fundReleasePercentage: 35, completed: true },
-      { id: 'm-402', title: 'First Planting Wave (25,000 Trees)', description: 'Deploy planting crews across Sector 4B in the southern seabed.', targetMonth: 'Month 2', fundReleasePercentage: 35, completed: true },
-      { id: 'm-403', title: 'Second Planting Wave (25,000 Trees)', description: 'Complete northern buffer zone perimeter planting.', targetMonth: 'Month 3', fundReleasePercentage: 20, completed: false },
-      { id: 'm-404', title: 'Spring Survival Audit & Public Report', description: 'Publish verified tree count map and backer GPS portal.', targetMonth: 'Month 6', fundReleasePercentage: 10, completed: false }
+      {
+        id: 'm-401',
+        title: 'Seedling Hardening in Kungrad Nursery',
+        description: 'Sort 50,000 two-year rootstock seedlings for field endurance.',
+        targetMonth: 'Month 1',
+        fundReleasePercentage: 35,
+        completed: true,
+      },
+      {
+        id: 'm-402',
+        title: 'First Planting Wave (25,000 Trees)',
+        description: 'Deploy planting crews across Sector 4B in the southern seabed.',
+        targetMonth: 'Month 2',
+        fundReleasePercentage: 35,
+        completed: true,
+      },
+      {
+        id: 'm-403',
+        title: 'Second Planting Wave (25,000 Trees)',
+        description: 'Complete northern buffer zone perimeter planting.',
+        targetMonth: 'Month 3',
+        fundReleasePercentage: 20,
+        completed: false,
+      },
+      {
+        id: 'm-404',
+        title: 'Spring Survival Audit & Public Report',
+        description: 'Publish verified tree count map and backer GPS portal.',
+        targetMonth: 'Month 6',
+        fundReleasePercentage: 10,
+        completed: false,
+      },
     ],
     evaluation: {
       overallScore: 95,
@@ -368,26 +619,27 @@ Every 13,000 UZS donated plants and monitors one certified saxaul sapling for tw
       riskScore: 19,
       status: 'Verified High Confidence',
       lastEvaluatedDate: '2026-10-15',
-      summaryNotes: 'Impeccable scientific pedigree with transparent cost-per-tree metrics. Strong endorsements from regional forestry committees.',
+      summaryNotes:
+        'Impeccable scientific pedigree with transparent cost-per-tree metrics. Strong endorsements from regional forestry committees.',
       keyStrengths: [
         'Proven 82% survival methodology developed over two decades',
         'Direct economic employment for Muynak local communities',
-        'Transparent satellite verification protocol'
+        'Transparent satellite verification protocol',
       ],
-      keyRisks: [
-        'Severe early spring heatwaves require moisture gel retainers'
-      ]
+      keyRisks: ['Severe early spring heatwaves require moisture gel retainers'],
     },
-    risksAndChallenges: 'Early spring storms can bury freshly planted seedlings. We plant in staggered micro-trenches that shield young stems from direct salt winds.',
+    risksAndChallenges:
+      'Early spring storms can bury freshly planted seedlings. We plant in staggered micro-trenches that shield young stems from direct salt winds.',
     updates: [
       {
         id: 'u-401',
         title: 'Sector 4B fully planted with 25,000 seedlings!',
-        content: 'Our team braved cold desert winds to complete the southern sector ahead of schedule. Moisture levels in the subsoil were optimal following October rains.',
+        content:
+          'Our team braved cold desert winds to complete the southern sector ahead of schedule. Moisture levels in the subsoil were optimal following October rains.',
         date: '2026-10-25',
         author: 'Dr. Timur Dauletov',
-        likesCount: 83
-      }
+        likesCount: 83,
+      },
     ],
     comments: [
       {
@@ -396,17 +648,18 @@ Every 13,000 UZS donated plants and monitors one certified saxaul sapling for tw
         authorCity: 'Navoi',
         date: '2026-10-27',
         content: 'Aral Sea is our shared responsibility. Thank you Dr. Timur for dedicating your life to this cause.',
-        isBacker: true
-      }
+        isBacker: true,
+      },
     ],
-    createdAt: '2026-09-01'
+    createdAt: '2026-09-01',
   },
   {
     id: 'project-5',
     slug: 'zarafshan-solar-cold-storage',
     title: 'Zarafshan Solar Cold Chain: Off-Grid Fruit Storage',
     tagline: '150-tonne solar-powered refrigerated hubs for grape and pomegranate growers in Navoi & Bukhara.',
-    description: 'Eliminating harvest-season fruit price collapses by providing smallholder horticultural farmers with decentralized, solar-powered cold storage facilities on a pay-per-crate model.',
+    description:
+      'Eliminating harvest-season fruit price collapses by providing smallholder horticultural farmers with decentralized, solar-powered cold storage facilities on a pay-per-crate model.',
     story: `Uzbekistan produces some of the world's sweetest table grapes, pomegranates, and dried apricots. Yet small family farms frequently lose up to 30% of their crop to spoilage or are forced to sell at rock-bottom wholesale prices during peak picking weeks due to a lack of cold storage.
 
 Zarafshan Solar Cold Chain builds modular 150-tonne cold storage facilities directly adjacent to rural orchards along the Zarafshan river basin. Running on high-capacity solar PV with thermal ice-battery storage, our units maintain a constant 0°C to 4°C with zero reliance on erratic rural electrical grids.
@@ -431,20 +684,78 @@ Under this Musharakah equity campaign, investors co-own the physical storage fac
       verifiedIdentity: true,
       tinOrRegistration: 'MCHJ #308194821 (Navoi Free Economic Zone)',
       bio: 'Renewable energy engineer with 14 years developing utility-scale solar and industrial refrigeration projects.',
-      experienceYears: 14
+      experienceYears: 14,
     },
     budgetBreakdown: [
-      { id: 'b-501', category: 'Insulated Cold Storage Modular Bay', amount: 140_000_000, description: 'PIR sandwich panels, rapid-closing airtight doors, concrete pad', percentage: 40 },
-      { id: 'b-502', category: 'Solar PV Array (45kW) & Ice Storage', amount: 105_000_000, description: 'Tier-1 bifacial solar modules and phase-change thermal ice batteries', percentage: 30 },
-      { id: 'b-503', category: 'Industrial Inverter Compressors', amount: 52_500_000, description: 'Eco-friendly R290 refrigerant variable-speed condensing units', percentage: 15 },
-      { id: 'b-504', category: 'Smart Pallet Sorting & Humidity Sensors', amount: 35_000_000, description: 'Automated weight scales, wireless crate temperature probes', percentage: 10 },
-      { id: 'b-505', category: 'Permits, Grid Sync & Installation', amount: 17_500_000, description: 'Municipal electrical signoff and foundation inspection', percentage: 5 }
+      {
+        id: 'b-501',
+        category: 'Insulated Cold Storage Modular Bay',
+        amount: 140_000_000,
+        description: 'PIR sandwich panels, rapid-closing airtight doors, concrete pad',
+        percentage: 40,
+      },
+      {
+        id: 'b-502',
+        category: 'Solar PV Array (45kW) & Ice Storage',
+        amount: 105_000_000,
+        description: 'Tier-1 bifacial solar modules and phase-change thermal ice batteries',
+        percentage: 30,
+      },
+      {
+        id: 'b-503',
+        category: 'Industrial Inverter Compressors',
+        amount: 52_500_000,
+        description: 'Eco-friendly R290 refrigerant variable-speed condensing units',
+        percentage: 15,
+      },
+      {
+        id: 'b-504',
+        category: 'Smart Pallet Sorting & Humidity Sensors',
+        amount: 35_000_000,
+        description: 'Automated weight scales, wireless crate temperature probes',
+        percentage: 10,
+      },
+      {
+        id: 'b-505',
+        category: 'Permits, Grid Sync & Installation',
+        amount: 17_500_000,
+        description: 'Municipal electrical signoff and foundation inspection',
+        percentage: 5,
+      },
     ],
     milestones: [
-      { id: 'm-501', title: 'Site Groundwork & Concrete Slab', description: 'Level 1,000 sq.m plot in Navoi agricultural corridor and pour reinforced slab.', targetMonth: 'Month 1', fundReleasePercentage: 30, completed: true },
-      { id: 'm-502', title: 'Chamber Assembly & Solar Rooftop', description: 'Mount insulated PIR envelope and install 45kW solar racking.', targetMonth: 'Month 2', fundReleasePercentage: 40, completed: true },
-      { id: 'm-503', title: 'Compressor Commissioning & Cold Test', description: 'Pull down temperature to -1°C and verify 36-hour thermal hold during grid outage.', targetMonth: 'Month 3', fundReleasePercentage: 20, completed: false },
-      { id: 'm-504', title: 'Farmer Intake & First Commercial Inflow', description: 'Fill 150-tonne capacity with Navoi grape and pomegranate harvest.', targetMonth: 'Month 4', fundReleasePercentage: 10, completed: false }
+      {
+        id: 'm-501',
+        title: 'Site Groundwork & Concrete Slab',
+        description: 'Level 1,000 sq.m plot in Navoi agricultural corridor and pour reinforced slab.',
+        targetMonth: 'Month 1',
+        fundReleasePercentage: 30,
+        completed: true,
+      },
+      {
+        id: 'm-502',
+        title: 'Chamber Assembly & Solar Rooftop',
+        description: 'Mount insulated PIR envelope and install 45kW solar racking.',
+        targetMonth: 'Month 2',
+        fundReleasePercentage: 40,
+        completed: true,
+      },
+      {
+        id: 'm-503',
+        title: 'Compressor Commissioning & Cold Test',
+        description: 'Pull down temperature to -1°C and verify 36-hour thermal hold during grid outage.',
+        targetMonth: 'Month 3',
+        fundReleasePercentage: 20,
+        completed: false,
+      },
+      {
+        id: 'm-504',
+        title: 'Farmer Intake & First Commercial Inflow',
+        description: 'Fill 150-tonne capacity with Navoi grape and pomegranate harvest.',
+        targetMonth: 'Month 4',
+        fundReleasePercentage: 10,
+        completed: false,
+      },
     ],
     equityTerms: {
       investorProfitSharePercent: 26,
@@ -453,7 +764,7 @@ Under this Musharakah equity campaign, investors co-own the physical storage fac
       projectedAnnualReturn: '22.0% - 27.5% p.a.',
       contractType: 'Musharakah',
       distributionSchedule: 'Bi-Annually',
-      exitHorizonYears: 6
+      exitHorizonYears: 6,
     },
     evaluation: {
       overallScore: 93,
@@ -464,26 +775,27 @@ Under this Musharakah equity campaign, investors co-own the physical storage fac
       riskScore: 18,
       status: 'Verified High Confidence',
       lastEvaluatedDate: '2026-10-22',
-      summaryNotes: 'Strong recurring cash-flow model based on proven post-harvest cold storage deficit in Navoi/Bukhara. Clean corporate structuring inside Navoi FEZ.',
+      summaryNotes:
+        'Strong recurring cash-flow model based on proven post-harvest cold storage deficit in Navoi/Bukhara. Clean corporate structuring inside Navoi FEZ.',
       keyStrengths: [
         'Eliminates ongoing electricity grid bills through thermal ice battery innovation',
         'Signed letters of intent with 18 commercial vineyard owners in Karmana district',
-        'Tangible capital asset security (real estate and industrial equipment)'
+        'Tangible capital asset security (real estate and industrial equipment)',
       ],
-      keyRisks: [
-        'Seasonal revenue fluctuations between summer harvest and winter maintenance'
-      ]
+      keyRisks: ['Seasonal revenue fluctuations between summer harvest and winter maintenance'],
     },
-    risksAndChallenges: 'Equipment import lead times can be unpredictable. We have sourced all core refrigeration units through authorized regional distributors in Tashkent with full manufacturer warranties.',
+    risksAndChallenges:
+      'Equipment import lead times can be unpredictable. We have sourced all core refrigeration units through authorized regional distributors in Tashkent with full manufacturer warranties.',
     updates: [
       {
         id: 'u-501',
         title: 'Thermal insulated envelope completed in Karmana',
-        content: 'The 150mm PIR cold chamber walls are sealed. Next week the 45kW rooftop solar panels will be bolted onto the specialized roof brackets.',
+        content:
+          'The 150mm PIR cold chamber walls are sealed. Next week the 45kW rooftop solar panels will be bolted onto the specialized roof brackets.',
         date: '2026-10-29',
         author: 'Bobur Alimov',
-        likesCount: 34
-      }
+        likesCount: 34,
+      },
     ],
     comments: [
       {
@@ -491,18 +803,21 @@ Under this Musharakah equity campaign, investors co-own the physical storage fac
         authorName: 'Nodirbek Yusupov',
         authorCity: 'Tashkent',
         date: '2026-10-30',
-        content: 'Joined with a 15M UZS simulated investment. Great to see decentralized clean tech solving real farmer struggles.',
-        isBacker: true
-      }
+        content:
+          'Joined with a 15M UZS simulated investment. Great to see decentralized clean tech solving real farmer struggles.',
+        isBacker: true,
+      },
     ],
-    createdAt: '2026-09-25'
+    createdAt: '2026-09-25',
   },
   {
     id: 'project-6',
     slug: 'chust-master-cutlery-works',
     title: 'Chust Pichoq: Heritage Hand-Forged Damascus Knives',
-    tagline: 'Modernizing Chust traditional bladesmithing with Damascus steel folding and Damascus Damascus kitchen sets.',
-    description: 'Equipping 12 generational bladesmiths in Chust, Namangan with hydraulic power-hammers and ergonomic Damascus blade finishing for chefs and collectors worldwide.',
+    tagline:
+      'Modernizing Chust traditional bladesmithing with Damascus steel folding and Damascus Damascus kitchen sets.',
+    description:
+      'Equipping 12 generational bladesmiths in Chust, Namangan with hydraulic power-hammers and ergonomic Damascus blade finishing for chefs and collectors worldwide.',
     story: `Chust in Namangan region is world-renowned for traditional Uzbek "pichoq" knives with brass inlays and horn handles. For centuries, these knives have been hand-hammered with incredible sharpness.
 
 To compete in modern culinary markets and withstand dishwasher use, our guild is combining historic Chust horn handle aesthetics with high-carbon multi-layered Damascus steel folding.
@@ -527,42 +842,102 @@ Backers receive individually serialized, hand-forged chef santokus, traditional 
       verifiedIdentity: true,
       tinOrRegistration: 'YaTT #920194812 (Namangan Artisan Chamber)',
       bio: '5th generation Chust bladesmith whose works are exhibited in the State Museum of History of Uzbekistan.',
-      experienceYears: 28
+      experienceYears: 28,
     },
     budgetBreakdown: [
-      { id: 'b-601', category: 'High-Carbon Damascus Billet Stock', amount: 18_000_000, description: '67-layer VG-10 equivalent steel billets and brass bolster blanks', percentage: 40 },
-      { id: 'b-602', category: 'Hydraulic Forging Press & Grinding Wheels', amount: 13_500_000, description: '25-ton compact forging press and 2x72 belt grinders', percentage: 30 },
-      { id: 'b-603', category: 'Natural Walnut & Cattle Horn Handle Blanks', amount: 6_750_000, description: 'Seasoned Fergana walnut burl and treated bone inlays', percentage: 15 },
-      { id: 'b-604', category: 'Handmade Leather Sheaths & Packaging', amount: 4_500_000, description: 'Hand-stitched saddle leather scabbards with brass rivets', percentage: 10 },
-      { id: 'b-605', category: 'Safety Equipment & Ventilation', amount: 2_250_000, description: 'Respiratory dust masks and forge exhaust hoods', percentage: 5 }
+      {
+        id: 'b-601',
+        category: 'High-Carbon Damascus Billet Stock',
+        amount: 18_000_000,
+        description: '67-layer VG-10 equivalent steel billets and brass bolster blanks',
+        percentage: 40,
+      },
+      {
+        id: 'b-602',
+        category: 'Hydraulic Forging Press & Grinding Wheels',
+        amount: 13_500_000,
+        description: '25-ton compact forging press and 2x72 belt grinders',
+        percentage: 30,
+      },
+      {
+        id: 'b-603',
+        category: 'Natural Walnut & Cattle Horn Handle Blanks',
+        amount: 6_750_000,
+        description: 'Seasoned Fergana walnut burl and treated bone inlays',
+        percentage: 15,
+      },
+      {
+        id: 'b-604',
+        category: 'Handmade Leather Sheaths & Packaging',
+        amount: 4_500_000,
+        description: 'Hand-stitched saddle leather scabbards with brass rivets',
+        percentage: 10,
+      },
+      {
+        id: 'b-605',
+        category: 'Safety Equipment & Ventilation',
+        amount: 2_250_000,
+        description: 'Respiratory dust masks and forge exhaust hoods',
+        percentage: 5,
+      },
     ],
     milestones: [
-      { id: 'm-601', title: 'Forge Upgrades & Press Installation', description: 'Mount 25-ton hydraulic press on vibration-dampened foundation.', targetMonth: 'Month 1', fundReleasePercentage: 40, completed: true },
-      { id: 'm-602', title: 'Damascus Billet Folding & Shaping', description: 'Hammer and shape first batch of 150 serialized backer blades.', targetMonth: 'Month 2', fundReleasePercentage: 40, completed: true },
-      { id: 'm-603', title: 'Handle Mounting & Razor Sharpening', description: 'Fit Fergana walnut handles and sharpen to 14° Japanese angle.', targetMonth: 'Month 3', fundReleasePercentage: 15, completed: false },
-      { id: 'm-604', title: 'Delivery to Backers Nationwide', description: 'Ship insured collector boxes to all backer addresses.', targetMonth: 'Month 4', fundReleasePercentage: 5, completed: false }
+      {
+        id: 'm-601',
+        title: 'Forge Upgrades & Press Installation',
+        description: 'Mount 25-ton hydraulic press on vibration-dampened foundation.',
+        targetMonth: 'Month 1',
+        fundReleasePercentage: 40,
+        completed: true,
+      },
+      {
+        id: 'm-602',
+        title: 'Damascus Billet Folding & Shaping',
+        description: 'Hammer and shape first batch of 150 serialized backer blades.',
+        targetMonth: 'Month 2',
+        fundReleasePercentage: 40,
+        completed: true,
+      },
+      {
+        id: 'm-603',
+        title: 'Handle Mounting & Razor Sharpening',
+        description: 'Fit Fergana walnut handles and sharpen to 14° Japanese angle.',
+        targetMonth: 'Month 3',
+        fundReleasePercentage: 15,
+        completed: false,
+      },
+      {
+        id: 'm-604',
+        title: 'Delivery to Backers Nationwide',
+        description: 'Ship insured collector boxes to all backer addresses.',
+        targetMonth: 'Month 4',
+        fundReleasePercentage: 5,
+        completed: false,
+      },
     ],
     rewards: [
       {
         id: 'r-601',
         title: 'Authentic Chust Paring Knife (Chor-qirra)',
         amount: 280_000,
-        description: 'Traditional 12cm utility blade with polished brass bolster and pressed bone handle, hand-sharpened on waterstones.',
+        description:
+          'Traditional 12cm utility blade with polished brass bolster and pressed bone handle, hand-sharpened on waterstones.',
         items: ['Chust Paring Knife', 'Embossed Leather Sheath', 'Maintenance Whetstone'],
         estimatedDelivery: 'December 2026',
         claimedCount: 45,
-        availableCount: 60
+        availableCount: 60,
       },
       {
         id: 'r-602',
         title: 'Grand Chust Plov & Chef Knife (22cm)',
         amount: 650_000,
-        description: 'Masterpiece 67-layer folded Damascus blade with contoured Fergana walnut burl handle, ideal for plov prep and butchery.',
+        description:
+          'Masterpiece 67-layer folded Damascus blade with contoured Fergana walnut burl handle, ideal for plov prep and butchery.',
         items: ['Grand Chust Chef Knife', 'Custom Wooden Presentation Box', 'Certificate of Authenticity'],
         estimatedDelivery: 'January 2027',
         claimedCount: 52,
-        availableCount: 75
-      }
+        availableCount: 75,
+      },
     ],
     evaluation: {
       overallScore: 91,
@@ -573,35 +948,38 @@ Backers receive individually serialized, hand-forged chef santokus, traditional 
       riskScore: 17,
       status: 'Verified High Confidence',
       lastEvaluatedDate: '2026-10-19',
-      summaryNotes: 'Beloved cultural craft brand with exceptional artisan authenticity. High demand from culinary enthusiasts domestically and abroad.',
+      summaryNotes:
+        'Beloved cultural craft brand with exceptional artisan authenticity. High demand from culinary enthusiasts domestically and abroad.',
       keyStrengths: [
         'Century-old family craft traditions recognized across Central Asia',
-        'Direct raw material sourcing reduces per-unit costs by 35%'
+        'Direct raw material sourcing reduces per-unit costs by 35%',
       ],
-      keyRisks: [
-        'Careful sharpening quality control needed on each individual blade'
-      ]
+      keyRisks: ['Careful sharpening quality control needed on each individual blade'],
     },
-    risksAndChallenges: 'Each knife is shaped by hand, so slight variations in Damascus grain and wood swirls will exist, reflecting genuine artisan uniqueness.',
+    risksAndChallenges:
+      'Each knife is shaped by hand, so slight variations in Damascus grain and wood swirls will exist, reflecting genuine artisan uniqueness.',
     updates: [
       {
         id: 'u-601',
         title: 'First 50 Damascus billets forged with stunning feather patterns',
-        content: 'Usto Mansur completed folding the first batch. The contrast between high-nickel steel and carbon layers is exquisite.',
+        content:
+          'Usto Mansur completed folding the first batch. The contrast between high-nickel steel and carbon layers is exquisite.',
         date: '2026-10-27',
         author: 'Usto Mansur Polatov',
-        likesCount: 39
-      }
+        likesCount: 39,
+      },
     ],
     comments: [],
-    createdAt: '2026-09-18'
+    createdAt: '2026-09-18',
   },
   {
     id: 'project-7',
     slug: 'registan-edtech-math-uzbek',
     title: 'Registan EdTech: Adaptive Math in Uzbek Language',
-    tagline: 'Gamified digital mathematics platform tailored for grades 5–11 aligned with Uzbekistan national curriculum.',
-    description: 'An interactive online learning system offering 10,000+ bilingual math challenges, animated video lessons in Uzbek, and automated mastery diagnostics for 50 public schools.',
+    tagline:
+      'Gamified digital mathematics platform tailored for grades 5–11 aligned with Uzbekistan national curriculum.',
+    description:
+      'An interactive online learning system offering 10,000+ bilingual math challenges, animated video lessons in Uzbek, and automated mastery diagnostics for 50 public schools.',
     story: `While international math apps exist, few are mapped directly to Uzbekistan's national school curriculum or narrated in natural Uzbek terminology with culturally relatable scenarios.
 
 Registan EdTech creates a clean, lightweight web and mobile app that runs smoothly even on entry-level Android phones with low internet bandwidth. Teachers receive real-time class dashboards showing student topic mastery.
@@ -626,19 +1004,71 @@ This non-profit initiative will grant 100% free digital subscriptions to 12,000 
       verifiedIdentity: true,
       tinOrRegistration: 'NGO #2049182 (Ministry of Preschool & School Education partner)',
       bio: 'Former International Math Olympiad medal mentor and pedagogical researcher with 12 years teaching experience.',
-      experienceYears: 12
+      experienceYears: 12,
     },
     budgetBreakdown: [
-      { id: 'b-701', category: 'Uzbek Video Lessons & Voiceover Production', amount: 38_000_000, description: '120 animated concept videos produced in Tashkent sound studio', percentage: 40 },
-      { id: 'b-702', category: 'Software Development & Interactive Problem Engine', amount: 28_500_000, description: 'Lightweight React PWA with offline caching and analytics', percentage: 30 },
-      { id: 'b-703', category: 'Teacher Training Workshops in 50 Schools', amount: 19_000_000, description: 'In-person pedagogical seminars for 150 public school teachers', percentage: 20 },
-      { id: 'b-704', category: 'Cloud Hosting & National CDN for 2 Years', amount: 9_500_000, description: 'Local Tashkent IX peering for zero data charges on mobile networks', percentage: 10 }
+      {
+        id: 'b-701',
+        category: 'Uzbek Video Lessons & Voiceover Production',
+        amount: 38_000_000,
+        description: '120 animated concept videos produced in Tashkent sound studio',
+        percentage: 40,
+      },
+      {
+        id: 'b-702',
+        category: 'Software Development & Interactive Problem Engine',
+        amount: 28_500_000,
+        description: 'Lightweight React PWA with offline caching and analytics',
+        percentage: 30,
+      },
+      {
+        id: 'b-703',
+        category: 'Teacher Training Workshops in 50 Schools',
+        amount: 19_000_000,
+        description: 'In-person pedagogical seminars for 150 public school teachers',
+        percentage: 20,
+      },
+      {
+        id: 'b-704',
+        category: 'Cloud Hosting & National CDN for 2 Years',
+        amount: 9_500_000,
+        description: 'Local Tashkent IX peering for zero data charges on mobile networks',
+        percentage: 10,
+      },
     ],
     milestones: [
-      { id: 'm-701', title: 'Grade 5-8 Curriculum Mapping Complete', description: 'Review and align all problem banks with national education standards.', targetMonth: 'Month 1', fundReleasePercentage: 30, completed: true },
-      { id: 'm-702', title: 'Beta Platform Deployment & Pilot in 10 Schools', description: 'Deploy platform to 1,200 pilot students in Samarkand district.', targetMonth: 'Month 2', fundReleasePercentage: 40, completed: true },
-      { id: 'm-703', title: 'Final Animation Dubbing & Full Rollout', description: 'Release remaining high school algebra and geometry modules.', targetMonth: 'Month 3', fundReleasePercentage: 20, completed: false },
-      { id: 'm-704', title: 'End-of-Year Olympiad & Impact Study', description: 'Publish verified student learning gain metrics to donors.', targetMonth: 'Month 6', fundReleasePercentage: 10, completed: false }
+      {
+        id: 'm-701',
+        title: 'Grade 5-8 Curriculum Mapping Complete',
+        description: 'Review and align all problem banks with national education standards.',
+        targetMonth: 'Month 1',
+        fundReleasePercentage: 30,
+        completed: true,
+      },
+      {
+        id: 'm-702',
+        title: 'Beta Platform Deployment & Pilot in 10 Schools',
+        description: 'Deploy platform to 1,200 pilot students in Samarkand district.',
+        targetMonth: 'Month 2',
+        fundReleasePercentage: 40,
+        completed: true,
+      },
+      {
+        id: 'm-703',
+        title: 'Final Animation Dubbing & Full Rollout',
+        description: 'Release remaining high school algebra and geometry modules.',
+        targetMonth: 'Month 3',
+        fundReleasePercentage: 20,
+        completed: false,
+      },
+      {
+        id: 'm-704',
+        title: 'End-of-Year Olympiad & Impact Study',
+        description: 'Publish verified student learning gain metrics to donors.',
+        targetMonth: 'Month 6',
+        fundReleasePercentage: 10,
+        completed: false,
+      },
     ],
     evaluation: {
       overallScore: 94,
@@ -649,35 +1079,38 @@ This non-profit initiative will grant 100% free digital subscriptions to 12,000 
       riskScore: 18,
       status: 'Verified High Confidence',
       lastEvaluatedDate: '2026-10-21',
-      summaryNotes: 'High social multiplier. Strong coordination with regional educational directorates. Proven pilot traction with high completion rates.',
+      summaryNotes:
+        'High social multiplier. Strong coordination with regional educational directorates. Proven pilot traction with high completion rates.',
       keyStrengths: [
         'Culturally contextualized content fills a huge gap in native Uzbek digital learning',
-        'Extremely low cost per student ($0.60 per child per year)'
+        'Extremely low cost per student ($0.60 per child per year)',
       ],
-      keyRisks: [
-        'Intermittent school internet requires robust offline PWA caching'
-      ]
+      keyRisks: ['Intermittent school internet requires robust offline PWA caching'],
     },
-    risksAndChallenges: 'Rural schools frequently face spotty internet. Our application is architected as an offline-first PWA that synchronizes progress only when connectivity is restored.',
+    risksAndChallenges:
+      'Rural schools frequently face spotty internet. Our application is architected as an offline-first PWA that synchronizes progress only when connectivity is restored.',
     updates: [
       {
         id: 'u-701',
         title: 'Grade 7 Geometry interactive lessons released for beta testing',
-        content: 'Students can now manipulate 3D geometric shapes directly on their screens with full Uzbek voice assistance.',
+        content:
+          'Students can now manipulate 3D geometric shapes directly on their screens with full Uzbek voice assistance.',
         date: '2026-10-30',
         author: 'Shakhnoza Karimova',
-        likesCount: 47
-      }
+        likesCount: 47,
+      },
     ],
     comments: [],
-    createdAt: '2026-09-12'
+    createdAt: '2026-09-12',
   },
   {
     id: 'project-8',
     slug: 'andijan-mobility-electric-cargo',
     title: 'Andijan Mobility: Modular Electric Cargo Trikes',
-    tagline: 'Locally assembled electric utility vehicles for bazaar traders and agricultural delivery in the Fergana Valley.',
-    description: 'Replacing noisy, petrol-guzzling tricycles with clean, whisper-quiet electric cargo tricycles capable of hauling 600kg on a single overnight charge from regular 220V wall outlets.',
+    tagline:
+      'Locally assembled electric utility vehicles for bazaar traders and agricultural delivery in the Fergana Valley.',
+    description:
+      'Replacing noisy, petrol-guzzling tricycles with clean, whisper-quiet electric cargo tricycles capable of hauling 600kg on a single overnight charge from regular 220V wall outlets.',
     story: `Throughout Uzbekistan's bustling bazaars and smallholder farms, small three-wheeled petrol cargo bikes are vital for moving produce, textiles, and bread. However, fuel costs and frequent maintenance weigh heavily on drivers.
 
 Andijan Mobility manufactures purpose-built, heavy-duty electric cargo trikes using domestically stamped steel frames and automotive-grade lithium iron phosphate (LiFePO4) battery packs. Our vehicles cost 80% less to operate per kilometer than petrol equivalents.
@@ -702,20 +1135,78 @@ With this Musharakah equity round, we are tooling an assembly line in Andijan to
       verifiedIdentity: true,
       tinOrRegistration: 'MCHJ #309482103 (Andijan Industrial Zone)',
       bio: '12 years in automotive manufacturing and powertrain testing in Asaka.',
-      experienceYears: 12
+      experienceYears: 12,
     },
     budgetBreakdown: [
-      { id: 'b-801', category: 'Battery Packs & Permanent Magnet Motors', amount: 168_000_000, description: '48V 100Ah LiFePO4 packs and 2.5kW high-torque brushless hub motors', percentage: 40 },
-      { id: 'b-802', category: 'Chassis Stamping & Welding Jig Tooling', amount: 105_000_000, description: 'Hydraulic tube benders and precision MIG welding assembly jigs', percentage: 25 },
-      { id: 'b-803', category: 'Component Inventory & Suspension', amount: 84_000_000, description: 'Heavy-duty leaf springs, hydraulic disc brakes, puncture-resistant tires', percentage: 20 },
-      { id: 'b-804', category: 'Assembly Line Equipment & Testing', amount: 42_000_000, description: 'Dynamometer roller test stand and diagnostic scan tools', percentage: 10 },
-      { id: 'b-805', category: 'Certification & Road Safety Compliance', amount: 21_000_000, description: 'Uzstandard vehicle type certification and road testing fees', percentage: 5 }
+      {
+        id: 'b-801',
+        category: 'Battery Packs & Permanent Magnet Motors',
+        amount: 168_000_000,
+        description: '48V 100Ah LiFePO4 packs and 2.5kW high-torque brushless hub motors',
+        percentage: 40,
+      },
+      {
+        id: 'b-802',
+        category: 'Chassis Stamping & Welding Jig Tooling',
+        amount: 105_000_000,
+        description: 'Hydraulic tube benders and precision MIG welding assembly jigs',
+        percentage: 25,
+      },
+      {
+        id: 'b-803',
+        category: 'Component Inventory & Suspension',
+        amount: 84_000_000,
+        description: 'Heavy-duty leaf springs, hydraulic disc brakes, puncture-resistant tires',
+        percentage: 20,
+      },
+      {
+        id: 'b-804',
+        category: 'Assembly Line Equipment & Testing',
+        amount: 42_000_000,
+        description: 'Dynamometer roller test stand and diagnostic scan tools',
+        percentage: 10,
+      },
+      {
+        id: 'b-805',
+        category: 'Certification & Road Safety Compliance',
+        amount: 21_000_000,
+        description: 'Uzstandard vehicle type certification and road testing fees',
+        percentage: 5,
+      },
     ],
     milestones: [
-      { id: 'm-801', title: 'Assembly Jig & Tooling Commissioning', description: 'Setup chassis frame fixtures in Andijan factory.', targetMonth: 'Month 1', fundReleasePercentage: 35, completed: true },
-      { id: 'm-802', title: 'First Batch of 30 Pre-Production Trikes', description: 'Assemble and dyno-test 30 commercial units.', targetMonth: 'Month 2', fundReleasePercentage: 35, completed: true },
-      { id: 'm-803', title: 'Bazaar Pilot Fleet Deployment', description: 'Deploy 20 test units to commercial delivery drivers at Andijan Central Bazaar.', targetMonth: 'Month 4', fundReleasePercentage: 20, completed: false },
-      { id: 'm-804', title: 'Full Commercial Series Launch', description: 'Ramp production to 50 units per month and fulfill pre-orders.', targetMonth: 'Month 6', fundReleasePercentage: 10, completed: false }
+      {
+        id: 'm-801',
+        title: 'Assembly Jig & Tooling Commissioning',
+        description: 'Setup chassis frame fixtures in Andijan factory.',
+        targetMonth: 'Month 1',
+        fundReleasePercentage: 35,
+        completed: true,
+      },
+      {
+        id: 'm-802',
+        title: 'First Batch of 30 Pre-Production Trikes',
+        description: 'Assemble and dyno-test 30 commercial units.',
+        targetMonth: 'Month 2',
+        fundReleasePercentage: 35,
+        completed: true,
+      },
+      {
+        id: 'm-803',
+        title: 'Bazaar Pilot Fleet Deployment',
+        description: 'Deploy 20 test units to commercial delivery drivers at Andijan Central Bazaar.',
+        targetMonth: 'Month 4',
+        fundReleasePercentage: 20,
+        completed: false,
+      },
+      {
+        id: 'm-804',
+        title: 'Full Commercial Series Launch',
+        description: 'Ramp production to 50 units per month and fulfill pre-orders.',
+        targetMonth: 'Month 6',
+        fundReleasePercentage: 10,
+        completed: false,
+      },
     ],
     equityTerms: {
       investorProfitSharePercent: 24,
@@ -724,7 +1215,7 @@ With this Musharakah equity round, we are tooling an assembly line in Andijan to
       projectedAnnualReturn: '23.5% - 28.0% p.a.',
       contractType: 'Musharakah',
       distributionSchedule: 'Quarterly',
-      exitHorizonYears: 5
+      exitHorizonYears: 5,
     },
     evaluation: {
       overallScore: 92,
@@ -735,27 +1226,28 @@ With this Musharakah equity round, we are tooling an assembly line in Andijan to
       riskScore: 17,
       status: 'Verified High Confidence',
       lastEvaluatedDate: '2026-10-23',
-      summaryNotes: 'Compelling localized manufacturing economics. Heavy commercial demand from bazaar logistics cooperatives.',
+      summaryNotes:
+        'Compelling localized manufacturing economics. Heavy commercial demand from bazaar logistics cooperatives.',
       keyStrengths: [
         'Deep automotive assembly expertise from Asaka manufacturing ecosystem',
-        'Operating cost advantage over petrol trikes provides immediate customer payback in 7 months'
+        'Operating cost advantage over petrol trikes provides immediate customer payback in 7 months',
       ],
-      keyRisks: [
-        'Battery cell supply chain volatility requires strategic local inventory buffers'
-      ]
+      keyRisks: ['Battery cell supply chain volatility requires strategic local inventory buffers'],
     },
-    risksAndChallenges: 'Battery cell import lead times can be subject to rail transport delays. We maintain a 60-day strategic buffer stock in our Andijan warehouse.',
+    risksAndChallenges:
+      'Battery cell import lead times can be subject to rail transport delays. We maintain a 60-day strategic buffer stock in our Andijan warehouse.',
     updates: [
       {
         id: 'u-801',
         title: 'Frame jig tooling passed structural load testing at 1,000kg',
-        content: 'Our reinforced chassis demonstrated zero deflection under 1.5x maximum rated payload. Battery mounting brackets are now certified.',
+        content:
+          'Our reinforced chassis demonstrated zero deflection under 1.5x maximum rated payload. Battery mounting brackets are now certified.',
         date: '2026-10-29',
         author: 'Sardor Mirzayev',
-        likesCount: 52
-      }
+        likesCount: 52,
+      },
     ],
     comments: [],
-    createdAt: '2026-09-08'
-  }
+    createdAt: '2026-09-08',
+  },
 ];

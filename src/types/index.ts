@@ -1,13 +1,13 @@
 export type CrowdfundingModel = 'donation' | 'reward' | 'equity';
 
-export type ProjectCategory = 
-  | 'Technology' 
-  | 'Agriculture' 
-  | 'Artisanal & Crafts' 
-  | 'Education' 
-  | 'Healthcare' 
-  | 'Clean Energy' 
-  | 'Food & Culinary' 
+export type ProjectCategory =
+  | 'Technology'
+  | 'Agriculture'
+  | 'Artisanal & Crafts'
+  | 'Education'
+  | 'Healthcare'
+  | 'Clean Energy'
+  | 'Food & Culinary'
   | 'Social Impact';
 
 export type ProjectStatus = 'draft' | 'pending_review' | 'active' | 'funded' | 'completed';

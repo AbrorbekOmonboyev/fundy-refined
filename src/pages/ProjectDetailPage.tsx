@@ -2,31 +2,33 @@ import React, { useState } from 'react';
 import { useApp } from '@/context/AppContext';
 import { ProjectCard } from '@/components/ProjectCard';
 import { formatUZS, formatPercentage, getModelLabel } from '@/lib/formatters';
-import { 
-  CheckCircle, 
-  Clock, 
-  Users, 
-  Bookmark, 
-  Share2, 
-  AlertCircle, 
-  TrendingUp, 
+import {
+  CheckCircle,
+  Clock,
+  Users,
+  Bookmark,
+  Share2,
+  AlertCircle,
+  TrendingUp,
   Sparkles,
   ThumbsUp,
   Send,
 } from 'lucide-react';
 
 export const ProjectDetailPage: React.FC = () => {
-  const { 
-    projects, 
-    selectedProjectId, 
-    savedProjectIds, 
-    toggleSaveProject, 
-    openContributionModal, 
+  const {
+    projects,
+    selectedProjectId,
+    savedProjectIds,
+    toggleSaveProject,
+    openContributionModal,
     addProjectComment,
-    navigateTo 
+    navigateTo,
   } = useApp();
 
-  const [activeTab, setActiveTab] = useState<'story' | 'budget' | 'milestones' | 'evaluation' | 'risks' | 'updates' | 'community'>('story');
+  const [activeTab, setActiveTab] = useState<
+    'story' | 'budget' | 'milestones' | 'evaluation' | 'risks' | 'updates' | 'community'
+  >('story');
   const [commentInput, setCommentInput] = useState('');
   const [copiedLink, setCopiedLink] = useState(false);
 
@@ -82,13 +84,9 @@ export const ProjectDetailPage: React.FC = () => {
             <span>{project.location}</span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
-            {project.title}
-          </h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">{project.title}</h1>
 
-          <p className="text-sm text-slate-600 leading-relaxed">
-            {project.tagline}
-          </p>
+          <p className="text-sm text-slate-600 leading-relaxed">{project.tagline}</p>
 
           {/* Cover image */}
           <div className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-slate-100 border border-slate-200">
@@ -104,7 +102,10 @@ export const ProjectDetailPage: React.FC = () => {
           <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-sm">
-                {project.founder.name.split(' ').map(n => n[0]).join('')}
+                {project.founder.name
+                  .split(' ')
+                  .map(n => n[0])
+                  .join('')}
               </div>
               <div className="text-xs">
                 <div className="flex items-center gap-1.5 font-bold text-slate-900">
@@ -115,7 +116,9 @@ export const ProjectDetailPage: React.FC = () => {
                     </span>
                   )}
                 </div>
-                <p className="text-slate-500">{project.founder.role} · {project.founder.organization}</p>
+                <p className="text-slate-500">
+                  {project.founder.role} · {project.founder.organization}
+                </p>
                 <p className="text-[11px] text-slate-400 mt-0.5">{project.founder.tinOrRegistration}</p>
               </div>
             </div>
@@ -141,9 +144,7 @@ export const ProjectDetailPage: React.FC = () => {
                     raised of <strong className="text-slate-700">{formatUZS(project.targetAmount)}</strong> goal
                   </p>
                 </div>
-                <span className="text-2xl font-bold text-emerald-700 font-mono-numbers">
-                  {percentage}%
-                </span>
+                <span className="text-2xl font-bold text-emerald-700 font-mono-numbers">{percentage}%</span>
               </div>
 
               {/* Progress bar */}
@@ -183,7 +184,8 @@ export const ProjectDetailPage: React.FC = () => {
                   <span>Musharakah Equity Partnership</span>
                 </div>
                 <p className="text-slate-700 leading-relaxed text-[11px]">
-                  {project.equityTerms.investorProfitSharePercent}% of audited net profits distributed {project.equityTerms.distributionSchedule.toLowerCase()} to backers.
+                  {project.equityTerms.investorProfitSharePercent}% of audited net profits distributed{' '}
+                  {project.equityTerms.distributionSchedule.toLowerCase()} to backers.
                 </p>
                 <div className="pt-1 flex items-center justify-between text-[11px] text-slate-600 border-t border-emerald-100">
                   <span>Min. Ticket: {formatUZS(project.equityTerms.minInvestment)}</span>
@@ -201,8 +203,8 @@ export const ProjectDetailPage: React.FC = () => {
                 {project.model === 'equity'
                   ? 'Simulate Musharakah Investment'
                   : project.model === 'reward'
-                  ? 'Back This Project & Claim Reward'
-                  : 'Make a Simulated Donation'}
+                    ? 'Back This Project & Claim Reward'
+                    : 'Make a Simulated Donation'}
               </button>
 
               <div className="grid grid-cols-2 gap-2">
@@ -261,7 +263,7 @@ export const ProjectDetailPage: React.FC = () => {
             { id: 'evaluation', label: 'AI Evaluation (100)' },
             { id: 'risks', label: 'Risks & Challenges' },
             { id: 'updates', label: `Updates (${project.updates.length})` },
-            { id: 'community', label: `Q&A (${project.comments.length})` }
+            { id: 'community', label: `Q&A (${project.comments.length})` },
           ].map(tab => (
             <button
               key={tab.id}
@@ -285,18 +287,14 @@ export const ProjectDetailPage: React.FC = () => {
               <div className="lg:col-span-8 space-y-6 text-sm text-slate-700 leading-relaxed">
                 <div>
                   <h3 className="text-lg font-bold text-slate-900 mb-2">About This Campaign</h3>
-                  <div className="whitespace-pre-line leading-relaxed text-slate-600">
-                    {project.story}
-                  </div>
+                  <div className="whitespace-pre-line leading-relaxed text-slate-600">{project.story}</div>
                 </div>
 
                 <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
                   <h4 className="font-bold text-slate-900 text-xs uppercase tracking-wider">
                     Founder Background & Mission
                   </h4>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {project.founder.bio}
-                  </p>
+                  <p className="text-xs text-slate-600 leading-relaxed">{project.founder.bio}</p>
                 </div>
               </div>
 
@@ -304,9 +302,7 @@ export const ProjectDetailPage: React.FC = () => {
               <div className="lg:col-span-4 space-y-4">
                 {project.model === 'reward' && project.rewards && (
                   <div className="space-y-3">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                      Reward Perks
-                    </h4>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">Reward Perks</h4>
                     {project.rewards.map(reward => (
                       <div
                         key={reward.id}
@@ -318,9 +314,7 @@ export const ProjectDetailPage: React.FC = () => {
                             {formatUZS(reward.amount)}
                           </span>
                         </div>
-                        <p className="text-xs text-slate-600 leading-relaxed">
-                          {reward.description}
-                        </p>
+                        <p className="text-xs text-slate-600 leading-relaxed">{reward.description}</p>
                         <ul className="text-[11px] text-slate-500 space-y-1 pt-1">
                           {reward.items.map((item, idx) => (
                             <li key={idx} className="flex items-center gap-1.5">
@@ -353,7 +347,8 @@ export const ProjectDetailPage: React.FC = () => {
               <div>
                 <h3 className="text-lg font-bold text-slate-900">Itemized Capital Allocation (UZS)</h3>
                 <p className="text-xs text-slate-500 mt-1">
-                  Fundy mandates full line-item visibility before campaigns launch. Total budget aligns with the {formatUZS(project.targetAmount)} target.
+                  Fundy mandates full line-item visibility before campaigns launch. Total budget aligns with the{' '}
+                  {formatUZS(project.targetAmount)} target.
                 </p>
               </div>
 
@@ -391,15 +386,15 @@ export const ProjectDetailPage: React.FC = () => {
                         <td className="py-3 px-4 text-right font-mono-numbers font-medium text-slate-900">
                           {formatUZS(item.amount)}
                         </td>
-                        <td className="py-3 px-4 text-right font-mono-numbers text-slate-500">
-                          {item.percentage}%
-                        </td>
+                        <td className="py-3 px-4 text-right font-mono-numbers text-slate-500">{item.percentage}%</td>
                       </tr>
                     ))}
                   </tbody>
                   <tfoot className="bg-slate-50 border-t border-slate-200 font-bold text-slate-900">
                     <tr>
-                      <td className="py-3 px-4" colSpan={2}>Total Goal Allocation</td>
+                      <td className="py-3 px-4" colSpan={2}>
+                        Total Goal Allocation
+                      </td>
                       <td className="py-3 px-4 text-right font-mono-numbers text-emerald-700">
                         {formatUZS(project.targetAmount)}
                       </td>
@@ -417,7 +412,8 @@ export const ProjectDetailPage: React.FC = () => {
               <div>
                 <h3 className="text-lg font-bold text-slate-900">Milestone-Based Escrow Schedule</h3>
                 <p className="text-xs text-slate-500 mt-1">
-                  Capital is locked in simulated escrow and disbursed to founders sequentially as each milestone is verified.
+                  Capital is locked in simulated escrow and disbursed to founders sequentially as each milestone is
+                  verified.
                 </p>
               </div>
 
@@ -426,18 +422,14 @@ export const ProjectDetailPage: React.FC = () => {
                   <div
                     key={m.id}
                     className={`p-4 rounded-xl border transition-all ${
-                      m.completed
-                        ? 'bg-emerald-50/40 border-emerald-200'
-                        : 'bg-white border-slate-200'
+                      m.completed ? 'bg-emerald-50/40 border-emerald-200' : 'bg-white border-slate-200'
                     }`}
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex items-start gap-3">
                         <div
                           className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold ${
-                            m.completed
-                              ? 'bg-emerald-600 text-white'
-                              : 'bg-slate-200 text-slate-600'
+                            m.completed ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-600'
                           }`}
                         >
                           {m.completed ? '✓' : idx + 1}
@@ -445,15 +437,15 @@ export const ProjectDetailPage: React.FC = () => {
                         <div>
                           <div className="flex items-center gap-2">
                             <h4 className="font-bold text-slate-900 text-sm">{m.title}</h4>
-                            <span className={`text-[11px] px-1.5 py-0.5 rounded font-medium ${
-                              m.completed ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'
-                            }`}>
+                            <span
+                              className={`text-[11px] px-1.5 py-0.5 rounded font-medium ${
+                                m.completed ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'
+                              }`}
+                            >
                               {m.completed ? 'Disbursed' : 'Upcoming'}
                             </span>
                           </div>
-                          <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-                            {m.description}
-                          </p>
+                          <p className="text-xs text-slate-600 mt-1 leading-relaxed">{m.description}</p>
                         </div>
                       </div>
 
@@ -476,7 +468,8 @@ export const ProjectDetailPage: React.FC = () => {
                 <div>
                   <strong className="font-semibold">Simulated Evaluation Demonstration:</strong>
                   <p className="text-[11px] mt-0.5 text-amber-800">
-                    This scorecard showcases Fundy's conceptual multi-factor evaluation framework. It demonstrates deterministic assessment across business viability, team verification, and operational risks.
+                    This scorecard showcases Fundy's conceptual multi-factor evaluation framework. It demonstrates
+                    deterministic assessment across business viability, team verification, and operational risks.
                   </p>
                 </div>
               </div>
@@ -486,7 +479,8 @@ export const ProjectDetailPage: React.FC = () => {
                   <div>
                     <h3 className="text-xl font-bold text-slate-900">Project Quality Scorecard</h3>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      Evaluated on {project.evaluation.lastEvaluatedDate} · Status: <strong>{project.evaluation.status}</strong>
+                      Evaluated on {project.evaluation.lastEvaluatedDate} · Status:{' '}
+                      <strong>{project.evaluation.status}</strong>
                     </p>
                   </div>
                   <div className="text-right">
@@ -504,12 +498,14 @@ export const ProjectDetailPage: React.FC = () => {
                     { label: 'Founding Team Pedigree', score: project.evaluation.teamScore, max: 20 },
                     { label: 'Market Opportunity in UZ', score: project.evaluation.marketScore, max: 20 },
                     { label: 'Financial Feasibility', score: project.evaluation.financialScore, max: 20 },
-                    { label: 'Risk Mitigation Index', score: project.evaluation.riskScore, max: 20 }
+                    { label: 'Risk Mitigation Index', score: project.evaluation.riskScore, max: 20 },
                   ].map((cat, idx) => (
                     <div key={idx} className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
                       <div className="flex justify-between text-xs font-semibold text-slate-700">
                         <span>{cat.label}</span>
-                        <span className="font-mono-numbers text-slate-900">{cat.score} / {cat.max}</span>
+                        <span className="font-mono-numbers text-slate-900">
+                          {cat.score} / {cat.max}
+                        </span>
                       </div>
                       <div className="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
                         <div
@@ -525,9 +521,7 @@ export const ProjectDetailPage: React.FC = () => {
                 <div className="pt-4 border-t border-slate-100 space-y-4 text-xs">
                   <div>
                     <h4 className="font-bold text-slate-800">Evaluator Synthesis:</h4>
-                    <p className="text-slate-600 mt-1 leading-relaxed">
-                      {project.evaluation.summaryNotes}
-                    </p>
+                    <p className="text-slate-600 mt-1 leading-relaxed">{project.evaluation.summaryNotes}</p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -565,7 +559,8 @@ export const ProjectDetailPage: React.FC = () => {
             <div className="space-y-4 max-w-3xl">
               <h3 className="text-lg font-bold text-slate-900">Transparency: Risks & Mitigation</h3>
               <p className="text-xs text-slate-500">
-                Ethical crowdfunding requires candid disclosures of technical, environmental, and commercial risks before backer capital is committed.
+                Ethical crowdfunding requires candid disclosures of technical, environmental, and commercial risks
+                before backer capital is committed.
               </p>
               <div className="p-5 bg-white rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed shadow-sm">
                 {project.risksAndChallenges}
@@ -578,9 +573,7 @@ export const ProjectDetailPage: React.FC = () => {
             <div className="space-y-6 max-w-3xl">
               <div>
                 <h3 className="text-lg font-bold text-slate-900">Project Announcements & Progress</h3>
-                <p className="text-xs text-slate-500 mt-1">
-                  Direct dispatches from the founding team to backers.
-                </p>
+                <p className="text-xs text-slate-500 mt-1">Direct dispatches from the founding team to backers.</p>
               </div>
 
               {project.updates.length === 0 ? (
@@ -590,16 +583,19 @@ export const ProjectDetailPage: React.FC = () => {
               ) : (
                 <div className="space-y-4">
                   {project.updates.map(update => (
-                    <div key={update.id} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                    <div
+                      key={update.id}
+                      className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3"
+                    >
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-bold text-slate-900 text-sm">{update.title}</span>
                         <span className="text-slate-400">{update.date}</span>
                       </div>
-                      <p className="text-xs text-slate-600 leading-relaxed">
-                        {update.content}
-                      </p>
+                      <p className="text-xs text-slate-600 leading-relaxed">{update.content}</p>
                       <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-slate-500">
-                        <span>Posted by <strong>{update.author}</strong></span>
+                        <span>
+                          Posted by <strong>{update.author}</strong>
+                        </span>
                         <button
                           type="button"
                           className="flex items-center gap-1 text-slate-500 hover:text-emerald-700 transition-colors p-1"
@@ -626,12 +622,15 @@ export const ProjectDetailPage: React.FC = () => {
               </div>
 
               {/* Add comment form */}
-              <form onSubmit={handleCommentSubmit} className="bg-white p-4 rounded-xl border border-slate-200 space-y-3 shadow-sm">
+              <form
+                onSubmit={handleCommentSubmit}
+                className="bg-white p-4 rounded-xl border border-slate-200 space-y-3 shadow-sm"
+              >
                 <textarea
                   rows={3}
                   placeholder="Post a question or message of support for the founder..."
                   value={commentInput}
-                  onChange={(e) => setCommentInput(e.target.value)}
+                  onChange={e => setCommentInput(e.target.value)}
                   className="w-full text-xs p-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
                 <div className="flex justify-end">
@@ -649,7 +648,10 @@ export const ProjectDetailPage: React.FC = () => {
               {/* Comments list */}
               <div className="space-y-3">
                 {project.comments.map(c => (
-                  <div key={c.id} className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 text-xs shadow-sm">
+                  <div
+                    key={c.id}
+                    className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 text-xs shadow-sm"
+                  >
                     <div className="flex items-center justify-between text-slate-500">
                       <div className="flex items-center gap-2">
                         <strong className="text-slate-900">{c.authorName}</strong>

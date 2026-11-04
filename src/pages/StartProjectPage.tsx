@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useApp } from '@/context/AppContext';
 import { CrowdfundingModel, ProjectCategory, BudgetItem, Milestone, RewardTier } from '@/types';
 import { formatUZS } from '@/lib/formatters';
-import { 
-  CheckCircle2, 
-  ArrowLeft, 
-  ArrowRight, 
-  Plus, 
-  Trash2, 
+import {
+  CheckCircle2,
+  ArrowLeft,
+  ArrowRight,
+  Plus,
+  Trash2,
   Sparkles,
   TrendingUp,
   Gift,
-  HeartHandshake
+  HeartHandshake,
 } from 'lucide-react';
 
 const DRAFT_STORAGE_KEY = 'fundy_project_draft_v1';
@@ -38,35 +38,82 @@ export const StartProjectPage: React.FC = () => {
 
   // Budget items
   const [budgetItems, setBudgetItems] = useState<BudgetItem[]>([
-    { id: 'b-1', category: 'Production & Tooling', description: 'Core equipment & materials', amount: 45_000_000, percentage: 60 },
-    { id: 'b-2', category: 'Packaging & Delivery', description: 'Eco-friendly boxes & courier', amount: 15_000_000, percentage: 20 },
-    { id: 'b-3', category: 'Working Capital & Operations', description: 'Operating labor & quality testing', amount: 15_000_000, percentage: 20 }
+    {
+      id: 'b-1',
+      category: 'Production & Tooling',
+      description: 'Core equipment & materials',
+      amount: 45_000_000,
+      percentage: 60,
+    },
+    {
+      id: 'b-2',
+      category: 'Packaging & Delivery',
+      description: 'Eco-friendly boxes & courier',
+      amount: 15_000_000,
+      percentage: 20,
+    },
+    {
+      id: 'b-3',
+      category: 'Working Capital & Operations',
+      description: 'Operating labor & quality testing',
+      amount: 15_000_000,
+      percentage: 20,
+    },
   ]);
 
   // Milestones
   const [milestones, setMilestones] = useState<Milestone[]>([
-    { id: 'm-1', title: 'Phase 1: Setup & Tooling', description: 'Procure primary supplies and setup workshop', targetMonth: 'Month 1', fundReleasePercentage: 50, completed: false },
-    { id: 'm-2', title: 'Phase 2: Execution & Fulfillment', description: 'Complete final production and dispatch backer packages', targetMonth: 'Month 3', fundReleasePercentage: 50, completed: false }
+    {
+      id: 'm-1',
+      title: 'Phase 1: Setup & Tooling',
+      description: 'Procure primary supplies and setup workshop',
+      targetMonth: 'Month 1',
+      fundReleasePercentage: 50,
+      completed: false,
+    },
+    {
+      id: 'm-2',
+      title: 'Phase 2: Execution & Fulfillment',
+      description: 'Complete final production and dispatch backer packages',
+      targetMonth: 'Month 3',
+      fundReleasePercentage: 50,
+      completed: false,
+    },
   ]);
 
   // Rewards
   const [rewards, setRewards] = useState<RewardTier[]>([
-    { id: 'r-1', title: 'Early Supporter Tier', amount: 250_000, description: 'First batch limited release with personalized thank you note.', items: ['Exclusive Product', 'Numbered Authenticity Card'], estimatedDelivery: 'March 2027', claimedCount: 0, availableCount: 50 }
+    {
+      id: 'r-1',
+      title: 'Early Supporter Tier',
+      amount: 250_000,
+      description: 'First batch limited release with personalized thank you note.',
+      items: ['Exclusive Product', 'Numbered Authenticity Card'],
+      estimatedDelivery: 'March 2027',
+      claimedCount: 0,
+      availableCount: 50,
+    },
   ]);
 
   // Equity Terms
   const [investorProfitSharePercent, setInvestorProfitSharePercent] = useState<number>(25);
   const [minInvestment, setMinInvestment] = useState<number>(2_500_000);
-  const [distributionSchedule, setDistributionSchedule] = useState<'Quarterly' | 'Bi-Annually' | 'Annually'>('Quarterly');
+  const [distributionSchedule, setDistributionSchedule] = useState<'Quarterly' | 'Bi-Annually' | 'Annually'>(
+    'Quarterly',
+  );
 
-  const [risksAndChallenges, setRisksAndChallenges] = useState('Primary risks include local supplier lead times and material price fluctuations. We maintain agreements with two alternative domestic suppliers in Tashkent.');
+  const [risksAndChallenges, setRisksAndChallenges] = useState(
+    'Primary risks include local supplier lead times and material price fluctuations. We maintain agreements with two alternative domestic suppliers in Tashkent.',
+  );
 
   // Founder Information
   const [founderName, setFounderName] = useState('Azizbek Rakhimov');
   const [founderRole, setFounderRole] = useState('Founder & Product Lead');
   const [organization, setOrganization] = useState('InnoCraft Technologies MCHJ');
   const [tinOrRegistration, setTinOrRegistration] = useState('MCHJ #309819203 (Registered Tashkent City)');
-  const [bio, setBio] = useState('Passionate builder with 6 years experience in hardware and consumer products across Central Asia.');
+  const [bio, setBio] = useState(
+    'Passionate builder with 6 years experience in hardware and consumer products across Central Asia.',
+  );
   const [experienceYears] = useState<number>(6);
 
   // Load from local draft
@@ -99,7 +146,7 @@ export const StartProjectPage: React.FC = () => {
       story,
       model,
       targetAmount,
-      daysRemaining
+      daysRemaining,
     };
     localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(draft));
   };
@@ -130,15 +177,18 @@ export const StartProjectPage: React.FC = () => {
       budgetBreakdown: budgetItems,
       milestones,
       rewards: model === 'reward' ? rewards : undefined,
-      equityTerms: model === 'equity' ? {
-        investorProfitSharePercent,
-        founderProfitSharePercent: 100 - investorProfitSharePercent,
-        minInvestment,
-        projectedAnnualReturn: '20% - 25% p.a.',
-        contractType: 'Musharakah',
-        distributionSchedule,
-        exitHorizonYears: 5
-      } : undefined,
+      equityTerms:
+        model === 'equity'
+          ? {
+              investorProfitSharePercent,
+              founderProfitSharePercent: 100 - investorProfitSharePercent,
+              minInvestment,
+              projectedAnnualReturn: '20% - 25% p.a.',
+              contractType: 'Musharakah',
+              distributionSchedule,
+              exitHorizonYears: 5,
+            }
+          : undefined,
       risksAndChallenges,
       founder: {
         id: `f-${Date.now()}`,
@@ -149,8 +199,8 @@ export const StartProjectPage: React.FC = () => {
         verifiedIdentity: true,
         tinOrRegistration,
         bio,
-        experienceYears
-      }
+        experienceYears,
+      },
     });
 
     localStorage.removeItem(DRAFT_STORAGE_KEY);
@@ -185,13 +235,19 @@ export const StartProjectPage: React.FC = () => {
             {step === 4 && '4. Funding Target & Duration'}
             {step === 5 && '5. Itemized Budget Allocation (UZS)'}
             {step === 6 && '6. Milestones & Escrow Stages'}
-            {step === 7 && (model === 'reward' ? '7. Backer Reward Tiers' : model === 'equity' ? '7. Musharakah Partnership Terms' : '7. Social Impact Metrics')}
+            {step === 7 &&
+              (model === 'reward'
+                ? '7. Backer Reward Tiers'
+                : model === 'equity'
+                  ? '7. Musharakah Partnership Terms'
+                  : '7. Social Impact Metrics')}
             {step === 8 && '8. Risks, Challenges & Mitigation'}
             {step === 9 && '9. Founder & Legal Verification'}
             {step === 10 && '10. Final Review & Submission'}
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Fill in the details for your campaign. All submissions undergo initial compliance and verification before going live.
+            Fill in the details for your campaign. All submissions undergo initial compliance and verification before
+            going live.
           </p>
         </div>
       </div>
@@ -202,14 +258,12 @@ export const StartProjectPage: React.FC = () => {
         {step === 1 && (
           <div className="space-y-5">
             <div>
-              <label className="block text-xs font-bold text-slate-800 mb-1">
-                Campaign Title *
-              </label>
+              <label className="block text-xs font-bold text-slate-800 mb-1">Campaign Title *</label>
               <input
                 type="text"
                 placeholder="e.g. Tashkent Robotics: Community STEM Maker Lab"
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={e => setTitle(e.target.value)}
                 className="w-full text-xs px-3.5 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
             </div>
@@ -222,19 +276,17 @@ export const StartProjectPage: React.FC = () => {
                 type="text"
                 placeholder="Briefly state what you are creating and why it matters..."
                 value={tagline}
-                onChange={(e) => setTagline(e.target.value)}
+                onChange={e => setTagline(e.target.value)}
                 className="w-full text-xs px-3.5 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1">
-                  Primary Category *
-                </label>
+                <label className="block text-xs font-bold text-slate-800 mb-1">Primary Category *</label>
                 <select
                   value={category}
-                  onChange={(e) => setCategory(e.target.value as typeof category)}
+                  onChange={e => setCategory(e.target.value as typeof category)}
                   className="w-full text-xs px-3.5 py-2.5 rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 >
                   <option value="Technology">Technology & Hardware</option>
@@ -247,35 +299,33 @@ export const StartProjectPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1">
-                  Location in Uzbekistan *
-                </label>
+                <label className="block text-xs font-bold text-slate-800 mb-1">Location in Uzbekistan *</label>
                 <input
                   type="text"
                   placeholder="e.g. Fergana Valley, Uzbekistan or Tashkent"
                   value={location}
-                  onChange={(e) => setLocation(e.target.value)}
+                  onChange={e => setLocation(e.target.value)}
                   className="w-full text-xs px-3.5 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-800 mb-1">
-                Cover Image
-              </label>
+              <label className="block text-xs font-bold text-slate-800 mb-1">Cover Image</label>
               <div className="grid grid-cols-3 gap-3">
                 {[
                   { label: 'Fintech Hub', url: '/images/hero.jpg' },
                   { label: 'Fergana Greenhouse', url: '/images/fergana-agro.jpg' },
                   { label: 'Samarkand Crafts', url: '/images/samarkand-craft.jpg' },
-                  { label: 'Tashkent Robotics', url: '/images/tashkent-robotics.jpg' }
+                  { label: 'Tashkent Robotics', url: '/images/tashkent-robotics.jpg' },
                 ].map((preset, i) => (
                   <div
                     key={i}
                     onClick={() => setImageUrl(preset.url)}
                     className={`relative rounded-lg overflow-hidden border-2 aspect-video cursor-pointer transition-all ${
-                      imageUrl === preset.url ? 'border-emerald-600 ring-2 ring-emerald-500/30' : 'border-slate-200 opacity-70 hover:opacity-100'
+                      imageUrl === preset.url
+                        ? 'border-emerald-600 ring-2 ring-emerald-500/30'
+                        : 'border-slate-200 opacity-70 hover:opacity-100'
                     }`}
                   >
                     <img src={preset.url} alt={preset.label} className="w-full h-full object-cover" />
@@ -293,17 +343,16 @@ export const StartProjectPage: React.FC = () => {
         {step === 2 && (
           <div className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-slate-800 mb-1">
-                The Full Campaign Narrative *
-              </label>
+              <label className="block text-xs font-bold text-slate-800 mb-1">The Full Campaign Narrative *</label>
               <p className="text-xs text-slate-500 mb-2">
-                Describe the problem you are solving in Uzbekistan, why your solution works, and how community capital will be utilized.
+                Describe the problem you are solving in Uzbekistan, why your solution works, and how community capital
+                will be utilized.
               </p>
               <textarea
                 rows={10}
                 placeholder="Write your story here... Provide specific context about your operations, your community impact, and the technology or craft involved."
                 value={story}
-                onChange={(e) => setStory(e.target.value)}
+                onChange={e => setStory(e.target.value)}
                 className="w-full text-xs p-3.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 leading-relaxed font-sans"
               />
             </div>
@@ -330,7 +379,8 @@ export const StartProjectPage: React.FC = () => {
                 <HeartHandshake className="w-6 h-6 text-blue-600 mb-2" />
                 <h4 className="font-bold text-slate-900 text-sm">Donation-Based</h4>
                 <p className="text-slate-600 mt-1 leading-relaxed text-[11px]">
-                  No financial or material returns. Ideal for non-profits, youth education, and public environmental programs.
+                  No financial or material returns. Ideal for non-profits, youth education, and public environmental
+                  programs.
                 </p>
               </div>
 
@@ -381,12 +431,10 @@ export const StartProjectPage: React.FC = () => {
                   type="number"
                   step="1000000"
                   value={targetAmount}
-                  onChange={(e) => setTargetAmount(Math.max(1_000_000, parseInt(e.target.value) || 0))}
+                  onChange={e => setTargetAmount(Math.max(1_000_000, parseInt(e.target.value) || 0))}
                   className="w-full text-sm font-mono-numbers px-3.5 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
-                <span className="absolute right-3.5 top-2.5 text-xs font-semibold text-slate-400">
-                  UZS
-                </span>
+                <span className="absolute right-3.5 top-2.5 text-xs font-semibold text-slate-400">UZS</span>
               </div>
               <p className="text-xs text-slate-500 mt-1">
                 Formatted: <strong className="text-slate-800 font-mono-numbers">{formatUZS(targetAmount)}</strong>
@@ -394,20 +442,16 @@ export const StartProjectPage: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-800 mb-1">
-                Campaign Duration (Days) *
-              </label>
+              <label className="block text-xs font-bold text-slate-800 mb-1">Campaign Duration (Days) *</label>
               <input
                 type="number"
                 min="14"
                 max="90"
                 value={daysRemaining}
-                onChange={(e) => setDaysRemaining(parseInt(e.target.value) || 30)}
+                onChange={e => setDaysRemaining(parseInt(e.target.value) || 30)}
                 className="w-full text-xs font-mono-numbers px-3.5 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 max-w-xs"
               />
-              <p className="text-xs text-slate-500 mt-1">
-                Recommended duration is 30 to 45 days.
-              </p>
+              <p className="text-xs text-slate-500 mt-1">Recommended duration is 30 to 45 days.</p>
             </div>
           </div>
         )}
@@ -431,8 +475,8 @@ export const StartProjectPage: React.FC = () => {
                       category: 'New Equipment Line',
                       description: 'Operational expenses',
                       amount: newAmt,
-                      percentage: 10
-                    }
+                      percentage: 10,
+                    },
                   ]);
                 }}
                 className="px-3 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg flex items-center gap-1 transition-colors cursor-pointer"
@@ -444,15 +488,20 @@ export const StartProjectPage: React.FC = () => {
 
             <div className="space-y-3">
               {budgetItems.map((b, i) => (
-                <div key={b.id} className="p-3 bg-slate-50 rounded-xl border border-slate-200 grid grid-cols-12 gap-2 items-center text-xs">
+                <div
+                  key={b.id}
+                  className="p-3 bg-slate-50 rounded-xl border border-slate-200 grid grid-cols-12 gap-2 items-center text-xs"
+                >
                   <div className="col-span-4">
                     <input
                       type="text"
                       placeholder="Category name"
                       value={b.category}
-                      onChange={(e) => {
+                      onChange={e => {
                         const val = e.target.value;
-                        setBudgetItems(prev => prev.map((item, idx) => idx === i ? { ...item, category: val } : item));
+                        setBudgetItems(prev =>
+                          prev.map((item, idx) => (idx === i ? { ...item, category: val } : item)),
+                        );
                       }}
                       className="w-full px-2 py-1.5 rounded border border-slate-200 bg-white text-xs"
                     />
@@ -462,9 +511,11 @@ export const StartProjectPage: React.FC = () => {
                       type="text"
                       placeholder="Line description"
                       value={b.description}
-                      onChange={(e) => {
+                      onChange={e => {
                         const val = e.target.value;
-                        setBudgetItems(prev => prev.map((item, idx) => idx === i ? { ...item, description: val } : item));
+                        setBudgetItems(prev =>
+                          prev.map((item, idx) => (idx === i ? { ...item, description: val } : item)),
+                        );
                       }}
                       className="w-full px-2 py-1.5 rounded border border-slate-200 bg-white text-xs"
                     />
@@ -474,9 +525,9 @@ export const StartProjectPage: React.FC = () => {
                       type="number"
                       placeholder="Amount UZS"
                       value={b.amount}
-                      onChange={(e) => {
+                      onChange={e => {
                         const val = parseInt(e.target.value) || 0;
-                        setBudgetItems(prev => prev.map((item, idx) => idx === i ? { ...item, amount: val } : item));
+                        setBudgetItems(prev => prev.map((item, idx) => (idx === i ? { ...item, amount: val } : item)));
                       }}
                       className="w-full px-2 py-1.5 rounded border border-slate-200 bg-white text-xs font-mono-numbers"
                     />
@@ -515,8 +566,8 @@ export const StartProjectPage: React.FC = () => {
                       description: 'Milestone deliverables and audit report',
                       targetMonth: `Month ${prev.length + 1}`,
                       fundReleasePercentage: 20,
-                      completed: false
-                    }
+                      completed: false,
+                    },
                   ]);
                 }}
                 className="px-3 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg flex items-center gap-1 transition-colors cursor-pointer"
@@ -544,9 +595,9 @@ export const StartProjectPage: React.FC = () => {
                       type="text"
                       placeholder="Milestone title"
                       value={m.title}
-                      onChange={(e) => {
+                      onChange={e => {
                         const val = e.target.value;
-                        setMilestones(prev => prev.map((item, idx) => idx === i ? { ...item, title: val } : item));
+                        setMilestones(prev => prev.map((item, idx) => (idx === i ? { ...item, title: val } : item)));
                       }}
                       className="px-2 py-1.5 rounded border border-slate-200 bg-white text-xs"
                     />
@@ -554,9 +605,11 @@ export const StartProjectPage: React.FC = () => {
                       type="text"
                       placeholder="Target timeline (e.g. Month 2)"
                       value={m.targetMonth}
-                      onChange={(e) => {
+                      onChange={e => {
                         const val = e.target.value;
-                        setMilestones(prev => prev.map((item, idx) => idx === i ? { ...item, targetMonth: val } : item));
+                        setMilestones(prev =>
+                          prev.map((item, idx) => (idx === i ? { ...item, targetMonth: val } : item)),
+                        );
                       }}
                       className="px-2 py-1.5 rounded border border-slate-200 bg-white text-xs"
                     />
@@ -565,9 +618,11 @@ export const StartProjectPage: React.FC = () => {
                     type="text"
                     placeholder="Deliverable description and verification criteria..."
                     value={m.description}
-                    onChange={(e) => {
+                    onChange={e => {
                       const val = e.target.value;
-                      setMilestones(prev => prev.map((item, idx) => idx === i ? { ...item, description: val } : item));
+                      setMilestones(prev =>
+                        prev.map((item, idx) => (idx === i ? { ...item, description: val } : item)),
+                      );
                     }}
                     className="w-full px-2 py-1.5 rounded border border-slate-200 bg-white text-xs"
                   />
@@ -597,8 +652,8 @@ export const StartProjectPage: React.FC = () => {
                           items: ['Collector Box', 'Certificate'],
                           estimatedDelivery: 'April 2027',
                           claimedCount: 0,
-                          availableCount: 30
-                        }
+                          availableCount: 30,
+                        },
                       ]);
                     }}
                     className="px-3 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg flex items-center gap-1 transition-colors cursor-pointer"
@@ -615,9 +670,9 @@ export const StartProjectPage: React.FC = () => {
                         type="text"
                         placeholder="Tier title"
                         value={rew.title}
-                        onChange={(e) => {
+                        onChange={e => {
                           const val = e.target.value;
-                          setRewards(prev => prev.map((r, idx) => idx === i ? { ...r, title: val } : r));
+                          setRewards(prev => prev.map((r, idx) => (idx === i ? { ...r, title: val } : r)));
                         }}
                         className="px-2 py-1.5 rounded border border-slate-200 bg-white text-xs"
                       />
@@ -625,9 +680,9 @@ export const StartProjectPage: React.FC = () => {
                         type="number"
                         placeholder="Pledge amount in UZS"
                         value={rew.amount}
-                        onChange={(e) => {
+                        onChange={e => {
                           const val = parseInt(e.target.value) || 0;
-                          setRewards(prev => prev.map((r, idx) => idx === i ? { ...r, amount: val } : r));
+                          setRewards(prev => prev.map((r, idx) => (idx === i ? { ...r, amount: val } : r)));
                         }}
                         className="px-2 py-1.5 rounded border border-slate-200 bg-white text-xs font-mono-numbers"
                       />
@@ -636,9 +691,9 @@ export const StartProjectPage: React.FC = () => {
                       rows={2}
                       placeholder="Detailed reward description..."
                       value={rew.description}
-                      onChange={(e) => {
+                      onChange={e => {
                         const val = e.target.value;
-                        setRewards(prev => prev.map((r, idx) => idx === i ? { ...r, description: val } : r));
+                        setRewards(prev => prev.map((r, idx) => (idx === i ? { ...r, description: val } : r)));
                       }}
                       className="w-full px-2 py-1.5 rounded border border-slate-200 bg-white text-xs"
                     />
@@ -660,10 +715,12 @@ export const StartProjectPage: React.FC = () => {
                       min="10"
                       max="49"
                       value={investorProfitSharePercent}
-                      onChange={(e) => setInvestorProfitSharePercent(parseInt(e.target.value) || 20)}
+                      onChange={e => setInvestorProfitSharePercent(parseInt(e.target.value) || 20)}
                       className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-mono-numbers"
                     />
-                    <p className="text-[11px] text-slate-400 mt-1">Founder retains {100 - investorProfitSharePercent}% of net profits</p>
+                    <p className="text-[11px] text-slate-400 mt-1">
+                      Founder retains {100 - investorProfitSharePercent}% of net profits
+                    </p>
                   </div>
 
                   <div>
@@ -674,7 +731,7 @@ export const StartProjectPage: React.FC = () => {
                       type="number"
                       step="500000"
                       value={minInvestment}
-                      onChange={(e) => setMinInvestment(parseInt(e.target.value) || 1_000_000)}
+                      onChange={e => setMinInvestment(parseInt(e.target.value) || 1_000_000)}
                       className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs font-mono-numbers"
                     />
                   </div>
@@ -686,7 +743,7 @@ export const StartProjectPage: React.FC = () => {
                   </label>
                   <select
                     value={distributionSchedule}
-                    onChange={(e) => setDistributionSchedule(e.target.value as typeof distributionSchedule)}
+                    onChange={e => setDistributionSchedule(e.target.value as typeof distributionSchedule)}
                     className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs bg-white"
                   >
                     <option value="Quarterly">Quarterly (Audited Books)</option>
@@ -701,7 +758,8 @@ export const StartProjectPage: React.FC = () => {
               <div className="p-4 bg-blue-50 rounded-xl border border-blue-200 text-xs text-blue-900 space-y-2">
                 <p className="font-semibold">Donation Transparency Guidelines:</p>
                 <p className="text-[11px] leading-relaxed">
-                  As a non-profit donation campaign, 100% of community contributions are disbursed according to verified project expenditure receipts. Backers receive periodic social impact reports.
+                  As a non-profit donation campaign, 100% of community contributions are disbursed according to verified
+                  project expenditure receipts. Backers receive periodic social impact reports.
                 </p>
               </div>
             )}
@@ -716,12 +774,13 @@ export const StartProjectPage: React.FC = () => {
                 Transparency: Risks, Obstacles & Mitigation Plan *
               </label>
               <p className="text-xs text-slate-500 mb-2">
-                Disclosing potential roadblocks builds backer confidence. Detail how you will handle supplier delays or seasonal variations.
+                Disclosing potential roadblocks builds backer confidence. Detail how you will handle supplier delays or
+                seasonal variations.
               </p>
               <textarea
                 rows={6}
                 value={risksAndChallenges}
-                onChange={(e) => setRisksAndChallenges(e.target.value)}
+                onChange={e => setRisksAndChallenges(e.target.value)}
                 className="w-full text-xs p-3.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 leading-relaxed font-sans"
               />
             </div>
@@ -733,37 +792,31 @@ export const StartProjectPage: React.FC = () => {
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1">
-                  Founder Full Name *
-                </label>
+                <label className="block text-xs font-bold text-slate-800 mb-1">Founder Full Name *</label>
                 <input
                   type="text"
                   value={founderName}
-                  onChange={(e) => setFounderName(e.target.value)}
+                  onChange={e => setFounderName(e.target.value)}
                   className="w-full text-xs px-3.5 py-2 rounded-lg border border-slate-200"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1">
-                  Founder Role / Title *
-                </label>
+                <label className="block text-xs font-bold text-slate-800 mb-1">Founder Role / Title *</label>
                 <input
                   type="text"
                   value={founderRole}
-                  onChange={(e) => setFounderRole(e.target.value)}
+                  onChange={e => setFounderRole(e.target.value)}
                   className="w-full text-xs px-3.5 py-2 rounded-lg border border-slate-200"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-800 mb-1">
-                  Legal Entity / Organization *
-                </label>
+                <label className="block text-xs font-bold text-slate-800 mb-1">Legal Entity / Organization *</label>
                 <input
                   type="text"
                   value={organization}
-                  onChange={(e) => setOrganization(e.target.value)}
+                  onChange={e => setOrganization(e.target.value)}
                   className="w-full text-xs px-3.5 py-2 rounded-lg border border-slate-200"
                 />
               </div>
@@ -775,20 +828,18 @@ export const StartProjectPage: React.FC = () => {
                 <input
                   type="text"
                   value={tinOrRegistration}
-                  onChange={(e) => setTinOrRegistration(e.target.value)}
+                  onChange={e => setTinOrRegistration(e.target.value)}
                   className="w-full text-xs px-3.5 py-2 rounded-lg border border-slate-200"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-800 mb-1">
-                Founder Bio & Track Record
-              </label>
+              <label className="block text-xs font-bold text-slate-800 mb-1">Founder Bio & Track Record</label>
               <textarea
                 rows={3}
                 value={bio}
-                onChange={(e) => setBio(e.target.value)}
+                onChange={e => setBio(e.target.value)}
                 className="w-full text-xs p-3 rounded-lg border border-slate-200"
               />
             </div>
@@ -803,7 +854,8 @@ export const StartProjectPage: React.FC = () => {
               <div>
                 <strong className="font-semibold">Ready for Review:</strong>
                 <p className="text-[11px] text-emerald-800 mt-0.5">
-                  Submitting will record your campaign into Fundy's prototype system with a 'Pending Review' status and redirect you to your Founder Dashboard.
+                  Submitting will record your campaign into Fundy's prototype system with a 'Pending Review' status and
+                  redirect you to your Founder Dashboard.
                 </p>
               </div>
             </div>
@@ -815,7 +867,9 @@ export const StartProjectPage: React.FC = () => {
               </div>
               <div className="flex justify-between border-b border-slate-200 pb-2">
                 <span className="text-slate-500">Category & Location:</span>
-                <strong className="text-slate-900">{category} · {location}</strong>
+                <strong className="text-slate-900">
+                  {category} · {location}
+                </strong>
               </div>
               <div className="flex justify-between border-b border-slate-200 pb-2">
                 <span className="text-slate-500">Target Goal:</span>
@@ -827,7 +881,9 @@ export const StartProjectPage: React.FC = () => {
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-500">Founder:</span>
-                <strong className="text-slate-900">{founderName} ({organization})</strong>
+                <strong className="text-slate-900">
+                  {founderName} ({organization})
+                </strong>
               </div>
             </div>
           </div>

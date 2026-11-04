@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '@/context/AppContext';
 import { formatUZS, formatPercentage, getModelLabel } from '@/lib/formatters';
-import { 
-  Plus, 
-  Send, 
-  AlertCircle, 
-  ArrowUpRight, 
-  DollarSign,
-  Users,
-  Layers,
-  Sparkles,
-} from 'lucide-react';
+import { Plus, Send, AlertCircle, ArrowUpRight, DollarSign, Users, Layers, Sparkles } from 'lucide-react';
 
 export const FounderDashboardPage: React.FC = () => {
   const { projects, publishProjectUpdate, navigateTo, userProfile } = useApp();
@@ -22,8 +13,8 @@ export const FounderDashboardPage: React.FC = () => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   // Filter projects by founder or show active founder mock campaigns
-  const founderProjects = projects.filter(p => 
-    p.founder.name === userProfile.name || p.id === 'project-1' || p.status === 'pending_review'
+  const founderProjects = projects.filter(
+    p => p.founder.name === userProfile.name || p.id === 'project-1' || p.status === 'pending_review',
   );
 
   const totalRaised = founderProjects.reduce((acc, p) => acc + p.raisedAmount, 0);
@@ -49,9 +40,7 @@ export const FounderDashboardPage: React.FC = () => {
             </span>
             <span className="text-xs text-slate-400">· Verified in Fergana / Tashkent</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
-            Welcome back, {userProfile.name}
-          </h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Welcome back, {userProfile.name}</h1>
           <p className="text-xs text-slate-500 mt-0.5">
             Manage your campaigns, track milestone disbursements, and communicate with backer communities.
           </p>
@@ -91,9 +80,7 @@ export const FounderDashboardPage: React.FC = () => {
           <span className="text-xs text-slate-500 flex items-center gap-1">
             <Users className="w-3.5 h-3.5 text-blue-600" /> Community Backers
           </span>
-          <p className="text-xl sm:text-2xl font-extrabold text-slate-900 font-mono-numbers">
-            {totalBackers}
-          </p>
+          <p className="text-xl sm:text-2xl font-extrabold text-slate-900 font-mono-numbers">{totalBackers}</p>
           <p className="text-[11px] text-slate-400">Supporting your ventures</p>
         </div>
 
@@ -101,9 +88,7 @@ export const FounderDashboardPage: React.FC = () => {
           <span className="text-xs text-slate-500 flex items-center gap-1">
             <Layers className="w-3.5 h-3.5 text-amber-600" /> Milestone Verification
           </span>
-          <p className="text-xl sm:text-2xl font-extrabold text-slate-900 font-mono-numbers">
-            2 Disbursed
-          </p>
+          <p className="text-xl sm:text-2xl font-extrabold text-slate-900 font-mono-numbers">2 Disbursed</p>
           <p className="text-[11px] text-emerald-600 font-medium">108M UZS released</p>
         </div>
 
@@ -111,9 +96,7 @@ export const FounderDashboardPage: React.FC = () => {
           <span className="text-xs text-slate-500 flex items-center gap-1">
             <Sparkles className="w-3.5 h-3.5 text-purple-600" /> AI Evaluation Status
           </span>
-          <p className="text-xl sm:text-2xl font-extrabold text-slate-900 font-mono-numbers">
-            92 / 100
-          </p>
+          <p className="text-xl sm:text-2xl font-extrabold text-slate-900 font-mono-numbers">92 / 100</p>
           <p className="text-[11px] text-slate-400">Verified High Confidence</p>
         </div>
       </div>
@@ -124,7 +107,7 @@ export const FounderDashboardPage: React.FC = () => {
           { id: 'campaigns', label: `My Campaigns (${founderProjects.length})` },
           { id: 'milestones', label: 'Milestones & Escrow' },
           { id: 'updates', label: 'Published Updates' },
-          { id: 'backers', label: 'Backer Directory' }
+          { id: 'backers', label: 'Backer Directory' },
         ].map(tab => (
           <button
             key={tab.id}
@@ -154,13 +137,15 @@ export const FounderDashboardPage: React.FC = () => {
                 >
                   <div className="space-y-2 max-w-xl">
                     <div className="flex items-center gap-2 text-xs">
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
-                        p.status === 'pending_review'
-                          ? 'bg-amber-100 text-amber-800'
-                          : p.status === 'funded'
-                          ? 'bg-blue-100 text-blue-800'
-                          : 'bg-emerald-100 text-emerald-800'
-                      }`}>
+                      <span
+                        className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
+                          p.status === 'pending_review'
+                            ? 'bg-amber-100 text-amber-800'
+                            : p.status === 'funded'
+                              ? 'bg-blue-100 text-blue-800'
+                              : 'bg-emerald-100 text-emerald-800'
+                        }`}
+                      >
                         {p.status === 'pending_review' ? 'Pending Review' : p.status}
                       </span>
                       <span className="text-slate-400">·</span>
@@ -187,7 +172,9 @@ export const FounderDashboardPage: React.FC = () => {
                       </div>
                       <div className="flex justify-between text-xs font-mono-numbers">
                         <span className="font-semibold text-slate-800">{formatUZS(p.raisedAmount)} raised</span>
-                        <span className="text-slate-500">Goal: {formatUZS(p.targetAmount)} ({pct}%)</span>
+                        <span className="text-slate-500">
+                          Goal: {formatUZS(p.targetAmount)} ({pct}%)
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -224,7 +211,8 @@ export const FounderDashboardPage: React.FC = () => {
               <div>
                 <strong className="font-bold">Escrow Verification Process:</strong>
                 <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
-                  Funds for each phase are unlocked following independent evaluation of photographic deliverables and supplier receipts. Once approved, funds disburse automatically to the creator's designated account.
+                  Funds for each phase are unlocked following independent evaluation of photographic deliverables and
+                  supplier receipts. Once approved, funds disburse automatically to the creator's designated account.
                 </p>
               </div>
             </div>
@@ -238,9 +226,11 @@ export const FounderDashboardPage: React.FC = () => {
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs ${
-                      m.completed ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-600'
-                    }`}>
+                    <div
+                      className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs ${
+                        m.completed ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-600'
+                      }`}
+                    >
                       {m.completed ? '✓' : i + 1}
                     </div>
                     <div>
@@ -253,7 +243,9 @@ export const FounderDashboardPage: React.FC = () => {
                     <span className="font-mono-numbers font-bold text-slate-900 block">
                       {m.fundReleasePercentage}% of Capital
                     </span>
-                    <span className={`text-[10px] font-semibold ${m.completed ? 'text-emerald-700' : 'text-amber-600'}`}>
+                    <span
+                      className={`text-[10px] font-semibold ${m.completed ? 'text-emerald-700' : 'text-amber-600'}`}
+                    >
                       {m.completed ? 'Verified & Disbursed' : 'Awaiting Proof Upload'}
                     </span>
                   </div>
@@ -296,10 +288,34 @@ export const FounderDashboardPage: React.FC = () => {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {[
-                  { name: 'Alisher Vohidov', city: 'Tashkent', type: 'Musharakah Equity (1.75%)', amt: 15_000_000, status: 'Confirmed' },
-                  { name: 'Nodirbek Yusupov', city: 'Tashkent', type: 'Musharakah Equity', amt: 10_000_000, status: 'Confirmed' },
-                  { name: 'Farrukh Temirov', city: 'Fergana', type: 'Musharakah Equity', amt: 5_000_000, status: 'Confirmed' },
-                  { name: 'Dilnoza Saidova', city: 'Samarkand', type: 'Community Backer', amt: 2_500_000, status: 'Confirmed' }
+                  {
+                    name: 'Alisher Vohidov',
+                    city: 'Tashkent',
+                    type: 'Musharakah Equity (1.75%)',
+                    amt: 15_000_000,
+                    status: 'Confirmed',
+                  },
+                  {
+                    name: 'Nodirbek Yusupov',
+                    city: 'Tashkent',
+                    type: 'Musharakah Equity',
+                    amt: 10_000_000,
+                    status: 'Confirmed',
+                  },
+                  {
+                    name: 'Farrukh Temirov',
+                    city: 'Fergana',
+                    type: 'Musharakah Equity',
+                    amt: 5_000_000,
+                    status: 'Confirmed',
+                  },
+                  {
+                    name: 'Dilnoza Saidova',
+                    city: 'Samarkand',
+                    type: 'Community Backer',
+                    amt: 2_500_000,
+                    status: 'Confirmed',
+                  },
                 ].map((b, idx) => (
                   <tr key={idx} className="hover:bg-slate-50 transition-colors">
                     <td className="py-3 px-4 font-semibold text-slate-900">{b.name}</td>
@@ -325,51 +341,45 @@ export const FounderDashboardPage: React.FC = () => {
       {showUpdateModal && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-4">
-            <h3 className="text-base font-bold text-slate-900">
-              Publish Project Announcement
-            </h3>
+            <h3 className="text-base font-bold text-slate-900">Publish Project Announcement</h3>
             <p className="text-xs text-slate-500">
               Announcements notify all backers immediately and appear on your project page.
             </p>
 
             <form onSubmit={handlePublishUpdate} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Target Campaign
-                </label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Target Campaign</label>
                 <select
                   value={selectedProjectIdForUpdate}
-                  onChange={(e) => setSelectedProjectIdForUpdate(e.target.value)}
+                  onChange={e => setSelectedProjectIdForUpdate(e.target.value)}
                   className="w-full text-xs px-3 py-2 rounded-lg border border-slate-200 bg-white"
                 >
                   {founderProjects.map(p => (
-                    <option key={p.id} value={p.id}>{p.title}</option>
+                    <option key={p.id} value={p.id}>
+                      {p.title}
+                    </option>
                   ))}
                 </select>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Update Title
-                </label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Update Title</label>
                 <input
                   type="text"
                   placeholder="e.g. Foundation poured and solar inverters delivered!"
                   value={updateTitle}
-                  onChange={(e) => setUpdateTitle(e.target.value)}
+                  onChange={e => setUpdateTitle(e.target.value)}
                   className="w-full text-xs px-3 py-2 rounded-lg border border-slate-200"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Update Content
-                </label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Update Content</label>
                 <textarea
                   rows={4}
                   placeholder="Share details of recent milestones achieved, photos taken, or upcoming steps..."
                   value={updateContent}
-                  onChange={(e) => setUpdateContent(e.target.value)}
+                  onChange={e => setUpdateContent(e.target.value)}
                   className="w-full text-xs p-3 rounded-lg border border-slate-200"
                 />
               </div>

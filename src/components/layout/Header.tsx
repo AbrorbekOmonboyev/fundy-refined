@@ -47,7 +47,7 @@ export function Header() {
 
           {/* Desktop navigation */}
           <nav className="hidden xl:flex items-center gap-6 text-sm font-medium text-slate-600">
-            {links.map(link => (
+            {links.map(link =>
               link.section ? (
                 <Link key={link.to} to={link.to} className={desktopLink(inactive)}>
                   {link.label}
@@ -56,8 +56,8 @@ export function Header() {
                 <NavLink key={link.to} to={link.to} end className={desktopLink}>
                   {link.label}
                 </NavLink>
-              )
-            ))}
+              ),
+            )}
             <NavLink to={dashboardPath} className={desktopLink}>
               {t('nav.dashboard')}
             </NavLink>
@@ -142,7 +142,7 @@ export function Header() {
       {mobileMenuOpen && (
         <div className="xl:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3 shadow-lg">
           <nav className="flex flex-col space-y-1 text-sm font-medium">
-            {links.map(link => (
+            {links.map(link =>
               link.section ? (
                 <Link key={link.to} to={link.to} onClick={closeMenu} className={mobileLink(inactive)}>
                   {link.label}
@@ -151,8 +151,8 @@ export function Header() {
                 <NavLink key={link.to} to={link.to} end onClick={closeMenu} className={mobileLink}>
                   {link.label}
                 </NavLink>
-              )
-            ))}
+              ),
+            )}
             <NavLink to={dashboardPath} onClick={closeMenu} className={mobileLink}>
               {t('nav.dashboard')} ({t(`roles.${userProfile.role}`)})
             </NavLink>
