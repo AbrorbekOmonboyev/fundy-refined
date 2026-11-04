@@ -533,6 +533,7 @@ export type Database = {
           full_name: string
           id: string
           is_blocked: boolean
+          onboarded_at: string | null
           preferred_language: Database["public"]["Enums"]["app_language"]
           region_id: string | null
           role: Database["public"]["Enums"]["app_role"]
@@ -545,6 +546,7 @@ export type Database = {
           full_name?: string
           id: string
           is_blocked?: boolean
+          onboarded_at?: string | null
           preferred_language?: Database["public"]["Enums"]["app_language"]
           region_id?: string | null
           role?: Database["public"]["Enums"]["app_role"]
@@ -557,6 +559,7 @@ export type Database = {
           full_name?: string
           id?: string
           is_blocked?: boolean
+          onboarded_at?: string | null
           preferred_language?: Database["public"]["Enums"]["app_language"]
           region_id?: string | null
           role?: Database["public"]["Enums"]["app_role"]
@@ -1039,6 +1042,7 @@ export type Database = {
         Args: { p_user_id: string; p_verified: boolean }
         Returns: undefined
       }
+      delete_my_account: { Args: never; Returns: undefined }
       contribute: {
         Args: {
           p_amount: number

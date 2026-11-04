@@ -24,6 +24,15 @@ export const paths = {
   backerDashboard: '/dashboard/backer',
   education: '/learn',
   trustSafety: '/trust-and-safety',
+  // Accounts
+  login: '/login',
+  signup: '/signup',
+  forgotPassword: '/forgot-password',
+  resetPassword: '/reset-password',
+  authCallback: '/auth/callback',
+  welcome: '/welcome',
+  settings: '/settings',
+  admin: '/admin',
 } as const;
 
 /** Route patterns, in matching order. */

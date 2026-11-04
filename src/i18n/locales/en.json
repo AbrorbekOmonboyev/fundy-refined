@@ -9,12 +9,7 @@
     "howItWorks": "How It Works",
     "learn": "Education & Musharakah",
     "trustSafety": "Trust & Safety",
-    "dashboard": "Dashboard",
     "startProject": "Start a Project"
-  },
-  "roles": {
-    "backer": "Backer",
-    "founder": "Founder"
   },
   "header": {
     "notifications": "Notifications",
@@ -27,7 +22,6 @@
     "label": "Demonstration Prototype:",
     "full": "Designed for the Uzbekistan market. All transactions, profit distributions, and projects are simulations.",
     "short": "Uzbekistan simulation (UZS).",
-    "viewAs": "View as:",
     "reset": "Reset Demo",
     "resetTitle": "Reset simulated data",
     "resetConfirm": "Reset prototype data to original demo state?"
@@ -58,5 +52,135 @@
     "title": "Page not found",
     "message": "This page doesn't exist or has been moved.",
     "home": "Go to home page"
+  },
+  "common": {
+    "loading": "Loading…",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
+  },
+  "account": {
+    "login": "Log in",
+    "signup": "Sign up",
+    "signOut": "Sign out",
+    "menu": "Account menu",
+    "contributions": "My contributions",
+    "projects": "My projects",
+    "settings": "Settings",
+    "admin": "Admin panel"
+  },
+  "validation": {
+    "email": "Enter a valid email address.",
+    "name": "Enter your name (at least 2 characters).",
+    "password": "At least {{min}} characters, with letters and numbers.",
+    "passwordMatch": "The passwords don't match.",
+    "terms": "Please accept the terms to continue."
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "network": "Could not connect. Check your internet connection and try again.",
+    "invalidCredentials": "Wrong email or password.",
+    "emailNotConfirmed": "Please confirm your email first — check your inbox for our message.",
+    "userExists": "An account with this email already exists. Try logging in.",
+    "weakPassword": "This password is too weak. Use at least 8 characters with letters and numbers.",
+    "samePassword": "The new password must be different from the old one.",
+    "invalidEmail": "This email address is not valid.",
+    "rateLimit": "Too many attempts. Please wait a few minutes and try again.",
+    "linkExpired": "This link has expired or was already used. Please request a new one.",
+    "linkOtherBrowser": "Please open the link in the same browser where you requested it.",
+    "signupDisabled": "New sign-ups are currently closed.",
+    "blocked": "This account has been blocked. Please contact support.",
+    "accountHasActivity": "This account has contributions or projects, so it is kept for financial records. Please contact support to close it.",
+    "notSignedIn": "Please log in first.",
+    "notConfigured": "Accounts are not available yet: the site is not connected to its database.",
+    "adminOnly": "This page is for administrators only."
+  },
+  "auth": {
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "fullName": "Full name",
+      "newPassword": "New password",
+      "confirmPassword": "Repeat new password"
+    },
+    "login": {
+      "title": "Log in to Fundy",
+      "noAccount": "New here?",
+      "signupLink": "Create an account",
+      "forgot": "Forgot password?",
+      "submit": "Log in",
+      "sendLink": "Email me a sign-in link",
+      "useLink": "Log in with an email link instead",
+      "usePassword": "Log in with a password instead",
+      "linkSent": "If an account exists for {{email}}, a sign-in link is on its way.",
+      "resendConfirmation": "Send the confirmation email again"
+    },
+    "signup": {
+      "title": "Create your account",
+      "haveAccount": "Already have an account?",
+      "loginLink": "Log in",
+      "terms": "I agree to the",
+      "termsLink": "terms and risk disclosures",
+      "submit": "Create account",
+      "checkEmailTitle": "Check your email",
+      "checkEmail": "We sent a confirmation link to {{email}}. Open it to activate your account.",
+      "checkEmailHint": "Didn't get it? Check your spam folder, or wait a minute and try logging in to resend it.",
+      "backToLogin": "Back to log in"
+    },
+    "forgot": {
+      "title": "Reset your password",
+      "subtitle": "Enter your email and we'll send you a link to choose a new password.",
+      "submit": "Send reset link",
+      "sent": "If an account exists for {{email}}, a reset link is on its way."
+    },
+    "reset": {
+      "title": "Choose a new password",
+      "submit": "Save new password",
+      "done": "Your password has been changed."
+    },
+    "callback": {
+      "failedTitle": "This link didn't work"
+    }
+  },
+  "welcome": {
+    "title": "Welcome to Fundy!",
+    "subtitle": "A few details so we can show you the right projects.",
+    "region": "Region",
+    "regionPlaceholder": "Choose your region",
+    "city": "City or district",
+    "language": "Language",
+    "intent": "What brings you here?",
+    "intentBack": "Support projects",
+    "intentBackHint": "Back causes, pre-order rewards or join Musharakah partnerships.",
+    "intentLaunch": "Launch a project",
+    "intentLaunchHint": "Raise interest-free funding for your idea or business.",
+    "submit": "Continue"
+  },
+  "settings": {
+    "title": "Account settings",
+    "profile": "Profile",
+    "profileHint": "Your name and photo are shown next to your comments and contributions.",
+    "save": "Save changes",
+    "saved": "Saved.",
+    "avatarUpload": "Upload photo",
+    "avatarHint": "JPG, PNG or WebP, up to {{mb}} MB.",
+    "avatarType": "Please choose a JPG, PNG or WebP image.",
+    "avatarSize": "The image is too large (maximum {{mb}} MB).",
+    "emailHint": "Your email is private and never shown to others.",
+    "language": "Language",
+    "languageHint": "Used for the website and the emails we send you.",
+    "password": "Change password",
+    "deleteTitle": "Delete account",
+    "deleteHint": "Permanently removes your profile, saved projects and comments. This cannot be undone.",
+    "deleteButton": "Delete my account",
+    "deleteConfirm": "Delete your account permanently? This cannot be undone."
+  },
+  "admin": {
+    "title": "Admin panel",
+    "greeting": "Signed in as {{name}}",
+    "pending": "Waiting for review",
+    "live": "Live projects",
+    "users": "Users",
+    "reports": "Open reports",
+    "comingSoon": "Project review, evaluations, verification and moderation tools are coming in Phase 6."
   }
 }

@@ -9,12 +9,7 @@
     "howItWorks": "Qanday ishlaydi",
     "learn": "Ta'lim va mushoraka",
     "trustSafety": "Ishonch va xavfsizlik",
-    "dashboard": "Kabinet",
     "startProject": "Loyiha boshlash"
-  },
-  "roles": {
-    "backer": "Homiy",
-    "founder": "Asoschi"
   },
   "header": {
     "notifications": "Bildirishnomalar",
@@ -27,7 +22,6 @@
     "label": "Demo versiya:",
     "full": "O'zbekiston bozori uchun ishlab chiqilgan. Barcha to'lovlar, foyda taqsimoti va loyihalar — simulyatsiya.",
     "short": "Demo versiya (UZS).",
-    "viewAs": "Ko'rinish:",
     "reset": "Demoni tiklash",
     "resetTitle": "Demo ma'lumotlarini tiklash",
     "resetConfirm": "Demo ma'lumotlarini boshlang'ich holatga qaytarasizmi?"
@@ -58,5 +52,135 @@
     "title": "Sahifa topilmadi",
     "message": "Bu sahifa mavjud emas yoki boshqa joyga ko'chirilgan.",
     "home": "Bosh sahifaga qaytish"
+  },
+  "common": {
+    "loading": "Yuklanmoqda…",
+    "showPassword": "Parolni ko'rsatish",
+    "hidePassword": "Parolni yashirish"
+  },
+  "account": {
+    "login": "Kirish",
+    "signup": "Ro'yxatdan o'tish",
+    "signOut": "Chiqish",
+    "menu": "Hisob menyusi",
+    "contributions": "Mening hissalarim",
+    "projects": "Mening loyihalarim",
+    "settings": "Sozlamalar",
+    "admin": "Admin panel"
+  },
+  "validation": {
+    "email": "To'g'ri elektron pochta manzilini kiriting.",
+    "name": "Ismingizni kiriting (kamida 2 ta belgi).",
+    "password": "Kamida {{min}} ta belgi, harflar va raqamlar bo'lsin.",
+    "passwordMatch": "Parollar bir xil emas.",
+    "terms": "Davom etish uchun shartlarga rozilik bildiring."
+  },
+  "errors": {
+    "generic": "Xatolik yuz berdi. Qaytadan urinib ko'ring.",
+    "network": "Ulanib bo'lmadi. Internet aloqangizni tekshirib, qaytadan urinib ko'ring.",
+    "invalidCredentials": "Elektron pochta yoki parol noto'g'ri.",
+    "emailNotConfirmed": "Avval elektron pochtangizni tasdiqlang — pochtangizdagi xatimizni oching.",
+    "userExists": "Bu elektron pochta bilan hisob allaqachon mavjud. Kirib ko'ring.",
+    "weakPassword": "Parol juda oddiy. Kamida 8 ta belgi, harflar va raqamlardan foydalaning.",
+    "samePassword": "Yangi parol eskisidan farq qilishi kerak.",
+    "invalidEmail": "Bu elektron pochta manzili noto'g'ri.",
+    "rateLimit": "Juda ko'p urinish. Bir necha daqiqa kutib, qaytadan urinib ko'ring.",
+    "linkExpired": "Bu havolaning muddati tugagan yoki u allaqachon ishlatilgan. Yangisini so'rang.",
+    "linkOtherBrowser": "Havolani uni so'ragan brauzeringizda oching.",
+    "signupDisabled": "Hozircha yangi ro'yxatdan o'tish yopiq.",
+    "blocked": "Bu hisob bloklangan. Qo'llab-quvvatlash xizmatiga murojaat qiling.",
+    "accountHasActivity": "Bu hisobda hissalar yoki loyihalar bor, shuning uchun u moliyaviy hisobot uchun saqlanadi. Yopish uchun qo'llab-quvvatlash xizmatiga murojaat qiling.",
+    "notSignedIn": "Avval tizimga kiring.",
+    "notConfigured": "Hisoblar hozircha mavjud emas: sayt ma'lumotlar bazasiga ulanmagan.",
+    "adminOnly": "Bu sahifa faqat administratorlar uchun."
+  },
+  "auth": {
+    "fields": {
+      "email": "Elektron pochta",
+      "password": "Parol",
+      "fullName": "To'liq ism",
+      "newPassword": "Yangi parol",
+      "confirmPassword": "Yangi parolni takrorlang"
+    },
+    "login": {
+      "title": "Fundy’ga kirish",
+      "noAccount": "Birinchi marta keldingizmi?",
+      "signupLink": "Hisob yaratish",
+      "forgot": "Parolni unutdingizmi?",
+      "submit": "Kirish",
+      "sendLink": "Kirish havolasini yuborish",
+      "useLink": "Elektron pochta havolasi orqali kirish",
+      "usePassword": "Parol bilan kirish",
+      "linkSent": "Agar {{email}} uchun hisob mavjud bo'lsa, kirish havolasi yuborildi.",
+      "resendConfirmation": "Tasdiqlash xatini qayta yuborish"
+    },
+    "signup": {
+      "title": "Hisob yaratish",
+      "haveAccount": "Hisobingiz bormi?",
+      "loginLink": "Kirish",
+      "terms": "Men quyidagilarga roziman:",
+      "termsLink": "shartlar va risklar haqida ma’lumot",
+      "submit": "Hisob yaratish",
+      "checkEmailTitle": "Pochtangizni tekshiring",
+      "checkEmail": "{{email}} manziliga tasdiqlash havolasini yubordik. Hisobingizni faollashtirish uchun uni oching.",
+      "checkEmailHint": "Xat kelmadimi? Spam papkasini tekshiring yoki bir daqiqadan so'ng kirib, qayta yuboring.",
+      "backToLogin": "Kirish sahifasiga qaytish"
+    },
+    "forgot": {
+      "title": "Parolni tiklash",
+      "subtitle": "Elektron pochtangizni kiriting — yangi parol tanlash uchun havola yuboramiz.",
+      "submit": "Havolani yuborish",
+      "sent": "Agar {{email}} uchun hisob mavjud bo'lsa, tiklash havolasi yuborildi."
+    },
+    "reset": {
+      "title": "Yangi parol tanlang",
+      "submit": "Yangi parolni saqlash",
+      "done": "Parolingiz o'zgartirildi."
+    },
+    "callback": {
+      "failedTitle": "Havola ishlamadi"
+    }
+  },
+  "welcome": {
+    "title": "Fundy’ga xush kelibsiz!",
+    "subtitle": "Sizga mos loyihalarni ko'rsatishimiz uchun bir nechta ma'lumot.",
+    "region": "Viloyat",
+    "regionPlaceholder": "Viloyatingizni tanlang",
+    "city": "Shahar yoki tuman",
+    "language": "Til",
+    "intent": "Sizni nima olib keldi?",
+    "intentBack": "Loyihalarni qo'llab-quvvatlash",
+    "intentBackHint": "Xayriya qiling, mukofotlarni oldindan buyurtma qiling yoki mushoraka hamkorligiga qo'shiling.",
+    "intentLaunch": "Loyiha boshlash",
+    "intentLaunchHint": "G'oyangiz yoki biznesingiz uchun foizsiz mablag' to'plang.",
+    "submit": "Davom etish"
+  },
+  "settings": {
+    "title": "Hisob sozlamalari",
+    "profile": "Profil",
+    "profileHint": "Ismingiz va rasmingiz izohlaringiz va hissalaringiz yonida ko'rsatiladi.",
+    "save": "O'zgarishlarni saqlash",
+    "saved": "Saqlandi.",
+    "avatarUpload": "Rasm yuklash",
+    "avatarHint": "JPG, PNG yoki WebP, {{mb}} MB gacha.",
+    "avatarType": "JPG, PNG yoki WebP rasmini tanlang.",
+    "avatarSize": "Rasm juda katta (maksimal {{mb}} MB).",
+    "emailHint": "Elektron pochtangiz maxfiy va boshqalarga ko'rsatilmaydi.",
+    "language": "Til",
+    "languageHint": "Sayt va sizga yuboriladigan xatlar uchun ishlatiladi.",
+    "password": "Parolni o'zgartirish",
+    "deleteTitle": "Hisobni o'chirish",
+    "deleteHint": "Profilingiz, saqlangan loyihalar va izohlaringiz butunlay o'chiriladi. Buni qaytarib bo'lmaydi.",
+    "deleteButton": "Hisobimni o'chirish",
+    "deleteConfirm": "Hisobingiz butunlay o'chirilsinmi? Buni qaytarib bo'lmaydi."
+  },
+  "admin": {
+    "title": "Admin panel",
+    "greeting": "{{name}} sifatida kirgansiz",
+    "pending": "Ko'rib chiqish kutilmoqda",
+    "live": "Faol loyihalar",
+    "users": "Foydalanuvchilar",
+    "reports": "Ochiq shikoyatlar",
+    "comingSoon": "Loyihalarni ko'rib chiqish, baholash, tekshirish va moderatsiya vositalari 6-bosqichda qo'shiladi."
   }
 }

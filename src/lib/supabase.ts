@@ -16,7 +16,8 @@ export const isSupabaseConfigured = Boolean(url && publishableKey);
 // Fully typed from the live schema — regenerate with `npm run db:types` after database changes.
 export const supabase: SupabaseClient<Database> | null = isSupabaseConfigured
   ? createClient<Database>(url!, publishableKey!, {
-      auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+      // PKCE: email links come back to /auth/callback?code=… and are exchanged for a session.
+      auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce' },
     })
   : null;
 

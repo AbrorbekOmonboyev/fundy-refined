@@ -569,6 +569,30 @@ describe('community', () => {
   });
 });
 
+describe('accounts', () => {
+  test('users can mark their welcome step as done', async () => {
+    await as(db, user(bob), `update public.profiles set onboarded_at = now() where id = $1`, [bob]);
+    const [p] = await as<{ onboarded_at: string | null }>(db, user(bob), `select onboarded_at from public.profiles where id = $1`, [bob]);
+    assert.ok(p.onboarded_at);
+  });
+
+  test('a user without activity can delete their account', async () => {
+    const dave = await createUser(db, 'Dave Leaving');
+    await as(db, user(dave), `select public.delete_my_account()`);
+    assert.equal((await as(db, owner, `select id from auth.users where id = $1`, [dave])).length, 0);
+    assert.equal((await as(db, owner, `select id from public.profiles where id = $1`, [dave])).length, 0);
+  });
+
+  test('accounts with contributions or projects are kept', async () => {
+    await rejects(as(db, user(bob), `select public.delete_my_account()`), /account_has_activity/);
+    await rejects(as(db, user(alice), `select public.delete_my_account()`), /account_has_activity/);
+  });
+
+  test('visitors cannot delete accounts', async () => {
+    await rejects(as(db, anon, `select public.delete_my_account()`), /permission denied/);
+  });
+});
+
 describe('file storage', () => {
   test('users upload only into their own folder', async () => {
     await as(db, user(bob), `insert into storage.objects (bucket_id, name) values ('avatars', $1)`, [`${bob}/me.png`]);
