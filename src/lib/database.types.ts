@@ -1042,7 +1042,6 @@ export type Database = {
         Args: { p_user_id: string; p_verified: boolean }
         Returns: undefined
       }
-      delete_my_account: { Args: never; Returns: undefined }
       contribute: {
         Args: {
           p_amount: number
@@ -1053,6 +1052,7 @@ export type Database = {
         }
         Returns: string
       }
+      delete_my_account: { Args: never; Returns: undefined }
       submit_milestone: {
         Args: { p_evidence: string; p_milestone_id: string }
         Returns: undefined
