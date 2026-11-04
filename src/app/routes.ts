@@ -34,6 +34,12 @@ export const paths = {
   welcome: '/welcome',
   settings: '/settings',
   admin: '/admin',
+  adminReview: '/admin/review',
+  adminReviewProject: (id: string) => `/admin/review/${id}`,
+  adminProjects: '/admin/projects',
+  adminComments: '/admin/comments',
+  adminUsers: '/admin/users',
+  adminAudit: '/admin/audit',
 } as const;
 
 /** Route patterns, in matching order. */

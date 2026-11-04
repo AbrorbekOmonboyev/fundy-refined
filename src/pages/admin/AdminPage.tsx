@@ -1,17 +1,21 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { ShieldCheck } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import { paths } from '@/app/routes';
 import { useAuth } from '@/features/auth/AuthContext';
-import { Alert } from '@/components/ui';
+import { usePageMeta } from '@/lib/usePageMeta';
+import { AdminHeader } from '@/pages/admin/AdminLayout';
 
-type Counts = { pending: number; live: number; users: number; reports: number };
+type Counts = { pending: number; live: number; users: number; hiddenComments: number };
 
-/** Admin area — the full review tools arrive in Phase 6. */
+/** Admin overview: the numbers that need attention, each linking to its page. */
 export function AdminPage() {
   const { t } = useTranslation();
   const { profile } = useAuth();
   const [counts, setCounts] = useState<Counts | null>(null);
+  usePageMeta(t('admin.title'));
 
   useEffect(() => {
     if (!supabase) return;
@@ -20,37 +24,38 @@ export function AdminPage() {
       count(supabase.from('projects').select('*', { count: 'exact', head: true }).eq('status', 'pending_review')),
       count(supabase.from('projects').select('*', { count: 'exact', head: true }).eq('status', 'active')),
       count(supabase.from('profiles').select('*', { count: 'exact', head: true })),
-      count(supabase.from('reports').select('*', { count: 'exact', head: true }).eq('status', 'open')),
-    ]).then(([pending, live, users, reports]) => setCounts({ pending, live, users, reports }));
+      count(supabase.from('comments').select('*', { count: 'exact', head: true }).eq('is_hidden', true)),
+    ]).then(([pending, live, users, hiddenComments]) => setCounts({ pending, live, users, hiddenComments }));
   }, []);
 
-  const tiles: { key: keyof Counts; label: string }[] = [
-    { key: 'pending', label: t('admin.pending') },
-    { key: 'live', label: t('admin.live') },
-    { key: 'users', label: t('admin.users') },
-    { key: 'reports', label: t('admin.reports') },
+  const tiles: { key: keyof Counts; label: string; to: string; highlight?: boolean }[] = [
+    { key: 'pending', label: t('admin.pending'), to: paths.adminReview, highlight: (counts?.pending ?? 0) > 0 },
+    { key: 'live', label: t('admin.live'), to: paths.adminProjects },
+    { key: 'users', label: t('admin.users.title'), to: paths.adminUsers },
+    { key: 'hiddenComments', label: t('admin.hiddenComments'), to: paths.adminComments },
   ];
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10 space-y-6">
-      <header className="flex items-center gap-3">
-        <ShieldCheck className="w-7 h-7 text-ink" aria-hidden />
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-ink">{t('admin.title')}</h1>
-          <p className="text-sm text-slate-600">{t('admin.greeting', { name: profile?.full_name })}</p>
-        </div>
-      </header>
-
-      <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
+    <>
+      <AdminHeader title={t('admin.title')} hint={t('admin.greeting', { name: profile?.full_name })} />
+      <div className="grid gap-4 grid-cols-2 xl:grid-cols-4">
         {tiles.map(tile => (
-          <div key={tile.key} className="bg-white rounded-xl border border-slate-200 p-4">
-            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">{tile.label}</p>
-            <p className="mt-1 text-2xl font-bold text-ink font-mono-numbers">{counts ? counts[tile.key] : '…'}</p>
-          </div>
+          <Link
+            key={tile.key}
+            to={tile.to}
+            className={`group rounded-3xl p-5 border transition-colors ${
+              tile.highlight ? 'bg-brand border-brand' : 'bg-white border-slate-200 hover:border-ink'
+            }`}
+          >
+            <p className="text-xs font-semibold text-slate-600">{tile.label}</p>
+            <p className="mt-2 font-display text-3xl text-ink font-mono-numbers">{counts ? counts[tile.key] : '…'}</p>
+            <ArrowRight
+              className="w-4 h-4 mt-2 text-ink opacity-0 group-hover:opacity-100 transition-opacity"
+              aria-hidden
+            />
+          </Link>
         ))}
       </div>
-
-      <Alert variant="info">{t('admin.comingSoon')}</Alert>
-    </div>
+    </>
   );
 }

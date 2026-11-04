@@ -187,9 +187,100 @@
     "greeting": "{{name}} sifatida kirgansiz",
     "pending": "Ko'rib chiqish kutilmoqda",
     "live": "Faol loyihalar",
-    "users": "Foydalanuvchilar",
-    "reports": "Ochiq shikoyatlar",
-    "comingSoon": "Loyihalarni ko'rib chiqish, baholash, tekshirish va moderatsiya vositalari 6-bosqichda qo'shiladi."
+    "hiddenComments": "Yashirilgan izohlar",
+    "nav": {
+      "overview": "Umumiy",
+      "review": "Ko'rib chiqish",
+      "projects": "Loyihalar",
+      "comments": "Izohlar",
+      "users": "Foydalanuvchilar",
+      "audit": "Harakatlar jurnali"
+    },
+    "review": {
+      "queueHint": "Qaror kutayotgan loyihalar, eng eskisi birinchi.",
+      "empty": "Hozircha ko'rib chiqadigan narsa yo'q.",
+      "submittedOn": "{{date}} da yuborilgan",
+      "overview": "Umumiy",
+      "nothing": "Hech narsa kiritilmagan.",
+      "incomplete": "Ba'zi qadamlar to'liq emas. Tasdiqlash o'rniga o'zgartirish so'rang.",
+      "verify": "Tasdiqlangan deb belgilash",
+      "unverify": "Tasdiqni olib tashlash",
+      "noDocuments": "Hujjatlar yuklanmagan.",
+      "confidence": "Ishonch darajasi",
+      "saveEvaluation": "Baholashni saqlash",
+      "scoreError": "Har bir ball 0 dan 20 gacha butun son bo'lishi kerak.",
+      "evaluationPublic": "Loyiha faollashganda baholash ochiq ko'rsatiladi.",
+      "decision": "Qaror",
+      "decisionLabel": "Nima qilinsin?",
+      "decisions": {
+        "approve": "Tasdiqlash",
+        "request_changes": "O'zgartirish so'rash",
+        "reject": "Rad etish"
+      },
+      "decisionHints": {
+        "approve": "Loyiha hozir faollashadi va kampaniya muddati boshlanadi.",
+        "request_changes": "Asoschi tahrirlab, qayta yubora oladi.",
+        "reject": "Yakuniy. Asoschi bu loyihani qayta yubora olmaydi."
+      },
+      "noteRequired": "Asoschiga izoh (majburiy)",
+      "noteOptional": "Asoschiga izoh (ixtiyoriy)",
+      "noteHint": "Asoschi bu izohni ko'radi. Nimani o'zgartirish kerakligini aniq yozing.",
+      "needEvaluation": "Tasdiqlashdan oldin baholashni saqlang.",
+      "needNote": "Kamida 10 belgidan iborat izoh yozing.",
+      "confirm": {
+        "approve": "Loyiha tasdiqlansin va hozir faollashtirilsinmi?",
+        "request_changes": "Loyiha o'zgartirish uchun asoschiga qaytarilsinmi?",
+        "reject": "Loyiha rad etilsinmi? Buni qaytarib bo'lmaydi."
+      },
+      "submit": {
+        "approve": "Tasdiqlash va e'lon qilish",
+        "request_changes": "O'zgartirish uchun qaytarish",
+        "reject": "Loyihani rad etish"
+      }
+    },
+    "projects": {
+      "hint": "Barcha holatdagi loyihalar. Yulduzcha faol loyihani bosh sahifada ko'rsatadi.",
+      "raised": "To'plangan",
+      "featured": "Tanlangan",
+      "featureToggle": "Bosh sahifada ko'rsatish",
+      "featureOnlyLive": "Faqat faol loyihalarni tanlash mumkin"
+    },
+    "comments": {
+      "hint": "Barcha loyihalardagi eng yangi izohlar. Yashirilgan izohlarni muallifidan boshqa hech kim ko'rmaydi.",
+      "onlyHidden": "Faqat yashirilganlar",
+      "hidden": "Yashirilgan",
+      "hide": "Yashirish",
+      "show": "Qayta ko'rsatish"
+    },
+    "users": {
+      "title": "Foydalanuvchilar",
+      "search": "Ism yoki elektron pochta bo'yicha qidirish",
+      "user": "Foydalanuvchi",
+      "activity": "Faollik",
+      "joined": "Ro'yxatdan o'tgan",
+      "count_one": "{{formatted}} ta foydalanuvchi",
+      "count_other": "{{formatted}} ta foydalanuvchi",
+      "projects_one": "{{count}} ta loyiha",
+      "projects_other": "{{count}} ta loyiha",
+      "admin": "Admin",
+      "blocked": "Bloklangan",
+      "block": "Bloklash",
+      "unblock": "Blokdan chiqarish",
+      "makeAdmin": "Admin qilish",
+      "removeAdmin": "Adminlikdan olish",
+      "confirmBlock": "{{name}} bloklansinmi? U izoh yoza, hissa qo'sha yoki loyiha yarata olmaydi.",
+      "confirmUnblock": "{{name}} blokdan chiqarilsinmi?",
+      "confirmMakeAdmin": "{{name}} ga to'liq admin huquqlari berilsinmi?",
+      "confirmRemoveAdmin": "{{name}} admin huquqlaridan mahrum qilinsinmi?"
+    },
+    "audit": {
+      "hint": "Har bir admin harakati shu yerda avtomatik qayd etiladi va o'zgartirib bo'lmaydi.",
+      "empty": "Hozircha admin harakatlari yo'q.",
+      "when": "Qachon",
+      "who": "Kim",
+      "what": "Harakat",
+      "details": "Tafsilotlar"
+    }
   },
   "money": {
     "currency": "so'm",

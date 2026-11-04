@@ -721,6 +721,39 @@ describe('project wizard (the exact writes the app makes)', () => {
   });
 });
 
+describe('admin panel', () => {
+  test('admins list users with email and activity; others cannot', async () => {
+    const rows = await as<{ email: string; contribution_total: string; total_count: string }>(
+      db, user(admin), `select * from public.admin_list_users('Bob Backer')`);
+    assert.equal(rows.length, 1);
+    assert.match(rows[0].email, /@test\.local$/);
+    assert.ok(Number(rows[0].contribution_total) > 0);
+    await rejects(as(db, user(bob), `select * from public.admin_list_users()`), /admin_only/);
+    await rejects(as(db, anon, `select * from public.admin_list_users()`), /permission denied/);
+  });
+
+  test('user search pages through everyone', async () => {
+    const page = await as<{ total_count: string }>(db, user(admin), `select * from public.admin_list_users(null, 10, 0)`);
+    assert.equal(page.length, 10);
+    assert.ok(Number(page[0].total_count) > 200);
+  });
+
+  test('admins see recent comments including hidden ones; others cannot', async () => {
+    const all = await as<{ is_hidden: boolean }>(db, user(admin), `select * from public.admin_recent_comments(200)`);
+    assert.ok(all.some(c => c.is_hidden), 'hidden comment from the moderation test is listed');
+    const hidden = await as<{ is_hidden: boolean }>(db, user(admin), `select * from public.admin_recent_comments(50, true)`);
+    assert.ok(hidden.length > 0 && hidden.every(c => c.is_hidden));
+    await rejects(as(db, user(carol), `select * from public.admin_recent_comments()`), /admin_only/);
+  });
+
+  test('admins can read pending projects and their private documents', async () => {
+    const pending = await as(db, user(admin), `select id from public.projects where status = 'pending_review'`);
+    assert.ok(pending.length > 0);
+    const docs = await as(db, user(admin), `select id from public.project_documents`);
+    assert.ok(docs.length > 0);
+  });
+});
+
 describe('public browsing', () => {
   test('search finds projects by title, place or founder, in any case', async () => {
     const byTitle = await as(db, anon, `select * from public.search_project_ids('robotics')`);

@@ -46,10 +46,11 @@ const fail = (error: unknown) => {
   if (error) throw error;
 };
 
-export async function getDraft(projectId: string, userId: string): Promise<Draft | null> {
+/** Load a project with all its parts. `userId` must own it — unless `anyOwner` (admins reviewing). */
+export async function getDraft(projectId: string, userId: string, { anyOwner = false } = {}): Promise<Draft | null> {
   const { data: project, error } = await db().from('projects').select('*').eq('id', projectId).maybeSingle();
   fail(error);
-  if (!project || project.owner_id !== userId) return null;
+  if (!project || (!anyOwner && project.owner_id !== userId)) return null;
 
   const [text, budget, milestones, rewards, equity, documents, founder] = await Promise.all([
     db()
@@ -71,7 +72,7 @@ export async function getDraft(projectId: string, userId: string): Promise<Draft
       .order('position'),
     db().from('equity_terms').select('*').eq('project_id', projectId).maybeSingle(),
     db().from('project_documents').select('*').eq('project_id', projectId).order('created_at'),
-    db().from('founder_profiles').select('*').eq('user_id', userId).maybeSingle(),
+    db().from('founder_profiles').select('*').eq('user_id', project.owner_id).maybeSingle(),
   ]);
   for (const r of [text, budget, milestones, rewards, equity, documents, founder]) fail(r.error);
 

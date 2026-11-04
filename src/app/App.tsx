@@ -23,6 +23,13 @@ import { AuthCallbackPage } from '@/pages/auth/AuthCallbackPage';
 import { WelcomePage } from '@/pages/auth/WelcomePage';
 import { SettingsPage } from '@/pages/SettingsPage';
 import { AdminPage } from '@/pages/admin/AdminPage';
+import { AdminLayout } from '@/pages/admin/AdminLayout';
+import { ReviewQueuePage } from '@/pages/admin/ReviewQueuePage';
+import { ReviewProjectPage } from '@/pages/admin/ReviewProjectPage';
+import { AdminProjectsPage } from '@/pages/admin/AdminProjectsPage';
+import { AdminCommentsPage } from '@/pages/admin/AdminCommentsPage';
+import { AdminUsersPage } from '@/pages/admin/AdminUsersPage';
+import { AdminAuditPage } from '@/pages/admin/AdminAuditPage';
 import { GuestOnly, RequireAdmin, RequireAuth } from '@/features/auth/guards';
 
 export function App() {
@@ -97,14 +104,23 @@ export function App() {
               </RequireAuth>
             }
           />
+          {/* Admin panel — every page inside requires the admin role */}
           <Route
             path={paths.admin}
             element={
               <RequireAdmin>
-                <AdminPage />
+                <AdminLayout />
               </RequireAdmin>
             }
-          />
+          >
+            <Route index element={<AdminPage />} />
+            <Route path="review" element={<ReviewQueuePage />} />
+            <Route path="review/:projectId" element={<ReviewProjectPage />} />
+            <Route path="projects" element={<AdminProjectsPage />} />
+            <Route path="comments" element={<AdminCommentsPage />} />
+            <Route path="users" element={<AdminUsersPage />} />
+            <Route path="audit" element={<AdminAuditPage />} />
+          </Route>
 
           {/* Accounts */}
           <Route

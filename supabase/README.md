@@ -44,7 +44,7 @@ draft ──submit_project()──▶ pending_review ──admin approve──�
                                  └──▶ rejected
 ```
 
-**Functions the app calls** (`supabase.rpc('name', { … })`): `contribute`, `submit_project`, `submit_milestone`, and for admins `admin_review_project`, `admin_save_evaluation`, `admin_set_featured`, `admin_verify_founder`, `admin_approve_milestone`, `admin_set_hidden`, `admin_resolve_report`, `admin_set_user_blocked`, `admin_set_role`.
+**Functions the app calls** (`supabase.rpc('name', { … })`): `contribute`, `submit_project`, `submit_milestone`, and for admins `admin_review_project`, `admin_save_evaluation`, `admin_set_featured`, `admin_verify_founder`, `admin_approve_milestone`, `admin_set_hidden`, `admin_resolve_report`, `admin_set_user_blocked`, `admin_set_role`, plus the read-only `admin_list_users` (with emails) and `admin_recent_comments`.
 Errors come back as short keys (e.g. `amount_below_minimum`) for the app to translate.
 
 ## Commands

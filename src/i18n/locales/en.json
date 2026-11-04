@@ -187,9 +187,100 @@
     "greeting": "Signed in as {{name}}",
     "pending": "Waiting for review",
     "live": "Live projects",
-    "users": "Users",
-    "reports": "Open reports",
-    "comingSoon": "Project review, evaluations, verification and moderation tools are coming in Phase 6."
+    "hiddenComments": "Hidden comments",
+    "nav": {
+      "overview": "Overview",
+      "review": "Review queue",
+      "projects": "Projects",
+      "comments": "Comments",
+      "users": "Users",
+      "audit": "Audit log"
+    },
+    "review": {
+      "queueHint": "Projects waiting for a decision, oldest first.",
+      "empty": "Nothing to review right now.",
+      "submittedOn": "Submitted {{date}}",
+      "overview": "Overview",
+      "nothing": "Nothing entered.",
+      "incomplete": "Some steps are incomplete. Ask for changes rather than approving.",
+      "verify": "Mark as verified",
+      "unverify": "Remove verification",
+      "noDocuments": "No documents uploaded.",
+      "confidence": "Confidence",
+      "saveEvaluation": "Save evaluation",
+      "scoreError": "Each score must be a whole number from 0 to 20.",
+      "evaluationPublic": "The evaluation becomes public when the project goes live.",
+      "decision": "Decision",
+      "decisionLabel": "What should happen?",
+      "decisions": {
+        "approve": "Approve",
+        "request_changes": "Request changes",
+        "reject": "Reject"
+      },
+      "decisionHints": {
+        "approve": "The project goes live now and the campaign clock starts.",
+        "request_changes": "The founder can edit and submit again.",
+        "reject": "Final. The founder cannot resubmit this project."
+      },
+      "noteRequired": "Note to the founder (required)",
+      "noteOptional": "Note to the founder (optional)",
+      "noteHint": "The founder sees this note. Be specific about what to change.",
+      "needEvaluation": "Save an evaluation before approving.",
+      "needNote": "Write a note of at least 10 characters.",
+      "confirm": {
+        "approve": "Approve this project and make it live now?",
+        "request_changes": "Send this project back to the founder for changes?",
+        "reject": "Reject this project? This cannot be undone."
+      },
+      "submit": {
+        "approve": "Approve and publish",
+        "request_changes": "Send back for changes",
+        "reject": "Reject project"
+      }
+    },
+    "projects": {
+      "hint": "All projects in every status. The star features a live project on the home page.",
+      "raised": "Raised",
+      "featured": "Featured",
+      "featureToggle": "Feature on the home page",
+      "featureOnlyLive": "Only live projects can be featured"
+    },
+    "comments": {
+      "hint": "Newest comments across all projects. Hidden comments disappear for everyone except their author.",
+      "onlyHidden": "Only hidden",
+      "hidden": "Hidden",
+      "hide": "Hide",
+      "show": "Show again"
+    },
+    "users": {
+      "title": "Users",
+      "search": "Search by name or email",
+      "user": "User",
+      "activity": "Activity",
+      "joined": "Joined",
+      "count_one": "{{formatted}} user",
+      "count_other": "{{formatted}} users",
+      "projects_one": "{{count}} project",
+      "projects_other": "{{count}} projects",
+      "admin": "Admin",
+      "blocked": "Blocked",
+      "block": "Block",
+      "unblock": "Unblock",
+      "makeAdmin": "Make admin",
+      "removeAdmin": "Remove admin",
+      "confirmBlock": "Block {{name}}? They will not be able to comment, contribute or create projects.",
+      "confirmUnblock": "Unblock {{name}}?",
+      "confirmMakeAdmin": "Give {{name}} full admin rights?",
+      "confirmRemoveAdmin": "Remove admin rights from {{name}}?"
+    },
+    "audit": {
+      "hint": "Every admin action is recorded here automatically and cannot be changed.",
+      "empty": "No admin actions yet.",
+      "when": "When",
+      "who": "Who",
+      "what": "Action",
+      "details": "Details"
+    }
   },
   "money": {
     "currency": "UZS",

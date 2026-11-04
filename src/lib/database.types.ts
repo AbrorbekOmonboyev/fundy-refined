@@ -992,6 +992,37 @@ export type Database = {
         Args: { p_milestone_id: string }
         Returns: undefined
       }
+      admin_list_users: {
+        Args: { p_limit?: number; p_offset?: number; p_search?: string }
+        Returns: {
+          city: string
+          contribution_total: number
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          is_blocked: boolean
+          is_founder: boolean
+          onboarded: boolean
+          project_count: number
+          role: Database["public"]["Enums"]["app_role"]
+          total_count: number
+        }[]
+      }
+      admin_recent_comments: {
+        Args: { p_limit?: number; p_only_hidden?: boolean }
+        Returns: {
+          author_id: string
+          author_name: string
+          body: string
+          created_at: string
+          id: string
+          is_hidden: boolean
+          parent_id: string
+          project_id: string
+          project_slug: string
+        }[]
+      }
       admin_resolve_report: {
         Args: {
           p_report_id: string
