@@ -1,402 +1,459 @@
-import React, { useState } from 'react';
-import { useApp } from '@/context/AppContext';
-import { ProjectCard } from '@/components/ProjectCard';
-import { formatUZS, formatPercentage, getModelLabel } from '@/lib/formatters';
+import { useState, type FormEvent } from 'react';
+import { Link, useLocation, useNavigate, useParams } from 'react-router';
+import { useTranslation } from 'react-i18next';
+import { useQueryClient } from '@tanstack/react-query';
 import {
+  AlertCircle,
+  Bookmark,
   CheckCircle,
   Clock,
-  Users,
-  Bookmark,
-  Share2,
-  AlertCircle,
-  TrendingUp,
+  Languages,
+  Link2,
+  Send,
   Sparkles,
   ThumbsUp,
-  Send,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
+import { paths } from '@/app/routes';
+import { useAuth } from '@/features/auth/AuthContext';
+import { errorKey } from '@/features/auth/errors';
+import { daysLeft, pickText, postComment, type ProjectComment, type ProjectDetail } from '@/features/projects/api';
+import { projectKeys, useProject, useProjectList, useSavedProjects } from '@/features/projects/hooks';
+import { ContributeDialog } from '@/features/projects/ContributeDialog';
+import { useCategories } from '@/features/reference/useReference';
+import { ProjectCard } from '@/components/ProjectCard';
+import { Avatar } from '@/components/Avatar';
+import { Alert, Button, PageSpinner } from '@/components/ui';
+import { NotFoundPage } from '@/pages/NotFoundPage';
+import { formatDate, formatMoney, formatNumber } from '@/lib/money';
+import { publicFileUrl } from '@/lib/supabase';
+import { usePageMeta } from '@/lib/usePageMeta';
 
-export const ProjectDetailPage: React.FC = () => {
-  const {
-    projects,
-    selectedProjectId,
-    savedProjectIds,
-    toggleSaveProject,
-    openContributionModal,
-    addProjectComment,
-    navigateTo,
-  } = useApp();
+type Tab = 'story' | 'budget' | 'milestones' | 'evaluation' | 'risks' | 'updates' | 'comments';
+const BUDGET_COLORS = ['bg-emerald-600', 'bg-blue-600', 'bg-amber-500', 'bg-purple-600', 'bg-slate-600', 'bg-rose-500'];
 
-  const [activeTab, setActiveTab] = useState<
-    'story' | 'budget' | 'milestones' | 'evaluation' | 'risks' | 'updates' | 'community'
-  >('story');
-  const [commentInput, setCommentInput] = useState('');
-  const [copiedLink, setCopiedLink] = useState(false);
+export function ProjectDetailPage() {
+  const { t } = useTranslation();
+  const { slug } = useParams();
+  const { data: project, isPending, isError } = useProject(slug);
 
-  const project = projects.find(p => p.id === selectedProjectId) || projects[0];
-  const isSaved = savedProjectIds.includes(project.id);
-  const percentage = formatPercentage(project.raisedAmount, project.targetAmount);
+  if (isPending) return <PageSpinner />;
+  if (isError) {
+    return (
+      <div className="max-w-md mx-auto px-4 py-16">
+        <Alert variant="error">{t('errors.generic')}</Alert>
+      </div>
+    );
+  }
+  if (!project) return <NotFoundPage />;
+  // key: reset tabs and dialogs when moving to another project
+  return <ProjectView key={project.id} project={project} />;
+}
 
-  const relatedProjects = projects
-    .filter(p => p.id !== project.id && (p.category === project.category || p.model === project.model))
-    .slice(0, 3);
+function ProjectView({ project }: { project: ProjectDetail }) {
+  const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { user } = useAuth();
+  const { nameOf } = useCategories();
+  const saved = useSavedProjects();
+  const related = useProjectList({ category: project.categoryId, excludeId: project.id, status: 'live', pageSize: 3 });
 
-  const handleShare = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 2000);
-  };
+  const lang = i18n.resolvedLanguage ?? 'uz';
+  const { text, isFallback } = pickText(project.translations, lang, project.originalLanguage);
+  const title = text?.title ?? project.slug;
+  usePageMeta(title, text?.tagline);
 
-  const handleCommentSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!commentInput.trim()) return;
-    addProjectComment(project.id, commentInput.trim());
-    setCommentInput('');
-  };
+  const [tab, setTab] = useState<Tab>('story');
+  const [dialogReward, setDialogReward] = useState<string | null | undefined>(undefined); // undefined = closed
+  const [copied, setCopied] = useState(false);
+
+  const isLive = project.status === 'active' && daysLeft(project.endsAt) > 0;
+  const isOwner = user?.id === project.ownerId;
+  const isSaved = saved.isSaved(project.id);
+  const shareUrl = window.location.href;
+
+  function openContribute(rewardId: string | null = null) {
+    if (!user) {
+      navigate(`${paths.login}?next=${encodeURIComponent(location.pathname)}`);
+      return;
+    }
+    setDialogReward(rewardId);
+  }
+
+  async function copyLink() {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.prompt(t('project.copyLink'), shareUrl);
+    }
+  }
+
+  const tabs: { id: Tab; label: string; show: boolean }[] = [
+    { id: 'story', label: t('project.tabs.story'), show: true },
+    { id: 'budget', label: t('project.tabs.budget'), show: project.budget.length > 0 },
+    { id: 'milestones', label: t('project.tabs.milestones'), show: project.milestones.length > 0 },
+    { id: 'evaluation', label: t('project.tabs.evaluation'), show: !!project.evaluation },
+    { id: 'risks', label: t('project.tabs.risks'), show: !!text?.risks },
+    { id: 'updates', label: t('project.tabs.updates', { count: project.updates.length }), show: true },
+    { id: 'comments', label: t('project.tabs.comments', { count: project.comments.length }), show: true },
+  ];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-12">
-      {/* Breadcrumb Navigation */}
-      <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-slate-500">
-        <button onClick={() => navigateTo('home')} className="hover:text-slate-800">
-          Home
-        </button>
-        <span aria-hidden="true">/</span>
-        <button onClick={() => navigateTo('explore')} className="hover:text-slate-800">
-          Explore
-        </button>
-        <span aria-hidden="true">/</span>
-        <span>{project.category}</span>
-        <span aria-hidden="true">/</span>
-        <span className="text-slate-900 font-medium truncate max-w-xs">{project.title}</span>
+      <nav aria-label={t('project.breadcrumb')} className="flex items-center gap-2 text-xs text-slate-500 min-w-0">
+        <Link to={paths.home} className="hover:text-slate-800 shrink-0">
+          {t('project.home')}
+        </Link>
+        <span aria-hidden>/</span>
+        <Link to={paths.explore} className="hover:text-slate-800 shrink-0">
+          {t('nav.explore')}
+        </Link>
+        <span aria-hidden>/</span>
+        <Link to={`${paths.explore}?category=${project.categoryId}`} className="hover:text-slate-800 shrink-0">
+          {nameOf(project.categoryId)}
+        </Link>
+        <span aria-hidden>/</span>
+        <span className="text-slate-900 font-medium truncate">{title}</span>
       </nav>
 
-      {/* Main Campaign Hero Header */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-        {/* Left: Media and Details (7 cols) */}
+        {/* Left: story header */}
         <div className="lg:col-span-7 space-y-4">
           <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
             <span className="font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded">
-              {getModelLabel(project.model)}
+              {t(`models.${project.model}.name`)}
             </span>
-            <span aria-hidden="true">·</span>
-            <span>{project.category}</span>
-            <span aria-hidden="true">·</span>
-            <span>{project.location}</span>
+            <span aria-hidden>·</span>
+            <span>{nameOf(project.categoryId)}</span>
+            {project.location && (
+              <>
+                <span aria-hidden>·</span>
+                <span>{project.location}</span>
+              </>
+            )}
           </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">{title}</h1>
+          <p className="text-sm text-slate-600 leading-relaxed">{text?.tagline}</p>
 
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">{project.title}</h1>
+          {isFallback && text && (
+            <p className="flex items-center gap-1.5 text-xs text-slate-500">
+              <Languages className="w-3.5 h-3.5" aria-hidden />
+              {t('project.originalLanguage', { language: t(`languages.${text.language}`) })}
+            </p>
+          )}
 
-          <p className="text-sm text-slate-600 leading-relaxed">{project.tagline}</p>
+          {project.coverUrl && (
+            <div className="rounded-2xl overflow-hidden aspect-[16/10] bg-slate-100 border border-slate-200">
+              <img src={project.coverUrl} alt="" className="w-full h-full object-cover" />
+            </div>
+          )}
 
-          {/* Cover image */}
-          <div className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-slate-100 border border-slate-200">
-            <img
-              src={project.imageUrl}
-              alt={project.title}
-              referrerPolicy="no-referrer"
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Founder Identity Strip */}
+          {/* Founder */}
           <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-sm">
-                {project.founder.name
-                  .split(' ')
-                  .map(n => n[0])
-                  .join('')}
-              </div>
-              <div className="text-xs">
-                <div className="flex items-center gap-1.5 font-bold text-slate-900">
-                  <span>{project.founder.name}</span>
-                  {project.founder.verifiedIdentity && (
-                    <span title="Verified by Fundy" className="text-emerald-600">
-                      <CheckCircle className="w-3.5 h-3.5 inline" />
-                    </span>
+            <div className="flex items-center gap-3 min-w-0">
+              <Avatar name={project.founderName} url={project.founderAvatarUrl} />
+              <div className="text-xs min-w-0">
+                <p className="flex items-center gap-1.5 font-bold text-slate-900">
+                  {project.founderName}
+                  {project.founderVerified && (
+                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600" aria-label={t('project.verifiedFounder')} />
                   )}
-                </div>
-                <p className="text-slate-500">
-                  {project.founder.role} · {project.founder.organization}
                 </p>
-                <p className="text-[11px] text-slate-400 mt-0.5">{project.founder.tinOrRegistration}</p>
+                {(project.founder?.role_title || project.founder?.organization) && (
+                  <p className="text-slate-500 truncate">
+                    {[project.founder?.role_title, project.founder?.organization].filter(Boolean).join(' · ')}
+                  </p>
+                )}
+                {project.founder?.registration_number && (
+                  <p className="text-[11px] text-slate-400 mt-0.5">{project.founder.registration_number}</p>
+                )}
               </div>
             </div>
-
-            <div className="text-right text-xs shrink-0 hidden sm:block">
-              <span className="text-slate-400">Experience:</span>
-              <p className="font-bold text-slate-700">{project.founder.experienceYears} Years</p>
-            </div>
+            {project.founder?.experience_years != null && (
+              <div className="text-right text-xs shrink-0 hidden sm:block">
+                <span className="text-slate-400">{t('project.experience')}</span>
+                <p className="font-bold text-slate-700">
+                  {t('project.years', { count: project.founder.experience_years })}
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Right: Financial & Action Sidebar (5 cols) */}
-        <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
+        {/* Right: funding box */}
+        <aside className="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
           <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
-            {/* Progress metrics */}
             <div className="space-y-2">
-              <div className="flex items-baseline justify-between">
+              <div className="flex items-baseline justify-between gap-3">
                 <div>
-                  <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono-numbers">
-                    {formatUZS(project.raisedAmount)}
-                  </span>
+                  <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono-numbers">
+                    {formatMoney(project.raisedAmount)}
+                  </p>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    raised of <strong className="text-slate-700">{formatUZS(project.targetAmount)}</strong> goal
+                    {t('project.raisedOf', { goal: formatMoney(project.targetAmount) })}
                   </p>
                 </div>
-                <span className="text-2xl font-bold text-emerald-700 font-mono-numbers">{percentage}%</span>
+                <span className="text-2xl font-bold text-emerald-700 font-mono-numbers">{project.fundedPercent}%</span>
               </div>
-
-              {/* Progress bar */}
-              <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+              <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden" aria-hidden>
                 <div
-                  className="bg-emerald-600 h-full rounded-full transition-all duration-500"
-                  style={{ width: `${Math.min(percentage, 100)}%` }}
+                  className="bg-emerald-600 h-full rounded-full"
+                  style={{ width: `${Math.min(project.fundedPercent, 100)}%` }}
                 />
               </div>
-
-              {/* Stats row */}
-              <div className="grid grid-cols-2 gap-4 pt-3 border-t border-slate-100 text-xs">
+              <dl className="grid grid-cols-2 gap-4 pt-3 border-t border-slate-100 text-xs">
                 <div>
-                  <span className="text-slate-400 flex items-center gap-1">
-                    <Users className="w-3.5 h-3.5" /> Backers
-                  </span>
-                  <strong className="text-base text-slate-900 font-mono-numbers block mt-0.5">
-                    {project.backerCount}
-                  </strong>
+                  <dt className="text-slate-400 flex items-center gap-1">
+                    <Users className="w-3.5 h-3.5" aria-hidden /> {t('project.backersLabel')}
+                  </dt>
+                  <dd className="text-base font-bold text-slate-900 font-mono-numbers mt-0.5">
+                    {formatNumber(project.backerCount)}
+                  </dd>
                 </div>
                 <div>
-                  <span className="text-slate-400 flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" /> Time Remaining
-                  </span>
-                  <strong className="text-base text-slate-900 font-mono-numbers block mt-0.5">
-                    {project.daysRemaining} Days
-                  </strong>
+                  <dt className="text-slate-400 flex items-center gap-1">
+                    <Clock className="w-3.5 h-3.5" aria-hidden />{' '}
+                    {isLive ? t('project.timeLeft') : t('project.statusLabel')}
+                  </dt>
+                  <dd className="text-base font-bold text-slate-900 font-mono-numbers mt-0.5">
+                    {isLive
+                      ? t('project.daysLeft', { count: daysLeft(project.endsAt) })
+                      : t(`status.${project.status}`)}
+                  </dd>
                 </div>
-              </div>
+              </dl>
             </div>
 
-            {/* Model Highlight Box */}
-            {project.model === 'equity' && project.equityTerms && (
-              <div className="p-4 bg-emerald-50/70 border border-emerald-100 rounded-xl text-xs text-emerald-950 space-y-2">
-                <div className="flex items-center gap-1.5 font-bold text-emerald-800">
-                  <TrendingUp className="w-4 h-4 text-emerald-600" />
-                  <span>Musharakah Equity Partnership</span>
-                </div>
-                <p className="text-slate-700 leading-relaxed text-[11px]">
-                  {project.equityTerms.investorProfitSharePercent}% of audited net profits distributed{' '}
-                  {project.equityTerms.distributionSchedule.toLowerCase()} to backers.
+            {project.equity && (
+              <div className="p-4 bg-emerald-50/70 border border-emerald-100 rounded-xl text-xs space-y-2">
+                <p className="flex items-center gap-1.5 font-bold text-emerald-800">
+                  <TrendingUp className="w-4 h-4 text-emerald-600" aria-hidden />
+                  {t(`project.contract.${project.equity.contract_type}`)}
                 </p>
-                <div className="pt-1 flex items-center justify-between text-[11px] text-slate-600 border-t border-emerald-100">
-                  <span>Min. Ticket: {formatUZS(project.equityTerms.minInvestment)}</span>
-                  <span>Target: {project.equityTerms.projectedAnnualReturn}</span>
+                <p className="text-slate-700 leading-relaxed text-[11px]">
+                  {t('project.equitySummary', {
+                    percent: project.equity.investor_profit_share_pct,
+                    schedule: t(`project.schedule.${project.equity.distribution_schedule}`),
+                    years: project.equity.exit_horizon_years,
+                  })}
+                </p>
+                <div className="pt-1 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-600 border-t border-emerald-100">
+                  <span>{t('project.minInvestment', { amount: formatMoney(project.equity.min_investment) })}</span>
+                  {project.equity.projected_annual_return && (
+                    <span>{t('project.projectedReturn', { value: project.equity.projected_annual_return })}</span>
+                  )}
                 </div>
               </div>
             )}
 
-            {/* Main Action Button */}
             <div className="space-y-2.5">
-              <button
-                onClick={() => openContributionModal(project)}
-                className="w-full py-3.5 px-4 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 rounded-xl shadow-sm transition-colors text-center cursor-pointer"
-              >
-                {project.model === 'equity'
-                  ? 'Simulate Musharakah Investment'
-                  : project.model === 'reward'
-                    ? 'Back This Project & Claim Reward'
-                    : 'Make a Simulated Donation'}
-              </button>
-
+              {isLive && !isOwner && (
+                <Button onClick={() => openContribute()} fullWidth className="py-3.5">
+                  {t(`contribute.cta.${project.model}`)}
+                </Button>
+              )}
+              {isOwner && <Alert variant="info">{t('project.youOwnThis')}</Alert>}
+              {!isLive && !isOwner && <Alert variant="info">{t('project.notAccepting')}</Alert>}
               <div className="grid grid-cols-2 gap-2">
                 <button
-                  onClick={() => toggleSaveProject(project.id)}
-                  className={`py-2 px-3 rounded-lg border text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+                  type="button"
+                  onClick={() => saved.toggle(project.id)}
+                  aria-pressed={isSaved}
+                  className={`py-2 px-3 rounded-lg border text-xs font-semibold flex items-center justify-center gap-1.5 cursor-pointer ${
                     isSaved
                       ? 'border-rose-200 bg-rose-50 text-rose-700'
                       : 'border-slate-200 hover:bg-slate-50 text-slate-700'
                   }`}
                 >
-                  <Bookmark className={`w-3.5 h-3.5 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`} />
-                  <span>{isSaved ? 'Saved' : 'Save Project'}</span>
+                  <Bookmark className={`w-3.5 h-3.5 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`} aria-hidden />
+                  {isSaved ? t('project.saved') : t('project.save')}
                 </button>
-
                 <button
-                  onClick={handleShare}
-                  className="py-2 px-3 rounded-lg border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                  type="button"
+                  onClick={copyLink}
+                  className="py-2 px-3 rounded-lg border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <Share2 className="w-3.5 h-3.5" />
-                  <span>{copiedLink ? 'Link Copied!' : 'Share'}</span>
+                  <Link2 className="w-3.5 h-3.5" aria-hidden />
+                  {copied ? t('project.copied') : t('project.copyLink')}
                 </button>
               </div>
+              <a
+                href={`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(title)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full py-2 px-3 rounded-lg border border-sky-200 bg-sky-50 hover:bg-sky-100 text-xs font-semibold text-sky-800 text-center"
+              >
+                {t('project.shareTelegram')}
+              </a>
             </div>
 
-            {/* AI Evaluation Scorecard Banner */}
-            <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-emerald-600" />
-                <div className="text-xs">
-                  <span className="font-bold text-slate-800">AI Evaluation Score:</span>
-                  <p className="text-[11px] text-slate-500">{project.evaluation.status}</p>
-                </div>
-              </div>
-              <span className="text-base font-extrabold text-emerald-700 font-mono-numbers">
-                {project.evaluation.overallScore}/100
-              </span>
-            </div>
+            {project.evaluation && (
+              <button
+                type="button"
+                onClick={() => setTab('evaluation')}
+                className="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between text-left hover:border-slate-300"
+              >
+                <span className="flex items-center gap-2 text-xs">
+                  <Sparkles className="w-4 h-4 text-emerald-600" aria-hidden />
+                  <span>
+                    <span className="block font-bold text-slate-800">{t('project.evaluationScore')}</span>
+                    <span className="text-[11px] text-slate-500">
+                      {t(`project.confidence.${project.evaluation.confidence}`)}
+                    </span>
+                  </span>
+                </span>
+                <span className="text-base font-extrabold text-emerald-700 font-mono-numbers">
+                  {project.evaluation.overall_score}/100
+                </span>
+              </button>
+            )}
 
-            {/* Simulation Disclaimer */}
-            <p className="text-[10px] text-slate-400 text-center leading-normal">
-              Fundy prototype demonstration. No actual funds, banking fees, or legal contracts are exchanged.
-            </p>
+            <p className="text-[10px] text-slate-400 text-center leading-normal">{t('contribute.demoNote')}</p>
           </div>
-        </div>
+        </aside>
       </div>
 
-      {/* Main Content Tabs */}
-      <div className="pt-6 border-t border-slate-200">
-        {/* Tab Headers */}
-        <div className="flex items-center gap-2 border-b border-slate-200 overflow-x-auto pb-px">
-          {[
-            { id: 'story', label: 'Story & Narrative' },
-            { id: 'budget', label: 'Budget Breakdown' },
-            { id: 'milestones', label: 'Milestones & Escrow' },
-            { id: 'evaluation', label: 'AI Evaluation (100)' },
-            { id: 'risks', label: 'Risks & Challenges' },
-            { id: 'updates', label: `Updates (${project.updates.length})` },
-            { id: 'community', label: `Q&A (${project.comments.length})` },
-          ].map(tab => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as typeof activeTab)}
-              className={`py-3 px-3 text-xs font-semibold whitespace-nowrap border-b-2 transition-colors cursor-pointer ${
-                activeTab === tab.id
-                  ? 'border-emerald-600 text-emerald-700'
-                  : 'border-transparent text-slate-500 hover:text-slate-800'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+      {/* Tabs */}
+      <section className="pt-6 border-t border-slate-200">
+        <div className="flex items-center gap-2 border-b border-slate-200 overflow-x-auto" role="tablist">
+          {tabs
+            .filter(x => x.show)
+            .map(x => (
+              <button
+                key={x.id}
+                type="button"
+                role="tab"
+                aria-selected={tab === x.id}
+                onClick={() => setTab(x.id)}
+                className={`py-3 px-3 text-xs font-semibold whitespace-nowrap border-b-2 -mb-px cursor-pointer ${
+                  tab === x.id
+                    ? 'border-emerald-600 text-emerald-700'
+                    : 'border-transparent text-slate-500 hover:text-slate-800'
+                }`}
+              >
+                {x.label}
+              </button>
+            ))}
         </div>
 
-        {/* Tab Panels */}
-        <div className="py-8">
-          {/* TAB 1: STORY */}
-          {activeTab === 'story' && (
+        <div className="py-8" role="tabpanel">
+          {tab === 'story' && (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
               <div className="lg:col-span-8 space-y-6 text-sm text-slate-700 leading-relaxed">
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-2">About This Campaign</h3>
-                  <div className="whitespace-pre-line leading-relaxed text-slate-600">{project.story}</div>
-                </div>
-
-                <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                  <h4 className="font-bold text-slate-900 text-xs uppercase tracking-wider">
-                    Founder Background & Mission
-                  </h4>
-                  <p className="text-xs text-slate-600 leading-relaxed">{project.founder.bio}</p>
-                </div>
-              </div>
-
-              {/* Sidebar with Perks or Equity details */}
-              <div className="lg:col-span-4 space-y-4">
-                {project.model === 'reward' && project.rewards && (
-                  <div className="space-y-3">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">Reward Perks</h4>
-                    {project.rewards.map(reward => (
-                      <div
-                        key={reward.id}
-                        className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-sm hover:border-slate-300 transition-colors"
-                      >
-                        <div className="flex justify-between items-baseline">
-                          <span className="font-bold text-slate-900 text-xs">{reward.title}</span>
-                          <span className="text-xs font-bold text-emerald-700 font-mono-numbers">
-                            {formatUZS(reward.amount)}
-                          </span>
-                        </div>
-                        <p className="text-xs text-slate-600 leading-relaxed">{reward.description}</p>
-                        <ul className="text-[11px] text-slate-500 space-y-1 pt-1">
-                          {reward.items.map((item, idx) => (
-                            <li key={idx} className="flex items-center gap-1.5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="pt-2 flex items-center justify-between text-[11px] text-slate-400 border-t border-slate-100">
-                          <span>Est. {reward.estimatedDelivery}</span>
-                          <span className="font-mono-numbers">{reward.claimedCount} claimed</span>
-                        </div>
-                        <button
-                          onClick={() => openContributionModal(project, reward.id)}
-                          className="w-full mt-2 py-2 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors cursor-pointer"
-                        >
-                          Select This Reward
-                        </button>
-                      </div>
-                    ))}
+                <h2 className="text-lg font-bold text-slate-900">{t('project.about')}</h2>
+                <div className="whitespace-pre-line text-slate-600">{text?.story}</div>
+                {project.founder?.bio && (
+                  <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                    <h3 className="font-bold text-slate-900 text-xs uppercase tracking-wider">
+                      {t('project.founderBio')}
+                    </h3>
+                    <p className="text-xs text-slate-600 leading-relaxed">{project.founder.bio}</p>
                   </div>
                 )}
               </div>
+              {project.rewards.length > 0 && (
+                <div className="lg:col-span-4 space-y-3">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">{t('project.rewards')}</h3>
+                  {project.rewards.map(r => {
+                    const soldOut = r.quantity_limit !== null && r.claimed_count >= r.quantity_limit;
+                    return (
+                      <div key={r.id} className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-sm">
+                        <div className="flex justify-between items-baseline gap-2">
+                          <span className="font-bold text-slate-900 text-xs">{r.title}</span>
+                          <span className="text-xs font-bold text-emerald-700 font-mono-numbers shrink-0">
+                            {formatMoney(r.amount)}
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-600 leading-relaxed">{r.description}</p>
+                        {r.items.length > 0 && (
+                          <ul className="text-[11px] text-slate-500 space-y-1 pt-1">
+                            {r.items.map(item => (
+                              <li key={item} className="flex items-center gap-1.5">
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" aria-hidden />
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        <div className="pt-2 flex items-center justify-between text-[11px] text-slate-400 border-t border-slate-100">
+                          {r.estimated_delivery && <span>{t('project.delivery', { when: r.estimated_delivery })}</span>}
+                          <span className="font-mono-numbers">
+                            {r.quantity_limit !== null
+                              ? t('project.claimedOf', { claimed: r.claimed_count, limit: r.quantity_limit })
+                              : t('project.claimed', { count: r.claimed_count })}
+                          </span>
+                        </div>
+                        {isLive && !isOwner && (
+                          <button
+                            type="button"
+                            disabled={soldOut}
+                            onClick={() => openContribute(r.id)}
+                            className="w-full mt-2 py-2 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 disabled:opacity-50 rounded-lg"
+                          >
+                            {soldOut ? t('project.soldOut') : t('project.selectReward')}
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           )}
 
-          {/* TAB 2: BUDGET BREAKDOWN */}
-          {activeTab === 'budget' && (
+          {tab === 'budget' && (
             <div className="space-y-6 max-w-4xl">
               <div>
-                <h3 className="text-lg font-bold text-slate-900">Itemized Capital Allocation (UZS)</h3>
+                <h2 className="text-lg font-bold text-slate-900">{t('project.budgetTitle')}</h2>
                 <p className="text-xs text-slate-500 mt-1">
-                  Fundy mandates full line-item visibility before campaigns launch. Total budget aligns with the{' '}
-                  {formatUZS(project.targetAmount)} target.
+                  {t('project.budgetText', { goal: formatMoney(project.targetAmount) })}
                 </p>
               </div>
-
-              {/* Visual budget breakdown bars */}
-              <div className="w-full bg-slate-100 h-4 rounded-full overflow-hidden flex">
-                {project.budgetBreakdown.map((item, idx) => {
-                  const colors = ['bg-emerald-600', 'bg-blue-600', 'bg-amber-500', 'bg-purple-600', 'bg-slate-600'];
-                  return (
-                    <div
-                      key={item.id}
-                      className={`h-full ${colors[idx % colors.length]}`}
-                      style={{ width: `${item.percentage}%` }}
-                      title={`${item.category}: ${item.percentage}% (${formatUZS(item.amount)})`}
-                    />
-                  );
-                })}
+              <div className="w-full bg-slate-100 h-4 rounded-full overflow-hidden flex" aria-hidden>
+                {project.budget.map((item, i) => (
+                  <div
+                    key={item.id}
+                    className={`h-full ${BUDGET_COLORS[i % BUDGET_COLORS.length]}`}
+                    style={{ width: `${(item.amount / project.targetAmount) * 100}%` }}
+                    title={item.category}
+                  />
+                ))}
               </div>
-
-              {/* Itemized Table */}
-              <div className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
+              <div className="border border-slate-200 rounded-xl overflow-x-auto bg-white shadow-sm">
                 <table className="w-full text-xs text-left">
                   <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
                     <tr>
-                      <th className="py-3 px-4">Cost Category</th>
-                      <th className="py-3 px-4">Description</th>
-                      <th className="py-3 px-4 text-right">Amount (UZS)</th>
-                      <th className="py-3 px-4 text-right">Share (%)</th>
+                      <th className="py-3 px-4">{t('project.budgetItem')}</th>
+                      <th className="py-3 px-4">{t('project.budgetDescription')}</th>
+                      <th className="py-3 px-4 text-right">{t('project.budgetAmount')}</th>
+                      <th className="py-3 px-4 text-right">%</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
-                    {project.budgetBreakdown.map(item => (
-                      <tr key={item.id} className="hover:bg-slate-50 transition-colors">
+                    {project.budget.map(item => (
+                      <tr key={item.id}>
                         <td className="py-3 px-4 font-semibold text-slate-900">{item.category}</td>
                         <td className="py-3 px-4 text-slate-600">{item.description}</td>
-                        <td className="py-3 px-4 text-right font-mono-numbers font-medium text-slate-900">
-                          {formatUZS(item.amount)}
+                        <td className="py-3 px-4 text-right font-mono-numbers whitespace-nowrap">
+                          {formatMoney(item.amount)}
                         </td>
-                        <td className="py-3 px-4 text-right font-mono-numbers text-slate-500">{item.percentage}%</td>
+                        <td className="py-3 px-4 text-right font-mono-numbers text-slate-500">
+                          {Math.round((item.amount / project.targetAmount) * 100)}%
+                        </td>
                       </tr>
                     ))}
                   </tbody>
                   <tfoot className="bg-slate-50 border-t border-slate-200 font-bold text-slate-900">
                     <tr>
                       <td className="py-3 px-4" colSpan={2}>
-                        Total Goal Allocation
+                        {t('project.budgetTotal')}
                       </td>
-                      <td className="py-3 px-4 text-right font-mono-numbers text-emerald-700">
-                        {formatUZS(project.targetAmount)}
+                      <td className="py-3 px-4 text-right font-mono-numbers text-emerald-700 whitespace-nowrap">
+                        {formatMoney(project.targetAmount)}
                       </td>
                       <td className="py-3 px-4 text-right font-mono-numbers">100%</td>
                     </tr>
@@ -406,302 +463,379 @@ export const ProjectDetailPage: React.FC = () => {
             </div>
           )}
 
-          {/* TAB 3: MILESTONES & ESCROW */}
-          {activeTab === 'milestones' && (
+          {tab === 'milestones' && (
             <div className="space-y-6 max-w-3xl">
               <div>
-                <h3 className="text-lg font-bold text-slate-900">Milestone-Based Escrow Schedule</h3>
-                <p className="text-xs text-slate-500 mt-1">
-                  Capital is locked in simulated escrow and disbursed to founders sequentially as each milestone is
-                  verified.
-                </p>
+                <h2 className="text-lg font-bold text-slate-900">{t('project.milestonesTitle')}</h2>
+                <p className="text-xs text-slate-500 mt-1">{t('project.milestonesText')}</p>
               </div>
-
-              <div className="space-y-4">
-                {project.milestones.map((m, idx) => (
-                  <div
-                    key={m.id}
-                    className={`p-4 rounded-xl border transition-all ${
-                      m.completed ? 'bg-emerald-50/40 border-emerald-200' : 'bg-white border-slate-200'
-                    }`}
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex items-start gap-3">
-                        <div
-                          className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold ${
-                            m.completed ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-600'
-                          }`}
-                        >
-                          {m.completed ? '✓' : idx + 1}
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <h4 className="font-bold text-slate-900 text-sm">{m.title}</h4>
-                            <span
-                              className={`text-[11px] px-1.5 py-0.5 rounded font-medium ${
-                                m.completed ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'
-                              }`}
-                            >
-                              {m.completed ? 'Disbursed' : 'Upcoming'}
-                            </span>
+              <ol className="space-y-4">
+                {project.milestones.map((m, i) => {
+                  const approved = m.status === 'approved';
+                  return (
+                    <li
+                      key={m.id}
+                      className={`p-4 rounded-xl border ${approved ? 'bg-emerald-50/40 border-emerald-200' : 'bg-white border-slate-200'}`}
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex items-start gap-3">
+                          <span
+                            className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold ${
+                              approved ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-600'
+                            }`}
+                          >
+                            {approved ? '✓' : i + 1}
+                          </span>
+                          <div>
+                            <h3 className="font-bold text-slate-900 text-sm flex flex-wrap items-center gap-2">
+                              {m.title}
+                              <span
+                                className={`text-[11px] px-1.5 py-0.5 rounded font-medium ${approved ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}`}
+                              >
+                                {t(`project.milestoneStatus.${m.status}`)}
+                              </span>
+                            </h3>
+                            <p className="text-xs text-slate-600 mt-1 leading-relaxed">{m.description}</p>
                           </div>
-                          <p className="text-xs text-slate-600 mt-1 leading-relaxed">{m.description}</p>
+                        </div>
+                        <div className="text-right text-xs shrink-0 font-mono-numbers">
+                          {m.target_label && <span className="text-slate-400 block">{m.target_label}</span>}
+                          <strong className="text-slate-800">
+                            {t('project.release', { percent: m.release_percent })}
+                          </strong>
                         </div>
                       </div>
-
-                      <div className="text-right text-xs shrink-0 font-mono-numbers">
-                        <span className="text-slate-400 block">{m.targetMonth}</span>
-                        <strong className="text-slate-800">{m.fundReleasePercentage}% of funds</strong>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                    </li>
+                  );
+                })}
+              </ol>
             </div>
           )}
 
-          {/* TAB 4: AI EVALUATION SCORECARD */}
-          {activeTab === 'evaluation' && (
-            <div className="space-y-6 max-w-4xl">
-              <div className="p-4 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 flex items-start gap-2.5">
-                <AlertCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
-                <div>
-                  <strong className="font-semibold">Simulated Evaluation Demonstration:</strong>
-                  <p className="text-[11px] mt-0.5 text-amber-800">
-                    This scorecard showcases Fundy's conceptual multi-factor evaluation framework. It demonstrates
-                    deterministic assessment across business viability, team verification, and operational risks.
-                  </p>
-                </div>
-              </div>
+          {tab === 'evaluation' && project.evaluation && <EvaluationPanel project={project} />}
 
-              <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
-                <div className="flex items-center justify-between pb-6 border-b border-slate-200">
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900">Project Quality Scorecard</h3>
-                    <p className="text-xs text-slate-500 mt-0.5">
-                      Evaluated on {project.evaluation.lastEvaluatedDate} · Status:{' '}
-                      <strong>{project.evaluation.status}</strong>
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-3xl font-extrabold text-emerald-700 font-mono-numbers">
-                      {project.evaluation.overallScore}
-                    </span>
-                    <span className="text-slate-400 text-sm"> / 100</span>
-                  </div>
-                </div>
-
-                {/* Individual 5 Pillars */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[
-                    { label: 'Business Plan Quality', score: project.evaluation.businessPlanScore, max: 20 },
-                    { label: 'Founding Team Pedigree', score: project.evaluation.teamScore, max: 20 },
-                    { label: 'Market Opportunity in UZ', score: project.evaluation.marketScore, max: 20 },
-                    { label: 'Financial Feasibility', score: project.evaluation.financialScore, max: 20 },
-                    { label: 'Risk Mitigation Index', score: project.evaluation.riskScore, max: 20 },
-                  ].map((cat, idx) => (
-                    <div key={idx} className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                      <div className="flex justify-between text-xs font-semibold text-slate-700">
-                        <span>{cat.label}</span>
-                        <span className="font-mono-numbers text-slate-900">
-                          {cat.score} / {cat.max}
-                        </span>
-                      </div>
-                      <div className="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
-                        <div
-                          className="bg-emerald-600 h-full rounded-full"
-                          style={{ width: `${(cat.score / cat.max) * 100}%` }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Qualitative Notes */}
-                <div className="pt-4 border-t border-slate-100 space-y-4 text-xs">
-                  <div>
-                    <h4 className="font-bold text-slate-800">Evaluator Synthesis:</h4>
-                    <p className="text-slate-600 mt-1 leading-relaxed">{project.evaluation.summaryNotes}</p>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="bg-emerald-50/50 p-3 rounded-lg border border-emerald-100">
-                      <h5 className="font-bold text-emerald-900 mb-1.5">Key Identified Strengths</h5>
-                      <ul className="space-y-1 text-slate-600">
-                        {project.evaluation.keyStrengths.map((str, i) => (
-                          <li key={i} className="flex items-start gap-1.5">
-                            <span className="text-emerald-600 font-bold">✓</span>
-                            <span>{str}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="bg-amber-50/50 p-3 rounded-lg border border-amber-100">
-                      <h5 className="font-bold text-amber-900 mb-1.5">Monitored Risk Factors</h5>
-                      <ul className="space-y-1 text-slate-600">
-                        {project.evaluation.keyRisks.map((rsk, i) => (
-                          <li key={i} className="flex items-start gap-1.5">
-                            <span className="text-amber-600 font-bold">!</span>
-                            <span>{rsk}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* TAB 5: RISKS & CHALLENGES */}
-          {activeTab === 'risks' && (
+          {tab === 'risks' && (
             <div className="space-y-4 max-w-3xl">
-              <h3 className="text-lg font-bold text-slate-900">Transparency: Risks & Mitigation</h3>
-              <p className="text-xs text-slate-500">
-                Ethical crowdfunding requires candid disclosures of technical, environmental, and commercial risks
-                before backer capital is committed.
-              </p>
-              <div className="p-5 bg-white rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed shadow-sm">
-                {project.risksAndChallenges}
+              <h2 className="text-lg font-bold text-slate-900">{t('project.risksTitle')}</h2>
+              <p className="text-xs text-slate-500">{t('project.risksText')}</p>
+              <div className="p-5 bg-white rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed shadow-sm whitespace-pre-line">
+                {text?.risks}
               </div>
             </div>
           )}
 
-          {/* TAB 6: UPDATES */}
-          {activeTab === 'updates' && (
+          {tab === 'updates' && (
             <div className="space-y-6 max-w-3xl">
-              <div>
-                <h3 className="text-lg font-bold text-slate-900">Project Announcements & Progress</h3>
-                <p className="text-xs text-slate-500 mt-1">Direct dispatches from the founding team to backers.</p>
-              </div>
-
+              <h2 className="text-lg font-bold text-slate-900">{t('project.updatesTitle')}</h2>
               {project.updates.length === 0 ? (
                 <p className="p-8 text-center text-xs text-slate-500 bg-white rounded-xl border border-slate-200">
-                  No project updates published yet.
+                  {t('project.noUpdates')}
                 </p>
               ) : (
-                <div className="space-y-4">
-                  {project.updates.map(update => (
-                    <div
-                      key={update.id}
-                      className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3"
-                    >
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="font-bold text-slate-900 text-sm">{update.title}</span>
-                        <span className="text-slate-400">{update.date}</span>
-                      </div>
-                      <p className="text-xs text-slate-600 leading-relaxed">{update.content}</p>
-                      <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-slate-500">
-                        <span>
-                          Posted by <strong>{update.author}</strong>
-                        </span>
-                        <button
-                          type="button"
-                          className="flex items-center gap-1 text-slate-500 hover:text-emerald-700 transition-colors p-1"
-                        >
-                          <ThumbsUp className="w-3.5 h-3.5" />
-                          <span className="font-mono-numbers">{update.likesCount}</span>
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                project.updates.map(u => (
+                  <article key={u.id} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                    <header className="flex items-start justify-between gap-3 text-xs">
+                      <h3 className="font-bold text-slate-900 text-sm">{u.title}</h3>
+                      <time className="text-slate-400 shrink-0">{formatDate(u.created_at)}</time>
+                    </header>
+                    <p className="text-xs text-slate-600 leading-relaxed whitespace-pre-line">{u.body}</p>
+                    <footer className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-slate-500">
+                      <span>{t('project.postedBy', { name: u.author?.full_name ?? project.founderName })}</span>
+                      <span className="flex items-center gap-1">
+                        <ThumbsUp className="w-3.5 h-3.5" aria-hidden />
+                        <span className="font-mono-numbers">{u.likes_count}</span>
+                      </span>
+                    </footer>
+                  </article>
+                ))
               )}
             </div>
           )}
 
-          {/* TAB 7: COMMUNITY Q&A */}
-          {activeTab === 'community' && (
-            <div className="space-y-6 max-w-3xl">
-              <div>
-                <h3 className="text-lg font-bold text-slate-900">Backer Discussions & Inquiries</h3>
-                <p className="text-xs text-slate-500 mt-1">
-                  Ask the founder questions about budget items, technology, or timelines.
-                </p>
-              </div>
-
-              {/* Add comment form */}
-              <form
-                onSubmit={handleCommentSubmit}
-                className="bg-white p-4 rounded-xl border border-slate-200 space-y-3 shadow-sm"
-              >
-                <textarea
-                  rows={3}
-                  placeholder="Post a question or message of support for the founder..."
-                  value={commentInput}
-                  onChange={e => setCommentInput(e.target.value)}
-                  className="w-full text-xs p-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                />
-                <div className="flex justify-end">
-                  <button
-                    type="submit"
-                    disabled={!commentInput.trim()}
-                    className="px-4 py-2 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
-                  >
-                    <Send className="w-3.5 h-3.5" />
-                    <span>Post Question</span>
-                  </button>
-                </div>
-              </form>
-
-              {/* Comments list */}
-              <div className="space-y-3">
-                {project.comments.map(c => (
-                  <div
-                    key={c.id}
-                    className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 text-xs shadow-sm"
-                  >
-                    <div className="flex items-center justify-between text-slate-500">
-                      <div className="flex items-center gap-2">
-                        <strong className="text-slate-900">{c.authorName}</strong>
-                        <span>({c.authorCity})</span>
-                        {c.isBacker && (
-                          <span className="text-[10px] bg-emerald-50 text-emerald-700 font-semibold px-1.5 py-0.5 rounded">
-                            Backer
-                          </span>
-                        )}
-                      </div>
-                      <span className="text-[11px] text-slate-400">{c.date}</span>
-                    </div>
-                    <p className="text-slate-700 leading-relaxed">{c.content}</p>
-
-                    {c.reply && (
-                      <div className="mt-2 pl-3 border-l-2 border-emerald-500 pt-1 space-y-1 bg-slate-50/60 p-2 rounded-r-lg">
-                        <div className="flex items-center justify-between text-[11px] text-slate-600">
-                          <strong className="text-emerald-800">{c.reply.author} (Founder)</strong>
-                          <span className="text-slate-400">{c.reply.date}</span>
-                        </div>
-                        <p className="text-slate-600 text-[11px] leading-relaxed">{c.reply.content}</p>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          {tab === 'comments' && <CommentsPanel project={project} isOwner={isOwner} />}
         </div>
-      </div>
+      </section>
 
-      {/* Related Campaigns */}
-      {relatedProjects.length > 0 && (
-        <div className="pt-10 border-t border-slate-200 space-y-6">
+      {related.data && related.data.items.length > 0 && (
+        <section className="pt-10 border-t border-slate-200 space-y-6">
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-bold text-slate-900">Similar Campaigns in Uzbekistan</h3>
-            <button
-              onClick={() => navigateTo('explore')}
+            <h2 className="text-xl font-bold text-slate-900">{t('project.related')}</h2>
+            <Link
+              to={`${paths.explore}?category=${project.categoryId}`}
               className="text-xs font-semibold text-emerald-700 hover:text-emerald-800"
             >
-              View all
-            </button>
+              {t('project.viewAll')}
+            </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {relatedProjects.map(rel => (
-              <ProjectCard key={rel.id} project={rel} />
+            {related.data.items.map(p => (
+              <ProjectCard key={p.id} project={p} />
             ))}
           </div>
-        </div>
+        </section>
+      )}
+
+      {dialogReward !== undefined && (
+        <ContributeDialog
+          project={project}
+          title={title}
+          initialRewardId={dialogReward}
+          onClose={() => setDialogReward(undefined)}
+        />
       )}
     </div>
   );
-};
+}
+
+function EvaluationPanel({ project }: { project: ProjectDetail }) {
+  const { t } = useTranslation();
+  const e = project.evaluation!;
+  const pillars = [
+    { key: 'businessPlan', score: e.business_plan_score },
+    { key: 'team', score: e.team_score },
+    { key: 'market', score: e.market_score },
+    { key: 'financial', score: e.financial_score },
+    { key: 'risk', score: e.risk_score },
+  ] as const;
+
+  return (
+    <div className="space-y-6 max-w-4xl">
+      <div className="p-4 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 flex items-start gap-2.5">
+        <AlertCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" aria-hidden />
+        <p>{t('project.evaluationNote')}</p>
+      </div>
+      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+        <div className="flex items-center justify-between pb-6 border-b border-slate-200 gap-4">
+          <div>
+            <h2 className="text-xl font-bold text-slate-900">{t('project.evaluationTitle')}</h2>
+            <p className="text-xs text-slate-500 mt-0.5">
+              {t('project.evaluatedOn', { date: formatDate(e.evaluated_at) })} ·{' '}
+              {t(`project.confidence.${e.confidence}`)}
+            </p>
+          </div>
+          <p>
+            <span className="text-3xl font-extrabold text-emerald-700 font-mono-numbers">{e.overall_score}</span>
+            <span className="text-slate-400 text-sm"> / 100</span>
+          </p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {pillars.map(p => (
+            <div key={p.key} className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+              <div className="flex justify-between text-xs font-semibold text-slate-700">
+                <span>{t(`project.pillars.${p.key}`)}</span>
+                <span className="font-mono-numbers text-slate-900">{p.score} / 20</span>
+              </div>
+              <div className="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden" aria-hidden>
+                <div className="bg-emerald-600 h-full rounded-full" style={{ width: `${(p.score / 20) * 100}%` }} />
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="pt-4 border-t border-slate-100 space-y-4 text-xs">
+          {e.summary && (
+            <div>
+              <h3 className="font-bold text-slate-800">{t('project.evaluatorSummary')}</h3>
+              <p className="text-slate-600 mt-1 leading-relaxed">{e.summary}</p>
+            </div>
+          )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="bg-emerald-50/50 p-3 rounded-lg border border-emerald-100">
+              <h3 className="font-bold text-emerald-900 mb-1.5">{t('project.strengths')}</h3>
+              <ul className="space-y-1 text-slate-600">
+                {e.strengths.map(s => (
+                  <li key={s} className="flex items-start gap-1.5">
+                    <span className="text-emerald-600 font-bold" aria-hidden>
+                      ✓
+                    </span>
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-amber-50/50 p-3 rounded-lg border border-amber-100">
+              <h3 className="font-bold text-amber-900 mb-1.5">{t('project.watchedRisks')}</h3>
+              <ul className="space-y-1 text-slate-600">
+                {e.risks.map(r => (
+                  <li key={r} className="flex items-start gap-1.5">
+                    <span className="text-amber-600 font-bold" aria-hidden>
+                      !
+                    </span>
+                    {r}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CommentsPanel({ project, isOwner }: { project: ProjectDetail; isOwner: boolean }) {
+  const { t } = useTranslation();
+  const location = useLocation();
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
+  const [body, setBody] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  async function submit(text: string, parentId?: string) {
+    if (!user || !text.trim()) return false;
+    setBusy(true);
+    setError(null);
+    try {
+      await postComment(project.id, user.id, text, parentId);
+      await queryClient.invalidateQueries({ queryKey: projectKeys.detail(project.slug) });
+      return true;
+    } catch (e) {
+      setError(t(errorKey(e)));
+      return false;
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    if (await submit(body)) setBody('');
+  }
+
+  return (
+    <div className="space-y-6 max-w-3xl">
+      <div>
+        <h2 className="text-lg font-bold text-slate-900">{t('project.commentsTitle')}</h2>
+        <p className="text-xs text-slate-500 mt-1">{t('project.commentsText')}</p>
+      </div>
+
+      {user ? (
+        <form onSubmit={handleSubmit} className="bg-white p-4 rounded-xl border border-slate-200 space-y-3 shadow-sm">
+          <label className="sr-only" htmlFor="new-comment">
+            {t('project.commentPlaceholder')}
+          </label>
+          <textarea
+            id="new-comment"
+            rows={3}
+            maxLength={4000}
+            placeholder={t('project.commentPlaceholder')}
+            value={body}
+            onChange={e => setBody(e.target.value)}
+            className="w-full text-sm p-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          />
+          {error && <Alert variant="error">{error}</Alert>}
+          <div className="flex justify-end">
+            <Button type="submit" loading={busy} disabled={!body.trim()}>
+              <Send className="w-3.5 h-3.5" aria-hidden />
+              {t('project.postComment')}
+            </Button>
+          </div>
+        </form>
+      ) : (
+        <p className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-sm text-slate-600">
+          <Link
+            to={`${paths.login}?next=${encodeURIComponent(location.pathname)}`}
+            className="font-semibold text-emerald-700 hover:underline"
+          >
+            {t('account.login')}
+          </Link>
+          {t('project.loginToComment')}
+        </p>
+      )}
+
+      {project.comments.length === 0 ? (
+        <p className="text-center text-xs text-slate-500 py-6">{t('project.noComments')}</p>
+      ) : (
+        <ul className="space-y-3">
+          {project.comments.map(c => (
+            <CommentItem key={c.id} comment={c} canReply={isOwner} onReply={text => submit(text, c.id)} busy={busy} />
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+function CommentItem({
+  comment,
+  canReply,
+  onReply,
+  busy,
+}: {
+  comment: ProjectComment;
+  canReply: boolean;
+  onReply: (text: string) => Promise<boolean>;
+  busy: boolean;
+}) {
+  const { t } = useTranslation();
+  const [replying, setReplying] = useState(false);
+  const [reply, setReply] = useState('');
+
+  return (
+    <li className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 text-xs shadow-sm">
+      <div className="flex items-center justify-between gap-2 text-slate-500">
+        <div className="flex items-center gap-2 min-w-0">
+          <Avatar
+            name={comment.author?.full_name ?? '?'}
+            url={publicFileUrl('avatars', comment.author?.avatar_path)}
+            size="sm"
+          />
+          <strong className="text-slate-900 truncate">{comment.author?.full_name}</strong>
+          {comment.author?.city && <span className="hidden sm:inline">({comment.author.city})</span>}
+          {comment.is_backer && (
+            <span className="text-[10px] bg-emerald-50 text-emerald-700 font-semibold px-1.5 py-0.5 rounded">
+              {t('project.backerBadge')}
+            </span>
+          )}
+        </div>
+        <time className="text-[11px] text-slate-400 shrink-0">{formatDate(comment.created_at)}</time>
+      </div>
+      <p className="text-slate-700 leading-relaxed whitespace-pre-line">{comment.body}</p>
+
+      {comment.replies.map(r => (
+        <div key={r.id} className="mt-2 pl-3 border-l-2 border-emerald-500 space-y-1 bg-slate-50/60 p-2 rounded-r-lg">
+          <div className="flex items-center justify-between text-[11px] text-slate-600">
+            <strong className="text-emerald-800">{t('project.founderReply', { name: r.author?.full_name })}</strong>
+            <time className="text-slate-400">{formatDate(r.created_at)}</time>
+          </div>
+          <p className="text-slate-600 text-[11px] leading-relaxed whitespace-pre-line">{r.body}</p>
+        </div>
+      ))}
+
+      {canReply &&
+        (replying ? (
+          <form
+            onSubmit={async e => {
+              e.preventDefault();
+              if (await onReply(reply)) {
+                setReply('');
+                setReplying(false);
+              }
+            }}
+            className="pt-2 space-y-2"
+          >
+            <textarea
+              rows={2}
+              maxLength={4000}
+              value={reply}
+              onChange={e => setReply(e.target.value)}
+              aria-label={t('project.reply')}
+              className="w-full text-xs p-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            />
+            <div className="flex justify-end gap-2">
+              <Button variant="secondary" onClick={() => setReplying(false)}>
+                {t('common.cancel')}
+              </Button>
+              <Button type="submit" loading={busy} disabled={!reply.trim()}>
+                {t('project.reply')}
+              </Button>
+            </div>
+          </form>
+        ) : (
+          <Button variant="link" onClick={() => setReplying(true)}>
+            {t('project.reply')}
+          </Button>
+        ))}
+    </li>
+  );
+}

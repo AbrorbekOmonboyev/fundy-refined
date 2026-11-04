@@ -1,9 +1,7 @@
 import { Route, Routes } from 'react-router';
-import { useApp } from '@/context/AppContext';
 import { DemoBanner } from '@/components/layout/DemoBanner';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { SimulateContributionModal } from '@/components/SimulateContributionModal';
 import { paths } from '@/app/routes';
 import { ScrollManager } from '@/app/ScrollManager';
 
@@ -26,12 +24,6 @@ import { SettingsPage } from '@/pages/SettingsPage';
 import { AdminPage } from '@/pages/admin/AdminPage';
 import { GuestOnly, RequireAdmin, RequireAuth } from '@/features/auth/guards';
 
-/** Shows the project page, or 404 if the slug in the URL doesn't match a project. */
-function ProjectRoute() {
-  const { selectedProjectId } = useApp();
-  return selectedProjectId ? <ProjectDetailPage /> : <NotFoundPage />;
-}
-
 export function App() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-emerald-100 selection:text-emerald-900">
@@ -43,7 +35,7 @@ export function App() {
         <Routes>
           <Route path={paths.home} element={<HomePage />} />
           <Route path={paths.explore} element={<ExplorePage />} />
-          <Route path="/projects/:slug" element={<ProjectRoute />} />
+          <Route path="/projects/:slug" element={<ProjectDetailPage />} />
           <Route path={paths.education} element={<EducationPage />} />
           <Route path={paths.trustSafety} element={<TrustSafetyPage />} />
 
@@ -128,7 +120,6 @@ export function App() {
         </Routes>
       </main>
 
-      <SimulateContributionModal />
       <Footer />
     </div>
   );

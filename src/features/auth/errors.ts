@@ -26,6 +26,12 @@ const BY_CODE: Record<string, ErrorKey> = {
   user_banned: 'errors.blocked',
   // Database functions (see supabase/migrations/*_functions.sql)
   account_has_activity: 'errors.accountHasActivity',
+  amount_below_minimum: 'errors.amountBelowMinimum',
+  amount_above_maximum: 'errors.amountAboveMaximum',
+  amount_below_reward_price: 'errors.amountBelowRewardPrice',
+  reward_sold_out: 'errors.rewardSoldOut',
+  project_not_accepting_contributions: 'errors.projectClosed',
+  cannot_back_own_project: 'errors.ownProject',
   account_blocked: 'errors.blocked',
   not_signed_in: 'errors.notSignedIn',
 };

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useApp } from '@/context/AppContext';
 import { formatUZS, getModelLabel } from '@/lib/formatters';
-import { ProjectCard } from '@/components/ProjectCard';
+import { Link } from 'react-router';
+import { paths } from '@/app/routes';
 import { DollarSign, Gift, TrendingUp, Bookmark, ArrowUpRight, Package } from 'lucide-react';
 
 export const BackerDashboardPage: React.FC = () => {
@@ -282,7 +283,14 @@ export const BackerDashboardPage: React.FC = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {savedProjects.map(sp => (
-                  <ProjectCard key={sp.id} project={sp} />
+                  // TODO(Phase 5): real saved projects from the database
+                  <Link
+                    key={sp.id}
+                    to={paths.project(sp.slug)}
+                    className="block bg-white p-4 rounded-xl border border-slate-200 text-sm font-semibold text-slate-900 hover:border-emerald-300"
+                  >
+                    {sp.title}
+                  </Link>
                 ))}
               </div>
             )}

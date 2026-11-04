@@ -56,7 +56,9 @@
   "common": {
     "loading": "Yuklanmoqda…",
     "showPassword": "Parolni ko'rsatish",
-    "hidePassword": "Parolni yashirish"
+    "hidePassword": "Parolni yashirish",
+    "close": "Yopish",
+    "cancel": "Bekor qilish"
   },
   "account": {
     "login": "Kirish",
@@ -92,7 +94,13 @@
     "accountHasActivity": "Bu hisobda hissalar yoki loyihalar bor, shuning uchun u moliyaviy hisobot uchun saqlanadi. Yopish uchun qo'llab-quvvatlash xizmatiga murojaat qiling.",
     "notSignedIn": "Avval tizimga kiring.",
     "notConfigured": "Hisoblar hozircha mavjud emas: sayt ma'lumotlar bazasiga ulanmagan.",
-    "adminOnly": "Bu sahifa faqat administratorlar uchun."
+    "adminOnly": "Bu sahifa faqat administratorlar uchun.",
+    "amountBelowMinimum": "Minimal summa — {{min}}.",
+    "amountAboveMaximum": "Bu summa bir martalik hissa chegarasidan oshadi.",
+    "amountBelowRewardPrice": "Summa tanlangan mukofot narxidan kam.",
+    "rewardSoldOut": "Bu mukofot tugagan.",
+    "projectClosed": "Bu loyiha endi yordam qabul qilmaydi.",
+    "ownProject": "O'z loyihangizni qo'llab-quvvatlay olmaysiz."
   },
   "auth": {
     "fields": {
@@ -182,5 +190,323 @@
     "users": "Foydalanuvchilar",
     "reports": "Ochiq shikoyatlar",
     "comingSoon": "Loyihalarni ko'rib chiqish, baholash, tekshirish va moderatsiya vositalari 6-bosqichda qo'shiladi."
+  },
+  "money": {
+    "currency": "so'm",
+    "thousand": "ming",
+    "million": "mln",
+    "billion": "mlrd"
+  },
+  "status": {
+    "draft": "Qoralama",
+    "pending_review": "Ko'rib chiqilmoqda",
+    "changes_requested": "O'zgartirish so'raldi",
+    "rejected": "Rad etilgan",
+    "active": "Faol",
+    "funded": "Moliyalashtirildi",
+    "unsuccessful": "Maqsadga yetmadi",
+    "completed": "Yakunlangan"
+  },
+  "models": {
+    "donation": {
+      "name": "Xayriya",
+      "subtitle": "Ijtimoiy foyda uchun",
+      "text": "Homiylar hech narsa kutmasdan yordam beradi. Maktab laboratoriyalari, ko'kalamzorlashtirish, sog'liqni saqlash va jamoat tashabbuslari uchun.",
+      "point1": "Har bir so'm e'lon qilingan byudjetga sarflanadi",
+      "point2": "Tekshirilgan tashkilotlar va jamoalar",
+      "cta": "Xayriya loyihalarini ko'rish"
+    },
+    "reward": {
+      "name": "Mukofotli",
+      "subtitle": "Oldindan buyurtma va hunarmand sovg'alari",
+      "text": "Homiylar qo'l mehnati mahsulotlari, hunarmandchilik buyumlari va yangi mahalliy mahsulotlarni bozorga chiqishidan oldin buyurtma qiladi.",
+      "point1": "Aniq ishlab chiqarish va yetkazish muddati",
+      "point2": "Mukofotlar butun O'zbekiston bo'ylab yetkaziladi",
+      "cta": "Mukofotli loyihalarni ko'rish"
+    },
+    "equity": {
+      "name": "Mushoraka",
+      "subtitle": "Islomiy foyda taqsimoti hamkorligi",
+      "text": "Homiylar haqiqiy bizneslarda — issiqxonalar, quyosh sovutgichlari, elektr transport — hamkorga aylanadi va foyda hamda xavfni baham ko'radi.",
+      "point1": "Tekshirilgan natijalardan muntazam foyda taqsimoti",
+      "point2": "Aktivlar bilan ta'minlangan, shariatga mos shartlar",
+      "cta": "Mushoraka qanday ishlashini bilish"
+    }
+  },
+  "home": {
+    "hero": {
+      "kicker": "O'zbekiston uchun axloqiy, foizsiz moliyalashtirish",
+      "title": "Shaffoflik, hamjamiyat va adolatli foyda taqsimotiga asoslangan kraudfanding.",
+      "text": "Fundy O'zbekiston tadbirkorlari, hunarmandlari va ixtirochilariga foizsiz mablag' olib keladi. Xayriya qiling, mukofotlarni oldindan buyurtma qiling yoki mushoraka orqali haqiqiy bizneslarda hamkor bo'ling.",
+      "explore": "Loyihalarni ko'rish",
+      "trust1Title": "0% foiz",
+      "trust1Text": "Ribo yo'q, yashirin to'lovlar yo'q",
+      "trust2Title": "Bosqichma-bosqich to'lov",
+      "trust2Text": "Mablag' tekshirilgan bosqichlarda beriladi",
+      "trust3Title": "So'm (UZS)",
+      "trust3Text": "O'zbekiston uchun yaratilgan",
+      "imageKicker": "Toshkent",
+      "imageTitle": "O'zbekiston ijodkorlarini jamoat kapitali bilan bog'laymiz"
+    },
+    "stats": {
+      "title": "Fundy raqamlarda",
+      "demoNote": "Demo ma'lumotlar · jonli yangilanadi",
+      "raised": "To'plangan mablag'",
+      "raisedHint": "{{count}} ta ochiq loyihada",
+      "backers": "Homiylar",
+      "backersHint": "{{count}} ta viloyatdagi loyihalar",
+      "live": "Faol kampaniyalar",
+      "liveHint": "Hozir yordam qabul qilmoqda",
+      "equity": "Mushoraka loyihalari",
+      "equityHint": "Foyda taqsimoti hamkorligi"
+    },
+    "models": {
+      "kicker": "Moliyalashtirishning uch yo'li",
+      "title": "Uch model. Nol foiz.",
+      "text": "Fundy mablag'ni loyiha turiga moslaydi — xayriya, mahsulot yoki biznes hamkorligi."
+    },
+    "featured": {
+      "kicker": "Kashf eting",
+      "title": "O'zbekiston bo'ylab tanlangan loyihalar",
+      "viewAll": "Barcha loyihalarni ko'rish"
+    },
+    "how": {
+      "kicker": "Qanday ishlaydi",
+      "title": "G'oyadan bajarilgan bosqichlargacha",
+      "text": "Har bir loyiha tekshiriladi, baholanadi va haqiqiy natijalarga bog'liq bosqichlarda moliyalashtiriladi.",
+      "step1Title": "Loyihani yuborish",
+      "step1Text": "Asoschilar loyihani, so'mdagi batafsil byudjetni, bosqichlarni va moliyalashtirish shartlarini tavsiflaydi.",
+      "step2Title": "Ko'rib chiqish va baholash",
+      "step2Text": "Fundy asoschini va ro'yxatdan o'tganligini tekshiradi hamda loyihani 100 ballik tizimda baholaydi.",
+      "step3Title": "Jamoat qo'llab-quvvatlashi",
+      "step3Text": "O'zbekiston bo'ylab odamlar Click, Payme, Uzcard yoki Humo orqali yordam beradi (demoda simulyatsiya).",
+      "step4Title": "Bosqichma-bosqich to'lov",
+      "step4Text": "Asoschi natijani isbotlagach, mablag' bosqichma-bosqich beriladi."
+    },
+    "trust": {
+      "kicker": "Ishonch uchun yaratilgan",
+      "title": "Homiylarni himoya qilamiz, asoschilarni javobgar qilamiz.",
+      "text": "Fundy har bir asoschini tekshiradi, har bir byudjet bandini e'lon qiladi, har bir loyihani baholaydi va mablag'ni faqat bajarilgan bosqichlar uchun beradi.",
+      "standards": "Tekshiruv standartlarimiz",
+      "learn": "Islomiy moliya haqida",
+      "item1Title": "Ro'yxatdan o'tishni tekshirish",
+      "item1Text": "Asoschilar O'zbekistonda korxonasining (MChJ yoki YaTT) ro'yxatdan o'tganligini tasdiqlaydi.",
+      "item2Title": "Bosqichma-bosqich to'lov",
+      "item2Text": "Mablag' qismlarga bo'lib, faqat har bir bosqich isbotlangach beriladi.",
+      "item3Title": "100 ballik baholash",
+      "item3Text": "Biznes reja, jamoa, bozor, moliya va xavflar alohida baholanadi.",
+      "item4Title": "Hamkorlarga hisobot",
+      "item4Text": "Mushoraka bizneslari homiylarga muntazam moliyaviy hisobot beradi."
+    },
+    "voices": {
+      "kicker": "Fikrlar",
+      "title": "Fundy haqida asoschilar va homiylar",
+      "note": "Demo uchun namunaviy misollar — haqiqiy sharhlar emas.",
+      "quote1": "Bank foizlari issiqxonalarimizni kengaytirishni imkonsiz qilgandi. Mushoraka orqali barqaror dehqonchilikni qadrlaydigan 42 kishi bilan hamkor bo'ldik.",
+      "name1": "Azizbek Rahimov",
+      "role1": "Asoschi, AgroSmart Farg'ona",
+      "quote2": "Samarqand ustaxonasini qo'llab-quvvatladim va usta to'quvchi imzolagan qo'lda to'qilgan ro'mol oldim. Byudjet va yangiliklar to'liq ochiq edi.",
+      "name2": "Shahnoza Yusupova",
+      "role2": "Homiy, Toshkent",
+      "quote3": "O'quvchilarimizda nihoyat 3D printerlar bor. Mablag'ning bosqichma-bosqich berilishi har bir xayriyachiga ishonch berdi.",
+      "name3": "Jasur Bekmurodov",
+      "role3": "O'qituvchi, Toshkent robototexnika laboratoriyasi"
+    },
+    "faq": {
+      "kicker": "Savollar",
+      "title": "Ko'p beriladigan savollar",
+      "q1": "Fundy nima uchun foizsiz?",
+      "a1": "Oddiy kreditlarda biznes muvaffaqiyatli bo'ladimi yoki yo'qmi, baribir foiz olinadi. Fundy'da umuman foiz yo'q: loyihalar xayriya, mukofot yoki mushoraka orqali moliyalashtiriladi — bunda homiy va asoschi haqiqiy foyda va xavfni baham ko'radi.",
+      "q2": "Mushoraka amalda qanday ishlaydi?",
+      "a2": "Homiylar issiqxona yoki uskunalar kabi ishlab chiqarish aktivlari uchun kapital beradi. Asoschi biznesni boshqaradi, tekshirilgan sof foydaning kelishilgan ulushi (masalan, 25–30%) homiylarga muntazam to'lanadi va chiqish muddati aniq belgilanadi.",
+      "q3": "Mablag' bir vaqtda beriladimi?",
+      "a3": "Yo'q. Mablag' bosqichlarga bog'liq holda — masalan, uskuna yetkazilganda yoki qurilish tugaganda — asoschi isbot ko'rsatgach beriladi.",
+      "q4": "Qanday loyihalar ariza bera oladi?",
+      "a4": "O'zbekistondagi barcha sohalardagi loyihalar: texnologiya, qishloq xo'jaligi, hunarmandchilik, oziq-ovqat, ta'lim, sog'liqni saqlash, toza energiya va ijtimoiy tashabbuslar.",
+      "q5": "Qaysi valyuta ishlatiladi?",
+      "a5": "Barcha summalar — byudjet, mukofotlar va foyda ulushlari — o'zbek so'mida (UZS)."
+    },
+    "cta": {
+      "title": "Loyihangizni moliyalashtirishga tayyormisiz?",
+      "text": "Loyihangizni tavsiflang, uni ko'rib chiqish va baholashdan o'tkazing va jamoatdan axloqiy, foizsiz mablag' to'plang.",
+      "start": "Loyihangizni boshlang",
+      "browse": "Loyihalarni ko'rish"
+    }
+  },
+  "explore": {
+    "title": "Loyihalar",
+    "subtitle": "O'zbekiston bo'ylab tekshirilgan, foizsiz moliyalashtiriladigan loyihalar.",
+    "search": "Loyihalarni qidirish",
+    "searchPlaceholder": "Loyiha, asoschi yoki joy bo'yicha qidiring (masalan, Farg'ona)…",
+    "clearSearch": "Qidiruvni tozalash",
+    "model": "Moliyalashtirish modeli",
+    "allModels": "Barcha modellar",
+    "region": "Viloyat",
+    "allRegions": "Barcha viloyatlar",
+    "statusLabel": "Holat",
+    "status": {
+      "all": "Barcha loyihalar",
+      "live": "Hozir faol",
+      "funded": "Moliyalashtirilgan"
+    },
+    "sortLabel": "Saralash",
+    "sort": {
+      "most_funded": "Eng ko'p to'plangan (%)",
+      "newest": "Eng yangi",
+      "ending_soon": "Tez tugaydigan",
+      "most_backers": "Eng ko'p homiy",
+      "target_low": "Eng kichik maqsad"
+    },
+    "category": "Kategoriya",
+    "all": "Hammasi",
+    "clearFilters": "Filtrlarni tozalash",
+    "resultCount_one": "{{formatted}} ta loyiha",
+    "resultCount_other": "{{formatted}} ta loyiha",
+    "emptyTitle": "Loyihalar topilmadi",
+    "emptyText": "Boshqa so'z bilan qidiring yoki ba'zi filtrlarni olib tashlang.",
+    "pagination": "Sahifalar",
+    "previous": "Oldingi sahifa",
+    "next": "Keyingi sahifa",
+    "pageOf": "{{page}}-sahifa, jami {{pages}}"
+  },
+  "project": {
+    "save": "Saqlash",
+    "unsave": "Saqlanganlardan olib tashlash",
+    "saved": "Saqlangan",
+    "daysLeft_one": "{{count}} kun qoldi",
+    "daysLeft_other": "{{count}} kun qoldi",
+    "by": "Muallif: {{name}}",
+    "verifiedFounder": "Tasdiqlangan asoschi",
+    "score": "Ball",
+    "funded": "{{percent}}% to'plandi",
+    "ofGoal": "{{goal}} dan",
+    "backers_one": "{{formatted}} homiy",
+    "backers_other": "{{formatted}} homiy",
+    "breadcrumb": "Yo'l",
+    "home": "Bosh sahifa",
+    "originalLanguage": "Asl tilda ko'rsatilmoqda ({{language}}).",
+    "experience": "Tajriba",
+    "years_one": "{{count}} yil",
+    "years_other": "{{count}} yil",
+    "raisedOf": "{{goal}} maqsaddan to'plandi",
+    "backersLabel": "Homiylar",
+    "timeLeft": "Qolgan vaqt",
+    "statusLabel": "Holat",
+    "contract": {
+      "musharakah": "Mushoraka hamkorligi",
+      "mudarabah": "Muzoraba hamkorligi"
+    },
+    "schedule": {
+      "quarterly": "har chorakda",
+      "biannually": "yarim yilda bir",
+      "annually": "yilda bir"
+    },
+    "equitySummary": "Tekshirilgan sof foydaning {{percent}}% {{years}} yil davomida {{schedule}} homiylarga taqsimlanadi.",
+    "minInvestment": "Minimal: {{amount}}",
+    "projectedReturn": "Maqsad: {{value}}",
+    "youOwnThis": "Bu sizning loyihangiz.",
+    "notAccepting": "Bu loyiha hozir yordam qabul qilmayapti.",
+    "copyLink": "Havolani nusxalash",
+    "copied": "Havola nusxalandi!",
+    "shareTelegram": "Telegramda ulashish",
+    "evaluationScore": "Baholash bali",
+    "confidence": {
+      "high": "Tasdiqlangan · yuqori ishonch",
+      "moderate": "Tasdiqlangan · o'rtacha ishonch",
+      "in_review": "Ko'rib chiqilmoqda"
+    },
+    "tabs": {
+      "story": "Hikoya",
+      "budget": "Byudjet",
+      "milestones": "Bosqichlar",
+      "evaluation": "Baholash",
+      "risks": "Xavflar",
+      "updates": "Yangiliklar ({{count}})",
+      "comments": "Savollar ({{count}})"
+    },
+    "about": "Loyiha haqida",
+    "founderBio": "Asoschi haqida",
+    "rewards": "Mukofotlar",
+    "delivery": "Yetkazish: {{when}}",
+    "claimed": "{{count}} ta tanlangan",
+    "claimedOf": "{{limit}} tadan {{claimed}} ta tanlangan",
+    "soldOut": "Tugagan",
+    "selectReward": "Bu mukofotni tanlash",
+    "budgetTitle": "Mablag' qayerga sarflanadi",
+    "budgetText": "{{goal}} maqsadning har bir so'mi oldindan rejalashtirilgan va e'lon qilingan.",
+    "budgetItem": "Band",
+    "budgetDescription": "Tavsif",
+    "budgetAmount": "Summa",
+    "budgetTotal": "Jami maqsad",
+    "milestonesTitle": "Bosqichlar",
+    "milestonesText": "Mablag' asoschiga har bir bosqich tasdiqlangach, qismlarga bo'lib beriladi.",
+    "milestoneStatus": {
+      "pending": "Kutilmoqda",
+      "submitted": "Ko'rib chiqilmoqda",
+      "approved": "Bajarildi"
+    },
+    "release": "mablag'ning {{percent}}%",
+    "evaluationNote": "Ballarni Fundy ko'rib chiqish jamoasi biznes reja, hujjatlar va asoschini tekshirgach beradi. Ushbu demoda ular namunaviy ma'lumotlar.",
+    "evaluationTitle": "Loyihani baholash",
+    "evaluatedOn": "{{date}} da baholangan",
+    "pillars": {
+      "businessPlan": "Biznes reja",
+      "team": "Jamoa",
+      "market": "Bozor",
+      "financial": "Moliya",
+      "risk": "Xavflarni boshqarish"
+    },
+    "evaluatorSummary": "Xulosa",
+    "strengths": "Kuchli tomonlar",
+    "watchedRisks": "Kuzatilayotgan xavflar",
+    "risksTitle": "Xavflar va qiyinchiliklar",
+    "risksText": "Asoschilar loyihani qo'llab-quvvatlashdan oldin xavflarni ochiq tavsiflashi shart.",
+    "updatesTitle": "Asoschidan yangiliklar",
+    "noUpdates": "Hozircha yangiliklar yo'q.",
+    "postedBy": "Muallif: {{name}}",
+    "commentsTitle": "Savollar va izohlar",
+    "commentsText": "Asoschidan byudjet, muddatlar yoki boshqa narsalar haqida so'rang.",
+    "commentPlaceholder": "Savol yoki qo'llab-quvvatlash so'zlarini yozing…",
+    "postComment": "Yuborish",
+    "loginToComment": " va savol bering.",
+    "noComments": "Hozircha savollar yo'q — birinchi bo'ling.",
+    "backerBadge": "Homiy",
+    "founderReply": "{{name}} (asoschi)",
+    "reply": "Javob berish",
+    "related": "O'xshash loyihalar",
+    "viewAll": "Hammasini ko'rish"
+  },
+  "contribute": {
+    "title": {
+      "donation": "Xayriya qilish",
+      "reward": "Loyihani qo'llab-quvvatlash",
+      "equity": "Hamkor bo'lish"
+    },
+    "cta": {
+      "donation": "Xayriya qilish",
+      "reward": "Loyihani qo'llab-quvvatlash",
+      "equity": "Sarmoya kiritish (mushoraka)"
+    },
+    "reward": "Mukofotni tanlang",
+    "noReward": "Mukofotsiz, shunchaki qo'llab-quvvatlash",
+    "amount": "Summa",
+    "customAmount": "Boshqa summa",
+    "minimum": "Minimal: {{min}}",
+    "method": "To'lov usuli",
+    "methods": {
+      "click": "Click",
+      "payme": "Payme",
+      "uzcard": "Uzcard",
+      "humo": "Humo",
+      "bank_wire": "Bank o'tkazmasi"
+    },
+    "anonymous": "Ismimni ochiq ko'rsatmang",
+    "equityShare": "Taxminiy ulushingiz: foydaning {{share}}% (barcha homiylarga ajratilgan {{pool}}% dan).",
+    "equityRisk": "Mushoraka hamkorlik ekanini tushunaman: foyda va zararni baham ko'raman, daromad kafolatlanmagan.",
+    "submit": "{{amount}} ni tasdiqlash",
+    "demoNote": "Demo: haqiqiy pul yechilmaydi.",
+    "successTitle": "Rahmat!",
+    "successText": "“{{project}}” uchun {{amount}} qayd etildi.",
+    "successReward": "Mukofot: {{reward}}"
   }
 }

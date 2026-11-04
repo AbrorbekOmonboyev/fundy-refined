@@ -56,7 +56,9 @@
   "common": {
     "loading": "Loading…",
     "showPassword": "Show password",
-    "hidePassword": "Hide password"
+    "hidePassword": "Hide password",
+    "close": "Close",
+    "cancel": "Cancel"
   },
   "account": {
     "login": "Log in",
@@ -92,7 +94,13 @@
     "accountHasActivity": "This account has contributions or projects, so it is kept for financial records. Please contact support to close it.",
     "notSignedIn": "Please log in first.",
     "notConfigured": "Accounts are not available yet: the site is not connected to its database.",
-    "adminOnly": "This page is for administrators only."
+    "adminOnly": "This page is for administrators only.",
+    "amountBelowMinimum": "The minimum amount is {{min}}.",
+    "amountAboveMaximum": "This amount is above the limit for one contribution.",
+    "amountBelowRewardPrice": "The amount is lower than the price of the chosen reward.",
+    "rewardSoldOut": "This reward is sold out.",
+    "projectClosed": "This project is no longer accepting support.",
+    "ownProject": "You can't back your own project."
   },
   "auth": {
     "fields": {
@@ -182,5 +190,323 @@
     "users": "Users",
     "reports": "Open reports",
     "comingSoon": "Project review, evaluations, verification and moderation tools are coming in Phase 6."
+  },
+  "money": {
+    "currency": "UZS",
+    "thousand": "K",
+    "million": "M",
+    "billion": "B"
+  },
+  "status": {
+    "draft": "Draft",
+    "pending_review": "Under review",
+    "changes_requested": "Changes requested",
+    "rejected": "Rejected",
+    "active": "Live",
+    "funded": "Funded",
+    "unsuccessful": "Did not reach goal",
+    "completed": "Completed"
+  },
+  "models": {
+    "donation": {
+      "name": "Donation",
+      "subtitle": "Philanthropic social impact",
+      "text": "Backers give without expecting anything in return. Ideal for school labs, reforestation, healthcare and community causes.",
+      "point1": "Every so'm goes to the published budget",
+      "point2": "Verified organisations and teams",
+      "cta": "Explore donation projects"
+    },
+    "reward": {
+      "name": "Reward",
+      "subtitle": "Pre-orders and artisan perks",
+      "text": "Backers pre-order handmade goods, crafts and new local products before they reach the market.",
+      "point1": "Clear production and delivery timeline",
+      "point2": "Rewards delivered across Uzbekistan",
+      "cta": "Explore reward projects"
+    },
+    "equity": {
+      "name": "Musharakah",
+      "subtitle": "Islamic profit-sharing partnership",
+      "text": "Backers become partners in real businesses — greenhouses, solar cold storage, electric transport — sharing both profit and risk.",
+      "point1": "Regular profit distributions from audited results",
+      "point2": "Asset-backed, Shariah-compliant terms",
+      "cta": "Learn how Musharakah works"
+    }
+  },
+  "home": {
+    "hero": {
+      "kicker": "Ethical, interest-free financing for Uzbekistan",
+      "title": "Crowdfunding built on transparency, community and fair profit-sharing.",
+      "text": "Fundy brings interest-free funding to Uzbekistan's entrepreneurs, artisans and innovators. Support causes with donations, pre-order authentic rewards, or become a partner in real businesses through Musharakah.",
+      "explore": "Explore projects",
+      "trust1Title": "0% interest",
+      "trust1Text": "No riba, no hidden fees",
+      "trust2Title": "Milestone releases",
+      "trust2Text": "Funds released in verified stages",
+      "trust3Title": "So'm (UZS)",
+      "trust3Text": "Built for Uzbekistan",
+      "imageKicker": "Tashkent",
+      "imageTitle": "Connecting Uzbekistan's creators with community capital"
+    },
+    "stats": {
+      "title": "Fundy in numbers",
+      "demoNote": "Demo data · updated live",
+      "raised": "Raised so far",
+      "raisedHint": "Across {{count}} public projects",
+      "backers": "Backers",
+      "backersHint": "Projects in {{count}} regions",
+      "live": "Live campaigns",
+      "liveHint": "Accepting support now",
+      "equity": "Musharakah ventures",
+      "equityHint": "Profit-sharing partnerships"
+    },
+    "models": {
+      "kicker": "Three ways to fund",
+      "title": "Three funding models. Zero interest.",
+      "text": "Fundy matches the funding to the project — philanthropic, product-based or a business partnership."
+    },
+    "featured": {
+      "kicker": "Discover",
+      "title": "Featured projects across Uzbekistan",
+      "viewAll": "View all projects"
+    },
+    "how": {
+      "kicker": "How it works",
+      "title": "From idea to delivered milestones",
+      "text": "Every project is checked, scored and funded in stages tied to real progress.",
+      "step1Title": "Submit the project",
+      "step1Text": "Founders describe the project, an itemised budget in so'm, milestones and the funding terms.",
+      "step2Title": "Review and evaluation",
+      "step2Text": "Fundy verifies the founder and registration, and scores the project out of 100.",
+      "step3Title": "Community support",
+      "step3Text": "People across Uzbekistan back the project with Click, Payme, Uzcard or Humo (simulated in this demo).",
+      "step4Title": "Staged releases",
+      "step4Text": "Money is released milestone by milestone as the founder shows proof of progress."
+    },
+    "trust": {
+      "kicker": "Built for trust",
+      "title": "Protecting backers and holding founders accountable.",
+      "text": "Fundy checks every founder, publishes every budget line, scores every project and releases money only against delivered milestones.",
+      "standards": "Our verification standards",
+      "learn": "Learn about Islamic finance",
+      "item1Title": "Registration checks",
+      "item1Text": "Founders verify their company registration (MChJ or YaTT) in Uzbekistan.",
+      "item2Title": "Milestone releases",
+      "item2Text": "Funding is released in parts, only after proof of each stage.",
+      "item3Title": "100-point evaluation",
+      "item3Text": "Business plan, team, market, financials and risk are each scored.",
+      "item4Title": "Reporting to partners",
+      "item4Text": "Musharakah businesses share regular financial statements with their backers."
+    },
+    "voices": {
+      "kicker": "Voices",
+      "title": "Founders and backers on Fundy",
+      "note": "Illustrative examples for the demo — not real testimonials.",
+      "quote1": "Bank interest made expanding our greenhouses impossible. Musharakah let us partner with 42 people who care about sustainable farming.",
+      "name1": "Azizbek Rakhimov",
+      "role1": "Founder, AgroSmart Fergana",
+      "quote2": "I backed the Samarkand studio and received a hand-woven scarf signed by the master weaver. The budget and updates were completely open.",
+      "name2": "Shakhnoza Yusupova",
+      "role2": "Backer, Tashkent",
+      "quote3": "Our students finally have 3D printers. Releasing funds milestone by milestone gave every donor confidence.",
+      "name3": "Jasur Bekmuradov",
+      "role3": "Educator, Tashkent Robotics Lab"
+    },
+    "faq": {
+      "kicker": "Questions",
+      "title": "Frequently asked questions",
+      "q1": "What makes Fundy interest-free?",
+      "a1": "Conventional loans charge interest whether a business succeeds or not. Fundy has no interest at all: projects are funded through donations, rewards, or Musharakah — where backers and founders share real profits and risks.",
+      "q2": "How does Musharakah work in practice?",
+      "a2": "Backers provide capital for productive assets such as greenhouses or machinery. The founder runs the business, and an agreed share of audited net profit (for example 25–30%) is paid to the backers regularly, with a clear exit horizon.",
+      "q3": "Is the money released all at once?",
+      "a3": "No. Funds are released in stages tied to milestones — for example, equipment delivered or construction finished — after the founder shows proof.",
+      "q4": "Which projects can apply?",
+      "a4": "Projects from all sectors in Uzbekistan: technology, agriculture, crafts, food, education, healthcare, clean energy and social initiatives.",
+      "q5": "Which currency is used?",
+      "a5": "All amounts — budgets, rewards and profit shares — are in Uzbek so'm (UZS)."
+    },
+    "cta": {
+      "title": "Ready to fund your project?",
+      "text": "Describe your project, get it reviewed and evaluated, and raise ethical, interest-free funding from the community.",
+      "start": "Start your project",
+      "browse": "Browse projects"
+    }
+  },
+  "explore": {
+    "title": "Explore projects",
+    "subtitle": "Reviewed projects across Uzbekistan, funded without interest.",
+    "search": "Search projects",
+    "searchPlaceholder": "Search by project, founder or place (e.g. Fergana)…",
+    "clearSearch": "Clear search",
+    "model": "Funding model",
+    "allModels": "All models",
+    "region": "Region",
+    "allRegions": "All regions",
+    "statusLabel": "Status",
+    "status": {
+      "all": "All projects",
+      "live": "Live now",
+      "funded": "Funded"
+    },
+    "sortLabel": "Sort by",
+    "sort": {
+      "most_funded": "Most funded (%)",
+      "newest": "Newest",
+      "ending_soon": "Ending soon",
+      "most_backers": "Most backers",
+      "target_low": "Smallest goal"
+    },
+    "category": "Category",
+    "all": "All",
+    "clearFilters": "Clear filters",
+    "resultCount_one": "{{formatted}} project",
+    "resultCount_other": "{{formatted}} projects",
+    "emptyTitle": "No projects found",
+    "emptyText": "Try another search or remove some filters.",
+    "pagination": "Pages",
+    "previous": "Previous page",
+    "next": "Next page",
+    "pageOf": "Page {{page}} of {{pages}}"
+  },
+  "project": {
+    "save": "Save project",
+    "unsave": "Remove from saved",
+    "saved": "Saved",
+    "daysLeft_one": "{{count}} day left",
+    "daysLeft_other": "{{count}} days left",
+    "by": "by {{name}}",
+    "verifiedFounder": "Verified founder",
+    "score": "Score",
+    "funded": "{{percent}}% funded",
+    "ofGoal": "of {{goal}}",
+    "backers_one": "{{formatted}} backer",
+    "backers_other": "{{formatted}} backers",
+    "breadcrumb": "Breadcrumb",
+    "home": "Home",
+    "originalLanguage": "Shown in the original language ({{language}}).",
+    "experience": "Experience",
+    "years_one": "{{count}} year",
+    "years_other": "{{count}} years",
+    "raisedOf": "raised of {{goal}} goal",
+    "backersLabel": "Backers",
+    "timeLeft": "Time left",
+    "statusLabel": "Status",
+    "contract": {
+      "musharakah": "Musharakah partnership",
+      "mudarabah": "Mudarabah partnership"
+    },
+    "schedule": {
+      "quarterly": "quarterly",
+      "biannually": "twice a year",
+      "annually": "once a year"
+    },
+    "equitySummary": "{{percent}}% of audited net profit is shared with backers {{schedule}}, over {{years}} years.",
+    "minInvestment": "Minimum: {{amount}}",
+    "projectedReturn": "Target: {{value}}",
+    "youOwnThis": "This is your project.",
+    "notAccepting": "This project is not accepting support right now.",
+    "copyLink": "Copy link",
+    "copied": "Link copied!",
+    "shareTelegram": "Share on Telegram",
+    "evaluationScore": "Evaluation score",
+    "confidence": {
+      "high": "Verified · high confidence",
+      "moderate": "Verified · moderate confidence",
+      "in_review": "In review"
+    },
+    "tabs": {
+      "story": "Story",
+      "budget": "Budget",
+      "milestones": "Milestones",
+      "evaluation": "Evaluation",
+      "risks": "Risks",
+      "updates": "Updates ({{count}})",
+      "comments": "Questions ({{count}})"
+    },
+    "about": "About this project",
+    "founderBio": "About the founder",
+    "rewards": "Rewards",
+    "delivery": "Delivery: {{when}}",
+    "claimed": "{{count}} chosen",
+    "claimedOf": "{{claimed}} of {{limit}} chosen",
+    "soldOut": "Sold out",
+    "selectReward": "Choose this reward",
+    "budgetTitle": "Where the money goes",
+    "budgetText": "Every so'm of the {{goal}} goal is planned in advance and published.",
+    "budgetItem": "Item",
+    "budgetDescription": "Description",
+    "budgetAmount": "Amount",
+    "budgetTotal": "Total goal",
+    "milestonesTitle": "Milestones",
+    "milestonesText": "Money is released to the founder in stages, after each milestone is verified.",
+    "milestoneStatus": {
+      "pending": "Upcoming",
+      "submitted": "Under review",
+      "approved": "Completed"
+    },
+    "release": "{{percent}}% of funds",
+    "evaluationNote": "Scores are given by Fundy's review team after checking the business plan, documents and founder. In this demo they are sample data.",
+    "evaluationTitle": "Project evaluation",
+    "evaluatedOn": "Evaluated on {{date}}",
+    "pillars": {
+      "businessPlan": "Business plan",
+      "team": "Team",
+      "market": "Market",
+      "financial": "Financials",
+      "risk": "Risk management"
+    },
+    "evaluatorSummary": "Summary",
+    "strengths": "Strengths",
+    "watchedRisks": "Risks we watch",
+    "risksTitle": "Risks and challenges",
+    "risksText": "Founders must describe the risks openly before anyone backs their project.",
+    "updatesTitle": "Updates from the founder",
+    "noUpdates": "No updates yet.",
+    "postedBy": "Posted by {{name}}",
+    "commentsTitle": "Questions and comments",
+    "commentsText": "Ask the founder about the budget, timeline or anything else.",
+    "commentPlaceholder": "Write a question or a message of support…",
+    "postComment": "Post",
+    "loginToComment": " to ask a question.",
+    "noComments": "No questions yet — be the first.",
+    "backerBadge": "Backer",
+    "founderReply": "{{name}} (founder)",
+    "reply": "Reply",
+    "related": "Similar projects",
+    "viewAll": "View all"
+  },
+  "contribute": {
+    "title": {
+      "donation": "Make a donation",
+      "reward": "Back this project",
+      "equity": "Become a partner"
+    },
+    "cta": {
+      "donation": "Donate",
+      "reward": "Back this project",
+      "equity": "Invest (Musharakah)"
+    },
+    "reward": "Choose a reward",
+    "noReward": "No reward, just support",
+    "amount": "Amount",
+    "customAmount": "Custom amount",
+    "minimum": "Minimum: {{min}}",
+    "method": "Payment method",
+    "methods": {
+      "click": "Click",
+      "payme": "Payme",
+      "uzcard": "Uzcard",
+      "humo": "Humo",
+      "bank_wire": "Bank transfer"
+    },
+    "anonymous": "Don't show my name publicly",
+    "equityShare": "Your estimated share: {{share}}% of profit (from the {{pool}}% shared with all backers).",
+    "equityRisk": "I understand that Musharakah is a partnership: I share in profits and losses, and returns are not guaranteed.",
+    "submit": "Confirm {{amount}}",
+    "demoNote": "Demo: no real money is charged.",
+    "successTitle": "Thank you!",
+    "successText": "Your {{amount}} for “{{project}}” has been recorded.",
+    "successReward": "Reward: {{reward}}"
   }
 }

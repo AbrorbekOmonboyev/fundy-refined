@@ -569,10 +569,79 @@ describe('community', () => {
   });
 });
 
+describe('public browsing', () => {
+  test('search finds projects by title, place or founder, in any case', async () => {
+    const byTitle = await as(db, anon, `select * from public.search_project_ids('robotics')`);
+    assert.equal(byTitle.length, 1);
+    const byPlace = await as(db, anon, `select * from public.search_project_ids('SAMARKAND')`);
+    assert.ok(byPlace.length >= 1);
+    const byFounder = await as(db, anon, `select * from public.search_project_ids('Rakhimov')`);
+    assert.equal(byFounder.length, 1);
+  });
+
+  test('search ignores wildcards, very short queries and hidden drafts', async () => {
+    assert.equal((await as(db, anon, `select * from public.search_project_ids('%')`)).length, 0);
+    assert.equal((await as(db, anon, `select * from public.search_project_ids('a')`)).length, 0);
+    const draftId = await createDraft(alice, 'secret-greenhouse-draft');
+    const found = await as<{ search_project_ids: string }>(
+      db,
+      anon,
+      `select * from public.search_project_ids('Test loyiha')`,
+    );
+    assert.ok(!found.some(r => r.search_project_ids === draftId));
+  });
+
+  test('funded percent follows the raised amount', async () => {
+    const [p] = await as<{ funded_percent: string }>(
+      db,
+      anon,
+      `select funded_percent::text from public.projects where slug = 'chust-master-cutlery-works'`,
+    );
+    assert.equal(Number(p.funded_percent), 93.33); // 42M of 45M
+  });
+
+  test('platform stats are public and count real backers', async () => {
+    const [{ platform_stats: s }] = await as<{ platform_stats: Record<string, number> }>(
+      db,
+      anon,
+      `select public.platform_stats()`,
+    );
+    assert.ok(s.backers > 200 && s.backers < 300, `backers ${s.backers}`); // ~240 demo users back several projects
+    assert.ok(s.public_projects >= 8);
+    assert.ok(s.raised >= 1_212_000_000);
+  });
+
+  test('comments show a Backer badge only for real, non-anonymous backers', async () => {
+    const rows = await as<{ is_backer: boolean }>(
+      db,
+      anon,
+      `
+      select c.is_backer from public.comments c
+      join public.projects p on p.id = c.project_id
+      where p.slug = 'agrosmart-fergana-greenhouse' and c.parent_id is null`,
+    );
+    assert.ok(
+      rows.some(r => r.is_backer),
+      'seeded backer comment has the badge',
+    );
+    const replies = await as<{ is_backer: boolean }>(
+      db,
+      anon,
+      `select c.is_backer from public.comments c where c.parent_id is not null limit 1`,
+    );
+    assert.equal(replies[0].is_backer, false, 'founder replies are not backers');
+  });
+});
+
 describe('accounts', () => {
   test('users can mark their welcome step as done', async () => {
     await as(db, user(bob), `update public.profiles set onboarded_at = now() where id = $1`, [bob]);
-    const [p] = await as<{ onboarded_at: string | null }>(db, user(bob), `select onboarded_at from public.profiles where id = $1`, [bob]);
+    const [p] = await as<{ onboarded_at: string | null }>(
+      db,
+      user(bob),
+      `select onboarded_at from public.profiles where id = $1`,
+      [bob],
+    );
     assert.ok(p.onboarded_at);
   });
 

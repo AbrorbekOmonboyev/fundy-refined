@@ -7,7 +7,7 @@ import { paths } from '@/app/routes';
 import { useAuth } from '@/features/auth/AuthContext';
 import { errorKey } from '@/features/auth/errors';
 import { isStrongPassword, isValidName, PASSWORD_MIN_LENGTH } from '@/features/auth/validation';
-import { useRegionOptions } from '@/features/reference/useRegions';
+import { useRegions } from '@/features/reference/useReference';
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import { Avatar } from '@/components/Avatar';
 import { Alert, Button, SelectField, TextField } from '@/components/ui';
@@ -33,7 +33,7 @@ export function SettingsPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { user, profile, refreshProfile, signOut } = useAuth();
-  const regionOptions = useRegionOptions();
+  const { options: regionOptions } = useRegions();
   const fileInput = useRef<HTMLInputElement>(null);
 
   // Profile

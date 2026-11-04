@@ -7,7 +7,7 @@ import { useAuth } from '@/features/auth/AuthContext';
 import { safeNext } from '@/features/auth/redirects';
 import { errorKey } from '@/features/auth/errors';
 import { isValidName } from '@/features/auth/validation';
-import { useRegionOptions } from '@/features/reference/useRegions';
+import { useRegions } from '@/features/reference/useReference';
 import { LANGUAGES, type Language } from '@/i18n';
 import { Alert, AuthCard, Button, ChoiceGroup, SelectField, TextField } from '@/components/ui';
 
@@ -19,7 +19,7 @@ export function WelcomePage() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const { profile, refreshProfile } = useAuth();
-  const regionOptions = useRegionOptions();
+  const { options: regionOptions } = useRegions();
 
   const [name, setName] = useState(profile?.full_name ?? '');
   const [regionId, setRegionId] = useState(profile?.region_id ?? '');

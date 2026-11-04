@@ -720,6 +720,7 @@ export type Database = {
           created_at: string
           duration_days: number
           ends_at: string | null
+          funded_percent: number | null
           id: string
           is_featured: boolean
           location: string | null
@@ -746,6 +747,7 @@ export type Database = {
           created_at?: string
           duration_days?: number
           ends_at?: string | null
+          funded_percent?: number | null
           id?: string
           is_featured?: boolean
           location?: string | null
@@ -772,6 +774,7 @@ export type Database = {
           created_at?: string
           duration_days?: number
           ends_at?: string | null
+          funded_percent?: number | null
           id?: string
           is_featured?: boolean
           location?: string | null
@@ -1053,6 +1056,12 @@ export type Database = {
         Returns: string
       }
       delete_my_account: { Args: never; Returns: undefined }
+      is_backer: {
+        Args: { c: Database["public"]["Tables"]["comments"]["Row"] }
+        Returns: boolean
+      }
+      platform_stats: { Args: never; Returns: Json }
+      search_project_ids: { Args: { p_query: string }; Returns: string[] }
       submit_milestone: {
         Args: { p_evidence: string; p_milestone_id: string }
         Returns: undefined
