@@ -569,6 +569,158 @@ describe('community', () => {
   });
 });
 
+describe('project wizard (the exact writes the app makes)', () => {
+  let dina: string;
+  let projectId: string;
+
+  before(async () => {
+    dina = await createUser(db, 'Dina Wizard');
+  });
+
+  test('step 1 creates a draft with its text', async () => {
+    const [p] = await as<{ id: string }>(
+      db,
+      user(dina),
+      `
+      insert into public.projects (owner_id, slug, model, category_id, region_id, location, target_amount, duration_days, original_language)
+      values ($1, 'dina-solar-bakery', 'equity', 'food', 'samarkand', 'Samarkand', 50000000, 45, 'uz') returning id`,
+      [dina],
+    );
+    projectId = p.id;
+    await as(
+      db,
+      user(dina),
+      `insert into public.project_translations (project_id, language, title, tagline) values ($1, 'uz', 'Quyosh nonvoyxonasi', 'Quyosh energiyasida non')`,
+      [projectId],
+    );
+  });
+
+  test('step 1 can be edited again, and the slug is protected from others', async () => {
+    await as(db, user(dina), `update public.projects set target_amount = 60000000, duration_days = 60 where id = $1`, [
+      projectId,
+    ]);
+    await rejects(
+      as(
+        db,
+        user(bob),
+        `insert into public.projects (owner_id, slug, model, category_id, target_amount) values ($1, 'dina-solar-bakery', 'donation', 'food', 2000000)`,
+        [bob],
+      ),
+      /duplicate key/,
+    );
+  });
+
+  test('steps 2–4: story, cover, budget and milestones (replace on save)', async () => {
+    await as(
+      db,
+      user(dina),
+      `update public.project_translations set summary = 'Qisqa', story = repeat('Hikoya. ', 40), risks = 'Xavf' where project_id = $1 and language = 'uz'`,
+      [projectId],
+    );
+    await as(db, user(dina), `update public.projects set cover_image_path = $2 where id = $1`, [
+      projectId,
+      `${dina}/${projectId}/cover.jpg`,
+    ]);
+    for (let round = 0; round < 2; round++) {
+      await as(db, user(dina), `delete from public.budget_items where project_id = $1`, [projectId]);
+      await as(
+        db,
+        user(dina),
+        `insert into public.budget_items (project_id, position, category, description, amount) values ($1, 0, 'Oven', '', 40000000), ($1, 1, 'Solar panels', '', 20000000)`,
+        [projectId],
+      );
+      await as(db, user(dina), `delete from public.milestones where project_id = $1`, [projectId]);
+      await as(
+        db,
+        user(dina),
+        `insert into public.milestones (project_id, position, title, description, target_label, release_percent) values ($1, 0, 'Install', '', 'Month 1', 50), ($1, 1, 'Open', '', null, 50)`,
+        [projectId],
+      );
+    }
+    const [{ n }] = await as<{ n: number }>(
+      db,
+      user(dina),
+      `select count(*)::int as n from public.budget_items where project_id = $1`,
+      [projectId],
+    );
+    assert.equal(n, 2, 'saving twice replaces, not duplicates');
+  });
+
+  test('step 5: equity terms insert, then update (no upsert needed)', async () => {
+    await as(db, user(dina), `update public.projects set min_contribution = 500000 where id = $1`, [projectId]);
+    await as(
+      db,
+      user(dina),
+      `insert into public.equity_terms (project_id, contract_type, investor_profit_share_pct, min_investment, distribution_schedule, exit_horizon_years) values ($1, 'musharakah', 25, 1000000, 'quarterly', 5)`,
+      [projectId],
+    );
+    const updated = await as(
+      db,
+      user(dina),
+      `update public.equity_terms set investor_profit_share_pct = 30 where project_id = $1 returning project_id`,
+      [projectId],
+    );
+    assert.equal(updated.length, 1);
+    await rejects(
+      as(db, user(dina), `update public.equity_terms set project_id = project_id where project_id = $1`, [projectId]),
+      /permission denied/,
+    );
+  });
+
+  test('step 6: founder profile and a private document', async () => {
+    await as(
+      db,
+      user(dina),
+      `insert into public.founder_profiles (user_id, display_name, role_title) values ($1, 'Dina', 'Founder')`,
+      [dina],
+    );
+    await as(db, user(dina), `insert into storage.objects (bucket_id, name) values ('project-documents', $1)`, [
+      `${dina}/${projectId}/license.pdf`,
+    ]);
+    await as(
+      db,
+      user(dina),
+      `insert into public.project_documents (project_id, kind, storage_path, file_name, uploaded_by) values ($1, 'registration', $2, 'license.pdf', $3)`,
+      [projectId, `${dina}/${projectId}/license.pdf`, dina],
+    );
+    assert.equal(
+      (await as(db, user(bob), `select id from public.project_documents where project_id = $1`, [projectId])).length,
+      0,
+    );
+  });
+
+  test('step 7: submit, after which the draft is locked', async () => {
+    await as(db, user(dina), `select public.submit_project($1)`, [projectId]);
+    const changed = await as(
+      db,
+      user(dina),
+      `update public.project_translations set story = 'x' where project_id = $1 returning project_id`,
+      [projectId],
+    );
+    assert.equal(changed.length, 0);
+    const deleted = await as(db, user(dina), `delete from public.projects where id = $1 returning id`, [projectId]);
+    assert.equal(deleted.length, 0, 'submitted projects cannot be deleted');
+  });
+
+  test('owners can delete an unsubmitted draft (with its parts)', async () => {
+    const id = await createDraft(dina, 'dina-throwaway');
+    await as(db, user(dina), `delete from public.projects where id = $1`, [id]);
+    assert.equal((await as(db, owner, `select id from public.budget_items where project_id = $1`, [id])).length, 0);
+  });
+
+  test('founders post updates only on their live projects', async () => {
+    await rejects(
+      as(
+        db,
+        user(dina),
+        `insert into public.project_updates (project_id, author_id, title, body) values ($1, $2, 'Hi', 'Still in review')`,
+        [projectId, dina],
+      ),
+      /row-level security/,
+    );
+  });
+});
+
 describe('public browsing', () => {
   test('search finds projects by title, place or founder, in any case', async () => {
     const byTitle = await as(db, anon, `select * from public.search_project_ids('robotics')`);
@@ -679,9 +831,14 @@ describe('file storage', () => {
       (await as(db, user(bob), `select id from storage.objects where bucket_id = 'project-documents'`)).length,
       0,
     );
-    assert.equal(
-      (await as(db, user(admin), `select id from storage.objects where bucket_id = 'project-documents'`)).length,
-      1,
+    const adminSees = await as(
+      db,
+      user(admin),
+      `select name from storage.objects where bucket_id = 'project-documents'`,
+    );
+    assert.ok(
+      adminSees.some(o => o.name === `${alice}/license.pdf`),
+      'admin sees the document',
     );
   });
 });

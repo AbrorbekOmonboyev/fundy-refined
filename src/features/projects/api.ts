@@ -392,13 +392,15 @@ export async function getMyContributions(userId: string): Promise<MyContribution
 }
 
 /** Projects the user owns, in every status (drafts included), newest first. */
-export async function getMyProjects(userId: string): Promise<ProjectCardData[]> {
+export type MyProject = ProjectCardData & { reviewNote: string | null };
+
+export async function getMyProjects(userId: string): Promise<MyProject[]> {
   const { data, error } = await client()
     .from('projects')
-    .select(CARD_COLUMNS)
+    .select(`${CARD_COLUMNS}, review_note`)
     .eq('owner_id', userId)
     .order('created_at', { ascending: false })
-    .returns<CardRow[]>();
+    .returns<(CardRow & { review_note: string | null })[]>();
   if (error) throw error;
-  return (data ?? []).map(toCard);
+  return (data ?? []).map(row => ({ ...toCard(row), reviewNote: row.review_note }));
 }

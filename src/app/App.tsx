@@ -9,6 +9,7 @@ import { HomePage } from '@/pages/HomePage';
 import { ExplorePage } from '@/pages/ExplorePage';
 import { ProjectDetailPage } from '@/pages/ProjectDetailPage';
 import { StartProjectPage } from '@/pages/StartProjectPage';
+import { ProjectEditorPage } from '@/pages/ProjectEditorPage';
 import { FounderDashboardPage } from '@/pages/FounderDashboardPage';
 import { BackerDashboardPage } from '@/pages/BackerDashboardPage';
 import { EducationPage } from '@/pages/EducationPage';
@@ -53,6 +54,14 @@ export function App() {
             element={
               <RequireAuth>
                 <FounderDashboardPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/dashboard/founder/:projectId/:step"
+            element={
+              <RequireAuth>
+                <ProjectEditorPage />
               </RequireAuth>
             }
           />

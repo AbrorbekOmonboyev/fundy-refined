@@ -20,6 +20,7 @@ export const paths = {
   explore: '/explore',
   project: (slug: string) => `/projects/${slug}`,
   startProject: '/start',
+  editProject: (id: string, step: string = 'basics') => `/dashboard/founder/${id}/${step}`,
   founderDashboard: '/dashboard/founder',
   backerDashboard: '/dashboard/backer',
   education: '/learn',

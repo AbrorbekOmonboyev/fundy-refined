@@ -9,6 +9,7 @@ import {
   type InputHTMLAttributes,
   type ReactNode,
   type SelectHTMLAttributes,
+  type TextareaHTMLAttributes,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AlertCircle, CheckCircle2, Eye, EyeOff, Info, Loader2, TriangleAlert } from 'lucide-react';
@@ -238,5 +239,58 @@ export function AuthCard({ title, subtitle, children }: { title: string; subtitl
         {children}
       </div>
     </section>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// More fields
+// ---------------------------------------------------------------------------
+type TextAreaFieldProps = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'id'> & {
+  label: string;
+  error?: string | null;
+  hint?: string;
+  /** Show "120 / 200" under the box. */
+  minChars?: number;
+};
+
+export function TextAreaField({ label, error, hint, minChars, value, rows = 4, ...rest }: TextAreaFieldProps) {
+  const id = useId();
+  const length = String(value ?? '').trim().length;
+  return (
+    <FieldShell id={id} label={label} error={error} hint={hint}>
+      <textarea
+        id={id}
+        rows={rows}
+        value={value}
+        aria-invalid={error ? true : undefined}
+        className={`${INPUT_STYLES} ${error ? 'border-rose-400' : 'border-slate-300'}`}
+        {...rest}
+      />
+      {minChars !== undefined && (
+        <p className={`text-[11px] text-right ${length >= minChars ? 'text-emerald-700' : 'text-slate-400'}`}>
+          {length} / {minChars}
+        </p>
+      )}
+    </FieldShell>
+  );
+}
+
+/** Whole-number input (amounts in so'm, days, percentages). Empty → 0. */
+export function NumberField({
+  value,
+  onValue,
+  ...rest
+}: Omit<TextFieldProps, 'value' | 'onChange' | 'type'> & { value: number; onValue: (value: number) => void }) {
+  return (
+    <TextField
+      {...rest}
+      type="text"
+      inputMode="decimal"
+      value={value ? String(value) : ''}
+      onChange={e => {
+        const n = Number(e.target.value.replace(/[\s,]/g, ''));
+        onValue(Number.isFinite(n) ? n : 0);
+      }}
+    />
   );
 }
