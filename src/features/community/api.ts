@@ -80,10 +80,23 @@ export async function reportContent(input: {
   return 'ok';
 }
 
-export type AdminReport = Database['public']['Tables']['reports']['Row'] & {
-  comment?: { id: string; body: string; is_hidden: boolean; author_name: string; project_slug: string } | null;
-  project?: { id: string; slug: string; title: string } | null;
+/** A reported comment or project update. */
+export type ReportedPost = {
+  id: string;
+  title: string | null;
+  body: string;
+  is_hidden: boolean;
+  author_name: string;
+  project_slug: string;
 };
+
+export type AdminReport = Database['public']['Tables']['reports']['Row'] & {
+  post: ReportedPost | null;
+  project: { id: string; slug: string; title: string } | null;
+  person: { id: string; full_name: string; is_blocked: boolean; role: string } | null;
+};
+
+const none = Promise.resolve({ data: [], error: null });
 
 /** Reports with a preview of what was reported (admins only). */
 export async function listReports(status: ReportStatus | 'all'): Promise<AdminReport[]> {
@@ -92,10 +105,10 @@ export async function listReports(status: ReportStatus | 'all'): Promise<AdminRe
   const { data, error } = await query;
   fail(error);
   const reports = data ?? [];
+  const idsOf = (type: ReportTarget) => reports.filter(r => r.target_type === type).map(r => r.target_id);
+  const [commentIds, updateIds, projectIds, userIds] = (['comment', 'update', 'project', 'user'] as const).map(idsOf);
 
-  const commentIds = reports.filter(r => r.target_type === 'comment').map(r => r.target_id);
-  const projectIds = reports.filter(r => r.target_type === 'project').map(r => r.target_id);
-  const [comments, projects] = await Promise.all([
+  const [comments, updates, projects, people] = await Promise.all([
     commentIds.length
       ? db()
           .from('comments')
@@ -103,19 +116,28 @@ export async function listReports(status: ReportStatus | 'all'): Promise<AdminRe
             'id, body, is_hidden, author:profiles!comments_author_id_fkey ( full_name ), project:projects ( slug )',
           )
           .in('id', commentIds)
-      : Promise.resolve({ data: [], error: null }),
+      : none,
+    updateIds.length
+      ? db()
+          .from('project_updates')
+          .select(
+            'id, title, body, is_hidden, author:profiles!project_updates_author_id_fkey ( full_name ), project:projects ( slug )',
+          )
+          .in('id', updateIds)
+      : none,
     projectIds.length
       ? db()
           .from('projects')
           .select('id, slug, original_language, project_translations ( language, title )')
           .in('id', projectIds)
-      : Promise.resolve({ data: [], error: null }),
+      : none,
+    userIds.length ? db().from('profiles').select('id, full_name, is_blocked, role').in('id', userIds) : none,
   ]);
-  fail(comments.error);
-  fail(projects.error);
+  for (const result of [comments, updates, projects, people]) fail(result.error);
 
-  type CommentRow = {
+  type PostRow = {
     id: string;
+    title?: string;
     body: string;
     is_hidden: boolean;
     author: { full_name: string } | null;
@@ -127,18 +149,26 @@ export async function listReports(status: ReportStatus | 'all'): Promise<AdminRe
     original_language: Language;
     project_translations: { language: Language; title: string }[];
   };
+  const posts = [...((comments.data ?? []) as PostRow[]), ...((updates.data ?? []) as PostRow[])];
+
   return reports.map(r => {
-    const c = (comments.data as CommentRow[] | null)?.find(x => x.id === r.target_id);
+    const post =
+      r.target_type === 'comment' || r.target_type === 'update' ? posts.find(x => x.id === r.target_id) : undefined;
     const p = (projects.data as ProjectRow[] | null)?.find(x => x.id === r.target_id);
+    const person =
+      r.target_type === 'user'
+        ? (people.data as AdminReport['person'][] | null)?.find(x => x?.id === r.target_id)
+        : null;
     return {
       ...r,
-      comment: c
+      post: post
         ? {
-            id: c.id,
-            body: c.body,
-            is_hidden: c.is_hidden,
-            author_name: c.author?.full_name ?? '',
-            project_slug: c.project?.slug ?? '',
+            id: post.id,
+            title: post.title ?? null,
+            body: post.body,
+            is_hidden: post.is_hidden,
+            author_name: post.author?.full_name ?? '',
+            project_slug: post.project?.slug ?? '',
           }
         : null,
       project: p
@@ -148,6 +178,7 @@ export async function listReports(status: ReportStatus | 'all'): Promise<AdminRe
             title: p.project_translations.find(t => t.language === p.original_language)?.title ?? p.slug,
           }
         : null,
+      person: person ?? null,
     };
   });
 }
@@ -156,8 +187,9 @@ export async function resolveReport(reportId: string, status: 'resolved' | 'dism
   fail((await db().rpc('admin_resolve_report', { p_report_id: reportId, p_status: status })).error);
 }
 
-export async function hideComment(commentId: string) {
-  fail((await db().rpc('admin_set_hidden', { p_target: 'comment', p_target_id: commentId, p_hidden: true })).error);
+/** Hide a comment or an update from the public. */
+export async function hidePost(target: 'comment' | 'update', id: string) {
+  fail((await db().rpc('admin_set_hidden', { p_target: target, p_target_id: id, p_hidden: true })).error);
 }
 
 // ---------------------------------------------------------------------------

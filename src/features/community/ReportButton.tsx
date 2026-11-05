@@ -11,10 +11,13 @@ export function ReportButton({
   target,
   targetId,
   compact = false,
+  label,
 }: {
   target: ReportTarget;
   targetId: string;
   compact?: boolean;
+  /** Button text instead of "Report" (e.g. "Report founder"). */
+  label?: string;
 }) {
   const { t } = useTranslation();
   const { user } = useAuth();
@@ -42,7 +45,7 @@ export function ReportButton({
 
   if (done) {
     return (
-      <p className="text-xs text-slate-500">
+      <p className="w-full text-xs text-slate-500">
         {done === 'ok' ? t('community.reported') : t('community.alreadyReported')}
       </p>
     );
@@ -53,16 +56,20 @@ export function ReportButton({
       <button
         type="button"
         onClick={() => setOpen(true)}
+        title={label ?? t('community.report')}
         className="inline-flex items-center gap-1 text-xs text-slate-400 hover:text-rose-600"
       >
         <Flag className="w-3.5 h-3.5" aria-hidden />
-        {compact ? <span className="sr-only">{t('community.report')}</span> : t('community.report')}
+        {compact ? <span className="sr-only">{label ?? t('community.report')}</span> : (label ?? t('community.report'))}
       </button>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-2 space-y-3 rounded-2xl border border-slate-200 bg-page p-4 text-left">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full mt-2 space-y-3 rounded-2xl border border-slate-200 bg-page p-4 text-left"
+    >
       <ChoiceGroup
         label={t('community.reportReason')}
         value={reason}

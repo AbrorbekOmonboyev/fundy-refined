@@ -347,7 +347,9 @@
       "hideAndResolve": "Скрыть комментарий",
       "manageProject": "Управление проектами",
       "resolve": "Решено",
-      "dismiss": "Отклонить"
+      "dismiss": "Отклонить",
+      "hideUpdate": "Скрыть новость",
+      "blockUser": "Заблокировать"
     }
   },
   "money": {
@@ -969,7 +971,8 @@
       "abuse": "Грубость или оскорбления",
       "misleading": "Ложь или обман",
       "other": "Другое"
-    }
+    },
+    "reportFounder": "Пожаловаться на основателя"
   },
   "milestones": {
     "manage": "Этапы",

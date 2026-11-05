@@ -23,5 +23,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "supabase", "vite.config.ts"]
+  "include": ["src", "supabase", "vite.config.ts", "middleware.ts"]
 }

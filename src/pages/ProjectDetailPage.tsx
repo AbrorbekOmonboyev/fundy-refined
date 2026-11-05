@@ -184,6 +184,11 @@ function ProjectView({ project }: { project: ProjectDetail }) {
               </div>
             )}
           </div>
+          {!isOwner && (
+            <div className="text-right">
+              <ReportButton target="user" targetId={project.ownerId} label={t('community.reportFounder')} />
+            </div>
+          )}
         </div>
 
         {/* Right: funding box */}
@@ -587,14 +592,17 @@ function UpdatesList({ project }: { project: ProjectDetail }) {
         <time className="text-slate-400 shrink-0">{formatDate(u.created_at)}</time>
       </header>
       <p className="text-xs text-slate-600 leading-relaxed whitespace-pre-line">{u.body}</p>
-      <footer className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-slate-500">
-        <span>{t('project.postedBy', { name: u.author?.full_name ?? project.founderName })}</span>
-        <LikeButton
-          updateId={u.id}
-          count={u.likes_count}
-          liked={likes.data?.includes(u.id) ?? false}
-          likesKey={likesKey}
-        />
+      <footer className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-2 border-t border-slate-100 text-xs text-slate-500">
+        <span className="mr-auto">{t('project.postedBy', { name: u.author?.full_name ?? project.founderName })}</span>
+        {user?.id !== project.ownerId && <ReportButton target="update" targetId={u.id} compact />}
+        <span>
+          <LikeButton
+            updateId={u.id}
+            count={u.likes_count}
+            liked={likes.data?.includes(u.id) ?? false}
+            likesKey={likesKey}
+          />
+        </span>
       </footer>
     </article>
   ));

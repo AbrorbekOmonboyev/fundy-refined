@@ -3,8 +3,10 @@ import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { paths } from '@/app/routes';
+import { useAuth } from '@/features/auth/AuthContext';
 import { errorKey } from '@/features/auth/errors';
-import { hideComment, listReports, resolveReport, type AdminReport, type ReportStatus } from '@/features/community/api';
+import { hidePost, listReports, resolveReport, type AdminReport, type ReportStatus } from '@/features/community/api';
+import { setUserBlocked } from '@/features/admin/api';
 import { Alert, Button, PageSpinner } from '@/components/ui';
 import { usePageMeta } from '@/lib/usePageMeta';
 import { AdminHeader } from '@/pages/admin/AdminLayout';
@@ -67,7 +69,9 @@ function ReportItem({ report: r }: { report: AdminReport }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const time = new Intl.DateTimeFormat(i18n.resolvedLanguage, { dateStyle: 'medium', timeStyle: 'short' });
+  const { user: me } = useAuth();
   const reasonKey = (['spam', 'abuse', 'misleading', 'other'] as const).find(x => x === r.reason) ?? 'other';
+  const { post, person } = r;
 
   async function act(action: () => Promise<void>) {
     setBusy(true);
@@ -96,18 +100,16 @@ function ReportItem({ report: r }: { report: AdminReport }) {
       {r.details && <p className="text-sm text-slate-700 whitespace-pre-line break-words">“{r.details}”</p>}
 
       <div className="rounded-xl bg-page p-3 text-sm">
-        {r.comment ? (
+        {post ? (
           <>
             <p className="text-xs text-slate-500 mb-1">
-              {r.comment.author_name}
-              {r.comment.is_hidden && <> · {t('admin.reports.hidden')}</>}
+              {post.author_name}
+              {post.is_hidden && <> · {t('admin.reports.hidden')}</>}
             </p>
-            <p className="text-slate-700 whitespace-pre-line break-words">{r.comment.body}</p>
-            {r.comment.project_slug && (
-              <Link
-                to={paths.project(r.comment.project_slug)}
-                className="text-xs underline text-slate-500 hover:text-ink"
-              >
+            {post.title && <p className="font-semibold text-ink">{post.title}</p>}
+            <p className="text-slate-700 whitespace-pre-line break-words line-clamp-6">{post.body}</p>
+            {post.project_slug && (
+              <Link to={paths.project(post.project_slug)} className="text-xs underline text-slate-500 hover:text-ink">
                 {t('admin.reports.open')}
               </Link>
             )}
@@ -116,6 +118,12 @@ function ReportItem({ report: r }: { report: AdminReport }) {
           <Link to={paths.project(r.project.slug)} className="font-semibold text-ink underline">
             {r.project.title}
           </Link>
+        ) : person ? (
+          <p>
+            <span className="font-semibold text-ink">{person.full_name || '—'}</span>
+            {person.role === 'admin' && <> · {t('admin.users.admin')}</>}
+            {person.is_blocked && <> · {t('admin.users.blocked')}</>}
+          </p>
         ) : (
           <p className="text-xs text-slate-500">{t('admin.reports.gone')}</p>
         )}
@@ -125,18 +133,33 @@ function ReportItem({ report: r }: { report: AdminReport }) {
 
       {r.status === 'open' ? (
         <div className="flex flex-wrap gap-2">
-          {r.comment && !r.comment.is_hidden && (
+          {post && !post.is_hidden && (r.target_type === 'comment' || r.target_type === 'update') && (
             <Button
               variant="danger"
               loading={busy}
               onClick={() =>
                 act(async () => {
-                  await hideComment(r.comment!.id);
+                  await hidePost(r.target_type as 'comment' | 'update', post.id);
                   await resolveReport(r.id, 'resolved');
                 })
               }
             >
-              {t('admin.reports.hideAndResolve')}
+              {t(r.target_type === 'update' ? 'admin.reports.hideUpdate' : 'admin.reports.hideAndResolve')}
+            </Button>
+          )}
+          {person && !person.is_blocked && person.id !== me?.id && (
+            <Button
+              variant="danger"
+              loading={busy}
+              onClick={() => {
+                if (!window.confirm(t('admin.users.confirmBlock', { name: person.full_name }))) return;
+                void act(async () => {
+                  await setUserBlocked(person.id, true);
+                  await resolveReport(r.id, 'resolved');
+                });
+              }}
+            >
+              {t('admin.reports.blockUser')}
             </Button>
           )}
           {r.project && (

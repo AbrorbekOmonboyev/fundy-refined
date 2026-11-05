@@ -343,7 +343,9 @@
       "hideAndResolve": "Izohni yashirish",
       "manageProject": "Loyihalarni boshqarish",
       "resolve": "Hal qilindi",
-      "dismiss": "Rad etish"
+      "dismiss": "Rad etish",
+      "hideUpdate": "Yangilikni yashirish",
+      "blockUser": "Foydalanuvchini bloklash"
     }
   },
   "money": {
@@ -955,7 +957,8 @@
       "abuse": "Qo‘pol yoki haqoratli",
       "misleading": "Yolg‘on yoki chalg‘ituvchi",
       "other": "Boshqa sabab"
-    }
+    },
+    "reportFounder": "Asoschi ustidan shikoyat"
   },
   "milestones": {
     "manage": "Bosqichlar",

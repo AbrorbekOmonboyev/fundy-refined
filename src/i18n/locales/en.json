@@ -343,7 +343,9 @@
       "hideAndResolve": "Hide comment",
       "manageProject": "Manage projects",
       "resolve": "Mark resolved",
-      "dismiss": "Dismiss"
+      "dismiss": "Dismiss",
+      "hideUpdate": "Hide update",
+      "blockUser": "Block user"
     }
   },
   "money": {
@@ -955,7 +957,8 @@
       "abuse": "Rude or abusive",
       "misleading": "False or misleading",
       "other": "Something else"
-    }
+    },
+    "reportFounder": "Report founder"
   },
   "milestones": {
     "manage": "Milestones",
