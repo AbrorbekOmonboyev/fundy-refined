@@ -86,3 +86,10 @@ Colours and fonts are defined once in `src/index.css` and used as Tailwind class
 `bg-brand` (chartreuse), `text-ink` / `bg-ink`, `bg-brand-soft`, `bg-page`, `bg-track`, `font-display` (Unbounded).
 Logos are in `public/brand/` and used through `src/components/Logo.tsx`.
 Rule of thumb from the brand kit: text and buttons are ink — chartreuse is for backgrounds, highlights and progress.
+
+## Deploying (Vercel)
+
+1. Import the GitHub repository in Vercel (framework: Vite — settings come from `vercel.json`).
+2. Add environment variables for Production and Preview: `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY` (same values as `.env.local`).
+3. Add the Vercel address to Supabase login settings (`site_url` / `additional_redirect_urls` in `supabase/config.toml`, then `npx supabase config push`), otherwise email links point to localhost.
+4. Before inviting real users: set up an email service (custom SMTP) — Supabase's built-in email only reaches team members.
