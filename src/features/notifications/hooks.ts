@@ -105,6 +105,7 @@ export function useNotificationView() {
       new_comment: { text: t('notifications.new_comment', { project: title }), to: projectPage },
       comment_reply: { text: t('notifications.comment_reply', { project: title }), to: projectPage },
       new_update: { text: t('notifications.new_update', { project: title }), to: projectPage },
+      contact_message: { text: t('notifications.contact_message'), to: paths.adminMessages },
       milestone_approved: { text: t('notifications.milestone_approved', { project: title }), to: projectPage },
     };
 

@@ -839,6 +839,95 @@ describe('notifications', () => {
   });
 });
 
+describe('contact messages', () => {
+  test('a visitor can send a message; admins are notified and can read it', async () => {
+    await as(
+      db,
+      anon,
+      `insert into public.contact_messages (name, email, topic, message) values ('Visitor', 'Visitor@Example.com', 'general', 'Hello, how do fees work?')`,
+    );
+    const msgs = await as<{ email: string; status: string }>(
+      db,
+      user(admin),
+      `select email, status from public.contact_messages where name = 'Visitor'`,
+    );
+    assert.equal(msgs.length, 1);
+    assert.equal(msgs[0].email, 'visitor@example.com', 'email is stored in lower case');
+    assert.equal(msgs[0].status, 'new');
+    const notes = await as(db, user(admin), `select id from public.notifications where type = 'contact_message'`);
+    assert.ok(notes.length >= 1);
+  });
+
+  test('nobody but admins can read messages', async () => {
+    assert.equal((await as(db, user(bob), `select id from public.contact_messages`)).length, 0);
+    await rejects(as(db, anon, `select id from public.contact_messages`), /permission denied/);
+  });
+
+  test('bad input is refused, and senders cannot pose as someone else', async () => {
+    await rejects(
+      as(
+        db,
+        anon,
+        `insert into public.contact_messages (name, email, message) values ('X', 'not-an-email', 'Too short')`,
+      ),
+      /check constraint/,
+    );
+    await rejects(
+      as(
+        db,
+        user(bob),
+        `insert into public.contact_messages (name, email, message, user_id) values ('Bob', 'bob@example.com', 'Pretending to be Carol here', $1)`,
+        [carol],
+      ),
+      /row-level security/,
+    );
+    await rejects(
+      as(
+        db,
+        anon,
+        `insert into public.contact_messages (name, email, message, status) values ('Sneaky', 's@example.com', 'Marking my own message handled', 'handled')`,
+      ),
+      /permission denied/,
+    );
+  });
+
+  test('more than 5 messages an hour from one email are refused', async () => {
+    for (let i = 0; i < 5; i++) {
+      await as(
+        db,
+        anon,
+        `insert into public.contact_messages (name, email, message) values ('Spammer', 'spam@example.com', 'Buy my product now please ' || $1)`,
+        [String(i)],
+      );
+    }
+    await rejects(
+      as(
+        db,
+        anon,
+        `insert into public.contact_messages (name, email, message) values ('Spammer', 'SPAM@example.com', 'One more time buying stuff')`,
+      ),
+      /too_many_messages/,
+    );
+  });
+
+  test('admins mark messages handled (audited); others cannot', async () => {
+    const [m] = await as<{ id: string }>(
+      db,
+      user(admin),
+      `select id from public.contact_messages where name = 'Visitor'`,
+    );
+    await rejects(as(db, user(bob), `select public.admin_set_message_handled($1, true)`, [m.id]), /admin_only/);
+    await as(db, user(admin), `select public.admin_set_message_handled($1, true)`, [m.id]);
+    const log = await as(
+      db,
+      user(admin),
+      `select id from public.audit_log where action = 'message.handled' and target_id = $1`,
+      [m.id],
+    );
+    assert.equal(log.length, 1);
+  });
+});
+
 describe('admin panel', () => {
   test('admins list users with email and activity; others cannot', async () => {
     const rows = await as<{ email: string; contribution_total: string; total_count: string }>(

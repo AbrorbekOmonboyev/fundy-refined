@@ -31,5 +31,8 @@ export function formatMoney(amount: number, compact = false): string {
 
 export function formatDate(iso: string | null | undefined): string {
   if (!iso) return '';
-  return new Intl.DateTimeFormat(locale(), { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(iso));
+  // A plain date ("2026-11-05") means that calendar day everywhere — don't let time zones shift it.
+  const plain = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  const date = plain ? new Date(Number(plain[1]), Number(plain[2]) - 1, Number(plain[3])) : new Date(iso);
+  return new Intl.DateTimeFormat(locale(), { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
 }

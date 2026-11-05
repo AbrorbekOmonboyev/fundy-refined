@@ -1,7 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { Bell, CheckCheck, CircleAlert, Gift, HandCoins, Megaphone, MessageSquare, Rocket, Trophy } from 'lucide-react';
+import {
+  Bell,
+  CheckCheck,
+  CircleAlert,
+  Gift,
+  HandCoins,
+  Mail,
+  Megaphone,
+  MessageSquare,
+  Rocket,
+  Trophy,
+} from 'lucide-react';
 import { useNotifications, useNotificationView } from '@/features/notifications/hooks';
 import type { AppNotification } from '@/features/notifications/api';
 
@@ -17,6 +28,7 @@ const ICONS: Record<AppNotification['type'], typeof Bell> = {
   comment_reply: MessageSquare,
   new_update: Megaphone,
   milestone_approved: Trophy,
+  contact_message: Mail,
 };
 
 /** 🔔 in the header: the signed-in user's real notifications, updated live. */

@@ -13,6 +13,10 @@ export const paths = {
   backerDashboard: '/dashboard/backer',
   education: '/learn',
   trustSafety: '/trust-and-safety',
+  about: '/about',
+  contact: '/contact',
+  terms: '/terms',
+  privacy: '/privacy',
   // Accounts
   login: '/login',
   signup: '/signup',
@@ -29,4 +33,5 @@ export const paths = {
   adminComments: '/admin/comments',
   adminUsers: '/admin/users',
   adminAudit: '/admin/audit',
+  adminMessages: '/admin/messages',
 } as const;

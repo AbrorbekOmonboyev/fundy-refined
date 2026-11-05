@@ -128,7 +128,7 @@ export function SignupPage() {
             />
             <span>
               {t('auth.signup.terms')}{' '}
-              <Link to={paths.trustSafety} target="_blank" className="font-medium text-ink hover:underline">
+              <Link to={paths.terms} target="_blank" className="font-medium text-ink hover:underline">
                 {t('auth.signup.termsLink')}
               </Link>
             </span>

@@ -169,6 +169,60 @@ export type Database = {
           },
         ]
       }
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          handled_at: string | null
+          handled_by: string | null
+          id: string
+          message: string
+          name: string
+          status: Database["public"]["Enums"]["contact_status"]
+          topic: Database["public"]["Enums"]["contact_topic"]
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          handled_at?: string | null
+          handled_by?: string | null
+          id?: string
+          message: string
+          name: string
+          status?: Database["public"]["Enums"]["contact_status"]
+          topic?: Database["public"]["Enums"]["contact_topic"]
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          handled_at?: string | null
+          handled_by?: string | null
+          id?: string
+          message?: string
+          name?: string
+          status?: Database["public"]["Enums"]["contact_status"]
+          topic?: Database["public"]["Enums"]["contact_topic"]
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_messages_handled_by_fkey"
+            columns: ["handled_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_messages_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contributions: {
         Row: {
           amount: number
@@ -1061,6 +1115,10 @@ export type Database = {
         }
         Returns: undefined
       }
+      admin_set_message_handled: {
+        Args: { p_handled: boolean; p_message_id: string }
+        Returns: undefined
+      }
       admin_set_role: {
         Args: {
           p_role: Database["public"]["Enums"]["app_role"]
@@ -1107,6 +1165,8 @@ export type Database = {
     Enums: {
       app_language: "uz" | "ru" | "en"
       app_role: "member" | "admin"
+      contact_status: "new" | "handled"
+      contact_topic: "general" | "founder" | "backer" | "report" | "partnership"
       contract_type: "musharakah" | "mudarabah"
       contribution_status: "confirmed" | "refunded"
       distribution_schedule: "quarterly" | "biannually" | "annually"
@@ -1131,6 +1191,7 @@ export type Database = {
         | "comment_reply"
         | "new_update"
         | "milestone_approved"
+        | "contact_message"
       payment_method: "click" | "payme" | "uzcard" | "humo" | "bank_wire"
       project_status:
         | "draft"
@@ -1272,6 +1333,8 @@ export const Constants = {
     Enums: {
       app_language: ["uz", "ru", "en"],
       app_role: ["member", "admin"],
+      contact_status: ["new", "handled"],
+      contact_topic: ["general", "founder", "backer", "report", "partnership"],
       contract_type: ["musharakah", "mudarabah"],
       contribution_status: ["confirmed", "refunded"],
       distribution_schedule: ["quarterly", "biannually", "annually"],
@@ -1297,6 +1360,7 @@ export const Constants = {
         "comment_reply",
         "new_update",
         "milestone_approved",
+        "contact_message",
       ],
       payment_method: ["click", "payme", "uzcard", "humo", "bank_wire"],
       project_status: [

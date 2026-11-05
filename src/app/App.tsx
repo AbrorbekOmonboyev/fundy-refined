@@ -12,8 +12,9 @@ import { StartProjectPage } from '@/pages/StartProjectPage';
 import { ProjectEditorPage } from '@/pages/ProjectEditorPage';
 import { FounderDashboardPage } from '@/pages/FounderDashboardPage';
 import { BackerDashboardPage } from '@/pages/BackerDashboardPage';
-import { EducationPage } from '@/pages/EducationPage';
-import { TrustSafetyPage } from '@/pages/TrustSafetyPage';
+import { AboutPage, EducationPage, PrivacyPage, TermsPage, TrustSafetyPage } from '@/pages/ContentPages';
+import { ContactPage } from '@/pages/ContactPage';
+import { AdminMessagesPage } from '@/pages/admin/AdminMessagesPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { LoginPage } from '@/pages/auth/LoginPage';
 import { SignupPage } from '@/pages/auth/SignupPage';
@@ -46,6 +47,10 @@ export function App() {
           <Route path="/projects/:slug" element={<ProjectDetailPage />} />
           <Route path={paths.education} element={<EducationPage />} />
           <Route path={paths.trustSafety} element={<TrustSafetyPage />} />
+          <Route path={paths.about} element={<AboutPage />} />
+          <Route path={paths.contact} element={<ContactPage />} />
+          <Route path={paths.terms} element={<TermsPage />} />
+          <Route path={paths.privacy} element={<PrivacyPage />} />
 
           {/* Signed-in users only */}
           <Route
@@ -120,6 +125,7 @@ export function App() {
             <Route path="comments" element={<AdminCommentsPage />} />
             <Route path="users" element={<AdminUsersPage />} />
             <Route path="audit" element={<AdminAuditPage />} />
+            <Route path="messages" element={<AdminMessagesPage />} />
           </Route>
 
           {/* Accounts */}

@@ -28,7 +28,6 @@
     "simulated": "Simulated Prototype · Built for Uzbekistan",
     "models": "Models",
     "platform": "Platform",
-    "trust": "Trust & Safety",
     "donation": "Donation-Based",
     "reward": "Reward-Based Perks",
     "musharakah": "Musharakah (Equity)",
@@ -37,13 +36,16 @@
     "startCampaign": "Start a Campaign",
     "founderDashboard": "Founder Dashboard",
     "backerDashboard": "Backer Dashboard",
-    "verification": "Verification Standards",
-    "aiEvaluation": "AI Project Evaluation",
-    "risk": "Risk Disclosures",
-    "terms": "Prototype Terms & Privacy",
+    "verification": "Trust & Safety",
+    "terms": "Terms of Use",
     "copyright": "© {{year}} Fundy Platform (Demonstration Prototype). All rights reserved.",
     "madeWith": "Crafted with",
-    "forEntrepreneurs": "for entrepreneurs across Uzbekistan."
+    "forEntrepreneurs": "for entrepreneurs across Uzbekistan.",
+    "company": "Fundy",
+    "aboutLink": "About us",
+    "learn": "How it works",
+    "contact": "Contact",
+    "privacy": "Privacy Policy"
   },
   "notFound": {
     "title": "Page not found",
@@ -197,7 +199,8 @@
       "projects": "Projects",
       "comments": "Comments",
       "users": "Users",
-      "audit": "Audit log"
+      "audit": "Audit log",
+      "messages": "Messages"
     },
     "review": {
       "queueHint": "Projects waiting for a decision, oldest first.",
@@ -283,6 +286,23 @@
       "who": "Who",
       "what": "Action",
       "details": "Details"
+    },
+    "messages": {
+      "hint": "Messages from the Contact page. Reply by email, then mark them handled.",
+      "empty": "No messages here.",
+      "filter": {
+        "new": "New",
+        "handled": "Handled",
+        "all": "All"
+      },
+      "status": {
+        "new": "New",
+        "handled": "Handled"
+      },
+      "signedIn": "signed-in user",
+      "reply": "Reply by email",
+      "markHandled": "Mark handled",
+      "reopen": "Reopen"
     }
   },
   "money": {
@@ -834,6 +854,47 @@
     "new_comment": "New question on {{project}}",
     "comment_reply": "The founder replied to your comment on {{project}}",
     "new_update": "{{project}} posted an update",
-    "milestone_approved": "A milestone of {{project}} was completed"
+    "milestone_approved": "A milestone of {{project}} was completed",
+    "contact_message": "New message from the contact page"
+  },
+  "content": {
+    "updated": "Last updated: {{date}}",
+    "onThisPage": "On this page"
+  },
+  "contact": {
+    "kicker": "Contact",
+    "title": "Write to us",
+    "intro": "Questions about a project, your account, or working with Fundy? Send us a message and we will reply by email.",
+    "topic": "Topic",
+    "message": "Message",
+    "topics": {
+      "general": "General question",
+      "backer": "Backing a project",
+      "founder": "Launching a project",
+      "report": "Report a problem",
+      "partnership": "Partnership or press"
+    },
+    "messageTooShort": "Please write at least 10 characters.",
+    "send": "Send message",
+    "privacyNote": "We use your name and email only to reply to you.",
+    "sentTitle": "Message sent",
+    "sentText": "Thank you! We will reply to your email as soon as we can.",
+    "tooMany": "You have sent several messages in the last hour. Please wait a little and try again."
+  },
+  "education": {
+    "calc": {
+      "title": "Musharakah calculator",
+      "hint": "An example of how one year of results is shared. Move the sliders — including into a loss.",
+      "investment": "Your investment",
+      "capital": "Project's total capital",
+      "share": "Backers' share of profit",
+      "result": "Business's yearly result",
+      "ownership": "Your share of the business",
+      "yourProfit": "Your profit this year",
+      "yourLoss": "Your loss this year",
+      "return": "Your yearly return",
+      "profitNote": "Profit year: the backers' share of profit is split in proportion to each backer's capital.",
+      "lossNote": "Loss year: the loss is shared in proportion to capital — your investment shrinks. That is why returns are never guaranteed."
+    }
   }
 }

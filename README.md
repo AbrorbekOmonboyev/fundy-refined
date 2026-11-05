@@ -37,6 +37,7 @@ src/
     layout/             Header, Footer, DemoBanner, LanguageSwitcher
     *.tsx               Shared pieces (ProjectCard, contribution modal)
   lib/supabase.ts       Connection to Supabase (database, login, files)
+  content/*.ts          Long page texts (About, Trust, Terms, Privacy, Learn) in uz/ru/en
   context/AppContext.tsx  App state (demo data in localStorage; switched to Supabase in Phases 2–3)
   data/mockProjects.ts  Demo projects (becomes the database seed in Phase 1)
   types/index.ts        Data shapes: Project, Contribution, …

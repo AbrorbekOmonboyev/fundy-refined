@@ -28,7 +28,6 @@
     "simulated": "Demo versiya · O'zbekiston uchun yaratilgan",
     "models": "Modellar",
     "platform": "Platforma",
-    "trust": "Ishonch va xavfsizlik",
     "donation": "Xayriya",
     "reward": "Mukofotli",
     "musharakah": "Mushoraka (ulush)",
@@ -37,13 +36,16 @@
     "startCampaign": "Kampaniya boshlash",
     "founderDashboard": "Asoschi kabineti",
     "backerDashboard": "Homiy kabineti",
-    "verification": "Tekshiruv standartlari",
-    "aiEvaluation": "Loyihalarni AI orqali baholash",
-    "risk": "Risklar haqida ma'lumot",
-    "terms": "Foydalanish shartlari va maxfiylik",
+    "verification": "Ishonch va xavfsizlik",
+    "terms": "Foydalanish shartlari",
     "copyright": "© {{year}} Fundy (demo versiya). Barcha huquqlar himoyalangan.",
     "madeWith": "Mehr bilan yaratildi",
-    "forEntrepreneurs": "O'zbekiston tadbirkorlari uchun."
+    "forEntrepreneurs": "O'zbekiston tadbirkorlari uchun.",
+    "company": "Fundy",
+    "aboutLink": "Biz haqimizda",
+    "learn": "Qanday ishlaydi",
+    "contact": "Aloqa",
+    "privacy": "Maxfiylik siyosati"
   },
   "notFound": {
     "title": "Sahifa topilmadi",
@@ -197,7 +199,8 @@
       "projects": "Loyihalar",
       "comments": "Izohlar",
       "users": "Foydalanuvchilar",
-      "audit": "Harakatlar jurnali"
+      "audit": "Harakatlar jurnali",
+      "messages": "Xabarlar"
     },
     "review": {
       "queueHint": "Qaror kutayotgan loyihalar, eng eskisi birinchi.",
@@ -283,6 +286,23 @@
       "who": "Kim",
       "what": "Harakat",
       "details": "Tafsilotlar"
+    },
+    "messages": {
+      "hint": "Aloqa sahifasidan kelgan xabarlar. Email orqali javob bering, so'ng ko'rib chiqilgan deb belgilang.",
+      "empty": "Bu yerda xabarlar yo'q.",
+      "filter": {
+        "new": "Yangi",
+        "handled": "Ko'rib chiqilgan",
+        "all": "Hammasi"
+      },
+      "status": {
+        "new": "Yangi",
+        "handled": "Ko'rib chiqilgan"
+      },
+      "signedIn": "tizimga kirgan foydalanuvchi",
+      "reply": "Email orqali javob berish",
+      "markHandled": "Ko'rib chiqildi",
+      "reopen": "Qayta ochish"
     }
   },
   "money": {
@@ -834,6 +854,47 @@
     "new_comment": "{{project}} da yangi savol",
     "comment_reply": "Asoschi {{project}} dagi izohingizga javob berdi",
     "new_update": "{{project}} yangilik e'lon qildi",
-    "milestone_approved": "{{project}} bosqichlaridan biri bajarildi"
+    "milestone_approved": "{{project}} bosqichlaridan biri bajarildi",
+    "contact_message": "Aloqa sahifasidan yangi xabar"
+  },
+  "content": {
+    "updated": "Oxirgi yangilanish: {{date}}",
+    "onThisPage": "Ushbu sahifada"
+  },
+  "contact": {
+    "kicker": "Aloqa",
+    "title": "Bizga yozing",
+    "intro": "Loyiha, hisobingiz yoki Fundy bilan hamkorlik haqida savolingiz bormi? Xabar yuboring — elektron pochtangizga javob beramiz.",
+    "topic": "Mavzu",
+    "message": "Xabar",
+    "topics": {
+      "general": "Umumiy savol",
+      "backer": "Loyihani qo'llab-quvvatlash",
+      "founder": "Loyiha boshlash",
+      "report": "Muammo haqida xabar berish",
+      "partnership": "Hamkorlik yoki matbuot"
+    },
+    "messageTooShort": "Kamida 10 ta belgi yozing.",
+    "send": "Xabarni yuborish",
+    "privacyNote": "Ism va emailingizdan faqat sizga javob berish uchun foydalanamiz.",
+    "sentTitle": "Xabar yuborildi",
+    "sentText": "Rahmat! Imkon qadar tez elektron pochtangizga javob beramiz.",
+    "tooMany": "Oxirgi bir soatda bir nechta xabar yubordingiz. Biroz kutib, qaytadan urinib ko'ring."
+  },
+  "education": {
+    "calc": {
+      "title": "Mushoraka kalkulyatori",
+      "hint": "Bir yillik natija qanday taqsimlanishiga misol. Slayderlarni suring — zarar holatini ham sinab ko'ring.",
+      "investment": "Sizning sarmoyangiz",
+      "capital": "Loyihaning umumiy kapitali",
+      "share": "Homiylarning foyda ulushi",
+      "result": "Biznesning yillik natijasi",
+      "ownership": "Biznesdagi ulushingiz",
+      "yourProfit": "Bu yilgi foydangiz",
+      "yourLoss": "Bu yilgi zararingiz",
+      "return": "Yillik daromadingiz",
+      "profitNote": "Foyda yili: homiylarning foyda ulushi har bir homiyning kapitaliga mutanosib ravishda bo'linadi.",
+      "lossNote": "Zarar yili: zarar kapitalga mutanosib ravishda bo'linadi — sarmoyangiz kamayadi. Shuning uchun daromad hech qachon kafolatlanmaydi."
+    }
   }
 }

@@ -11,10 +11,10 @@ export function Footer() {
     {
       title: t('footer.models'),
       links: [
-        { to: paths.explore, label: t('footer.donation') },
-        { to: paths.explore, label: t('footer.reward') },
-        { to: paths.education, label: t('footer.musharakah') },
-        { to: paths.education, label: t('footer.calculator') },
+        { to: `${paths.explore}?model=donation`, label: t('footer.donation') },
+        { to: `${paths.explore}?model=reward`, label: t('footer.reward') },
+        { to: `${paths.explore}?model=equity`, label: t('footer.musharakah') },
+        { to: `${paths.education}#calculator`, label: t('footer.calculator') },
       ],
     },
     {
@@ -27,12 +27,14 @@ export function Footer() {
       ],
     },
     {
-      title: t('footer.trust'),
+      title: t('footer.company'),
       links: [
+        { to: paths.about, label: t('footer.aboutLink') },
         { to: paths.trustSafety, label: t('footer.verification') },
-        { to: paths.trustSafety, label: t('footer.aiEvaluation') },
-        { to: paths.trustSafety, label: t('footer.risk') },
-        { to: paths.trustSafety, label: t('footer.terms') },
+        { to: paths.education, label: t('footer.learn') },
+        { to: paths.contact, label: t('footer.contact') },
+        { to: paths.terms, label: t('footer.terms') },
+        { to: paths.privacy, label: t('footer.privacy') },
       ],
     },
   ];
