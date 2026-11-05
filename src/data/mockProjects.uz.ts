@@ -304,7 +304,7 @@ Har 13 000 so'm bitta sertifikatlangan ko'chatni ekish va ikki yil parvarishlash
     risks:
       "Erta bahordagi bo'ronlar yangi ko'chatlarni qum bilan ko'mib yuborishi mumkin. Shuning uchun ko'chatlarni tuzli shamoldan to'sadigan pog'onali kichik ariqlarga ekamiz.",
     location: "Mo'ynoq, Qoraqalpog'iston",
-    imageUrl: '/images/covers/aral-saxaul.svg',
+    imageUrl: '/images/projects/aral-saxaul.jpg',
     founder: {
       name: 'Temur Dauletov',
       role: 'Ekolog, loyiha rahbari',
@@ -367,7 +367,7 @@ Bu mushoraka loyihasi: sarmoyadorlar ombor egalaridan biriga aylanadi va yashik 
     risks:
       "Uskunani chetdan olib kelish muddati o'zgarishi mumkin. Shuning uchun barcha sovutgich uskunalarini Toshkentdagi rasmiy distribyutorlar orqali, ishlab chiqaruvchi kafolati bilan oldik.",
     location: 'Karmana, Navoiy viloyati',
-    imageUrl: '/images/covers/zarafshan-cold.svg',
+    imageUrl: '/images/projects/zarafshan-fruit.jpg',
     founder: {
       name: 'Bobur Alimov',
       role: 'Boshqaruvchi hamkor',
@@ -443,7 +443,7 @@ Homiylar har biri raqamlangan, qo'lda yasalgan pichoq oladi: oshxona pichog'i, o
     risks:
       "Har bir pichoq qo'lda yasaladi, shuning uchun damask naqshi va yog'och tolasi biroz farq qiladi — bu haqiqiy qo'l mehnatining belgisi.",
     location: 'Chust, Namangan viloyati',
-    imageUrl: '/images/covers/chust-knives.svg',
+    imageUrl: '/images/projects/chust-knives.jpg',
     founder: {
       name: "Mansur Po'latov",
       role: 'Usta pichoqchi, uyushma oqsoqoli',
@@ -518,7 +518,7 @@ Bu notijorat loyiha: Samarqand, Qashqadaryo va Surxondaryo qishloqlaridagi 12 00
     risks:
       'Qishloq maktablarida internet tez-tez uziladi. Ilova internetsiz ishlaydi va natijalarni aloqa tiklanganda sinxronlaydi.',
     location: 'Samarqand va Toshkent',
-    imageUrl: '/images/covers/registan-math.svg',
+    imageUrl: '/images/projects/registan.jpg',
     founder: {
       name: 'Shahnoza Qosimova',
       role: "O'quv dasturi rahbari",
@@ -578,7 +578,7 @@ Bu mushoraka loyihasi: Andijonda 200 ta mototsikl yig'adigan liniya quramiz. Sar
     risks:
       "Batareya elementlarini olib kelish temir yo'l kechikishlariga bog'liq bo'lishi mumkin. Andijondagi omborimizda 60 kunlik zaxira saqlaymiz.",
     location: 'Andijon',
-    imageUrl: '/images/covers/andijan-trikes.svg',
+    imageUrl: '/images/projects/andijan-trike.jpg',
     founder: {
       name: 'Sardor Mirzayev',
       role: 'Asoschi, bosh muhandis',

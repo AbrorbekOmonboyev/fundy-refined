@@ -28,6 +28,7 @@ import { ProjectCard } from '@/components/ProjectCard';
 import { Avatar } from '@/components/Avatar';
 import { Alert, Button, PageSpinner } from '@/components/ui';
 import { NotFoundPage } from '@/pages/NotFoundPage';
+import { photoCredit } from '@/data/photoCredits';
 import { formatDate, formatMoney, formatNumber } from '@/lib/money';
 import { publicFileUrl } from '@/lib/supabase';
 import { usePageMeta } from '@/lib/usePageMeta';
@@ -75,6 +76,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
   const isOwner = user?.id === project.ownerId;
   const isSaved = saved.isSaved(project.id);
   const shareUrl = window.location.href;
+  const credit = photoCredit(project.coverUrl);
 
   function openContribute(rewardId: string | null = null) {
     if (!user) {
@@ -149,9 +151,24 @@ function ProjectView({ project }: { project: ProjectDetail }) {
           )}
 
           {project.coverUrl && (
-            <div className="rounded-2xl overflow-hidden aspect-[16/10] bg-slate-100 border border-slate-200">
-              <img src={project.coverUrl} alt={title} className="w-full h-full object-cover" />
-            </div>
+            <figure className="space-y-1.5">
+              <div className="rounded-2xl overflow-hidden aspect-[16/10] bg-slate-100 border border-slate-200">
+                <img src={project.coverUrl} alt={title} className="w-full h-full object-cover" />
+              </div>
+              {credit && (
+                <figcaption className="text-[11px] text-slate-500 text-right">
+                  {t('project.photoBy')}{' '}
+                  <a
+                    href={credit.source}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-ink"
+                  >
+                    {credit.author}, {credit.license}
+                  </a>
+                </figcaption>
+              )}
+            </figure>
           )}
 
           {/* Founder */}

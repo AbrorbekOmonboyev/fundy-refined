@@ -571,7 +571,8 @@
     "reply": "Reply",
     "related": "Similar projects",
     "viewAll": "View all",
-    "scoreHint": "Fundy's score: business plan, team, market, finances and risk — 20 points each"
+    "scoreHint": "Fundy's score: business plan, team, market, finances and risk — 20 points each",
+    "photoBy": "Photo:"
   },
   "contribute": {
     "title": {
