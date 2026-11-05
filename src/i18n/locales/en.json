@@ -106,7 +106,10 @@
     "projectNotFunded": "Milestones can be reported only after the project reaches its goal.",
     "evidenceTooShort": "Please describe the evidence in at least 20 characters.",
     "milestoneChanged": "This milestone has already changed. Refresh the page.",
-    "reviewNoteRequired": "Please write a note of at least 10 characters."
+    "reviewNoteRequired": "Please write a note of at least 10 characters.",
+    "crashTitle": "Something went wrong",
+    "crashText": "This page hit an error. Reloading usually fixes it. We have been notified.",
+    "reload": "Reload the page"
   },
   "auth": {
     "fields": {

@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
+    "test": "vitest run",
     "db:test": "node --test supabase/tests/",
     "db:seed:generate": "node supabase/scripts/generate-seed.ts",
     "db:login": "supabase login",
@@ -22,8 +23,10 @@
     "email:generate": "node supabase/scripts/generate-email-templates.ts"
   },
   "dependencies": {
+    "@sentry/react": "^11.11.0",
     "@supabase/supabase-js": "^2.118.0",
     "@tanstack/react-query": "^5.105.3",
+    "@vercel/analytics": "^2.0.1",
     "i18next": "^26.7.1",
     "i18next-browser-languagedetector": "^8.3.0",
     "lucide-react": "^1.68.0",
@@ -50,6 +53,7 @@
     "tailwindcss": "^4.3.4",
     "typescript": "~6.0",
     "typescript-eslint": "^8.72.1",
-    "vite": "^8.3.5"
+    "vite": "^8.3.5",
+    "vitest": "^5.1.0"
   }
 }

@@ -54,6 +54,7 @@ export const privacy: Localized<Article> = {
         heading: 'Brauzeringizda nima saqlanadi',
         paragraphs: [
           'Tizimga kirganingizni eslab qolish va tanlagan tilingizni saqlash uchun brauzer xotirasidan (localStorage) foydalanamiz. Reklama yoki kuzatuv cookie-fayllaridan foydalanmaymiz.',
+          "Saytni yaxshilash uchun Vercel Web Analytics orqali umumiy tashriflar sonini hisoblaymiz (cookie-fayllarsiz, shaxsingizni aniqlamasdan). Sahifada xatolik yuz bersa, xato haqidagi texnik ma'lumot (sahifa manzili va brauzer turi) Sentry xizmatiga yuborilishi mumkin; IP-manzil va siz kiritgan ma'lumotlar yuborilmaydi.",
         ],
       },
       {
@@ -123,6 +124,7 @@ export const privacy: Localized<Article> = {
         heading: 'Что хранится в браузере',
         paragraphs: [
           'Мы используем память браузера (localStorage), чтобы помнить вход и выбранный язык. Рекламные и следящие cookie мы не используем.',
+          'Чтобы улучшать сайт, мы считаем общее число посещений через Vercel Web Analytics (без cookie и без вашей идентификации). Если на странице произошла ошибка, техническая информация о ней (адрес страницы и тип браузера) может отправляться в сервис Sentry; IP-адрес и введённые вами данные не отправляются.',
         ],
       },
       {
@@ -192,6 +194,7 @@ export const privacy: Localized<Article> = {
         heading: 'What is stored in your browser',
         paragraphs: [
           'We use browser storage (localStorage) to keep you signed in and remember your language. We do not use advertising or tracking cookies.',
+          'To improve the site, we count overall visits with Vercel Web Analytics (no cookies, and you are not identified). If a page hits an error, technical details about it (the page address and browser type) may be sent to Sentry; your IP address and anything you typed are not sent.',
         ],
       },
       {

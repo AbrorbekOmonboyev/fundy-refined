@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { Suspense, type ReactNode } from 'react';
 import { NavLink, Outlet } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import {
@@ -13,6 +13,7 @@ import {
   Users,
 } from 'lucide-react';
 import { paths } from '@/app/routes';
+import { PageSpinner } from '@/components/ui';
 
 /** Frame for every admin page: section menu on the left (top on phones), page on the right. */
 export function AdminLayout() {
@@ -55,7 +56,9 @@ export function AdminLayout() {
         </ul>
       </nav>
       <div className="min-w-0">
-        <Outlet />
+        <Suspense fallback={<PageSpinner />}>
+          <Outlet />
+        </Suspense>
       </div>
     </div>
   );

@@ -20,6 +20,7 @@ npm run dev        # http://localhost:3000
 | `npm run typecheck` | Check TypeScript types only                           |
 | `npm run lint`      | Check code for mistakes (ESLint)                      |
 | `npm run format`    | Auto-format all files (Prettier)                      |
+| `npm test`          | Unit tests (money, sign-up and wizard checks)         |
 
 Copy `.env.example` to `.env.local` when environment values are needed (Supabase, from Phase 1).
 

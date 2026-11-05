@@ -106,7 +106,10 @@
     "projectNotFunded": "Bosqichlar haqida faqat loyiha maqsadiga yetgandan keyin xabar berish mumkin.",
     "evidenceTooShort": "Dalilni kamida 20 ta belgida yozing.",
     "milestoneChanged": "Bu bosqich allaqachon o‘zgargan. Sahifani yangilang.",
-    "reviewNoteRequired": "Kamida 10 ta belgidan iborat izoh yozing."
+    "reviewNoteRequired": "Kamida 10 ta belgidan iborat izoh yozing.",
+    "crashTitle": "Nimadir xato ketdi",
+    "crashText": "Bu sahifada xatolik yuz berdi. Odatda sahifani yangilash yordam beradi. Bizga xabar yuborildi.",
+    "reload": "Sahifani yangilash"
   },
   "auth": {
     "fields": {

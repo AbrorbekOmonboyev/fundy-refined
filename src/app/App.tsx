@@ -1,4 +1,6 @@
-import { Route, Routes } from 'react-router';
+import { Suspense } from 'react';
+import { Route, Routes, useLocation } from 'react-router';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { DemoBanner } from '@/components/layout/DemoBanner';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -6,36 +8,45 @@ import { paths } from '@/app/routes';
 import { ScrollManager } from '@/app/ScrollManager';
 
 import { HomePage } from '@/pages/HomePage';
-import { ExplorePage } from '@/pages/ExplorePage';
-import { ProjectDetailPage } from '@/pages/ProjectDetailPage';
-import { StartProjectPage } from '@/pages/StartProjectPage';
-import { ProjectEditorPage } from '@/pages/ProjectEditorPage';
-import { FounderDashboardPage } from '@/pages/FounderDashboardPage';
-import { BackerDashboardPage } from '@/pages/BackerDashboardPage';
-import { AboutPage, EducationPage, PrivacyPage, TermsPage, TrustSafetyPage } from '@/pages/ContentPages';
-import { ContactPage } from '@/pages/ContactPage';
-import { AdminMessagesPage } from '@/pages/admin/AdminMessagesPage';
-import { AdminMilestonesPage } from '@/pages/admin/AdminMilestonesPage';
-import { AdminReportsPage } from '@/pages/admin/AdminReportsPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
-import { LoginPage } from '@/pages/auth/LoginPage';
-import { SignupPage } from '@/pages/auth/SignupPage';
-import { ForgotPasswordPage } from '@/pages/auth/ForgotPasswordPage';
-import { ResetPasswordPage } from '@/pages/auth/ResetPasswordPage';
-import { AuthCallbackPage } from '@/pages/auth/AuthCallbackPage';
-import { WelcomePage } from '@/pages/auth/WelcomePage';
-import { SettingsPage } from '@/pages/SettingsPage';
-import { AdminPage } from '@/pages/admin/AdminPage';
-import { AdminLayout } from '@/pages/admin/AdminLayout';
-import { ReviewQueuePage } from '@/pages/admin/ReviewQueuePage';
-import { ReviewProjectPage } from '@/pages/admin/ReviewProjectPage';
-import { AdminProjectsPage } from '@/pages/admin/AdminProjectsPage';
-import { AdminCommentsPage } from '@/pages/admin/AdminCommentsPage';
-import { AdminUsersPage } from '@/pages/admin/AdminUsersPage';
-import { AdminAuditPage } from '@/pages/admin/AdminAuditPage';
 import { GuestOnly, RequireAdmin, RequireAuth } from '@/features/auth/guards';
+import { page } from '@/app/lazyPage';
+import { PageSpinner } from '@/components/ui';
+
+// Every page except Home is downloaded only when it is opened.
+const ExplorePage = page(() => import('@/pages/ExplorePage'), 'ExplorePage');
+const ProjectDetailPage = page(() => import('@/pages/ProjectDetailPage'), 'ProjectDetailPage');
+const StartProjectPage = page(() => import('@/pages/StartProjectPage'), 'StartProjectPage');
+const ProjectEditorPage = page(() => import('@/pages/ProjectEditorPage'), 'ProjectEditorPage');
+const FounderDashboardPage = page(() => import('@/pages/FounderDashboardPage'), 'FounderDashboardPage');
+const BackerDashboardPage = page(() => import('@/pages/BackerDashboardPage'), 'BackerDashboardPage');
+const AboutPage = page(() => import('@/pages/ContentPages'), 'AboutPage');
+const EducationPage = page(() => import('@/pages/ContentPages'), 'EducationPage');
+const PrivacyPage = page(() => import('@/pages/ContentPages'), 'PrivacyPage');
+const TermsPage = page(() => import('@/pages/ContentPages'), 'TermsPage');
+const TrustSafetyPage = page(() => import('@/pages/ContentPages'), 'TrustSafetyPage');
+const ContactPage = page(() => import('@/pages/ContactPage'), 'ContactPage');
+const AdminMessagesPage = page(() => import('@/pages/admin/AdminMessagesPage'), 'AdminMessagesPage');
+const AdminMilestonesPage = page(() => import('@/pages/admin/AdminMilestonesPage'), 'AdminMilestonesPage');
+const AdminReportsPage = page(() => import('@/pages/admin/AdminReportsPage'), 'AdminReportsPage');
+const LoginPage = page(() => import('@/pages/auth/LoginPage'), 'LoginPage');
+const SignupPage = page(() => import('@/pages/auth/SignupPage'), 'SignupPage');
+const ForgotPasswordPage = page(() => import('@/pages/auth/ForgotPasswordPage'), 'ForgotPasswordPage');
+const ResetPasswordPage = page(() => import('@/pages/auth/ResetPasswordPage'), 'ResetPasswordPage');
+const AuthCallbackPage = page(() => import('@/pages/auth/AuthCallbackPage'), 'AuthCallbackPage');
+const WelcomePage = page(() => import('@/pages/auth/WelcomePage'), 'WelcomePage');
+const SettingsPage = page(() => import('@/pages/SettingsPage'), 'SettingsPage');
+const AdminPage = page(() => import('@/pages/admin/AdminPage'), 'AdminPage');
+const AdminLayout = page(() => import('@/pages/admin/AdminLayout'), 'AdminLayout');
+const ReviewQueuePage = page(() => import('@/pages/admin/ReviewQueuePage'), 'ReviewQueuePage');
+const ReviewProjectPage = page(() => import('@/pages/admin/ReviewProjectPage'), 'ReviewProjectPage');
+const AdminProjectsPage = page(() => import('@/pages/admin/AdminProjectsPage'), 'AdminProjectsPage');
+const AdminCommentsPage = page(() => import('@/pages/admin/AdminCommentsPage'), 'AdminCommentsPage');
+const AdminUsersPage = page(() => import('@/pages/admin/AdminUsersPage'), 'AdminUsersPage');
+const AdminAuditPage = page(() => import('@/pages/admin/AdminAuditPage'), 'AdminAuditPage');
 
 export function App() {
+  const { pathname } = useLocation();
   return (
     <div className="min-h-screen flex flex-col bg-page text-ink font-sans">
       <ScrollManager />
@@ -43,116 +54,120 @@ export function App() {
       <Header />
 
       <main className="flex-1">
-        <Routes>
-          <Route path={paths.home} element={<HomePage />} />
-          <Route path={paths.explore} element={<ExplorePage />} />
-          <Route path="/projects/:slug" element={<ProjectDetailPage />} />
-          <Route path={paths.education} element={<EducationPage />} />
-          <Route path={paths.trustSafety} element={<TrustSafetyPage />} />
-          <Route path={paths.about} element={<AboutPage />} />
-          <Route path={paths.contact} element={<ContactPage />} />
-          <Route path={paths.terms} element={<TermsPage />} />
-          <Route path={paths.privacy} element={<PrivacyPage />} />
+        <ErrorBoundary resetKey={pathname}>
+          <Suspense fallback={<PageSpinner />}>
+            <Routes>
+              <Route path={paths.home} element={<HomePage />} />
+              <Route path={paths.explore} element={<ExplorePage />} />
+              <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+              <Route path={paths.education} element={<EducationPage />} />
+              <Route path={paths.trustSafety} element={<TrustSafetyPage />} />
+              <Route path={paths.about} element={<AboutPage />} />
+              <Route path={paths.contact} element={<ContactPage />} />
+              <Route path={paths.terms} element={<TermsPage />} />
+              <Route path={paths.privacy} element={<PrivacyPage />} />
 
-          {/* Signed-in users only */}
-          <Route
-            path={paths.startProject}
-            element={
-              <RequireAuth>
-                <StartProjectPage />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path={paths.founderDashboard}
-            element={
-              <RequireAuth>
-                <FounderDashboardPage />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/dashboard/founder/:projectId/:step"
-            element={
-              <RequireAuth>
-                <ProjectEditorPage />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path={paths.backerDashboard}
-            element={
-              <RequireAuth>
-                <BackerDashboardPage />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path={paths.settings}
-            element={
-              <RequireAuth>
-                <SettingsPage />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path={paths.welcome}
-            element={
-              <RequireAuth allowUnboarded>
-                <WelcomePage />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path={paths.resetPassword}
-            element={
-              <RequireAuth allowUnboarded>
-                <ResetPasswordPage />
-              </RequireAuth>
-            }
-          />
-          {/* Admin panel — every page inside requires the admin role */}
-          <Route
-            path={paths.admin}
-            element={
-              <RequireAdmin>
-                <AdminLayout />
-              </RequireAdmin>
-            }
-          >
-            <Route index element={<AdminPage />} />
-            <Route path="review" element={<ReviewQueuePage />} />
-            <Route path="review/:projectId" element={<ReviewProjectPage />} />
-            <Route path="projects" element={<AdminProjectsPage />} />
-            <Route path="comments" element={<AdminCommentsPage />} />
-            <Route path="users" element={<AdminUsersPage />} />
-            <Route path="audit" element={<AdminAuditPage />} />
-            <Route path="messages" element={<AdminMessagesPage />} />
-            <Route path="milestones" element={<AdminMilestonesPage />} />
-            <Route path="reports" element={<AdminReportsPage />} />
-          </Route>
+              {/* Signed-in users only */}
+              <Route
+                path={paths.startProject}
+                element={
+                  <RequireAuth>
+                    <StartProjectPage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path={paths.founderDashboard}
+                element={
+                  <RequireAuth>
+                    <FounderDashboardPage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/dashboard/founder/:projectId/:step"
+                element={
+                  <RequireAuth>
+                    <ProjectEditorPage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path={paths.backerDashboard}
+                element={
+                  <RequireAuth>
+                    <BackerDashboardPage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path={paths.settings}
+                element={
+                  <RequireAuth>
+                    <SettingsPage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path={paths.welcome}
+                element={
+                  <RequireAuth allowUnboarded>
+                    <WelcomePage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path={paths.resetPassword}
+                element={
+                  <RequireAuth allowUnboarded>
+                    <ResetPasswordPage />
+                  </RequireAuth>
+                }
+              />
+              {/* Admin panel — every page inside requires the admin role */}
+              <Route
+                path={paths.admin}
+                element={
+                  <RequireAdmin>
+                    <AdminLayout />
+                  </RequireAdmin>
+                }
+              >
+                <Route index element={<AdminPage />} />
+                <Route path="review" element={<ReviewQueuePage />} />
+                <Route path="review/:projectId" element={<ReviewProjectPage />} />
+                <Route path="projects" element={<AdminProjectsPage />} />
+                <Route path="comments" element={<AdminCommentsPage />} />
+                <Route path="users" element={<AdminUsersPage />} />
+                <Route path="audit" element={<AdminAuditPage />} />
+                <Route path="messages" element={<AdminMessagesPage />} />
+                <Route path="milestones" element={<AdminMilestonesPage />} />
+                <Route path="reports" element={<AdminReportsPage />} />
+              </Route>
 
-          {/* Accounts */}
-          <Route
-            path={paths.login}
-            element={
-              <GuestOnly>
-                <LoginPage />
-              </GuestOnly>
-            }
-          />
-          <Route
-            path={paths.signup}
-            element={
-              <GuestOnly>
-                <SignupPage />
-              </GuestOnly>
-            }
-          />
-          <Route path={paths.forgotPassword} element={<ForgotPasswordPage />} />
-          <Route path={paths.authCallback} element={<AuthCallbackPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+              {/* Accounts */}
+              <Route
+                path={paths.login}
+                element={
+                  <GuestOnly>
+                    <LoginPage />
+                  </GuestOnly>
+                }
+              />
+              <Route
+                path={paths.signup}
+                element={
+                  <GuestOnly>
+                    <SignupPage />
+                  </GuestOnly>
+                }
+              />
+              <Route path={paths.forgotPassword} element={<ForgotPasswordPage />} />
+              <Route path={paths.authCallback} element={<AuthCallbackPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
       </main>
 
       <Footer />

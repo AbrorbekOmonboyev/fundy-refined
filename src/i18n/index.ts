@@ -41,7 +41,9 @@ void i18n
   });
 
 // Keep <html lang="…"> in sync for screen readers and search engines.
-const syncHtmlLang = (lng: string) => document.documentElement.setAttribute('lang', lng);
+const syncHtmlLang = (lng: string) => {
+  if (typeof document !== 'undefined') document.documentElement.setAttribute('lang', lng);
+};
 syncHtmlLang(i18n.resolvedLanguage ?? DEFAULT_LANGUAGE);
 i18n.on('languageChanged', syncHtmlLang);
 

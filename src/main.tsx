@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { App } from '@/app/App';
 import { AuthProvider } from '@/features/auth/AuthProvider';
+import { Analytics } from '@vercel/analytics/react';
+import { startMonitoring } from '@/lib/monitoring';
 import '@/i18n';
 import '@/index.css';
 
@@ -12,6 +14,8 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 30_000, retry: 1, refetchOnWindowFocus: false } },
 });
 
+startMonitoring();
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
@@ -19,6 +23,8 @@ createRoot(document.getElementById('root')!).render(
         <AuthProvider>
           <App />
         </AuthProvider>
+        {/* Cookie-free visitor counts; works once Web Analytics is enabled in Vercel */}
+        <Analytics />
       </BrowserRouter>
     </QueryClientProvider>
   </StrictMode>,
