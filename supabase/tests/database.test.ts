@@ -126,7 +126,7 @@ describe('visitors (not signed in)', () => {
     const projects = await as(db, anon, `select id from public.projects`);
     assert.equal(projects.length, 8);
     const texts = await as(db, anon, `select title from public.project_translations`);
-    assert.equal(texts.length, 8);
+    assert.equal(texts.length, 16); // Uzbek + English for each demo project
     const evaluations = await as(db, anon, `select overall_score from public.evaluations`);
     assert.equal(evaluations.length, 8);
   });
@@ -1129,9 +1129,9 @@ describe('public browsing', () => {
   test('search finds projects by title, place or founder, in any case', async () => {
     const byTitle = await as(db, anon, `select * from public.search_project_ids('robotics')`);
     assert.equal(byTitle.length, 1);
-    const byPlace = await as(db, anon, `select * from public.search_project_ids('SAMARKAND')`);
+    const byPlace = await as(db, anon, `select * from public.search_project_ids('SAMARQAND')`);
     assert.ok(byPlace.length >= 1);
-    const byFounder = await as(db, anon, `select * from public.search_project_ids('Rakhimov')`);
+    const byFounder = await as(db, anon, `select * from public.search_project_ids('Rahimov')`);
     assert.equal(byFounder.length, 1);
   });
 

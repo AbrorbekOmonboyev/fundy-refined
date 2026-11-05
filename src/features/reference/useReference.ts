@@ -31,7 +31,9 @@ function useNamed(table: 'regions' | 'categories') {
   });
   const lang = (i18n.resolvedLanguage ?? 'uz') as 'uz' | 'ru' | 'en';
   const options = data.map(r => ({ value: r.id, label: r[`name_${lang}`] }));
-  const nameOf = (id: string | null | undefined) => (id ? (options.find(o => o.value === id)?.label ?? id) : '');
+  // While the list is loading, show nothing rather than the raw code ("agriculture").
+  const nameOf = (id: string | null | undefined) =>
+    id ? (options.find(o => o.value === id)?.label ?? (data.length ? id : '')) : '';
   return { options, nameOf };
 }
 

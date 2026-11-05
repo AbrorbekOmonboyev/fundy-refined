@@ -38,3 +38,15 @@ describe('dates', () => {
     expect(formatDate(undefined)).toBe('');
   });
 });
+
+describe('Uzbek and Russian number style', () => {
+  it('uses spaces between thousands and a decimal comma', async () => {
+    await i18n.changeLanguage('uz');
+    expect(plain(formatMoney(213_000_000))).toBe(`213 000 000 ${i18n.t('money.currency')}`);
+    expect(formatMoney(1_340_000_000, true)).toBe(`1,3 ${i18n.t('money.billion')} ${i18n.t('money.currency')}`);
+    expect(formatMoney(188_000_000, true)).toBe(`188 ${i18n.t('money.million')} ${i18n.t('money.currency')}`);
+    await i18n.changeLanguage('ru');
+    expect(plain(formatMoney(5_500))).toBe(`5 500 ${i18n.t('money.currency')}`);
+    await i18n.changeLanguage('en');
+  });
+});

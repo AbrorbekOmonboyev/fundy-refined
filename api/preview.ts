@@ -36,13 +36,15 @@ export function projectPreview(p: PreviewProject, supabaseUrl: string): Preview 
     p.project_translations.find(t => t.language === p.original_language) ??
     p.project_translations[0];
   const path = p.cover_image_path;
-  const image = !path
-    ? `${SITE_URL}/og-image.png`
-    : path.startsWith('http')
-      ? path
-      : path.startsWith('/')
-        ? `${SITE_URL}${path}`
-        : `${supabaseUrl}/storage/v1/object/public/project-images/${path.split('/').map(encodeURIComponent).join('/')}`;
+  // Telegram and Facebook can't show SVG (the ikat pattern covers), so those use the site image.
+  const image =
+    !path || path.toLowerCase().endsWith('.svg')
+      ? `${SITE_URL}/og-image.png`
+      : path.startsWith('http')
+        ? path
+        : path.startsWith('/')
+          ? `${SITE_URL}${path}`
+          : `${supabaseUrl}/storage/v1/object/public/project-images/${path.split('/').map(encodeURIComponent).join('/')}`;
   const description = (text?.tagline ?? '').trim();
   return {
     title: `${text?.title ?? p.slug} · Fundy`,

@@ -7,7 +7,8 @@ export const paths = {
   home: '/',
   explore: '/explore',
   project: (slug: string) => `/projects/${slug}`,
-  startProject: '/start',
+  startProject: '/start', // what founders need, open to everyone
+  newProject: '/start/new', // the application itself (signed in)
   editProject: (id: string, step: string = 'basics') => `/dashboard/founder/${id}/${step}`,
   founderDashboard: '/dashboard/founder',
   backerDashboard: '/dashboard/backer',

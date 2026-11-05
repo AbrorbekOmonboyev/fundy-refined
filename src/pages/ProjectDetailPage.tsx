@@ -150,7 +150,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
 
           {project.coverUrl && (
             <div className="rounded-2xl overflow-hidden aspect-[16/10] bg-slate-100 border border-slate-200">
-              <img src={project.coverUrl} alt="" className="w-full h-full object-cover" />
+              <img src={project.coverUrl} alt={title} className="w-full h-full object-cover" />
             </div>
           )}
 
@@ -564,6 +564,34 @@ function ProjectView({ project }: { project: ProjectDetail }) {
             ))}
           </div>
         </section>
+      )}
+
+      {/* Phones: the main button is always in reach, at the bottom of the screen */}
+      {isLive && !isOwner && (
+        <>
+          <div className="h-20 lg:hidden" aria-hidden />
+          <div className="lg:hidden fixed inset-x-0 bottom-0 z-30 bg-card/95 backdrop-blur-md border-t border-slate-200 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+            <div className="flex items-center gap-3">
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-bold text-ink font-mono-numbers truncate">
+                  {formatMoney(project.raisedAmount, true)}
+                  <span className="ml-1.5 text-xs font-semibold text-slate-500">
+                    {t('project.funded', { percent: project.fundedPercent })}
+                  </span>
+                </p>
+                <div className="mt-1.5 w-full bg-track rounded-full h-1.5 overflow-hidden" aria-hidden>
+                  <div
+                    className="bg-brand h-full rounded-full"
+                    style={{ width: `${Math.min(project.fundedPercent, 100)}%` }}
+                  />
+                </div>
+              </div>
+              <Button onClick={() => openContribute()} className="shrink-0 py-3">
+                {t(`contribute.cta.${project.model}`)}
+              </Button>
+            </div>
+          </div>
+        </>
       )}
 
       {dialogReward !== undefined && (

@@ -23,7 +23,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
         {project.coverUrl ? (
           <img
             src={project.coverUrl}
-            alt=""
+            alt={title}
             loading="lazy"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
@@ -84,7 +84,10 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
                 <span aria-hidden className="text-slate-300">
                   ·
                 </span>
-                <span className="text-[11px] text-slate-500 font-mono-numbers">
+                <span
+                  className="text-[11px] text-slate-500 font-mono-numbers underline decoration-dotted underline-offset-2 cursor-help"
+                  title={t('project.scoreHint')}
+                >
                   {t('project.score')}: <strong className="font-semibold text-slate-700">{project.score}/100</strong>
                 </span>
               </>

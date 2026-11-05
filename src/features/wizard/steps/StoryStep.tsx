@@ -59,7 +59,7 @@ export function StoryStep({ draft }: { draft: Draft }) {
         <p className="text-sm font-medium text-slate-700">{t('wizard.story.cover')}</p>
         <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 overflow-hidden aspect-[16/9] flex items-center justify-center">
           {coverUrl ? (
-            <img src={coverUrl} alt="" className="w-full h-full object-cover" />
+            <img src={coverUrl} alt={t('wizard.story.cover')} className="w-full h-full object-cover" />
           ) : (
             <ImagePlus className="w-10 h-10 text-slate-300" aria-hidden />
           )}

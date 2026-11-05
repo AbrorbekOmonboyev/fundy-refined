@@ -5,7 +5,7 @@ import { CheckCircle2, ShieldAlert, X } from 'lucide-react';
 import { contribute, type ProjectDetail } from '@/features/projects/api';
 import { projectKeys } from '@/features/projects/hooks';
 import { errorKey } from '@/features/auth/errors';
-import { formatMoney } from '@/lib/money';
+import { formatMoney, formatNumber } from '@/lib/money';
 import { Alert, Button } from '@/components/ui';
 import type { Database } from '@/lib/database.types';
 
@@ -208,7 +208,7 @@ export function ContributeDialog({
             {project.equity && (
               <div className="rounded-lg bg-brand-soft border border-brand p-3 text-xs text-ink">
                 {t('contribute.equityShare', {
-                  share: share.toLocaleString(undefined, { maximumFractionDigits: 2 }),
+                  share: formatNumber(share, 2),
                   pool: project.equity.investor_profit_share_pct,
                 })}
               </div>

@@ -3,7 +3,7 @@ import type { Article, Localized } from '@/content/types';
 export const about: Localized<Article> = {
   uz: {
     kicker: 'Biz haqimizda',
-    title: "Kichik orzulardan katta o'zgarishlarga",
+    title: "Nega biz Fundy'ni qurmoqdamiz",
     intro:
       "Fundy — O'zbekiston uchun foizsiz kraudfanding platformasi. Biz g'oyasi bor odamlarni ularni qo'llab-quvvatlashga tayyor hamjamiyat bilan bog'laymiz — qarzsiz va foizsiz.",
     sections: [
@@ -44,7 +44,7 @@ export const about: Localized<Article> = {
   },
   ru: {
     kicker: 'О нас',
-    title: 'От маленьких мечтаний к большим переменам',
+    title: 'Почему мы делаем Fundy',
     intro:
       'Fundy — беспроцентная краудфандинговая платформа для Узбекистана. Мы соединяем людей с идеями и сообщество, готовое их поддержать, — без долгов и без процентов.',
     sections: [
@@ -85,7 +85,7 @@ export const about: Localized<Article> = {
   },
   en: {
     kicker: 'About us',
-    title: 'From small dreams to big change',
+    title: "Why we're building Fundy",
     intro:
       'Fundy is an interest-free crowdfunding platform for Uzbekistan. We connect people with ideas to a community ready to back them — without debt and without interest.',
     sections: [

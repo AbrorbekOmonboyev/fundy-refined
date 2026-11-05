@@ -1,9 +1,11 @@
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { paths } from '@/app/routes';
+import { usePageMeta } from '@/lib/usePageMeta';
 
 export function NotFoundPage() {
   const { t } = useTranslation();
+  usePageMeta(t('notFound.title'));
 
   return (
     <section className="max-w-xl mx-auto px-4 py-24 text-center">

@@ -9,7 +9,7 @@
     "howItWorks": "How It Works",
     "learn": "Education & Musharakah",
     "trustSafety": "Trust & Safety",
-    "startProject": "Start a Project"
+    "startProject": "Post a project"
   },
   "header": {
     "notifications": "Notifications",
@@ -23,7 +23,7 @@
   "banner": {
     "label": "Demonstration Prototype:",
     "full": "Designed for the Uzbekistan market. All transactions, profit distributions, and projects are simulations.",
-    "short": "Uzbekistan simulation (UZS)."
+    "short": "Payments are simulated."
   },
   "footer": {
     "about": "Uzbekistan's transparent, interest-free crowdfunding ecosystem. Connecting entrepreneurs, artisans, and social champions with community backers through Donations, Rewards, and Musharakah profit-sharing.",
@@ -394,102 +394,36 @@
   },
   "home": {
     "hero": {
-      "kicker": "Interest-free · Made for Uzbekistan",
-      "title": "From small dreams to big change",
-      "text": "Raise funds, gain trust, and make it real. Interest-free funding for Uzbekistan's creators, artisans and entrepreneurs — through donations, rewards or Musharakah partnership.",
-      "explore": "Explore projects",
-      "trust1Title": "0% interest",
-      "trust1Text": "No riba, no hidden fees",
-      "trust2Title": "Milestone releases",
-      "trust2Text": "Funds released in verified stages",
-      "trust3Title": "So'm (UZS)",
-      "trust3Text": "Built for Uzbekistan",
-      "imageKicker": "Tashkent",
-      "imageTitle": "Connecting Uzbekistan's creators with community capital"
-    },
-    "stats": {
-      "title": "Fundy in numbers",
-      "demoNote": "Demo data · updated live",
-      "raised": "Raised so far",
-      "raisedHint": "Across {{count}} public projects",
-      "backers": "Backers",
-      "backersHint": "Projects in {{count}} regions",
-      "live": "Live campaigns",
-      "liveHint": "Accepting support now",
-      "equity": "Musharakah ventures",
-      "equityHint": "Profit-sharing partnerships"
-    },
-    "models": {
-      "kicker": "Three ways to fund",
-      "title": "Three funding models. Zero interest.",
-      "text": "Fundy matches the funding to the project — philanthropic, product-based or a business partnership."
+      "title": "Interest-free crowdfunding. For Uzbekistan.",
+      "text": "Post your project — people back it with a donation, a pre-order or Musharakah. Money is released only for a finished stage.",
+      "explore": "Browse projects",
+      "start": "Post a project",
+      "cardKicker": "Raising now"
     },
     "featured": {
-      "kicker": "Discover",
-      "title": "Featured projects across Uzbekistan",
-      "viewAll": "View all projects"
+      "title": "Projects raising money now",
+      "viewAll": "All projects"
     },
     "how": {
-      "kicker": "How it works",
-      "title": "From idea to delivered milestones",
-      "text": "Every project is checked, scored and funded in stages tied to real progress.",
-      "step1Title": "Submit the project",
-      "step1Text": "Founders describe the project, an itemised budget in so'm, milestones and the funding terms.",
-      "step2Title": "Review and evaluation",
-      "step2Text": "Fundy verifies the founder and registration, and scores the project out of 100.",
-      "step3Title": "Community support",
-      "step3Text": "People across Uzbekistan back the project with Click, Payme, Uzcard or Humo (simulated in this demo).",
-      "step4Title": "Staged releases",
-      "step4Text": "Money is released milestone by milestone as the founder shows proof of progress."
+      "title": "How the money moves",
+      "step1Title": "The founder applies",
+      "step1Text": "LLC or sole-trader certificate, passport, bank account, a budget in so'm and 3–6 stages.",
+      "step2Title": "We check and score it",
+      "step2Text": "We check the documents and score the project out of 100: business plan, team, market, finances and risk — 20 points each. The score is public on the project page.",
+      "step3Title": "People back it",
+      "step3Text": "A donation, a reward (pre-order) or Musharakah. Pay with Click, Payme, Uzcard or Humo. In the demo no money is charged.",
+      "step4Title": "Money is released stage by stage",
+      "step4Text": "The founder finishes a stage and uploads proof. Once Fundy checks it, the next part is released. No stage, no money."
     },
-    "trust": {
-      "kicker": "Built for trust",
-      "title": "Protecting backers and holding founders accountable.",
-      "text": "Fundy checks every founder, publishes every budget line, scores every project and releases money only against delivered milestones.",
-      "standards": "Our verification standards",
-      "learn": "Learn about Islamic finance",
-      "item1Title": "Registration checks",
-      "item1Text": "Founders verify their company registration (MChJ or YaTT) in Uzbekistan.",
-      "item2Title": "Milestone releases",
-      "item2Text": "Funding is released in parts, only after proof of each stage.",
-      "item3Title": "100-point evaluation",
-      "item3Text": "Business plan, team, market, financials and risk are each scored.",
-      "item4Title": "Reporting to partners",
-      "item4Text": "Musharakah businesses share regular financial statements with their backers."
-    },
-    "voices": {
-      "kicker": "Voices",
-      "title": "Founders and backers on Fundy",
-      "note": "Illustrative examples for the demo — not real testimonials.",
-      "quote1": "Bank interest made expanding our greenhouses impossible. Musharakah let us partner with 42 people who care about sustainable farming.",
-      "name1": "Azizbek Rakhimov",
-      "role1": "Founder, AgroSmart Fergana",
-      "quote2": "I backed the Samarkand studio and received a hand-woven scarf signed by the master weaver. The budget and updates were completely open.",
-      "name2": "Shakhnoza Yusupova",
-      "role2": "Backer, Tashkent",
-      "quote3": "Our students finally have 3D printers. Releasing funds milestone by milestone gave every donor confidence.",
-      "name3": "Jasur Bekmuradov",
-      "role3": "Educator, Tashkent Robotics Lab"
-    },
-    "faq": {
-      "kicker": "Questions",
-      "title": "Frequently asked questions",
-      "q1": "What makes Fundy interest-free?",
-      "a1": "Conventional loans charge interest whether a business succeeds or not. Fundy has no interest at all: projects are funded through donations, rewards, or Musharakah — where backers and founders share real profits and risks.",
-      "q2": "How does Musharakah work in practice?",
-      "a2": "Backers provide capital for productive assets such as greenhouses or machinery. The founder runs the business, and an agreed share of audited net profit (for example 25–30%) is paid to the backers regularly, with a clear exit horizon.",
-      "q3": "Is the money released all at once?",
-      "a3": "No. Funds are released in stages tied to milestones — for example, equipment delivered or construction finished — after the founder shows proof.",
-      "q4": "Which projects can apply?",
-      "a4": "Projects from all sectors in Uzbekistan: technology, agriculture, crafts, food, education, healthcare, clean energy and social initiatives.",
-      "q5": "Which currency is used?",
-      "a5": "All amounts — budgets, rewards and profit shares — are in Uzbek so'm (UZS)."
+    "musharakah": {
+      "title": "Musharakah: a partnership, not a loan",
+      "text": "You put a share into a business. If it makes a profit, it is split by the agreed share; if it makes a loss, so is that. There is no guaranteed rate, so it is not riba. Try the numbers:",
+      "more": "More about Musharakah"
     },
     "cta": {
-      "title": "Ready to fund your project?",
-      "text": "Describe your project, get it reviewed and evaluated, and raise ethical, interest-free funding from the community.",
-      "start": "Start your project",
-      "browse": "Browse projects"
+      "title": "Have a project?",
+      "text": "See what you need, how long it takes and what it costs first. Sign up later.",
+      "start": "See the requirements"
     }
   },
   "explore": {
@@ -526,7 +460,10 @@
     "pagination": "Pages",
     "previous": "Previous page",
     "next": "Next page",
-    "pageOf": "Page {{page}} of {{pages}}"
+    "pageOf": "Page {{page}} of {{pages}}",
+    "filters": "Filters",
+    "closeFilters": "Close",
+    "showResults": "Show ({{formatted}})"
   },
   "project": {
     "save": "Save project",
@@ -562,7 +499,7 @@
     },
     "equitySummary": "{{percent}}% of audited net profit is shared with backers {{schedule}}, over {{years}} years.",
     "minInvestment": "Minimum: {{amount}}",
-    "projectedReturn": "Target: {{value}}",
+    "projectedReturn": "Forecast: {{value}}",
     "youOwnThis": "This is your project.",
     "notAccepting": "This project is not accepting support right now.",
     "copyLink": "Copy link",
@@ -633,7 +570,8 @@
     "founderReply": "{{name}} (founder)",
     "reply": "Reply",
     "related": "Similar projects",
-    "viewAll": "View all"
+    "viewAll": "View all",
+    "scoreHint": "Fundy's score: business plan, team, market, finances and risk — 20 points each"
   },
   "contribute": {
     "title": {
@@ -813,8 +751,8 @@
       "minInvestment": "Minimum investment (so'm)",
       "schedule": "How often profit is paid",
       "years": "Partnership length (years)",
-      "projected": "Projected return (optional)",
-      "projectedHint": "e.g. \"18–24% per year\". Not a promise — explain it in your story.",
+      "projected": "Profit forecast in so'm (optional)",
+      "projectedHint": "Not an interest rate — an estimate in so'm. E.g. \"~200,000 so'm a year per 1 mln so'm share\". Not a promise.",
       "equityError": "Check the terms: profit share 1–99%, minimum investment, and 1–30 years.",
       "equityNote": "Musharakah terms are reviewed by the Fundy team before the project goes live."
     },
@@ -940,7 +878,7 @@
       "ownership": "Your share of the business",
       "yourProfit": "Your profit this year",
       "yourLoss": "Your loss this year",
-      "return": "Your yearly return",
+      "return": "Yours at year end",
       "profitNote": "Profit year: the backers' share of profit is split in proportion to each backer's capital.",
       "lossNote": "Loss year: the loss is shared in proportion to capital — your investment shrinks. That is why returns are never guaranteed."
     }
@@ -979,5 +917,29 @@
       "submitted": "Being checked",
       "approved": "Done and verified"
     }
+  },
+  "start": {
+    "title": "Post a project on Fundy",
+    "intro": "The application takes 20–30 minutes. Your draft is saved — continue any time.",
+    "needTitle": "What you'll need",
+    "need1": "An LLC (MChJ) or sole-trader (YaTT) certificate (NGOs can run donation projects)",
+    "need2": "The director's or founder's passport",
+    "need3": "A bank account in the organisation's name",
+    "need4": "A budget in so'm — one line per expense",
+    "need5": "3–6 stages: what gets done, when, and what share of the money",
+    "need6": "A cover photo and the project story (at least 200 characters)",
+    "timeTitle": "How long it takes",
+    "time1Title": "Application",
+    "time1Text": "20–30 minutes",
+    "time2Title": "Check and score",
+    "time2Text": "usually 3–5 working days",
+    "time3Title": "Fundraising",
+    "time3Text": "7 to 90 days — you choose",
+    "time4Title": "Money by stage",
+    "time4Text": "after each stage's proof is checked",
+    "feesTitle": "Fees",
+    "fees": "During the demo Fundy charges nothing. When real payments start, the fee will be published on this page in advance.",
+    "cta": "Start the application",
+    "ctaHint": "You'll log in or sign up first — it takes a minute."
   }
 }

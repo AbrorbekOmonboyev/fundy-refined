@@ -9,7 +9,7 @@
     "howItWorks": "Qanday ishlaydi",
     "learn": "Ta'lim va mushoraka",
     "trustSafety": "Ishonch va xavfsizlik",
-    "startProject": "Loyiha boshlash"
+    "startProject": "Loyiha joylash"
   },
   "header": {
     "notifications": "Bildirishnomalar",
@@ -23,7 +23,7 @@
   "banner": {
     "label": "Demo versiya:",
     "full": "O'zbekiston bozori uchun ishlab chiqilgan. Barcha to'lovlar, foyda taqsimoti va loyihalar — simulyatsiya.",
-    "short": "Demo versiya (UZS)."
+    "short": "To'lovlar — simulyatsiya."
   },
   "footer": {
     "about": "O'zbekistonning shaffof, foizsiz kraudfanding ekotizimi. Tadbirkorlar, hunarmandlar va ijtimoiy tashabbuskorlarni xayriya, mukofot va mushoraka orqali homiylar bilan bog'laydi.",
@@ -394,102 +394,36 @@
   },
   "home": {
     "hero": {
-      "kicker": "Foizsiz · O'zbekiston uchun",
-      "title": "Kichik orzulardan katta o'zgarishlarga",
-      "text": "Mablag' to'plang, ishonch qozoning va orzuingizni ro'yobga chiqaring. O'zbekiston ijodkorlari, hunarmandlari va tadbirkorlari uchun foizsiz moliyalashtirish — xayriya, mukofot yoki mushoraka orqali.",
+      "title": "Foizsiz kraudfanding. O'zbekiston uchun.",
+      "text": "Loyihangizni joylang — odamlar xayriya, oldindan buyurtma yoki mushoraka orqali qo'llab-quvvatlaydi. Pul faqat bajarilgan bosqich uchun beriladi.",
       "explore": "Loyihalarni ko'rish",
-      "trust1Title": "0% foiz",
-      "trust1Text": "Ribo yo'q, yashirin to'lovlar yo'q",
-      "trust2Title": "Bosqichma-bosqich to'lov",
-      "trust2Text": "Mablag' tekshirilgan bosqichlarda beriladi",
-      "trust3Title": "So'm (UZS)",
-      "trust3Text": "O'zbekiston uchun yaratilgan",
-      "imageKicker": "Toshkent",
-      "imageTitle": "O'zbekiston ijodkorlarini jamoat kapitali bilan bog'laymiz"
-    },
-    "stats": {
-      "title": "Fundy raqamlarda",
-      "demoNote": "Demo ma'lumotlar · jonli yangilanadi",
-      "raised": "To'plangan mablag'",
-      "raisedHint": "{{count}} ta ochiq loyihada",
-      "backers": "Homiylar",
-      "backersHint": "{{count}} ta viloyatdagi loyihalar",
-      "live": "Faol kampaniyalar",
-      "liveHint": "Hozir yordam qabul qilmoqda",
-      "equity": "Mushoraka loyihalari",
-      "equityHint": "Foyda taqsimoti hamkorligi"
-    },
-    "models": {
-      "kicker": "Moliyalashtirishning uch yo'li",
-      "title": "Uch model. Nol foiz.",
-      "text": "Fundy mablag'ni loyiha turiga moslaydi — xayriya, mahsulot yoki biznes hamkorligi."
+      "start": "Loyiha joylash",
+      "cardKicker": "Hozir mablag' yig'moqda"
     },
     "featured": {
-      "kicker": "Kashf eting",
-      "title": "O'zbekiston bo'ylab tanlangan loyihalar",
-      "viewAll": "Barcha loyihalarni ko'rish"
+      "title": "Hozir mablag' yig'ayotgan loyihalar",
+      "viewAll": "Barcha loyihalar"
     },
     "how": {
-      "kicker": "Qanday ishlaydi",
-      "title": "G'oyadan bajarilgan bosqichlargacha",
-      "text": "Har bir loyiha tekshiriladi, baholanadi va haqiqiy natijalarga bog'liq bosqichlarda moliyalashtiriladi.",
-      "step1Title": "Loyihani yuborish",
-      "step1Text": "Asoschilar loyihani, so'mdagi batafsil byudjetni, bosqichlarni va moliyalashtirish shartlarini tavsiflaydi.",
-      "step2Title": "Ko'rib chiqish va baholash",
-      "step2Text": "Fundy asoschini va ro'yxatdan o'tganligini tekshiradi hamda loyihani 100 ballik tizimda baholaydi.",
-      "step3Title": "Jamoat qo'llab-quvvatlashi",
-      "step3Text": "O'zbekiston bo'ylab odamlar Click, Payme, Uzcard yoki Humo orqali yordam beradi (demoda simulyatsiya).",
-      "step4Title": "Bosqichma-bosqich to'lov",
-      "step4Text": "Asoschi natijani isbotlagach, mablag' bosqichma-bosqich beriladi."
+      "title": "Pul qanday yo'l bosadi",
+      "step1Title": "Asoschi ariza beradi",
+      "step1Text": "MChJ yoki YaTT guvohnomasi, pasport, bank hisobi, so'mdagi byudjet va 3–6 ta bosqich.",
+      "step2Title": "Biz tekshiramiz va baholaymiz",
+      "step2Text": "Hujjatlarni tekshiramiz va loyihani 100 ballik tizimda baholaymiz: biznes-reja, jamoa, bozor, moliya va xatar — har biri 20 balldan. Baho loyiha sahifasida ochiq turadi.",
+      "step3Title": "Odamlar qo'llab-quvvatlaydi",
+      "step3Text": "Xayriya, mukofot (oldindan buyurtma) yoki mushoraka orqali. To'lov — Click, Payme, Uzcard yoki Humo. Demoda pul yechilmaydi.",
+      "step4Title": "Pul bosqichma-bosqich beriladi",
+      "step4Text": "Asoschi bosqichni bajarib, dalil yuklaydi. Fundy tekshirgach, keyingi qism beriladi. Bajarilmagan bosqich uchun pul yo'q."
     },
-    "trust": {
-      "kicker": "Ishonch uchun yaratilgan",
-      "title": "Homiylarni himoya qilamiz, asoschilarni javobgar qilamiz.",
-      "text": "Fundy har bir asoschini tekshiradi, har bir byudjet bandini e'lon qiladi, har bir loyihani baholaydi va mablag'ni faqat bajarilgan bosqichlar uchun beradi.",
-      "standards": "Tekshiruv standartlarimiz",
-      "learn": "Islomiy moliya haqida",
-      "item1Title": "Ro'yxatdan o'tishni tekshirish",
-      "item1Text": "Asoschilar O'zbekistonda korxonasining (MChJ yoki YaTT) ro'yxatdan o'tganligini tasdiqlaydi.",
-      "item2Title": "Bosqichma-bosqich to'lov",
-      "item2Text": "Mablag' qismlarga bo'lib, faqat har bir bosqich isbotlangach beriladi.",
-      "item3Title": "100 ballik baholash",
-      "item3Text": "Biznes reja, jamoa, bozor, moliya va xavflar alohida baholanadi.",
-      "item4Title": "Hamkorlarga hisobot",
-      "item4Text": "Mushoraka bizneslari homiylarga muntazam moliyaviy hisobot beradi."
-    },
-    "voices": {
-      "kicker": "Fikrlar",
-      "title": "Fundy haqida asoschilar va homiylar",
-      "note": "Demo uchun namunaviy misollar — haqiqiy sharhlar emas.",
-      "quote1": "Bank foizlari issiqxonalarimizni kengaytirishni imkonsiz qilgandi. Mushoraka orqali barqaror dehqonchilikni qadrlaydigan 42 kishi bilan hamkor bo'ldik.",
-      "name1": "Azizbek Rahimov",
-      "role1": "Asoschi, AgroSmart Farg'ona",
-      "quote2": "Samarqand ustaxonasini qo'llab-quvvatladim va usta to'quvchi imzolagan qo'lda to'qilgan ro'mol oldim. Byudjet va yangiliklar to'liq ochiq edi.",
-      "name2": "Shahnoza Yusupova",
-      "role2": "Homiy, Toshkent",
-      "quote3": "O'quvchilarimizda nihoyat 3D printerlar bor. Mablag'ning bosqichma-bosqich berilishi har bir xayriyachiga ishonch berdi.",
-      "name3": "Jasur Bekmurodov",
-      "role3": "O'qituvchi, Toshkent robototexnika laboratoriyasi"
-    },
-    "faq": {
-      "kicker": "Savollar",
-      "title": "Ko'p beriladigan savollar",
-      "q1": "Fundy nima uchun foizsiz?",
-      "a1": "Oddiy kreditlarda biznes muvaffaqiyatli bo'ladimi yoki yo'qmi, baribir foiz olinadi. Fundy'da umuman foiz yo'q: loyihalar xayriya, mukofot yoki mushoraka orqali moliyalashtiriladi — bunda homiy va asoschi haqiqiy foyda va xavfni baham ko'radi.",
-      "q2": "Mushoraka amalda qanday ishlaydi?",
-      "a2": "Homiylar issiqxona yoki uskunalar kabi ishlab chiqarish aktivlari uchun kapital beradi. Asoschi biznesni boshqaradi, tekshirilgan sof foydaning kelishilgan ulushi (masalan, 25–30%) homiylarga muntazam to'lanadi va chiqish muddati aniq belgilanadi.",
-      "q3": "Mablag' bir vaqtda beriladimi?",
-      "a3": "Yo'q. Mablag' bosqichlarga bog'liq holda — masalan, uskuna yetkazilganda yoki qurilish tugaganda — asoschi isbot ko'rsatgach beriladi.",
-      "q4": "Qanday loyihalar ariza bera oladi?",
-      "a4": "O'zbekistondagi barcha sohalardagi loyihalar: texnologiya, qishloq xo'jaligi, hunarmandchilik, oziq-ovqat, ta'lim, sog'liqni saqlash, toza energiya va ijtimoiy tashabbuslar.",
-      "q5": "Qaysi valyuta ishlatiladi?",
-      "a5": "Barcha summalar — byudjet, mukofotlar va foyda ulushlari — o'zbek so'mida (UZS)."
+    "musharakah": {
+      "title": "Mushoraka: qarz emas, sheriklik",
+      "text": "Siz biznesga ulush kiritasiz. Foyda bo'lsa — kelishilgan ulush bo'yicha bo'linadi, zarar bo'lsa — u ham. Kafolatlangan foiz yo'q, shuning uchun bu ribo emas. Raqamlarni o'zingiz sinab ko'ring:",
+      "more": "Mushoraka haqida batafsil"
     },
     "cta": {
-      "title": "Loyihangizni moliyalashtirishga tayyormisiz?",
-      "text": "Loyihangizni tavsiflang, uni ko'rib chiqish va baholashdan o'tkazing va jamoatdan axloqiy, foizsiz mablag' to'plang.",
-      "start": "Loyihangizni boshlang",
-      "browse": "Loyihalarni ko'rish"
+      "title": "Loyihangiz bormi?",
+      "text": "Nima kerakligi, qancha vaqt olishi va xarajatlarni oldindan ko'ring. Ro'yxatdan o'tish — keyin.",
+      "start": "Talablarni ko'rish"
     }
   },
   "explore": {
@@ -526,7 +460,10 @@
     "pagination": "Sahifalar",
     "previous": "Oldingi sahifa",
     "next": "Keyingi sahifa",
-    "pageOf": "{{page}}-sahifa, jami {{pages}}"
+    "pageOf": "{{page}}-sahifa, jami {{pages}}",
+    "filters": "Filtr",
+    "closeFilters": "Yopish",
+    "showResults": "Ko'rsatish ({{formatted}})"
   },
   "project": {
     "save": "Saqlash",
@@ -562,7 +499,7 @@
     },
     "equitySummary": "Tekshirilgan sof foydaning {{percent}}% {{years}} yil davomida {{schedule}} homiylarga taqsimlanadi.",
     "minInvestment": "Minimal: {{amount}}",
-    "projectedReturn": "Maqsad: {{value}}",
+    "projectedReturn": "Prognoz: {{value}}",
     "youOwnThis": "Bu sizning loyihangiz.",
     "notAccepting": "Bu loyiha hozir yordam qabul qilmayapti.",
     "copyLink": "Havolani nusxalash",
@@ -633,7 +570,8 @@
     "founderReply": "{{name}} (asoschi)",
     "reply": "Javob berish",
     "related": "O'xshash loyihalar",
-    "viewAll": "Hammasini ko'rish"
+    "viewAll": "Hammasini ko'rish",
+    "scoreHint": "Fundy bahosi: biznes-reja, jamoa, bozor, moliya va xatar — har biri 20 balldan"
   },
   "contribute": {
     "title": {
@@ -813,8 +751,8 @@
       "minInvestment": "Minimal sarmoya (so'm)",
       "schedule": "Foyda qanchalik tez-tez to'lanadi",
       "years": "Hamkorlik muddati (yil)",
-      "projected": "Kutilayotgan daromad (ixtiyoriy)",
-      "projectedHint": "masalan, «yiliga 18–24%». Bu va'da emas — hikoyada tushuntiring.",
+      "projected": "Foyda prognozi so'mda (ixtiyoriy)",
+      "projectedHint": "Foiz stavkasi emas — so'mdagi taxmin. Masalan: «1 mln so'm ulushga yiliga ~200 ming so'm». Bu va'da emas.",
       "equityError": "Shartlarni tekshiring: foyda ulushi 1–99%, minimal sarmoya va 1–30 yil.",
       "equityNote": "Mushoraka shartlari loyiha faollashishidan oldin Fundy jamoasi tomonidan ko'rib chiqiladi."
     },
@@ -940,7 +878,7 @@
       "ownership": "Biznesdagi ulushingiz",
       "yourProfit": "Bu yilgi foydangiz",
       "yourLoss": "Bu yilgi zararingiz",
-      "return": "Yillik daromadingiz",
+      "return": "Yil oxirida sizda",
       "profitNote": "Foyda yili: homiylarning foyda ulushi har bir homiyning kapitaliga mutanosib ravishda bo'linadi.",
       "lossNote": "Zarar yili: zarar kapitalga mutanosib ravishda bo'linadi — sarmoyangiz kamayadi. Shuning uchun daromad hech qachon kafolatlanmaydi."
     }
@@ -979,5 +917,29 @@
       "submitted": "Tekshirilmoqda",
       "approved": "Bajarildi va tasdiqlandi"
     }
+  },
+  "start": {
+    "title": "Fundy'da loyiha joylash",
+    "intro": "Ariza 20–30 daqiqa oladi. Qoralama saqlanib turadi — istalgan vaqtda davom ettirasiz.",
+    "needTitle": "Nima kerak bo'ladi",
+    "need1": "MChJ yoki YaTT guvohnomasi (xayriya loyihalari uchun NNT ham bo'ladi)",
+    "need2": "Rahbar yoki asoschining pasporti",
+    "need3": "Tashkilot nomiga ochilgan bank hisobi",
+    "need4": "So'mdagi byudjet — har bir xarajat alohida qator",
+    "need5": "3–6 ta bosqich: nima qilinadi, qachon va pulning necha foizi",
+    "need6": "Muqova surati va loyiha hikoyasi (kamida 200 belgi)",
+    "timeTitle": "Qancha vaqt oladi",
+    "time1Title": "Ariza",
+    "time1Text": "20–30 daqiqa",
+    "time2Title": "Tekshiruv va baholash",
+    "time2Text": "odatda 3–5 ish kuni",
+    "time3Title": "Mablag' yig'ish",
+    "time3Text": "7 dan 90 kungacha — o'zingiz tanlaysiz",
+    "time4Title": "Bosqichlar bo'yicha pul",
+    "time4Text": "har bir bosqich dalili tekshirilgach",
+    "feesTitle": "Xarajatlar",
+    "fees": "Demo davrida Fundy hech qanday to'lov olmaydi. Haqiqiy to'lovlar ishga tushganda komissiya shu sahifada oldindan e'lon qilinadi.",
+    "cta": "Arizani boshlash",
+    "ctaHint": "Avval kirasiz yoki ro'yxatdan o'tasiz — bir daqiqa."
   }
 }

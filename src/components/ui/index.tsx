@@ -13,6 +13,7 @@ import {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AlertCircle, CheckCircle2, Eye, EyeOff, Info, Loader2, TriangleAlert } from 'lucide-react';
+import { usePageMeta } from '@/lib/usePageMeta';
 
 // ---------------------------------------------------------------------------
 // Button
@@ -229,6 +230,7 @@ export function PageSpinner() {
 
 /** Centered card used by the login / sign-up pages. */
 export function AuthCard({ title, subtitle, children }: { title: string; subtitle?: ReactNode; children: ReactNode }) {
+  usePageMeta(title);
   return (
     <section className="px-4 py-12 sm:py-16">
       <div className="mx-auto w-full max-w-md bg-card rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">

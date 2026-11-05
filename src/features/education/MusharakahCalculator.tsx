@@ -1,7 +1,7 @@
 import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Calculator } from 'lucide-react';
-import { formatMoney } from '@/lib/money';
+import { formatMoney, formatNumber } from '@/lib/money';
 
 /**
  * Musharakah example: profit is shared at the agreed rate, a loss in proportion to capital.
@@ -9,9 +9,9 @@ import { formatMoney } from '@/lib/money';
  *   profit year: your profit = annual result × backers' share × (investment / capital)
  *   loss year:   your loss   = annual result × (investment / capital)
  */
-export function MusharakahCalculator() {
+export function MusharakahCalculator({ showHeader = true }: { showHeader?: boolean }) {
   const { t } = useTranslation();
-  const [investment, setInvestment] = useState(12_000_000);
+  const [investment, setInvestment] = useState(2_500_000);
   const [capital, setCapital] = useState(240_000_000);
   const [backersShare, setBackersShare] = useState(28);
   const [result, setResult] = useState(80_000_000);
@@ -19,25 +19,28 @@ export function MusharakahCalculator() {
   const ownership = investment / capital;
   const isLoss = result < 0;
   const yours = isLoss ? result * ownership : result * (backersShare / 100) * ownership;
-  const yearlyReturn = (yours / investment) * 100;
+  const yearEnd = investment + yours; // your money plus your profit share (or minus your loss)
 
   return (
     <section
       id="calculator"
       className="scroll-mt-24 rounded-3xl bg-card border border-slate-200 p-5 sm:p-8 space-y-6"
-      aria-labelledby="calc-title"
+      aria-labelledby={showHeader ? 'calc-title' : undefined}
+      aria-label={showHeader ? undefined : t('education.calc.title')}
     >
-      <header className="flex items-start gap-3">
-        <span className="w-10 h-10 rounded-2xl bg-brand text-ink flex items-center justify-center shrink-0">
-          <Calculator className="w-5 h-5" aria-hidden />
-        </span>
-        <div>
-          <h2 id="calc-title" className="text-xl text-ink">
-            {t('education.calc.title')}
-          </h2>
-          <p className="text-sm text-slate-600 mt-1">{t('education.calc.hint')}</p>
-        </div>
-      </header>
+      {showHeader && (
+        <header className="flex items-start gap-3">
+          <span className="w-10 h-10 rounded-2xl bg-brand text-ink flex items-center justify-center shrink-0">
+            <Calculator className="w-5 h-5" aria-hidden />
+          </span>
+          <div>
+            <h2 id="calc-title" className="text-xl text-ink">
+              {t('education.calc.title')}
+            </h2>
+            <p className="text-sm text-slate-600 mt-1">{t('education.calc.hint')}</p>
+          </div>
+        </header>
+      )}
 
       <div className="grid gap-5 md:grid-cols-2">
         <Slider
@@ -81,7 +84,7 @@ export function MusharakahCalculator() {
       <dl className={`grid gap-4 sm:grid-cols-3 rounded-2xl p-5 ${isLoss ? 'bg-rose-50' : 'bg-brand-soft'}`}>
         <div>
           <dt className="text-xs text-slate-600">{t('education.calc.ownership')}</dt>
-          <dd className="font-display text-2xl text-ink">{(ownership * 100).toFixed(2)}%</dd>
+          <dd className="font-display text-2xl text-ink">{formatNumber(ownership * 100, 2)}%</dd>
         </div>
         <div>
           <dt className="text-xs text-slate-600">
@@ -95,7 +98,7 @@ export function MusharakahCalculator() {
         <div>
           <dt className="text-xs text-slate-600">{t('education.calc.return')}</dt>
           <dd className={`font-display text-2xl ${isLoss ? 'text-rose-700' : 'text-ink'}`}>
-            {yearlyReturn.toFixed(1)}%
+            {formatMoney(Math.round(yearEnd))}
           </dd>
         </div>
       </dl>

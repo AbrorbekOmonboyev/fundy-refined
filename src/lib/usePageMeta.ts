@@ -14,10 +14,8 @@ function setMeta(selector: string, attr: 'name' | 'property', key: string, conte
 
 /**
  * Sets the browser tab title and the page description.
- *
- * Note: link previews in Telegram/Facebook are read by bots that don't run
- * JavaScript, so per-project previews need server-side help — planned for
- * deployment (Phase 9). Until then they show the site-wide preview from index.html.
+ * When the page closes, the tab title goes back to plain "Fundy" so the next
+ * page never shows a stale title. Link previews for bots: see api/preview.ts.
  */
 export function usePageMeta(title: string | null | undefined, description?: string | null) {
   useEffect(() => {
@@ -29,5 +27,8 @@ export function usePageMeta(title: string | null | undefined, description?: stri
       setMeta('meta[property="og:description"]', 'property', 'og:description', short);
     }
     setMeta('meta[property="og:title"]', 'property', 'og:title', title);
+    return () => {
+      document.title = SITE;
+    };
   }, [title, description]);
 }

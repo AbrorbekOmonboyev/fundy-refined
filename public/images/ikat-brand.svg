@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="320" viewBox="0 0 240 320">
+  <defs>
+    <filter id="ikat" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.015 0.9" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="18" xChannelSelector="R" yChannelSelector="A"/>
+    </filter>
+  </defs>
+  <g filter="url(#ikat)" fill="none" stroke="#90d508" stroke-width="10" opacity="0.55">
+    <path d="M120 22 L214 160 L120 298 L26 160 Z"/>
+    <path d="M120 92 L168 160 L120 228 L72 160 Z" fill="#90d508" fill-opacity="0.35" stroke="none"/>
+  </g>
+</svg>

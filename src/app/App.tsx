@@ -17,6 +17,7 @@ import { PageSpinner } from '@/components/ui';
 const ExplorePage = page(() => import('@/pages/ExplorePage'), 'ExplorePage');
 const ProjectDetailPage = page(() => import('@/pages/ProjectDetailPage'), 'ProjectDetailPage');
 const StartProjectPage = page(() => import('@/pages/StartProjectPage'), 'StartProjectPage');
+const StartLandingPage = page(() => import('@/pages/StartProjectPage'), 'StartLandingPage');
 const ProjectEditorPage = page(() => import('@/pages/ProjectEditorPage'), 'ProjectEditorPage');
 const FounderDashboardPage = page(() => import('@/pages/FounderDashboardPage'), 'FounderDashboardPage');
 const BackerDashboardPage = page(() => import('@/pages/BackerDashboardPage'), 'BackerDashboardPage');
@@ -67,9 +68,11 @@ export function App() {
               <Route path={paths.terms} element={<TermsPage />} />
               <Route path={paths.privacy} element={<PrivacyPage />} />
 
+              <Route path={paths.startProject} element={<StartLandingPage />} />
+
               {/* Signed-in users only */}
               <Route
-                path={paths.startProject}
+                path={paths.newProject}
                 element={
                   <RequireAuth>
                     <StartProjectPage />

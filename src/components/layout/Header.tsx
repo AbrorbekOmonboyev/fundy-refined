@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Menu, X } from 'lucide-react';
 import { useAuth } from '@/features/auth/AuthContext';
 import { paths } from '@/app/routes';
-import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
+import { LanguageMenu, LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { NotificationBell } from '@/components/layout/NotificationBell';
 import { Logo } from '@/components/Logo';
@@ -61,35 +61,29 @@ export function Header() {
 
           {/* Actions */}
           <div className="flex items-center gap-2 shrink-0">
-            <LanguageSwitcher className="hidden sm:flex" />
+            <LanguageMenu className="hidden sm:flex" />
             <ThemeToggle />
 
             {user && <NotificationBell />}
 
+            {showLogin && (
+              <Link
+                to={paths.login}
+                className="hidden sm:inline-block px-3 py-2 text-xs font-semibold text-slate-700 hover:text-ink whitespace-nowrap"
+              >
+                {t('account.login')}
+              </Link>
+            )}
+
+            {/* The one primary action */}
             <Link
               to={paths.startProject}
-              className="hidden sm:inline-block px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft active:bg-night rounded-lg shadow-sm transition-colors whitespace-nowrap"
+              className="hidden sm:inline-block px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft active:bg-night rounded-full shadow-sm transition-colors whitespace-nowrap"
             >
               {t('nav.startProject')}
             </Link>
 
             {user && <UserMenu />}
-            {showLogin && (
-              <>
-                <Link
-                  to={paths.login}
-                  className="hidden sm:inline-block px-3 py-2 text-xs font-semibold text-slate-700 hover:text-ink whitespace-nowrap"
-                >
-                  {t('account.login')}
-                </Link>
-                <Link
-                  to={paths.signup}
-                  className="hidden md:inline-block px-4 py-2 text-xs font-semibold text-ink bg-brand hover:bg-brand-deep rounded-full whitespace-nowrap transition-colors"
-                >
-                  {t('account.signup')}
-                </Link>
-              </>
-            )}
 
             <button
               type="button"

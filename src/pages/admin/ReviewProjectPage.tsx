@@ -82,7 +82,7 @@ function Review({ draft, evaluation }: { draft: Draft; evaluation: Evaluation | 
             {p.cover_image_path && (
               <img
                 src={publicFileUrl('project-images', p.cover_image_path) ?? ''}
-                alt=""
+                alt={t('wizard.story.cover')}
                 className="w-full aspect-[16/9] object-cover rounded-2xl"
               />
             )}

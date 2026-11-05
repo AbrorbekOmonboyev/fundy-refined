@@ -62,7 +62,7 @@ export function WelcomePage() {
     setBusy(false);
 
     const requested = params.get('next');
-    const fallback = intent === 'launch' ? paths.startProject : paths.explore;
+    const fallback = intent === 'launch' ? paths.newProject : paths.explore;
     // Coming from a specific page? Go back there. Otherwise follow their choice.
     navigate(requested && safeNext(requested) !== paths.home ? safeNext(requested) : fallback, { replace: true });
   }

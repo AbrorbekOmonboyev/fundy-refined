@@ -39,7 +39,7 @@ export function FounderDashboardPage() {
       <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-6">
         <h1 className="text-2xl sm:text-3xl font-extrabold text-ink">{t('account.projects')}</h1>
         <Link
-          to={paths.startProject}
+          to={paths.newProject}
           className="px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-lg self-start sm:self-auto"
         >
           + {t('dashboard.founder.newProject')}
@@ -58,7 +58,7 @@ export function FounderDashboardPage() {
           <h2 className="text-lg font-bold text-ink">{t('dashboard.founder.emptyTitle')}</h2>
           <p className="text-sm text-slate-600 max-w-md mx-auto">{t('dashboard.founder.emptyText')}</p>
           <Link
-            to={paths.startProject}
+            to={paths.newProject}
             className="inline-block px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-lg"
           >
             {t('nav.startProject')}

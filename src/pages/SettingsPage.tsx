@@ -11,6 +11,7 @@ import { useRegions } from '@/features/reference/useReference';
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import { Avatar } from '@/components/Avatar';
 import { Alert, Button, SelectField, TextField } from '@/components/ui';
+import { usePageMeta } from '@/lib/usePageMeta';
 
 const AVATAR_MAX_BYTES = 2 * 1024 * 1024; // matches the avatars bucket limit
 const AVATAR_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
@@ -31,6 +32,7 @@ function Section({ title, description, children }: { title: string; description?
 
 export function SettingsPage() {
   const { t } = useTranslation();
+  usePageMeta(t('settings.title'));
   const navigate = useNavigate();
   const { user, profile, refreshProfile, signOut } = useAuth();
   const { options: regionOptions } = useRegions();
