@@ -18,7 +18,8 @@
     "db:push": "supabase db push",
     "db:seed:push": "supabase db push --include-seed",
     "db:types": "supabase gen types typescript --remote --schema public > src/lib/database.types.ts",
-    "db:check": "node supabase/scripts/check-live.ts"
+    "db:check": "node supabase/scripts/check-live.ts",
+    "email:generate": "node supabase/scripts/generate-email-templates.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",

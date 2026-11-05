@@ -21,10 +21,7 @@
   "banner": {
     "label": "Демо-версия:",
     "full": "Создано для рынка Узбекистана. Все платежи, распределение прибыли и проекты — симуляция.",
-    "short": "Демо-версия (UZS).",
-    "reset": "Сбросить демо",
-    "resetTitle": "Сбросить демо-данные",
-    "resetConfirm": "Вернуть демо-данные в исходное состояние?"
+    "short": "Демо-версия (UZS)."
   },
   "footer": {
     "about": "Прозрачная беспроцентная краудфандинговая платформа Узбекистана. Соединяет предпринимателей, ремесленников и социальных лидеров со сторонниками через пожертвования, вознаграждения и мушараку.",
@@ -830,5 +827,24 @@
       "equity_terms_missing": "Добавьте условия партнёрства (шаг 5).",
       "project_not_editable": "Этот проект больше нельзя изменить."
     }
+  },
+  "notifications": {
+    "aProject": "проект",
+    "unreadLabel_one": "Уведомления, {{count}} непрочитанное",
+    "unreadLabel_few": "Уведомления, {{count}} непрочитанных",
+    "unreadLabel_many": "Уведомления, {{count}} непрочитанных",
+    "unreadLabel_other": "Уведомления, {{count}} непрочитанных",
+    "project_submitted": "Новый проект на проверку: {{project}}",
+    "project_approved": "{{project}} одобрен и запущен!",
+    "project_changes_requested": "Команда проверки просит изменить {{project}}",
+    "project_rejected": "{{project}} не одобрен",
+    "project_funded": "{{project}} достиг цели 🎉",
+    "project_unsuccessful": "Сбор {{project}} завершился, не достигнув цели",
+    "new_contribution": "Новая поддержка {{project}}: {{amount}}",
+    "contribution_confirmed": "Ваши {{amount}} для {{project}} записаны",
+    "new_comment": "Новый вопрос по проекту {{project}}",
+    "comment_reply": "Автор ответил на ваш комментарий к {{project}}",
+    "new_update": "{{project}}: новая публикация",
+    "milestone_approved": "Выполнен этап проекта {{project}}"
   }
 }

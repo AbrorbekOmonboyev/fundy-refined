@@ -21,10 +21,7 @@
   "banner": {
     "label": "Demo versiya:",
     "full": "O'zbekiston bozori uchun ishlab chiqilgan. Barcha to'lovlar, foyda taqsimoti va loyihalar — simulyatsiya.",
-    "short": "Demo versiya (UZS).",
-    "reset": "Demoni tiklash",
-    "resetTitle": "Demo ma'lumotlarini tiklash",
-    "resetConfirm": "Demo ma'lumotlarini boshlang'ich holatga qaytarasizmi?"
+    "short": "Demo versiya (UZS)."
   },
   "footer": {
     "about": "O'zbekistonning shaffof, foizsiz kraudfanding ekotizimi. Tadbirkorlar, hunarmandlar va ijtimoiy tashabbuskorlarni xayriya, mukofot va mushoraka orqali homiylar bilan bog'laydi.",
@@ -818,5 +815,22 @@
       "equity_terms_missing": "Hamkorlik shartlarini qo'shing (5-qadam).",
       "project_not_editable": "Bu loyihani endi o'zgartirib bo'lmaydi."
     }
+  },
+  "notifications": {
+    "aProject": "loyiha",
+    "unreadLabel_one": "Bildirishnomalar, {{count}} ta o'qilmagan",
+    "unreadLabel_other": "Bildirishnomalar, {{count}} ta o'qilmagan",
+    "project_submitted": "Ko'rib chiqish uchun yangi loyiha: {{project}}",
+    "project_approved": "{{project}} tasdiqlandi va faollashdi!",
+    "project_changes_requested": "Ko'rib chiqish jamoasi {{project}} uchun o'zgartirish so'radi",
+    "project_rejected": "{{project}} tasdiqlanmadi",
+    "project_funded": "{{project}} maqsadga yetdi 🎉",
+    "project_unsuccessful": "{{project}} maqsadga yetmay tugadi",
+    "new_contribution": "{{project}} uchun yangi hissa: {{amount}}",
+    "contribution_confirmed": "{{project}} uchun {{amount}} qayd etildi",
+    "new_comment": "{{project}} da yangi savol",
+    "comment_reply": "Asoschi {{project}} dagi izohingizga javob berdi",
+    "new_update": "{{project}} yangilik e'lon qildi",
+    "milestone_approved": "{{project}} bosqichlaridan biri bajarildi"
   }
 }

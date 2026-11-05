@@ -21,10 +21,7 @@
   "banner": {
     "label": "Demonstration Prototype:",
     "full": "Designed for the Uzbekistan market. All transactions, profit distributions, and projects are simulations.",
-    "short": "Uzbekistan simulation (UZS).",
-    "reset": "Reset Demo",
-    "resetTitle": "Reset simulated data",
-    "resetConfirm": "Reset prototype data to original demo state?"
+    "short": "Uzbekistan simulation (UZS)."
   },
   "footer": {
     "about": "Uzbekistan's transparent, interest-free crowdfunding ecosystem. Connecting entrepreneurs, artisans, and social champions with community backers through Donations, Rewards, and Musharakah profit-sharing.",
@@ -818,5 +815,22 @@
       "equity_terms_missing": "Add the partnership terms (step 5).",
       "project_not_editable": "This project can no longer be changed."
     }
+  },
+  "notifications": {
+    "aProject": "a project",
+    "unreadLabel_one": "Notifications, {{count}} unread",
+    "unreadLabel_other": "Notifications, {{count}} unread",
+    "project_submitted": "New project to review: {{project}}",
+    "project_approved": "{{project}} is approved and live!",
+    "project_changes_requested": "The review team asked for changes to {{project}}",
+    "project_rejected": "{{project}} was not approved",
+    "project_funded": "{{project}} reached its goal 🎉",
+    "project_unsuccessful": "{{project}} ended below its goal",
+    "new_contribution": "New support for {{project}}: {{amount}}",
+    "contribution_confirmed": "Your {{amount}} for {{project}} was recorded",
+    "new_comment": "New question on {{project}}",
+    "comment_reply": "The founder replied to your comment on {{project}}",
+    "new_update": "{{project}} posted an update",
+    "milestone_approved": "A milestone of {{project}} was completed"
   }
 }

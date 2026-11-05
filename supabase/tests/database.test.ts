@@ -798,6 +798,47 @@ describe('conflict of interest and withdrawing', () => {
   });
 });
 
+describe('notifications', () => {
+  test('users mark only their own notifications as read', async () => {
+    const before = await as<{ n: number }>(
+      db,
+      user(alice),
+      `select count(*)::int as n from public.notifications where user_id = $1 and read_at is null`,
+      [alice],
+    );
+    assert.ok(before[0].n > 0, 'alice has unread notifications from earlier tests');
+    const bobUnread = await as<{ n: number }>(
+      db,
+      owner,
+      `select count(*)::int as n from public.notifications where user_id = $1 and read_at is null`,
+      [bob],
+    );
+
+    const [{ mark_all_notifications_read: marked }] = await as<{ mark_all_notifications_read: number }>(
+      db,
+      user(alice),
+      `select public.mark_all_notifications_read()`,
+    );
+    assert.equal(marked, before[0].n);
+
+    const after = await as<{ n: number }>(
+      db,
+      owner,
+      `select count(*)::int as n from public.notifications where user_id = $1 and read_at is null`,
+      [bob],
+    );
+    assert.equal(after[0].n, bobUnread[0].n, "bob's notifications are untouched");
+  });
+
+  test('users cannot rewrite what a notification says', async () => {
+    await rejects(
+      as(db, user(bob), `update public.notifications set data = '{}' where user_id = $1`, [bob]),
+      /permission denied/,
+    );
+    await rejects(as(db, anon, `select public.mark_all_notifications_read()`), /permission denied/);
+  });
+});
+
 describe('admin panel', () => {
   test('admins list users with email and activity; others cannot', async () => {
     const rows = await as<{ email: string; contribution_total: string; total_count: string }>(

@@ -1091,6 +1091,7 @@ export type Database = {
         Args: { c: Database["public"]["Tables"]["comments"]["Row"] }
         Returns: boolean
       }
+      mark_all_notifications_read: { Args: never; Returns: number }
       platform_stats: { Args: never; Returns: Json }
       search_project_ids: { Args: { p_query: string }; Returns: string[] }
       submit_milestone: {

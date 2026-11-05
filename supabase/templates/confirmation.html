@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <body style="margin:0;padding:0;background:#F4F6FB;font-family:Arial,Helvetica,sans-serif;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#F4F6FB;padding:24px 12px;">
+      <tr><td align="center">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;background:#FFFFFF;border-radius:24px;overflow:hidden;">
+          <tr><td style="background:#B5F23D;padding:24px 32px;">
+            <img src="https://fundy-refined-b8z3.vercel.app/brand/fundy-logo-email.png" width="140" alt="Fundy" style="display:block;width:140px;height:auto;border:0;" />
+          </td></tr>
+          <tr><td style="padding:32px;">
+{{ if eq (printf "%v" .Data.language) "ru" }}
+              <h1 style="margin:0 0 12px;font-size:24px;line-height:1.25;color:#15122B;font-family:Arial,Helvetica,sans-serif;">Добро пожаловать в Fundy!</h1>
+              <p style="margin:0 0 24px;font-size:16px;line-height:1.5;color:#15122B;">Подтвердите почту, чтобы активировать аккаунт.</p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-radius:999px;background:#15122B;">
+                <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;">Подтвердить почту</a>
+              </td></tr></table>
+              <p style="margin:24px 0 6px;font-size:13px;line-height:1.5;color:#5B6175;">Если кнопка не работает, скопируйте ссылку в браузер:</p>
+              <p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all;"><a href="{{ .ConfirmationURL }}" style="color:#15122B;">{{ .ConfirmationURL }}</a></p>
+              <p style="margin:0;font-size:13px;line-height:1.5;color:#5B6175;">Если вы не регистрировались в Fundy, просто проигнорируйте это письмо.</p>
+            </td></tr>
+            <tr><td style="padding:20px 32px;background:#F4F6FB;font-size:12px;line-height:1.5;color:#5B6175;">Fundy — беспроцентный краудфандинг для Узбекистана. Демо-версия: настоящие деньги не списываются.</td></tr>
+{{ else if eq (printf "%v" .Data.language) "en" }}
+              <h1 style="margin:0 0 12px;font-size:24px;line-height:1.25;color:#15122B;font-family:Arial,Helvetica,sans-serif;">Welcome to Fundy!</h1>
+              <p style="margin:0 0 24px;font-size:16px;line-height:1.5;color:#15122B;">Confirm your email to activate your account.</p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-radius:999px;background:#15122B;">
+                <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;">Confirm email</a>
+              </td></tr></table>
+              <p style="margin:24px 0 6px;font-size:13px;line-height:1.5;color:#5B6175;">If the button doesn't work, copy this link into your browser:</p>
+              <p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all;"><a href="{{ .ConfirmationURL }}" style="color:#15122B;">{{ .ConfirmationURL }}</a></p>
+              <p style="margin:0;font-size:13px;line-height:1.5;color:#5B6175;">If you didn't sign up for Fundy, you can ignore this email.</p>
+            </td></tr>
+            <tr><td style="padding:20px 32px;background:#F4F6FB;font-size:12px;line-height:1.5;color:#5B6175;">Fundy — interest-free crowdfunding for Uzbekistan. Demo version: no real money is charged.</td></tr>
+{{ else }}
+              <h1 style="margin:0 0 12px;font-size:24px;line-height:1.25;color:#15122B;font-family:Arial,Helvetica,sans-serif;">Fundy'ga xush kelibsiz!</h1>
+              <p style="margin:0 0 24px;font-size:16px;line-height:1.5;color:#15122B;">Hisobingizni faollashtirish uchun elektron pochtangizni tasdiqlang.</p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-radius:999px;background:#15122B;">
+                <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;">Emailni tasdiqlash</a>
+              </td></tr></table>
+              <p style="margin:24px 0 6px;font-size:13px;line-height:1.5;color:#5B6175;">Tugma ishlamasa, bu havolani brauzerga nusxalang:</p>
+              <p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all;"><a href="{{ .ConfirmationURL }}" style="color:#15122B;">{{ .ConfirmationURL }}</a></p>
+              <p style="margin:0;font-size:13px;line-height:1.5;color:#5B6175;">Agar siz Fundy'da ro'yxatdan o'tmagan bo'lsangiz, bu xatni e'tiborsiz qoldiring.</p>
+            </td></tr>
+            <tr><td style="padding:20px 32px;background:#F4F6FB;font-size:12px;line-height:1.5;color:#5B6175;">Fundy — O'zbekiston uchun foizsiz kraudfanding. Demo versiya: haqiqiy pul yechilmaydi.</td></tr>
+{{ end }}
+        </table>
+      </td></tr>
+    </table>
+  </body>
+</html>
