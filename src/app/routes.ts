@@ -34,4 +34,6 @@ export const paths = {
   adminUsers: '/admin/users',
   adminAudit: '/admin/audit',
   adminMessages: '/admin/messages',
+  adminMilestones: '/admin/milestones',
+  adminReports: '/admin/reports',
 } as const;

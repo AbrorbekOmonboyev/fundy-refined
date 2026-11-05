@@ -107,6 +107,9 @@ export function useNotificationView() {
       new_update: { text: t('notifications.new_update', { project: title }), to: projectPage },
       contact_message: { text: t('notifications.contact_message'), to: paths.adminMessages },
       milestone_approved: { text: t('notifications.milestone_approved', { project: title }), to: projectPage },
+      milestone_submitted: { text: t('notifications.milestone_submitted', { project: title }), to: paths.adminMilestones },
+      milestone_returned: { text: t('notifications.milestone_returned', { project: title }), to: paths.founderDashboard },
+      content_reported: { text: t('notifications.content_reported'), to: paths.adminReports },
     };
 
     const seconds = Math.round((new Date(n.created_at).getTime() - Date.now()) / 1000);

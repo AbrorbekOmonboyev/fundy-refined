@@ -15,6 +15,8 @@ import { BackerDashboardPage } from '@/pages/BackerDashboardPage';
 import { AboutPage, EducationPage, PrivacyPage, TermsPage, TrustSafetyPage } from '@/pages/ContentPages';
 import { ContactPage } from '@/pages/ContactPage';
 import { AdminMessagesPage } from '@/pages/admin/AdminMessagesPage';
+import { AdminMilestonesPage } from '@/pages/admin/AdminMilestonesPage';
+import { AdminReportsPage } from '@/pages/admin/AdminReportsPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { LoginPage } from '@/pages/auth/LoginPage';
 import { SignupPage } from '@/pages/auth/SignupPage';
@@ -126,6 +128,8 @@ export function App() {
             <Route path="users" element={<AdminUsersPage />} />
             <Route path="audit" element={<AdminAuditPage />} />
             <Route path="messages" element={<AdminMessagesPage />} />
+            <Route path="milestones" element={<AdminMilestonesPage />} />
+            <Route path="reports" element={<AdminReportsPage />} />
           </Route>
 
           {/* Accounts */}

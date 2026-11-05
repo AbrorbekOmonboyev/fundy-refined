@@ -839,6 +839,156 @@ describe('notifications', () => {
   });
 });
 
+describe('milestone reviews', () => {
+  let projectId: string;
+  let milestoneId: string;
+
+  before(async () => {
+    // A funded project of alice's with one milestone.
+    projectId = await createDraft(alice, 'alice-funded-milestones');
+    await as(db, user(alice), `select public.submit_project($1)`, [projectId]);
+    await evaluateAndApprove(projectId);
+    await db.query(`update public.projects set status = 'funded' where id = $1`, [projectId]);
+    [{ id: milestoneId }] = await as<{ id: string }>(
+      db,
+      anon,
+      `select id from public.milestones where project_id = $1 order by position limit 1`,
+      [projectId],
+    );
+  });
+
+  test('reporting a milestone done notifies admins', async () => {
+    await as(
+      db,
+      user(alice),
+      `select public.submit_milestone($1, 'Equipment installed; photos and receipts attached.')`,
+      [milestoneId],
+    );
+    const notes = await as(
+      db,
+      user(admin),
+      `select id from public.notifications where type = 'milestone_submitted' and data->>'milestone_id' = $1`,
+      [milestoneId],
+    );
+    assert.equal(notes.length, 1);
+  });
+
+  test('an admin can send it back with a note; the founder is notified and can resubmit', async () => {
+    await rejects(
+      as(db, user(admin), `select public.admin_return_milestone($1, 'short')`, [milestoneId]),
+      /review_note_required/,
+    );
+    await rejects(
+      as(db, user(alice), `select public.admin_return_milestone($1, 'Please add the receipts')`, [milestoneId]),
+      /admin_only/,
+    );
+    await as(db, user(admin), `select public.admin_return_milestone($1, 'Please add the supplier receipts.')`, [
+      milestoneId,
+    ]);
+    const [m] = await as<{ status: string; review_note: string }>(
+      db,
+      anon,
+      `select status, review_note from public.milestones where id = $1`,
+      [milestoneId],
+    );
+    assert.equal(m.status, 'pending');
+    assert.match(m.review_note, /receipts/);
+    assert.equal(
+      (await as(db, user(alice), `select id from public.notifications where type = 'milestone_returned'`)).length,
+      1,
+    );
+    await as(db, user(alice), `select public.submit_milestone($1, 'Receipts from the supplier are now attached.')`, [
+      milestoneId,
+    ]);
+  });
+
+  test('approving clears the note', async () => {
+    await as(db, user(admin), `select public.admin_approve_milestone($1)`, [milestoneId]);
+    const [m] = await as<{ status: string; review_note: string | null }>(
+      db,
+      anon,
+      `select status, review_note from public.milestones where id = $1`,
+      [milestoneId],
+    );
+    assert.equal(m.status, 'approved');
+    assert.equal(m.review_note, null);
+  });
+});
+
+describe('content reports', () => {
+  let commentId: string;
+
+  before(async () => {
+    [{ id: commentId }] = await as<{ id: string }>(
+      db,
+      owner,
+      `select id from public.comments where is_hidden = false limit 1`,
+    );
+  });
+
+  test('a user reports a comment once; admins are notified', async () => {
+    await as(
+      db,
+      user(carol),
+      `insert into public.reports (reporter_id, target_type, target_id, reason) values ($1, 'comment', $2, 'spam')`,
+      [carol, commentId],
+    );
+    await rejects(
+      as(
+        db,
+        user(carol),
+        `insert into public.reports (reporter_id, target_type, target_id, reason) values ($1, 'comment', $2, 'spam')`,
+        [carol, commentId],
+      ),
+      /duplicate key/,
+    );
+    const notes = await as(db, user(admin), `select id from public.notifications where type = 'content_reported'`);
+    assert.ok(notes.length >= 1);
+  });
+
+  test('reporters see only their own reports; visitors cannot report', async () => {
+    assert.equal((await as(db, user(bob), `select id from public.reports where reporter_id = $1`, [carol])).length, 0);
+    await rejects(
+      as(
+        db,
+        anon,
+        `insert into public.reports (reporter_id, target_type, target_id, reason) values (gen_random_uuid(), 'comment', gen_random_uuid(), 'spam')`,
+      ),
+      /permission denied/,
+    );
+  });
+});
+
+describe('likes on updates', () => {
+  test('liking twice is refused and the count follows likes', async () => {
+    const [u] = await as<{ id: string; likes_count: number }>(
+      db,
+      owner,
+      `select id, likes_count from public.project_updates limit 1`,
+    );
+    await as(db, user(carol), `insert into public.update_likes (update_id, user_id) values ($1, $2)`, [u.id, carol]);
+    await rejects(
+      as(db, user(carol), `insert into public.update_likes (update_id, user_id) values ($1, $2)`, [u.id, carol]),
+      /duplicate key/,
+    );
+    const [after] = await as<{ likes_count: number }>(
+      db,
+      anon,
+      `select likes_count from public.project_updates where id = $1`,
+      [u.id],
+    );
+    assert.equal(after.likes_count, u.likes_count + 1);
+    await as(db, user(carol), `delete from public.update_likes where update_id = $1 and user_id = $2`, [u.id, carol]);
+    const [back] = await as<{ likes_count: number }>(
+      db,
+      anon,
+      `select likes_count from public.project_updates where id = $1`,
+      [u.id],
+    );
+    assert.equal(back.likes_count, u.likes_count);
+  });
+});
+
 describe('contact messages', () => {
   test('a visitor can send a message; admins are notified and can read it', async () => {
     await as(

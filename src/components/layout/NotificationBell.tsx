@@ -5,6 +5,7 @@ import {
   Bell,
   CheckCheck,
   CircleAlert,
+  Flag,
   Gift,
   HandCoins,
   Mail,
@@ -28,6 +29,9 @@ const ICONS: Record<AppNotification['type'], typeof Bell> = {
   comment_reply: MessageSquare,
   new_update: Megaphone,
   milestone_approved: Trophy,
+  milestone_submitted: Flag,
+  milestone_returned: CircleAlert,
+  content_reported: Flag,
   contact_message: Mail,
 };
 

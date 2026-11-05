@@ -102,7 +102,11 @@
     "ownProject": "O'z loyihangizni qo'llab-quvvatlay olmaysiz.",
     "cannotReviewOwn": "Bu sizning loyihangiz. Uni boshqa admin baholashi va qaror qabul qilishi kerak.",
     "cannotVerifySelf": "O'z asoschi profilingizni tasdiqlay olmaysiz. Buni boshqa admin qilishi kerak.",
-    "notPendingReview": "Bu loyiha ko'rib chiqishni kutmayapti."
+    "notPendingReview": "Bu loyiha ko'rib chiqishni kutmayapti.",
+    "projectNotFunded": "Bosqichlar haqida faqat loyiha maqsadiga yetgandan keyin xabar berish mumkin.",
+    "evidenceTooShort": "Dalilni kamida 20 ta belgida yozing.",
+    "milestoneChanged": "Bu bosqich allaqachon o‘zgargan. Sahifani yangilang.",
+    "reviewNoteRequired": "Kamida 10 ta belgidan iborat izoh yozing."
   },
   "auth": {
     "fields": {
@@ -200,7 +204,9 @@
       "comments": "Izohlar",
       "users": "Foydalanuvchilar",
       "audit": "Harakatlar jurnali",
-      "messages": "Xabarlar"
+      "messages": "Xabarlar",
+      "milestones": "Bosqichlar",
+      "reports": "Shikoyatlar"
     },
     "review": {
       "queueHint": "Qaror kutayotgan loyihalar, eng eskisi birinchi.",
@@ -303,6 +309,38 @@
       "reply": "Email orqali javob berish",
       "markHandled": "Ko'rib chiqildi",
       "reopen": "Qayta ochish"
+    },
+    "milestones": {
+      "hint": "Asoschilar bosqich bajarilganini xabar qiladi. Dalilni tekshiring, so‘ng tasdiqlang yoki qaytaring.",
+      "empty": "Kutayotgan bosqichlar yo‘q.",
+      "approve": "Tasdiqlash",
+      "sendBack": "Qaytarish",
+      "approveConfirm": "Bu bosqichni tasdiqlaysizmi? Pulning shu ulushi o‘tkaziladi.",
+      "noteLabel": "Nima yetishmayapti?",
+      "noteHint": "Asoschi bu izohni ko‘radi."
+    },
+    "reports": {
+      "hint": "Foydalanuvchilar shikoyat qilgan kontent. Qoidani buzganini yashiring yoki shikoyatni rad eting.",
+      "empty": "Shikoyatlar yo‘q.",
+      "filter": {
+        "open": "Ochiq",
+        "resolved": "Hal qilingan",
+        "dismissed": "Rad etilgan",
+        "all": "Hammasi"
+      },
+      "target": {
+        "project": "Loyiha",
+        "comment": "Izoh",
+        "update": "Yangilik",
+        "user": "Foydalanuvchi"
+      },
+      "hidden": "yashirilgan",
+      "open": "Loyihani ochish",
+      "gone": "Bu narsa endi mavjud emas.",
+      "hideAndResolve": "Izohni yashirish",
+      "manageProject": "Loyihalarni boshqarish",
+      "resolve": "Hal qilindi",
+      "dismiss": "Rad etish"
     }
   },
   "money": {
@@ -855,7 +893,10 @@
     "comment_reply": "Asoschi {{project}} dagi izohingizga javob berdi",
     "new_update": "{{project}} yangilik e'lon qildi",
     "milestone_approved": "{{project}} bosqichlaridan biri bajarildi",
-    "contact_message": "Aloqa sahifasidan yangi xabar"
+    "contact_message": "Aloqa sahifasidan yangi xabar",
+    "milestone_submitted": "{{project}} bosqich bajarilganini xabar qildi",
+    "milestone_returned": "{{project}} bosqichi uchun qo‘shimcha dalil kerak",
+    "content_reported": "Kimdir kontent ustidan shikoyat qildi"
   },
   "content": {
     "updated": "Oxirgi yangilanish: {{date}}",
@@ -895,6 +936,40 @@
       "return": "Yillik daromadingiz",
       "profitNote": "Foyda yili: homiylarning foyda ulushi har bir homiyning kapitaliga mutanosib ravishda bo'linadi.",
       "lossNote": "Zarar yili: zarar kapitalga mutanosib ravishda bo'linadi — sarmoyangiz kamayadi. Shuning uchun daromad hech qachon kafolatlanmaydi."
+    }
+  },
+  "community": {
+    "like": "Yoqdi",
+    "unlike": "Yoqdini olib tashlash",
+    "report": "Shikoyat qilish",
+    "reportReason": "Nima noto‘g‘ri?",
+    "reportDetails": "Batafsil (ixtiyoriy)",
+    "sendReport": "Shikoyatni yuborish",
+    "reported": "Rahmat. Jamoamiz buni ko‘rib chiqadi.",
+    "alreadyReported": "Siz bu haqda allaqachon xabar bergansiz. Jamoamiz ko‘rib chiqadi.",
+    "reasons": {
+      "spam": "Spam yoki reklama",
+      "abuse": "Qo‘pol yoki haqoratli",
+      "misleading": "Yolg‘on yoki chalg‘ituvchi",
+      "other": "Boshqa sabab"
+    }
+  },
+  "milestones": {
+    "manage": "Bosqichlar",
+    "none": "Bu loyihada bosqichlar yo‘q.",
+    "founderIntro": "Bosqichni tugatganingizda, dalil bilan xabar bering. Jamoamiz tekshirgach, pulning shu ulushi o‘tkaziladi.",
+    "report": "Bajarildi deb xabar berish",
+    "evidence": "Dalil",
+    "evidenceHint": "Nima qilinganini yozing va rasm, hujjat yoki cheklarga havola qo‘shing.",
+    "evidenceTooShort": "Kamida {{count}} ta belgi yozing.",
+    "send": "Tekshiruvga yuborish",
+    "waiting": "Yuborildi. Jamoamiz tekshirishini kuting.",
+    "returnedNote": "Jamoamiz qo‘shimcha so‘radi:",
+    "release": "Pulning {{percent}}%",
+    "status": {
+      "pending": "Hali bajarilmagan",
+      "submitted": "Tekshirilmoqda",
+      "approved": "Bajarildi va tasdiqlandi"
     }
   }
 }

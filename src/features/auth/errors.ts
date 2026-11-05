@@ -36,6 +36,11 @@ const BY_CODE: Record<string, ErrorKey> = {
   cannot_review_own_project: 'errors.cannotReviewOwn',
   cannot_verify_self: 'errors.cannotVerifySelf',
   project_not_pending_review: 'errors.notPendingReview',
+  project_not_funded: 'errors.projectNotFunded',
+  evidence_too_short: 'errors.evidenceTooShort',
+  milestone_already_submitted: 'errors.milestoneChanged',
+  milestone_not_submitted: 'errors.milestoneChanged',
+  review_note_required: 'errors.reviewNoteRequired',
   account_blocked: 'errors.blocked',
   not_signed_in: 'errors.notSignedIn',
 };

@@ -9,6 +9,7 @@ import { errorKey } from '@/features/auth/errors';
 import { pickText, type MyProject } from '@/features/projects/api';
 import { useMyProjects } from '@/features/projects/hooks';
 import { deleteDraft, postUpdate, withdrawSubmission } from '@/features/wizard/api';
+import { FounderMilestones } from '@/features/community/FounderMilestones';
 import { Alert, Button, PageSpinner, TextAreaField, TextField } from '@/components/ui';
 import { formatMoney } from '@/lib/money';
 import { usePageMeta } from '@/lib/usePageMeta';
@@ -85,6 +86,9 @@ function ProjectRow({ project: p }: { project: MyProject }) {
   const title = pickText(p.translations, i18n.resolvedLanguage ?? 'uz', p.originalLanguage).text?.title ?? p.slug;
   const isLive = LIVE.includes(p.status);
   const editable = p.status === 'draft' || p.status === 'changes_requested';
+  // Milestone reports start once the money is raised.
+  const hasMilestones = p.status === 'funded' || p.status === 'completed';
+  const [showMilestones, setShowMilestones] = useState(false);
 
   async function withdraw() {
     if (!window.confirm(t('dashboard.founder.withdrawConfirm'))) return;
@@ -174,6 +178,15 @@ function ProjectRow({ project: p }: { project: MyProject }) {
             <Button variant="secondary" className="!px-3 !py-1.5 text-xs" onClick={() => setWriting(!writing)}>
               {t('dashboard.founder.postUpdate')}
             </Button>
+            {hasMilestones && (
+              <Button
+                variant="secondary"
+                className="!px-3 !py-1.5 text-xs"
+                onClick={() => setShowMilestones(!showMilestones)}
+              >
+                {t('milestones.manage')}
+              </Button>
+            )}
           </>
         )}
         {p.status === 'draft' && (
@@ -189,6 +202,7 @@ function ProjectRow({ project: p }: { project: MyProject }) {
       </div>
 
       {writing && <UpdateForm projectId={p.id} slug={p.slug} onDone={() => setWriting(false)} />}
+      {hasMilestones && showMilestones && <FounderMilestones projectId={p.id} />}
     </li>
   );
 }

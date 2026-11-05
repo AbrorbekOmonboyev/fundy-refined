@@ -102,7 +102,11 @@
     "ownProject": "You can't back your own project.",
     "cannotReviewOwn": "This is your own project. Another admin must evaluate and decide on it.",
     "cannotVerifySelf": "You cannot verify your own founder profile. Another admin must do it.",
-    "notPendingReview": "This project is not waiting for review."
+    "notPendingReview": "This project is not waiting for review.",
+    "projectNotFunded": "Milestones can be reported only after the project reaches its goal.",
+    "evidenceTooShort": "Please describe the evidence in at least 20 characters.",
+    "milestoneChanged": "This milestone has already changed. Refresh the page.",
+    "reviewNoteRequired": "Please write a note of at least 10 characters."
   },
   "auth": {
     "fields": {
@@ -200,7 +204,9 @@
       "comments": "Comments",
       "users": "Users",
       "audit": "Audit log",
-      "messages": "Messages"
+      "messages": "Messages",
+      "milestones": "Milestones",
+      "reports": "Reports"
     },
     "review": {
       "queueHint": "Projects waiting for a decision, oldest first.",
@@ -303,6 +309,38 @@
       "reply": "Reply by email",
       "markHandled": "Mark handled",
       "reopen": "Reopen"
+    },
+    "milestones": {
+      "hint": "Founders report milestones as done. Check the evidence, then approve it or send it back.",
+      "empty": "No milestones are waiting.",
+      "approve": "Approve",
+      "sendBack": "Send back",
+      "approveConfirm": "Approve this milestone? Its share of the money will be released.",
+      "noteLabel": "What is missing?",
+      "noteHint": "The founder will see this note."
+    },
+    "reports": {
+      "hint": "Content people reported. Hide what breaks the rules, or dismiss the report.",
+      "empty": "No reports here.",
+      "filter": {
+        "open": "Open",
+        "resolved": "Resolved",
+        "dismissed": "Dismissed",
+        "all": "All"
+      },
+      "target": {
+        "project": "Project",
+        "comment": "Comment",
+        "update": "Update",
+        "user": "User"
+      },
+      "hidden": "hidden",
+      "open": "Open the project",
+      "gone": "This item no longer exists.",
+      "hideAndResolve": "Hide comment",
+      "manageProject": "Manage projects",
+      "resolve": "Mark resolved",
+      "dismiss": "Dismiss"
     }
   },
   "money": {
@@ -855,7 +893,10 @@
     "comment_reply": "The founder replied to your comment on {{project}}",
     "new_update": "{{project}} posted an update",
     "milestone_approved": "A milestone of {{project}} was completed",
-    "contact_message": "New message from the contact page"
+    "contact_message": "New message from the contact page",
+    "milestone_submitted": "{{project}} reported a milestone as done",
+    "milestone_returned": "Our team needs more evidence for a milestone of {{project}}",
+    "content_reported": "Someone reported content"
   },
   "content": {
     "updated": "Last updated: {{date}}",
@@ -895,6 +936,40 @@
       "return": "Your yearly return",
       "profitNote": "Profit year: the backers' share of profit is split in proportion to each backer's capital.",
       "lossNote": "Loss year: the loss is shared in proportion to capital — your investment shrinks. That is why returns are never guaranteed."
+    }
+  },
+  "community": {
+    "like": "Like",
+    "unlike": "Remove like",
+    "report": "Report",
+    "reportReason": "What is wrong?",
+    "reportDetails": "More details (optional)",
+    "sendReport": "Send report",
+    "reported": "Thank you. Our team will look at it.",
+    "alreadyReported": "You have already reported this. Our team will look at it.",
+    "reasons": {
+      "spam": "Spam or advertising",
+      "abuse": "Rude or abusive",
+      "misleading": "False or misleading",
+      "other": "Something else"
+    }
+  },
+  "milestones": {
+    "manage": "Milestones",
+    "none": "This project has no milestones.",
+    "founderIntro": "When you finish a milestone, report it with evidence. After our team checks it, that share of the money is released.",
+    "report": "Report as done",
+    "evidence": "Evidence",
+    "evidenceHint": "Describe what was done and add links to photos, documents or receipts.",
+    "evidenceTooShort": "Please write at least {{count}} characters.",
+    "send": "Send for review",
+    "waiting": "Sent. Waiting for our team to check it.",
+    "returnedNote": "Our team asked for more:",
+    "release": "{{percent}}% of the money",
+    "status": {
+      "pending": "Not done yet",
+      "submitted": "Being checked",
+      "approved": "Done and verified"
     }
   }
 }

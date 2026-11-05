@@ -497,6 +497,7 @@ export type Database = {
           position: number
           project_id: string
           release_percent: number
+          review_note: string | null
           status: Database["public"]["Enums"]["milestone_status"]
           target_label: string | null
           title: string
@@ -510,6 +511,7 @@ export type Database = {
           position?: number
           project_id: string
           release_percent: number
+          review_note?: string | null
           status?: Database["public"]["Enums"]["milestone_status"]
           target_label?: string | null
           title: string
@@ -523,6 +525,7 @@ export type Database = {
           position?: number
           project_id?: string
           release_percent?: number
+          review_note?: string | null
           status?: Database["public"]["Enums"]["milestone_status"]
           target_label?: string | null
           title?: string
@@ -1084,6 +1087,10 @@ export type Database = {
         }
         Returns: undefined
       }
+      admin_return_milestone: {
+        Args: { p_milestone_id: string; p_note: string }
+        Returns: undefined
+      }
       admin_review_project: {
         Args: { p_decision: string; p_note?: string; p_project_id: string }
         Returns: undefined
@@ -1192,6 +1199,9 @@ export type Database = {
         | "new_update"
         | "milestone_approved"
         | "contact_message"
+        | "milestone_submitted"
+        | "milestone_returned"
+        | "content_reported"
       payment_method: "click" | "payme" | "uzcard" | "humo" | "bank_wire"
       project_status:
         | "draft"
@@ -1361,6 +1371,9 @@ export const Constants = {
         "new_update",
         "milestone_approved",
         "contact_message",
+        "milestone_submitted",
+        "milestone_returned",
+        "content_reported",
       ],
       payment_method: ["click", "payme", "uzcard", "humo", "bank_wire"],
       project_status: [

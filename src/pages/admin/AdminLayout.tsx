@@ -1,7 +1,17 @@
 import type { ReactNode } from 'react';
 import { NavLink, Outlet } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { ClipboardCheck, Inbox, FolderKanban, LayoutDashboard, MessageSquare, ScrollText, Users } from 'lucide-react';
+import {
+  ClipboardCheck,
+  Flag,
+  Inbox,
+  FolderKanban,
+  LayoutDashboard,
+  MessageSquare,
+  ScrollText,
+  ShieldAlert,
+  Users,
+} from 'lucide-react';
 import { paths } from '@/app/routes';
 
 /** Frame for every admin page: section menu on the left (top on phones), page on the right. */
@@ -11,6 +21,8 @@ export function AdminLayout() {
     { to: paths.admin, label: t('admin.nav.overview'), Icon: LayoutDashboard, end: true },
     { to: paths.adminReview, label: t('admin.nav.review'), Icon: ClipboardCheck },
     { to: paths.adminProjects, label: t('admin.nav.projects'), Icon: FolderKanban },
+    { to: paths.adminMilestones, label: t('admin.nav.milestones'), Icon: Flag },
+    { to: paths.adminReports, label: t('admin.nav.reports'), Icon: ShieldAlert },
     { to: paths.adminComments, label: t('admin.nav.comments'), Icon: MessageSquare },
     { to: paths.adminUsers, label: t('admin.nav.users'), Icon: Users },
     { to: paths.adminMessages, label: t('admin.nav.messages'), Icon: Inbox },

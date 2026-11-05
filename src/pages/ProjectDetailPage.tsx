@@ -11,7 +11,6 @@ import {
   Link2,
   Send,
   Sparkles,
-  ThumbsUp,
   TrendingUp,
   Users,
 } from 'lucide-react';
@@ -21,6 +20,9 @@ import { errorKey } from '@/features/auth/errors';
 import { daysLeft, pickText, postComment, type ProjectComment, type ProjectDetail } from '@/features/projects/api';
 import { projectKeys, useProject, useProjectList, useSavedProjects } from '@/features/projects/hooks';
 import { ContributeDialog } from '@/features/projects/ContributeDialog';
+import { LikeButton } from '@/features/community/LikeButton';
+import { likesKey as makeLikesKey, useMyLikes } from '@/features/community/hooks';
+import { ReportButton } from '@/features/community/ReportButton';
 import { useCategories } from '@/features/reference/useReference';
 import { ProjectCard } from '@/components/ProjectCard';
 import { Avatar } from '@/components/Avatar';
@@ -289,6 +291,11 @@ function ProjectView({ project }: { project: ProjectDetail }) {
               >
                 {t('project.shareTelegram')}
               </a>
+              {!isOwner && (
+                <div className="text-center">
+                  <ReportButton target="project" targetId={project.id} />
+                </div>
+              )}
             </div>
 
             {project.evaluation && (
@@ -526,22 +533,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                   {t('project.noUpdates')}
                 </p>
               ) : (
-                project.updates.map(u => (
-                  <article key={u.id} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
-                    <header className="flex items-start justify-between gap-3 text-xs">
-                      <h3 className="font-bold text-ink text-sm">{u.title}</h3>
-                      <time className="text-slate-400 shrink-0">{formatDate(u.created_at)}</time>
-                    </header>
-                    <p className="text-xs text-slate-600 leading-relaxed whitespace-pre-line">{u.body}</p>
-                    <footer className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-slate-500">
-                      <span>{t('project.postedBy', { name: u.author?.full_name ?? project.founderName })}</span>
-                      <span className="flex items-center gap-1">
-                        <ThumbsUp className="w-3.5 h-3.5" aria-hidden />
-                        <span className="font-mono-numbers">{u.likes_count}</span>
-                      </span>
-                    </footer>
-                  </article>
-                ))
+                <UpdatesList project={project} />
               )}
             </div>
           )}
@@ -579,6 +571,33 @@ function ProjectView({ project }: { project: ProjectDetail }) {
       )}
     </div>
   );
+}
+
+function UpdatesList({ project }: { project: ProjectDetail }) {
+  const { t } = useTranslation();
+  const { user } = useAuth();
+  const ids = project.updates.map(u => u.id);
+  const likes = useMyLikes(ids);
+  const likesKey = makeLikesKey(user?.id ?? null, ids);
+
+  return project.updates.map(u => (
+    <article key={u.id} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+      <header className="flex items-start justify-between gap-3 text-xs">
+        <h3 className="font-bold text-ink text-sm">{u.title}</h3>
+        <time className="text-slate-400 shrink-0">{formatDate(u.created_at)}</time>
+      </header>
+      <p className="text-xs text-slate-600 leading-relaxed whitespace-pre-line">{u.body}</p>
+      <footer className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-slate-500">
+        <span>{t('project.postedBy', { name: u.author?.full_name ?? project.founderName })}</span>
+        <LikeButton
+          updateId={u.id}
+          count={u.likes_count}
+          liked={likes.data?.includes(u.id) ?? false}
+          likesKey={likesKey}
+        />
+      </footer>
+    </article>
+  ));
 }
 
 function EvaluationPanel({ project }: { project: ProjectDetail }) {
@@ -762,6 +781,7 @@ function CommentItem({
   busy: boolean;
 }) {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [replying, setReplying] = useState(false);
   const [reply, setReply] = useState('');
 
@@ -785,6 +805,7 @@ function CommentItem({
         <time className="text-[11px] text-slate-400 shrink-0">{formatDate(comment.created_at)}</time>
       </div>
       <p className="text-slate-700 leading-relaxed whitespace-pre-line">{comment.body}</p>
+      {user && user.id !== comment.author?.id && <ReportButton target="comment" targetId={comment.id} />}
 
       {comment.replies.map(r => (
         <div key={r.id} className="mt-2 pl-3 border-l-2 border-ink space-y-1 bg-slate-50/60 p-2 rounded-r-lg">
