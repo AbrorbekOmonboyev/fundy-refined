@@ -91,5 +91,5 @@ Rule of thumb from the brand kit: text and buttons are ink — chartreuse is for
 
 1. Import the GitHub repository in Vercel (framework: Vite — settings come from `vercel.json`).
 2. Add environment variables for Production and Preview: `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY` (same values as `.env.local`).
-3. Add the Vercel address to Supabase login settings (`site_url` / `additional_redirect_urls` in `supabase/config.toml`, then `npx supabase config push`), otherwise email links point to localhost.
+3. Add the site address (now https://www.fundy.uz) to Supabase login settings (`site_url` / `additional_redirect_urls` in `supabase/config.toml`, then `npx supabase config push`), otherwise email links point to localhost.
 4. Before inviting real users: set up an email service (custom SMTP) — Supabase's built-in email only reaches team members.

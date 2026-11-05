@@ -11,7 +11,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const SITE = 'https://fundy-refined-b8z3.vercel.app';
+const SITE = 'https://www.fundy.uz';
 const LOGO = `${SITE}/brand/fundy-logo-email.png`;
 const INK = '#15122B';
 const BRAND = '#B5F23D';
