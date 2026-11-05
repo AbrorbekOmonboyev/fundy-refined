@@ -147,7 +147,9 @@
     },
     "callback": {
       "failedTitle": "Havola ishlamadi"
-    }
+    },
+    "google": "Google orqali davom etish",
+    "or": "yoki"
   },
   "welcome": {
     "title": "Fundy’ga xush kelibsiz!",

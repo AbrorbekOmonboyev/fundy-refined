@@ -7,6 +7,7 @@ import { callbackUrl, safeNext } from '@/features/auth/redirects';
 import { errorKey } from '@/features/auth/errors';
 import { isValidEmail } from '@/features/auth/validation';
 import { Alert, AuthCard, Button, TextField } from '@/components/ui';
+import { GoogleButton } from '@/features/auth/GoogleButton';
 
 type Mode = 'password' | 'link';
 
@@ -90,6 +91,8 @@ export function LoginPage() {
         </>
       }
     >
+      <GoogleButton next={next} />
+
       <form onSubmit={handleSubmit} noValidate className="space-y-4">
         <TextField
           label={t('auth.fields.email')}

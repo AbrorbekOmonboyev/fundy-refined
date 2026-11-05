@@ -147,7 +147,9 @@
     },
     "callback": {
       "failedTitle": "This link didn't work"
-    }
+    },
+    "google": "Continue with Google",
+    "or": "or"
   },
   "welcome": {
     "title": "Welcome to Fundy!",

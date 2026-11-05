@@ -147,7 +147,9 @@
     },
     "callback": {
       "failedTitle": "Ссылка не сработала"
-    }
+    },
+    "google": "Продолжить с Google",
+    "or": "или"
   },
   "welcome": {
     "title": "Добро пожаловать в Fundy!",

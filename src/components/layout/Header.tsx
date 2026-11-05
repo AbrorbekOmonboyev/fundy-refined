@@ -73,12 +73,20 @@ export function Header() {
 
             {user && <UserMenu />}
             {showLogin && (
-              <Link
-                to={paths.login}
-                className="hidden sm:inline-block px-3 py-2 text-xs font-semibold text-slate-700 hover:text-ink whitespace-nowrap"
-              >
-                {t('account.login')}
-              </Link>
+              <>
+                <Link
+                  to={paths.login}
+                  className="hidden sm:inline-block px-3 py-2 text-xs font-semibold text-slate-700 hover:text-ink whitespace-nowrap"
+                >
+                  {t('account.login')}
+                </Link>
+                <Link
+                  to={paths.signup}
+                  className="hidden md:inline-block px-4 py-2 text-xs font-semibold text-ink bg-brand hover:bg-brand-deep rounded-full whitespace-nowrap transition-colors"
+                >
+                  {t('account.signup')}
+                </Link>
+              </>
             )}
 
             <button
