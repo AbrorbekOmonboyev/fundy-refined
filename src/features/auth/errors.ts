@@ -22,6 +22,7 @@ const BY_CODE: Record<string, ErrorKey> = {
   flow_state_expired: 'errors.linkExpired',
   flow_state_not_found: 'errors.linkExpired',
   bad_code_verifier: 'errors.linkOtherBrowser',
+  pkce_code_verifier_not_found: 'errors.linkOtherBrowser',
   signup_disabled: 'errors.signupDisabled',
   user_banned: 'errors.blocked',
   // Database functions (see supabase/migrations/*_functions.sql)

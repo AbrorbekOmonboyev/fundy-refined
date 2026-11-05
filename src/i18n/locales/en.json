@@ -85,7 +85,7 @@
     "invalidEmail": "This email address is not valid.",
     "rateLimit": "Too many attempts. Please wait a few minutes and try again.",
     "linkExpired": "This link has expired or was already used. Please request a new one.",
-    "linkOtherBrowser": "Please open the link in the same browser where you requested it.",
+    "linkOtherBrowser": "This link opened in a different browser or app than the one where you asked for it, so it could not log you in. Open the link in the same browser — or simply log in with your password.",
     "signupDisabled": "New sign-ups are currently closed.",
     "blocked": "This account has been blocked. Please contact support.",
     "accountHasActivity": "This account has contributions or projects, so it is kept for financial records. Please contact support to close it.",
@@ -146,7 +146,8 @@
       "done": "Your password has been changed."
     },
     "callback": {
-      "failedTitle": "This link didn't work"
+      "failedTitle": "This link didn't work",
+      "confirmedHint": "If you were confirming your email, it is already confirmed — you can log in now."
     },
     "google": "Continue with Google",
     "or": "or"

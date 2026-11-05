@@ -85,7 +85,7 @@
     "invalidEmail": "Bu elektron pochta manzili noto'g'ri.",
     "rateLimit": "Juda ko'p urinish. Bir necha daqiqa kutib, qaytadan urinib ko'ring.",
     "linkExpired": "Bu havolaning muddati tugagan yoki u allaqachon ishlatilgan. Yangisini so'rang.",
-    "linkOtherBrowser": "Havolani uni so'ragan brauzeringizda oching.",
+    "linkOtherBrowser": "Havola siz uni so'ragan brauzerdan boshqa brauzer yoki ilovada ochildi, shuning uchun tizimga kira olmadi. Havolani o'sha brauzerda oching — yoki shunchaki parolingiz bilan kiring.",
     "signupDisabled": "Hozircha yangi ro'yxatdan o'tish yopiq.",
     "blocked": "Bu hisob bloklangan. Qo'llab-quvvatlash xizmatiga murojaat qiling.",
     "accountHasActivity": "Bu hisobda hissalar yoki loyihalar bor, shuning uchun u moliyaviy hisobot uchun saqlanadi. Yopish uchun qo'llab-quvvatlash xizmatiga murojaat qiling.",
@@ -146,7 +146,8 @@
       "done": "Parolingiz o'zgartirildi."
     },
     "callback": {
-      "failedTitle": "Havola ishlamadi"
+      "failedTitle": "Havola ishlamadi",
+      "confirmedHint": "Agar siz emailni tasdiqlayotgan bo'lsangiz, u allaqachon tasdiqlangan — hozir kirishingiz mumkin."
     },
     "google": "Google orqali davom etish",
     "or": "yoki"
