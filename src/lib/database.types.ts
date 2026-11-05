@@ -1098,6 +1098,10 @@ export type Database = {
         Returns: undefined
       }
       submit_project: { Args: { p_project_id: string }; Returns: undefined }
+      withdraw_submission: {
+        Args: { p_project_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
       app_language: "uz" | "ru" | "en"

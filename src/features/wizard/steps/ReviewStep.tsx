@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { CheckCircle2, CircleAlert, Clock } from 'lucide-react';
 import { paths } from '@/app/routes';
 import { wizardErrorText } from '@/features/wizard/errors';
-import { submitDraft, type Draft } from '@/features/wizard/api';
+import { submitDraft, withdrawSubmission, type Draft } from '@/features/wizard/api';
 import { STEPS, budgetTotal, isEditable, releaseTotal, stepComplete } from '@/features/wizard/checks';
 import { draftKey } from '@/features/wizard/hooks';
 import { WizardShell } from '@/features/wizard/WizardShell';
@@ -47,6 +47,21 @@ export function ReviewStep({ draft }: { draft: Draft }) {
       await queryClient.invalidateQueries({ queryKey: draftKey(draft.project.id) });
       void queryClient.invalidateQueries({ queryKey: ['projects'] });
       navigate(paths.founderDashboard, { state: { submitted: true } });
+    } catch (e) {
+      setError(wizardErrorText(t, e));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function withdraw() {
+    if (!window.confirm(t('dashboard.founder.withdrawConfirm'))) return;
+    setBusy(true);
+    setError(null);
+    try {
+      await withdrawSubmission(draft.project.id);
+      await queryClient.invalidateQueries({ queryKey: draftKey(draft.project.id) });
+      void queryClient.invalidateQueries({ queryKey: ['projects'] });
     } catch (e) {
       setError(wizardErrorText(t, e));
     } finally {
@@ -114,6 +129,14 @@ export function ReviewStep({ draft }: { draft: Draft }) {
           <Clock className="w-4 h-4" aria-hidden />
           {t('wizard.review.waiting')}
         </p>
+      )}
+      {status === 'pending_review' && (
+        <div className="space-y-2">
+          <Button variant="secondary" loading={busy} onClick={withdraw}>
+            {t('dashboard.founder.withdraw')}
+          </Button>
+          <p className="text-xs text-slate-500">{t('dashboard.founder.withdrawHint')}</p>
+        </div>
       )}
     </WizardShell>
   );

@@ -58,6 +58,8 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 
 function Review({ draft, evaluation }: { draft: Draft; evaluation: Evaluation | null }) {
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const isOwn = draft.project.owner_id === user?.id;
   const p = draft.project;
   const text = draft.text;
   const isPending = p.status === 'pending_review';
@@ -150,8 +152,14 @@ function Review({ draft, evaluation }: { draft: Draft; evaluation: Evaluation | 
 
         {/* Evaluation and decision */}
         <div className="space-y-6 xl:sticky xl:top-24">
-          <EvaluationForm projectId={p.id} evaluation={evaluation} />
-          {isPending && <DecisionPanel projectId={p.id} hasEvaluation={!!evaluation} />}
+          {isOwn ? (
+            <Alert variant="warning">{t('errors.cannotReviewOwn')}</Alert>
+          ) : (
+            <>
+              <EvaluationForm projectId={p.id} evaluation={evaluation} />
+              {isPending && <DecisionPanel projectId={p.id} hasEvaluation={!!evaluation} />}
+            </>
+          )}
         </div>
       </div>
     </div>

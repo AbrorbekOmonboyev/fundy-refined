@@ -32,6 +32,9 @@ const BY_CODE: Record<string, ErrorKey> = {
   reward_sold_out: 'errors.rewardSoldOut',
   project_not_accepting_contributions: 'errors.projectClosed',
   cannot_back_own_project: 'errors.ownProject',
+  cannot_review_own_project: 'errors.cannotReviewOwn',
+  cannot_verify_self: 'errors.cannotVerifySelf',
+  project_not_pending_review: 'errors.notPendingReview',
   account_blocked: 'errors.blocked',
   not_signed_in: 'errors.notSignedIn',
 };

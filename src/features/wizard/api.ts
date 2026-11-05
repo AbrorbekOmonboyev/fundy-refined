@@ -331,8 +331,29 @@ export async function submitDraft(projectId: string) {
   fail((await db().rpc('submit_project', { p_project_id: projectId })).error);
 }
 
-export async function deleteDraft(projectId: string) {
-  fail((await db().from('projects').delete().eq('id', projectId)).error);
+/**
+ * Delete a draft for good: the project row (its text, budget, milestones, rewards and
+ * document records go with it), then its uploaded photo and documents.
+ * The database only allows this for the owner's own drafts.
+ */
+export async function deleteDraft(projectId: string, ownerId: string) {
+  const deleted = await db().from('projects').delete().eq('id', projectId).select('id');
+  fail(deleted.error);
+  if (!deleted.data?.length) throw new Error('project_not_editable');
+
+  const folder = `${ownerId}/${projectId}`;
+  for (const bucket of ['project-images', 'project-documents'] as const) {
+    const { data: files } = await db().storage.from(bucket).list(folder);
+    if (files?.length)
+      await db()
+        .storage.from(bucket)
+        .remove(files.map(f => `${folder}/${f.name}`));
+  }
+}
+
+/** Take a submitted project back from the review queue; it becomes an editable draft again. */
+export async function withdrawSubmission(projectId: string) {
+  fail((await db().rpc('withdraw_submission', { p_project_id: projectId })).error);
 }
 
 export async function postUpdate(projectId: string, authorId: string, title: string, body: string) {

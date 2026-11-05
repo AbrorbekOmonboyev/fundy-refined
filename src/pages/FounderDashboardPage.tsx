@@ -8,7 +8,7 @@ import { useAuth } from '@/features/auth/AuthContext';
 import { errorKey } from '@/features/auth/errors';
 import { pickText, type MyProject } from '@/features/projects/api';
 import { useMyProjects } from '@/features/projects/hooks';
-import { deleteDraft, postUpdate } from '@/features/wizard/api';
+import { deleteDraft, postUpdate, withdrawSubmission } from '@/features/wizard/api';
 import { Alert, Button, PageSpinner, TextAreaField, TextField } from '@/components/ui';
 import { formatMoney } from '@/lib/money';
 import { usePageMeta } from '@/lib/usePageMeta';
@@ -76,6 +76,7 @@ export function FounderDashboardPage() {
 
 function ProjectRow({ project: p }: { project: MyProject }) {
   const { t, i18n } = useTranslation();
+  const { user } = useAuth();
   const queryClient = useQueryClient();
   const [writing, setWriting] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -85,11 +86,24 @@ function ProjectRow({ project: p }: { project: MyProject }) {
   const isLive = LIVE.includes(p.status);
   const editable = p.status === 'draft' || p.status === 'changes_requested';
 
+  async function withdraw() {
+    if (!window.confirm(t('dashboard.founder.withdrawConfirm'))) return;
+    setDeleting(true);
+    try {
+      await withdrawSubmission(p.id);
+      await queryClient.invalidateQueries({ queryKey: ['projects'] });
+    } catch (e) {
+      setError(t(errorKey(e)));
+    } finally {
+      setDeleting(false);
+    }
+  }
+
   async function remove() {
     if (!window.confirm(t('dashboard.founder.deleteConfirm'))) return;
     setDeleting(true);
     try {
-      await deleteDraft(p.id);
+      await deleteDraft(p.id, user!.id);
       await queryClient.invalidateQueries({ queryKey: ['projects'] });
     } catch (e) {
       setError(t(errorKey(e)));
@@ -143,6 +157,11 @@ function ProjectRow({ project: p }: { project: MyProject }) {
           >
             {t('dashboard.founder.viewStatus')}
           </Link>
+        )}
+        {p.status === 'pending_review' && (
+          <Button variant="link" loading={deleting} onClick={withdraw} className="ml-auto">
+            {t('dashboard.founder.withdraw')}
+          </Button>
         )}
         {isLive && (
           <>

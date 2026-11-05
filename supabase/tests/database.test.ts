@@ -721,10 +721,90 @@ describe('project wizard (the exact writes the app makes)', () => {
   });
 });
 
+describe('conflict of interest and withdrawing', () => {
+  let founderAdmin: string;
+  let ownProject: string;
+
+  before(async () => {
+    founderAdmin = await createUser(db, 'Farida FounderAdmin', { admin: true });
+    await as(
+      db,
+      user(founderAdmin),
+      `insert into public.founder_profiles (user_id, display_name) values ($1, 'Farida')`,
+      [founderAdmin],
+    );
+    ownProject = await createDraft(founderAdmin, 'farida-own-project');
+    await as(db, user(founderAdmin), `select public.submit_project($1)`, [ownProject]);
+  });
+
+  test('an admin cannot evaluate, approve or reject their own project', async () => {
+    await rejects(
+      as(
+        db,
+        user(founderAdmin),
+        `select public.admin_save_evaluation($1, 20::smallint, 20::smallint, 20::smallint, 20::smallint, 20::smallint, 'high', 'Perfect')`,
+        [ownProject],
+      ),
+      /cannot_review_own_project/,
+    );
+    await rejects(
+      as(db, user(founderAdmin), `select public.admin_review_project($1, 'approve')`, [ownProject]),
+      /cannot_review_own_project/,
+    );
+    await rejects(
+      as(db, user(founderAdmin), `select public.admin_review_project($1, 'reject', 'Not good enough at all')`, [
+        ownProject,
+      ]),
+      /cannot_review_own_project/,
+    );
+  });
+
+  test('admins cannot verify themselves', async () => {
+    await rejects(
+      as(db, user(founderAdmin), `select public.admin_verify_founder($1, true)`, [founderAdmin]),
+      /cannot_verify_self/,
+    );
+  });
+
+  test('another admin can still review it', async () => {
+    await as(
+      db,
+      user(admin),
+      `select public.admin_save_evaluation($1, 15::smallint, 15::smallint, 15::smallint, 15::smallint, 15::smallint, 'moderate', 'Fine')`,
+      [ownProject],
+    );
+  });
+
+  test('a founder can withdraw a submission and then delete the draft', async () => {
+    const id = await createDraft(alice, 'withdraw-me');
+    await as(db, user(alice), `select public.submit_project($1)`, [id]);
+    await rejects(as(db, user(bob), `select public.withdraw_submission($1)`, [id]), /project_not_pending_review/);
+    await as(db, user(alice), `select public.withdraw_submission($1)`, [id]);
+    const [p] = await as<{ status: string; submitted_at: string | null }>(
+      db,
+      owner,
+      `select status, submitted_at from public.projects where id = $1`,
+      [id],
+    );
+    assert.equal(p.status, 'draft');
+    assert.equal(p.submitted_at, null);
+    await rejects(as(db, user(alice), `select public.withdraw_submission($1)`, [id]), /project_not_pending_review/);
+    const deleted = await as(db, user(alice), `delete from public.projects where id = $1 returning id`, [id]);
+    assert.equal(deleted.length, 1);
+  });
+
+  test('visitors cannot withdraw anything', async () => {
+    await rejects(as(db, anon, `select public.withdraw_submission(gen_random_uuid())`), /permission denied/);
+  });
+});
+
 describe('admin panel', () => {
   test('admins list users with email and activity; others cannot', async () => {
     const rows = await as<{ email: string; contribution_total: string; total_count: string }>(
-      db, user(admin), `select * from public.admin_list_users('Bob Backer')`);
+      db,
+      user(admin),
+      `select * from public.admin_list_users('Bob Backer')`,
+    );
     assert.equal(rows.length, 1);
     assert.match(rows[0].email, /@test\.local$/);
     assert.ok(Number(rows[0].contribution_total) > 0);
@@ -733,15 +813,26 @@ describe('admin panel', () => {
   });
 
   test('user search pages through everyone', async () => {
-    const page = await as<{ total_count: string }>(db, user(admin), `select * from public.admin_list_users(null, 10, 0)`);
+    const page = await as<{ total_count: string }>(
+      db,
+      user(admin),
+      `select * from public.admin_list_users(null, 10, 0)`,
+    );
     assert.equal(page.length, 10);
     assert.ok(Number(page[0].total_count) > 200);
   });
 
   test('admins see recent comments including hidden ones; others cannot', async () => {
     const all = await as<{ is_hidden: boolean }>(db, user(admin), `select * from public.admin_recent_comments(200)`);
-    assert.ok(all.some(c => c.is_hidden), 'hidden comment from the moderation test is listed');
-    const hidden = await as<{ is_hidden: boolean }>(db, user(admin), `select * from public.admin_recent_comments(50, true)`);
+    assert.ok(
+      all.some(c => c.is_hidden),
+      'hidden comment from the moderation test is listed',
+    );
+    const hidden = await as<{ is_hidden: boolean }>(
+      db,
+      user(admin),
+      `select * from public.admin_recent_comments(50, true)`,
+    );
     assert.ok(hidden.length > 0 && hidden.every(c => c.is_hidden));
     await rejects(as(db, user(carol), `select * from public.admin_recent_comments()`), /admin_only/);
   });

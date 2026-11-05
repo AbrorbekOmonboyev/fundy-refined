@@ -100,7 +100,10 @@
     "amountBelowRewardPrice": "The amount is lower than the price of the chosen reward.",
     "rewardSoldOut": "This reward is sold out.",
     "projectClosed": "This project is no longer accepting support.",
-    "ownProject": "You can't back your own project."
+    "ownProject": "You can't back your own project.",
+    "cannotReviewOwn": "This is your own project. Another admin must evaluate and decide on it.",
+    "cannotVerifySelf": "You cannot verify your own founder profile. Another admin must do it.",
+    "notPendingReview": "This project is not waiting for review."
   },
   "auth": {
     "fields": {
@@ -634,7 +637,10 @@
       "updateTitle": "Update title",
       "updateBody": "What happened?",
       "updateHint": "Everyone who backed or saved the project will be notified.",
-      "publish": "Publish update"
+      "publish": "Publish update",
+      "withdraw": "Withdraw submission",
+      "withdrawConfirm": "Take this project back from review? It becomes an editable draft again.",
+      "withdrawHint": "Use this to fix something or delete the project before a decision is made."
     }
   },
   "wizard": {

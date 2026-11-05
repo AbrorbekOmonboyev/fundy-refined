@@ -100,7 +100,10 @@
     "amountBelowRewardPrice": "Summa tanlangan mukofot narxidan kam.",
     "rewardSoldOut": "Bu mukofot tugagan.",
     "projectClosed": "Bu loyiha endi yordam qabul qilmaydi.",
-    "ownProject": "O'z loyihangizni qo'llab-quvvatlay olmaysiz."
+    "ownProject": "O'z loyihangizni qo'llab-quvvatlay olmaysiz.",
+    "cannotReviewOwn": "Bu sizning loyihangiz. Uni boshqa admin baholashi va qaror qabul qilishi kerak.",
+    "cannotVerifySelf": "O'z asoschi profilingizni tasdiqlay olmaysiz. Buni boshqa admin qilishi kerak.",
+    "notPendingReview": "Bu loyiha ko'rib chiqishni kutmayapti."
   },
   "auth": {
     "fields": {
@@ -634,7 +637,10 @@
       "updateTitle": "Yangilik sarlavhasi",
       "updateBody": "Nima bo'ldi?",
       "updateHint": "Loyihani qo'llab-quvvatlagan yoki saqlagan barchaga xabar boradi.",
-      "publish": "E'lon qilish"
+      "publish": "E'lon qilish",
+      "withdraw": "Yuborishni qaytarib olish",
+      "withdrawConfirm": "Loyiha ko'rib chiqishdan qaytarib olinsinmi? U yana tahrirlanadigan qoralamaga aylanadi.",
+      "withdrawHint": "Qaror qabul qilinishidan oldin biror narsani tuzatish yoki loyihani o'chirish uchun."
     }
   },
   "wizard": {
