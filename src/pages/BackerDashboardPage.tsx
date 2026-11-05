@@ -47,7 +47,7 @@ export function BackerDashboardPage() {
         </div>
         <Link
           to={paths.explore}
-          className="px-4 py-2 text-xs font-semibold text-white bg-ink hover:bg-ink-soft rounded-lg self-start sm:self-auto"
+          className="px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-lg self-start sm:self-auto"
         >
           {t('home.hero.explore')}
         </Link>
@@ -55,7 +55,7 @@ export function BackerDashboardPage() {
 
       <dl className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {tiles.map(({ Icon, label, value }) => (
-          <div key={label} className="bg-white rounded-xl border border-slate-200 p-4">
+          <div key={label} className="bg-card rounded-xl border border-slate-200 p-4">
             <dt className="flex items-center gap-1.5 text-xs text-slate-500">
               <Icon className="w-3.5 h-3.5 text-ink" aria-hidden />
               {label}
@@ -94,7 +94,7 @@ export function BackerDashboardPage() {
         ) : rows.length === 0 ? (
           <Empty text={t('dashboard.backer.emptyContributions')} />
         ) : (
-          <div className="bg-white rounded-xl border border-slate-200 overflow-x-auto">
+          <div className="bg-card rounded-xl border border-slate-200 overflow-x-auto">
             <table className="w-full text-xs text-left">
               <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
                 <tr>
@@ -179,7 +179,7 @@ export function BackerDashboardPage() {
 function Empty({ text }: { text: string }) {
   const { t } = useTranslation();
   return (
-    <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 space-y-4">
+    <div className="p-12 text-center bg-card rounded-2xl border border-slate-200 space-y-4">
       <p className="text-sm text-slate-600">{text}</p>
       <Link
         to={paths.explore}

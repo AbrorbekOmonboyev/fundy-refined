@@ -32,7 +32,7 @@ export function ReviewQueuePage() {
       ) : isError ? (
         <Alert variant="error">{t('errors.generic')}</Alert>
       ) : data.length === 0 ? (
-        <div className="p-12 text-center bg-white rounded-3xl border border-slate-200">
+        <div className="p-12 text-center bg-card rounded-3xl border border-slate-200">
           <CheckCircle className="w-10 h-10 mx-auto text-brand-deep" aria-hidden />
           <p className="mt-3 text-sm text-slate-600">{t('admin.review.empty')}</p>
         </div>
@@ -42,7 +42,7 @@ export function ReviewQueuePage() {
             <li key={p.id}>
               <Link
                 to={paths.adminReviewProject(p.id)}
-                className="block bg-white rounded-2xl border border-slate-200 p-5 hover:border-ink transition-colors"
+                className="block bg-card rounded-2xl border border-slate-200 p-5 hover:border-ink transition-colors"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="min-w-0">

@@ -24,7 +24,7 @@ export function MusharakahCalculator() {
   return (
     <section
       id="calculator"
-      className="scroll-mt-24 rounded-3xl bg-white border border-slate-200 p-5 sm:p-8 space-y-6"
+      className="scroll-mt-24 rounded-3xl bg-card border border-slate-200 p-5 sm:p-8 space-y-6"
       aria-labelledby="calc-title"
     >
       <header className="flex items-start gap-3">

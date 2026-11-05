@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react';
 import { useAuth } from '@/features/auth/AuthContext';
 import { paths } from '@/app/routes';
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
+import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { NotificationBell } from '@/components/layout/NotificationBell';
 import { Logo } from '@/components/Logo';
 import { UserMenu } from '@/components/layout/UserMenu';
@@ -35,7 +36,7 @@ export function Header() {
   const inactive = { isActive: false };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
+    <header className="sticky top-0 z-40 bg-card/95 backdrop-blur-md border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-6 h-16">
           {/* Logo */}
@@ -61,12 +62,13 @@ export function Header() {
           {/* Actions */}
           <div className="flex items-center gap-2 shrink-0">
             <LanguageSwitcher className="hidden sm:flex" />
+            <ThemeToggle />
 
             {user && <NotificationBell />}
 
             <Link
               to={paths.startProject}
-              className="hidden sm:inline-block px-4 py-2 text-xs font-semibold text-white bg-ink hover:bg-ink-soft active:bg-ink rounded-lg shadow-sm transition-colors whitespace-nowrap"
+              className="hidden sm:inline-block px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft active:bg-night rounded-lg shadow-sm transition-colors whitespace-nowrap"
             >
               {t('nav.startProject')}
             </Link>
@@ -104,7 +106,7 @@ export function Header() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="xl:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3 shadow-lg">
+        <div className="xl:hidden border-t border-slate-200 bg-card px-4 pt-3 pb-6 space-y-3 shadow-lg">
           <nav className="flex flex-col space-y-1 text-sm font-medium">
             {links.map(link =>
               link.section ? (
@@ -160,7 +162,7 @@ export function Header() {
             <Link
               to={paths.startProject}
               onClick={closeMenu}
-              className="block w-full py-2.5 text-center text-sm font-semibold text-white bg-ink rounded-lg shadow-sm"
+              className="block w-full py-2.5 text-center text-sm font-semibold text-white bg-night rounded-lg shadow-sm"
             >
               {t('nav.startProject')}
             </Link>

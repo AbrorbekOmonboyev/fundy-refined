@@ -15,6 +15,14 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#B5F23D" />
+    <!-- Dark mode before the first paint (no white flash); see src/lib/theme.ts -->
+    <script>
+      try {
+        var t = localStorage.getItem("fundy-theme");
+        if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches))
+          document.documentElement.classList.add("dark");
+      } catch (e) {}
+    </script>
 
     <!-- Link previews (Telegram, Facebook, X) -->
     <meta property="og:site_name" content="Fundy" />

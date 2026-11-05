@@ -20,7 +20,7 @@ const STATUS_STYLE: Record<string, string> = {
   changes_requested: 'bg-orange-100 text-orange-800',
   rejected: 'bg-rose-100 text-rose-800',
   active: 'bg-brand text-ink',
-  funded: 'bg-ink text-white',
+  funded: 'bg-night text-white',
   unsuccessful: 'bg-slate-200 text-slate-700',
   completed: 'bg-sky-100 text-sky-800',
 };
@@ -40,7 +40,7 @@ export function FounderDashboardPage() {
         <h1 className="text-2xl sm:text-3xl font-extrabold text-ink">{t('account.projects')}</h1>
         <Link
           to={paths.startProject}
-          className="px-4 py-2 text-xs font-semibold text-white bg-ink hover:bg-ink-soft rounded-lg self-start sm:self-auto"
+          className="px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-lg self-start sm:self-auto"
         >
           + {t('dashboard.founder.newProject')}
         </Link>
@@ -53,13 +53,13 @@ export function FounderDashboardPage() {
       ) : isError ? (
         <Alert variant="error">{t('errors.generic')}</Alert>
       ) : data.length === 0 ? (
-        <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 space-y-4">
+        <div className="p-12 text-center bg-card rounded-2xl border border-slate-200 space-y-4">
           <Rocket className="w-10 h-10 text-ink mx-auto" aria-hidden />
           <h2 className="text-lg font-bold text-ink">{t('dashboard.founder.emptyTitle')}</h2>
           <p className="text-sm text-slate-600 max-w-md mx-auto">{t('dashboard.founder.emptyText')}</p>
           <Link
             to={paths.startProject}
-            className="inline-block px-4 py-2 text-xs font-semibold text-white bg-ink hover:bg-ink-soft rounded-lg"
+            className="inline-block px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-lg"
           >
             {t('nav.startProject')}
           </Link>
@@ -116,7 +116,7 @@ function ProjectRow({ project: p }: { project: MyProject }) {
   }
 
   return (
-    <li className="bg-white rounded-xl border border-slate-200 p-5 space-y-3">
+    <li className="bg-card rounded-xl border border-slate-200 p-5 space-y-3">
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
         <div className="min-w-0">
           <span className={`text-[11px] font-semibold px-2 py-0.5 rounded ${STATUS_STYLE[p.status]}`}>
@@ -149,7 +149,7 @@ function ProjectRow({ project: p }: { project: MyProject }) {
         {editable && (
           <Link
             to={paths.editProject(p.id, 'review')}
-            className="px-3 py-1.5 text-xs font-semibold text-white bg-ink hover:bg-ink-soft rounded-lg"
+            className="px-3 py-1.5 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-lg"
           >
             {t('dashboard.founder.continue')}
           </Link>

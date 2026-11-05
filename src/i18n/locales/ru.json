@@ -16,7 +16,9 @@
     "markAllRead": "Отметить все как прочитанные",
     "noNotifications": "Уведомлений пока нет.",
     "toggleMenu": "Открыть или закрыть меню",
-    "language": "Язык"
+    "language": "Язык",
+    "darkMode": "Тёмная тема",
+    "lightMode": "Светлая тема"
   },
   "banner": {
     "label": "Демо-версия:",

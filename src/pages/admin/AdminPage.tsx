@@ -44,7 +44,7 @@ export function AdminPage() {
             key={tile.key}
             to={tile.to}
             className={`group rounded-3xl p-5 border transition-colors ${
-              tile.highlight ? 'bg-brand border-brand' : 'bg-white border-slate-200 hover:border-ink'
+              tile.highlight ? 'bg-brand border-brand' : 'bg-card border-slate-200 hover:border-ink'
             }`}
           >
             <p className="text-xs font-semibold text-slate-600">{tile.label}</p>

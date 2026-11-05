@@ -44,7 +44,7 @@ export function AdminLayout() {
                 end={end}
                 className={({ isActive }) =>
                   `flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium ${
-                    isActive ? 'bg-ink text-white' : 'text-slate-600 hover:bg-white hover:text-ink'
+                    isActive ? 'bg-night text-white' : 'text-slate-600 hover:bg-card hover:text-ink'
                   }`
                 }
               >

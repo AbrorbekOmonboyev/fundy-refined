@@ -16,7 +16,9 @@
     "markAllRead": "Hammasini o'qilgan deb belgilash",
     "noNotifications": "Hozircha bildirishnomalar yo'q.",
     "toggleMenu": "Menyuni ochish yoki yopish",
-    "language": "Til"
+    "language": "Til",
+    "darkMode": "Tungi rejim",
+    "lightMode": "Kunduzgi rejim"
   },
   "banner": {
     "label": "Demo versiya:",

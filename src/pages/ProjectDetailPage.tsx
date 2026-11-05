@@ -33,7 +33,7 @@ import { publicFileUrl } from '@/lib/supabase';
 import { usePageMeta } from '@/lib/usePageMeta';
 
 type Tab = 'story' | 'budget' | 'milestones' | 'evaluation' | 'risks' | 'updates' | 'comments';
-const BUDGET_COLORS = ['bg-brand', 'bg-ink', 'bg-brand-deep', 'bg-slate-400', 'bg-ink-soft', 'bg-track'];
+const BUDGET_COLORS = ['bg-brand', 'bg-night', 'bg-brand-deep', 'bg-slate-400', 'bg-night-soft', 'bg-track'];
 
 export function ProjectDetailPage() {
   const { t } = useTranslation();
@@ -193,7 +193,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
 
         {/* Right: funding box */}
         <aside className="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+          <div className="bg-card rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
             <div className="space-y-2">
               <div className="flex items-baseline justify-between gap-3">
                 <div>
@@ -369,7 +369,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                   {project.rewards.map(r => {
                     const soldOut = r.quantity_limit !== null && r.claimed_count >= r.quantity_limit;
                     return (
-                      <div key={r.id} className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 shadow-sm">
+                      <div key={r.id} className="bg-card p-4 rounded-xl border border-slate-200 space-y-2 shadow-sm">
                         <div className="flex justify-between items-baseline gap-2">
                           <span className="font-bold text-ink text-xs">{r.title}</span>
                           <span className="text-xs font-bold text-ink font-mono-numbers shrink-0">
@@ -431,7 +431,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                   />
                 ))}
               </div>
-              <div className="border border-slate-200 rounded-xl overflow-x-auto bg-white shadow-sm">
+              <div className="border border-slate-200 rounded-xl overflow-x-auto bg-card shadow-sm">
                 <table className="w-full text-xs text-left">
                   <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
                     <tr>
@@ -483,13 +483,13 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                   return (
                     <li
                       key={m.id}
-                      className={`p-4 rounded-xl border ${approved ? 'bg-brand-soft border-brand' : 'bg-white border-slate-200'}`}
+                      className={`p-4 rounded-xl border ${approved ? 'bg-brand-soft border-brand' : 'bg-card border-slate-200'}`}
                     >
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex items-start gap-3">
                           <span
                             className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold ${
-                              approved ? 'bg-ink text-white' : 'bg-slate-200 text-slate-600'
+                              approved ? 'bg-night text-white' : 'bg-slate-200 text-slate-600'
                             }`}
                           >
                             {approved ? '✓' : i + 1}
@@ -524,7 +524,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
             <div className="space-y-4 max-w-3xl">
               <h2 className="text-lg font-bold text-ink">{t('project.risksTitle')}</h2>
               <p className="text-xs text-slate-500">{t('project.risksText')}</p>
-              <div className="p-5 bg-white rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed shadow-sm whitespace-pre-line">
+              <div className="p-5 bg-card rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed shadow-sm whitespace-pre-line">
                 {text?.risks}
               </div>
             </div>
@@ -534,7 +534,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
             <div className="space-y-6 max-w-3xl">
               <h2 className="text-lg font-bold text-ink">{t('project.updatesTitle')}</h2>
               {project.updates.length === 0 ? (
-                <p className="p-8 text-center text-xs text-slate-500 bg-white rounded-xl border border-slate-200">
+                <p className="p-8 text-center text-xs text-slate-500 bg-card rounded-xl border border-slate-200">
                   {t('project.noUpdates')}
                 </p>
               ) : (
@@ -586,7 +586,7 @@ function UpdatesList({ project }: { project: ProjectDetail }) {
   const likesKey = makeLikesKey(user?.id ?? null, ids);
 
   return project.updates.map(u => (
-    <article key={u.id} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+    <article key={u.id} className="bg-card p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
       <header className="flex items-start justify-between gap-3 text-xs">
         <h3 className="font-bold text-ink text-sm">{u.title}</h3>
         <time className="text-slate-400 shrink-0">{formatDate(u.created_at)}</time>
@@ -625,7 +625,7 @@ function EvaluationPanel({ project }: { project: ProjectDetail }) {
         <AlertCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" aria-hidden />
         <p>{t('project.evaluationNote')}</p>
       </div>
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+      <div className="bg-card rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
         <div className="flex items-center justify-between pb-6 border-b border-slate-200 gap-4">
           <div>
             <h2 className="text-xl font-bold text-ink">{t('project.evaluationTitle')}</h2>
@@ -731,7 +731,7 @@ function CommentsPanel({ project, isOwner }: { project: ProjectDetail; isOwner: 
       </div>
 
       {user ? (
-        <form onSubmit={handleSubmit} className="bg-white p-4 rounded-xl border border-slate-200 space-y-3 shadow-sm">
+        <form onSubmit={handleSubmit} className="bg-card p-4 rounded-xl border border-slate-200 space-y-3 shadow-sm">
           <label className="sr-only" htmlFor="new-comment">
             {t('project.commentPlaceholder')}
           </label>
@@ -794,7 +794,7 @@ function CommentItem({
   const [reply, setReply] = useState('');
 
   return (
-    <li className="bg-white p-4 rounded-xl border border-slate-200 space-y-2 text-xs shadow-sm">
+    <li className="bg-card p-4 rounded-xl border border-slate-200 space-y-2 text-xs shadow-sm">
       <div className="flex items-center justify-between gap-2 text-slate-500">
         <div className="flex items-center gap-2 min-w-0">
           <Avatar

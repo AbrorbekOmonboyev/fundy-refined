@@ -65,7 +65,7 @@ export function AdminUsersPage() {
             value={input}
             onChange={e => setInput(e.target.value)}
             placeholder={t('admin.users.search')}
-            className="w-full pl-9 pr-3 py-2 text-sm rounded-full border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand"
+            className="w-full pl-9 pr-3 py-2 text-sm rounded-full border border-slate-200 bg-card focus:outline-none focus:ring-2 focus:ring-brand"
           />
         </label>
       </AdminHeader>
@@ -76,7 +76,7 @@ export function AdminUsersPage() {
       ) : isError ? (
         <Alert variant="error">{t('errors.generic')}</Alert>
       ) : (
-        <div className="bg-white rounded-3xl border border-slate-200 overflow-x-auto">
+        <div className="bg-card rounded-3xl border border-slate-200 overflow-x-auto">
           <table className="w-full text-sm text-left">
             <thead className="text-xs text-slate-500 border-b border-slate-200">
               <tr>
@@ -95,7 +95,7 @@ export function AdminUsersPage() {
                       <p className="font-semibold text-ink">
                         {u.full_name || '—'}
                         {u.role === 'admin' && (
-                          <span className="ml-2 rounded-full bg-ink text-brand px-2 py-0.5 text-[10px] font-semibold align-middle">
+                          <span className="ml-2 rounded-full bg-night text-brand px-2 py-0.5 text-[10px] font-semibold align-middle">
                             {t('admin.users.admin')}
                           </span>
                         )}
@@ -166,7 +166,7 @@ export function AdminUsersPage() {
             type="button"
             disabled={page === 1}
             onClick={() => setPage(page - 1)}
-            className="p-2 rounded-full border border-slate-200 bg-white disabled:opacity-40"
+            className="p-2 rounded-full border border-slate-200 bg-card disabled:opacity-40"
             aria-label={t('explore.previous')}
           >
             <ChevronLeft className="w-4 h-4" />
@@ -176,7 +176,7 @@ export function AdminUsersPage() {
             type="button"
             disabled={page === pages}
             onClick={() => setPage(page + 1)}
-            className="p-2 rounded-full border border-slate-200 bg-white disabled:opacity-40"
+            className="p-2 rounded-full border border-slate-200 bg-card disabled:opacity-40"
             aria-label={t('explore.next')}
           >
             <ChevronRight className="w-4 h-4" />

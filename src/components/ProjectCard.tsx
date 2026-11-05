@@ -18,7 +18,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
   const days = daysLeft(project.endsAt);
 
   return (
-    <article className="group relative bg-white rounded-3xl border border-slate-200/70 overflow-hidden flex flex-col hover:border-slate-300 hover:shadow-md transition-all duration-200">
+    <article className="group relative bg-card rounded-3xl border border-slate-200/70 overflow-hidden flex flex-col hover:border-slate-300 hover:shadow-md transition-all duration-200">
       <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
         {project.coverUrl ? (
           <img
@@ -39,7 +39,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
           aria-pressed={isSaved}
           aria-label={isSaved ? t('project.unsave') : t('project.save')}
           title={isSaved ? t('project.unsave') : t('project.save')}
-          className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm shadow-sm flex items-center justify-center text-slate-700 hover:text-rose-600 transition-colors cursor-pointer"
+          className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-card/90 backdrop-blur-sm shadow-sm flex items-center justify-center text-slate-700 hover:text-rose-600 transition-colors cursor-pointer"
         >
           <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`} />
         </button>

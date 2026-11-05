@@ -93,7 +93,7 @@ export function ContributeDialog({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-ink/50 p-0 sm:p-4"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-night/50 p-0 sm:p-4"
       onMouseDown={e => e.target === e.currentTarget && onClose()}
     >
       <div
@@ -102,9 +102,9 @@ export function ContributeDialog({
         aria-modal="true"
         aria-labelledby="contribute-title"
         tabIndex={-1}
-        className="bg-white w-full sm:max-w-lg max-h-[92vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl shadow-2xl outline-none"
+        className="bg-card w-full sm:max-w-lg max-h-[92vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl shadow-2xl outline-none"
       >
-        <header className="sticky top-0 bg-white border-b border-slate-100 px-5 py-4 flex items-start justify-between gap-4">
+        <header className="sticky top-0 bg-card border-b border-slate-100 px-5 py-4 flex items-start justify-between gap-4">
           <div>
             <h2 id="contribute-title" className="text-base font-bold text-ink">
               {t(`contribute.title.${project.model}`)}

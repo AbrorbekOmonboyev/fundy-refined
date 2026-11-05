@@ -60,7 +60,7 @@ export function ContactPage() {
         <p className="mt-4 text-slate-600 leading-relaxed">{t('contact.intro')}</p>
       </header>
 
-      <div className="mt-8 bg-white rounded-3xl border border-slate-200 p-5 sm:p-8">
+      <div className="mt-8 bg-card rounded-3xl border border-slate-200 p-5 sm:p-8">
         {sent ? (
           <div className="text-center space-y-3 py-6">
             <CheckCircle2 className="w-12 h-12 mx-auto text-brand-deep" aria-hidden />

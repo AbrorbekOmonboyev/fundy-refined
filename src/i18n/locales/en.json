@@ -16,7 +16,9 @@
     "markAllRead": "Mark all read",
     "noNotifications": "No notifications yet.",
     "toggleMenu": "Toggle navigation menu",
-    "language": "Language"
+    "language": "Language",
+    "darkMode": "Dark mode",
+    "lightMode": "Light mode"
   },
   "banner": {
     "label": "Demonstration Prototype:",

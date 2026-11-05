@@ -38,7 +38,7 @@ export function AdminReportsPage() {
             type="button"
             aria-pressed={filter === f}
             onClick={() => setFilter(f)}
-            className={`rounded-full px-3 py-1.5 text-xs font-semibold ${filter === f ? 'bg-ink text-white' : 'bg-white text-slate-600 border border-slate-200 hover:border-ink'}`}
+            className={`rounded-full px-3 py-1.5 text-xs font-semibold ${filter === f ? 'bg-night text-white' : 'bg-card text-slate-600 border border-slate-200 hover:border-ink'}`}
           >
             {t(`admin.reports.filter.${f}`)}
           </button>
@@ -49,7 +49,7 @@ export function AdminReportsPage() {
       ) : isError ? (
         <Alert variant="error">{t('errors.generic')}</Alert>
       ) : data.length === 0 ? (
-        <p className="p-10 text-center text-sm text-slate-500 bg-white rounded-3xl border border-slate-200">
+        <p className="p-10 text-center text-sm text-slate-500 bg-card rounded-3xl border border-slate-200">
           {t('admin.reports.empty')}
         </p>
       ) : (
@@ -88,7 +88,7 @@ function ReportItem({ report: r }: { report: AdminReport }) {
 
   return (
     <li
-      className={`bg-white rounded-2xl border p-5 space-y-3 ${r.status === 'open' ? 'border-ink' : 'border-slate-200'}`}
+      className={`bg-card rounded-2xl border p-5 space-y-3 ${r.status === 'open' ? 'border-ink' : 'border-slate-200'}`}
     >
       <div className="flex flex-wrap items-start justify-between gap-2 text-xs text-slate-500">
         <p>

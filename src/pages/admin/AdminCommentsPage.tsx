@@ -60,7 +60,7 @@ export function AdminCommentsPage() {
       ) : isError ? (
         <Alert variant="error">{t('errors.generic')}</Alert>
       ) : data.length === 0 ? (
-        <p className="p-10 text-center text-sm text-slate-500 bg-white rounded-3xl border border-slate-200">
+        <p className="p-10 text-center text-sm text-slate-500 bg-card rounded-3xl border border-slate-200">
           {t('project.noComments')}
         </p>
       ) : (
@@ -68,7 +68,7 @@ export function AdminCommentsPage() {
           {data.map(c => (
             <li
               key={c.id}
-              className={`bg-white rounded-2xl border p-4 space-y-2 ${c.is_hidden ? 'border-rose-200 opacity-75' : 'border-slate-200'}`}
+              className={`bg-card rounded-2xl border p-4 space-y-2 ${c.is_hidden ? 'border-rose-200 opacity-75' : 'border-slate-200'}`}
             >
               <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
                 <span>

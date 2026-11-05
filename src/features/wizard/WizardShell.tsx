@@ -44,7 +44,7 @@ export function WizardShell({
               <span className="flex items-center gap-2">
                 <span
                   className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 ${
-                    current ? 'bg-ink text-white' : done ? 'bg-brand text-ink' : 'bg-slate-200 text-slate-600'
+                    current ? 'bg-night text-white' : done ? 'bg-brand text-ink' : 'bg-slate-200 text-slate-600'
                   }`}
                 >
                   {done && !current ? <Check className="w-3.5 h-3.5" aria-hidden /> : i + 1}
@@ -71,7 +71,7 @@ export function WizardShell({
       <form
         onSubmit={onSubmit}
         noValidate
-        className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-8 space-y-6 min-w-0"
+        className="bg-card rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-8 space-y-6 min-w-0"
       >
         <header>
           <p className="text-xs font-semibold text-ink">

@@ -6,6 +6,7 @@ import { App } from '@/app/App';
 import { AuthProvider } from '@/features/auth/AuthProvider';
 import { Analytics } from '@vercel/analytics/react';
 import { startMonitoring } from '@/lib/monitoring';
+import { watchSystemTheme } from '@/lib/theme';
 import '@/i18n';
 import '@/index.css';
 
@@ -15,6 +16,7 @@ const queryClient = new QueryClient({
 });
 
 startMonitoring();
+watchSystemTheme();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

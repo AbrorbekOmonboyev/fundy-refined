@@ -19,7 +19,7 @@ type Feedback = { variant: 'success' | 'error'; text: string } | null;
 
 function Section({ title, description, children }: { title: string; description?: string; children: ReactNode }) {
   return (
-    <section className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 space-y-4">
+    <section className="bg-card rounded-2xl border border-slate-200 p-5 sm:p-6 space-y-4">
       <header>
         <h2 className="text-lg font-semibold text-ink">{title}</h2>
         {description && <p className="text-sm text-slate-600 mt-0.5">{description}</p>}

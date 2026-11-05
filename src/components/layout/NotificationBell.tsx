@@ -67,14 +67,14 @@ export function NotificationBell() {
       >
         <Bell className="w-5 h-5" />
         {unread > 0 && (
-          <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-brand text-ink text-[10px] font-bold flex items-center justify-center ring-2 ring-white">
+          <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-brand text-ink text-[10px] font-bold flex items-center justify-center ring-2 ring-card">
             {unread > 9 ? '9+' : unread}
           </span>
         )}
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-[22rem] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-xl border border-slate-200 z-50 overflow-hidden">
+        <div className="absolute right-0 mt-2 w-[22rem] max-w-[calc(100vw-2rem)] bg-card rounded-2xl shadow-xl border border-slate-200 z-50 overflow-hidden">
           <div className="px-4 py-3 border-b border-slate-100 flex items-center justify-between gap-3">
             <span className="text-sm font-semibold text-ink">{t('header.notifications')}</span>
             {unread > 0 && (

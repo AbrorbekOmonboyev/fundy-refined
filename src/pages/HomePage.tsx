@@ -67,7 +67,7 @@ export function HomePage() {
   const faqs = [1, 2, 3, 4, 5] as const;
   const voices = [
     { key: 1, initials: 'AR', color: 'bg-brand text-ink' },
-    { key: 2, initials: 'SY', color: 'bg-ink text-brand' },
+    { key: 2, initials: 'SY', color: 'bg-night text-brand' },
     { key: 3, initials: 'JB', color: 'bg-track text-ink' },
   ] as const;
 
@@ -77,7 +77,7 @@ export function HomePage() {
       <section className="relative overflow-hidden bg-brand">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7 space-y-6">
-            <p className="inline-flex items-center gap-2 rounded-full bg-ink text-brand px-3 py-1 text-xs font-semibold">
+            <p className="inline-flex items-center gap-2 rounded-full bg-night text-brand px-3 py-1 text-xs font-semibold">
               <ShieldCheck className="w-4 h-4" aria-hidden />
               {t('home.hero.kicker')}
             </p>
@@ -88,14 +88,14 @@ export function HomePage() {
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <Link
                 to={paths.explore}
-                className="px-6 py-3.5 text-sm font-semibold text-white bg-ink hover:bg-ink-soft rounded-full flex items-center gap-2"
+                className="px-6 py-3.5 text-sm font-semibold text-white bg-night hover:bg-night-soft rounded-full flex items-center gap-2"
               >
                 {t('home.hero.explore')}
                 <ArrowRight className="w-4 h-4" aria-hidden />
               </Link>
               <Link
                 to={paths.startProject}
-                className="px-6 py-3.5 text-sm font-semibold text-ink bg-white hover:bg-white/80 rounded-full"
+                className="px-6 py-3.5 text-sm font-semibold text-ink bg-card hover:bg-card/80 rounded-full"
               >
                 {t('nav.startProject')}
               </Link>
@@ -111,9 +111,9 @@ export function HomePage() {
           </div>
 
           <div className="lg:col-span-5">
-            <figure className="relative z-10 rounded-[2rem] overflow-hidden aspect-[4/3] bg-ink shadow-[12px_12px_0_0_var(--color-brand-deep)]">
+            <figure className="relative z-10 rounded-[2rem] overflow-hidden aspect-[4/3] bg-night shadow-[12px_12px_0_0_var(--color-brand-deep)]">
               <img src="/images/hero.jpg" alt="" className="w-full h-full object-cover" />
-              <figcaption className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent flex flex-col justify-end p-6 text-white">
+              <figcaption className="absolute inset-0 bg-gradient-to-t from-night/85 via-night/10 to-transparent flex flex-col justify-end p-6 text-white">
                 <span className="text-xs text-brand font-semibold">{t('home.hero.imageKicker')}</span>
                 <span className="text-base font-bold mt-1">{t('home.hero.imageTitle')}</span>
               </figcaption>
@@ -124,7 +124,7 @@ export function HomePage() {
 
       {/* Platform numbers (live from the database) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-ink text-white rounded-2xl p-6 lg:p-8 shadow-lg">
+        <div className="bg-night text-white rounded-2xl p-6 lg:p-8 shadow-lg">
           <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-3 gap-4">
             <h2 className="text-xs font-semibold uppercase tracking-wider text-brand">{t('home.stats.title')}</h2>
             <span className="text-[11px] text-slate-400">{t('home.stats.demoNote')}</span>
@@ -152,7 +152,7 @@ export function HomePage() {
           {modelCards.map(({ id, Icon }) => (
             <div
               key={id}
-              className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between"
+              className="bg-card p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between"
             >
               <div>
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 bg-brand text-ink`}>
@@ -179,9 +179,9 @@ export function HomePage() {
               </Link>
             </div>
           ))}
-          <div className="bg-ink text-white p-6 rounded-2xl shadow-sm flex flex-col justify-between">
+          <div className="bg-night text-white p-6 rounded-2xl shadow-sm flex flex-col justify-between">
             <div>
-              <div className="w-10 h-10 rounded-xl bg-ink-soft text-brand flex items-center justify-center mb-4">
+              <div className="w-10 h-10 rounded-xl bg-night-soft text-brand flex items-center justify-center mb-4">
                 <TrendingUp className="w-5 h-5" aria-hidden />
               </div>
               <h3 className="text-lg font-bold">{t('models.equity.name')}</h3>
@@ -222,7 +222,7 @@ export function HomePage() {
                 aria-pressed={model === m}
                 onClick={() => setModel(m)}
                 className={`px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap cursor-pointer ${
-                  model === m ? 'bg-white text-ink shadow-sm' : 'text-slate-600 hover:text-ink'
+                  model === m ? 'bg-card text-ink shadow-sm' : 'text-slate-600 hover:text-ink'
                 }`}
               >
                 {m ? t(`models.${m}.name`) : t('explore.allModels')}
@@ -244,7 +244,7 @@ export function HomePage() {
         <div className="text-center mt-10">
           <Link
             to={model ? exploreModel(model) : paths.explore}
-            className="px-6 py-2.5 text-xs font-semibold text-ink bg-white hover:bg-slate-50 border border-slate-300 rounded-lg shadow-sm inline-flex items-center gap-2"
+            className="px-6 py-2.5 text-xs font-semibold text-ink bg-card hover:bg-slate-50 border border-slate-300 rounded-lg shadow-sm inline-flex items-center gap-2"
           >
             <Search className="w-3.5 h-3.5 text-slate-500" aria-hidden />
             {t('home.featured.viewAll')}
@@ -274,7 +274,7 @@ export function HomePage() {
 
       {/* Trust */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-br from-ink to-ink-soft text-white rounded-3xl p-8 lg:p-12 shadow-xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div className="bg-gradient-to-br from-night to-night-soft text-white rounded-3xl p-8 lg:p-12 shadow-xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="space-y-4">
             <p className="flex items-center gap-2 text-xs font-semibold text-brand uppercase">
               <Lock className="w-4 h-4" aria-hidden />
@@ -285,13 +285,13 @@ export function HomePage() {
             <div className="pt-2 flex flex-col sm:flex-row gap-3">
               <Link
                 to={paths.trustSafety}
-                className="px-5 py-2.5 text-xs font-semibold text-white bg-ink hover:bg-ink-soft rounded-lg text-center"
+                className="px-5 py-2.5 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-lg text-center"
               >
                 {t('home.trust.standards')}
               </Link>
               <Link
                 to={paths.education}
-                className="px-5 py-2.5 text-xs font-semibold text-slate-300 hover:text-white bg-ink-soft hover:bg-white/10 rounded-lg border border-white/10 text-center"
+                className="px-5 py-2.5 text-xs font-semibold text-slate-300 hover:text-white bg-night-soft hover:bg-card/10 rounded-lg border border-white/10 text-center"
               >
                 {t('home.trust.learn')}
               </Link>
@@ -299,7 +299,7 @@ export function HomePage() {
           </div>
           <div className="grid grid-cols-2 gap-4 text-xs">
             {trustItems.map(({ key, Icon }) => (
-              <div key={key} className="bg-ink-soft p-4 rounded-xl border border-white/10">
+              <div key={key} className="bg-night-soft p-4 rounded-xl border border-white/10">
                 <Icon className="w-5 h-5 text-brand mb-2" aria-hidden />
                 <h3 className="font-bold text-sm">{t(`home.trust.item${key}Title`)}</h3>
                 <p className="text-slate-400 mt-1 text-[11px] leading-relaxed">{t(`home.trust.item${key}Text`)}</p>
@@ -320,7 +320,7 @@ export function HomePage() {
           {voices.map(v => (
             <figure
               key={v.key}
-              className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between"
+              className="bg-card p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between"
             >
               <blockquote className="text-xs text-slate-700 leading-relaxed italic">
                 “{t(`home.voices.quote${v.key}`)}”
@@ -350,7 +350,7 @@ export function HomePage() {
         </div>
         <div className="space-y-3">
           {faqs.map((i, idx) => (
-            <div key={i} className="border border-slate-200 rounded-xl overflow-hidden bg-white">
+            <div key={i} className="border border-slate-200 rounded-xl overflow-hidden bg-card">
               <h3>
                 <button
                   type="button"
@@ -383,13 +383,13 @@ export function HomePage() {
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
             <Link
               to={paths.startProject}
-              className="px-6 py-3 text-xs font-semibold text-white bg-ink hover:bg-ink-soft rounded-lg shadow-sm"
+              className="px-6 py-3 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-lg shadow-sm"
             >
               {t('home.cta.start')}
             </Link>
             <Link
               to={paths.explore}
-              className="px-6 py-3 text-xs font-semibold text-ink bg-white hover:bg-brand border border-brand rounded-lg"
+              className="px-6 py-3 text-xs font-semibold text-ink bg-card hover:bg-brand border border-brand rounded-lg"
             >
               {t('home.cta.browse')}
             </Link>

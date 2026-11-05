@@ -49,7 +49,7 @@ export function ReviewProjectPage() {
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="bg-white rounded-3xl border border-slate-200 p-5 sm:p-6 space-y-3">
+    <section className="bg-card rounded-3xl border border-slate-200 p-5 sm:p-6 space-y-3">
       <h2 className="text-base text-ink">{title}</h2>
       {children}
     </section>
@@ -342,7 +342,7 @@ function EvaluationForm({ projectId, evaluation }: { projectId: string; evaluati
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="bg-white rounded-3xl border border-slate-200 p-5 sm:p-6 space-y-4"
+      className="bg-card rounded-3xl border border-slate-200 p-5 sm:p-6 space-y-4"
     >
       <div className="flex items-baseline justify-between">
         <h2 className="text-base text-ink">{t('project.evaluationTitle')}</h2>

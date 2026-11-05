@@ -62,7 +62,7 @@ export function GoogleButton({ next, beforeStart }: { next: string; beforeStart?
         type="button"
         onClick={start}
         disabled={busy}
-        className="w-full inline-flex items-center justify-center gap-3 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-ink hover:bg-page disabled:opacity-60 cursor-pointer"
+        className="w-full inline-flex items-center justify-center gap-3 rounded-full border border-slate-300 bg-card px-4 py-2.5 text-sm font-semibold text-ink hover:bg-page disabled:opacity-60 cursor-pointer"
       >
         {/* Google "G" mark */}
         <svg viewBox="0 0 48 48" className="w-5 h-5" aria-hidden>
