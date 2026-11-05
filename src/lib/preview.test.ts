@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { injectPreview, isPreviewBot, projectPreview, type PreviewProject } from '@/lib/linkPreview';
+import { injectPreview, isPreviewBot, projectPreview, type PreviewProject } from '../../api/preview';
 
 const SUPABASE = 'https://abc.supabase.co';
 const project = (over: Partial<PreviewProject> = {}): PreviewProject => ({

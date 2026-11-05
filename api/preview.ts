@@ -1,11 +1,13 @@
 /**
- * Link previews for shared project links (Telegram, Facebook, WhatsApp, X…).
+ * Vercel Function: link previews for shared project links (Telegram, Facebook, WhatsApp, X…).
  *
- * Those apps read the page with a bot that doesn't run JavaScript, so they only
- * see index.html. middleware.ts (project root, runs on Vercel) uses these helpers
- * to put the project's own title, text and photo into the page for such bots.
+ * Those apps read the page with a bot that doesn't run JavaScript, so they only see
+ * index.html. vercel.json sends ONLY those bots' requests for /projects/:slug here
+ * (matched by user agent); everyone else gets the normal site and never runs this code.
+ * We put the project's own title, text and photo into index.html and return it.
  *
- * No imports: this file is also bundled into the Vercel middleware.
+ * Self-contained on purpose (no imports), so it runs on Vercel without bundling.
+ * Only projects the public may see are found (database rules).
  */
 
 export const SITE_URL = 'https://www.fundy.uz';
@@ -75,4 +77,45 @@ export function injectPreview(html: string, p: Preview): string {
     .replace(/<meta\s+name="description"[\s\S]*?\/>/i, '')
     .replace(/<meta\s+(property|name)="(og|twitter):[^"]*"[^>]*\/>\s*/gi, '');
   return cleaned.replace('</head>', `    ${tags}\n  </head>`);
+}
+
+const DEFAULT_PAGE = `<!doctype html><html lang="uz"><head><meta charset="UTF-8" /><title>Fundy</title></head><body></body></html>`;
+
+/** GET /api/preview?slug=… (reached through the rewrite in vercel.json). */
+export async function GET(request: Request): Promise<Response> {
+  const html = (body: string) =>
+    new Response(body, {
+      headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'public, max-age=0, s-maxage=300' },
+    });
+
+  let page = DEFAULT_PAGE;
+  try {
+    const res = await fetch(`${SITE_URL}/index.html`, { signal: AbortSignal.timeout(3000) });
+    if (res.ok) page = await res.text();
+  } catch {
+    /* keep the default page */
+  }
+
+  try {
+    const slug = new URL(request.url).searchParams.get('slug') ?? '';
+    const supabaseUrl = process.env.VITE_SUPABASE_URL;
+    const key = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+    if (!slug || !supabaseUrl || !key) return html(page);
+
+    const api = new URL(`${supabaseUrl}/rest/v1/projects`);
+    api.searchParams.set(
+      'select',
+      'slug,cover_image_path,original_language,project_translations(language,title,tagline)',
+    );
+    api.searchParams.set('slug', `eq.${slug}`);
+    api.searchParams.set('limit', '1');
+    const found = await fetch(api, {
+      headers: { apikey: key, Authorization: `Bearer ${key}` },
+      signal: AbortSignal.timeout(3000),
+    });
+    const [project] = found.ok ? ((await found.json()) as PreviewProject[]) : [];
+    return html(project ? injectPreview(page, projectPreview(project, supabaseUrl)) : page);
+  } catch {
+    return html(page); // never fail: at worst the bot sees the site-wide preview
+  }
 }
