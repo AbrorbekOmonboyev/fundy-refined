@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, Navigate, useSearchParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import type { EmailOtpType } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/features/auth/AuthContext';
 import { safeNext } from '@/features/auth/redirects';
@@ -11,11 +12,10 @@ import { Alert, AuthCard, PageSpinner } from '@/components/ui';
 /**
  * Where links in emails (and Google sign-in) land.
  *
- * The link brings a one-time ?code=… that is exchanged for a session. For safety
- * that only works in the browser where the login was started (it holds a matching
- * key). The Supabase client tries this by itself; if no session appears, this page
- * asks Supabase for the exact reason and explains it — e.g. "open the link in the
- * same browser" — instead of a generic "expired".
+ * Email links bring ?token_hash=…&type=… (see supabase/scripts/generate-email-templates.ts):
+ * checked with verifyOtp(), they work on any device — request on a computer, open on a phone.
+ * Google sign-in brings ?code=…, exchanged for a session in the same browser.
+ * If no session appears, this page asks Supabase for the exact reason and explains it.
  */
 export function AuthCallbackPage() {
   const { t } = useTranslation();
@@ -28,16 +28,27 @@ export function AuthCallbackPage() {
   const hash = new URLSearchParams(window.location.hash.slice(1));
   const urlError = params.get('error_code') ?? hash.get('error_code') ?? params.get('error') ?? hash.get('error');
   const code = params.get('code');
+  const tokenHash = params.get('token_hash');
+  const otpType = params.get('type') as EmailOtpType | null;
 
   useEffect(() => {
     if (urlError || user || loading || tried.current) return;
-    if (!code || !supabase) return; // handled below: a link without a code can't work
+    if (!supabase) return;
+    if (tokenHash && otpType) {
+      // Email link: works on any device.
+      tried.current = true;
+      void supabase.auth.verifyOtp({ token_hash: tokenHash, type: otpType }).then(({ error }) => {
+        if (error) setFailure(t(errorKey(error)));
+      });
+      return;
+    }
+    if (!code) return; // handled below: a link without a code can't work
     tried.current = true;
     // No session after the automatic attempt: try once more to learn why.
     void supabase.auth.exchangeCodeForSession(code).then(({ error }) => {
       if (error) setFailure(t(errorKey(error)));
     });
-  }, [urlError, user, loading, code, t]);
+  }, [urlError, user, loading, code, tokenHash, otpType, t]);
 
   // Last resort if nothing answers at all.
   useEffect(() => {
@@ -50,7 +61,7 @@ export function AuthCallbackPage() {
 
   const message = urlError
     ? t(errorKey({ code: params.get('error_code') ?? hash.get('error_code') ?? 'otp_expired' }))
-    : !code && !loading
+    : !code && !tokenHash && !loading
       ? t('errors.linkExpired')
       : failure;
   if (!message) return <PageSpinner />;

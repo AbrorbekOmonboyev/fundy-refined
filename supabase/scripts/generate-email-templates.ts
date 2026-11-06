@@ -135,21 +135,21 @@ const EMAILS: Record<string, { subject: string; copy: Record<Lang, Copy> }> = {
   },
 };
 
-function body(c: Copy, lang: Lang): string {
+function body(c: Copy, lang: Lang, link: string): string {
   return `
               <h1 style="margin:0 0 12px;font-size:24px;line-height:1.25;color:${INK};font-family:Arial,Helvetica,sans-serif;">${c.heading}</h1>
               <p style="margin:0 0 24px;font-size:16px;line-height:1.5;color:${INK};">${c.text}</p>
               <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-radius:999px;background:${INK};">
-                <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;">${c.button}</a>
+                <a href="${link}" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;">${c.button}</a>
               </td></tr></table>
               <p style="margin:24px 0 6px;font-size:13px;line-height:1.5;color:${MUTED};">${c.fallback}</p>
-              <p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all;"><a href="{{ .ConfirmationURL }}" style="color:${INK};">{{ .ConfirmationURL }}</a></p>
+              <p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all;"><a href="${link}" style="color:${INK};">${link}</a></p>
               <p style="margin:0;font-size:13px;line-height:1.5;color:${MUTED};">${c.ignore}</p>
             </td></tr>
             <tr><td style="padding:20px 32px;background:${PAGE};font-size:12px;line-height:1.5;color:${MUTED};">${FOOTER[lang]}</td></tr>`;
 }
 
-function template(copy: Record<Lang, Copy>): string {
+function template(copy: Record<Lang, Copy>, link: string): string {
   // printf avoids an error when .Data.language is missing (older accounts).
   const lang = '(printf "%v" .Data.language)';
   return `<!doctype html>
@@ -162,9 +162,9 @@ function template(copy: Record<Lang, Copy>): string {
             <img src="${LOGO}" width="140" alt="Fundy" style="display:block;width:140px;height:auto;border:0;" />
           </td></tr>
           <tr><td style="padding:32px;">
-{{ if eq ${lang} "ru" }}${body(copy.ru, 'ru')}
-{{ else if eq ${lang} "en" }}${body(copy.en, 'en')}
-{{ else }}${body(copy.uz, 'uz')}
+{{ if eq ${lang} "ru" }}${body(copy.ru, 'ru', link)}
+{{ else if eq ${lang} "en" }}${body(copy.en, 'en', link)}
+{{ else }}${body(copy.uz, 'uz', link)}
 {{ end }}
         </table>
       </td></tr>
@@ -174,9 +174,23 @@ function template(copy: Record<Lang, Copy>): string {
 `;
 }
 
+/**
+ * Links that work on any device: the email carries a one-time token_hash, and
+ * /auth/callback checks it with verifyOtp(). (The default {{ .ConfirmationURL }} uses
+ * PKCE, which only works in the browser where the email was requested.)
+ * {{ .RedirectTo }} is our /auth/callback?next=… so the token is added with &.
+ */
+const LINK_TYPE: Record<string, string> = {
+  confirmation: 'email',
+  magic_link: 'email',
+  recovery: 'recovery',
+  email_change: 'email_change',
+};
+const linkFor = (name: string) => `{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=${LINK_TYPE[name]}`;
+
 const dir = join(import.meta.dirname, '..', 'templates');
 mkdirSync(dir, { recursive: true });
 for (const [name, email] of Object.entries(EMAILS)) {
-  writeFileSync(join(dir, `${name}.html`), template(email.copy));
+  writeFileSync(join(dir, `${name}.html`), template(email.copy, linkFor(name)));
   console.log(`supabase/templates/${name}.html  —  "${email.subject}"`);
 }

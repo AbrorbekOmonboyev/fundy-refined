@@ -12,10 +12,10 @@
               <h1 style="margin:0 0 12px;font-size:24px;line-height:1.25;color:#15122B;font-family:Arial,Helvetica,sans-serif;">Вход в Fundy</h1>
               <p style="margin:0 0 24px;font-size:16px;line-height:1.5;color:#15122B;">Нажмите кнопку, чтобы войти в аккаунт. Ссылка работает один раз.</p>
               <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-radius:999px;background:#15122B;">
-                <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;">Войти</a>
+                <a href="{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=email" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;">Войти</a>
               </td></tr></table>
               <p style="margin:24px 0 6px;font-size:13px;line-height:1.5;color:#5B6175;">Если кнопка не работает, скопируйте ссылку в браузер:</p>
-              <p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all;"><a href="{{ .ConfirmationURL }}" style="color:#15122B;">{{ .ConfirmationURL }}</a></p>
+              <p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all;"><a href="{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=email" style="color:#15122B;">{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=email</a></p>
               <p style="margin:0;font-size:13px;line-height:1.5;color:#5B6175;">Если вы не запрашивали вход, проигнорируйте это письмо.</p>
             </td></tr>
             <tr><td style="padding:20px 32px;background:#F4F6FB;font-size:12px;line-height:1.5;color:#5B6175;">Fundy — беспроцентный краудфандинг для Узбекистана. Демо-версия: настоящие деньги не списываются.</td></tr>
@@ -23,10 +23,10 @@
               <h1 style="margin:0 0 12px;font-size:24px;line-height:1.25;color:#15122B;font-family:Arial,Helvetica,sans-serif;">Sign in to Fundy</h1>
               <p style="margin:0 0 24px;font-size:16px;line-height:1.5;color:#15122B;">Click the button to sign in. The link works once.</p>
               <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-radius:999px;background:#15122B;">
-                <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;">Sign in</a>
+                <a href="{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=email" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;">Sign in</a>
               </td></tr></table>
               <p style="margin:24px 0 6px;font-size:13px;line-height:1.5;color:#5B6175;">If the button doesn't work, copy this link into your browser:</p>
-              <p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all;"><a href="{{ .ConfirmationURL }}" style="color:#15122B;">{{ .ConfirmationURL }}</a></p>
+              <p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all;"><a href="{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=email" style="color:#15122B;">{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=email</a></p>
               <p style="margin:0;font-size:13px;line-height:1.5;color:#5B6175;">If you didn't ask to sign in, you can ignore this email.</p>
             </td></tr>
             <tr><td style="padding:20px 32px;background:#F4F6FB;font-size:12px;line-height:1.5;color:#5B6175;">Fundy — interest-free crowdfunding for Uzbekistan. Demo version: no real money is charged.</td></tr>
@@ -34,10 +34,10 @@
               <h1 style="margin:0 0 12px;font-size:24px;line-height:1.25;color:#15122B;font-family:Arial,Helvetica,sans-serif;">Fundy’ga kirish</h1>
               <p style="margin:0 0 24px;font-size:16px;line-height:1.5;color:#15122B;">Hisobingizga kirish uchun quyidagi tugmani bosing. Havola bir marta ishlaydi.</p>
               <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-radius:999px;background:#15122B;">
-                <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;">Kirish</a>
+                <a href="{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=email" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;">Kirish</a>
               </td></tr></table>
               <p style="margin:24px 0 6px;font-size:13px;line-height:1.5;color:#5B6175;">Tugma ishlamasa, bu havolani brauzerga nusxalang:</p>
-              <p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all;"><a href="{{ .ConfirmationURL }}" style="color:#15122B;">{{ .ConfirmationURL }}</a></p>
+              <p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all;"><a href="{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=email" style="color:#15122B;">{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=email</a></p>
               <p style="margin:0;font-size:13px;line-height:1.5;color:#5B6175;">Agar siz kirishni so'ramagan bo'lsangiz, bu xatni e'tiborsiz qoldiring.</p>
             </td></tr>
             <tr><td style="padding:20px 32px;background:#F4F6FB;font-size:12px;line-height:1.5;color:#5B6175;">Fundy — O'zbekiston uchun foizsiz kraudfanding. Demo versiya: haqiqiy pul yechilmaydi.</td></tr>
