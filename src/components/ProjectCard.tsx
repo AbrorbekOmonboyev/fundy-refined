@@ -68,14 +68,19 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
             </span>
           </div>
 
-          <h3 className="text-base font-bold text-ink group-hover:text-ink transition-colors line-clamp-2 leading-snug">
+          <h3
+            lang={text?.language}
+            className="text-base font-bold text-ink group-hover:text-ink transition-colors line-clamp-2 leading-snug"
+          >
             {/* The whole card is clickable through this link's stretched area. */}
             <Link to={href} className="after:absolute after:inset-0 after:z-10">
               {title}
             </Link>
           </h3>
 
-          <p className="mt-2 text-xs text-slate-600 line-clamp-2 leading-relaxed">{text?.tagline}</p>
+          <p lang={text?.language} className="mt-2 text-xs text-slate-600 line-clamp-2 leading-relaxed">
+            {text?.tagline}
+          </p>
 
           <div className="mt-3 flex flex-wrap items-center gap-1.5 text-xs text-slate-600">
             <span>{t('project.by', { name: project.founderName })}</span>

@@ -1143,6 +1143,8 @@ describe('public browsing', () => {
     assert.ok(byPlace.length >= 1);
     const byFounder = await as(db, anon, `select * from public.search_project_ids('Rahimov')`);
     assert.equal(byFounder.length, 1);
+    const plainApostrophe = await as(db, anon, `select * from public.search_project_ids('Farg''ona')`);
+    assert.ok(plainApostrophe.length >= 1); // finds "Fargʻona"
   });
 
   test('search ignores wildcards, very short queries and hidden drafts', async () => {

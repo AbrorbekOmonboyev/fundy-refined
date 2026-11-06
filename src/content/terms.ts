@@ -6,25 +6,25 @@ export const terms: Localized<Article> = {
   uz: {
     kicker: 'Foydalanish shartlari',
     title: 'Foydalanish shartlari',
-    intro: "Fundy'dan foydalanish orqali siz quyidagi shartlarga rozilik bildirasiz. Iltimos, diqqat bilan o'qing.",
+    intro: 'Fundyʼdan foydalanish orqali siz quyidagi shartlarga rozilik bildirasiz. Iltimos, diqqat bilan oʻqing.',
     draftNote:
-      "Loyiha matni. Bu shartlar demo versiya uchun tayyorlangan va haqiqiy ishga tushirishdan oldin yurist tomonidan ko'rib chiqiladi.",
+      'Loyiha matni. Bu shartlar demo versiya uchun tayyorlangan va haqiqiy ishga tushirishdan oldin yurist tomonidan koʻrib chiqiladi.',
     updated: UPDATED,
     sections: [
       {
         id: 'service',
         heading: '1. Xizmat haqida',
         paragraphs: [
-          "Fundy — loyiha asoschilarini ularni qo'llab-quvvatlovchilar bilan bog'laydigan onlayn platforma. Fundy loyihalarning o'zini amalga oshirmaydi va ularning natijasiga kafolat bermaydi.",
-          "Hozirgi demo versiyada barcha to'lovlar simulyatsiya: haqiqiy pul yechilmaydi va o'tkazilmaydi.",
+          'Fundy — loyiha asoschilarini ularni qoʻllab-quvvatlovchilar bilan bogʻlaydigan onlayn platforma. Fundy loyihalarning oʻzini amalga oshirmaydi va ularning natijasiga kafolat bermaydi.',
+          'Hozirgi demo versiyada barcha toʻlovlar simulyatsiya: haqiqiy pul yechilmaydi va oʻtkazilmaydi.',
         ],
       },
       {
         id: 'accounts',
         heading: '2. Hisob',
         bullets: [
-          "Hisob ochish uchun 18 yoshdan katta bo'lishingiz kerak.",
-          "To'g'ri ma'lumot kiriting va parolingizni maxfiy saqlang. Hisobingizdagi harakatlar uchun siz javobgarsiz.",
+          'Hisob ochish uchun 18 yoshdan katta boʻlishingiz kerak.',
+          'Toʻgʻri maʼlumot kiriting va parolingizni maxfiy saqlang. Hisobingizdagi harakatlar uchun siz javobgarsiz.',
           'Bir kishi — bitta hisob. Boshqa shaxs nomidan hisob ochish taqiqlanadi.',
         ],
       },
@@ -32,29 +32,29 @@ export const terms: Localized<Article> = {
         id: 'founders',
         heading: '3. Loyiha asoschilari uchun qoidalar',
         bullets: [
-          "Loyiha, byudjet, bosqichlar va xavflar haqidagi barcha ma'lumotlar haqqoniy va to'liq bo'lishi kerak.",
-          "Yuklangan hujjatlar haqiqiy bo'lishi va sizga tegishli bo'lishi kerak.",
-          "Mablag' faqat e'lon qilingan byudjetga muvofiq ishlatilishi kerak.",
+          'Loyiha, byudjet, bosqichlar va xavflar haqidagi barcha maʼlumotlar haqqoniy va toʻliq boʻlishi kerak.',
+          'Yuklangan hujjatlar haqiqiy boʻlishi va sizga tegishli boʻlishi kerak.',
+          'Mablagʻ faqat eʼlon qilingan byudjetga muvofiq ishlatilishi kerak.',
           'Homiylarni muntazam yangiliklar bilan xabardor qilib turing va bosqichlarni bajarilganini isbotlang.',
-          "Fundy loyihani tushuntirishsiz rad etish, o'zgartirish so'rash yoki to'xtatish huquqiga ega.",
+          'Fundy loyihani tushuntirishsiz rad etish, oʻzgartirish soʻrash yoki toʻxtatish huquqiga ega.',
         ],
       },
       {
         id: 'backers',
         heading: '4. Homiylar uchun',
         bullets: [
-          "Qo'llab-quvvatlash — bu loyihaga ishonch, xarid emas. Mukofotlar kechikishi yoki o'zgarishi mumkin.",
+          'Qoʻllab-quvvatlash — bu loyihaga ishonch, xarid emas. Mukofotlar kechikishi yoki oʻzgarishi mumkin.',
           'Mushoraka hamkorligida foyda ham, zarar ham taqsimlanadi; daromad kafolatlanmagan.',
-          "Fundy'dagi ma'lumotlar moliyaviy, investitsion yoki diniy maslahat emas. Qaror qabul qilishdan oldin mustaqil maslahat oling.",
+          'Fundyʼdagi maʼlumotlar moliyaviy, investitsion yoki diniy maslahat emas. Qaror qabul qilishdan oldin mustaqil maslahat oling.',
         ],
       },
       {
         id: 'content',
         heading: '5. Kontent va xulq-atvor',
         bullets: [
-          "Haqoratli, yolg'on, noqonuniy yoki reklama xarakteridagi kontent joylashtirish taqiqlanadi.",
-          "Boshqalarning mualliflik huquqi va shaxsiy ma'lumotlarini hurmat qiling.",
-          "Siz joylashtirgan matn va rasmlar sizga tegishli bo'lib qoladi; ularni platformada ko'rsatish uchun Fundy'ga ruxsat berasiz.",
+          'Haqoratli, yolgʻon, noqonuniy yoki reklama xarakteridagi kontent joylashtirish taqiqlanadi.',
+          'Boshqalarning mualliflik huquqi va shaxsiy maʼlumotlarini hurmat qiling.',
+          'Siz joylashtirgan matn va rasmlar sizga tegishli boʻlib qoladi; ularni platformada koʻrsatish uchun Fundyʼga ruxsat berasiz.',
           'Fundy qoidalarni buzgan kontentni yashirishi va hisoblarni bloklashi mumkin.',
         ],
       },
@@ -67,10 +67,10 @@ export const terms: Localized<Article> = {
       },
       {
         id: 'changes',
-        heading: "7. O'zgarishlar va qo'llaniladigan qonun",
+        heading: '7. Oʻzgarishlar va qoʻllaniladigan qonun',
         paragraphs: [
-          "Shartlar o'zgarishi mumkin; muhim o'zgarishlar haqida sayt orqali xabar beramiz. Ushbu shartlarga O'zbekiston Respublikasi qonunchiligi qo'llaniladi.",
-          "Savollar bo'lsa, aloqa sahifasi orqali yozing.",
+          'Shartlar oʻzgarishi mumkin; muhim oʻzgarishlar haqida sayt orqali xabar beramiz. Ushbu shartlarga Oʻzbekiston Respublikasi qonunchiligi qoʻllaniladi.',
+          'Savollar boʻlsa, aloqa sahifasi orqali yozing.',
         ],
       },
     ],

@@ -5,58 +5,58 @@ export const trust: Localized<Article> = {
     kicker: 'Ishonch va xavfsizlik',
     title: 'Pulingiz qanday himoyalanadi',
     intro:
-      "Fundy'da har bir loyiha tekshiriladi, har bir byudjet ochiq va mablag' faqat bajarilgan ish uchun beriladi. Mana qanday ishlaydi — va nimalarni bilishingiz kerak.",
+      'Fundyʼda har bir loyiha tekshiriladi, har bir byudjet ochiq va mablagʻ faqat bajarilgan ish uchun beriladi. Mana qanday ishlaydi — va nimalarni bilishingiz kerak.',
     sections: [
       {
         id: 'review',
         heading: 'Loyihalar qanday tekshiriladi',
-        paragraphs: ["Loyiha e'lon qilinishidan oldin Fundy ko'rib chiqish jamoasi:"],
+        paragraphs: ['Loyiha eʼlon qilinishidan oldin Fundy koʻrib chiqish jamoasi:'],
         bullets: [
-          "Asoschini va uning tashkiloti ro'yxatdan o'tganligini (MChJ, YaTT yoki STIR) tekshiradi.",
-          "Hujjatlarni ko'rib chiqadi: ro'yxatdan o'tganlik guvohnomasi, biznes reja, moliyaviy hisobotlar.",
+          'Asoschini va uning tashkiloti roʻyxatdan oʻtganligini (MChJ, YaTT yoki STIR) tekshiradi.',
+          'Hujjatlarni koʻrib chiqadi: roʻyxatdan oʻtganlik guvohnomasi, biznes reja, moliyaviy hisobotlar.',
           'Byudjet maqsadga aniq teng ekanini va bosqichlar mantiqiy ekanini tekshiradi.',
-          "Loyihani beshta yo'nalish bo'yicha baholaydi (har biri 0–20 ball): biznes reja, jamoa, bozor, moliya va xavflarni boshqarish.",
+          'Loyihani beshta yoʻnalish boʻyicha baholaydi (har biri 0–20 ball): biznes reja, jamoa, bozor, moliya va xavflarni boshqarish.',
         ],
       },
       {
         id: 'verified',
         heading: '"Tasdiqlangan asoschi" belgisi',
         paragraphs: [
-          "Belgi asoschining shaxsi va ro'yxatdan o'tganligi hujjatlar bilan tasdiqlanganini bildiradi. Bu loyiha muvaffaqiyatli bo'lishiga kafolat emas.",
-          "Adminlar o'z loyihalarini baholay olmaydi va o'zlarini tasdiqlay olmaydi — buni boshqa admin qilishi shart.",
+          'Belgi asoschining shaxsi va roʻyxatdan oʻtganligi hujjatlar bilan tasdiqlanganini bildiradi. Bu loyiha muvaffaqiyatli boʻlishiga kafolat emas.',
+          'Adminlar oʻz loyihalarini baholay olmaydi va oʻzlarini tasdiqlay olmaydi — buni boshqa admin qilishi shart.',
         ],
       },
       {
         id: 'milestones',
-        heading: "Mablag' bosqichma-bosqich beriladi",
+        heading: 'Mablagʻ bosqichma-bosqich beriladi',
         paragraphs: [
-          "Har bir loyiha ishni bosqichlarga bo'ladi va har bir bosqich uchun mablag'ning qancha qismi berilishini ko'rsatadi. Asoschi bosqich bajarilganini isbotlaydi, jamoamiz uni tekshiradi — shundan keyingina keyingi qism beriladi.",
-          "Demo versiyada pul harakatlanmaydi; bosqichlar jarayonni ko'rsatish uchun simulyatsiya qilinadi.",
+          'Har bir loyiha ishni bosqichlarga boʻladi va har bir bosqich uchun mablagʻning qancha qismi berilishini koʻrsatadi. Asoschi bosqich bajarilganini isbotlaydi, jamoamiz uni tekshiradi — shundan keyingina keyingi qism beriladi.',
+          'Demo versiyada pul harakatlanmaydi; bosqichlar jarayonni koʻrsatish uchun simulyatsiya qilinadi.',
         ],
       },
       {
         id: 'risks',
-        heading: "Bilishingiz kerak bo'lgan xavflar",
+        heading: 'Bilishingiz kerak boʻlgan xavflar',
         bullets: [
-          "Loyihalar muvaffaqiyatsiz bo'lishi mumkin. Tekshiruv xavfni kamaytiradi, lekin yo'q qilmaydi.",
+          'Loyihalar muvaffaqiyatsiz boʻlishi mumkin. Tekshiruv xavfni kamaytiradi, lekin yoʻq qilmaydi.',
           'Mukofotlarni yetkazish kechikishi mumkin.',
-          "Mushoraka — hamkorlik: foyda va zararni baham ko'rasiz. Daromad kafolatlanmagan, sarmoyaning bir qismi yoki barchasi yo'qolishi mumkin.",
-          "Faqat yo'qotishga tayyor bo'lgan miqdorda qo'llab-quvvatlang.",
+          'Mushoraka — hamkorlik: foyda va zararni baham koʻrasiz. Daromad kafolatlanmagan, sarmoyaning bir qismi yoki barchasi yoʻqolishi mumkin.',
+          'Faqat yoʻqotishga tayyor boʻlgan miqdorda qoʻllab-quvvatlang.',
         ],
       },
       {
         id: 'report',
         heading: 'Muammo haqida xabar berish',
         paragraphs: [
-          'Agar loyiha yoki izoh shubhali ko\'rinsa, aloqa sahifasi orqali "Muammo haqida xabar berish" mavzusini tanlab yozing. Adminlar har bir xabarni ko\'rib chiqadi; nomaqbul izohlar yashiriladi, qoidabuzar foydalanuvchilar bloklanadi.',
-          "Har bir admin harakati o'zgartirib bo'lmaydigan jurnalga yoziladi.",
+          'Agar loyiha yoki izoh shubhali koʻrinsa, aloqa sahifasi orqali "Muammo haqida xabar berish" mavzusini tanlab yozing. Adminlar har bir xabarni koʻrib chiqadi; nomaqbul izohlar yashiriladi, qoidabuzar foydalanuvchilar bloklanadi.',
+          'Har bir admin harakati oʻzgartirib boʻlmaydigan jurnalga yoziladi.',
         ],
       },
       {
         id: 'data',
-        heading: "Ma'lumotlaringiz",
+        heading: 'Maʼlumotlaringiz',
         paragraphs: [
-          "Elektron pochtangiz boshqalarga ko'rsatilmaydi. Hujjatlar maxfiy saqlanadi — ularni faqat siz va ko'rib chiqish jamoasi ko'radi. Batafsil — Maxfiylik siyosatida.",
+          'Elektron pochtangiz boshqalarga koʻrsatilmaydi. Hujjatlar maxfiy saqlanadi — ularni faqat siz va koʻrib chiqish jamoasi koʻradi. Batafsil — Maxfiylik siyosatida.',
         ],
       },
     ],

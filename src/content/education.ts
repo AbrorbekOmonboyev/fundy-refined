@@ -2,37 +2,37 @@ import type { Article, Localized } from '@/content/types';
 
 export const education: Localized<Article> = {
   uz: {
-    kicker: "Ta'lim",
+    kicker: 'Taʼlim',
     title: 'Foizsiz moliyalashtirish qanday ishlaydi',
     intro:
-      "Fundy'dagi uch model — xayriya, mukofot va mushoraka — haqida qisqa qo'llanma. Oxirida mushoraka kalkulyatori bor: foyda va zarar qanday taqsimlanishini o'zingiz sinab ko'ring.",
+      'Fundyʼdagi uch model — xayriya, mukofot va mushoraka — haqida qisqa qoʻllanma. Oxirida mushoraka kalkulyatori bor: foyda va zarar qanday taqsimlanishini oʻzingiz sinab koʻring.',
     sections: [
       {
         id: 'riba',
         heading: 'Nima uchun foizsiz',
         paragraphs: [
-          "Oddiy kreditda qarz oluvchi biznes muvaffaqiyatli bo'ladimi yoki yo'qmi, oldindan belgilangan foizni to'laydi. Islom moliyasida bunday kafolatlangan foyda (ribo) taqiqlanadi: daromad faqat haqiqiy faoliyat va xavfni baham ko'rishdan kelishi kerak.",
-          "Fundy'da hech kim foiz to'lamaydi va olmaydi. Pul xayriya, mahsulot uchun oldindan to'lov yoki haqiqiy foyda va zararni baham ko'radigan hamkorlik sifatida beriladi.",
+          'Oddiy kreditda qarz oluvchi biznes muvaffaqiyatli boʻladimi yoki yoʻqmi, oldindan belgilangan foizni toʻlaydi. Islom moliyasida bunday kafolatlangan foyda (ribo) taqiqlanadi: daromad faqat haqiqiy faoliyat va xavfni baham koʻrishdan kelishi kerak.',
+          'Fundyʼda hech kim foiz toʻlamaydi va olmaydi. Pul xayriya, mahsulot uchun oldindan toʻlov yoki haqiqiy foyda va zararni baham koʻradigan hamkorlik sifatida beriladi.',
         ],
       },
       {
         id: 'models',
         heading: 'Uch model',
         bullets: [
-          "Xayriya — hech narsa kutmasdan yordam berasiz. Maktablar, sog'liqni saqlash, ekologiya kabi ijtimoiy loyihalar uchun.",
-          "Mukofot — loyihani qo'llab-quvvatlab, evaziga mahsulot yoki sovg'a olasiz (masalan, hunarmand buyumi). Bu oldindan buyurtmaga o'xshaydi.",
-          "Mushoraka — biznesda hamkorga aylanasiz. Kelishilgan ulushda foyda olasiz va zararni ham sarmoyangizga mutanosib ravishda baham ko'rasiz.",
+          'Xayriya — hech narsa kutmasdan yordam berasiz. Maktablar, sogʻliqni saqlash, ekologiya kabi ijtimoiy loyihalar uchun.',
+          'Mukofot — loyihani qoʻllab-quvvatlab, evaziga mahsulot yoki sovgʻa olasiz (masalan, hunarmand buyumi). Bu oldindan buyurtmaga oʻxshaydi.',
+          'Mushoraka — biznesda hamkorga aylanasiz. Kelishilgan ulushda foyda olasiz va zararni ham sarmoyangizga mutanosib ravishda baham koʻrasiz.',
         ],
       },
       {
         id: 'musharakah',
-        heading: "Fundy'da mushoraka bosqichma-bosqich",
+        heading: 'Fundyʼda mushoraka bosqichma-bosqich',
         bullets: [
-          "Asoschi shartlarni e'lon qiladi: homiylar ulushi (masalan, sof foydaning 25%), minimal sarmoya, to'lov davriyligi va hamkorlik muddati.",
+          'Asoschi shartlarni eʼlon qiladi: homiylar ulushi (masalan, sof foydaning 25%), minimal sarmoya, toʻlov davriyligi va hamkorlik muddati.',
           'Fundy jamoasi loyihani tekshiradi va baholaydi.',
           'Siz sarmoya kiritasiz. Sizning ulushingiz — sarmoyangizning loyiha maqsadiga nisbati.',
-          "Mablag' bosqichma-bosqich, bajarilgan ish uchun beriladi.",
-          "Biznes muntazam ravishda tekshirilgan natijalar bo'yicha foydani taqsimlaydi. Zarar yili bo'lsa, zarar kapitalga mutanosib ravishda taqsimlanadi.",
+          'Mablagʻ bosqichma-bosqich, bajarilgan ish uchun beriladi.',
+          'Biznes muntazam ravishda tekshirilgan natijalar boʻyicha foydani taqsimlaydi. Zarar yili boʻlsa, zarar kapitalga mutanosib ravishda taqsimlanadi.',
           'Muddat oxirida asoschi ulushingizni kelishilgan tartibda qaytarib sotib olishi mumkin.',
         ],
       },
@@ -40,15 +40,15 @@ export const education: Localized<Article> = {
         id: 'mudarabah',
         heading: 'Mushoraka va muzoraba farqi',
         paragraphs: [
-          "Mushorakada har ikki tomon kapital kiritadi va biznesni birgalikda yuritishi mumkin. Muzorabada homiylar faqat kapital beradi, asoschi esa mehnati bilan qatnashadi. Har ikkisida foyda kelishilgan nisbatda bo'linadi; muzorabada moliyaviy zararni odatda kapital egasi ko'taradi (agar asoschi beparvolik qilmagan bo'lsa).",
+          'Mushorakada har ikki tomon kapital kiritadi va biznesni birgalikda yuritishi mumkin. Muzorabada homiylar faqat kapital beradi, asoschi esa mehnati bilan qatnashadi. Har ikkisida foyda kelishilgan nisbatda boʻlinadi; muzorabada moliyaviy zararni odatda kapital egasi koʻtaradi (agar asoschi beparvolik qilmagan boʻlsa).',
         ],
       },
       {
         id: 'glossary',
-        heading: "Qisqa lug'at",
+        heading: 'Qisqa lugʻat',
         bullets: [
           'Ribo — kafolatlangan foiz; islom moliyasida taqiqlangan.',
-          "Bosqich — loyihaning ma'lum qismi; bajarilgach, mablag'ning bir qismi beriladi.",
+          'Bosqich — loyihaning maʼlum qismi; bajarilgach, mablagʻning bir qismi beriladi.',
           'Baholash — Fundy jamoasining 100 ballik bahosi: biznes reja, jamoa, bozor, moliya va xavflar.',
           'Sof foyda — barcha xarajatlardan keyin qolgan foyda.',
         ],
@@ -57,7 +57,7 @@ export const education: Localized<Article> = {
         id: 'disclaimer',
         heading: 'Muhim eslatma',
         paragraphs: [
-          "Bu sahifa umumiy ma'lumot beradi va moliyaviy, investitsion yoki diniy maslahat emas. Fundy shartnomalari haqiqiy ishga tushirishdan oldin shariat bo'yicha maslahat kengashi tomonidan ko'rib chiqiladi. Demo versiyada haqiqiy pul yechilmaydi.",
+          'Bu sahifa umumiy maʼlumot beradi va moliyaviy, investitsion yoki diniy maslahat emas. Fundy shartnomalari haqiqiy ishga tushirishdan oldin shariat boʻyicha maslahat kengashi tomonidan koʻrib chiqiladi. Demo versiyada haqiqiy pul yechilmaydi.',
         ],
       },
     ],

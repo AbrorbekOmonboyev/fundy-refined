@@ -1,20 +1,21 @@
 {
   "languages": {
-    "uz": "O'zbekcha",
+    "uz": "Oʻzbekcha",
     "ru": "Русский",
-    "en": "English"
+    "en": "English",
+    "uzCyrl": "Oʻzbekcha (kirill)"
   },
   "nav": {
     "explore": "Loyihalar",
     "howItWorks": "Qanday ishlaydi",
-    "learn": "Ta'lim va mushoraka",
+    "learn": "Taʼlim va mushoraka",
     "trustSafety": "Ishonch va xavfsizlik",
     "startProject": "Loyiha joylash"
   },
   "header": {
     "notifications": "Bildirishnomalar",
-    "markAllRead": "Hammasini o'qilgan deb belgilash",
-    "noNotifications": "Hozircha bildirishnomalar yo'q.",
+    "markAllRead": "Hammasini oʻqilgan deb belgilash",
+    "noNotifications": "Hozircha bildirishnomalar yoʻq.",
     "toggleMenu": "Menyuni ochish yoki yopish",
     "language": "Til",
     "darkMode": "Tungi rejim",
@@ -22,19 +23,19 @@
   },
   "banner": {
     "label": "Demo versiya:",
-    "full": "O'zbekiston bozori uchun ishlab chiqilgan. Barcha to'lovlar, foyda taqsimoti va loyihalar — simulyatsiya.",
-    "short": "To'lovlar — simulyatsiya."
+    "full": "Oʻzbekiston bozori uchun ishlab chiqilgan. Barcha toʻlovlar, foyda taqsimoti va loyihalar — simulyatsiya.",
+    "short": "Toʻlovlar — simulyatsiya."
   },
   "footer": {
-    "about": "O'zbekistonning shaffof, foizsiz kraudfanding ekotizimi. Tadbirkorlar, hunarmandlar va ijtimoiy tashabbuskorlarni xayriya, mukofot va mushoraka orqali homiylar bilan bog'laydi.",
-    "simulated": "Demo versiya · O'zbekiston uchun yaratilgan",
+    "about": "Oʻzbekistonning shaffof, foizsiz kraudfanding ekotizimi. Tadbirkorlar, hunarmandlar va ijtimoiy tashabbuskorlarni xayriya, mukofot va mushoraka orqali homiylar bilan bogʻlaydi.",
+    "simulated": "Demo versiya · Oʻzbekiston uchun yaratilgan",
     "models": "Modellar",
     "platform": "Platforma",
     "donation": "Xayriya",
     "reward": "Mukofotli",
     "musharakah": "Mushoraka (ulush)",
     "calculator": "Foyda taqsimoti kalkulyatori",
-    "discover": "Loyihalarni ko'rish",
+    "discover": "Loyihalarni koʻrish",
     "startCampaign": "Kampaniya boshlash",
     "founderDashboard": "Asoschi kabineti",
     "backerDashboard": "Homiy kabineti",
@@ -42,7 +43,7 @@
     "terms": "Foydalanish shartlari",
     "copyright": "© {{year}} Fundy (demo versiya). Barcha huquqlar himoyalangan.",
     "madeWith": "Mehr bilan yaratildi",
-    "forEntrepreneurs": "O'zbekiston tadbirkorlari uchun.",
+    "forEntrepreneurs": "Oʻzbekiston tadbirkorlari uchun.",
     "company": "Fundy",
     "aboutLink": "Biz haqimizda",
     "learn": "Qanday ishlaydi",
@@ -51,19 +52,19 @@
   },
   "notFound": {
     "title": "Sahifa topilmadi",
-    "message": "Bu sahifa mavjud emas yoki boshqa joyga ko'chirilgan.",
+    "message": "Bu sahifa mavjud emas yoki boshqa joyga koʻchirilgan.",
     "home": "Bosh sahifaga qaytish"
   },
   "common": {
     "loading": "Yuklanmoqda…",
-    "showPassword": "Parolni ko'rsatish",
+    "showPassword": "Parolni koʻrsatish",
     "hidePassword": "Parolni yashirish",
     "close": "Yopish",
     "cancel": "Bekor qilish"
   },
   "account": {
     "login": "Kirish",
-    "signup": "Ro'yxatdan o'tish",
+    "signup": "Roʻyxatdan oʻtish",
     "signOut": "Chiqish",
     "menu": "Hisob menyusi",
     "contributions": "Mening hissalarim",
@@ -72,42 +73,42 @@
     "admin": "Admin panel"
   },
   "validation": {
-    "email": "To'g'ri elektron pochta manzilini kiriting.",
+    "email": "Toʻgʻri elektron pochta manzilini kiriting.",
     "name": "Ismingizni kiriting (kamida 2 ta belgi).",
-    "password": "Kamida {{min}} ta belgi, harflar va raqamlar bo'lsin.",
+    "password": "Kamida {{min}} ta belgi, harflar va raqamlar boʻlsin.",
     "passwordMatch": "Parollar bir xil emas.",
     "terms": "Davom etish uchun shartlarga rozilik bildiring."
   },
   "errors": {
-    "generic": "Xatolik yuz berdi. Qaytadan urinib ko'ring.",
-    "network": "Ulanib bo'lmadi. Internet aloqangizni tekshirib, qaytadan urinib ko'ring.",
-    "invalidCredentials": "Elektron pochta yoki parol noto'g'ri.",
+    "generic": "Xatolik yuz berdi. Qaytadan urinib koʻring.",
+    "network": "Ulanib boʻlmadi. Internet aloqangizni tekshirib, qaytadan urinib koʻring.",
+    "invalidCredentials": "Elektron pochta yoki parol notoʻgʻri.",
     "emailNotConfirmed": "Avval elektron pochtangizni tasdiqlang — pochtangizdagi xatimizni oching.",
-    "userExists": "Bu elektron pochta bilan hisob allaqachon mavjud. Kirib ko'ring.",
+    "userExists": "Bu elektron pochta bilan hisob allaqachon mavjud. Kirib koʻring.",
     "weakPassword": "Parol juda oddiy. Kamida 8 ta belgi, harflar va raqamlardan foydalaning.",
     "samePassword": "Yangi parol eskisidan farq qilishi kerak.",
-    "invalidEmail": "Bu elektron pochta manzili noto'g'ri.",
-    "rateLimit": "Juda ko'p urinish. Bir necha daqiqa kutib, qaytadan urinib ko'ring.",
-    "linkExpired": "Bu havolaning muddati tugagan yoki u allaqachon ishlatilgan. Yangisini so'rang.",
-    "linkOtherBrowser": "Havola siz uni so'ragan brauzerdan boshqa brauzer yoki ilovada ochildi, shuning uchun tizimga kira olmadi. Havolani o'sha brauzerda oching — yoki shunchaki parolingiz bilan kiring.",
-    "signupDisabled": "Hozircha yangi ro'yxatdan o'tish yopiq.",
-    "blocked": "Bu hisob bloklangan. Qo'llab-quvvatlash xizmatiga murojaat qiling.",
-    "accountHasActivity": "Bu hisobda hissalar yoki loyihalar bor, shuning uchun u moliyaviy hisobot uchun saqlanadi. Yopish uchun qo'llab-quvvatlash xizmatiga murojaat qiling.",
+    "invalidEmail": "Bu elektron pochta manzili notoʻgʻri.",
+    "rateLimit": "Juda koʻp urinish. Bir necha daqiqa kutib, qaytadan urinib koʻring.",
+    "linkExpired": "Bu havolaning muddati tugagan yoki u allaqachon ishlatilgan. Yangisini soʻrang.",
+    "linkOtherBrowser": "Havola siz uni soʻragan brauzerdan boshqa brauzer yoki ilovada ochildi, shuning uchun tizimga kira olmadi. Havolani oʻsha brauzerda oching — yoki shunchaki parolingiz bilan kiring.",
+    "signupDisabled": "Hozircha yangi roʻyxatdan oʻtish yopiq.",
+    "blocked": "Bu hisob bloklangan. Qoʻllab-quvvatlash xizmatiga murojaat qiling.",
+    "accountHasActivity": "Bu hisobda hissalar yoki loyihalar bor, shuning uchun u moliyaviy hisobot uchun saqlanadi. Yopish uchun qoʻllab-quvvatlash xizmatiga murojaat qiling.",
     "notSignedIn": "Avval tizimga kiring.",
-    "notConfigured": "Hisoblar hozircha mavjud emas: sayt ma'lumotlar bazasiga ulanmagan.",
+    "notConfigured": "Hisoblar hozircha mavjud emas: sayt maʼlumotlar bazasiga ulanmagan.",
     "adminOnly": "Bu sahifa faqat administratorlar uchun.",
     "amountBelowMinimum": "Minimal summa — {{min}}.",
     "amountAboveMaximum": "Bu summa bir martalik hissa chegarasidan oshadi.",
     "amountBelowRewardPrice": "Summa tanlangan mukofot narxidan kam.",
     "rewardSoldOut": "Bu mukofot tugagan.",
     "projectClosed": "Bu loyiha endi yordam qabul qilmaydi.",
-    "ownProject": "O'z loyihangizni qo'llab-quvvatlay olmaysiz.",
+    "ownProject": "Oʻz loyihangizni qoʻllab-quvvatlay olmaysiz.",
     "cannotReviewOwn": "Bu sizning loyihangiz. Uni boshqa admin baholashi va qaror qabul qilishi kerak.",
-    "cannotVerifySelf": "O'z asoschi profilingizni tasdiqlay olmaysiz. Buni boshqa admin qilishi kerak.",
-    "notPendingReview": "Bu loyiha ko'rib chiqishni kutmayapti.",
+    "cannotVerifySelf": "Oʻz asoschi profilingizni tasdiqlay olmaysiz. Buni boshqa admin qilishi kerak.",
+    "notPendingReview": "Bu loyiha koʻrib chiqishni kutmayapti.",
     "projectNotFunded": "Bosqichlar haqida faqat loyiha maqsadiga yetgandan keyin xabar berish mumkin.",
     "evidenceTooShort": "Dalilni kamida 20 ta belgida yozing.",
-    "milestoneChanged": "Bu bosqich allaqachon o‘zgargan. Sahifani yangilang.",
+    "milestoneChanged": "Bu bosqich allaqachon oʻzgargan. Sahifani yangilang.",
     "reviewNoteRequired": "Kamida 10 ta belgidan iborat izoh yozing.",
     "crashTitle": "Nimadir xato ketdi",
     "crashText": "Bu sahifada xatolik yuz berdi. Odatda sahifani yangilash yordam beradi. Bizga xabar yuborildi.",
@@ -117,12 +118,12 @@
     "fields": {
       "email": "Elektron pochta",
       "password": "Parol",
-      "fullName": "To'liq ism",
+      "fullName": "Toʻliq ism",
       "newPassword": "Yangi parol",
       "confirmPassword": "Yangi parolni takrorlang"
     },
     "login": {
-      "title": "Fundy’ga kirish",
+      "title": "Fundyʼga kirish",
       "noAccount": "Birinchi marta keldingizmi?",
       "signupLink": "Hisob yaratish",
       "forgot": "Parolni unutdingizmi?",
@@ -130,7 +131,7 @@
       "sendLink": "Kirish havolasini yuborish",
       "useLink": "Elektron pochta havolasi orqali kirish",
       "usePassword": "Parol bilan kirish",
-      "linkSent": "Agar {{email}} uchun hisob mavjud bo'lsa, kirish havolasi yuborildi.",
+      "linkSent": "Agar {{email}} uchun hisob mavjud boʻlsa, kirish havolasi yuborildi.",
       "resendConfirmation": "Tasdiqlash xatini qayta yuborish"
     },
     "signup": {
@@ -138,73 +139,73 @@
       "haveAccount": "Hisobingiz bormi?",
       "loginLink": "Kirish",
       "terms": "Men quyidagilarga roziman:",
-      "termsLink": "shartlar va risklar haqida ma’lumot",
+      "termsLink": "shartlar va risklar haqida maʼlumot",
       "submit": "Hisob yaratish",
       "checkEmailTitle": "Pochtangizni tekshiring",
       "checkEmail": "{{email}} manziliga tasdiqlash havolasini yubordik. Hisobingizni faollashtirish uchun uni oching.",
-      "checkEmailHint": "Xat kelmadimi? Spam papkasini tekshiring yoki bir daqiqadan so'ng kirib, qayta yuboring.",
+      "checkEmailHint": "Xat kelmadimi? Spam papkasini tekshiring yoki bir daqiqadan soʻng kirib, qayta yuboring.",
       "backToLogin": "Kirish sahifasiga qaytish"
     },
     "forgot": {
       "title": "Parolni tiklash",
       "subtitle": "Elektron pochtangizni kiriting — yangi parol tanlash uchun havola yuboramiz.",
       "submit": "Havolani yuborish",
-      "sent": "Agar {{email}} uchun hisob mavjud bo'lsa, tiklash havolasi yuborildi."
+      "sent": "Agar {{email}} uchun hisob mavjud boʻlsa, tiklash havolasi yuborildi."
     },
     "reset": {
       "title": "Yangi parol tanlang",
       "submit": "Yangi parolni saqlash",
-      "done": "Parolingiz o'zgartirildi."
+      "done": "Parolingiz oʻzgartirildi."
     },
     "callback": {
       "failedTitle": "Havola ishlamadi",
-      "confirmedHint": "Agar siz emailni tasdiqlayotgan bo'lsangiz, u allaqachon tasdiqlangan — hozir kirishingiz mumkin."
+      "confirmedHint": "Agar siz emailni tasdiqlayotgan boʻlsangiz, u allaqachon tasdiqlangan — hozir kirishingiz mumkin."
     },
     "google": "Google orqali davom etish",
     "or": "yoki"
   },
   "welcome": {
-    "title": "Fundy’ga xush kelibsiz!",
-    "subtitle": "Sizga mos loyihalarni ko'rsatishimiz uchun bir nechta ma'lumot.",
+    "title": "Fundyʼga xush kelibsiz!",
+    "subtitle": "Sizga mos loyihalarni koʻrsatishimiz uchun bir nechta maʼlumot.",
     "region": "Viloyat",
     "regionPlaceholder": "Viloyatingizni tanlang",
     "city": "Shahar yoki tuman",
     "language": "Til",
     "intent": "Sizni nima olib keldi?",
-    "intentBack": "Loyihalarni qo'llab-quvvatlash",
-    "intentBackHint": "Xayriya qiling, mukofotlarni oldindan buyurtma qiling yoki mushoraka hamkorligiga qo'shiling.",
+    "intentBack": "Loyihalarni qoʻllab-quvvatlash",
+    "intentBackHint": "Xayriya qiling, mukofotlarni oldindan buyurtma qiling yoki mushoraka hamkorligiga qoʻshiling.",
     "intentLaunch": "Loyiha boshlash",
-    "intentLaunchHint": "G'oyangiz yoki biznesingiz uchun foizsiz mablag' to'plang.",
+    "intentLaunchHint": "Gʻoyangiz yoki biznesingiz uchun foizsiz mablagʻ toʻplang.",
     "submit": "Davom etish"
   },
   "settings": {
     "title": "Hisob sozlamalari",
     "profile": "Profil",
-    "profileHint": "Ismingiz va rasmingiz izohlaringiz va hissalaringiz yonida ko'rsatiladi.",
-    "save": "O'zgarishlarni saqlash",
+    "profileHint": "Ismingiz va rasmingiz izohlaringiz va hissalaringiz yonida koʻrsatiladi.",
+    "save": "Oʻzgarishlarni saqlash",
     "saved": "Saqlandi.",
     "avatarUpload": "Rasm yuklash",
     "avatarHint": "JPG, PNG yoki WebP, {{mb}} MB gacha.",
     "avatarType": "JPG, PNG yoki WebP rasmini tanlang.",
     "avatarSize": "Rasm juda katta (maksimal {{mb}} MB).",
-    "emailHint": "Elektron pochtangiz maxfiy va boshqalarga ko'rsatilmaydi.",
+    "emailHint": "Elektron pochtangiz maxfiy va boshqalarga koʻrsatilmaydi.",
     "language": "Til",
     "languageHint": "Sayt va sizga yuboriladigan xatlar uchun ishlatiladi.",
-    "password": "Parolni o'zgartirish",
-    "deleteTitle": "Hisobni o'chirish",
-    "deleteHint": "Profilingiz, saqlangan loyihalar va izohlaringiz butunlay o'chiriladi. Buni qaytarib bo'lmaydi.",
-    "deleteButton": "Hisobimni o'chirish",
-    "deleteConfirm": "Hisobingiz butunlay o'chirilsinmi? Buni qaytarib bo'lmaydi."
+    "password": "Parolni oʻzgartirish",
+    "deleteTitle": "Hisobni oʻchirish",
+    "deleteHint": "Profilingiz, saqlangan loyihalar va izohlaringiz butunlay oʻchiriladi. Buni qaytarib boʻlmaydi.",
+    "deleteButton": "Hisobimni oʻchirish",
+    "deleteConfirm": "Hisobingiz butunlay oʻchirilsinmi? Buni qaytarib boʻlmaydi."
   },
   "admin": {
     "title": "Admin panel",
     "greeting": "{{name}} sifatida kirgansiz",
-    "pending": "Ko'rib chiqish kutilmoqda",
+    "pending": "Koʻrib chiqish kutilmoqda",
     "live": "Faol loyihalar",
     "hiddenComments": "Yashirilgan izohlar",
     "nav": {
       "overview": "Umumiy",
-      "review": "Ko'rib chiqish",
+      "review": "Koʻrib chiqish",
       "projects": "Loyihalar",
       "comments": "Izohlar",
       "users": "Foydalanuvchilar",
@@ -215,23 +216,23 @@
     },
     "review": {
       "queueHint": "Qaror kutayotgan loyihalar, eng eskisi birinchi.",
-      "empty": "Hozircha ko'rib chiqadigan narsa yo'q.",
+      "empty": "Hozircha koʻrib chiqadigan narsa yoʻq.",
       "submittedOn": "{{date}} da yuborilgan",
       "overview": "Umumiy",
       "nothing": "Hech narsa kiritilmagan.",
-      "incomplete": "Ba'zi qadamlar to'liq emas. Tasdiqlash o'rniga o'zgartirish so'rang.",
+      "incomplete": "Baʼzi qadamlar toʻliq emas. Tasdiqlash oʻrniga oʻzgartirish soʻrang.",
       "verify": "Tasdiqlangan deb belgilash",
       "unverify": "Tasdiqni olib tashlash",
       "noDocuments": "Hujjatlar yuklanmagan.",
       "confidence": "Ishonch darajasi",
       "saveEvaluation": "Baholashni saqlash",
-      "scoreError": "Har bir ball 0 dan 20 gacha butun son bo'lishi kerak.",
-      "evaluationPublic": "Loyiha faollashganda baholash ochiq ko'rsatiladi.",
+      "scoreError": "Har bir ball 0 dan 20 gacha butun son boʻlishi kerak.",
+      "evaluationPublic": "Loyiha faollashganda baholash ochiq koʻrsatiladi.",
       "decision": "Qaror",
       "decisionLabel": "Nima qilinsin?",
       "decisions": {
         "approve": "Tasdiqlash",
-        "request_changes": "O'zgartirish so'rash",
+        "request_changes": "Oʻzgartirish soʻrash",
         "reject": "Rad etish"
       },
       "decisionHints": {
@@ -241,40 +242,40 @@
       },
       "noteRequired": "Asoschiga izoh (majburiy)",
       "noteOptional": "Asoschiga izoh (ixtiyoriy)",
-      "noteHint": "Asoschi bu izohni ko'radi. Nimani o'zgartirish kerakligini aniq yozing.",
+      "noteHint": "Asoschi bu izohni koʻradi. Nimani oʻzgartirish kerakligini aniq yozing.",
       "needEvaluation": "Tasdiqlashdan oldin baholashni saqlang.",
       "needNote": "Kamida 10 belgidan iborat izoh yozing.",
       "confirm": {
         "approve": "Loyiha tasdiqlansin va hozir faollashtirilsinmi?",
-        "request_changes": "Loyiha o'zgartirish uchun asoschiga qaytarilsinmi?",
-        "reject": "Loyiha rad etilsinmi? Buni qaytarib bo'lmaydi."
+        "request_changes": "Loyiha oʻzgartirish uchun asoschiga qaytarilsinmi?",
+        "reject": "Loyiha rad etilsinmi? Buni qaytarib boʻlmaydi."
       },
       "submit": {
-        "approve": "Tasdiqlash va e'lon qilish",
-        "request_changes": "O'zgartirish uchun qaytarish",
+        "approve": "Tasdiqlash va eʼlon qilish",
+        "request_changes": "Oʻzgartirish uchun qaytarish",
         "reject": "Loyihani rad etish"
       }
     },
     "projects": {
-      "hint": "Barcha holatdagi loyihalar. Yulduzcha faol loyihani bosh sahifada ko'rsatadi.",
-      "raised": "To'plangan",
+      "hint": "Barcha holatdagi loyihalar. Yulduzcha faol loyihani bosh sahifada koʻrsatadi.",
+      "raised": "Toʻplangan",
       "featured": "Tanlangan",
-      "featureToggle": "Bosh sahifada ko'rsatish",
+      "featureToggle": "Bosh sahifada koʻrsatish",
       "featureOnlyLive": "Faqat faol loyihalarni tanlash mumkin"
     },
     "comments": {
-      "hint": "Barcha loyihalardagi eng yangi izohlar. Yashirilgan izohlarni muallifidan boshqa hech kim ko'rmaydi.",
+      "hint": "Barcha loyihalardagi eng yangi izohlar. Yashirilgan izohlarni muallifidan boshqa hech kim koʻrmaydi.",
       "onlyHidden": "Faqat yashirilganlar",
       "hidden": "Yashirilgan",
       "hide": "Yashirish",
-      "show": "Qayta ko'rsatish"
+      "show": "Qayta koʻrsatish"
     },
     "users": {
       "title": "Foydalanuvchilar",
-      "search": "Ism yoki elektron pochta bo'yicha qidirish",
+      "search": "Ism yoki elektron pochta boʻyicha qidirish",
       "user": "Foydalanuvchi",
       "activity": "Faollik",
-      "joined": "Ro'yxatdan o'tgan",
+      "joined": "Roʻyxatdan oʻtgan",
       "count_one": "{{formatted}} ta foydalanuvchi",
       "count_other": "{{formatted}} ta foydalanuvchi",
       "projects_one": "{{count}} ta loyiha",
@@ -285,48 +286,48 @@
       "unblock": "Blokdan chiqarish",
       "makeAdmin": "Admin qilish",
       "removeAdmin": "Adminlikdan olish",
-      "confirmBlock": "{{name}} bloklansinmi? U izoh yoza, hissa qo'sha yoki loyiha yarata olmaydi.",
+      "confirmBlock": "{{name}} bloklansinmi? U izoh yoza, hissa qoʻsha yoki loyiha yarata olmaydi.",
       "confirmUnblock": "{{name}} blokdan chiqarilsinmi?",
-      "confirmMakeAdmin": "{{name}} ga to'liq admin huquqlari berilsinmi?",
+      "confirmMakeAdmin": "{{name}} ga toʻliq admin huquqlari berilsinmi?",
       "confirmRemoveAdmin": "{{name}} admin huquqlaridan mahrum qilinsinmi?"
     },
     "audit": {
-      "hint": "Har bir admin harakati shu yerda avtomatik qayd etiladi va o'zgartirib bo'lmaydi.",
-      "empty": "Hozircha admin harakatlari yo'q.",
+      "hint": "Har bir admin harakati shu yerda avtomatik qayd etiladi va oʻzgartirib boʻlmaydi.",
+      "empty": "Hozircha admin harakatlari yoʻq.",
       "when": "Qachon",
       "who": "Kim",
       "what": "Harakat",
       "details": "Tafsilotlar"
     },
     "messages": {
-      "hint": "Aloqa sahifasidan kelgan xabarlar. Email orqali javob bering, so'ng ko'rib chiqilgan deb belgilang.",
-      "empty": "Bu yerda xabarlar yo'q.",
+      "hint": "Aloqa sahifasidan kelgan xabarlar. Email orqali javob bering, soʻng koʻrib chiqilgan deb belgilang.",
+      "empty": "Bu yerda xabarlar yoʻq.",
       "filter": {
         "new": "Yangi",
-        "handled": "Ko'rib chiqilgan",
+        "handled": "Koʻrib chiqilgan",
         "all": "Hammasi"
       },
       "status": {
         "new": "Yangi",
-        "handled": "Ko'rib chiqilgan"
+        "handled": "Koʻrib chiqilgan"
       },
       "signedIn": "tizimga kirgan foydalanuvchi",
       "reply": "Email orqali javob berish",
-      "markHandled": "Ko'rib chiqildi",
+      "markHandled": "Koʻrib chiqildi",
       "reopen": "Qayta ochish"
     },
     "milestones": {
-      "hint": "Asoschilar bosqich bajarilganini xabar qiladi. Dalilni tekshiring, so‘ng tasdiqlang yoki qaytaring.",
-      "empty": "Kutayotgan bosqichlar yo‘q.",
+      "hint": "Asoschilar bosqich bajarilganini xabar qiladi. Dalilni tekshiring, soʻng tasdiqlang yoki qaytaring.",
+      "empty": "Kutayotgan bosqichlar yoʻq.",
       "approve": "Tasdiqlash",
       "sendBack": "Qaytarish",
-      "approveConfirm": "Bu bosqichni tasdiqlaysizmi? Pulning shu ulushi o‘tkaziladi.",
+      "approveConfirm": "Bu bosqichni tasdiqlaysizmi? Pulning shu ulushi oʻtkaziladi.",
       "noteLabel": "Nima yetishmayapti?",
-      "noteHint": "Asoschi bu izohni ko‘radi."
+      "noteHint": "Asoschi bu izohni koʻradi."
     },
     "reports": {
       "hint": "Foydalanuvchilar shikoyat qilgan kontent. Qoidani buzganini yashiring yoki shikoyatni rad eting.",
-      "empty": "Shikoyatlar yo‘q.",
+      "empty": "Shikoyatlar yoʻq.",
       "filter": {
         "open": "Ochiq",
         "resolved": "Hal qilingan",
@@ -351,15 +352,15 @@
     }
   },
   "money": {
-    "currency": "so'm",
+    "currency": "soʻm",
     "thousand": "ming",
     "million": "mln",
     "billion": "mlrd"
   },
   "status": {
     "draft": "Qoralama",
-    "pending_review": "Ko'rib chiqilmoqda",
-    "changes_requested": "O'zgartirish so'raldi",
+    "pending_review": "Koʻrib chiqilmoqda",
+    "changes_requested": "Oʻzgartirish soʻraldi",
     "rejected": "Rad etilgan",
     "active": "Faol",
     "funded": "Moliyalashtirildi",
@@ -370,67 +371,67 @@
     "donation": {
       "name": "Xayriya",
       "subtitle": "Ijtimoiy foyda uchun",
-      "text": "Homiylar hech narsa kutmasdan yordam beradi. Maktab laboratoriyalari, ko'kalamzorlashtirish, sog'liqni saqlash va jamoat tashabbuslari uchun.",
-      "point1": "Har bir so'm e'lon qilingan byudjetga sarflanadi",
+      "text": "Homiylar hech narsa kutmasdan yordam beradi. Maktab laboratoriyalari, koʻkalamzorlashtirish, sogʻliqni saqlash va jamoat tashabbuslari uchun.",
+      "point1": "Har bir soʻm eʼlon qilingan byudjetga sarflanadi",
       "point2": "Tekshirilgan tashkilotlar va jamoalar",
-      "cta": "Xayriya loyihalarini ko'rish"
+      "cta": "Xayriya loyihalarini koʻrish"
     },
     "reward": {
       "name": "Mukofotli",
-      "subtitle": "Oldindan buyurtma va hunarmand sovg'alari",
-      "text": "Homiylar qo'l mehnati mahsulotlari, hunarmandchilik buyumlari va yangi mahalliy mahsulotlarni bozorga chiqishidan oldin buyurtma qiladi.",
+      "subtitle": "Oldindan buyurtma va hunarmand sovgʻalari",
+      "text": "Homiylar qoʻl mehnati mahsulotlari, hunarmandchilik buyumlari va yangi mahalliy mahsulotlarni bozorga chiqishidan oldin buyurtma qiladi.",
       "point1": "Aniq ishlab chiqarish va yetkazish muddati",
-      "point2": "Mukofotlar butun O'zbekiston bo'ylab yetkaziladi",
-      "cta": "Mukofotli loyihalarni ko'rish"
+      "point2": "Mukofotlar butun Oʻzbekiston boʻylab yetkaziladi",
+      "cta": "Mukofotli loyihalarni koʻrish"
     },
     "equity": {
       "name": "Mushoraka",
       "subtitle": "Islomiy foyda taqsimoti hamkorligi",
-      "text": "Homiylar haqiqiy bizneslarda — issiqxonalar, quyosh sovutgichlari, elektr transport — hamkorga aylanadi va foyda hamda xavfni baham ko'radi.",
+      "text": "Homiylar haqiqiy bizneslarda — issiqxonalar, quyosh sovutgichlari, elektr transport — hamkorga aylanadi va foyda hamda xavfni baham koʻradi.",
       "point1": "Tekshirilgan natijalardan muntazam foyda taqsimoti",
-      "point2": "Aktivlar bilan ta'minlangan, shariatga mos shartlar",
+      "point2": "Aktivlar bilan taʼminlangan, shariatga mos shartlar",
       "cta": "Mushoraka qanday ishlashini bilish"
     }
   },
   "home": {
     "hero": {
-      "title": "Foizsiz kraudfanding. O'zbekiston uchun.",
-      "text": "Loyihangizni joylang — odamlar xayriya, oldindan buyurtma yoki mushoraka orqali qo'llab-quvvatlaydi. Pul faqat bajarilgan bosqich uchun beriladi.",
-      "explore": "Loyihalarni ko'rish",
+      "title": "Foizsiz kraudfanding. Oʻzbekiston uchun.",
+      "text": "Loyihangizni joylang — odamlar xayriya, oldindan buyurtma yoki mushoraka orqali qoʻllab-quvvatlaydi. Pul faqat bajarilgan bosqich uchun beriladi.",
+      "explore": "Loyihalarni koʻrish",
       "start": "Loyiha joylash",
-      "cardKicker": "Hozir mablag' yig'moqda"
+      "cardKicker": "Hozir mablagʻ yigʻmoqda"
     },
     "featured": {
-      "title": "Hozir mablag' yig'ayotgan loyihalar",
+      "title": "Hozir mablagʻ yigʻayotgan loyihalar",
       "viewAll": "Barcha loyihalar"
     },
     "how": {
-      "title": "Pul qanday yo'l bosadi",
+      "title": "Pul qanday yoʻl bosadi",
       "step1Title": "Asoschi ariza beradi",
-      "step1Text": "MChJ yoki YaTT guvohnomasi, pasport, bank hisobi, so'mdagi byudjet va 3–6 ta bosqich.",
+      "step1Text": "MChJ yoki YaTT guvohnomasi, pasport, bank hisobi, soʻmdagi byudjet va 3–6 ta bosqich.",
       "step2Title": "Biz tekshiramiz va baholaymiz",
       "step2Text": "Hujjatlarni tekshiramiz va loyihani 100 ballik tizimda baholaymiz: biznes-reja, jamoa, bozor, moliya va xatar — har biri 20 balldan. Baho loyiha sahifasida ochiq turadi.",
-      "step3Title": "Odamlar qo'llab-quvvatlaydi",
-      "step3Text": "Xayriya, mukofot (oldindan buyurtma) yoki mushoraka orqali. To'lov — Click, Payme, Uzcard yoki Humo. Demoda pul yechilmaydi.",
+      "step3Title": "Odamlar qoʻllab-quvvatlaydi",
+      "step3Text": "Xayriya, mukofot (oldindan buyurtma) yoki mushoraka orqali. Toʻlov — Click, Payme, Uzcard yoki Humo. Demoda pul yechilmaydi.",
       "step4Title": "Pul bosqichma-bosqich beriladi",
-      "step4Text": "Asoschi bosqichni bajarib, dalil yuklaydi. Fundy tekshirgach, keyingi qism beriladi. Bajarilmagan bosqich uchun pul yo'q."
+      "step4Text": "Asoschi bosqichni bajarib, dalil yuklaydi. Fundy tekshirgach, keyingi qism beriladi. Bajarilmagan bosqich uchun pul yoʻq."
     },
     "musharakah": {
       "title": "Mushoraka: qarz emas, sheriklik",
-      "text": "Siz biznesga ulush kiritasiz. Foyda bo'lsa — kelishilgan ulush bo'yicha bo'linadi, zarar bo'lsa — u ham. Kafolatlangan foiz yo'q, shuning uchun bu ribo emas. Raqamlarni o'zingiz sinab ko'ring:",
+      "text": "Siz biznesga ulush kiritasiz. Foyda boʻlsa — kelishilgan ulush boʻyicha boʻlinadi, zarar boʻlsa — u ham. Kafolatlangan foiz yoʻq, shuning uchun bu ribo emas. Raqamlarni oʻzingiz sinab koʻring:",
       "more": "Mushoraka haqida batafsil"
     },
     "cta": {
       "title": "Loyihangiz bormi?",
-      "text": "Nima kerakligi, qancha vaqt olishi va xarajatlarni oldindan ko'ring. Ro'yxatdan o'tish — keyin.",
-      "start": "Talablarni ko'rish"
+      "text": "Nima kerakligi, qancha vaqt olishi va xarajatlarni oldindan koʻring. Roʻyxatdan oʻtish — keyin.",
+      "start": "Talablarni koʻrish"
     }
   },
   "explore": {
     "title": "Loyihalar",
-    "subtitle": "O'zbekiston bo'ylab tekshirilgan, foizsiz moliyalashtiriladigan loyihalar.",
+    "subtitle": "Oʻzbekiston boʻylab tekshirilgan, foizsiz moliyalashtiriladigan loyihalar.",
     "search": "Loyihalarni qidirish",
-    "searchPlaceholder": "Loyiha, asoschi yoki joy bo'yicha qidiring (masalan, Farg'ona)…",
+    "searchPlaceholder": "Loyiha, asoschi yoki joy boʻyicha qidiring (masalan, Fargʻona)…",
     "clearSearch": "Qidiruvni tozalash",
     "model": "Moliyalashtirish modeli",
     "allModels": "Barcha modellar",
@@ -444,10 +445,10 @@
     },
     "sortLabel": "Saralash",
     "sort": {
-      "most_funded": "Eng ko'p to'plangan (%)",
+      "most_funded": "Eng koʻp toʻplangan (%)",
       "newest": "Eng yangi",
       "ending_soon": "Tez tugaydigan",
-      "most_backers": "Eng ko'p homiy",
+      "most_backers": "Eng koʻp homiy",
       "target_low": "Eng kichik maqsad"
     },
     "category": "Kategoriya",
@@ -456,14 +457,14 @@
     "resultCount_one": "{{formatted}} ta loyiha",
     "resultCount_other": "{{formatted}} ta loyiha",
     "emptyTitle": "Loyihalar topilmadi",
-    "emptyText": "Boshqa so'z bilan qidiring yoki ba'zi filtrlarni olib tashlang.",
+    "emptyText": "Boshqa soʻz bilan qidiring yoki baʼzi filtrlarni olib tashlang.",
     "pagination": "Sahifalar",
     "previous": "Oldingi sahifa",
     "next": "Keyingi sahifa",
     "pageOf": "{{page}}-sahifa, jami {{pages}}",
     "filters": "Filtr",
     "closeFilters": "Yopish",
-    "showResults": "Ko'rsatish ({{formatted}})"
+    "showResults": "Koʻrsatish ({{formatted}})"
   },
   "project": {
     "save": "Saqlash",
@@ -474,17 +475,17 @@
     "by": "Muallif: {{name}}",
     "verifiedFounder": "Tasdiqlangan asoschi",
     "score": "Ball",
-    "funded": "{{percent}}% to'plandi",
+    "funded": "{{percent}}% toʻplandi",
     "ofGoal": "{{goal}} dan",
     "backers_one": "{{formatted}} homiy",
     "backers_other": "{{formatted}} homiy",
-    "breadcrumb": "Yo'l",
+    "breadcrumb": "Yoʻl",
     "home": "Bosh sahifa",
-    "originalLanguage": "Asl tilda ko'rsatilmoqda ({{language}}).",
+    "originalLanguage": "Asl tilda koʻrsatilmoqda ({{language}}).",
     "experience": "Tajriba",
     "years_one": "{{count}} yil",
     "years_other": "{{count}} yil",
-    "raisedOf": "{{goal}} maqsaddan to'plandi",
+    "raisedOf": "{{goal}} maqsaddan toʻplandi",
     "backersLabel": "Homiylar",
     "timeLeft": "Qolgan vaqt",
     "statusLabel": "Holat",
@@ -508,8 +509,8 @@
     "evaluationScore": "Baholash bali",
     "confidence": {
       "high": "Tasdiqlangan · yuqori ishonch",
-      "moderate": "Tasdiqlangan · o'rtacha ishonch",
-      "in_review": "Ko'rib chiqilmoqda"
+      "moderate": "Tasdiqlangan · oʻrtacha ishonch",
+      "in_review": "Koʻrib chiqilmoqda"
     },
     "tabs": {
       "story": "Hikoya",
@@ -528,21 +529,21 @@
     "claimedOf": "{{limit}} tadan {{claimed}} ta tanlangan",
     "soldOut": "Tugagan",
     "selectReward": "Bu mukofotni tanlash",
-    "budgetTitle": "Mablag' qayerga sarflanadi",
-    "budgetText": "{{goal}} maqsadning har bir so'mi oldindan rejalashtirilgan va e'lon qilingan.",
+    "budgetTitle": "Mablagʻ qayerga sarflanadi",
+    "budgetText": "{{goal}} maqsadning har bir soʻmi oldindan rejalashtirilgan va eʼlon qilingan.",
     "budgetItem": "Band",
     "budgetDescription": "Tavsif",
     "budgetAmount": "Summa",
     "budgetTotal": "Jami maqsad",
     "milestonesTitle": "Bosqichlar",
-    "milestonesText": "Mablag' asoschiga har bir bosqich tasdiqlangach, qismlarga bo'lib beriladi.",
+    "milestonesText": "Mablagʻ asoschiga har bir bosqich tasdiqlangach, qismlarga boʻlib beriladi.",
     "milestoneStatus": {
       "pending": "Kutilmoqda",
-      "submitted": "Ko'rib chiqilmoqda",
+      "submitted": "Koʻrib chiqilmoqda",
       "approved": "Bajarildi"
     },
-    "release": "mablag'ning {{percent}}%",
-    "evaluationNote": "Ballarni Fundy ko'rib chiqish jamoasi biznes reja, hujjatlar va asoschini tekshirgach beradi. Ushbu demoda ular namunaviy ma'lumotlar.",
+    "release": "mablagʻning {{percent}}%",
+    "evaluationNote": "Ballarni Fundy koʻrib chiqish jamoasi biznes reja, hujjatlar va asoschini tekshirgach beradi. Ushbu demoda ular namunaviy maʼlumotlar.",
     "evaluationTitle": "Loyihani baholash",
     "evaluatedOn": "{{date}} da baholangan",
     "pillars": {
@@ -556,21 +557,21 @@
     "strengths": "Kuchli tomonlar",
     "watchedRisks": "Kuzatilayotgan xavflar",
     "risksTitle": "Xavflar va qiyinchiliklar",
-    "risksText": "Asoschilar loyihani qo'llab-quvvatlashdan oldin xavflarni ochiq tavsiflashi shart.",
+    "risksText": "Asoschilar loyihani qoʻllab-quvvatlashdan oldin xavflarni ochiq tavsiflashi shart.",
     "updatesTitle": "Asoschidan yangiliklar",
-    "noUpdates": "Hozircha yangiliklar yo'q.",
+    "noUpdates": "Hozircha yangiliklar yoʻq.",
     "postedBy": "Muallif: {{name}}",
     "commentsTitle": "Savollar va izohlar",
-    "commentsText": "Asoschidan byudjet, muddatlar yoki boshqa narsalar haqida so'rang.",
-    "commentPlaceholder": "Savol yoki qo'llab-quvvatlash so'zlarini yozing…",
+    "commentsText": "Asoschidan byudjet, muddatlar yoki boshqa narsalar haqida soʻrang.",
+    "commentPlaceholder": "Savol yoki qoʻllab-quvvatlash soʻzlarini yozing…",
     "postComment": "Yuborish",
     "loginToComment": " va savol bering.",
-    "noComments": "Hozircha savollar yo'q — birinchi bo'ling.",
+    "noComments": "Hozircha savollar yoʻq — birinchi boʻling.",
     "backerBadge": "Homiy",
     "founderReply": "{{name}} (asoschi)",
     "reply": "Javob berish",
-    "related": "O'xshash loyihalar",
-    "viewAll": "Hammasini ko'rish",
+    "related": "Oʻxshash loyihalar",
+    "viewAll": "Hammasini koʻrish",
     "scoreHint": "Fundy bahosi: biznes-reja, jamoa, bozor, moliya va xatar — har biri 20 balldan",
     "photoBy": "Surat:",
     "money": {
@@ -580,47 +581,47 @@
       "released": "Asoschiga berildi",
       "review": "Dalil tekshirilmoqda",
       "held": "Bosqichni kutmoqda",
-      "raisingNote": "Mablag' yig'ilmoqda: maqsadga yetguncha pul hech kimga berilmaydi. Yetmasa — homiylarga qaytariladi. Yetsa — har bir bosqich bajarilgach o'z ulushi beriladi."
+      "raisingNote": "Mablagʻ yigʻilmoqda: maqsadga yetguncha pul hech kimga berilmaydi. Yetmasa — homiylarga qaytariladi. Yetsa — har bir bosqich bajarilgach oʻz ulushi beriladi."
     },
     "checks": {
       "title": "Fundy nimani tekshirdi",
       "identity": "Asoschining shaxsi tasdiqlangan",
-      "registration": "Ro'yxatdan o'tgan: {{number}}",
-      "budget_one": "Byudjet {{count}} ta bandga bo'lib e'lon qilingan",
-      "budget_other": "Byudjet {{count}} ta bandga bo'lib e'lon qilingan",
+      "registration": "Roʻyxatdan oʻtgan: {{number}}",
+      "budget_one": "Byudjet {{count}} ta bandga boʻlib eʼlon qilingan",
+      "budget_other": "Byudjet {{count}} ta bandga boʻlib eʼlon qilingan",
       "score": "Ekspert bahosi: {{score}}/100 (5 mezon)"
     },
-    "recentBackers": "So'nggi homiylar",
+    "recentBackers": "Soʻnggi homiylar",
     "backedFrom": "{{name}}, {{city}}",
     "backed": "{{name}}"
   },
   "contribute": {
     "title": {
       "donation": "Xayriya qilish",
-      "reward": "Loyihani qo'llab-quvvatlash",
-      "equity": "Hamkor bo'lish"
+      "reward": "Loyihani qoʻllab-quvvatlash",
+      "equity": "Hamkor boʻlish"
     },
     "cta": {
       "donation": "Xayriya qilish",
-      "reward": "Loyihani qo'llab-quvvatlash",
+      "reward": "Loyihani qoʻllab-quvvatlash",
       "equity": "Sarmoya kiritish (mushoraka)"
     },
     "reward": "Mukofotni tanlang",
-    "noReward": "Mukofotsiz, shunchaki qo'llab-quvvatlash",
+    "noReward": "Mukofotsiz, shunchaki qoʻllab-quvvatlash",
     "amount": "Summa",
     "customAmount": "Boshqa summa",
     "minimum": "Minimal: {{min}}",
-    "method": "To'lov usuli",
+    "method": "Toʻlov usuli",
     "methods": {
       "click": "Click",
       "payme": "Payme",
       "uzcard": "Uzcard",
       "humo": "Humo",
-      "bank_wire": "Bank o'tkazmasi"
+      "bank_wire": "Bank oʻtkazmasi"
     },
-    "anonymous": "Ismimni ochiq ko'rsatmang",
+    "anonymous": "Ismimni ochiq koʻrsatmang",
     "equityShare": "Taxminiy ulushingiz: foydaning {{share}}% (barcha homiylarga ajratilgan {{pool}}% dan).",
-    "equityRisk": "Mushoraka hamkorlik ekanini tushunaman: foyda va zararni baham ko'raman, daromad kafolatlanmagan.",
+    "equityRisk": "Mushoraka hamkorlik ekanini tushunaman: foyda va zararni baham koʻraman, daromad kafolatlanmagan.",
     "submit": "{{amount}} ni tasdiqlash",
     "demoNote": "Demo: haqiqiy pul yechilmaydi.",
     "successTitle": "Rahmat!",
@@ -629,14 +630,14 @@
     "completesGoal": "Bu summa loyihani maqsadga yetkazadi! 🎉",
     "bringsCloser": "Bu summa loyihani maqsadga yana {{percent}}% yaqinlashtiradi.",
     "shareTitle": "Yana bitta homiy topishga yordam bering",
-    "shareText": "Do'stlaringizga yuboring — bitta ulashish ko'pincha yangi homiy olib keladi.",
-    "shareMessage": "Men «{{project}}» loyihasini qo'llab-quvvatladim. Siz ham qo'shiling:"
+    "shareText": "Doʻstlaringizga yuboring — bitta ulashish koʻpincha yangi homiy olib keladi.",
+    "shareMessage": "Men «{{project}}» loyihasini qoʻllab-quvvatladim. Siz ham qoʻshiling:"
   },
   "dashboard": {
     "backer": {
       "title": "Salom, {{name}}",
       "total": "Jami hissa",
-      "projects": "Qo'llab-quvvatlangan loyihalar",
+      "projects": "Qoʻllab-quvvatlangan loyihalar",
       "musharakah": "Mushorakada",
       "rewards": "Tanlangan mukofotlar",
       "historyTab": "Hissalar ({{count}})",
@@ -645,31 +646,31 @@
       "project": "Loyiha",
       "details": "Tafsilotlar",
       "share": "Foyda ulushi: {{share}}%",
-      "anonymous": "Ochiq ko'rsatilmaydi",
+      "anonymous": "Ochiq koʻrsatilmaydi",
       "refunded": "Qaytarilgan",
       "simulated": "simulyatsiya",
-      "emptyContributions": "Siz hali hech bir loyihani qo'llab-quvvatlamagansiz.",
-      "emptySaved": "Saqlangan loyihalar yo'q. Saqlash uchun loyihadagi xatcho'p belgisini bosing."
+      "emptyContributions": "Siz hali hech bir loyihani qoʻllab-quvvatlamagansiz.",
+      "emptySaved": "Saqlangan loyihalar yoʻq. Saqlash uchun loyihadagi xatchoʻp belgisini bosing."
     },
     "founder": {
-      "emptyTitle": "Sizda hali loyihalar yo'q",
-      "emptyText": "Birinchi loyihangizni yarating: tavsiflang, byudjet va bosqichlarni rejalashtiring, so'ng ko'rib chiqishga yuboring.",
+      "emptyTitle": "Sizda hali loyihalar yoʻq",
+      "emptyText": "Birinchi loyihangizni yarating: tavsiflang, byudjet va bosqichlarni rejalashtiring, soʻng koʻrib chiqishga yuboring.",
       "newProject": "Yangi loyiha",
-      "submitted": "Loyihangiz ko'rib chiqishga yuborildi. Qaror qabul qilinganda sizga xabar beramiz.",
-      "reviewNote": "Ko'rib chiquvchi izohi:",
+      "submitted": "Loyihangiz koʻrib chiqishga yuborildi. Qaror qabul qilinganda sizga xabar beramiz.",
+      "reviewNote": "Koʻrib chiquvchi izohi:",
       "continue": "Tahrirlashni davom ettirish",
-      "viewStatus": "Holatni ko'rish",
-      "viewPage": "Sahifani ko'rish",
-      "postUpdate": "Yangilik e'lon qilish",
-      "delete": "Qoralamani o'chirish",
-      "deleteConfirm": "Bu qoralama butunlay o'chirilsinmi?",
+      "viewStatus": "Holatni koʻrish",
+      "viewPage": "Sahifani koʻrish",
+      "postUpdate": "Yangilik eʼlon qilish",
+      "delete": "Qoralamani oʻchirish",
+      "deleteConfirm": "Bu qoralama butunlay oʻchirilsinmi?",
       "updateTitle": "Yangilik sarlavhasi",
-      "updateBody": "Nima bo'ldi?",
-      "updateHint": "Loyihani qo'llab-quvvatlagan yoki saqlagan barchaga xabar boradi.",
-      "publish": "E'lon qilish",
+      "updateBody": "Nima boʻldi?",
+      "updateHint": "Loyihani qoʻllab-quvvatlagan yoki saqlagan barchaga xabar boradi.",
+      "publish": "Eʼlon qilish",
       "withdraw": "Yuborishni qaytarib olish",
-      "withdrawConfirm": "Loyiha ko'rib chiqishdan qaytarib olinsinmi? U yana tahrirlanadigan qoralamaga aylanadi.",
-      "withdrawHint": "Qaror qabul qilinishidan oldin biror narsani tuzatish yoki loyihani o'chirish uchun."
+      "withdrawConfirm": "Loyiha koʻrib chiqishdan qaytarib olinsinmi? U yana tahrirlanadigan qoralamaga aylanadi.",
+      "withdrawHint": "Qaror qabul qilinishidan oldin biror narsani tuzatish yoki loyihani oʻchirish uchun."
     }
   },
   "wizard": {
@@ -677,10 +678,10 @@
     "stepOf": "{{total}} dan {{step}}-qadam",
     "back": "Orqaga",
     "saveContinue": "Saqlash va davom etish",
-    "remove": "O'chirish",
-    "required": "Iltimos, bu maydonni to'ldiring.",
+    "remove": "Oʻchirish",
+    "required": "Iltimos, bu maydonni toʻldiring.",
     "choose": "Tanlang…",
-    "changesRequested": "Ko'rib chiqish jamoasi o'zgartirish so'radi:",
+    "changesRequested": "Koʻrib chiqish jamoasi oʻzgartirish soʻradi:",
     "step": {
       "basics": "Asosiy",
       "story": "Hikoya va rasm",
@@ -691,20 +692,20 @@
       "review": "Tekshirish va yuborish"
     },
     "basics": {
-      "title": "Loyihangiz haqida so'zlab bering",
-      "hint": "Yuborguningizcha bularning barchasini o'zgartirishingiz mumkin.",
+      "title": "Loyihangiz haqida soʻzlab bering",
+      "hint": "Yuborguningizcha bularning barchasini oʻzgartirishingiz mumkin.",
       "language": "Qaysi tilda yozasiz",
       "name": "Loyiha nomi",
       "nameHint": "5–140 belgi. Aniq va tushunarli nom yaxshi.",
-      "titleError": "Nom 5–140 belgidan iborat bo'lishi kerak.",
+      "titleError": "Nom 5–140 belgidan iborat boʻlishi kerak.",
       "tagline": "Bir jumlali tavsif",
-      "taglineHint": "Loyiha kartochkalarida ko'rsatiladi.",
+      "taglineHint": "Loyiha kartochkalarida koʻrsatiladi.",
       "model": "Moliyalashtirish modeli",
       "location": "Joy",
-      "locationHint": "Shahar yoki tuman, masalan, «Quva, Farg'ona».",
-      "target": "Maqsad (so'm)",
-      "targetHint": "Kamida 1 000 000 so'm.",
-      "targetError": "Maqsad kamida {{min}} bo'lishi kerak.",
+      "locationHint": "Shahar yoki tuman, masalan, «Quva, Fargʻona».",
+      "target": "Maqsad (soʻm)",
+      "targetHint": "Kamida 1 000 000 soʻm.",
+      "targetError": "Maqsad kamida {{min}} boʻlishi kerak.",
       "duration": "Kampaniya muddati (kun)",
       "durationHint": "7 dan 90 kungacha.",
       "durationError": "7 dan 90 kungacha tanlang."
@@ -717,32 +718,32 @@
       "changeCover": "Rasmni almashtirish",
       "coverHint": "JPG, PNG yoki WebP, {{mb}} MB gacha. Gorizontal rasm yaxshi.",
       "summary": "Qisqa tavsif",
-      "summaryHint": "Tez ko'zdan kechiruvchilar uchun bir-ikki xatboshi.",
-      "story": "To'liq hikoya",
-      "storyHint": "Kamida 200 belgi: muammo, yechim, jamoa, mablag' qanday yordam beradi.",
+      "summaryHint": "Tez koʻzdan kechiruvchilar uchun bir-ikki xatboshi.",
+      "story": "Toʻliq hikoya",
+      "storyHint": "Kamida 200 belgi: muammo, yechim, jamoa, mablagʻ qanday yordam beradi.",
       "risks": "Xavflar va qiyinchiliklar",
-      "risksHint": "Nima noto'g'ri ketishi mumkin va qanday hal qilasiz? Ochiqlik ishonch uyg'otadi."
+      "risksHint": "Nima notoʻgʻri ketishi mumkin va qanday hal qilasiz? Ochiqlik ishonch uygʻotadi."
     },
     "budget": {
       "title": "Byudjet",
-      "hint": "Mablag' nimaga sarflanishini yozing. Bandlar yig'indisi aniq {{goal}} maqsadga teng bo'lishi kerak.",
+      "hint": "Mablagʻ nimaga sarflanishini yozing. Bandlar yigʻindisi aniq {{goal}} maqsadga teng boʻlishi kerak.",
       "item": "Band",
-      "add": "Band qo'shish",
+      "add": "Band qoʻshish",
       "total": "Jami: {{total}} / {{goal}}",
       "missing": "{{amount}} hali rejalashtirilmagan.",
       "over": "{{amount}} maqsaddan ortiq.",
-      "rowError": "Har bir bandda nom (kamida 2 belgi) va summa bo'lishi kerak."
+      "rowError": "Har bir bandda nom (kamida 2 belgi) va summa boʻlishi kerak."
     },
     "milestones": {
       "title": "Bosqichlar",
-      "hint": "Ishni bosqichlarga bo'ling. Har biri tasdiqlangach mablag'ning bir qismi beriladi. Foizlar jami 100% bo'lishi kerak.",
+      "hint": "Ishni bosqichlarga boʻling. Har biri tasdiqlangach mablagʻning bir qismi beriladi. Foizlar jami 100% boʻlishi kerak.",
       "name": "Bosqich",
       "when": "Qachon",
       "whenPlaceholder": "masalan, 2-oy",
       "release": "Foiz %",
-      "add": "Bosqich qo'shish",
+      "add": "Bosqich qoʻshish",
       "total": "Jami: 100% dan {{total}}%",
-      "rowError": "Har bir bosqichda nom va 1 dan 100 gacha foiz bo'lishi kerak."
+      "rowError": "Har bir bosqichda nom va 1 dan 100 gacha foiz boʻlishi kerak."
     },
     "terms": {
       "title": {
@@ -752,54 +753,54 @@
       },
       "hint": {
         "donation": "Xayriyachilar mukofot olmaydi. Eng kichik hissa miqdorini belgilang.",
-        "reward": "Homiylar yordami evaziga nima oladi. Kamida bitta mukofot qo'shing.",
-        "equity": "Foyda homiylar bilan qanday taqsimlanadi. Bu shartlar ochiq ko'rsatiladi."
+        "reward": "Homiylar yordami evaziga nima oladi. Kamida bitta mukofot qoʻshing.",
+        "equity": "Foyda homiylar bilan qanday taqsimlanadi. Bu shartlar ochiq koʻrsatiladi."
       },
-      "minContribution": "Minimal hissa (so'm)",
-      "minError": "Minimal summa kamida 1 000 so'm bo'lishi kerak.",
+      "minContribution": "Minimal hissa (soʻm)",
+      "minError": "Minimal summa kamida 1 000 soʻm boʻlishi kerak.",
       "tierName": "Mukofot nomi",
-      "tierPrice": "Narxi (so'm)",
+      "tierPrice": "Narxi (soʻm)",
       "tierItems": "Nimalar kiradi",
       "tierItemsHint": "Har bir satrga bitta narsa.",
       "delivery": "Taxminiy yetkazish",
       "deliveryPlaceholder": "masalan, 2027-yil mart",
       "limit": "Soni cheklovi",
-      "limitHint": "Cheklovsiz bo'lsa, bo'sh qoldiring.",
-      "addTier": "Mukofot qo'shish",
-      "tierError": "Har bir mukofotda nom va kamida {{min}} narx bo'lishi kerak.",
+      "limitHint": "Cheklovsiz boʻlsa, boʻsh qoldiring.",
+      "addTier": "Mukofot qoʻshish",
+      "tierError": "Har bir mukofotda nom va kamida {{min}} narx boʻlishi kerak.",
       "contract": "Shartnoma turi",
       "contractHint": {
-        "musharakah": "Homiylar ham, siz ham sarmoya kiritasiz, foyda va zararni baham ko'rasiz.",
-        "mudarabah": "Homiylar kapital beradi, siz mehnat qilasiz; foyda bo'linadi."
+        "musharakah": "Homiylar ham, siz ham sarmoya kiritasiz, foyda va zararni baham koʻrasiz.",
+        "mudarabah": "Homiylar kapital beradi, siz mehnat qilasiz; foyda boʻlinadi."
       },
       "share": "Homiylar foyda ulushi (%)",
-      "shareHint": "Tekshirilgan sof foydaning barcha homiylarga to'lanadigan ulushi.",
-      "minInvestment": "Minimal sarmoya (so'm)",
-      "schedule": "Foyda qanchalik tez-tez to'lanadi",
+      "shareHint": "Tekshirilgan sof foydaning barcha homiylarga toʻlanadigan ulushi.",
+      "minInvestment": "Minimal sarmoya (soʻm)",
+      "schedule": "Foyda qanchalik tez-tez toʻlanadi",
       "years": "Hamkorlik muddati (yil)",
-      "projected": "Foyda prognozi so'mda (ixtiyoriy)",
-      "projectedHint": "Foiz stavkasi emas — so'mdagi taxmin. Masalan: «1 mln so'm ulushga yiliga ~200 ming so'm». Bu va'da emas.",
+      "projected": "Foyda prognozi soʻmda (ixtiyoriy)",
+      "projectedHint": "Foiz stavkasi emas — soʻmdagi taxmin. Masalan: «1 mln soʻm ulushga yiliga ~200 ming soʻm». Bu vaʼda emas.",
       "equityError": "Shartlarni tekshiring: foyda ulushi 1–99%, minimal sarmoya va 1–30 yil.",
-      "equityNote": "Mushoraka shartlari loyiha faollashishidan oldin Fundy jamoasi tomonidan ko'rib chiqiladi."
+      "equityNote": "Mushoraka shartlari loyiha faollashishidan oldin Fundy jamoasi tomonidan koʻrib chiqiladi."
     },
     "founder": {
       "title": "Siz va hujjatlaringiz",
-      "hint": "Ochiq asoschi profilingiz va ko'rib chiqish jamoasi uchun maxfiy hujjatlar.",
-      "name": "Ochiq ko'rsatiladigan ism",
+      "hint": "Ochiq asoschi profilingiz va koʻrib chiqish jamoasi uchun maxfiy hujjatlar.",
+      "name": "Ochiq koʻrsatiladigan ism",
       "role": "Lavozimingiz",
       "rolePlaceholder": "masalan, Asoschi va rahbar",
       "organization": "Tashkilot",
-      "registration": "Ro'yxat raqami",
-      "registrationHint": "MChJ / YaTT raqami yoki STIR, agar ro'yxatdan o'tgan bo'lsa.",
+      "registration": "Roʻyxat raqami",
+      "registrationHint": "MChJ / YaTT raqami yoki STIR, agar roʻyxatdan oʻtgan boʻlsa.",
       "experience": "Tajriba (yil)",
-      "bio": "O'zingiz haqingizda",
+      "bio": "Oʻzingiz haqingizda",
       "bioHint": "Tajribangiz va nima uchun aynan siz buni uddalay olishingiz.",
-      "documents": "Ko'rib chiqish uchun hujjatlar (maxfiy)",
-      "documentsHint": "Ularni faqat siz va Fundy ko'rib chiqish jamoasi ko'radi. PDF, JPG yoki PNG, 10 MB gacha.",
+      "documents": "Koʻrib chiqish uchun hujjatlar (maxfiy)",
+      "documentsHint": "Ularni faqat siz va Fundy koʻrib chiqish jamoasi koʻradi. PDF, JPG yoki PNG, 10 MB gacha.",
       "kind": "Hujjat turi",
       "upload": "Hujjat yuklash",
       "kinds": {
-        "registration": "Ro'yxatdan o'tganlik guvohnomasi",
+        "registration": "Roʻyxatdan oʻtganlik guvohnomasi",
         "business_plan": "Biznes reja",
         "identity": "Shaxsni tasdiqlovchi hujjat",
         "financials": "Moliyaviy hisobotlar",
@@ -808,23 +809,23 @@
     },
     "review": {
       "title": "Tekshirish va yuborish",
-      "hint": "Barcha qadamlar to'ldirilganini tekshiring va loyihani ko'rib chiqishga yuboring.",
+      "hint": "Barcha qadamlar toʻldirilganini tekshiring va loyihani koʻrib chiqishga yuboring.",
       "edit": "Tahrirlash",
-      "submit": "Ko'rib chiqishga yuborish",
+      "submit": "Koʻrib chiqishga yuborish",
       "resubmit": "Qayta yuborish",
-      "notReady": "Yuborish uchun yuqorida belgilangan qadamlarni to'ldiring.",
-      "whatNext": "Yuborganingizdan so'ng Fundy jamoasi loyiha va hujjatlarni tekshiradi va baholaydi. Ko'rib chiqish davomida tahrirlab bo'lmaydi. Qaror haqida xabar olasiz.",
-      "waiting": "Ko'rib chiqish jamoasi kutilmoqda.",
+      "notReady": "Yuborish uchun yuqorida belgilangan qadamlarni toʻldiring.",
+      "whatNext": "Yuborganingizdan soʻng Fundy jamoasi loyiha va hujjatlarni tekshiradi va baholaydi. Koʻrib chiqish davomida tahrirlab boʻlmaydi. Qaror haqida xabar olasiz.",
+      "waiting": "Koʻrib chiqish jamoasi kutilmoqda.",
       "budgetProblem": "Byudjet jami {{total}}, maqsad esa {{goal}}.",
-      "milestonesProblem": "Foizlar jami {{total}}%, 100% bo'lishi kerak.",
+      "milestonesProblem": "Foizlar jami {{total}}%, 100% boʻlishi kerak.",
       "problem": {
         "basics": "Nom va qisqa tavsif kerak.",
         "story": "200+ belgili hikoya va muqova rasmi kerak.",
-        "terms": "Kamida bitta mukofot yoki hamkorlik shartlarini qo'shing.",
-        "founder": "Asoschi profilingizni to'ldiring."
+        "terms": "Kamida bitta mukofot yoki hamkorlik shartlarini qoʻshing.",
+        "founder": "Asoschi profilingizni toʻldiring."
       },
       "statusText": {
-        "pending_review": "Ko'rib chiqish jamoasi loyihangizni tekshirmoqda.",
+        "pending_review": "Koʻrib chiqish jamoasi loyihangizni tekshirmoqda.",
         "rejected": "Bu loyiha tasdiqlanmadi.",
         "active": "Loyihangiz faol.",
         "funded": "Loyihangiz maqsadga yetdi.",
@@ -837,24 +838,24 @@
       "image_size": "Rasm juda katta (maksimal {{mb}} MB).",
       "document_type": "PDF, JPG yoki PNG faylini tanlang.",
       "document_size": "Fayl juda katta (maksimal {{mb}} MB).",
-      "slug_unavailable": "Bu nom uchun veb-manzil yaratib bo'lmadi. Nomni biroz o'zgartirib ko'ring.",
-      "founder_profile_missing": "Avval asoschi profilingizni to'ldiring (6-qadam).",
-      "project_text_incomplete": "Qisqa tavsif yoki hikoya yo'q yoki juda qisqa (2-qadam).",
-      "cover_image_missing": "Muqova rasmini qo'shing (2-qadam).",
-      "budget_total_mismatch": "Byudjet aniq maqsadga teng bo'lishi kerak (3-qadam).",
-      "milestones_must_total_100": "Bosqich foizlari jami 100% bo'lishi kerak (4-qadam).",
-      "reward_tiers_missing": "Kamida bitta mukofot qo'shing (5-qadam).",
-      "equity_terms_missing": "Hamkorlik shartlarini qo'shing (5-qadam).",
-      "project_not_editable": "Bu loyihani endi o'zgartirib bo'lmaydi."
+      "slug_unavailable": "Bu nom uchun veb-manzil yaratib boʻlmadi. Nomni biroz oʻzgartirib koʻring.",
+      "founder_profile_missing": "Avval asoschi profilingizni toʻldiring (6-qadam).",
+      "project_text_incomplete": "Qisqa tavsif yoki hikoya yoʻq yoki juda qisqa (2-qadam).",
+      "cover_image_missing": "Muqova rasmini qoʻshing (2-qadam).",
+      "budget_total_mismatch": "Byudjet aniq maqsadga teng boʻlishi kerak (3-qadam).",
+      "milestones_must_total_100": "Bosqich foizlari jami 100% boʻlishi kerak (4-qadam).",
+      "reward_tiers_missing": "Kamida bitta mukofot qoʻshing (5-qadam).",
+      "equity_terms_missing": "Hamkorlik shartlarini qoʻshing (5-qadam).",
+      "project_not_editable": "Bu loyihani endi oʻzgartirib boʻlmaydi."
     }
   },
   "notifications": {
     "aProject": "loyiha",
-    "unreadLabel_one": "Bildirishnomalar, {{count}} ta o'qilmagan",
-    "unreadLabel_other": "Bildirishnomalar, {{count}} ta o'qilmagan",
-    "project_submitted": "Ko'rib chiqish uchun yangi loyiha: {{project}}",
+    "unreadLabel_one": "Bildirishnomalar, {{count}} ta oʻqilmagan",
+    "unreadLabel_other": "Bildirishnomalar, {{count}} ta oʻqilmagan",
+    "project_submitted": "Koʻrib chiqish uchun yangi loyiha: {{project}}",
     "project_approved": "{{project}} tasdiqlandi va faollashdi!",
-    "project_changes_requested": "Ko'rib chiqish jamoasi {{project}} uchun o'zgartirish so'radi",
+    "project_changes_requested": "Koʻrib chiqish jamoasi {{project}} uchun oʻzgartirish soʻradi",
     "project_rejected": "{{project}} tasdiqlanmadi",
     "project_funded": "{{project}} maqsadga yetdi 🎉",
     "project_unsuccessful": "{{project}} maqsadga yetmay tugadi",
@@ -862,11 +863,11 @@
     "contribution_confirmed": "{{project}} uchun {{amount}} qayd etildi",
     "new_comment": "{{project}} da yangi savol",
     "comment_reply": "Asoschi {{project}} dagi izohingizga javob berdi",
-    "new_update": "{{project}} yangilik e'lon qildi",
+    "new_update": "{{project}} yangilik eʼlon qildi",
     "milestone_approved": "{{project}} bosqichlaridan biri bajarildi",
     "contact_message": "Aloqa sahifasidan yangi xabar",
     "milestone_submitted": "{{project}} bosqich bajarilganini xabar qildi",
-    "milestone_returned": "{{project}} bosqichi uchun qo‘shimcha dalil kerak",
+    "milestone_returned": "{{project}} bosqichi uchun qoʻshimcha dalil kerak",
     "content_reported": "Kimdir kontent ustidan shikoyat qildi"
   },
   "content": {
@@ -881,7 +882,7 @@
     "message": "Xabar",
     "topics": {
       "general": "Umumiy savol",
-      "backer": "Loyihani qo'llab-quvvatlash",
+      "backer": "Loyihani qoʻllab-quvvatlash",
       "founder": "Loyiha boshlash",
       "report": "Muammo haqida xabar berish",
       "partnership": "Hamkorlik yoki matbuot"
@@ -891,12 +892,12 @@
     "privacyNote": "Ism va emailingizdan faqat sizga javob berish uchun foydalanamiz.",
     "sentTitle": "Xabar yuborildi",
     "sentText": "Rahmat! Imkon qadar tez elektron pochtangizga javob beramiz.",
-    "tooMany": "Oxirgi bir soatda bir nechta xabar yubordingiz. Biroz kutib, qaytadan urinib ko'ring."
+    "tooMany": "Oxirgi bir soatda bir nechta xabar yubordingiz. Biroz kutib, qaytadan urinib koʻring."
   },
   "education": {
     "calc": {
       "title": "Mushoraka kalkulyatori",
-      "hint": "Bir yillik natija qanday taqsimlanishiga misol. Slayderlarni suring — zarar holatini ham sinab ko'ring.",
+      "hint": "Bir yillik natija qanday taqsimlanishiga misol. Slayderlarni suring — zarar holatini ham sinab koʻring.",
       "investment": "Sizning sarmoyangiz",
       "capital": "Loyihaning umumiy kapitali",
       "share": "Homiylarning foyda ulushi",
@@ -905,38 +906,38 @@
       "yourProfit": "Bu yilgi foydangiz",
       "yourLoss": "Bu yilgi zararingiz",
       "return": "Yil oxirida sizda",
-      "profitNote": "Foyda yili: homiylarning foyda ulushi har bir homiyning kapitaliga mutanosib ravishda bo'linadi.",
-      "lossNote": "Zarar yili: zarar kapitalga mutanosib ravishda bo'linadi — sarmoyangiz kamayadi. Shuning uchun daromad hech qachon kafolatlanmaydi."
+      "profitNote": "Foyda yili: homiylarning foyda ulushi har bir homiyning kapitaliga mutanosib ravishda boʻlinadi.",
+      "lossNote": "Zarar yili: zarar kapitalga mutanosib ravishda boʻlinadi — sarmoyangiz kamayadi. Shuning uchun daromad hech qachon kafolatlanmaydi."
     }
   },
   "community": {
     "like": "Yoqdi",
     "unlike": "Yoqdini olib tashlash",
     "report": "Shikoyat qilish",
-    "reportReason": "Nima noto‘g‘ri?",
+    "reportReason": "Nima notoʻgʻri?",
     "reportDetails": "Batafsil (ixtiyoriy)",
     "sendReport": "Shikoyatni yuborish",
-    "reported": "Rahmat. Jamoamiz buni ko‘rib chiqadi.",
-    "alreadyReported": "Siz bu haqda allaqachon xabar bergansiz. Jamoamiz ko‘rib chiqadi.",
+    "reported": "Rahmat. Jamoamiz buni koʻrib chiqadi.",
+    "alreadyReported": "Siz bu haqda allaqachon xabar bergansiz. Jamoamiz koʻrib chiqadi.",
     "reasons": {
       "spam": "Spam yoki reklama",
-      "abuse": "Qo‘pol yoki haqoratli",
-      "misleading": "Yolg‘on yoki chalg‘ituvchi",
+      "abuse": "Qoʻpol yoki haqoratli",
+      "misleading": "Yolgʻon yoki chalgʻituvchi",
       "other": "Boshqa sabab"
     },
     "reportFounder": "Asoschi ustidan shikoyat"
   },
   "milestones": {
     "manage": "Bosqichlar",
-    "none": "Bu loyihada bosqichlar yo‘q.",
-    "founderIntro": "Bosqichni tugatganingizda, dalil bilan xabar bering. Jamoamiz tekshirgach, pulning shu ulushi o‘tkaziladi.",
+    "none": "Bu loyihada bosqichlar yoʻq.",
+    "founderIntro": "Bosqichni tugatganingizda, dalil bilan xabar bering. Jamoamiz tekshirgach, pulning shu ulushi oʻtkaziladi.",
     "report": "Bajarildi deb xabar berish",
     "evidence": "Dalil",
-    "evidenceHint": "Nima qilinganini yozing va rasm, hujjat yoki cheklarga havola qo‘shing.",
+    "evidenceHint": "Nima qilinganini yozing va rasm, hujjat yoki cheklarga havola qoʻshing.",
     "evidenceTooShort": "Kamida {{count}} ta belgi yozing.",
     "send": "Tekshiruvga yuborish",
     "waiting": "Yuborildi. Jamoamiz tekshirishini kuting.",
-    "returnedNote": "Jamoamiz qo‘shimcha so‘radi:",
+    "returnedNote": "Jamoamiz qoʻshimcha soʻradi:",
     "release": "Pulning {{percent}}%",
     "status": {
       "pending": "Hali bajarilmagan",
@@ -945,13 +946,13 @@
     }
   },
   "start": {
-    "title": "Fundy'da loyiha joylash",
+    "title": "Fundyʼda loyiha joylash",
     "intro": "Ariza 20–30 daqiqa oladi. Qoralama saqlanib turadi — istalgan vaqtda davom ettirasiz.",
-    "needTitle": "Nima kerak bo'ladi",
-    "need1": "MChJ yoki YaTT guvohnomasi (xayriya loyihalari uchun NNT ham bo'ladi)",
+    "needTitle": "Nima kerak boʻladi",
+    "need1": "MChJ yoki YaTT guvohnomasi (xayriya loyihalari uchun NNT ham boʻladi)",
     "need2": "Rahbar yoki asoschining pasporti",
     "need3": "Tashkilot nomiga ochilgan bank hisobi",
-    "need4": "So'mdagi byudjet — har bir xarajat alohida qator",
+    "need4": "Soʻmdagi byudjet — har bir xarajat alohida qator",
     "need5": "3–6 ta bosqich: nima qilinadi, qachon va pulning necha foizi",
     "need6": "Muqova surati va loyiha hikoyasi (kamida 200 belgi)",
     "timeTitle": "Qancha vaqt oladi",
@@ -959,14 +960,14 @@
     "time1Text": "20–30 daqiqa",
     "time2Title": "Tekshiruv va baholash",
     "time2Text": "odatda 3–5 ish kuni",
-    "time3Title": "Mablag' yig'ish",
-    "time3Text": "7 dan 90 kungacha — o'zingiz tanlaysiz",
-    "time4Title": "Bosqichlar bo'yicha pul",
+    "time3Title": "Mablagʻ yigʻish",
+    "time3Text": "7 dan 90 kungacha — oʻzingiz tanlaysiz",
+    "time4Title": "Bosqichlar boʻyicha pul",
     "time4Text": "har bir bosqich dalili tekshirilgach",
     "feesTitle": "Xarajatlar",
-    "fees": "Demo davrida Fundy hech qanday to'lov olmaydi. Haqiqiy to'lovlar ishga tushganda komissiya shu sahifada oldindan e'lon qilinadi.",
+    "fees": "Demo davrida Fundy hech qanday toʻlov olmaydi. Haqiqiy toʻlovlar ishga tushganda komissiya shu sahifada oldindan eʼlon qilinadi.",
     "cta": "Arizani boshlash",
-    "ctaHint": "Avval kirasiz yoki ro'yxatdan o'tasiz — bir daqiqa."
+    "ctaHint": "Avval kirasiz yoki roʻyxatdan oʻtasiz — bir daqiqa."
   },
   "time": {
     "now": "hozirgina",

@@ -3,41 +3,41 @@ import type { Article, Localized } from '@/content/types';
 export const about: Localized<Article> = {
   uz: {
     kicker: 'Biz haqimizda',
-    title: "Nega biz Fundy'ni qurmoqdamiz",
+    title: 'Nega biz Fundyʼni qurmoqdamiz',
     intro:
-      "Fundy — O'zbekiston uchun foizsiz kraudfanding platformasi. Biz g'oyasi bor odamlarni ularni qo'llab-quvvatlashga tayyor hamjamiyat bilan bog'laymiz — qarzsiz va foizsiz.",
+      'Fundy — Oʻzbekiston uchun foizsiz kraudfanding platformasi. Biz gʻoyasi bor odamlarni ularni qoʻllab-quvvatlashga tayyor hamjamiyat bilan bogʻlaymiz — qarzsiz va foizsiz.',
     sections: [
       {
         id: 'why',
         heading: 'Nima uchun Fundy',
         paragraphs: [
-          "Ko'plab tadbirkorlar, hunarmandlar va ijtimoiy tashabbuskorlar uchun bank krediti yo'q yoki juda qimmat. Boshqalar esa foizli qarzni o'z e'tiqodiga zid deb biladi. Natijada yaxshi g'oyalar amalga oshmay qoladi.",
-          "Shu bilan birga, odamlar o'z shahri, viloyati va mamlakatidagi loyihalarni qo'llab-quvvatlashni xohlaydi — faqat pul qayerga ketishini aniq bilishi kerak.",
+          'Koʻplab tadbirkorlar, hunarmandlar va ijtimoiy tashabbuskorlar uchun bank krediti yoʻq yoki juda qimmat. Boshqalar esa foizli qarzni oʻz eʼtiqodiga zid deb biladi. Natijada yaxshi gʻoyalar amalga oshmay qoladi.',
+          'Shu bilan birga, odamlar oʻz shahri, viloyati va mamlakatidagi loyihalarni qoʻllab-quvvatlashni xohlaydi — faqat pul qayerga ketishini aniq bilishi kerak.',
         ],
       },
       {
         id: 'how',
         heading: 'Qanday ishlaymiz',
         bullets: [
-          "Uch xil model: xayriya, mukofotli loyihalar va mushoraka (foyda va xavfni baham ko'rish).",
-          "Har bir loyiha byudjeti so'mma-so'm e'lon qilinadi.",
-          "Loyihalar e'lon qilinishidan oldin tekshiriladi va 100 ballik tizimda baholanadi.",
-          "Mablag' bosqichma-bosqich, bajarilgan ish uchun beriladi.",
+          'Uch xil model: xayriya, mukofotli loyihalar va mushoraka (foyda va xavfni baham koʻrish).',
+          'Har bir loyiha byudjeti soʻmma-soʻm eʼlon qilinadi.',
+          'Loyihalar eʼlon qilinishidan oldin tekshiriladi va 100 ballik tizimda baholanadi.',
+          'Mablagʻ bosqichma-bosqich, bajarilgan ish uchun beriladi.',
         ],
       },
       {
         id: 'for-uzbekistan',
-        heading: "O'zbekiston uchun yaratilgan",
+        heading: 'Oʻzbekiston uchun yaratilgan',
         paragraphs: [
-          "Fundy o'zbek, rus va ingliz tillarida ishlaydi, barcha summalar so'mda. Loyihalar 14 ta hudud bo'yicha — Qoraqalpog'istondan Farg'ona vodiysigacha.",
+          'Fundy oʻzbek, rus va ingliz tillarida ishlaydi, barcha summalar soʻmda. Loyihalar 14 ta hudud boʻyicha — Qoraqalpogʻistondan Fargʻona vodiysigacha.',
         ],
       },
       {
         id: 'status',
         heading: 'Hozirgi holat',
         paragraphs: [
-          "Fundy hozir demo versiyada. Barcha to'lovlar simulyatsiya — haqiqiy pul yechilmaydi. Haqiqiy to'lovlar faqat zarur huquqiy ruxsatlar, hamkor banklar va shariat bo'yicha maslahat kengashi tayyor bo'lgandan keyin ishga tushiriladi.",
-          "Platforma qanday ishlashini ko'rsatish va fikr-mulohaza to'plash uchun ochiq. Fikringiz bo'lsa, aloqa sahifasi orqali yozing.",
+          'Fundy hozir demo versiyada. Barcha toʻlovlar simulyatsiya — haqiqiy pul yechilmaydi. Haqiqiy toʻlovlar faqat zarur huquqiy ruxsatlar, hamkor banklar va shariat boʻyicha maslahat kengashi tayyor boʻlgandan keyin ishga tushiriladi.',
+          'Platforma qanday ishlashini koʻrsatish va fikr-mulohaza toʻplash uchun ochiq. Fikringiz boʻlsa, aloqa sahifasi orqali yozing.',
         ],
       },
     ],

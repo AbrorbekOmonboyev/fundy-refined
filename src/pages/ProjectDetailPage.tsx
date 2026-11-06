@@ -142,8 +142,12 @@ function ProjectView({ project }: { project: ProjectDetail }) {
               </>
             )}
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-ink leading-tight">{title}</h1>
-          <p className="text-sm text-slate-600 leading-relaxed">{text?.tagline}</p>
+          <h1 lang={text?.language} className="text-2xl sm:text-3xl font-extrabold text-ink leading-tight">
+            {title}
+          </h1>
+          <p lang={text?.language} className="text-sm text-slate-600 leading-relaxed">
+            {text?.tagline}
+          </p>
 
           {isFallback && text && (
             <p className="flex items-center gap-1.5 text-xs text-slate-500">
@@ -383,7 +387,9 @@ function ProjectView({ project }: { project: ProjectDetail }) {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
               <div className="lg:col-span-8 space-y-6 text-sm text-slate-700 leading-relaxed">
                 <h2 className="text-lg font-bold text-ink">{t('project.about')}</h2>
-                <div className="whitespace-pre-line text-slate-600">{text?.story}</div>
+                <div lang={text?.language} className="whitespace-pre-line text-slate-600">
+                  {text?.story}
+                </div>
                 {project.founder?.bio && (
                   <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
                     <h3 className="font-bold text-ink text-xs uppercase tracking-wider">{t('project.founderBio')}</h3>
@@ -553,7 +559,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
               <h2 className="text-lg font-bold text-ink">{t('project.risksTitle')}</h2>
               <p className="text-xs text-slate-500">{t('project.risksText')}</p>
               <div className="p-5 bg-card rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed shadow-sm whitespace-pre-line">
-                {text?.risks}
+                <span lang={text?.language}>{text?.risks}</span>
               </div>
             </div>
           )}

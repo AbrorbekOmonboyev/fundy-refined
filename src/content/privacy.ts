@@ -6,47 +6,47 @@ export const privacy: Localized<Article> = {
   uz: {
     kicker: 'Maxfiylik siyosati',
     title: 'Maxfiylik siyosati',
-    intro: "Qanday ma'lumotlarni yig'amiz, nima uchun va ular qayerda saqlanadi — oddiy tilda.",
+    intro: 'Qanday maʼlumotlarni yigʻamiz, nima uchun va ular qayerda saqlanadi — oddiy tilda.',
     draftNote:
-      "Loyiha matni. Bu siyosat demo versiya uchun tayyorlangan va haqiqiy ishga tushirishdan oldin yurist tomonidan, jumladan shaxsga doir ma'lumotlar to'g'risidagi qonunchilik talablari bo'yicha ko'rib chiqiladi.",
+      'Loyiha matni. Bu siyosat demo versiya uchun tayyorlangan va haqiqiy ishga tushirishdan oldin yurist tomonidan, jumladan shaxsga doir maʼlumotlar toʻgʻrisidagi qonunchilik talablari boʻyicha koʻrib chiqiladi.',
     updated: UPDATED,
     sections: [
       {
         id: 'collect',
-        heading: "Qanday ma'lumotlarni yig'amiz",
+        heading: 'Qanday maʼlumotlarni yigʻamiz',
         bullets: [
           'Hisob: ism, elektron pochta, parol (shifrlangan holda), shahar, viloyat, tanlangan til. Google orqali kirsangiz — Google bergan ism va email.',
-          "Asoschi profili: ko'rsatiladigan ism, lavozim, tashkilot, ro'yxat raqami, tajriba, o'zingiz haqingizda.",
-          "Hujjatlar: ko'rib chiqish uchun yuklangan fayllar (masalan, guvohnoma, biznes reja).",
+          'Asoschi profili: koʻrsatiladigan ism, lavozim, tashkilot, roʻyxat raqami, tajriba, oʻzingiz haqingizda.',
+          'Hujjatlar: koʻrib chiqish uchun yuklangan fayllar (masalan, guvohnoma, biznes reja).',
           'Faollik: hissalar (demo), saqlangan loyihalar, izohlar, yangiliklar, bildirishnomalar.',
           'Aloqa xabarlari: aloqa formasida yozgan ism, email va matn.',
-          "Texnik ma'lumotlar: xizmat ko'rsatuvchilarimiz yozib boradigan IP manzil va brauzer turi.",
+          'Texnik maʼlumotlar: xizmat koʻrsatuvchilarimiz yozib boradigan IP manzil va brauzer turi.',
         ],
       },
       {
         id: 'why',
         heading: 'Nima uchun',
         bullets: [
-          "Hisobingizni yaratish va himoya qilish, tizimga kirishni ta'minlash.",
-          "Loyihalarni ko'rsatish, ko'rib chiqish va firibgarlikning oldini olish.",
+          'Hisobingizni yaratish va himoya qilish, tizimga kirishni taʼminlash.',
+          'Loyihalarni koʻrsatish, koʻrib chiqish va firibgarlikning oldini olish.',
           'Sizga bildirishnoma va xizmat xatlarini yuborish.',
           'Platformani yaxshilash va xatolarni tuzatish.',
         ],
-        paragraphs: ["Biz ma'lumotlaringizni sotmaymiz va reklama uchun ishlatmaymiz."],
+        paragraphs: ['Biz maʼlumotlaringizni sotmaymiz va reklama uchun ishlatmaymiz.'],
       },
       {
         id: 'visible',
-        heading: "Boshqalar nimani ko'radi",
+        heading: 'Boshqalar nimani koʻradi',
         paragraphs: [
-          "Ismingiz, shahringiz va rasmingiz izohlar va asoschi profilida ko'rinadi. Elektron pochtangiz va hujjatlaringiz hech qachon ochiq ko'rsatilmaydi. Hissa qo'shayotganda \"ismimni ko'rsatmang\" ni tanlashingiz mumkin.",
+          'Ismingiz, shahringiz va rasmingiz izohlar va asoschi profilida koʻrinadi. Elektron pochtangiz va hujjatlaringiz hech qachon ochiq koʻrsatilmaydi. Hissa qoʻshayotganda "ismimni koʻrsatmang" ni tanlashingiz mumkin.',
         ],
       },
       {
         id: 'where',
-        heading: "Ma'lumotlar qayerda saqlanadi",
+        heading: 'Maʼlumotlar qayerda saqlanadi',
         paragraphs: [
-          "Hozir ma'lumotlar xizmat ko'rsatuvchilarimiz serverlarida saqlanadi: Supabase (ma'lumotlar bazasi va fayllar, Singapur) va Vercel (sayt). Bu O'zbekistondan tashqarida joylashgan.",
-          "Haqiqiy ishga tushirishdan oldin ma'lumotlarni saqlash joyi O'zbekiston qonunchiligi talablariga muvofiqlashtiriladi.",
+          'Hozir maʼlumotlar xizmat koʻrsatuvchilarimiz serverlarida saqlanadi: Supabase (maʼlumotlar bazasi va fayllar, Singapur) va Vercel (sayt). Bu Oʻzbekistondan tashqarida joylashgan.',
+          'Haqiqiy ishga tushirishdan oldin maʼlumotlarni saqlash joyi Oʻzbekiston qonunchiligi talablariga muvofiqlashtiriladi.',
         ],
       },
       {
@@ -54,22 +54,22 @@ export const privacy: Localized<Article> = {
         heading: 'Brauzeringizda nima saqlanadi',
         paragraphs: [
           'Tizimga kirganingizni eslab qolish va tanlagan tilingizni saqlash uchun brauzer xotirasidan (localStorage) foydalanamiz. Reklama yoki kuzatuv cookie-fayllaridan foydalanmaymiz.',
-          "Saytni yaxshilash uchun Vercel Web Analytics orqali umumiy tashriflar sonini hisoblaymiz (cookie-fayllarsiz, shaxsingizni aniqlamasdan). Sahifada xatolik yuz bersa, xato haqidagi texnik ma'lumot (sahifa manzili va brauzer turi) Sentry xizmatiga yuborilishi mumkin; IP-manzil va siz kiritgan ma'lumotlar yuborilmaydi.",
+          'Saytni yaxshilash uchun Vercel Web Analytics orqali umumiy tashriflar sonini hisoblaymiz (cookie-fayllarsiz, shaxsingizni aniqlamasdan). Sahifada xatolik yuz bersa, xato haqidagi texnik maʼlumot (sahifa manzili va brauzer turi) Sentry xizmatiga yuborilishi mumkin; IP-manzil va siz kiritgan maʼlumotlar yuborilmaydi.',
         ],
       },
       {
         id: 'rights',
         heading: 'Sizning huquqlaringiz',
         bullets: [
-          'Ma\'lumotlaringizni ko\'rish va tuzatish — "Sozlamalar" sahifasida.',
-          'Hisobni o\'chirish — "Sozlamalar" sahifasida. Hissa yoki loyihasi bor hisoblar moliyaviy hisobot uchun saqlanadi; ularni yopish uchun biz bilan bog\'laning.',
-          "Ma'lumotlaringiz nusxasini so'rash yoki boshqa savollar — aloqa sahifasi orqali.",
+          'Maʼlumotlaringizni koʻrish va tuzatish — "Sozlamalar" sahifasida.',
+          'Hisobni oʻchirish — "Sozlamalar" sahifasida. Hissa yoki loyihasi bor hisoblar moliyaviy hisobot uchun saqlanadi; ularni yopish uchun biz bilan bogʻlaning.',
+          'Maʼlumotlaringiz nusxasini soʻrash yoki boshqa savollar — aloqa sahifasi orqali.',
         ],
       },
       {
         id: 'changes',
-        heading: "O'zgarishlar",
-        paragraphs: ["Siyosat o'zgarsa, ushbu sahifadagi sana yangilanadi va muhim o'zgarishlar haqida xabar beramiz."],
+        heading: 'Oʻzgarishlar',
+        paragraphs: ['Siyosat oʻzgarsa, ushbu sahifadagi sana yangilanadi va muhim oʻzgarishlar haqida xabar beramiz.'],
       },
     ],
   },

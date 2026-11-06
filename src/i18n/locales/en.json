@@ -2,7 +2,8 @@
   "languages": {
     "uz": "O'zbekcha",
     "ru": "Русский",
-    "en": "English"
+    "en": "English",
+    "uzCyrl": "Uzbek (Cyrillic)"
   },
   "nav": {
     "explore": "Explore Projects",
