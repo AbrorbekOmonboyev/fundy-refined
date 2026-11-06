@@ -126,6 +126,13 @@ function ProjectView({ project }: { project: ProjectDetail }) {
         <span className="text-ink font-medium truncate">{title}</span>
       </nav>
 
+      {/* The founder looking at a project that isn't public yet */}
+      {['draft', 'changes_requested', 'pending_review'].includes(project.status) && (
+        <Alert variant="info">
+          <strong>{t('project.previewTitle')}</strong> {t('project.previewText')}
+        </Alert>
+      )}
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         {/* Left: story header */}
         <div className="lg:col-span-7 space-y-4">

@@ -593,7 +593,9 @@
     },
     "recentBackers": "Recent backers",
     "backedFrom": "{{name}}, {{city}}",
-    "backed": "{{name}}"
+    "backed": "{{name}}",
+    "previewTitle": "Preview.",
+    "previewText": "This project isn't published yet — only you and the Fundy team can see it."
   },
   "contribute": {
     "title": {
@@ -847,6 +849,17 @@
       "reward_tiers_missing": "Add at least one reward (step 5).",
       "equity_terms_missing": "Add the partnership terms (step 5).",
       "project_not_editable": "This project can no longer be changed."
+    },
+    "preview": "See it as a backer",
+    "example": {
+      "title": "A good example",
+      "show": "open",
+      "basics": "Title: \"AgroSmart Fergana: solar-powered greenhouses\"\nTagline: \"A greenhouse in Kuva that uses 78% less water — tomatoes for Fergana and Tashkent markets.\"\nThe title says what and where. The tagline says who it's for and why it helps.",
+      "story": "Paragraph 1 — the problem: \"Water in the Fergana Valley is running low, and furrow irrigation wastes most of it.\"\nParagraph 2 — the solution and proof: \"Our test greenhouse has run two seasons using 4× less water.\"\nParagraph 3 — what the money pays for and what backers get.\nNumbers, place names and real photos build trust.",
+      "budget": "One line per expense:\n• Greenhouse frames and cover — 96 000 000 so'm (steel arches, polycarbonate)\n• Solar panels — 60 000 000 so'm (15 kW, inverter, batteries)\n• Workers and transport — 12 000 000 so'm\nAvoid vague lines like \"Other costs\".",
+      "milestones": "Each stage is a result someone can check:\n1. Foundation ready — month 1 — 30%\n2. Frame and panels installed — month 2 — 40%\n3. First crop planted — month 3 — 20%\n4. First harvest delivered to shops — month 5 — 10%\nProof: photos, video, an invoice or a signed handover act.",
+      "terms": "Reward: \"A hand-made piyola — 350 000 so'm, delivered December 2026, 100 available\".\nMusharakah: \"28% of net profit to backers, every quarter, for 5 years. Minimum share 2 500 000 so'm\".\nWrite exact terms, not promises.",
+      "founder": "\"Graduate of Tashkent State Agrarian University. Has built greenhouse systems for 11 years: 3 in Kuva, 2 in Turkey.\"\nWrite the full registration number: \"LLC certificate No. 309812490\"."
     }
   },
   "notifications": {

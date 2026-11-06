@@ -1,7 +1,7 @@
 import type { FormEvent, ReactNode } from 'react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { Check } from 'lucide-react';
+import { Check, Eye } from 'lucide-react';
 import { paths } from '@/app/routes';
 import { Alert, Button } from '@/components/ui';
 import type { Draft } from '@/features/wizard/api';
@@ -80,6 +80,31 @@ export function WizardShell({
           <h1 className="text-xl sm:text-2xl font-bold text-ink mt-1">{title}</h1>
           {hint && <p className="text-sm text-slate-600 mt-1">{hint}</p>}
         </header>
+
+        {/* A short, real-looking example for this step */}
+        {step !== 'review' && (
+          <details className="group rounded-xl border border-brand bg-brand-soft px-4 py-3 text-sm">
+            <summary className="cursor-pointer font-semibold text-ink list-none flex items-center justify-between gap-2">
+              {t('wizard.example.title')}
+              <span aria-hidden className="text-xs text-slate-500 group-open:hidden">
+                {t('wizard.example.show')}
+              </span>
+            </summary>
+            <p className="mt-2 whitespace-pre-line text-slate-700 leading-relaxed">{t(`wizard.example.${step}`)}</p>
+          </details>
+        )}
+
+        {draft && (
+          <a
+            href={paths.project(draft.project.slug)}
+            target="_blank"
+            rel="noopener"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink underline underline-offset-4"
+          >
+            <Eye className="w-4 h-4" aria-hidden />
+            {t('wizard.preview')}
+          </a>
+        )}
 
         {draft?.project.status === 'changes_requested' && draft.project.review_note && (
           <Alert variant="warning">

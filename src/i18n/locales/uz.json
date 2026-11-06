@@ -593,7 +593,9 @@
     },
     "recentBackers": "Soʻnggi homiylar",
     "backedFrom": "{{name}}, {{city}}",
-    "backed": "{{name}}"
+    "backed": "{{name}}",
+    "previewTitle": "Oldindan koʻrish.",
+    "previewText": "Loyiha hali eʼlon qilinmagan — uni faqat siz va Fundy jamoasi koʻradi."
   },
   "contribute": {
     "title": {
@@ -847,6 +849,17 @@
       "reward_tiers_missing": "Kamida bitta mukofot qoʻshing (5-qadam).",
       "equity_terms_missing": "Hamkorlik shartlarini qoʻshing (5-qadam).",
       "project_not_editable": "Bu loyihani endi oʻzgartirib boʻlmaydi."
+    },
+    "preview": "Homiy koʻzi bilan koʻrish",
+    "example": {
+      "title": "Yaxshi namuna",
+      "show": "ochish",
+      "basics": "Nomi: «AgroSmart Fargʻona: quyosh energiyali issiqxonalar»\nQisqa tavsif: «Quvada suvni 78% kam sarflaydigan issiqxona — Fargʻona va Toshkent bozorlari uchun pomidor.»\nNomda — nima va qayerda. Tavsifda — kim uchun va qanday foyda.",
+      "story": "1-xatboshi — muammo: «Fargʻona vodiysida suv kamaymoqda, ariq usuli suvning katta qismini isrof qiladi.»\n2-xatboshi — yechim va dalil: «Tajriba issiqxonamiz ikki mavsum ishladi: suv sarfi 4 barobar kam.»\n3-xatboshi — pul nimaga ketadi va homiy nima oladi.\nRaqamlar, joy nomlari va haqiqiy suratlar ishonch uygʻotadi.",
+      "budget": "Har bir xarajat — alohida qator:\n• Issiqxona karkasi va qoplamasi — 96 000 000 soʻm (poʻlat arkalar, polikarbonat)\n• Quyosh panellari — 60 000 000 soʻm (15 kVt, invertor, batareya)\n• Ishchilar va transport — 12 000 000 soʻm\n«Boshqa xarajatlar» kabi umumiy qatorlardan qoching.",
+      "milestones": "Har bir bosqich — tekshirsa boʻladigan natija:\n1. Poydevor tayyor — 1-oy — 30%\n2. Karkas va panellar oʻrnatildi — 2-oy — 40%\n3. Birinchi ekin ekildi — 3-oy — 20%\n4. Birinchi hosil doʻkonlarga topshirildi — 5-oy — 10%\nDalil: surat, video, hisob-faktura yoki dalolatnoma.",
+      "terms": "Mukofot: «Qoʻlda yasalgan piyola — 350 000 soʻm, 2026-yil dekabrda yetkaziladi, 100 dona».\nMushoraka: «Sof foydaning 28% — homiylarga, har chorakda, 5 yil. Minimal ulush 2 500 000 soʻm».\nVaʼda emas, aniq shart yozing.",
+      "founder": "«Toshkent davlat agrar universiteti bitiruvchisi. 11 yildan beri issiqxona tizimlarini quradi: Quvada 3 ta, Turkiyada 2 ta.»\nGuvohnoma raqamini toʻliq yozing: «MChJ guvohnomasi № 309812490»."
     }
   },
   "notifications": {
