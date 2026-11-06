@@ -76,7 +76,7 @@ export function AdminUsersPage() {
       ) : isError ? (
         <Alert variant="error">{t('errors.generic')}</Alert>
       ) : (
-        <div className="bg-card rounded-3xl border border-slate-200 overflow-x-auto">
+        <div className="bg-card rounded-2xl border border-slate-200 overflow-x-auto">
           <table className="w-full text-sm text-left">
             <thead className="text-xs text-slate-500 border-b border-slate-200">
               <tr>

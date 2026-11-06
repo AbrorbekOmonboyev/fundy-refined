@@ -15,13 +15,13 @@ export function NotFoundPage() {
       <div className="mt-8 flex justify-center gap-3">
         <Link
           to={paths.home}
-          className="px-4 py-2 text-sm font-semibold text-white bg-night hover:bg-night-soft rounded-lg"
+          className="px-4 py-2 text-sm font-semibold text-white bg-night hover:bg-night-soft rounded-full"
         >
           {t('notFound.home')}
         </Link>
         <Link
           to={paths.explore}
-          className="px-4 py-2 text-sm font-semibold text-slate-700 bg-card border border-slate-200 hover:bg-slate-50 rounded-lg"
+          className="px-4 py-2 text-sm font-semibold text-slate-700 bg-card border border-slate-200 hover:bg-slate-50 rounded-full"
         >
           {t('nav.explore')}
         </Link>

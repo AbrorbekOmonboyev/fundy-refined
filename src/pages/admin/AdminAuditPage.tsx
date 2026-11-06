@@ -20,11 +20,11 @@ export function AdminAuditPage() {
       ) : isError ? (
         <Alert variant="error">{t('errors.generic')}</Alert>
       ) : data.length === 0 ? (
-        <p className="p-10 text-center text-sm text-slate-500 bg-card rounded-3xl border border-slate-200">
+        <p className="p-10 text-center text-sm text-slate-500 bg-card rounded-2xl border border-slate-200">
           {t('admin.audit.empty')}
         </p>
       ) : (
-        <div className="bg-card rounded-3xl border border-slate-200 overflow-x-auto">
+        <div className="bg-card rounded-2xl border border-slate-200 overflow-x-auto">
           <table className="w-full text-sm text-left">
             <thead className="text-xs text-slate-500 border-b border-slate-200">
               <tr>

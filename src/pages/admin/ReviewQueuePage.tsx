@@ -32,7 +32,7 @@ export function ReviewQueuePage() {
       ) : isError ? (
         <Alert variant="error">{t('errors.generic')}</Alert>
       ) : data.length === 0 ? (
-        <div className="p-12 text-center bg-card rounded-3xl border border-slate-200">
+        <div className="p-12 text-center bg-card rounded-2xl border border-slate-200">
           <CheckCircle className="w-10 h-10 mx-auto text-brand-deep" aria-hidden />
           <p className="mt-3 text-sm text-slate-600">{t('admin.review.empty')}</p>
         </div>

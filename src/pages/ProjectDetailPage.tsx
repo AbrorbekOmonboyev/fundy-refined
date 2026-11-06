@@ -320,7 +320,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                 <button
                   type="button"
                   onClick={copyLink}
-                  className="py-2 px-3 rounded-lg border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="py-2 px-3 rounded-full border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Link2 className="w-3.5 h-3.5" aria-hidden />
                   {copied ? t('project.copied') : t('project.copyLink')}

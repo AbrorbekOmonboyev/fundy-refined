@@ -24,7 +24,7 @@ export function MusharakahCalculator({ showHeader = true }: { showHeader?: boole
   return (
     <section
       id="calculator"
-      className="scroll-mt-24 rounded-3xl bg-card border border-slate-200 p-5 sm:p-8 space-y-6"
+      className="scroll-mt-24 rounded-2xl bg-card border border-slate-200 p-5 sm:p-8 space-y-6"
       aria-labelledby={showHeader ? 'calc-title' : undefined}
       aria-label={showHeader ? undefined : t('education.calc.title')}
     >

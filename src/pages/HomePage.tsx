@@ -66,7 +66,7 @@ export function HomePage() {
                 </span>
                 {t('home.hero.cardKicker')}
               </p>
-              <div className="rotate-[1.5deg] shadow-[12px_12px_0_0_var(--color-brand-deep)] rounded-3xl">
+              <div className="rotate-[1.5deg] shadow-[12px_12px_0_0_var(--color-brand-deep)] rounded-2xl">
                 <ProjectCard project={heroProject} />
               </div>
             </div>
@@ -123,7 +123,7 @@ export function HomePage() {
         {/* 3. How the money moves — verification, scoring and staged payouts, in one place */}
         <section id="how-it-works" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
           <h2 className="text-2xl sm:text-3xl text-ink mb-8">{t('home.how.title')}</h2>
-          <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 rounded-3xl overflow-hidden border border-slate-200">
+          <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 rounded-2xl overflow-hidden border border-slate-200">
             {([1, 2, 3, 4] as const).map(i => (
               <li key={i} className="bg-card p-6 space-y-3">
                 <span className="w-8 h-8 rounded-full bg-brand text-ink font-bold text-sm flex items-center justify-center font-mono-numbers">
@@ -168,7 +168,7 @@ export function HomePage() {
 
         {/* 5. Start yours */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden bg-night text-white rounded-3xl p-8 sm:p-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="relative overflow-hidden bg-night text-white rounded-2xl p-8 sm:p-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div
               aria-hidden
               className="absolute inset-0 opacity-25 [background-image:url(/images/ikat-brand.svg)] [background-size:120px_160px] [mask-image:linear-gradient(to_left,black,transparent_60%)]"

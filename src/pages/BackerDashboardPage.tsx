@@ -47,7 +47,7 @@ export function BackerDashboardPage() {
         </div>
         <Link
           to={paths.explore}
-          className="px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-lg self-start sm:self-auto"
+          className="px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-full self-start sm:self-auto"
         >
           {t('home.hero.explore')}
         </Link>
@@ -184,7 +184,7 @@ function Empty({ text }: { text: string }) {
       <p className="text-sm text-slate-600">{text}</p>
       <Link
         to={paths.explore}
-        className="inline-block px-4 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand rounded-lg"
+        className="inline-block px-4 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand rounded-full"
       >
         {t('home.hero.explore')}
       </Link>

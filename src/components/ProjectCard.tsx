@@ -19,7 +19,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
   const days = daysLeft(project.endsAt);
 
   return (
-    <article className="group relative bg-card rounded-3xl border border-slate-200/70 overflow-hidden flex flex-col hover:border-slate-300 hover:shadow-md transition-all duration-200">
+    <article className="group relative bg-card rounded-2xl border border-slate-200/70 overflow-hidden flex flex-col hover:border-slate-300 hover:shadow-md transition-all duration-200">
       <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
         {project.coverUrl ? (
           <img
@@ -143,7 +143,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
 /** Grey outline of a card, shown while projects load (feels faster than a spinner). */
 export function ProjectCardSkeleton() {
   return (
-    <div aria-hidden className="bg-card rounded-3xl border border-slate-200/70 overflow-hidden animate-pulse">
+    <div aria-hidden className="bg-card rounded-2xl border border-slate-200/70 overflow-hidden animate-pulse">
       <div className="aspect-[16/10] bg-slate-100" />
       <div className="p-5 space-y-3">
         <div className="h-3 w-1/3 rounded bg-slate-100" />

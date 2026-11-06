@@ -40,7 +40,7 @@ export function FounderDashboardPage() {
         <h1 className="text-2xl sm:text-3xl font-extrabold text-ink">{t('account.projects')}</h1>
         <Link
           to={paths.newProject}
-          className="px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-lg self-start sm:self-auto"
+          className="px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-full self-start sm:self-auto"
         >
           + {t('dashboard.founder.newProject')}
         </Link>
@@ -59,7 +59,7 @@ export function FounderDashboardPage() {
           <p className="text-sm text-slate-600 max-w-md mx-auto">{t('dashboard.founder.emptyText')}</p>
           <Link
             to={paths.newProject}
-            className="inline-block px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-lg"
+            className="inline-block px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-full"
           >
             {t('nav.startProject')}
           </Link>
@@ -149,7 +149,7 @@ function ProjectRow({ project: p }: { project: MyProject }) {
         {editable && (
           <Link
             to={paths.editProject(p.id, 'review')}
-            className="px-3 py-1.5 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-lg"
+            className="px-3 py-1.5 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-full"
           >
             {t('dashboard.founder.continue')}
           </Link>
@@ -157,7 +157,7 @@ function ProjectRow({ project: p }: { project: MyProject }) {
         {p.status === 'pending_review' && (
           <Link
             to={paths.editProject(p.id, 'review')}
-            className="px-3 py-1.5 text-xs font-semibold text-slate-700 border border-slate-300 rounded-lg hover:bg-slate-50"
+            className="px-3 py-1.5 text-xs font-semibold text-slate-700 border border-slate-300 rounded-full hover:bg-slate-50"
           >
             {t('dashboard.founder.viewStatus')}
           </Link>
@@ -171,7 +171,7 @@ function ProjectRow({ project: p }: { project: MyProject }) {
           <>
             <Link
               to={paths.project(p.slug)}
-              className="px-3 py-1.5 text-xs font-semibold text-slate-700 border border-slate-300 rounded-lg hover:bg-slate-50"
+              className="px-3 py-1.5 text-xs font-semibold text-slate-700 border border-slate-300 rounded-full hover:bg-slate-50"
             >
               {t('dashboard.founder.viewPage')}
             </Link>

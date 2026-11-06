@@ -43,7 +43,7 @@ export function AdminPage() {
           <Link
             key={tile.key}
             to={tile.to}
-            className={`group rounded-3xl p-5 border transition-colors ${
+            className={`group rounded-2xl p-5 border transition-colors ${
               tile.highlight ? 'bg-brand border-brand' : 'bg-card border-slate-200 hover:border-ink'
             }`}
           >

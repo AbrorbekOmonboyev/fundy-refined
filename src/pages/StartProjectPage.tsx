@@ -23,7 +23,7 @@ export function StartLandingPage() {
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-        <section className="lg:col-span-3 bg-card rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-4">
+        <section className="lg:col-span-3 bg-card rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-4">
           <h2 className="text-xl text-ink">{t('start.needTitle')}</h2>
           <ul className="space-y-3">
             {([1, 2, 3, 4, 5, 6] as const).map(i => (
@@ -36,7 +36,7 @@ export function StartLandingPage() {
         </section>
 
         <div className="lg:col-span-2 space-y-6">
-          <section className="bg-card rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-4">
+          <section className="bg-card rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-4">
             <h2 className="text-xl text-ink">{t('start.timeTitle')}</h2>
             <ol className="space-y-3">
               {([1, 2, 3, 4] as const).map(i => (
@@ -52,7 +52,7 @@ export function StartLandingPage() {
               ))}
             </ol>
           </section>
-          <section className="bg-brand-soft rounded-3xl border border-brand p-6 space-y-2">
+          <section className="bg-brand-soft rounded-2xl border border-brand p-6 space-y-2">
             <h2 className="text-lg text-ink">{t('start.feesTitle')}</h2>
             <p className="text-sm text-slate-700">{t('start.fees')}</p>
           </section>

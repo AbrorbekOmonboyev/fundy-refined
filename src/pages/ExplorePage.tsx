@@ -186,7 +186,7 @@ export function ExplorePage() {
               type="button"
               onClick={() => setSheetOpen(true)}
               aria-haspopup="dialog"
-              className="lg:hidden shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 bg-card text-sm font-semibold text-ink cursor-pointer"
+              className="lg:hidden shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-full border border-slate-200 bg-card text-sm font-semibold text-ink cursor-pointer"
             >
               <SlidersHorizontal className="w-4 h-4" aria-hidden />
               {t('explore.filters')}
@@ -308,7 +308,7 @@ export function ExplorePage() {
             <button
               type="button"
               onClick={clearAll}
-              className="px-4 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand rounded-lg"
+              className="px-4 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand rounded-full"
             >
               {t('explore.clearFilters')}
             </button>

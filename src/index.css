@@ -7,7 +7,7 @@
  *   Ink         #15122B  text and buttons (also text on chartreuse)
  *   Shadow      #90D508  the layer behind the f; deeper chartreuse
  *   Grey        #F4F6FB  page background
- * Fonts: Unbounded Bold for headlines, Plus Jakarta Sans for everything else.
+ * Fonts: Onest Bold for headlines (was Unbounded in the brand kit; the logo keeps its own lettering), Plus Jakarta Sans for everything else.
  *
  * Use as Tailwind classes: bg-brand, text-ink, bg-brand-soft, font-display, bg-page …
  *
@@ -33,7 +33,7 @@
   --text-xs--line-height: calc(1.15 / 0.8125);
 
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-display: 'Unbounded', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-display: 'Onest', 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
 @layer base {
@@ -47,8 +47,8 @@
   h1,
   h2 {
     font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.01em;
+    font-weight: 800;
+    letter-spacing: -0.025em;
     overflow-wrap: break-word; /* long Uzbek words never overflow on phones */
     hyphens: auto;
   }

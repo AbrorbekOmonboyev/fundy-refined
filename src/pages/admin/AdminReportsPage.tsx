@@ -49,7 +49,7 @@ export function AdminReportsPage() {
       ) : isError ? (
         <Alert variant="error">{t('errors.generic')}</Alert>
       ) : data.length === 0 ? (
-        <p className="p-10 text-center text-sm text-slate-500 bg-card rounded-3xl border border-slate-200">
+        <p className="p-10 text-center text-sm text-slate-500 bg-card rounded-2xl border border-slate-200">
           {t('admin.reports.empty')}
         </p>
       ) : (
@@ -165,7 +165,7 @@ function ReportItem({ report: r }: { report: AdminReport }) {
           {r.project && (
             <Link
               to={paths.adminProjects}
-              className="px-3 py-2 text-xs font-semibold text-slate-700 border border-slate-300 rounded-lg hover:bg-slate-50"
+              className="px-3 py-2 text-xs font-semibold text-slate-700 border border-slate-300 rounded-full hover:bg-slate-50"
             >
               {t('admin.reports.manageProject')}
             </Link>
