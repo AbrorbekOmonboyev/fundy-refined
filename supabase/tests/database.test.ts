@@ -1279,3 +1279,39 @@ describe('recent backers', () => {
     assert.deepEqual(cols, ['backed_at', 'city', 'first_name']); // no amounts, no ids
   });
 });
+
+describe('telegram notifications', () => {
+  test('a one-time code links a chat; only the server can link or read chats', async () => {
+    const [{ telegram_link_token: code }] = await as<{ telegram_link_token: string }>(
+      db,
+      user(bob),
+      `select public.telegram_link_token()`,
+    );
+    assert.match(code, /^[0-9a-f]{32}$/);
+    const status = async () =>
+      (await as<{ telegram_status: boolean }>(db, user(bob), `select public.telegram_status()`))[0].telegram_status;
+    assert.equal(await status(), false);
+
+    // the website can't link chats or read what's waiting
+    await rejects(as(db, user(bob), `select public.telegram_link_chat($1, 111)`, [code]), /permission denied/);
+    await rejects(as(db, anon, `select * from public.telegram_pending()`), /permission denied/);
+    await rejects(as(db, user(bob), `select * from public.telegram_pending()`), /permission denied/);
+
+    // the bot (service role) links it — once
+    const link = async () =>
+      (await as<{ ok: boolean }>(db, owner, `select public.telegram_link_chat($1, 111) as ok`, [code]))[0].ok;
+    assert.equal(await link(), true);
+    assert.equal(await link(), false);
+    assert.equal(await status(), true);
+
+    // new notifications for Bob are waiting, then marked as sent
+    await db.query(`insert into public.notifications (user_id, type, data) values ($1, 'new_update', '{}')`, [bob]);
+    const pending = await as<{ id: string; chat_id: string }>(db, owner, `select * from public.telegram_pending()`);
+    assert.ok(pending.length >= 1 && pending.every(p => Number(p.chat_id) === 111));
+    await as(db, owner, `select public.telegram_mark_sent($1::uuid[])`, [pending.map(p => p.id)]);
+    assert.equal((await as(db, owner, `select * from public.telegram_pending()`)).length, 0);
+
+    await as(db, user(bob), `select public.telegram_unlink()`);
+    assert.equal(await status(), false);
+  });
+});

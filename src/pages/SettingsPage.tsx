@@ -12,6 +12,7 @@ import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import { Avatar } from '@/components/Avatar';
 import { Alert, Button, SelectField, TextField } from '@/components/ui';
 import { usePageMeta } from '@/lib/usePageMeta';
+import { TELEGRAM_BOT, TelegramConnect } from '@/features/notifications/TelegramConnect';
 
 const AVATAR_MAX_BYTES = 2 * 1024 * 1024; // matches the avatars bucket limit
 const AVATAR_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
@@ -201,6 +202,12 @@ export function SettingsPage() {
       <Section title={t('settings.language')} description={t('settings.languageHint')}>
         <LanguageSwitcher />
       </Section>
+
+      {TELEGRAM_BOT && (
+        <Section title={t('telegram.title')} description={t('telegram.hint')}>
+          <TelegramConnect />
+        </Section>
+      )}
 
       <Section title={t('settings.password')}>
         <form onSubmit={changePassword} noValidate className="space-y-4">

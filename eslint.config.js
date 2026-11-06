@@ -5,7 +5,7 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  { ignores: ['dist', 'node_modules', 'src/lib/database.types.ts'] },
+  { ignores: ['dist', 'node_modules', 'src/lib/database.types.ts', 'supabase/functions'] }, // Edge Functions run on Deno
   {
     files: ['**/*.{ts,tsx}'],
     extends: [js.configs.recommended, ...tseslint.configs.recommended],

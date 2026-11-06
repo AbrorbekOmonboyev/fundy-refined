@@ -1030,5 +1030,13 @@
     "years_few": "{{count}} года назад",
     "years_many": "{{count}} лет назад",
     "years_other": "{{count}} года назад"
+  },
+  "telegram": {
+    "title": "Уведомления в Telegram",
+    "hint": "Получайте новости проектов, этапы и ответы в Telegram.",
+    "connect": "Подключить Telegram",
+    "disconnect": "Отключить",
+    "linked": "Telegram подключён",
+    "waiting": "Telegram открыт — нажмите «Start» в боте. После подключения это появится здесь."
   }
 }

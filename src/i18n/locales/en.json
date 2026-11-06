@@ -1002,5 +1002,13 @@
     "months_other": "{{count}} months ago",
     "years_one": "{{count}} year ago",
     "years_other": "{{count}} years ago"
+  },
+  "telegram": {
+    "title": "Telegram notifications",
+    "hint": "Get project updates, stages and replies in Telegram.",
+    "connect": "Connect Telegram",
+    "disconnect": "Disconnect",
+    "linked": "Telegram connected",
+    "waiting": "Telegram is open — press Start in the bot. Once linked, it shows here."
   }
 }

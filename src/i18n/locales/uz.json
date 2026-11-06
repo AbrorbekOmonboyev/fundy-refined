@@ -1002,5 +1002,13 @@
     "months_other": "{{count}} oy oldin",
     "years_one": "{{count}} yil oldin",
     "years_other": "{{count}} yil oldin"
+  },
+  "telegram": {
+    "title": "Telegram bildirishnomalari",
+    "hint": "Yangiliklar, bosqichlar va javoblar haqida Telegram orqali xabar oling.",
+    "connect": "Telegramni ulash",
+    "disconnect": "Uzish",
+    "linked": "Telegram ulangan",
+    "waiting": "Telegram ochildi — botda «Start» tugmasini bosing. Ulangach, shu yerda koʻrinadi."
   }
 }

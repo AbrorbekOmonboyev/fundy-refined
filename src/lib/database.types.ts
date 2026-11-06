@@ -1158,6 +1158,9 @@ export type Database = {
       }
       mark_all_notifications_read: { Args: never; Returns: number }
       platform_stats: { Args: never; Returns: Json }
+      telegram_link_token: { Args: never; Returns: string }
+      telegram_status: { Args: never; Returns: boolean }
+      telegram_unlink: { Args: never; Returns: undefined }
       recent_backers: {
         Args: { p_project_id: string; p_limit?: number }
         Returns: { first_name: string; city: string | null; backed_at: string }[]
