@@ -372,6 +372,9 @@ export type MyContribution = {
     status: ProjectStatus;
     original_language: Language;
     project_translations: Translation[];
+    ends_at: string | null;
+    milestones: { release_percent: number; status: Enums['milestone_status'] }[];
+    equity_terms: { distribution_schedule: Enums['distribution_schedule'] } | null;
   } | null;
 };
 
@@ -382,7 +385,8 @@ export async function getMyContributions(userId: string): Promise<MyContribution
     .select(
       `id, amount, payment_method, equity_share_pct, status, is_anonymous, created_at,
        reward:reward_tiers ( title ),
-       project:projects ( slug, model, status, original_language, project_translations ( language, title, tagline ) )`,
+       project:projects ( slug, model, status, ends_at, original_language, project_translations ( language, title, tagline ),
+         milestones ( release_percent, status ), equity_terms ( distribution_schedule ) )`,
     )
     .eq('backer_id', userId)
     .order('created_at', { ascending: false })

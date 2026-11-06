@@ -652,7 +652,15 @@
       "refunded": "Refunded",
       "simulated": "simulated",
       "emptyContributions": "You haven't backed any project yet.",
-      "emptySaved": "No saved projects yet. Tap the bookmark on any project to save it."
+      "emptySaved": "No saved projects yet. Tap the bookmark on any project to save it.",
+      "money": {
+        "title": "Your money",
+        "waiting": "Waiting for the goal",
+        "refunded": "Refunded",
+        "refunding": "Being refunded",
+        "released": "{{percent}}% paid to the founder",
+        "nextPayout": "Next profit payout: {{date}}"
+      }
     },
     "founder": {
       "emptyTitle": "You don't have any projects yet",

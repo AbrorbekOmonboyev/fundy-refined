@@ -652,7 +652,15 @@
       "refunded": "Qaytarilgan",
       "simulated": "simulyatsiya",
       "emptyContributions": "Siz hali hech bir loyihani qoʻllab-quvvatlamagansiz.",
-      "emptySaved": "Saqlangan loyihalar yoʻq. Saqlash uchun loyihadagi xatchoʻp belgisini bosing."
+      "emptySaved": "Saqlangan loyihalar yoʻq. Saqlash uchun loyihadagi xatchoʻp belgisini bosing.",
+      "money": {
+        "title": "Pulingiz",
+        "waiting": "Maqsad kutilmoqda",
+        "refunded": "Qaytarildi",
+        "refunding": "Qaytariladi",
+        "released": "Asoschiga {{percent}}% berildi",
+        "nextPayout": "Keyingi foyda taqsimoti: {{date}}"
+      }
     },
     "founder": {
       "emptyTitle": "Sizda hali loyihalar yoʻq",

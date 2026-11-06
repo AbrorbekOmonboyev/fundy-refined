@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { Bookmark, Gift, HandCoins, TrendingUp } from 'lucide-react';
 import { paths } from '@/app/routes';
 import { useAuth } from '@/features/auth/AuthContext';
-import { pickText } from '@/features/projects/api';
+import { pickText, type MyContribution } from '@/features/projects/api';
 import { useMyContributions, useSavedProjectCards } from '@/features/projects/hooks';
 import { ProjectCard } from '@/components/ProjectCard';
 import { Alert, PageSpinner } from '@/components/ui';
@@ -101,6 +101,7 @@ export function BackerDashboardPage() {
                   <th className="py-3 px-4">{t('dashboard.backer.date')}</th>
                   <th className="py-3 px-4">{t('dashboard.backer.project')}</th>
                   <th className="py-3 px-4">{t('dashboard.backer.details')}</th>
+                  <th className="py-3 px-4">{t('dashboard.backer.money.title')}</th>
                   <th className="py-3 px-4">{t('contribute.method')}</th>
                   <th className="py-3 px-4 text-right">{t('contribute.amount')}</th>
                 </tr>
@@ -141,9 +142,9 @@ export function BackerDashboardPage() {
                         {c.is_anonymous && (
                           <span className="block text-slate-400">{t('dashboard.backer.anonymous')}</span>
                         )}
-                        {c.status === 'refunded' && (
-                          <span className="block text-rose-600">{t('dashboard.backer.refunded')}</span>
-                        )}
+                      </td>
+                      <td className="py-3 px-4">
+                        <MoneyStatus c={c} />
                       </td>
                       <td className="py-3 px-4 whitespace-nowrap text-slate-600">
                         {t(`contribute.methods.${c.payment_method}`)}
@@ -188,5 +189,49 @@ function Empty({ text }: { text: string }) {
         {t('home.hero.explore')}
       </Link>
     </div>
+  );
+}
+
+const MONTHS: Record<string, number> = { quarterly: 3, biannually: 6, annually: 12 };
+
+/** First payout after today: every few months from the campaign's end. */
+function nextPayoutDate(endsAt: string, everyMonths: number): string {
+  const d = new Date(endsAt);
+  const now = new Date();
+  do d.setMonth(d.getMonth() + everyMonths);
+  while (d < now);
+  return d.toISOString().slice(0, 10);
+}
+
+/** Where this backer's money is now, in plain words, plus the next profit date for Musharakah. */
+function MoneyStatus({ c }: { c: MyContribution }) {
+  const { t } = useTranslation();
+  const p = c.project;
+  if (!p) return null;
+  if (c.status === 'refunded') return <Badge tone="rose">{t('dashboard.backer.money.refunded')}</Badge>;
+  if (p.status === 'active') return <Badge tone="slate">{t('dashboard.backer.money.waiting')}</Badge>;
+  if (p.status === 'unsuccessful') return <Badge tone="rose">{t('dashboard.backer.money.refunding')}</Badge>;
+
+  const released = p.milestones.filter(m => m.status === 'approved').reduce((s, m) => s + Number(m.release_percent), 0);
+  let nextPayout: string | null = null;
+  if (p.model === 'equity' && p.equity_terms && p.ends_at) {
+    nextPayout = formatDate(nextPayoutDate(p.ends_at, MONTHS[p.equity_terms.distribution_schedule] ?? 3));
+  }
+
+  return (
+    <div className="space-y-1.5 min-w-40">
+      <p className="text-ink font-semibold">{t('dashboard.backer.money.released', { percent: released })}</p>
+      <div className="h-1.5 rounded-full bg-track overflow-hidden" aria-hidden>
+        <div className="h-full bg-brand rounded-full" style={{ width: `${released}%` }} />
+      </div>
+      {nextPayout && <p className="text-slate-500">{t('dashboard.backer.money.nextPayout', { date: nextPayout })}</p>}
+    </div>
+  );
+}
+
+function Badge({ tone, children }: { tone: 'rose' | 'slate'; children: ReactNode }) {
+  const style = tone === 'rose' ? 'bg-rose-50 text-rose-700' : 'bg-slate-100 text-slate-700';
+  return (
+    <span className={`inline-block rounded-full px-2.5 py-1 font-semibold whitespace-nowrap ${style}`}>{children}</span>
   );
 }
