@@ -43,7 +43,7 @@ export function AdminAuditPage() {
                   <td className="py-3 px-4 whitespace-nowrap font-semibold text-ink">{e.actor?.full_name ?? '—'}</td>
                   <td className="py-3 px-4">
                     <code className="rounded bg-page px-1.5 py-0.5 text-xs">{e.action}</code>
-                    <span className="block text-[11px] text-slate-400 mt-1 break-all">
+                    <span className="block text-xs text-slate-400 mt-1 break-all">
                       {e.target_type} {e.target_id}
                     </span>
                   </td>

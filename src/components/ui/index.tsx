@@ -269,7 +269,7 @@ export function TextAreaField({ label, error, hint, minChars, value, rows = 4, .
         {...rest}
       />
       {minChars !== undefined && (
-        <p className={`text-[11px] text-right ${length >= minChars ? 'text-ink' : 'text-slate-400'}`}>
+        <p className={`text-xs text-right ${length >= minChars ? 'text-ink' : 'text-slate-400'}`}>
           {length} / {minChars}
         </p>
       )}

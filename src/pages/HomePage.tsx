@@ -3,8 +3,7 @@ import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight } from 'lucide-react';
 import { paths } from '@/app/routes';
-import { ProjectCard } from '@/components/ProjectCard';
-import { PageSpinner } from '@/components/ui';
+import { ProjectCard, ProjectGridSkeleton } from '@/components/ProjectCard';
 import { MusharakahCalculator } from '@/features/education/MusharakahCalculator';
 import { useProjectList } from '@/features/projects/hooks';
 import type { FundingModel } from '@/features/projects/api';
@@ -97,7 +96,7 @@ export function HomePage() {
             </div>
           </div>
           {featured.isPending ? (
-            <PageSpinner />
+            <ProjectGridSkeleton />
           ) : featured.data && featured.data.items.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featured.data.items.map((project, i) => (
@@ -137,7 +136,7 @@ export function HomePage() {
                     {PAYMENT_METHODS.map(m => (
                       <li
                         key={m}
-                        className="px-2 py-0.5 rounded-md border border-slate-200 text-[11px] font-semibold text-slate-700"
+                        className="px-2 py-0.5 rounded-md border border-slate-200 text-xs font-semibold text-slate-700"
                       >
                         {m}
                       </li>

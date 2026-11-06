@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { Bookmark, CheckCircle, ImageOff, Users } from 'lucide-react';
+import { responsiveImage } from '@/lib/supabase';
 import { paths } from '@/app/routes';
 import { daysLeft, pickText, type ProjectCardData } from '@/features/projects/api';
 import { useSavedProjects } from '@/features/projects/hooks';
@@ -22,9 +23,11 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
       <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
         {project.coverUrl ? (
           <img
-            src={project.coverUrl}
+            {...responsiveImage(project.coverUrl)}
+            sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
             alt={title}
             loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
         ) : (
@@ -39,12 +42,12 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
           aria-pressed={isSaved}
           aria-label={isSaved ? t('project.unsave') : t('project.save')}
           title={isSaved ? t('project.unsave') : t('project.save')}
-          className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-card/90 backdrop-blur-sm shadow-sm flex items-center justify-center text-slate-700 hover:text-rose-600 transition-colors cursor-pointer"
+          className="absolute top-3 right-3 z-20 w-10 h-10 rounded-full bg-card/90 backdrop-blur-sm shadow-sm flex items-center justify-center text-slate-700 hover:text-rose-600 transition-colors cursor-pointer"
         >
           <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`} />
         </button>
 
-        <span className="absolute bottom-3 left-3 text-[11px] font-semibold text-ink px-2.5 py-1 rounded-full bg-brand">
+        <span className="absolute bottom-3 left-3 text-xs font-semibold text-ink px-2.5 py-1 rounded-full bg-brand">
           {t(`models.${project.model}.name`)}
         </span>
       </div>
@@ -85,7 +88,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
                   ·
                 </span>
                 <span
-                  className="text-[11px] text-slate-500 font-mono-numbers underline decoration-dotted underline-offset-2 cursor-help"
+                  className="text-xs text-slate-500 font-mono-numbers underline decoration-dotted underline-offset-2 cursor-help"
                   title={t('project.scoreHint')}
                 >
                   {t('project.score')}: <strong className="font-semibold text-slate-700">{project.score}/100</strong>
@@ -114,7 +117,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
               <span className="font-bold text-ink font-mono-numbers text-sm">
                 {formatMoney(project.raisedAmount, true)}
               </span>
-              <span className="text-slate-500 text-[11px] ml-1">
+              <span className="text-slate-500 text-xs ml-1">
                 {t('project.ofGoal', { goal: formatMoney(project.targetAmount, true) })}
               </span>
             </div>
@@ -129,5 +132,33 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
         </div>
       </div>
     </article>
+  );
+}
+
+/** Grey outline of a card, shown while projects load (feels faster than a spinner). */
+export function ProjectCardSkeleton() {
+  return (
+    <div aria-hidden className="bg-card rounded-3xl border border-slate-200/70 overflow-hidden animate-pulse">
+      <div className="aspect-[16/10] bg-slate-100" />
+      <div className="p-5 space-y-3">
+        <div className="h-3 w-1/3 rounded bg-slate-100" />
+        <div className="h-5 w-4/5 rounded bg-slate-100" />
+        <div className="h-3 w-full rounded bg-slate-100" />
+        <div className="h-2 w-full rounded-full bg-slate-100 mt-6" />
+      </div>
+    </div>
+  );
+}
+
+/** A grid of skeleton cards. */
+export function ProjectGridSkeleton({ count = 3 }: { count?: number }) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="status" aria-label="…">
+      {Array.from({ length: count }, (_, i) => (
+        <div key={i} className={i >= 1 ? 'hidden md:block' : ''}>
+          <ProjectCardSkeleton />
+        </div>
+      ))}
+    </div>
   );
 }

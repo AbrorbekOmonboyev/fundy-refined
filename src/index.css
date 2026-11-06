@@ -28,6 +28,10 @@
   --color-page: #f4f6fb;
   --color-track: #e3e7f1; /* empty part of progress bars, image placeholders */
 
+  /* Smallest text is 13px (Tailwind's default 12px is hard to read on phones). */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: calc(1.15 / 0.8125);
+
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-display: 'Unbounded', 'Plus Jakarta Sans', system-ui, sans-serif;
 }

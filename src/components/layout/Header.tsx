@@ -88,7 +88,7 @@ export function Header() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 text-slate-600 hover:text-ink rounded-lg hover:bg-slate-100 transition-colors"
+              className="xl:hidden w-11 h-11 flex items-center justify-center text-slate-600 hover:text-ink rounded-lg hover:bg-slate-100 transition-colors"
               aria-label={t('header.toggleMenu')}
               aria-expanded={mobileMenuOpen}
             >

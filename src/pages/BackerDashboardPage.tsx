@@ -126,7 +126,7 @@ export function BackerDashboardPage() {
                           title
                         )}
                         {c.project && (
-                          <span className="block text-[11px] text-slate-500 mt-0.5">
+                          <span className="block text-xs text-slate-500 mt-0.5">
                             {t(`models.${c.project.model}.name`)}
                           </span>
                         )}
@@ -147,7 +147,7 @@ export function BackerDashboardPage() {
                       </td>
                       <td className="py-3 px-4 whitespace-nowrap text-slate-600">
                         {t(`contribute.methods.${c.payment_method}`)}
-                        <span className="block text-[11px] text-slate-400">{t('dashboard.backer.simulated')}</span>
+                        <span className="block text-xs text-slate-400">{t('dashboard.backer.simulated')}</span>
                       </td>
                       <td className="py-3 px-4 text-right font-mono-numbers font-semibold text-ink whitespace-nowrap">
                         {formatMoney(c.amount)}

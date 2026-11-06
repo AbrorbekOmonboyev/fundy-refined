@@ -302,7 +302,7 @@ export function ContributeDialog({
             <Button type="submit" fullWidth loading={busy} disabled={!acceptedRisk}>
               {t('contribute.submit', { amount: formatMoney(amount || 0) })}
             </Button>
-            <p className="text-[11px] text-slate-400 text-center">{t('contribute.demoNote')}</p>
+            <p className="text-xs text-slate-400 text-center">{t('contribute.demoNote')}</p>
           </form>
         )}
       </div>

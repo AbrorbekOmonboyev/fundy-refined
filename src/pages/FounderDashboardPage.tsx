@@ -119,7 +119,7 @@ function ProjectRow({ project: p }: { project: MyProject }) {
     <li className="bg-card rounded-xl border border-slate-200 p-5 space-y-3">
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
         <div className="min-w-0">
-          <span className={`text-[11px] font-semibold px-2 py-0.5 rounded ${STATUS_STYLE[p.status]}`}>
+          <span className={`text-xs font-semibold px-2 py-0.5 rounded ${STATUS_STYLE[p.status]}`}>
             {t(`status.${p.status}`)}
           </span>
           <p className="mt-1.5 font-semibold text-ink">

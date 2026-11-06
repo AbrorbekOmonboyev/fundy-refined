@@ -43,7 +43,7 @@ export function WizardShell({
             const label = (
               <span className="flex items-center gap-2">
                 <span
-                  className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 ${
+                  className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
                     current ? 'bg-night text-white' : done ? 'bg-brand text-ink' : 'bg-slate-200 text-slate-600'
                   }`}
                 >

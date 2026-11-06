@@ -20,7 +20,8 @@
     "db:seed:push": "supabase db push --include-seed",
     "db:types": "supabase gen types typescript --remote --schema public > src/lib/database.types.ts",
     "db:check": "node supabase/scripts/check-live.ts",
-    "email:generate": "node supabase/scripts/generate-email-templates.ts"
+    "email:generate": "node supabase/scripts/generate-email-templates.ts",
+    "images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
     "@sentry/react": "^11.11.0",
@@ -49,6 +50,7 @@
     "eslint-plugin-react-refresh": "^0.5.7",
     "globals": "^17.14.0",
     "prettier": "^3.9.10",
+    "sharp": "^0.34.4",
     "supabase": "^3.0.0",
     "tailwindcss": "^4.3.4",
     "typescript": "~6.0",

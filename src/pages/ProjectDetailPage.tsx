@@ -32,7 +32,7 @@ import { photoCredit } from '@/data/photoCredits';
 import { ChecksList, MoneyTrail } from '@/features/projects/MoneyTrail';
 import { RecentBackers } from '@/features/projects/RecentBackers';
 import { formatDate, formatMoney, formatNumber } from '@/lib/money';
-import { publicFileUrl } from '@/lib/supabase';
+import { publicFileUrl, responsiveImage } from '@/lib/supabase';
 import { usePageMeta } from '@/lib/usePageMeta';
 
 type Tab = 'story' | 'budget' | 'milestones' | 'evaluation' | 'risks' | 'updates' | 'comments';
@@ -155,10 +155,15 @@ function ProjectView({ project }: { project: ProjectDetail }) {
           {project.coverUrl && (
             <figure className="space-y-1.5">
               <div className="rounded-2xl overflow-hidden aspect-[16/10] bg-slate-100 border border-slate-200">
-                <img src={project.coverUrl} alt={title} className="w-full h-full object-cover" />
+                <img
+                  {...responsiveImage(project.coverUrl)}
+                  sizes="(min-width: 1024px) 700px, 100vw"
+                  alt={title}
+                  className="w-full h-full object-cover"
+                />
               </div>
               {credit && (
-                <figcaption className="text-[11px] text-slate-500 text-right">
+                <figcaption className="text-xs text-slate-500 text-right">
                   {t('project.photoBy')}{' '}
                   <a
                     href={credit.source}
@@ -192,7 +197,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                   </p>
                 )}
                 {project.founder?.registration_number && (
-                  <p className="text-[11px] text-slate-400 mt-0.5">{project.founder.registration_number}</p>
+                  <p className="text-xs text-slate-400 mt-0.5">{project.founder.registration_number}</p>
                 )}
               </div>
             </div>
@@ -263,14 +268,14 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                   <TrendingUp className="w-4 h-4 text-ink" aria-hidden />
                   {t(`project.contract.${project.equity.contract_type}`)}
                 </p>
-                <p className="text-slate-700 leading-relaxed text-[11px]">
+                <p className="text-slate-700 leading-relaxed text-xs">
                   {t('project.equitySummary', {
                     percent: project.equity.investor_profit_share_pct,
                     schedule: t(`project.schedule.${project.equity.distribution_schedule}`),
                     years: project.equity.exit_horizon_years,
                   })}
                 </p>
-                <div className="pt-1 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-600 border-t border-brand">
+                <div className="pt-1 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600 border-t border-brand">
                   <span>{t('project.minInvestment', { amount: formatMoney(project.equity.min_investment) })}</span>
                   {project.equity.projected_annual_return && (
                     <span>{t('project.projectedReturn', { value: project.equity.projected_annual_return })}</span>
@@ -335,7 +340,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                   <Sparkles className="w-4 h-4 text-ink" aria-hidden />
                   <span>
                     <span className="block font-bold text-ink">{t('project.evaluationScore')}</span>
-                    <span className="text-[11px] text-slate-500">
+                    <span className="text-xs text-slate-500">
                       {t(`project.confidence.${project.evaluation.confidence}`)}
                     </span>
                   </span>
@@ -346,7 +351,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
               </button>
             )}
 
-            <p className="text-[10px] text-slate-400 text-center leading-normal">{t('contribute.demoNote')}</p>
+            <p className="text-xs text-slate-400 text-center leading-normal">{t('contribute.demoNote')}</p>
           </div>
           <RecentBackers projectId={project.id} />
         </aside>
@@ -401,7 +406,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                         </div>
                         <p className="text-xs text-slate-600 leading-relaxed">{r.description}</p>
                         {r.items.length > 0 && (
-                          <ul className="text-[11px] text-slate-500 space-y-1 pt-1">
+                          <ul className="text-xs text-slate-500 space-y-1 pt-1">
                             {r.items.map(item => (
                               <li key={item} className="flex items-center gap-1.5">
                                 <span className="w-1.5 h-1.5 rounded-full bg-brand shrink-0" aria-hidden />
@@ -410,7 +415,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                             ))}
                           </ul>
                         )}
-                        <div className="pt-2 flex items-center justify-between text-[11px] text-slate-400 border-t border-slate-100">
+                        <div className="pt-2 flex items-center justify-between text-xs text-slate-400 border-t border-slate-100">
                           {r.estimated_delivery && <span>{t('project.delivery', { when: r.estimated_delivery })}</span>}
                           <span className="font-mono-numbers">
                             {r.quantity_limit !== null
@@ -521,7 +526,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                             <h3 className="font-bold text-ink text-sm flex flex-wrap items-center gap-2">
                               {m.title}
                               <span
-                                className={`text-[11px] px-1.5 py-0.5 rounded font-medium ${approved ? 'bg-brand text-ink' : 'bg-slate-100 text-slate-600'}`}
+                                className={`text-xs px-1.5 py-0.5 rounded font-medium ${approved ? 'bg-brand text-ink' : 'bg-slate-100 text-slate-600'}`}
                               >
                                 {t(`project.milestoneStatus.${m.status}`)}
                               </span>
@@ -856,23 +861,23 @@ function CommentItem({
           <strong className="text-ink truncate">{comment.author?.full_name}</strong>
           {comment.author?.city && <span className="hidden sm:inline">({comment.author.city})</span>}
           {comment.is_backer && (
-            <span className="text-[10px] bg-brand-soft text-ink font-semibold px-1.5 py-0.5 rounded">
+            <span className="text-xs bg-brand-soft text-ink font-semibold px-1.5 py-0.5 rounded">
               {t('project.backerBadge')}
             </span>
           )}
         </div>
-        <time className="text-[11px] text-slate-400 shrink-0">{formatDate(comment.created_at)}</time>
+        <time className="text-xs text-slate-400 shrink-0">{formatDate(comment.created_at)}</time>
       </div>
       <p className="text-slate-700 leading-relaxed whitespace-pre-line">{comment.body}</p>
       {user && user.id !== comment.author?.id && <ReportButton target="comment" targetId={comment.id} />}
 
       {comment.replies.map(r => (
         <div key={r.id} className="mt-2 pl-3 border-l-2 border-ink space-y-1 bg-slate-50/60 p-2 rounded-r-lg">
-          <div className="flex items-center justify-between text-[11px] text-slate-600">
+          <div className="flex items-center justify-between text-xs text-slate-600">
             <strong className="text-ink">{t('project.founderReply', { name: r.author?.full_name })}</strong>
             <time className="text-slate-400">{formatDate(r.created_at)}</time>
           </div>
-          <p className="text-slate-600 text-[11px] leading-relaxed whitespace-pre-line">{r.body}</p>
+          <p className="text-slate-600 text-xs leading-relaxed whitespace-pre-line">{r.body}</p>
         </div>
       ))}
 

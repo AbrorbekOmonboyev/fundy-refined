@@ -18,7 +18,7 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
       }}
       aria-label={label}
       title={label}
-      className={`relative w-9 h-9 shrink-0 rounded-full flex items-center justify-center text-slate-600 hover:text-ink hover:bg-slate-100 transition-colors cursor-pointer overflow-hidden ${className}`}
+      className={`relative w-11 h-11 shrink-0 rounded-full flex items-center justify-center text-slate-600 hover:text-ink hover:bg-slate-100 transition-colors cursor-pointer overflow-hidden ${className}`}
     >
       <Sun
         aria-hidden

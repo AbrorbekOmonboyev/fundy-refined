@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { ArrowUpDown, ChevronLeft, ChevronRight, Search, SlidersHorizontal, X } from 'lucide-react';
-import { ProjectCard } from '@/components/ProjectCard';
-import { Alert, PageSpinner } from '@/components/ui';
+import { ProjectCard, ProjectGridSkeleton } from '@/components/ProjectCard';
+import { Alert } from '@/components/ui';
 import { useProjectList } from '@/features/projects/hooks';
 import type { FundingModel, ProjectFilters, ProjectSort } from '@/features/projects/api';
 import { useCategories, useRegions } from '@/features/reference/useReference';
@@ -191,7 +191,7 @@ export function ExplorePage() {
               <SlidersHorizontal className="w-4 h-4" aria-hidden />
               {t('explore.filters')}
               {activeCount > 0 && (
-                <span className="min-w-5 h-5 px-1 rounded-full bg-brand text-ink text-[11px] font-bold flex items-center justify-center">
+                <span className="min-w-5 h-5 px-1 rounded-full bg-brand text-ink text-xs font-bold flex items-center justify-center">
                   {activeCount}
                 </span>
               )}
@@ -294,7 +294,7 @@ export function ExplorePage() {
       {isError ? (
         <Alert variant="error">{t('errors.generic')}</Alert>
       ) : isPending ? (
-        <PageSpinner />
+        <ProjectGridSkeleton count={6} />
       ) : total === 0 ? (
         <div className="bg-card rounded-2xl border border-slate-200 p-12 text-center max-w-md mx-auto space-y-4">
           <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
