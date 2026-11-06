@@ -15,7 +15,8 @@
  */
 import { createClient } from 'npm:@supabase/supabase-js@2.49.4';
 
-const BOT_TOKEN = Deno.env.get('TELEGRAM_BOT_TOKEN') ?? '';
+// The bot token from @BotFather (either name works).
+const BOT_TOKEN = Deno.env.get('TELEGRAM_BOT_TOKEN') ?? Deno.env.get('TELEGRAM_WEBHOOK_TOKEN') ?? '';
 const WEBHOOK_SECRET = Deno.env.get('TELEGRAM_WEBHOOK_SECRET') ?? '';
 const SITE = 'https://www.fundy.uz';
 const db = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!, {
