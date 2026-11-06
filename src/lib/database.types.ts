@@ -1158,6 +1158,10 @@ export type Database = {
       }
       mark_all_notifications_read: { Args: never; Returns: number }
       platform_stats: { Args: never; Returns: Json }
+      recent_backers: {
+        Args: { p_project_id: string; p_limit?: number }
+        Returns: { first_name: string; city: string | null; backed_at: string }[]
+      }
       search_project_ids: { Args: { p_query: string }; Returns: string[] }
       submit_milestone: {
         Args: { p_evidence: string; p_milestone_id: string }

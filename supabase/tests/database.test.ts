@@ -1256,3 +1256,24 @@ describe('file storage', () => {
     );
   });
 });
+
+describe('recent backers', () => {
+  test('show first name and city only, newest first, never anonymous backers', async () => {
+    const [{ id }] = await as<{ id: string }>(
+      db,
+      owner,
+      `select id from public.projects where slug = 'silkroad-samarkand-ikat-weavers'`,
+    );
+    const rows = await as<{ first_name: string; city: string | null; backed_at: string }>(
+      db,
+      anon,
+      `select * from public.recent_backers($1, 3)`,
+      [id],
+    );
+    assert.equal(rows.length, 3);
+    assert.ok(rows.every(r => !r.first_name.includes(' ')));
+    assert.ok(new Date(rows[0].backed_at) >= new Date(rows[1].backed_at));
+    const cols = Object.keys(rows[0]).sort();
+    assert.deepEqual(cols, ['backed_at', 'city', 'first_name']); // no amounts, no ids
+  });
+});

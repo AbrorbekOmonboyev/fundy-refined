@@ -589,7 +589,10 @@
       "budget_one": "Budget published in {{count}} line",
       "budget_other": "Budget published in {{count}} lines",
       "score": "Expert score: {{score}}/100 (5 criteria)"
-    }
+    },
+    "recentBackers": "Recent backers",
+    "backedFrom": "{{name}}, {{city}}",
+    "backed": "{{name}}"
   },
   "contribute": {
     "title": {
@@ -622,7 +625,12 @@
     "demoNote": "Demo: no real money is charged.",
     "successTitle": "Thank you!",
     "successText": "Your {{amount}} for “{{project}}” has been recorded.",
-    "successReward": "Reward: {{reward}}"
+    "successReward": "Reward: {{reward}}",
+    "completesGoal": "This amount takes the project to its goal! 🎉",
+    "bringsCloser": "This brings the project {{percent}}% closer to its goal.",
+    "shareTitle": "Help find one more backer",
+    "shareText": "Send it to friends — one share often brings a new backer.",
+    "shareMessage": "I backed \"{{project}}\". Join me:"
   },
   "dashboard": {
     "backer": {
@@ -959,5 +967,18 @@
     "fees": "During the demo Fundy charges nothing. When real payments start, the fee will be published on this page in advance.",
     "cta": "Start the application",
     "ctaHint": "You'll log in or sign up first — it takes a minute."
+  },
+  "time": {
+    "now": "just now",
+    "minutes_one": "{{count}} minute ago",
+    "minutes_other": "{{count}} minutes ago",
+    "hours_one": "{{count}} hour ago",
+    "hours_other": "{{count}} hours ago",
+    "days_one": "{{count}} day ago",
+    "days_other": "{{count}} days ago",
+    "months_one": "{{count}} month ago",
+    "months_other": "{{count}} months ago",
+    "years_one": "{{count}} year ago",
+    "years_other": "{{count}} years ago"
   }
 }

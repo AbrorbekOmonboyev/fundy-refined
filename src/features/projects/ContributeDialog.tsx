@@ -17,7 +17,7 @@ function presets(project: ProjectDetail): number[] {
     const min = project.equity.min_investment;
     return [min, min * 2, min * 5, min * 10];
   }
-  return [100_000, 250_000, 500_000, 1_000_000].filter(a => a >= project.minContribution);
+  return [50_000, 100_000, 250_000, 500_000, 1_000_000].filter(a => a >= project.minContribution).slice(0, 4);
 }
 
 /**
@@ -48,10 +48,20 @@ export function ContributeDialog({
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const shareUrl = `${window.location.origin}/projects/${project.slug}`;
 
   const minimum = Math.max(project.minContribution, project.equity?.min_investment ?? 0);
   const tier = project.rewards.find(r => r.id === rewardId) ?? null;
   const share = project.equity ? (amount / project.targetAmount) * project.equity.investor_profit_share_pct : 0;
+  // What this amount does for the project, in plain words.
+  const remaining = Math.max(0, project.targetAmount - project.raisedAmount);
+  const impact =
+    !amount || amount < minimum
+      ? null
+      : remaining > 0 && amount >= remaining
+        ? t('contribute.completesGoal')
+        : t('contribute.bringsCloser', { percent: formatNumber((amount / project.targetAmount) * 100, 2) });
 
   // Close on Escape; focus the dialog when it opens.
   useEffect(() => {
@@ -129,8 +139,34 @@ export function ContributeDialog({
               {t('contribute.successText', { amount: formatMoney(amount), project: title })}
             </p>
             {tier && <p className="text-xs text-slate-500">{t('contribute.successReward', { reward: tier.title })}</p>}
-            <Alert variant="info">{t('contribute.demoNote')}</Alert>
-            <Button onClick={onClose} fullWidth>
+
+            {/* Every backer can bring the next one */}
+            <div className="rounded-2xl bg-brand-soft border border-brand p-4 space-y-3 text-left">
+              <p className="text-sm font-semibold text-ink">{t('contribute.shareTitle')}</p>
+              <p className="text-sm text-slate-700">{t('contribute.shareText')}</p>
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href={`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(t('contribute.shareMessage', { project: title }))}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-3 rounded-xl bg-[#229ED9] text-white text-sm font-semibold text-center hover:opacity-90"
+                >
+                  Telegram
+                </a>
+                <button
+                  type="button"
+                  onClick={() => {
+                    void navigator.clipboard?.writeText(shareUrl).then(() => setCopied(true));
+                  }}
+                  className="py-3 rounded-xl border border-slate-300 bg-card text-sm font-semibold text-ink cursor-pointer"
+                >
+                  {copied ? t('project.copied') : t('project.copyLink')}
+                </button>
+              </div>
+            </div>
+
+            <p className="text-xs text-slate-500">{t('contribute.demoNote')}</p>
+            <Button onClick={onClose} fullWidth variant="secondary">
               {t('common.close')}
             </Button>
           </div>
@@ -180,7 +216,7 @@ export function ContributeDialog({
                     type="button"
                     onClick={() => setAmount(p)}
                     aria-pressed={amount === p}
-                    className={`py-2 rounded-lg border text-xs font-semibold font-mono-numbers ${
+                    className={`py-3 rounded-xl border text-sm font-semibold font-mono-numbers ${
                       amount === p
                         ? 'border-ink bg-brand-soft text-ink'
                         : 'border-slate-200 text-slate-700 hover:bg-slate-50'
@@ -203,6 +239,7 @@ export function ContributeDialog({
                 />
               </label>
               <p className="text-xs text-slate-500">{t('contribute.minimum', { min: formatMoney(minimum) })}</p>
+              {impact && <p className="text-sm font-medium text-ink">{impact}</p>}
             </fieldset>
 
             {project.equity && (

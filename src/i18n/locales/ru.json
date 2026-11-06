@@ -605,7 +605,10 @@
       "budget_many": "Бюджет опубликован: {{count}} статей",
       "budget_other": "Бюджет опубликован: {{count}} статьи",
       "score": "Оценка экспертов: {{score}}/100 (5 критериев)"
-    }
+    },
+    "recentBackers": "Недавние сторонники",
+    "backedFrom": "{{name}}, {{city}}",
+    "backed": "{{name}}"
   },
   "contribute": {
     "title": {
@@ -638,7 +641,12 @@
     "demoNote": "Демо: настоящие деньги не списываются.",
     "successTitle": "Спасибо!",
     "successText": "Ваши {{amount}} для «{{project}}» записаны.",
-    "successReward": "Вознаграждение: {{reward}}"
+    "successReward": "Вознаграждение: {{reward}}",
+    "completesGoal": "Эта сумма доведёт проект до цели! 🎉",
+    "bringsCloser": "Эта сумма приблизит проект к цели ещё на {{percent}}%.",
+    "shareTitle": "Помогите найти ещё одного сторонника",
+    "shareText": "Отправьте друзьям — один репост часто приводит нового сторонника.",
+    "shareMessage": "Я поддержал(а) проект «{{project}}». Присоединяйтесь:"
   },
   "dashboard": {
     "backer": {
@@ -977,5 +985,28 @@
     "fees": "В демо-режиме Fundy не берёт никаких платежей. Когда заработают реальные платежи, комиссия будет заранее опубликована на этой странице.",
     "cta": "Начать заявку",
     "ctaHint": "Сначала войдите или зарегистрируйтесь — это минута."
+  },
+  "time": {
+    "now": "только что",
+    "minutes_one": "{{count}} минуту назад",
+    "minutes_few": "{{count}} минуты назад",
+    "minutes_many": "{{count}} минут назад",
+    "minutes_other": "{{count}} минуты назад",
+    "hours_one": "{{count}} час назад",
+    "hours_few": "{{count}} часа назад",
+    "hours_many": "{{count}} часов назад",
+    "hours_other": "{{count}} часа назад",
+    "days_one": "{{count}} день назад",
+    "days_few": "{{count}} дня назад",
+    "days_many": "{{count}} дней назад",
+    "days_other": "{{count}} дня назад",
+    "months_one": "{{count}} месяц назад",
+    "months_few": "{{count}} месяца назад",
+    "months_many": "{{count}} месяцев назад",
+    "months_other": "{{count}} месяца назад",
+    "years_one": "{{count}} год назад",
+    "years_few": "{{count}} года назад",
+    "years_many": "{{count}} лет назад",
+    "years_other": "{{count}} года назад"
   }
 }

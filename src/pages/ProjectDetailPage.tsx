@@ -30,6 +30,7 @@ import { Alert, Button, PageSpinner } from '@/components/ui';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { photoCredit } from '@/data/photoCredits';
 import { ChecksList, MoneyTrail } from '@/features/projects/MoneyTrail';
+import { RecentBackers } from '@/features/projects/RecentBackers';
 import { formatDate, formatMoney, formatNumber } from '@/lib/money';
 import { publicFileUrl } from '@/lib/supabase';
 import { usePageMeta } from '@/lib/usePageMeta';
@@ -347,6 +348,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
 
             <p className="text-[10px] text-slate-400 text-center leading-normal">{t('contribute.demoNote')}</p>
           </div>
+          <RecentBackers projectId={project.id} />
         </aside>
       </div>
 

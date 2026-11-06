@@ -589,7 +589,10 @@
       "budget_one": "Byudjet {{count}} ta bandga bo'lib e'lon qilingan",
       "budget_other": "Byudjet {{count}} ta bandga bo'lib e'lon qilingan",
       "score": "Ekspert bahosi: {{score}}/100 (5 mezon)"
-    }
+    },
+    "recentBackers": "So'nggi homiylar",
+    "backedFrom": "{{name}}, {{city}}",
+    "backed": "{{name}}"
   },
   "contribute": {
     "title": {
@@ -622,7 +625,12 @@
     "demoNote": "Demo: haqiqiy pul yechilmaydi.",
     "successTitle": "Rahmat!",
     "successText": "“{{project}}” uchun {{amount}} qayd etildi.",
-    "successReward": "Mukofot: {{reward}}"
+    "successReward": "Mukofot: {{reward}}",
+    "completesGoal": "Bu summa loyihani maqsadga yetkazadi! 🎉",
+    "bringsCloser": "Bu summa loyihani maqsadga yana {{percent}}% yaqinlashtiradi.",
+    "shareTitle": "Yana bitta homiy topishga yordam bering",
+    "shareText": "Do'stlaringizga yuboring — bitta ulashish ko'pincha yangi homiy olib keladi.",
+    "shareMessage": "Men «{{project}}» loyihasini qo'llab-quvvatladim. Siz ham qo'shiling:"
   },
   "dashboard": {
     "backer": {
@@ -959,5 +967,18 @@
     "fees": "Demo davrida Fundy hech qanday to'lov olmaydi. Haqiqiy to'lovlar ishga tushganda komissiya shu sahifada oldindan e'lon qilinadi.",
     "cta": "Arizani boshlash",
     "ctaHint": "Avval kirasiz yoki ro'yxatdan o'tasiz — bir daqiqa."
+  },
+  "time": {
+    "now": "hozirgina",
+    "minutes_one": "{{count}} daqiqa oldin",
+    "minutes_other": "{{count}} daqiqa oldin",
+    "hours_one": "{{count}} soat oldin",
+    "hours_other": "{{count}} soat oldin",
+    "days_one": "{{count}} kun oldin",
+    "days_other": "{{count}} kun oldin",
+    "months_one": "{{count}} oy oldin",
+    "months_other": "{{count}} oy oldin",
+    "years_one": "{{count}} yil oldin",
+    "years_other": "{{count}} yil oldin"
   }
 }
