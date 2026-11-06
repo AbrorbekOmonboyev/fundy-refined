@@ -572,7 +572,24 @@
     "related": "Similar projects",
     "viewAll": "View all",
     "scoreHint": "Fundy's score: business plan, team, market, finances and risk — 20 points each",
-    "photoBy": "Photo:"
+    "photoBy": "Photo:",
+    "money": {
+      "title": "Where is the money?",
+      "stages_one": "{{count}} stage",
+      "stages_other": "{{count}} stages",
+      "released": "Paid to the founder",
+      "review": "Proof being checked",
+      "held": "Waiting for its stage",
+      "raisingNote": "Still raising: until the goal is reached, nobody gets the money. If it isn't reached, backers are refunded. If it is, each part is paid once its stage is done."
+    },
+    "checks": {
+      "title": "What Fundy checked",
+      "identity": "Founder's identity confirmed",
+      "registration": "Registered: {{number}}",
+      "budget_one": "Budget published in {{count}} line",
+      "budget_other": "Budget published in {{count}} lines",
+      "score": "Expert score: {{score}}/100 (5 criteria)"
+    }
   },
   "contribute": {
     "title": {

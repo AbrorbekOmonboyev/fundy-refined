@@ -572,7 +572,24 @@
     "related": "O'xshash loyihalar",
     "viewAll": "Hammasini ko'rish",
     "scoreHint": "Fundy bahosi: biznes-reja, jamoa, bozor, moliya va xatar — har biri 20 balldan",
-    "photoBy": "Surat:"
+    "photoBy": "Surat:",
+    "money": {
+      "title": "Pul qayerda?",
+      "stages_one": "{{count}} ta bosqich",
+      "stages_other": "{{count}} ta bosqich",
+      "released": "Asoschiga berildi",
+      "review": "Dalil tekshirilmoqda",
+      "held": "Bosqichni kutmoqda",
+      "raisingNote": "Mablag' yig'ilmoqda: maqsadga yetguncha pul hech kimga berilmaydi. Yetmasa — homiylarga qaytariladi. Yetsa — har bir bosqich bajarilgach o'z ulushi beriladi."
+    },
+    "checks": {
+      "title": "Fundy nimani tekshirdi",
+      "identity": "Asoschining shaxsi tasdiqlangan",
+      "registration": "Ro'yxatdan o'tgan: {{number}}",
+      "budget_one": "Byudjet {{count}} ta bandga bo'lib e'lon qilingan",
+      "budget_other": "Byudjet {{count}} ta bandga bo'lib e'lon qilingan",
+      "score": "Ekspert bahosi: {{score}}/100 (5 mezon)"
+    }
   },
   "contribute": {
     "title": {

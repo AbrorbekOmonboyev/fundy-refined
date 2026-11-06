@@ -29,6 +29,7 @@ import { Avatar } from '@/components/Avatar';
 import { Alert, Button, PageSpinner } from '@/components/ui';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { photoCredit } from '@/data/photoCredits';
+import { ChecksList, MoneyTrail } from '@/features/projects/MoneyTrail';
 import { formatDate, formatMoney, formatNumber } from '@/lib/money';
 import { publicFileUrl } from '@/lib/supabase';
 import { usePageMeta } from '@/lib/usePageMeta';
@@ -171,6 +172,8 @@ function ProjectView({ project }: { project: ProjectDetail }) {
             </figure>
           )}
 
+          <MoneyTrail project={project} />
+
           {/* Founder */}
           <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3 min-w-0">
@@ -206,6 +209,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
               <ReportButton target="user" targetId={project.ownerId} label={t('community.reportFounder')} />
             </div>
           )}
+          <ChecksList project={project} />
         </div>
 
         {/* Right: funding box */}

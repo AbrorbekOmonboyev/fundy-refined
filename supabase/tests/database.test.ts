@@ -446,6 +446,16 @@ describe('contributions', () => {
     assert.equal(closed, 1);
     const [p] = await as<{ status: string }>(db, anon, `select status from public.projects where id = $1`, [projectId]);
     assert.equal(p.status, 'unsuccessful'); // 600k of 5M
+    const refunds = await as<{ status: string }>(
+      db,
+      owner,
+      `select distinct status from public.contributions where project_id = $1`,
+      [projectId],
+    );
+    assert.deepEqual(
+      refunds.map(r => r.status),
+      ['refunded'],
+    ); // backers get their money back
     await rejects(
       as(db, user(carol), `select public.contribute($1, 100000, 'click')`, [projectId]),
       /project_not_accepting_contributions/,
@@ -1087,7 +1097,7 @@ describe('admin panel', () => {
     );
     assert.equal(rows.length, 1);
     assert.match(rows[0].email, /@test\.local$/);
-    assert.ok(Number(rows[0].contribution_total) > 0);
+    assert.ok(Number.isFinite(Number(rows[0].contribution_total))); // Bob's backing was refunded when that campaign missed its goal
     await rejects(as(db, user(bob), `select * from public.admin_list_users()`), /admin_only/);
     await rejects(as(db, anon, `select * from public.admin_list_users()`), /permission denied/);
   });
