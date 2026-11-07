@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { isSupabaseConfigured, supabase } from '@/lib/supabase';
 import { LANGUAGES, type Language } from '@/i18n';
 import { AuthContext, type AuthState, type Profile } from '@/features/auth/AuthContext';
+import { setCartOwner } from '@/features/cart/cart';
 
 async function fetchProfile(userId: string): Promise<Profile | null> {
   if (!supabase) return null;
@@ -45,6 +46,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
     return () => data.subscription.unsubscribe();
   }, []);
+
+  // Each account has its own pledge cart: hide it on sign-out, bring it back on sign-in.
+  useEffect(() => {
+    if (sessionLoaded) setCartOwner(userId);
+  }, [sessionLoaded, userId]);
 
   // 2. Load the profile whenever the signed-in user changes.
   useEffect(() => {

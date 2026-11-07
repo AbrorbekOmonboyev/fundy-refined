@@ -2,7 +2,8 @@
  * The pledge cart (docs/PLAN-rewards-and-pledges.md, Phase B).
  *
  * Kept in this browser per project, so it works before logging in and survives a
- * reload. Only reward ids and quantities are stored — prices always come from the
+ * reload. Each account has its own carts: logging out hides them, logging back in
+ * brings them back, and a guest cart is moved into the account on login. Only reward ids and quantities are stored — prices always come from the
  * project data, and the database checks everything again when paying.
  */
 import { useSyncExternalStore } from 'react';
@@ -14,7 +15,11 @@ export type Cart = { lines: CartLine[]; extra: number; slug?: string; updatedAt?
 
 export const MAX_QTY = 99;
 const EMPTY: Cart = { lines: [], extra: 0 };
-const key = (projectId: string) => `fundy-cart:${projectId}`;
+/** Whose carts are shown: null = guest (not logged in), otherwise the user's id. */
+let owner: string | null = null;
+const GUEST_PREFIX = 'fundy-cart:';
+const prefixFor = (who: string | null) => (who ? `fundy-ucart:${who}:` : GUEST_PREFIX);
+const key = (projectId: string) => prefixFor(owner) + projectId;
 const listeners = new Set<() => void>();
 const cache = new Map<string, { raw: string | null; cart: Cart }>();
 
@@ -54,6 +59,61 @@ function write(projectId: string, cart: Cart) {
   } catch {
     /* private mode: the cart just won't be remembered */
   }
+  listeners.forEach(l => l());
+}
+
+/** All project ids that have a cart saved under this prefix. */
+function projectIdsWith(prefix: string): string[] {
+  const ids: string[] = [];
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k?.startsWith(prefix)) ids.push(k.slice(prefix.length));
+    }
+  } catch {
+    /* storage blocked */
+  }
+  return ids;
+}
+
+/**
+ * Switch carts when someone logs in or out (called by AuthProvider).
+ * On login, anything put in the cart as a guest is added to that account's cart,
+ * so "add to cart, then log in to pay" keeps working.
+ */
+export function setCartOwner(userId: string | null) {
+  if (userId === owner) return;
+  if (userId) {
+    for (const projectId of projectIdsWith(GUEST_PREFIX)) {
+      owner = null;
+      const guest = read(projectId);
+      owner = userId;
+      const mine = read(projectId);
+      const lines = [...mine.lines];
+      for (const g of guest.lines) {
+        const found = lines.findIndex(l => l.rewardId === g.rewardId);
+        if (found >= 0)
+          lines[found] = { ...lines[found], quantity: Math.min(MAX_QTY, lines[found].quantity + g.quantity) };
+        else lines.push(g);
+      }
+      try {
+        localStorage.setItem(
+          key(projectId),
+          JSON.stringify({
+            lines,
+            extra: guest.extra || mine.extra,
+            slug: guest.slug ?? mine.slug,
+            updatedAt: Math.max(guest.updatedAt ?? 0, mine.updatedAt ?? 0),
+          }),
+        );
+        localStorage.removeItem(GUEST_PREFIX + projectId);
+      } catch {
+        /* storage blocked */
+      }
+    }
+  }
+  owner = userId;
+  cache.clear();
   listeners.forEach(l => l());
 }
 
@@ -167,18 +227,7 @@ const NO_CARTS: CartsSummary = { count: 0, latest: null, all: [] };
 let summaryCache: { sig: string; value: CartsSummary } = { sig: '', value: NO_CARTS };
 
 function readSummary(): CartsSummary {
-  const carts: { projectId: string; cart: Cart }[] = [];
-  try {
-    for (let i = 0; i < localStorage.length; i++) {
-      const k = localStorage.key(i);
-      if (k?.startsWith('fundy-cart:')) {
-        const projectId = k.slice('fundy-cart:'.length);
-        carts.push({ projectId, cart: read(projectId) });
-      }
-    }
-  } catch {
-    return NO_CARTS;
-  }
+  const carts = projectIdsWith(prefixFor(owner)).map(projectId => ({ projectId, cart: read(projectId) }));
   const count = carts.reduce(
     (s, c) =>
       s + c.cart.lines.reduce((n, l) => n + l.quantity, 0) + (c.cart.extra > 0 && c.cart.lines.length === 0 ? 1 : 0),
@@ -198,7 +247,7 @@ export function useCartsSummary(): CartsSummary {
   return useSyncExternalStore(
     l => {
       listeners.add(l);
-      const onStorage = (e: StorageEvent) => e.key?.startsWith('fundy-cart:') && l();
+      const onStorage = (e: StorageEvent) => e.key?.startsWith(prefixFor(owner)) && l();
       window.addEventListener('storage', onStorage);
       return () => {
         listeners.delete(l);
