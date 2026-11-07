@@ -127,14 +127,14 @@ export function CartDrawer({
                   href={`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(t('contribute.shareMessage', { project: title }))}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="py-3 rounded-full bg-[#229ED9] text-white text-sm font-semibold text-center hover:opacity-90"
+                  className="py-3 rounded-md bg-[#229ED9] text-white text-sm font-semibold text-center hover:opacity-90"
                 >
                   Telegram
                 </a>
                 <button
                   type="button"
                   onClick={() => void navigator.clipboard?.writeText(shareUrl).then(() => setCopied(true))}
-                  className="py-3 rounded-full border border-slate-300 bg-card text-sm font-semibold text-ink cursor-pointer"
+                  className="py-3 rounded-md border border-slate-300 bg-card text-sm font-semibold text-ink cursor-pointer"
                 >
                   {copied ? t('project.copied') : t('project.copyLink')}
                 </button>
@@ -224,7 +224,7 @@ export function CartDrawer({
                       type="button"
                       aria-pressed={cart.extra === p}
                       onClick={() => actions.setExtra(p)}
-                      className={`py-2 rounded-full border text-xs font-semibold font-mono-numbers cursor-pointer ${
+                      className={`py-2 rounded-md border text-xs font-semibold font-mono-numbers cursor-pointer ${
                         cart.extra === p ? 'border-ink bg-brand-soft text-ink' : 'border-slate-200 text-slate-700'
                       }`}
                     >
@@ -265,7 +265,7 @@ export function CartDrawer({
                         type="button"
                         aria-pressed={method === m}
                         onClick={() => setMethod(m)}
-                        className={`px-3 py-2 rounded-full border text-xs font-semibold cursor-pointer ${
+                        className={`px-3 py-2 rounded-md border text-xs font-semibold cursor-pointer ${
                           method === m ? 'border-ink bg-brand-soft text-ink' : 'border-slate-200 text-slate-700'
                         }`}
                       >
@@ -311,7 +311,7 @@ export function CartDrawer({
               ) : (
                 <Link
                   to={`${paths.login}?next=${encodeURIComponent(`${location.pathname}?cart=open`)}`}
-                  className="block w-full py-3.5 rounded-full bg-night text-white text-center font-semibold hover:bg-night-soft"
+                  className="block w-full py-3.5 rounded-md bg-night text-white text-center font-semibold hover:bg-night-soft"
                 >
                   {t('cart.loginToPay')}
                 </Link>

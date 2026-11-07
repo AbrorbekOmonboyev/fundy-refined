@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { Bookmark, CheckCircle, ImageOff, Users } from 'lucide-react';
+import { Bookmark, CheckCircle, ImageOff } from 'lucide-react';
 import { responsiveImage } from '@/lib/supabase';
 import { paths } from '@/app/routes';
 import { daysLeft, pickText, type ProjectCardData } from '@/features/projects/api';
@@ -19,8 +19,9 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
   const days = daysLeft(project.endsAt);
 
   return (
-    <article className="group relative bg-card rounded-2xl border border-slate-200/70 overflow-hidden flex flex-col hover:border-slate-300 hover:shadow-md transition-all duration-200">
-      <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+    // Plain card in the style of the big platforms: the photo and the numbers do the work.
+    <article className="group relative flex flex-col">
+      <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-slate-100">
         {project.coverUrl ? (
           <img
             {...responsiveImage(project.coverUrl)}
@@ -28,7 +29,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
             alt={title}
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-slate-300">
@@ -42,47 +43,45 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
           aria-pressed={isSaved}
           aria-label={isSaved ? t('project.unsave') : t('project.save')}
           title={isSaved ? t('project.unsave') : t('project.save')}
-          className="absolute top-3 right-3 z-20 w-10 h-10 rounded-full bg-card/90 backdrop-blur-sm shadow-sm flex items-center justify-center text-slate-700 hover:text-rose-600 transition-colors cursor-pointer"
+          className="absolute top-2 right-2 z-20 w-10 h-10 rounded-md bg-card flex items-center justify-center text-slate-700 hover:text-ink cursor-pointer"
         >
-          <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`} />
+          <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-ink text-ink' : ''}`} />
         </button>
-
-        <span className="absolute bottom-3 left-3 text-xs font-semibold text-ink px-2.5 py-1 rounded-full bg-brand">
-          {t(`models.${project.model}.name`)}
-        </span>
       </div>
 
-      <div className="p-5 flex-1 flex flex-col justify-between">
+      <div className="pt-4 flex-1 flex flex-col justify-between">
         <div>
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-slate-500 mb-2">
-            <span>{nameOf(project.categoryId)}</span>
+          <p className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-xs text-slate-500 mb-1.5">
+            <span className="font-semibold text-ink">{t(`models.${project.model}.name`)}</span>
+            {nameOf(project.categoryId) && (
+              <>
+                <span aria-hidden>·</span>
+                <span>{nameOf(project.categoryId)}</span>
+              </>
+            )}
             {project.location && (
               <>
                 <span aria-hidden>·</span>
                 <span>{project.location.split(',')[0]}</span>
               </>
             )}
-            <span aria-hidden>·</span>
-            <span className="font-mono-numbers">
-              {project.status === 'active' ? t('project.daysLeft', { count: days }) : t(`status.${project.status}`)}
-            </span>
-          </div>
+          </p>
 
-          <h3
-            lang={text?.language}
-            className="text-base font-bold text-ink group-hover:text-ink transition-colors line-clamp-2 leading-snug"
-          >
+          <h3 lang={text?.language} className="text-[1.0625rem] font-bold text-ink line-clamp-2 leading-snug">
             {/* The whole card is clickable through this link's stretched area. */}
-            <Link to={href} className="after:absolute after:inset-0 after:z-10">
+            <Link
+              to={href}
+              className="after:absolute after:inset-0 after:z-10 group-hover:underline underline-offset-4 decoration-2 decoration-brand-deep"
+            >
               {title}
             </Link>
           </h3>
 
-          <p lang={text?.language} className="mt-2 text-xs text-slate-600 line-clamp-2 leading-relaxed">
+          <p lang={text?.language} className="mt-1.5 text-sm text-slate-600 line-clamp-2 leading-relaxed">
             {text?.tagline}
           </p>
 
-          <div className="mt-3 flex flex-wrap items-center gap-1.5 text-xs text-slate-600">
+          <p className="mt-2 flex flex-wrap items-center gap-1.5 text-xs text-slate-600">
             <span>{t('project.by', { name: project.founderName })}</span>
             {project.founderVerified && (
               <CheckCircle className="w-3.5 h-3.5 text-ink" aria-label={t('project.verifiedFounder')} />
@@ -92,20 +91,17 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
                 <span aria-hidden className="text-slate-300">
                   ·
                 </span>
-                <span
-                  className="text-xs text-slate-500 font-mono-numbers underline decoration-dotted underline-offset-2 cursor-help"
-                  title={t('project.scoreHint')}
-                >
-                  {t('project.score')}: <strong className="font-semibold text-slate-700">{project.score}/100</strong>
+                <span className="font-mono-numbers" title={t('project.scoreHint')}>
+                  {t('project.score')} {project.score}/100
                 </span>
               </>
             )}
-          </div>
+          </p>
         </div>
 
-        <div className="mt-5 pt-4 border-t border-slate-100">
+        <div className="mt-4">
           <div
-            className="w-full bg-track rounded-full h-2 overflow-hidden mb-2.5"
+            className="w-full bg-track rounded-full h-1.5 overflow-hidden"
             role="progressbar"
             aria-valuenow={project.fundedPercent}
             aria-valuemin={0}
@@ -113,27 +109,27 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
             aria-label={t('project.funded', { percent: project.fundedPercent })}
           >
             <div
-              className="h-full rounded-full bg-brand"
+              className="h-full rounded-full bg-brand-deep"
               style={{ width: `${Math.min(project.fundedPercent, 100)}%` }}
             />
           </div>
-          <div className="flex items-baseline justify-between text-xs">
-            <div>
-              <span className="font-bold text-ink font-mono-numbers text-sm">
-                {formatMoney(project.raisedAmount, true)}
-              </span>
-              <span className="text-slate-500 text-xs ml-1">
-                {t('project.ofGoal', { goal: formatMoney(project.targetAmount, true) })}
-              </span>
-            </div>
-            <span className="font-bold text-ink font-mono-numbers">{project.fundedPercent}%</span>
-          </div>
-          <div className="mt-2 flex items-center gap-1 text-xs text-slate-500 font-mono-numbers">
-            <Users className="w-3.5 h-3.5 text-slate-400" aria-hidden />
-            <span>
-              {t('project.backers', { count: project.backerCount, formatted: formatNumber(project.backerCount) })}
+          <p className="mt-2.5 font-mono-numbers">
+            <span className="text-base font-bold text-ink">{formatMoney(project.raisedAmount, true)}</span>
+            <span className="text-sm text-slate-500 ml-1.5">
+              {t('project.ofGoal', { goal: formatMoney(project.targetAmount, true) })}
             </span>
-          </div>
+          </p>
+          <p className="mt-0.5 text-sm text-slate-600 font-mono-numbers">
+            <strong className="font-semibold text-ink">{project.fundedPercent}%</strong>
+            <span aria-hidden className="mx-1.5 text-slate-300">
+              ·
+            </span>
+            {project.status === 'active' ? t('project.daysLeft', { count: days }) : t(`status.${project.status}`)}
+            <span aria-hidden className="mx-1.5 text-slate-300">
+              ·
+            </span>
+            {t('project.backers', { count: project.backerCount, formatted: formatNumber(project.backerCount) })}
+          </p>
         </div>
       </div>
     </article>
@@ -143,9 +139,9 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
 /** Grey outline of a card, shown while projects load (feels faster than a spinner). */
 export function ProjectCardSkeleton() {
   return (
-    <div aria-hidden className="bg-card rounded-2xl border border-slate-200/70 overflow-hidden animate-pulse">
-      <div className="aspect-[16/10] bg-slate-100" />
-      <div className="p-5 space-y-3">
+    <div aria-hidden className="animate-pulse">
+      <div className="aspect-[16/10] rounded-2xl bg-slate-100" />
+      <div className="pt-4 space-y-3">
         <div className="h-3 w-1/3 rounded bg-slate-100" />
         <div className="h-5 w-4/5 rounded bg-slate-100" />
         <div className="h-3 w-full rounded bg-slate-100" />
@@ -158,7 +154,7 @@ export function ProjectCardSkeleton() {
 /** A grid of skeleton cards. */
 export function ProjectGridSkeleton({ count = 3 }: { count?: number }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="status" aria-label="…">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10" role="status" aria-label="…">
       {Array.from({ length: count }, (_, i) => (
         <div key={i} className={i >= 1 ? 'hidden md:block' : ''}>
           <ProjectCardSkeleton />

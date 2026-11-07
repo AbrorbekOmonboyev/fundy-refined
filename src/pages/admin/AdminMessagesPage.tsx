@@ -50,7 +50,7 @@ export function AdminMessagesPage() {
             type="button"
             aria-pressed={filter === f}
             onClick={() => setFilter(f)}
-            className={`rounded-full px-3 py-1.5 text-xs font-semibold ${filter === f ? 'bg-night text-white' : 'bg-card text-slate-600 border border-slate-200 hover:border-ink'}`}
+            className={`rounded-md px-3 py-1.5 text-xs font-semibold ${filter === f ? 'bg-night text-white' : 'bg-card text-slate-600 border border-slate-200 hover:border-ink'}`}
           >
             {t(`admin.messages.filter.${f}`)}
           </button>
@@ -95,7 +95,7 @@ export function AdminMessagesPage() {
               <div className="flex flex-wrap gap-2">
                 <a
                   href={`mailto:${m.email}?subject=${encodeURIComponent('Fundy')}`}
-                  className="rounded-full bg-night px-3 py-1.5 text-xs font-semibold text-white hover:bg-night-soft"
+                  className="rounded-md bg-night px-3 py-1.5 text-xs font-semibold text-white hover:bg-night-soft"
                 >
                   {t('admin.messages.reply')}
                 </a>

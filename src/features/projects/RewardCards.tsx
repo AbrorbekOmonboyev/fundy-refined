@@ -100,13 +100,13 @@ export function RewardsSection({
       {/* Compare bar */}
       {compare.length > 0 && (
         <div className="sticky bottom-24 lg:bottom-4 z-20 flex justify-center pointer-events-none">
-          <div className="pointer-events-auto flex items-center gap-3 rounded-full bg-night text-white pl-5 pr-2 py-2 shadow-lg">
+          <div className="pointer-events-auto flex items-center gap-3 rounded-md bg-night text-white pl-5 pr-2 py-2 shadow-lg">
             <span className="text-sm">{t('rewards.selected', { count: compare.length })}</span>
             <button
               type="button"
               onClick={() => setComparing(true)}
               disabled={compare.length < 2}
-              className="rounded-full bg-brand text-night px-4 py-2 text-sm font-semibold disabled:opacity-50 cursor-pointer"
+              className="rounded-md bg-brand text-night px-4 py-2 text-sm font-semibold disabled:opacity-50 cursor-pointer"
             >
               {t('rewards.compare')}
             </button>
@@ -284,7 +284,7 @@ function RewardCard({
               type="button"
               disabled={status !== 'available'}
               onClick={onChoose}
-              className="flex-1 min-w-32 py-2.5 rounded-full bg-night text-white text-sm font-semibold hover:bg-night-soft disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              className="flex-1 min-w-32 py-2.5 rounded-md bg-night text-white text-sm font-semibold hover:bg-night-soft disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {status === 'available'
                 ? inCart > 0
@@ -296,7 +296,7 @@ function RewardCard({
           <button
             type="button"
             onClick={onDetails}
-            className="py-2.5 px-4 rounded-full border border-slate-300 text-sm font-semibold text-ink hover:bg-slate-50 cursor-pointer inline-flex items-center gap-1.5"
+            className="py-2.5 px-4 rounded-md border border-slate-300 text-sm font-semibold text-ink hover:bg-slate-50 cursor-pointer inline-flex items-center gap-1.5"
           >
             <Info className="w-4 h-4" aria-hidden />
             {t('rewards.details')}
@@ -474,7 +474,7 @@ function RewardDetails({
               type="button"
               disabled={status !== 'available'}
               onClick={onChoose}
-              className="w-full py-3 rounded-full bg-night text-white font-semibold hover:bg-night-soft disabled:opacity-50 cursor-pointer"
+              className="w-full py-3 rounded-md bg-night text-white font-semibold hover:bg-night-soft disabled:opacity-50 cursor-pointer"
             >
               {status === 'available' ? t('rewards.addToCart') : t(`rewards.${status}`)}
             </button>

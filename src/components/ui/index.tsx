@@ -46,7 +46,7 @@ export function Button({
       type={type}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
-      className={`inline-flex items-center justify-center gap-2 rounded-full text-sm font-semibold transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${
+      className={`inline-flex items-center justify-center gap-2 rounded-md text-sm font-semibold transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${
         variant === 'link' ? '' : 'px-4 py-2.5'
       } ${BUTTON_STYLES[variant]} ${fullWidth ? 'w-full' : ''} ${className}`}
       {...rest}

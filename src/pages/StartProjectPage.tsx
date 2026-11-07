@@ -62,7 +62,7 @@ export function StartLandingPage() {
       <div className="flex flex-col sm:flex-row sm:items-center gap-3">
         <Link
           to={paths.newProject}
-          className="px-6 py-3.5 text-sm font-semibold text-white bg-night hover:bg-night-soft rounded-full inline-flex items-center justify-center gap-2"
+          className="px-6 py-3.5 text-sm font-semibold text-white bg-night hover:bg-night-soft rounded-md inline-flex items-center justify-center gap-2"
         >
           {t('start.cta')}
           <ArrowRight className="w-4 h-4" aria-hidden />

@@ -165,7 +165,7 @@ function ReportItem({ report: r }: { report: AdminReport }) {
           {r.project && (
             <Link
               to={paths.adminProjects}
-              className="px-3 py-2 text-xs font-semibold text-slate-700 border border-slate-300 rounded-full hover:bg-slate-50"
+              className="px-3 py-2 text-xs font-semibold text-slate-700 border border-slate-300 rounded-md hover:bg-slate-50"
             >
               {t('admin.reports.manageProject')}
             </Link>

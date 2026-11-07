@@ -47,7 +47,7 @@ export function BackerDashboardPage() {
         </div>
         <Link
           to={paths.explore}
-          className="px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-full self-start sm:self-auto"
+          className="px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-md self-start sm:self-auto"
         >
           {t('home.hero.explore')}
         </Link>
@@ -183,7 +183,7 @@ export function BackerDashboardPage() {
         ) : saved.items.length === 0 ? (
           <Empty text={t('dashboard.backer.emptySaved')} />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
             {saved.items.map(p => (
               <ProjectCard key={p.id} project={p} />
             ))}
@@ -200,7 +200,7 @@ function Empty({ text }: { text: string }) {
       <p className="text-sm text-slate-600">{text}</p>
       <Link
         to={paths.explore}
-        className="inline-block px-4 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand rounded-full"
+        className="inline-block px-4 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand rounded-md"
       >
         {t('home.hero.explore')}
       </Link>

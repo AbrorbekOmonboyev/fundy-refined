@@ -42,14 +42,14 @@ export function HomePage() {
             <div className="pt-2 grid grid-cols-1 sm:flex gap-3">
               <Link
                 to={paths.explore}
-                className="px-6 py-3.5 text-sm font-semibold text-white bg-night hover:bg-night-soft rounded-full inline-flex items-center justify-center gap-2"
+                className="px-6 py-3.5 text-sm font-semibold text-white bg-night hover:bg-night-soft rounded-md inline-flex items-center justify-center gap-2"
               >
                 {t('home.hero.explore')}
                 <ArrowRight className="w-4 h-4" aria-hidden />
               </Link>
               <Link
                 to={paths.startProject}
-                className="px-6 py-3 text-sm font-semibold text-ink border-2 border-ink hover:bg-ink/5 rounded-full inline-flex items-center justify-center"
+                className="px-6 py-3 text-sm font-semibold text-ink border-2 border-ink hover:bg-ink/5 rounded-md inline-flex items-center justify-center"
               >
                 {t('home.hero.start')}
               </Link>
@@ -59,14 +59,8 @@ export function HomePage() {
           {/* A real project instead of a stock photo */}
           {heroProject && (
             <div className="hidden lg:block lg:col-span-5">
-              <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold text-ink">
-                <span className="relative flex w-2 h-2">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-night opacity-60 animate-ping" />
-                  <span className="relative inline-flex w-2 h-2 rounded-full bg-night" />
-                </span>
-                {t('home.hero.cardKicker')}
-              </p>
-              <div className="rotate-[1.5deg] shadow-[12px_12px_0_0_var(--color-brand-deep)] rounded-2xl">
+              <p className="mb-3 text-xs font-semibold text-ink">{t('home.hero.cardKicker')}</p>
+              <div className="bg-card rounded-2xl p-4">
                 <ProjectCard project={heroProject} />
               </div>
             </div>
@@ -98,7 +92,7 @@ export function HomePage() {
           {featured.isPending ? (
             <ProjectGridSkeleton />
           ) : featured.data && featured.data.items.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
               {featured.data.items.map((project, i) => (
                 // Phones show three; the rest are one tap away in "All projects".
                 <div key={project.id} className={i >= 3 ? 'hidden md:block' : ''}>
@@ -179,7 +173,7 @@ export function HomePage() {
             </div>
             <Link
               to={paths.startProject}
-              className="relative shrink-0 px-6 py-3.5 text-sm font-semibold text-ink bg-brand hover:bg-brand-deep rounded-full inline-flex items-center justify-center gap-2"
+              className="relative shrink-0 px-6 py-3.5 text-sm font-semibold text-ink bg-brand hover:bg-brand-deep rounded-md inline-flex items-center justify-center gap-2"
             >
               {t('home.cta.start')}
               <ArrowRight className="w-4 h-4" aria-hidden />

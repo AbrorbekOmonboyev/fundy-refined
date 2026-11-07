@@ -73,13 +73,13 @@ export function AuthCallbackPage() {
       <div className="grid gap-2 sm:grid-cols-2">
         <Link
           to={paths.login}
-          className="rounded-full bg-night px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-night-soft"
+          className="rounded-md bg-night px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-night-soft"
         >
           {t('auth.login.submit')}
         </Link>
         <Link
           to={paths.forgotPassword}
-          className="rounded-full border border-slate-300 px-4 py-2.5 text-center text-sm font-semibold text-ink hover:bg-page"
+          className="rounded-md border border-slate-300 px-4 py-2.5 text-center text-sm font-semibold text-ink hover:bg-page"
         >
           {t('auth.login.forgot')}
         </Link>

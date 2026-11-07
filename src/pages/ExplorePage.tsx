@@ -186,7 +186,7 @@ export function ExplorePage() {
               type="button"
               onClick={() => setSheetOpen(true)}
               aria-haspopup="dialog"
-              className="lg:hidden shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-full border border-slate-200 bg-card text-sm font-semibold text-ink cursor-pointer"
+              className="lg:hidden shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-md border border-slate-200 bg-card text-sm font-semibold text-ink cursor-pointer"
             >
               <SlidersHorizontal className="w-4 h-4" aria-hidden />
               {t('explore.filters')}
@@ -271,14 +271,14 @@ export function ExplorePage() {
                 type="button"
                 onClick={clearAll}
                 disabled={!hasFilters}
-                className="py-3 rounded-full border border-slate-300 text-sm font-semibold text-slate-700 disabled:opacity-40"
+                className="py-3 rounded-md border border-slate-300 text-sm font-semibold text-slate-700 disabled:opacity-40"
               >
                 {t('explore.clearFilters')}
               </button>
               <button
                 type="button"
                 onClick={() => setSheetOpen(false)}
-                className="py-3 rounded-full bg-night text-white text-sm font-semibold"
+                className="py-3 rounded-md bg-night text-white text-sm font-semibold"
               >
                 {t('explore.showResults', { formatted: formatNumber(total) })}
               </button>
@@ -308,7 +308,7 @@ export function ExplorePage() {
             <button
               type="button"
               onClick={clearAll}
-              className="px-4 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand rounded-full"
+              className="px-4 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand rounded-md"
             >
               {t('explore.clearFilters')}
             </button>
@@ -316,7 +316,7 @@ export function ExplorePage() {
         </div>
       ) : (
         <div
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity ${isPlaceholderData ? 'opacity-60' : ''}`}
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 transition-opacity ${isPlaceholderData ? 'opacity-60' : ''}`}
         >
           {data.items.map(project => (
             <ProjectCard key={project.id} project={project} />

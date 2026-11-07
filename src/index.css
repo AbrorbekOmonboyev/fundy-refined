@@ -28,9 +28,26 @@
   --color-page: #f4f6fb;
   --color-track: #e3e7f1; /* empty part of progress bars, image placeholders */
 
-  /* Smallest text is 13px (Tailwind's default 12px is hard to read on phones). */
-  --text-xs: 0.8125rem;
-  --text-xs--line-height: calc(1.15 / 0.8125);
+  /* Smallest text is 13.5px (Tailwind's default 12px is hard to read on phones);
+     small body text is 15px. */
+  --text-xs: 0.84375rem;
+  --text-xs--line-height: calc(1.2 / 0.84375);
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: calc(1.4 / 0.9375);
+
+  /* Design refresh (docs/PLAN-design-refresh.md): small, firm corners like the big
+     crowdfunding sites instead of soft bubbly boxes. Pills (rounded-full) are kept only
+     for avatars, counters, tags and progress bars. */
+  --radius-md: 0.375rem; /* buttons, inputs */
+  --radius-lg: 0.375rem;
+  --radius-xl: 0.5rem; /* panels */
+  --radius-2xl: 0.5rem; /* cards, images */
+  --radius-3xl: 0.75rem;
+
+  /* No soft shadows on cards and buttons: thin lines separate things.
+     Bigger shadows stay for things that float (menus, dialogs, drawers). */
+  --shadow-sm: 0 0 #0000;
+  --shadow-md: 0 0 #0000;
 
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-display: 'Onest', 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -47,8 +64,8 @@
   h1,
   h2 {
     font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: -0.025em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     overflow-wrap: break-word; /* long Uzbek words never overflow on phones */
     hyphens: auto;
   }
@@ -137,12 +154,6 @@
   --color-slate-900: oklch(20.8% 0.042 265.755);
 }
 
-/* A faint chartreuse glow on the horizon at the top of every page. */
-.dark body {
-  background-image: radial-gradient(1100px 420px at 50% -160px, rgb(181 242 61 / 0.07), transparent 70%);
-  background-repeat: no-repeat;
-}
-
 /* Primary buttons light up in chartreuse (a dark button on a dark page would vanish). */
 .dark :is(button, a).bg-night:not(.bg-brand *) {
   background-color: var(--color-brand);
@@ -157,11 +168,6 @@
 .dark :not(button, a):is(.bg-night, .bg-night-soft) {
   outline: 1px solid rgb(255 255 255 / 0.07);
   outline-offset: -1px;
-}
-
-/* Progress bars glow. */
-.dark .rounded-full.bg-brand.h-full {
-  box-shadow: 0 0 12px rgb(181 242 61 / 0.45);
 }
 
 /* Photos are dimmed slightly so they don't glare at night. */

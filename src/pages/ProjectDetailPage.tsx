@@ -361,7 +361,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                 <button
                   type="button"
                   onClick={copyLink}
-                  className="py-2 px-3 rounded-full border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="py-2 px-3 rounded-md border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Link2 className="w-3.5 h-3.5" aria-hidden />
                   {copied ? t('project.copied') : t('project.copyLink')}
@@ -461,7 +461,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                   <button
                     type="button"
                     onClick={() => setTab('rewards')}
-                    className="w-full py-2.5 rounded-full border border-slate-300 text-sm font-semibold text-ink hover:bg-slate-50 cursor-pointer"
+                    className="w-full py-2.5 rounded-md border border-slate-300 text-sm font-semibold text-ink hover:bg-slate-50 cursor-pointer"
                   >
                     {t('rewards.seeAll')}
                   </button>
@@ -631,7 +631,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
       {isLive && !isOwner && (
         <>
           <div className="h-20 lg:hidden" aria-hidden />
-          <div className="lg:hidden fixed inset-x-0 bottom-0 z-30 bg-card/95 backdrop-blur-md border-t border-slate-200 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+          <div className="lg:hidden fixed inset-x-0 bottom-0 z-30 bg-card border-t border-slate-200 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
             <div className="flex items-center gap-3">
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-bold text-ink font-mono-numbers truncate">
@@ -672,7 +672,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
           <button
             type="button"
             onClick={() => setCartOpen(true)}
-            className="shrink-0 rounded-full bg-brand text-night px-4 py-2 text-sm font-semibold cursor-pointer"
+            className="shrink-0 rounded-md bg-brand text-night px-4 py-2 text-sm font-semibold cursor-pointer"
           >
             {t('cart.view')}
           </button>
@@ -684,7 +684,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
         <button
           type="button"
           onClick={() => setCartOpen(true)}
-          className="hidden lg:inline-flex fixed z-30 right-6 bottom-6 items-center gap-2 rounded-full bg-night text-white pl-4 pr-5 py-3 shadow-xl hover:bg-night-soft cursor-pointer"
+          className="hidden lg:inline-flex fixed z-30 right-6 bottom-6 items-center gap-2 rounded-md bg-night text-white pl-4 pr-5 py-3 shadow-xl hover:bg-night-soft cursor-pointer"
         >
           <ShoppingBag className="w-5 h-5 text-brand" aria-hidden />
           <span className="text-sm font-semibold font-mono-numbers">{cartLabel}</span>
