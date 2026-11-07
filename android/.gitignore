@@ -1,0 +1,18 @@
+# Generated Android project and build output (rebuilt from twa-manifest.json by Bubblewrap)
+app/
+gradle/
+build/
+.gradle/
+*.apk
+*.aab
+*.idsig
+gradle.properties
+gradlew
+gradlew.bat
+build.gradle
+settings.gradle
+manifest-checksum.txt
+store_icon.png
+# Never commit signing keys
+*.keystore
+*.jks

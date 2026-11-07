@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "uz.fundy.app",
+      "sha256_cert_fingerprints": [
+        "1F:9E:35:AC:A2:8C:8E:3A:C4:CD:C5:A7:94:F5:19:D7:25:08:1D:1F:B8:C0:D9:4F:0D:86:FB:B1:E8:9E:4A:A5"
+      ]
+    }
+  }
+]

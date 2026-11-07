@@ -1,0 +1,51 @@
+{
+  "packageId": "uz.fundy.app",
+  "host": "www.fundy.uz",
+  "name": "Fundy",
+  "launcherName": "Fundy",
+  "display": "standalone",
+  "themeColor": "#B5F23D",
+  "themeColorDark": "#15122B",
+  "navigationColor": "#15122B",
+  "navigationColorDark": "#15122B",
+  "navigationDividerColor": "#15122B",
+  "navigationDividerColorDark": "#15122B",
+  "backgroundColor": "#B5F23D",
+  "enableNotifications": false,
+  "startUrl": "/",
+  "iconUrl": "https://www.fundy.uz/icon-512.png",
+  "maskableIconUrl": "https://www.fundy.uz/icon-maskable-512.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "C:\\Users\\Recruiter\\fundy-android-keys\\fundy-release.keystore",
+    "alias": "fundy"
+  },
+  "appVersionName": "1.0.0",
+  "appVersionCode": 1,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://www.fundy.uz/site.webmanifest",
+  "fallbackType": "customtabs",
+  "features": {},
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://www.fundy.uz/",
+  "minSdkVersion": 21,
+  "orientation": "portrait",
+  "fingerprints": [
+    {
+      "name": "fundy-release",
+      "value": "1F:9E:35:AC:A2:8C:8E:3A:C4:CD:C5:A7:94:F5:19:D7:25:08:1D:1F:B8:C0:D9:4F:0D:86:FB:B1:E8:9E:4A:A5"
+    }
+  ],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "protocolHandlers": [],
+  "fileHandlers": [],
+  "launchHandlerClientMode": "",
+  "displayOverride": []
+}
