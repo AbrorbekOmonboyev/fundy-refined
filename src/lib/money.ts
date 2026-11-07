@@ -13,6 +13,20 @@ const lang = () => (i18n.resolvedLanguage ?? 'uz') as keyof typeof LOCALES;
 const locale = () => LOCALES[lang()] ?? 'uz-UZ';
 
 const NBSP = String.fromCharCode(160); // keeps "213 000 000" on one line
+const UZ_MONTHS = [
+  'yanvar',
+  'fevral',
+  'mart',
+  'aprel',
+  'may',
+  'iyun',
+  'iyul',
+  'avgust',
+  'sentabr',
+  'oktabr',
+  'noyabr',
+  'dekabr',
+];
 
 /** Formats with at most `decimals` decimal places (trailing zeros dropped). */
 function format(value: number, decimals: number): string {
@@ -48,5 +62,7 @@ export function formatDate(iso: string | null | undefined): string {
   // A plain date ("2026-11-05") means that calendar day everywhere — don't let time zones shift it.
   const plain = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
   const date = plain ? new Date(Number(plain[1]), Number(plain[2]) - 1, Number(plain[3])) : new Date(iso);
+  // Browsers often lack Uzbek month names ("2026 M11 12"), so Uzbek is written by hand.
+  if (lang() === 'uz') return `${date.getFullYear()}-yil ${date.getDate()}-${UZ_MONTHS[date.getMonth()]}`;
   return new Intl.DateTimeFormat(locale(), { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
 }

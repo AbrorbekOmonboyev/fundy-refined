@@ -50,3 +50,11 @@ describe('Uzbek and Russian number style', () => {
     await i18n.changeLanguage('en');
   });
 });
+
+describe('Uzbek dates', () => {
+  it('writes months by hand (browsers often lack them)', async () => {
+    await i18n.changeLanguage('uz');
+    expect(formatDate('2026-11-12')).toBe('2026-yil 12-noyabr');
+    await i18n.changeLanguage('en');
+  });
+});
