@@ -1332,6 +1332,7 @@ export type Database = {
         | "milestone_submitted"
         | "milestone_returned"
         | "content_reported"
+        | "user_signed_up"
       payment_method: "click" | "payme" | "uzcard" | "humo" | "bank_wire"
       project_status:
         | "draft"
@@ -1505,6 +1506,7 @@ export const Constants = {
         "milestone_submitted",
         "milestone_returned",
         "content_reported",
+        "user_signed_up",
       ],
       payment_method: ["click", "payme", "uzcard", "humo", "bank_wire"],
       project_status: [

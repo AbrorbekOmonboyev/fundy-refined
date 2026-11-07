@@ -951,7 +951,8 @@
     "contact_message": "Aloqa sahifasidan yangi xabar",
     "milestone_submitted": "{{project}} bosqich bajarilganini xabar qildi",
     "milestone_returned": "{{project}} bosqichi uchun qoʻshimcha dalil kerak",
-    "content_reported": "Kimdir kontent ustidan shikoyat qildi"
+    "content_reported": "Kimdir kontent ustidan shikoyat qildi",
+    "user_signed_up": "Yangi foydalanuvchi: {{name}} ({{email}})"
   },
   "content": {
     "updated": "Oxirgi yangilanish: {{date}}",

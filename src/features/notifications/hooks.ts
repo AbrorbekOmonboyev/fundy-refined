@@ -116,6 +116,13 @@ export function useNotificationView() {
         to: paths.founderDashboard,
       },
       content_reported: { text: t('notifications.content_reported'), to: paths.adminReports },
+      user_signed_up: {
+        text: t('notifications.user_signed_up', {
+          name: String(n.data?.name ?? '') || '—',
+          email: String(n.data?.email ?? ''),
+        }),
+        to: paths.adminUsers,
+      },
     };
 
     const seconds = Math.round((new Date(n.created_at).getTime() - Date.now()) / 1000);

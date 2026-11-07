@@ -12,7 +12,15 @@ export type NotificationType = Database['public']['Enums']['notification_type'];
 export type AppNotification = {
   id: string;
   type: NotificationType;
-  data: { project_id?: string; amount?: number; status?: string; comment_id?: string; update_id?: string };
+  data: {
+    project_id?: string;
+    amount?: number;
+    status?: string;
+    comment_id?: string;
+    update_id?: string;
+    name?: string;
+    email?: string;
+  };
   read_at: string | null;
   created_at: string;
   project: {

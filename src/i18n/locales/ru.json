@@ -969,7 +969,8 @@
     "contact_message": "Новое сообщение со страницы контактов",
     "milestone_submitted": "{{project}} сообщил о выполнении этапа",
     "milestone_returned": "Для этапа проекта {{project}} нужны доп. доказательства",
-    "content_reported": "Кто-то пожаловался на контент"
+    "content_reported": "Кто-то пожаловался на контент",
+    "user_signed_up": "Новый пользователь: {{name}} ({{email}})"
   },
   "content": {
     "updated": "Обновлено: {{date}}",

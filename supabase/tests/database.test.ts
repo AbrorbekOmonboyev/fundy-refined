@@ -1521,3 +1521,41 @@ describe('pledge cart (phase B)', () => {
     assert.equal(n, 0);
   });
 });
+
+describe('owner alerts and /getreports', () => {
+  test('admins get a "new user" notification with name and email', async () => {
+    const newbie = await createUser(db, 'Nora Newcomer');
+    const rows = await as<{ data: { email: string; name: string } }>(
+      db,
+      user(admin),
+      `select data from public.notifications where type = 'user_signed_up' and data->>'user_id' = $1`,
+      [newbie],
+    );
+    assert.equal(rows.length, 1);
+    assert.equal(rows[0].data.name, 'Nora Newcomer');
+    assert.match(rows[0].data.email, /@test\.local$/);
+    // members don't get it
+    const forBob = await as(db, user(bob), `select 1 from public.notifications where type = 'user_signed_up' and user_id = $1`, [bob]);
+    assert.equal(forBob.length, 0);
+  });
+
+  test('/getreports answers only a chat linked to an admin', async () => {
+    const link = async (who: string, chat: number) => {
+      const [{ code }] = await as<{ code: string }>(db, user(who), `select public.telegram_link_token() as code`);
+      await as(db, owner, `select public.telegram_link_chat($1, $2)`, [code, chat]);
+    };
+    await link(admin, 9001);
+    await link(bob, 9002);
+    const report = await as<{ email: string; contributed: string; contributions: number }>(
+      db,
+      owner,
+      `select * from public.telegram_admin_report(9001)`,
+    );
+    assert.ok(report.length > 5);
+    assert.ok(report.every(r => r.email.includes('@')));
+    assert.ok(report.some(r => Number(r.contributed) > 0 && r.contributions > 0));
+    await rejects(as(db, owner, `select * from public.telegram_admin_report(9002)`), /admin_only/); // Bob isn't an admin
+    await rejects(as(db, owner, `select * from public.telegram_admin_report(12345)`), /admin_only/); // unknown chat
+    await rejects(as(db, user(admin), `select * from public.telegram_admin_report(9001)`), /permission denied/); // not from the website
+  });
+});

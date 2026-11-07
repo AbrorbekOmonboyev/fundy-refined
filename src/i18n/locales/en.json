@@ -951,7 +951,8 @@
     "contact_message": "New message from the contact page",
     "milestone_submitted": "{{project}} reported a milestone as done",
     "milestone_returned": "Our team needs more evidence for a milestone of {{project}}",
-    "content_reported": "Someone reported content"
+    "content_reported": "Someone reported content",
+    "user_signed_up": "New user signed up: {{name}} ({{email}})"
   },
   "content": {
     "updated": "Last updated: {{date}}",

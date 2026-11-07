@@ -13,6 +13,7 @@ import {
   MessageSquare,
   Rocket,
   Trophy,
+  UserPlus,
 } from 'lucide-react';
 import { useNotifications, useNotificationView } from '@/features/notifications/hooks';
 import type { AppNotification } from '@/features/notifications/api';
@@ -32,6 +33,7 @@ const ICONS: Record<AppNotification['type'], typeof Bell> = {
   milestone_submitted: Flag,
   milestone_returned: CircleAlert,
   content_reported: Flag,
+  user_signed_up: UserPlus,
   contact_message: Mail,
 };
 
