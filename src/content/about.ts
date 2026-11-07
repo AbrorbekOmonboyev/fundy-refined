@@ -5,14 +5,14 @@ export const about: Localized<Article> = {
     kicker: 'Biz haqimizda',
     title: 'Nega biz Fundyʼni qurmoqdamiz',
     intro:
-      'Fundy — Oʻzbekiston uchun foizsiz kraudfanding platformasi. Biz gʻoyasi bor odamlarni ularni qoʻllab-quvvatlashga tayyor hamjamiyat bilan bogʻlaymiz — qarzsiz va foizsiz.',
+      'Fundy — Oʻzbekiston uchun foizsiz kraudfanding platformasi. Biz gʻoyasi bor odamlarni ularni qoʻllab-quvvatlashga tayyor hamjamiyat bilan bogʻlaymiz. Qarzsiz va foizsiz.',
     sections: [
       {
         id: 'why',
         heading: 'Nima uchun Fundy',
         paragraphs: [
           'Koʻplab tadbirkorlar, hunarmandlar va ijtimoiy tashabbuskorlar uchun bank krediti yoʻq yoki juda qimmat. Boshqalar esa foizli qarzni oʻz eʼtiqodiga zid deb biladi. Natijada yaxshi gʻoyalar amalga oshmay qoladi.',
-          'Shu bilan birga, odamlar oʻz shahri, viloyati va mamlakatidagi loyihalarni qoʻllab-quvvatlashni xohlaydi — faqat pul qayerga ketishini aniq bilishi kerak.',
+          'Shu bilan birga, odamlar oʻz shahri, viloyati va mamlakatidagi loyihalarni qoʻllab-quvvatlashni xohlaydi. Faqat pul qayerga ketishini aniq bilishi kerak.',
         ],
       },
       {
@@ -29,14 +29,14 @@ export const about: Localized<Article> = {
         id: 'for-uzbekistan',
         heading: 'Oʻzbekiston uchun yaratilgan',
         paragraphs: [
-          'Fundy oʻzbek, rus va ingliz tillarida ishlaydi, barcha summalar soʻmda. Loyihalar 14 ta hudud boʻyicha — Qoraqalpogʻistondan Fargʻona vodiysigacha.',
+          'Fundy oʻzbek, rus va ingliz tillarida ishlaydi, barcha summalar soʻmda. Loyihalar 14 ta hudud boʻyicha: Qoraqalpogʻistondan Fargʻona vodiysigacha.',
         ],
       },
       {
         id: 'status',
         heading: 'Hozirgi holat',
         paragraphs: [
-          'Fundy hozir demo versiyada. Barcha toʻlovlar simulyatsiya — haqiqiy pul yechilmaydi. Haqiqiy toʻlovlar faqat zarur huquqiy ruxsatlar, hamkor banklar va shariat boʻyicha maslahat kengashi tayyor boʻlgandan keyin ishga tushiriladi.',
+          'Fundy hozir demo versiyada. Barcha toʻlovlar simulyatsiya, haqiqiy pul yechilmaydi. Haqiqiy toʻlovlar faqat zarur huquqiy ruxsatlar, hamkor banklar va shariat boʻyicha maslahat kengashi tayyor boʻlgandan keyin ishga tushiriladi.',
           'Platforma qanday ishlashini koʻrsatish va fikr-mulohaza toʻplash uchun ochiq. Fikringiz boʻlsa, aloqa sahifasi orqali yozing.',
         ],
       },
@@ -46,14 +46,14 @@ export const about: Localized<Article> = {
     kicker: 'О нас',
     title: 'Почему мы делаем Fundy',
     intro:
-      'Fundy — беспроцентная краудфандинговая платформа для Узбекистана. Мы соединяем людей с идеями и сообщество, готовое их поддержать, — без долгов и без процентов.',
+      'Fundy — беспроцентная краудфандинговая платформа для Узбекистана. Мы соединяем людей с идеями и сообщество, готовое их поддержать. Без долгов и без процентов.',
     sections: [
       {
         id: 'why',
         heading: 'Зачем нужен Fundy',
         paragraphs: [
           'Многим предпринимателям, ремесленникам и социальным активистам банковский кредит недоступен или слишком дорог. Другие считают процентный долг несовместимым со своими убеждениями. В итоге хорошие идеи так и остаются идеями.',
-          'При этом люди хотят поддерживать проекты в своём городе, регионе и стране — им просто нужно точно знать, куда идут деньги.',
+          'При этом люди хотят поддерживать проекты в своём городе, регионе и стране. Им просто нужно точно знать, куда идут деньги.',
         ],
       },
       {
@@ -63,7 +63,7 @@ export const about: Localized<Article> = {
           'Три модели: пожертвования, проекты с вознаграждением и мушарака (раздел прибыли и риска).',
           'Бюджет каждого проекта публикуется до последнего сума.',
           'Проекты проверяются до публикации и получают оценку по 100-балльной шкале.',
-          'Деньги выдаются по этапам — за выполненную работу.',
+          'Деньги выдаются по этапам, за выполненную работу.',
         ],
       },
       {
@@ -77,7 +77,7 @@ export const about: Localized<Article> = {
         id: 'status',
         heading: 'Текущий статус',
         paragraphs: [
-          'Сейчас Fundy работает в демо-режиме. Все платежи — симуляция, настоящие деньги не списываются. Реальные платежи появятся только после получения необходимых разрешений, подключения банков-партнёров и шариатского совета.',
+          'Сейчас Fundy работает в демо-режиме. Все платежи симулируются, настоящие деньги не списываются. Реальные платежи появятся только после получения необходимых разрешений, подключения банков-партнёров и шариатского совета.',
           'Платформа открыта, чтобы показать, как всё работает, и собрать отзывы. Пишите нам через страницу контактов.',
         ],
       },
@@ -87,14 +87,14 @@ export const about: Localized<Article> = {
     kicker: 'About us',
     title: "Why we're building Fundy",
     intro:
-      'Fundy is an interest-free crowdfunding platform for Uzbekistan. We connect people with ideas to a community ready to back them — without debt and without interest.',
+      'Fundy is an interest-free crowdfunding platform for Uzbekistan. We connect people with ideas to a community ready to back them, without debt and without interest.',
     sections: [
       {
         id: 'why',
         heading: 'Why Fundy',
         paragraphs: [
           'For many entrepreneurs, artisans and community builders, a bank loan is out of reach or too expensive. Others see interest-based debt as incompatible with their beliefs. So good ideas stay ideas.',
-          'At the same time, people want to support projects in their own city, region and country — they just need to know exactly where the money goes.',
+          'At the same time, people want to support projects in their own city, region and country. They just need to know exactly where the money goes.',
         ],
       },
       {
@@ -111,14 +111,14 @@ export const about: Localized<Article> = {
         id: 'for-uzbekistan',
         heading: 'Built for Uzbekistan',
         paragraphs: [
-          "Fundy works in Uzbek, Russian and English, and every amount is in so'm. Projects come from all 14 regions — from Karakalpakstan to the Fergana Valley.",
+          "Fundy works in Uzbek, Russian and English, and every amount is in so'm. Projects come from all 14 regions, from Karakalpakstan to the Fergana Valley.",
         ],
       },
       {
         id: 'status',
         heading: 'Where we are now',
         paragraphs: [
-          'Fundy is currently a demo. All payments are simulated — no real money is charged. Real payments will only start once the required licences, partner banks and a Shariah advisory board are in place.',
+          'Fundy is currently a demo. All payments are simulated. No real money is charged. Real payments will only start once the required licences, partner banks and a Shariah advisory board are in place.',
           'The platform is open so people can see how it works and share feedback. Write to us through the contact page.',
         ],
       },

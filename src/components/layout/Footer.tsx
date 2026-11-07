@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { Heart, ShieldCheck } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 import { paths } from '@/app/routes';
 import { Logo } from '@/components/Logo';
 
@@ -72,11 +72,6 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <p>{t('footer.copyright', { year: new Date().getFullYear() })}</p>
-          <div className="flex items-center gap-1">
-            <span>{t('footer.madeWith')}</span>
-            <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 inline" aria-hidden />
-            <span>{t('footer.forEntrepreneurs')}</span>
-          </div>
         </div>
       </div>
     </footer>

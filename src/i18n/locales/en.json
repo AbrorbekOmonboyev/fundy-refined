@@ -29,23 +29,21 @@
     "short": "Payments are simulated."
   },
   "footer": {
-    "about": "Uzbekistan's transparent, interest-free crowdfunding ecosystem. Connecting entrepreneurs, artisans, and social champions with community backers through Donations, Rewards, and Musharakah profit-sharing.",
-    "simulated": "Simulated Prototype · Built for Uzbekistan",
+    "about": "Interest-free crowdfunding for Uzbekistan. Entrepreneurs, craftspeople and community projects raise money through donations, rewards or Musharakah.",
+    "simulated": "Demo version · Built for Uzbekistan",
     "models": "Models",
     "platform": "Platform",
-    "donation": "Donation-Based",
-    "reward": "Reward-Based Perks",
+    "donation": "Donations",
+    "reward": "Rewards",
     "musharakah": "Musharakah (Equity)",
     "calculator": "Profit-Sharing Calculator",
-    "discover": "Discover Projects",
-    "startCampaign": "Start a Campaign",
+    "discover": "Browse projects",
+    "startCampaign": "Start a project",
     "founderDashboard": "Founder Dashboard",
     "backerDashboard": "Backer Dashboard",
     "verification": "Trust & Safety",
     "terms": "Terms of Use",
-    "copyright": "© {{year}} Fundy Platform (Demonstration Prototype). All rights reserved.",
-    "madeWith": "Crafted with",
-    "forEntrepreneurs": "for entrepreneurs across Uzbekistan.",
+    "copyright": "© {{year}} Fundy (demo version). All rights reserved.",
     "company": "Fundy",
     "aboutLink": "About us",
     "learn": "How it works",
@@ -85,14 +83,14 @@
     "generic": "Something went wrong. Please try again.",
     "network": "Could not connect. Check your internet connection and try again.",
     "invalidCredentials": "Wrong email or password.",
-    "emailNotConfirmed": "Please confirm your email first — check your inbox for our message.",
+    "emailNotConfirmed": "Please confirm your email first. Check your inbox for our message.",
     "userExists": "An account with this email already exists. Try logging in.",
     "weakPassword": "This password is too weak. Use at least 8 characters with letters and numbers.",
     "samePassword": "The new password must be different from the old one.",
     "invalidEmail": "This email address is not valid.",
     "rateLimit": "Too many attempts. Please wait a few minutes and try again.",
     "linkExpired": "This link has expired or was already used. Please request a new one.",
-    "linkOtherBrowser": "This link opened in a different browser or app than the one where you asked for it, so it could not log you in. Open the link in the same browser — or simply log in with your password.",
+    "linkOtherBrowser": "This link opened in a different browser or app than the one where you asked for it, so it could not log you in. Open the link in the same browser, or log in with your password.",
     "signupDisabled": "New sign-ups are currently closed.",
     "blocked": "This account has been blocked. Please contact support.",
     "accountHasActivity": "This account has contributions or projects, so it is kept for financial records. Please contact support to close it.",
@@ -117,7 +115,7 @@
     "reload": "Reload the page",
     "addonNeedsReward": "Add-ons can only be taken together with a main reward.",
     "rewardNotAvailableNow": "This reward isn't available right now.",
-    "rewardLimitPerBacker": "This reward is limited per person — you've reached the limit.",
+    "rewardLimitPerBacker": "This reward is limited per person, and you've reached the limit.",
     "cartInvalid": "Something is wrong with the cart. Reload the page and try again."
   },
   "auth": {
@@ -165,7 +163,7 @@
     },
     "callback": {
       "failedTitle": "This link didn't work",
-      "confirmedHint": "If you were confirming your email, it is already confirmed — you can log in now."
+      "confirmedHint": "If you were confirming your email, it is already confirmed. You can log in now."
     },
     "google": "Continue with Google",
     "or": "or"
@@ -377,16 +375,16 @@
   "models": {
     "donation": {
       "name": "Donation",
-      "subtitle": "Philanthropic social impact",
-      "text": "Backers give without expecting anything in return. Ideal for school labs, reforestation, healthcare and community causes.",
+      "subtitle": "For community causes",
+      "text": "Backers give without expecting anything back. Used for school labs, tree planting, health care and local causes.",
       "point1": "Every so'm goes to the published budget",
       "point2": "Verified organisations and teams",
       "cta": "Explore donation projects"
     },
     "reward": {
       "name": "Reward",
-      "subtitle": "Pre-orders and artisan perks",
-      "text": "Backers pre-order handmade goods, crafts and new local products before they reach the market.",
+      "subtitle": "Pre-orders from makers",
+      "text": "Backers pre-order handmade goods and new local products before they go on sale.",
       "point1": "Clear production and delivery timeline",
       "point2": "Rewards delivered across Uzbekistan",
       "cta": "Explore reward projects"
@@ -394,7 +392,7 @@
     "equity": {
       "name": "Musharakah",
       "subtitle": "Islamic profit-sharing partnership",
-      "text": "Backers become partners in real businesses — greenhouses, solar cold storage, electric transport — sharing both profit and risk.",
+      "text": "Backers become partners in real businesses such as greenhouses, solar cold storage or electric transport. Profit and loss are both shared by stake.",
       "point1": "Regular profit distributions from audited results",
       "point2": "Asset-backed, Shariah-compliant terms",
       "cta": "Learn how Musharakah works"
@@ -403,7 +401,7 @@
   "home": {
     "hero": {
       "title": "Interest-free crowdfunding. For Uzbekistan.",
-      "text": "Post your project — people back it with a donation, a pre-order or Musharakah. Money is released only for a finished stage.",
+      "text": "Post your project. People back it with a donation, a pre-order or Musharakah. Money is released only for a finished stage.",
       "explore": "Browse projects",
       "start": "Post a project",
       "cardKicker": "Raising now",
@@ -427,7 +425,7 @@
       "step1Title": "The founder applies",
       "step1Text": "LLC or sole-trader certificate, passport, bank account, a budget in so'm and 3–6 stages.",
       "step2Title": "We check and score it",
-      "step2Text": "We check the documents and score the project out of 100: business plan, team, market, finances and risk — 20 points each. The score is public on the project page.",
+      "step2Text": "We check the documents and score the project out of 100: business plan, team, market, finances and risk, 20 points each. The score is public on the project page.",
       "step3Title": "People back it",
       "step3Text": "A donation, a reward (pre-order) or Musharakah. Pay with Click, Payme, Uzcard or Humo. In the demo no money is charged.",
       "step4Title": "Money is released stage by stage",
@@ -601,13 +599,13 @@
     "commentPlaceholder": "Write a question or a message of support…",
     "postComment": "Post",
     "loginToComment": " to ask a question.",
-    "noComments": "No questions yet — be the first.",
+    "noComments": "No questions yet. Ask the first one.",
     "backerBadge": "Backer",
     "founderReply": "{{name}} (founder)",
     "reply": "Reply",
     "related": "Similar projects",
     "viewAll": "View all",
-    "scoreHint": "Fundy's score: business plan, team, market, finances and risk — 20 points each",
+    "scoreHint": "Fundy's score: business plan, team, market, finances and risk, 20 points each",
     "photoBy": "Photo:",
     "money": {
       "title": "Where is the money?",
@@ -630,7 +628,7 @@
     "backedFrom": "{{name}}, {{city}}",
     "backed": "{{name}}",
     "previewTitle": "Preview.",
-    "previewText": "This project isn't published yet — only you and the Fundy team can see it."
+    "previewText": "This project isn't published yet. Only you and the Fundy team can see it."
   },
   "contribute": {
     "title": {
@@ -667,7 +665,7 @@
     "completesGoal": "This amount takes the project to its goal! 🎉",
     "bringsCloser": "This brings the project {{percent}}% closer to its goal.",
     "shareTitle": "Help find one more backer",
-    "shareText": "Send it to friends — one share often brings a new backer.",
+    "shareText": "Send it to friends. One share often brings a new backer.",
     "shareMessage": "I backed \"{{project}}\". Join me:"
   },
   "dashboard": {
@@ -824,7 +822,7 @@
       "schedule": "How often profit is paid",
       "years": "Partnership length (years)",
       "projected": "Profit forecast in so'm (optional)",
-      "projectedHint": "Not an interest rate — an estimate in so'm. E.g. \"~200,000 so'm a year per 1 mln so'm share\". Not a promise.",
+      "projectedHint": "This is not an interest rate but an estimate in so'm. E.g. \"~200,000 so'm a year per 1 mln so'm share\". Not a promise.",
       "equityError": "Check the terms: profit share 1–99%, minimum investment, and 1–30 years.",
       "equityNote": "Musharakah terms are reviewed by the Fundy team before the project goes live."
     },
@@ -923,12 +921,12 @@
       "photos": "Photos (up to {{max}})",
       "addPhoto": "Add photo",
       "long": "Full description",
-      "longHint": "Size, material, warranty, delivery terms — everything a backer should know.",
+      "longHint": "Size, material, warranty and delivery terms: everything a backer should know.",
       "accessWhen": "When access starts",
       "perBacker": "Limit per person",
       "perBackerHint": "0 = no limit. Stops one person taking every early-backer place.",
       "from": "Available from (optional)",
-      "fromHint": "Empty — right away",
+      "fromHint": "Leave empty to start right away",
       "until": "Available until (optional)",
       "untilHint": "For an early-backer price: can't be chosen after this",
       "is_featured": "Recommended",
@@ -988,7 +986,7 @@
   "education": {
     "calc": {
       "title": "Musharakah calculator",
-      "hint": "An example of how one year of results is shared. Move the sliders — including into a loss.",
+      "hint": "An example of how one year of results is shared. Move the sliders, and try a loss too.",
       "investment": "Your investment",
       "capital": "Project's total capital",
       "share": "Backers' share of profit",
@@ -998,7 +996,7 @@
       "yourLoss": "Your loss this year",
       "return": "Yours at year end",
       "profitNote": "Profit year: the backers' share of profit is split in proportion to each backer's capital.",
-      "lossNote": "Loss year: the loss is shared in proportion to capital — your investment shrinks. That is why returns are never guaranteed."
+      "lossNote": "Loss year: the loss is shared in proportion to capital, so your investment shrinks. That is why returns are never guaranteed."
     }
   },
   "community": {
@@ -1038,12 +1036,12 @@
   },
   "start": {
     "title": "Post a project on Fundy",
-    "intro": "The application takes 20–30 minutes. Your draft is saved — continue any time.",
+    "intro": "The application takes 20–30 minutes. Your draft is saved, so you can continue any time.",
     "needTitle": "What you'll need",
     "need1": "An LLC (MChJ) or sole-trader (YaTT) certificate (NGOs can run donation projects)",
     "need2": "The director's or founder's passport",
     "need3": "A bank account in the organisation's name",
-    "need4": "A budget in so'm — one line per expense",
+    "need4": "A budget in so'm, one line per expense",
     "need5": "3–6 stages: what gets done, when, and what share of the money",
     "need6": "A cover photo and the project story (at least 200 characters)",
     "timeTitle": "How long it takes",
@@ -1052,13 +1050,13 @@
     "time2Title": "Check and score",
     "time2Text": "usually 3–5 working days",
     "time3Title": "Fundraising",
-    "time3Text": "7 to 90 days — you choose",
+    "time3Text": "7 to 90 days, your choice",
     "time4Title": "Money by stage",
     "time4Text": "after each stage's proof is checked",
     "feesTitle": "Fees",
     "fees": "During the demo Fundy charges nothing. When real payments start, the fee will be published on this page in advance.",
     "cta": "Start the application",
-    "ctaHint": "You'll log in or sign up first — it takes a minute."
+    "ctaHint": "You'll log in or sign up first. It takes a minute."
   },
   "time": {
     "now": "just now",
@@ -1079,7 +1077,7 @@
     "connect": "Connect Telegram",
     "disconnect": "Disconnect",
     "linked": "Telegram connected",
-    "waiting": "Telegram is open — press Start in the bot. Once linked, it shows here."
+    "waiting": "Telegram is open. Press Start in the bot. Once linked, it shows here."
   },
   "rewards": {
     "title": "Rewards",
@@ -1133,9 +1131,9 @@
     "less": "Fewer",
     "more": "More",
     "problem": {
-      "missing": "Not available — remove it",
+      "missing": "Not available, remove it",
       "unavailable": "Can't be chosen right now",
-      "notEnough": "Not that many left — lower it",
+      "notEnough": "Not that many left, lower it",
       "overLimit": "Over the per-person limit"
     },
     "extra": "Extra support",

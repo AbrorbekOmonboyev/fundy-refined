@@ -25,11 +25,11 @@
   },
   "banner": {
     "label": "Demo versiya:",
-    "full": "Oʻzbekiston bozori uchun ishlab chiqilgan. Barcha toʻlovlar, foyda taqsimoti va loyihalar — simulyatsiya.",
-    "short": "Toʻlovlar — simulyatsiya."
+    "full": "Oʻzbekiston bozori uchun ishlab chiqilgan. Toʻlovlar, foyda taqsimoti va loyihalar hozircha simulyatsiya.",
+    "short": "Toʻlovlar hozircha simulyatsiya."
   },
   "footer": {
-    "about": "Oʻzbekistonning shaffof, foizsiz kraudfanding ekotizimi. Tadbirkorlar, hunarmandlar va ijtimoiy tashabbuskorlarni xayriya, mukofot va mushoraka orqali homiylar bilan bogʻlaydi.",
+    "about": "Oʻzbekiston uchun foizsiz kraudfanding. Tadbirkorlar, hunarmandlar va jamoat loyihalari xayriya, mukofot yoki mushoraka orqali mablagʻ yigʻadi.",
     "simulated": "Demo versiya · Oʻzbekiston uchun yaratilgan",
     "models": "Modellar",
     "platform": "Platforma",
@@ -44,8 +44,6 @@
     "verification": "Ishonch va xavfsizlik",
     "terms": "Foydalanish shartlari",
     "copyright": "© {{year}} Fundy (demo versiya). Barcha huquqlar himoyalangan.",
-    "madeWith": "Mehr bilan yaratildi",
-    "forEntrepreneurs": "Oʻzbekiston tadbirkorlari uchun.",
     "company": "Fundy",
     "aboutLink": "Biz haqimizda",
     "learn": "Qanday ishlaydi",
@@ -85,14 +83,14 @@
     "generic": "Xatolik yuz berdi. Qaytadan urinib koʻring.",
     "network": "Ulanib boʻlmadi. Internet aloqangizni tekshirib, qaytadan urinib koʻring.",
     "invalidCredentials": "Elektron pochta yoki parol notoʻgʻri.",
-    "emailNotConfirmed": "Avval elektron pochtangizni tasdiqlang — pochtangizdagi xatimizni oching.",
+    "emailNotConfirmed": "Avval elektron pochtangizni tasdiqlang: biz yuborgan xatni oching.",
     "userExists": "Bu elektron pochta bilan hisob allaqachon mavjud. Kirib koʻring.",
     "weakPassword": "Parol juda oddiy. Kamida 8 ta belgi, harflar va raqamlardan foydalaning.",
     "samePassword": "Yangi parol eskisidan farq qilishi kerak.",
     "invalidEmail": "Bu elektron pochta manzili notoʻgʻri.",
     "rateLimit": "Juda koʻp urinish. Bir necha daqiqa kutib, qaytadan urinib koʻring.",
     "linkExpired": "Bu havolaning muddati tugagan yoki u allaqachon ishlatilgan. Yangisini soʻrang.",
-    "linkOtherBrowser": "Havola siz uni soʻragan brauzerdan boshqa brauzer yoki ilovada ochildi, shuning uchun tizimga kira olmadi. Havolani oʻsha brauzerda oching — yoki shunchaki parolingiz bilan kiring.",
+    "linkOtherBrowser": "Havola siz uni soʻragan brauzerdan boshqa brauzer yoki ilovada ochildi, shuning uchun tizimga kira olmadi. Havolani oʻsha brauzerda oching yoki parolingiz bilan kiring.",
     "signupDisabled": "Hozircha yangi roʻyxatdan oʻtish yopiq.",
     "blocked": "Bu hisob bloklangan. Qoʻllab-quvvatlash xizmatiga murojaat qiling.",
     "accountHasActivity": "Bu hisobda hissalar yoki loyihalar bor, shuning uchun u moliyaviy hisobot uchun saqlanadi. Yopish uchun qoʻllab-quvvatlash xizmatiga murojaat qiling.",
@@ -117,7 +115,7 @@
     "reload": "Sahifani yangilash",
     "addonNeedsReward": "Qoʻshimcha mahsulotni faqat asosiy mukofot bilan olish mumkin.",
     "rewardNotAvailableNow": "Bu mukofot hozir mavjud emas.",
-    "rewardLimitPerBacker": "Bu mukofotni bir kishi cheklangan miqdorda oladi — limitga yetdingiz.",
+    "rewardLimitPerBacker": "Bu mukofotni bir kishi cheklangan miqdorda oladi. Siz limitga yetdingiz.",
     "cartInvalid": "Savatda xatolik bor. Sahifani yangilab, qaytadan urinib koʻring."
   },
   "auth": {
@@ -154,7 +152,7 @@
     },
     "forgot": {
       "title": "Parolni tiklash",
-      "subtitle": "Elektron pochtangizni kiriting — yangi parol tanlash uchun havola yuboramiz.",
+      "subtitle": "Elektron pochtangizni kiriting. Yangi parol tanlash uchun havola yuboramiz.",
       "submit": "Havolani yuborish",
       "sent": "Agar {{email}} uchun hisob mavjud boʻlsa, tiklash havolasi yuborildi."
     },
@@ -165,7 +163,7 @@
     },
     "callback": {
       "failedTitle": "Havola ishlamadi",
-      "confirmedHint": "Agar siz emailni tasdiqlayotgan boʻlsangiz, u allaqachon tasdiqlangan — hozir kirishingiz mumkin."
+      "confirmedHint": "Agar siz emailni tasdiqlayotgan boʻlsangiz, u allaqachon tasdiqlangan. Hozir kirishingiz mumkin."
     },
     "google": "Google orqali davom etish",
     "or": "yoki"
@@ -394,7 +392,7 @@
     "equity": {
       "name": "Mushoraka",
       "subtitle": "Islomiy foyda taqsimoti hamkorligi",
-      "text": "Homiylar haqiqiy bizneslarda — issiqxonalar, quyosh sovutgichlari, elektr transport — hamkorga aylanadi va foyda hamda xavfni baham koʻradi.",
+      "text": "Homiylar issiqxona, quyosh sovutgichi yoki elektr transport kabi haqiqiy bizneslarga sherik boʻladi. Foyda ham, zarar ham ulushga qarab boʻlinadi.",
       "point1": "Tekshirilgan natijalardan muntazam foyda taqsimoti",
       "point2": "Aktivlar bilan taʼminlangan, shariatga mos shartlar",
       "cta": "Mushoraka qanday ishlashini bilish"
@@ -403,7 +401,7 @@
   "home": {
     "hero": {
       "title": "Foizsiz kraudfanding. Oʻzbekiston uchun.",
-      "text": "Loyihangizni joylang — odamlar xayriya, oldindan buyurtma yoki mushoraka orqali qoʻllab-quvvatlaydi. Pul faqat bajarilgan bosqich uchun beriladi.",
+      "text": "Loyihangizni joylang. Odamlar uni xayriya, oldindan buyurtma yoki mushoraka orqali qoʻllab-quvvatlaydi. Pul faqat bajarilgan bosqich uchun beriladi.",
       "explore": "Loyihalarni koʻrish",
       "start": "Loyiha joylash",
       "cardKicker": "Hozir mablagʻ yigʻmoqda",
@@ -427,20 +425,20 @@
       "step1Title": "Asoschi ariza beradi",
       "step1Text": "MChJ yoki YaTT guvohnomasi, pasport, bank hisobi, soʻmdagi byudjet va 3–6 ta bosqich.",
       "step2Title": "Biz tekshiramiz va baholaymiz",
-      "step2Text": "Hujjatlarni tekshiramiz va loyihani 100 ballik tizimda baholaymiz: biznes-reja, jamoa, bozor, moliya va xatar — har biri 20 balldan. Baho loyiha sahifasida ochiq turadi.",
+      "step2Text": "Hujjatlarni tekshiramiz va loyihani 100 ballik tizimda baholaymiz: biznes-reja, jamoa, bozor, moliya va xatar, har biri 20 balldan. Baho loyiha sahifasida ochiq turadi.",
       "step3Title": "Odamlar qoʻllab-quvvatlaydi",
-      "step3Text": "Xayriya, mukofot (oldindan buyurtma) yoki mushoraka orqali. Toʻlov — Click, Payme, Uzcard yoki Humo. Demoda pul yechilmaydi.",
+      "step3Text": "Xayriya, mukofot (oldindan buyurtma) yoki mushoraka orqali. Click, Payme, Uzcard yoki Humo bilan toʻlanadi. Demoda pul yechilmaydi.",
       "step4Title": "Pul bosqichma-bosqich beriladi",
       "step4Text": "Asoschi bosqichni bajarib, dalil yuklaydi. Fundy tekshirgach, keyingi qism beriladi. Bajarilmagan bosqich uchun pul yoʻq."
     },
     "musharakah": {
       "title": "Mushoraka: qarz emas, sheriklik",
-      "text": "Siz biznesga ulush kiritasiz. Foyda boʻlsa — kelishilgan ulush boʻyicha boʻlinadi, zarar boʻlsa — u ham. Kafolatlangan foiz yoʻq, shuning uchun bu ribo emas. Raqamlarni oʻzingiz sinab koʻring:",
+      "text": "Siz biznesga ulush kiritasiz. Foyda boʻlsa, kelishilgan ulush boʻyicha boʻlinadi. Zarar boʻlsa, u ham shunday boʻlinadi. Kafolatlangan foiz yoʻq, shuning uchun bu ribo emas. Raqamlarni oʻzingiz sinab koʻring:",
       "more": "Mushoraka haqida batafsil"
     },
     "cta": {
       "title": "Loyihangiz bormi?",
-      "text": "Nima kerakligi, qancha vaqt olishi va xarajatlarni oldindan koʻring. Roʻyxatdan oʻtish — keyin.",
+      "text": "Nima kerakligi, qancha vaqt olishi va xarajatlarni oldindan koʻring. Roʻyxatdan keyin oʻtasiz.",
       "start": "Talablarni koʻrish"
     }
   },
@@ -601,13 +599,13 @@
     "commentPlaceholder": "Savol yoki qoʻllab-quvvatlash soʻzlarini yozing…",
     "postComment": "Yuborish",
     "loginToComment": " va savol bering.",
-    "noComments": "Hozircha savollar yoʻq — birinchi boʻling.",
+    "noComments": "Hozircha savollar yoʻq. Birinchi boʻlib soʻrang.",
     "backerBadge": "Homiy",
     "founderReply": "{{name}} (asoschi)",
     "reply": "Javob berish",
     "related": "Oʻxshash loyihalar",
     "viewAll": "Hammasini koʻrish",
-    "scoreHint": "Fundy bahosi: biznes-reja, jamoa, bozor, moliya va xatar — har biri 20 balldan",
+    "scoreHint": "Fundy bahosi: biznes-reja, jamoa, bozor, moliya va xatar, har biri 20 balldan",
     "photoBy": "Surat:",
     "money": {
       "title": "Pul qayerda?",
@@ -616,7 +614,7 @@
       "released": "Asoschiga berildi",
       "review": "Dalil tekshirilmoqda",
       "held": "Bosqichni kutmoqda",
-      "raisingNote": "Mablagʻ yigʻilmoqda: maqsadga yetguncha pul hech kimga berilmaydi. Yetmasa — homiylarga qaytariladi. Yetsa — har bir bosqich bajarilgach oʻz ulushi beriladi."
+      "raisingNote": "Mablagʻ yigʻilmoqda. Maqsadga yetguncha pul hech kimga berilmaydi. Yetmasa, pul homiylarga qaytariladi. Yetsa, har bir bosqich bajarilgach oʻz ulushi beriladi."
     },
     "checks": {
       "title": "Fundy nimani tekshirdi",
@@ -630,7 +628,7 @@
     "backedFrom": "{{name}}, {{city}}",
     "backed": "{{name}}",
     "previewTitle": "Oldindan koʻrish.",
-    "previewText": "Loyiha hali eʼlon qilinmagan — uni faqat siz va Fundy jamoasi koʻradi."
+    "previewText": "Loyiha hali eʼlon qilinmagan. Uni faqat siz va Fundy jamoasi koʻradi."
   },
   "contribute": {
     "title": {
@@ -667,7 +665,7 @@
     "completesGoal": "Bu summa loyihani maqsadga yetkazadi! 🎉",
     "bringsCloser": "Bu summa loyihani maqsadga yana {{percent}}% yaqinlashtiradi.",
     "shareTitle": "Yana bitta homiy topishga yordam bering",
-    "shareText": "Doʻstlaringizga yuboring — bitta ulashish koʻpincha yangi homiy olib keladi.",
+    "shareText": "Doʻstlaringizga yuboring. Bitta ulashish koʻpincha yangi homiy olib keladi.",
     "shareMessage": "Men «{{project}}» loyihasini qoʻllab-quvvatladim. Siz ham qoʻshiling:"
   },
   "dashboard": {
@@ -824,7 +822,7 @@
       "schedule": "Foyda qanchalik tez-tez toʻlanadi",
       "years": "Hamkorlik muddati (yil)",
       "projected": "Foyda prognozi soʻmda (ixtiyoriy)",
-      "projectedHint": "Foiz stavkasi emas — soʻmdagi taxmin. Masalan: «1 mln soʻm ulushga yiliga ~200 ming soʻm». Bu vaʼda emas.",
+      "projectedHint": "Bu foiz stavkasi emas, soʻmdagi taxmin. Masalan: «1 mln soʻm ulushga yiliga ~200 ming soʻm». Bu vaʼda emas.",
       "equityError": "Shartlarni tekshiring: foyda ulushi 1–99%, minimal sarmoya va 1–30 yil.",
       "equityNote": "Mushoraka shartlari loyiha faollashishidan oldin Fundy jamoasi tomonidan koʻrib chiqiladi."
     },
@@ -923,12 +921,12 @@
       "photos": "Suratlar (koʻpi bilan {{max}} ta)",
       "addPhoto": "Surat qoʻshish",
       "long": "Batafsil tavsif",
-      "longHint": "Oʻlcham, material, kafolat, yetkazish shartlari — homiy bilishi kerak boʻlgan hamma narsa.",
+      "longHint": "Oʻlcham, material, kafolat, yetkazish shartlari: homiy bilishi kerak boʻlgan hamma narsa.",
       "accessWhen": "Qachon foydalanish mumkin",
       "perBacker": "Bir kishiga cheklov",
       "perBackerHint": "0 = cheklovsiz. Erta homiylar narxini bir kishi hammasini olib qoʻymasligi uchun.",
       "from": "Qachondan (ixtiyoriy)",
-      "fromHint": "Boʻsh — darhol",
+      "fromHint": "Boʻsh qoldirsangiz, darhol",
       "until": "Qachongacha (ixtiyoriy)",
       "untilHint": "Erta homiylar narxi uchun: shu vaqtdan keyin tanlab boʻlmaydi",
       "is_featured": "Tavsiya etilgan",
@@ -968,7 +966,7 @@
   "contact": {
     "kicker": "Aloqa",
     "title": "Bizga yozing",
-    "intro": "Loyiha, hisobingiz yoki Fundy bilan hamkorlik haqida savolingiz bormi? Xabar yuboring — elektron pochtangizga javob beramiz.",
+    "intro": "Loyiha, hisobingiz yoki Fundy bilan hamkorlik haqida savolingiz bormi? Xabar yuboring, elektron pochtangizga javob beramiz.",
     "topic": "Mavzu",
     "message": "Xabar",
     "topics": {
@@ -988,7 +986,7 @@
   "education": {
     "calc": {
       "title": "Mushoraka kalkulyatori",
-      "hint": "Bir yillik natija qanday taqsimlanishiga misol. Slayderlarni suring — zarar holatini ham sinab koʻring.",
+      "hint": "Bir yillik natija qanday taqsimlanishiga misol. Slayderlarni suring, zarar holatini ham sinab koʻring.",
       "investment": "Sizning sarmoyangiz",
       "capital": "Loyihaning umumiy kapitali",
       "share": "Homiylarning foyda ulushi",
@@ -998,7 +996,7 @@
       "yourLoss": "Bu yilgi zararingiz",
       "return": "Yil oxirida sizda",
       "profitNote": "Foyda yili: homiylarning foyda ulushi har bir homiyning kapitaliga mutanosib ravishda boʻlinadi.",
-      "lossNote": "Zarar yili: zarar kapitalga mutanosib ravishda boʻlinadi — sarmoyangiz kamayadi. Shuning uchun daromad hech qachon kafolatlanmaydi."
+      "lossNote": "Zarar yili: zarar kapitalga mutanosib boʻlinadi va sarmoyangiz kamayadi. Shuning uchun daromad hech qachon kafolatlanmaydi."
     }
   },
   "community": {
@@ -1038,12 +1036,12 @@
   },
   "start": {
     "title": "Fundyʼda loyiha joylash",
-    "intro": "Ariza 20–30 daqiqa oladi. Qoralama saqlanib turadi — istalgan vaqtda davom ettirasiz.",
+    "intro": "Ariza 20–30 daqiqa oladi. Qoralama saqlanib turadi, istalgan vaqtda davom ettirasiz.",
     "needTitle": "Nima kerak boʻladi",
     "need1": "MChJ yoki YaTT guvohnomasi (xayriya loyihalari uchun NNT ham boʻladi)",
     "need2": "Rahbar yoki asoschining pasporti",
     "need3": "Tashkilot nomiga ochilgan bank hisobi",
-    "need4": "Soʻmdagi byudjet — har bir xarajat alohida qator",
+    "need4": "Soʻmdagi byudjet: har bir xarajat alohida qatorda",
     "need5": "3–6 ta bosqich: nima qilinadi, qachon va pulning necha foizi",
     "need6": "Muqova surati va loyiha hikoyasi (kamida 200 belgi)",
     "timeTitle": "Qancha vaqt oladi",
@@ -1052,13 +1050,13 @@
     "time2Title": "Tekshiruv va baholash",
     "time2Text": "odatda 3–5 ish kuni",
     "time3Title": "Mablagʻ yigʻish",
-    "time3Text": "7 dan 90 kungacha — oʻzingiz tanlaysiz",
+    "time3Text": "7 dan 90 kungacha, oʻzingiz tanlaysiz",
     "time4Title": "Bosqichlar boʻyicha pul",
     "time4Text": "har bir bosqich dalili tekshirilgach",
     "feesTitle": "Xarajatlar",
     "fees": "Demo davrida Fundy hech qanday toʻlov olmaydi. Haqiqiy toʻlovlar ishga tushganda komissiya shu sahifada oldindan eʼlon qilinadi.",
     "cta": "Arizani boshlash",
-    "ctaHint": "Avval kirasiz yoki roʻyxatdan oʻtasiz — bir daqiqa."
+    "ctaHint": "Avval kirasiz yoki roʻyxatdan oʻtasiz. Bu bir daqiqa oladi."
   },
   "time": {
     "now": "hozirgina",
@@ -1079,7 +1077,7 @@
     "connect": "Telegramni ulash",
     "disconnect": "Uzish",
     "linked": "Telegram ulangan",
-    "waiting": "Telegram ochildi — botda «Start» tugmasini bosing. Ulangach, shu yerda koʻrinadi."
+    "waiting": "Telegram ochildi. Botda «Start» tugmasini bosing, ulangach shu yerda koʻrinadi."
   },
   "rewards": {
     "title": "Mukofotlar",
@@ -1133,9 +1131,9 @@
     "less": "Kamaytirish",
     "more": "Koʻpaytirish",
     "problem": {
-      "missing": "Mavjud emas — oʻchiring",
+      "missing": "Mavjud emas, oʻchiring",
       "unavailable": "Hozir tanlab boʻlmaydi",
-      "notEnough": "Shuncha qolmagan — kamaytiring",
+      "notEnough": "Shuncha qolmagan, kamaytiring",
       "overLimit": "Bir kishiga cheklovdan koʻp"
     },
     "extra": "Qoʻshimcha qoʻllab-quvvatlash",
@@ -1150,8 +1148,8 @@
     "loginToPay": "Toʻlash uchun kiring",
     "button_one": "Savat · {{count}} · {{amount}}",
     "button_other": "Savat · {{count}} · {{amount}}",
-    "successText_one": "{{amount}} — {{count}} ta mahsulot bilan. Rahmat!",
-    "successText_other": "{{amount}} — {{count}} ta mahsulot bilan. Rahmat!",
+    "successText_one": "{{amount}}, {{count}} ta mahsulot. Rahmat!",
+    "successText_other": "{{amount}}, {{count}} ta mahsulot. Rahmat!",
     "added": "Savatga qoʻshildi ✓",
     "view": "Savatni ochish",
     "open_one": "Savat: {{count}} ta mahsulot",

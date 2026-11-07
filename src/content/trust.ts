@@ -5,7 +5,7 @@ export const trust: Localized<Article> = {
     kicker: 'Ishonch va xavfsizlik',
     title: 'Pulingiz qanday himoyalanadi',
     intro:
-      'Fundyʼda har bir loyiha tekshiriladi, har bir byudjet ochiq va mablagʻ faqat bajarilgan ish uchun beriladi. Mana qanday ishlaydi — va nimalarni bilishingiz kerak.',
+      'Fundyʼda har bir loyiha tekshiriladi, har bir byudjet ochiq va mablagʻ faqat bajarilgan ish uchun beriladi. Quyida qanday ishlashini va nimalarni bilishingiz kerakligini tushuntiramiz.',
     sections: [
       {
         id: 'review',
@@ -23,14 +23,14 @@ export const trust: Localized<Article> = {
         heading: '"Tasdiqlangan asoschi" belgisi',
         paragraphs: [
           'Belgi asoschining shaxsi va roʻyxatdan oʻtganligi hujjatlar bilan tasdiqlanganini bildiradi. Bu loyiha muvaffaqiyatli boʻlishiga kafolat emas.',
-          'Adminlar oʻz loyihalarini baholay olmaydi va oʻzlarini tasdiqlay olmaydi — buni boshqa admin qilishi shart.',
+          'Adminlar oʻz loyihalarini baholay olmaydi va oʻzlarini tasdiqlay olmaydi. Buni boshqa admin qilishi shart.',
         ],
       },
       {
         id: 'milestones',
         heading: 'Mablagʻ bosqichma-bosqich beriladi',
         paragraphs: [
-          'Har bir loyiha ishni bosqichlarga boʻladi va har bir bosqich uchun mablagʻning qancha qismi berilishini koʻrsatadi. Asoschi bosqich bajarilganini isbotlaydi, jamoamiz uni tekshiradi — shundan keyingina keyingi qism beriladi.',
+          'Har bir loyiha ishni bosqichlarga boʻladi va har bir bosqich uchun mablagʻning qancha qismi berilishini koʻrsatadi. Asoschi bosqich bajarilganini isbotlaydi, jamoamiz uni tekshiradi va shundan keyingina keyingi qism beriladi.',
           'Demo versiyada pul harakatlanmaydi; bosqichlar jarayonni koʻrsatish uchun simulyatsiya qilinadi.',
         ],
       },
@@ -56,7 +56,7 @@ export const trust: Localized<Article> = {
         id: 'data',
         heading: 'Maʼlumotlaringiz',
         paragraphs: [
-          'Elektron pochtangiz boshqalarga koʻrsatilmaydi. Hujjatlar maxfiy saqlanadi — ularni faqat siz va koʻrib chiqish jamoasi koʻradi. Batafsil — Maxfiylik siyosatida.',
+          'Elektron pochtangiz boshqalarga koʻrsatilmaydi. Hujjatlar maxfiy saqlanadi, ularni faqat siz va koʻrib chiqish jamoasi koʻradi. Batafsil maʼlumot Maxfiylik siyosatida.',
         ],
       },
     ],
@@ -65,7 +65,7 @@ export const trust: Localized<Article> = {
     kicker: 'Доверие и безопасность',
     title: 'Как защищены ваши деньги',
     intro:
-      'В Fundy каждый проект проходит проверку, каждый бюджет открыт, а деньги выдаются только за выполненную работу. Вот как это устроено — и что важно знать.',
+      'В Fundy каждый проект проходит проверку, каждый бюджет открыт, а деньги выдаются только за выполненную работу. Ниже рассказываем, как это устроено и что важно знать.',
     sections: [
       {
         id: 'review',
@@ -83,14 +83,14 @@ export const trust: Localized<Article> = {
         heading: 'Значок «Проверенный автор»',
         paragraphs: [
           'Значок означает, что личность автора и регистрация подтверждены документами. Это не гарантия успеха проекта.',
-          'Администраторы не могут оценивать собственные проекты и подтверждать сами себя — это должен сделать другой администратор.',
+          'Администраторы не могут оценивать собственные проекты и подтверждать сами себя. Это должен сделать другой администратор.',
         ],
       },
       {
         id: 'milestones',
         heading: 'Деньги выдаются по этапам',
         paragraphs: [
-          'Каждый проект делит работу на этапы и указывает, какая часть средств выдаётся за каждый. Автор подтверждает выполнение этапа, наша команда проверяет — и только тогда выдаётся следующая часть.',
+          'Каждый проект делит работу на этапы и указывает, какая часть средств выдаётся за каждый. Автор подтверждает выполнение этапа, наша команда проверяет, и только тогда выдаётся следующая часть.',
           'В демо-версии деньги не движутся; этапы симулируются, чтобы показать процесс.',
         ],
       },
@@ -116,7 +116,7 @@ export const trust: Localized<Article> = {
         id: 'data',
         heading: 'Ваши данные',
         paragraphs: [
-          'Ваша почта не показывается другим. Документы хранятся закрыто — их видите только вы и команда проверки. Подробнее — в Политике конфиденциальности.',
+          'Ваша почта не показывается другим. Документы хранятся закрыто, их видите только вы и команда проверки. Подробнее в Политике конфиденциальности.',
         ],
       },
     ],
@@ -125,7 +125,7 @@ export const trust: Localized<Article> = {
     kicker: 'Trust & Safety',
     title: 'How your money is protected',
     intro:
-      'On Fundy every project is checked, every budget is public, and money is released only for work delivered. Here is how it works — and what you should know.',
+      'On Fundy every project is checked, every budget is public, and money is released only for work delivered. Here is how it works and what you should know.',
     sections: [
       {
         id: 'review',
@@ -143,14 +143,14 @@ export const trust: Localized<Article> = {
         heading: 'The "Verified founder" badge',
         paragraphs: [
           "The badge means the founder's identity and registration were confirmed with documents. It is not a guarantee that the project will succeed.",
-          'Admins cannot evaluate their own projects or verify themselves — another admin must do it.',
+          'Admins cannot evaluate their own projects or verify themselves. Another admin must do it.',
         ],
       },
       {
         id: 'milestones',
         heading: 'Money is released in stages',
         paragraphs: [
-          'Every project splits the work into milestones and states how much of the money each one releases. The founder shows proof that a milestone is done, our team checks it — and only then is the next part released.',
+          'Every project splits the work into milestones and states how much of the money each one releases. The founder shows proof that a milestone is done, our team checks it, and only then is the next part released.',
           'In the demo no money moves; milestones are simulated to show the process.',
         ],
       },
@@ -176,7 +176,7 @@ export const trust: Localized<Article> = {
         id: 'data',
         heading: 'Your data',
         paragraphs: [
-          'Your email is never shown to others. Documents are stored privately — only you and the review team can see them. Details are in the Privacy Policy.',
+          'Your email is never shown to others. Documents are stored privately, and only you and the review team can see them. Details are in the Privacy Policy.',
         ],
       },
     ],
