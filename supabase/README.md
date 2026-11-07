@@ -57,7 +57,7 @@ Errors come back as short keys (e.g. `amount_below_minimum`) for the app to tran
 | `npm run db:login`         | Log the Supabase CLI into your account (once)                  |
 | `npm run db:link`          | Connect this folder to your Supabase project (once)            |
 | `npm run db:push`          | Apply new migrations to the linked project                     |
-| `npm run db:seed:push`     | Apply migrations **and** load demo data                        |
+| `npm run db:seed:push`     | Apply migrations **and** load demo data — ⚠️ NEVER on the live project (real since 7 Nov 2026) |
 | `npm run db:types`         | Generate TypeScript types from the live database               |
 
 ## Connecting a Supabase project (first time)
@@ -67,7 +67,7 @@ Errors come back as short keys (e.g. `amount_below_minimum`) for the app to tran
    ```bash
    npm run db:login
    npm run db:link
-   npm run db:seed:push
+   npm run db:seed:push   # only for a NEW, empty test project — never the live one
    npm run db:types
    ```
 3. Copy `.env.example` to `.env.local` and fill in the Project URL and the **publishable** key from _Project Settings → API Keys_.
