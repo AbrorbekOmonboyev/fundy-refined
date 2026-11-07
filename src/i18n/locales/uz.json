@@ -48,7 +48,8 @@
     "aboutLink": "Biz haqimizda",
     "learn": "Qanday ishlaydi",
     "contact": "Aloqa",
-    "privacy": "Maxfiylik siyosati"
+    "privacy": "Maxfiylik siyosati",
+    "androidApp": "Android ilova (test)"
   },
   "notFound": {
     "title": "Sahifa topilmadi",

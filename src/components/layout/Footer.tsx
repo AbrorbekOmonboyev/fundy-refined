@@ -70,6 +70,14 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <p>{t('footer.copyright', { year: new Date().getFullYear() })}</p>
+          {/* Quiet link to the Android test app (android/twa-manifest.json; rebuilt APK goes to public/downloads) */}
+          <a
+            href="/downloads/fundy-android.apk"
+            download="Fundy.apk"
+            className="text-slate-500 hover:text-slate-300 underline-offset-4 hover:underline"
+          >
+            {t('footer.androidApp')}
+          </a>
         </div>
       </div>
     </footer>

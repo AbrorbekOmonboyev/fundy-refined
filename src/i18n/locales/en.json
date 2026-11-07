@@ -48,7 +48,8 @@
     "aboutLink": "About us",
     "learn": "How it works",
     "contact": "Contact",
-    "privacy": "Privacy Policy"
+    "privacy": "Privacy Policy",
+    "androidApp": "Android app (test)"
   },
   "notFound": {
     "title": "Page not found",
