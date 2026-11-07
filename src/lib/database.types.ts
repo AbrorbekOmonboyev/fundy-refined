@@ -223,8 +223,52 @@ export type Database = {
           },
         ]
       }
+      contribution_items: {
+        Row: {
+          contribution_id: string
+          id: string
+          kind: Database["public"]["Enums"]["reward_kind"]
+          quantity: number
+          reward_tier_id: string
+          unit_amount: number
+        }
+        Insert: {
+          contribution_id: string
+          id?: string
+          kind: Database["public"]["Enums"]["reward_kind"]
+          quantity: number
+          reward_tier_id: string
+          unit_amount: number
+        }
+        Update: {
+          contribution_id?: string
+          id?: string
+          kind?: Database["public"]["Enums"]["reward_kind"]
+          quantity?: number
+          reward_tier_id?: string
+          unit_amount?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contribution_items_contribution_id_fkey"
+            columns: ["contribution_id"]
+            isOneToOne: false
+            referencedRelation: "contributions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contribution_items_reward_tier_id_fkey"
+            columns: ["reward_tier_id"]
+            isOneToOne: false
+            referencedRelation: "reward_tiers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contributions: {
         Row: {
+          extra_amount: number
+          shipping_amount: number
           amount: number
           backer_id: string
           created_at: string
@@ -238,6 +282,8 @@ export type Database = {
           status: Database["public"]["Enums"]["contribution_status"]
         }
         Insert: {
+          extra_amount?: number
+          shipping_amount?: number
           amount: number
           backer_id: string
           created_at?: string
@@ -251,6 +297,8 @@ export type Database = {
           status?: Database["public"]["Enums"]["contribution_status"]
         }
         Update: {
+          extra_amount?: number
+          shipping_amount?: number
           amount?: number
           backer_id?: string
           created_at?: string
@@ -771,6 +819,7 @@ export type Database = {
       }
       projects: {
         Row: {
+          allow_addons_only: boolean
           backer_count: number
           category_id: string
           cover_image_path: string | null
@@ -798,6 +847,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          allow_addons_only?: boolean
           backer_count?: number
           category_id: string
           cover_image_path?: string | null
@@ -825,6 +875,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          allow_addons_only?: boolean
           backer_count?: number
           category_id?: string
           cover_image_path?: string | null
@@ -1210,6 +1261,16 @@ export type Database = {
           p_payment_method: Database["public"]["Enums"]["payment_method"]
           p_project_id: string
           p_reward_tier_id?: string
+        }
+        Returns: string
+      }
+      contribute_cart: {
+        Args: {
+          p_extra_amount?: number
+          p_is_anonymous?: boolean
+          p_items: Json
+          p_payment_method?: Database["public"]["Enums"]["payment_method"]
+          p_project_id: string
         }
         Returns: string
       }

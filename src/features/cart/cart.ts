@@ -1,0 +1,155 @@
+/**
+ * The pledge cart (docs/PLAN-rewards-and-pledges.md, Phase B).
+ *
+ * Kept in this browser per project, so it works before logging in and survives a
+ * reload. Only reward ids and quantities are stored — prices always come from the
+ * project data, and the database checks everything again when paying.
+ */
+import { useSyncExternalStore } from 'react';
+import { rewardStatus, unitsLeft, type RewardLike } from '@/features/projects/rewards';
+
+export type CartLine = { rewardId: string; quantity: number };
+export type Cart = { lines: CartLine[]; extra: number };
+
+export const MAX_QTY = 99;
+const EMPTY: Cart = { lines: [], extra: 0 };
+const key = (projectId: string) => `fundy-cart:${projectId}`;
+const listeners = new Set<() => void>();
+const cache = new Map<string, { raw: string | null; cart: Cart }>();
+
+function read(projectId: string): Cart {
+  let raw: string | null = null;
+  try {
+    raw = localStorage.getItem(key(projectId));
+  } catch {
+    /* storage blocked: empty cart */
+  }
+  const hit = cache.get(projectId);
+  if (hit && hit.raw === raw) return hit.cart; // same object → no needless re-renders
+  let cart = EMPTY;
+  try {
+    const parsed = raw ? (JSON.parse(raw) as Cart) : null;
+    if (parsed && Array.isArray(parsed.lines)) {
+      cart = {
+        lines: parsed.lines
+          .filter(l => typeof l.rewardId === 'string' && Number.isInteger(l.quantity) && l.quantity > 0)
+          .map(l => ({ rewardId: l.rewardId, quantity: Math.min(l.quantity, MAX_QTY) })),
+        extra: Math.max(0, Math.round(Number(parsed.extra) || 0)),
+      };
+    }
+  } catch {
+    /* broken data: start empty */
+  }
+  cache.set(projectId, { raw, cart });
+  return cart;
+}
+
+function write(projectId: string, cart: Cart) {
+  try {
+    if (cart.lines.length === 0 && cart.extra === 0) localStorage.removeItem(key(projectId));
+    else localStorage.setItem(key(projectId), JSON.stringify(cart));
+  } catch {
+    /* private mode: the cart just won't be remembered */
+  }
+  listeners.forEach(l => l());
+}
+
+export function cartActions(projectId: string) {
+  const update = (fn: (c: Cart) => Cart) => write(projectId, fn(read(projectId)));
+  return {
+    add: (rewardId: string, quantity = 1) =>
+      update(c => {
+        const found = c.lines.find(l => l.rewardId === rewardId);
+        return {
+          ...c,
+          lines: found
+            ? c.lines.map(l =>
+                l.rewardId === rewardId ? { ...l, quantity: Math.min(MAX_QTY, l.quantity + quantity) } : l,
+              )
+            : [...c.lines, { rewardId, quantity }],
+        };
+      }),
+    setQuantity: (rewardId: string, quantity: number) =>
+      update(c => ({
+        ...c,
+        lines:
+          quantity <= 0
+            ? c.lines.filter(l => l.rewardId !== rewardId)
+            : c.lines.map(l => (l.rewardId === rewardId ? { ...l, quantity: Math.min(MAX_QTY, quantity) } : l)),
+      })),
+    remove: (rewardId: string) => update(c => ({ ...c, lines: c.lines.filter(l => l.rewardId !== rewardId) })),
+    setExtra: (extra: number) => update(c => ({ ...c, extra: Math.max(0, Math.round(extra) || 0) })),
+    clear: () => write(projectId, EMPTY),
+  };
+}
+
+export function useCart(projectId: string): Cart {
+  return useSyncExternalStore(
+    l => {
+      listeners.add(l);
+      const onStorage = (e: StorageEvent) => e.key === key(projectId) && l(); // other tabs
+      window.addEventListener('storage', onStorage);
+      return () => {
+        listeners.delete(l);
+        window.removeEventListener('storage', onStorage);
+      };
+    },
+    () => read(projectId),
+    () => EMPTY,
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Totals and problems (pure — tested in cart.test.ts)
+// ---------------------------------------------------------------------------
+export type CartReward = RewardLike & {
+  id: string;
+  title: string;
+  kind: 'reward' | 'addon';
+  per_backer_limit: number | null;
+};
+
+export type LineProblem = 'missing' | 'unavailable' | 'notEnough' | 'overLimit';
+
+export type PricedLine = {
+  rewardId: string;
+  reward: CartReward | null;
+  quantity: number;
+  lineTotal: number;
+  problem: LineProblem | null;
+};
+
+export function priceCart(cart: Cart, rewards: CartReward[], now = new Date()) {
+  const lines: PricedLine[] = cart.lines.map(l => {
+    const reward = rewards.find(r => r.id === l.rewardId && !r.is_hidden) ?? null;
+    if (!reward) return { rewardId: l.rewardId, reward: null, quantity: l.quantity, lineTotal: 0, problem: 'missing' };
+    const status = rewardStatus(reward, now);
+    const left = unitsLeft(reward);
+    const problem: LineProblem | null =
+      status !== 'available'
+        ? 'unavailable'
+        : left !== null && l.quantity > left
+          ? 'notEnough'
+          : reward.per_backer_limit !== null && l.quantity > reward.per_backer_limit
+            ? 'overLimit'
+            : null;
+    return { rewardId: l.rewardId, reward, quantity: l.quantity, lineTotal: reward.amount * l.quantity, problem };
+  });
+  const valid = lines.filter(l => !l.problem);
+  const itemsTotal = valid.reduce((s, l) => s + l.lineTotal, 0);
+  return {
+    lines,
+    itemsTotal,
+    total: itemsTotal + cart.extra,
+    count: valid.reduce((s, l) => s + l.quantity, 0),
+    hasMain: valid.some(l => l.reward?.kind === 'reward'),
+    hasAddon: valid.some(l => l.reward?.kind === 'addon'),
+    hasProblems: lines.some(l => l.problem),
+  };
+}
+
+/** Highest quantity the stepper allows for a reward. */
+export function maxQuantity(r: CartReward): number {
+  const left = unitsLeft(r);
+  return Math.max(1, Math.min(MAX_QTY, left ?? MAX_QTY, r.per_backer_limit ?? MAX_QTY));
+}

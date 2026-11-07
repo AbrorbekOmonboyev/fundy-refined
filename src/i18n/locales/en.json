@@ -115,7 +115,8 @@
     "reload": "Reload the page",
     "addonNeedsReward": "Add-ons can only be taken together with a main reward.",
     "rewardNotAvailableNow": "This reward isn't available right now.",
-    "rewardLimitPerBacker": "This reward is limited per person — you've reached the limit."
+    "rewardLimitPerBacker": "This reward is limited per person — you've reached the limit.",
+    "cartInvalid": "Something is wrong with the cart. Reload the page and try again."
   },
   "auth": {
     "fields": {
@@ -1057,7 +1058,6 @@
     "compareHint": "Tick two or more rewards to compare them",
     "addonsTitle": "Add-ons",
     "addonsHint": "Added on top of a main reward.",
-    "addonSoon": "Adding to a cart is coming soon — for now you can look.",
     "selected_one": "{{count}} selected",
     "selected_other": "{{count}} selected",
     "compare": "Compare",
@@ -1092,6 +1092,36 @@
     "included": "Included",
     "notIncluded": "Not included",
     "unlimited": "Unlimited",
-    "seeAll": "All rewards"
+    "seeAll": "All rewards",
+    "addToCart": "Add to cart",
+    "addMore": "Add another ({{count}} in cart)",
+    "addonHint": "Taken together with a main reward."
+  },
+  "cart": {
+    "title": "My pledge",
+    "empty": "Your cart is empty. Pick a reward, or support with an amount below.",
+    "gone": "This item is no longer available",
+    "less": "Fewer",
+    "more": "More",
+    "problem": {
+      "missing": "Not available — remove it",
+      "unavailable": "Can't be chosen right now",
+      "notEnough": "Not that many left — lower it",
+      "overLimit": "Over the per-person limit"
+    },
+    "extra": "Extra support",
+    "extraHint": "No reward, just to help the project. Optional.",
+    "noExtra": "None",
+    "extraOther": "Other amount",
+    "addonAlone": "Add-ons come with a main reward. If you already backed a main reward, payment will go through.",
+    "items_one": "{{count}} item",
+    "items_other": "{{count}} items",
+    "total": "Total",
+    "pay": "Pay {{amount}}",
+    "loginToPay": "Log in to pay",
+    "button_one": "Cart · {{count}} · {{amount}}",
+    "button_other": "Cart · {{count}} · {{amount}}",
+    "successText_one": "{{amount}} with {{count}} item. Thank you!",
+    "successText_other": "{{amount}} with {{count}} items. Thank you!"
   }
 }

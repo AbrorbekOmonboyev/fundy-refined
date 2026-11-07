@@ -188,7 +188,7 @@ const DETAIL_COLUMNS = `
       'owner:profiles!projects_owner_id_fkey ( full_name, founder_profiles!founder_profiles_user_id_fkey ( display_name, is_verified ) )',
       'owner:profiles!projects_owner_id_fkey ( id, full_name, avatar_path, founder_profiles!founder_profiles_user_id_fkey ( * ) )',
     )},
-  owner_id, min_contribution, starts_at,
+  owner_id, min_contribution, allow_addons_only, starts_at,
   budget_items ( id, position, category, description, amount ),
   milestones ( id, position, title, description, target_label, release_percent, status ),
   reward_tiers ( id, position, title, description, amount, items, estimated_delivery, quantity_limit, claimed_count,
@@ -202,6 +202,7 @@ const DETAIL_COLUMNS = `
 type DetailRow = Omit<CardRow, 'evaluations' | 'owner'> & {
   owner_id: string;
   min_contribution: number;
+  allow_addons_only: boolean;
   starts_at: string | null;
   evaluations: Tables['evaluations']['Row'] | null;
   owner: {
@@ -242,6 +243,7 @@ export type ProjectComment = DetailRow['comments'][number] & { replies: DetailRo
 export type ProjectDetail = ProjectCardData & {
   ownerId: string;
   minContribution: number;
+  allowAddonsOnly: boolean;
   startsAt: string | null;
   evaluation: Tables['evaluations']['Row'] | null;
   founder: Tables['founder_profiles']['Row'] | null;
@@ -285,6 +287,7 @@ export async function getProject(slug: string): Promise<ProjectDetail | null> {
     ...card,
     ownerId: data.owner_id,
     minContribution: data.min_contribution,
+    allowAddonsOnly: data.allow_addons_only,
     startsAt: data.starts_at,
     evaluation: data.evaluations?.is_published ? data.evaluations : null,
     founder: data.owner?.founder_profiles ?? null,
@@ -360,6 +363,25 @@ export async function contribute(args: {
   return data;
 }
 
+/** One payment for several rewards and add-ons (+ extra support). Prices are taken by the database. */
+export async function contributeCart(args: {
+  projectId: string;
+  items: { rewardId: string; quantity: number }[];
+  extra: number;
+  paymentMethod: Enums['payment_method'];
+  anonymous?: boolean;
+}): Promise<string> {
+  const { data, error } = await client().rpc('contribute_cart', {
+    p_project_id: args.projectId,
+    p_items: args.items.map(i => ({ reward_id: i.rewardId, quantity: i.quantity })),
+    p_extra_amount: args.extra,
+    p_payment_method: args.paymentMethod,
+    p_is_anonymous: args.anonymous ?? false,
+  });
+  if (error) throw error;
+  return data;
+}
+
 // ---------------------------------------------------------------------------
 // Dashboards
 // ---------------------------------------------------------------------------
@@ -372,6 +394,8 @@ export type MyContribution = {
   is_anonymous: boolean;
   created_at: string;
   reward: { title: string } | null;
+  extra_amount: number;
+  contribution_items: { quantity: number; unit_amount: number; reward: { title: string } | null }[];
   project: {
     slug: string;
     model: FundingModel;
@@ -389,7 +413,8 @@ export async function getMyContributions(userId: string): Promise<MyContribution
   const { data, error } = await client()
     .from('contributions')
     .select(
-      `id, amount, payment_method, equity_share_pct, status, is_anonymous, created_at,
+      `id, amount, payment_method, equity_share_pct, status, is_anonymous, created_at, extra_amount,
+       contribution_items ( quantity, unit_amount, reward:reward_tiers ( title ) ),
        reward:reward_tiers ( title ),
        project:projects ( slug, model, status, ends_at, original_language, project_translations ( language, title, tagline ),
          milestones ( release_percent, status ), equity_terms ( distribution_schedule ) )`,

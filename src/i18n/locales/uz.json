@@ -115,7 +115,8 @@
     "reload": "Sahifani yangilash",
     "addonNeedsReward": "Qoʻshimcha mahsulotni faqat asosiy mukofot bilan olish mumkin.",
     "rewardNotAvailableNow": "Bu mukofot hozir mavjud emas.",
-    "rewardLimitPerBacker": "Bu mukofotni bir kishi cheklangan miqdorda oladi — limitga yetdingiz."
+    "rewardLimitPerBacker": "Bu mukofotni bir kishi cheklangan miqdorda oladi — limitga yetdingiz.",
+    "cartInvalid": "Savatda xatolik bor. Sahifani yangilab, qaytadan urinib koʻring."
   },
   "auth": {
     "fields": {
@@ -1057,7 +1058,6 @@
     "compareHint": "Ikki yoki undan koʻp mukofotni belgilab, solishtiring",
     "addonsTitle": "Qoʻshimcha mahsulotlar",
     "addonsHint": "Asosiy mukofotga qoʻshib olinadi.",
-    "addonSoon": "Savatga qoʻshish tez orada — hozircha faqat koʻrish mumkin.",
     "selected_one": "{{count}} ta tanlandi",
     "selected_other": "{{count}} ta tanlandi",
     "compare": "Solishtirish",
@@ -1092,6 +1092,36 @@
     "included": "Bor",
     "notIncluded": "Yoʻq",
     "unlimited": "Cheklanmagan",
-    "seeAll": "Barcha mukofotlar"
+    "seeAll": "Barcha mukofotlar",
+    "addToCart": "Savatga qoʻshish",
+    "addMore": "Yana qoʻshish (savatda {{count}})",
+    "addonHint": "Asosiy mukofot bilan birga olinadi."
+  },
+  "cart": {
+    "title": "Homiyligim",
+    "empty": "Savat boʻsh. Mukofot tanlang yoki pastda qoʻshimcha summa bilan qoʻllab-quvvatlang.",
+    "gone": "Bu mahsulot endi mavjud emas",
+    "less": "Kamaytirish",
+    "more": "Koʻpaytirish",
+    "problem": {
+      "missing": "Mavjud emas — oʻchiring",
+      "unavailable": "Hozir tanlab boʻlmaydi",
+      "notEnough": "Shuncha qolmagan — kamaytiring",
+      "overLimit": "Bir kishiga cheklovdan koʻp"
+    },
+    "extra": "Qoʻshimcha qoʻllab-quvvatlash",
+    "extraHint": "Mukofotsiz, faqat loyihani qoʻllash uchun. Ixtiyoriy.",
+    "noExtra": "Yoʻq",
+    "extraOther": "Boshqa summa",
+    "addonAlone": "Qoʻshimcha mahsulotlar asosiy mukofot bilan birga beriladi. Agar oldin asosiy mukofot olgan boʻlsangiz, toʻlov oʻtadi.",
+    "items_one": "{{count}} ta mahsulot",
+    "items_other": "{{count}} ta mahsulot",
+    "total": "Jami",
+    "pay": "{{amount}} toʻlash",
+    "loginToPay": "Toʻlash uchun kiring",
+    "button_one": "Savat · {{count}} · {{amount}}",
+    "button_other": "Savat · {{count}} · {{amount}}",
+    "successText_one": "{{amount}} — {{count}} ta mahsulot bilan. Rahmat!",
+    "successText_other": "{{amount}} — {{count}} ta mahsulot bilan. Rahmat!"
   }
 }

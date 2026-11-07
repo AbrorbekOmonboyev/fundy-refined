@@ -5,6 +5,7 @@ import type { ProjectDetail } from '@/features/projects/api';
 import { discountPercent, isLowStock, rewardStatus, sortRewards, unitsLeft } from '@/features/projects/rewards';
 import { publicFileUrl, responsiveImage } from '@/lib/supabase';
 import { formatDate, formatMoney, formatNumber } from '@/lib/money';
+import { useCart } from '@/features/cart/cart';
 
 export type Reward = ProjectDetail['rewards'][number];
 
@@ -13,7 +14,7 @@ const imageOf = (path: string) => publicFileUrl('project-images', path) ?? path;
 /**
  * Rewards and add-ons: cards with price, retail price and saving, real stock,
  * delivery, a details window and a compare tool (docs/PLAN-rewards-and-pledges.md, Phase A).
- * Choosing a reward opens the existing backing dialog; the multi-item cart comes in Phase B.
+ * "Add to cart" puts a reward or add-on in the pledge cart (Phase B) and opens it.
  */
 export function RewardsSection({
   project,
@@ -28,6 +29,8 @@ export function RewardsSection({
   const [details, setDetails] = useState<Reward | null>(null);
   const [compare, setCompare] = useState<string[]>([]);
   const [comparing, setComparing] = useState(false);
+  const cart = useCart(project.id);
+  const inCart = (id: string) => cart.lines.find(l => l.rewardId === id)?.quantity ?? 0;
 
   const visible = project.rewards.filter(r => !r.is_hidden);
   const main = sortRewards(visible.filter(r => r.kind === 'reward'));
@@ -61,6 +64,7 @@ export function RewardsSection({
               reward={r}
               canBack={canBack}
               onChoose={() => onChoose(r.id)}
+              inCart={inCart(r.id)}
               onDetails={() => setDetails(r)}
               compareChecked={main.length > 1 ? compare.includes(r.id) : undefined}
               onCompare={() => toggleCompare(r.id)}
@@ -79,7 +83,15 @@ export function RewardsSection({
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {addons.map(r => (
-              <RewardCard key={r.id} reward={r} compact canBack={false} onDetails={() => setDetails(r)} />
+              <RewardCard
+                key={r.id}
+                reward={r}
+                compact
+                canBack={canBack}
+                onChoose={() => onChoose(r.id)}
+                inCart={inCart(r.id)}
+                onDetails={() => setDetails(r)}
+              />
             ))}
           </div>
         </section>
@@ -113,7 +125,7 @@ export function RewardsSection({
       {details && (
         <RewardDetails
           reward={details}
-          canBack={canBack && details.kind === 'reward'}
+          canBack={canBack}
           onChoose={() => {
             setDetails(null);
             onChoose(details.id);
@@ -181,10 +193,12 @@ function RewardCard({
   onDetails,
   compareChecked,
   onCompare,
+  inCart = 0,
 }: {
   reward: Reward;
   compact?: boolean;
   canBack: boolean;
+  inCart?: number;
   onChoose?: () => void;
   onDetails: () => void;
   compareChecked?: boolean;
@@ -272,7 +286,11 @@ function RewardCard({
               onClick={onChoose}
               className="flex-1 min-w-32 py-2.5 rounded-full bg-night text-white text-sm font-semibold hover:bg-night-soft disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
-              {status === 'available' ? t('rewards.choose') : t(`rewards.${status}`)}
+              {status === 'available'
+                ? inCart > 0
+                  ? t('rewards.addMore', { count: inCart })
+                  : t('rewards.addToCart')
+                : t(`rewards.${status}`)}
             </button>
           )}
           <button
@@ -293,7 +311,7 @@ function RewardCard({
         {compact && (
           <p className="text-xs text-slate-500 flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5" aria-hidden />
-            {t('rewards.addonSoon')}
+            {t('rewards.addonHint')}
           </p>
         )}
       </div>
@@ -458,10 +476,10 @@ function RewardDetails({
               onClick={onChoose}
               className="w-full py-3 rounded-full bg-night text-white font-semibold hover:bg-night-soft disabled:opacity-50 cursor-pointer"
             >
-              {status === 'available' ? t('rewards.choose') : t(`rewards.${status}`)}
+              {status === 'available' ? t('rewards.addToCart') : t(`rewards.${status}`)}
             </button>
           )}
-          {r.kind === 'addon' && <p className="text-xs text-slate-500">{t('rewards.addonSoon')}</p>}
+          {r.kind === 'addon' && <p className="text-xs text-slate-500">{t('rewards.addonHint')}</p>}
         </div>
       </div>
     </Modal>

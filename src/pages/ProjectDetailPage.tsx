@@ -32,6 +32,8 @@ import { photoCredit } from '@/data/photoCredits';
 import { ChecksList, MoneyTrail } from '@/features/projects/MoneyTrail';
 import { RecentBackers } from '@/features/projects/RecentBackers';
 import { RewardsSection } from '@/features/projects/RewardCards';
+import { CartDrawer } from '@/features/cart/CartDrawer';
+import { cartActions, priceCart, useCart } from '@/features/cart/cart';
 import { formatDate, formatMoney, formatNumber } from '@/lib/money';
 import { publicFileUrl, responsiveImage } from '@/lib/supabase';
 import { usePageMeta } from '@/lib/usePageMeta';
@@ -74,6 +76,15 @@ function ProjectView({ project }: { project: ProjectDetail }) {
   const [tab, setTab] = useState<Tab>('story');
   const mainRewards = project.rewards.filter(r => r.kind === 'reward' && !r.is_hidden);
   const [dialogReward, setDialogReward] = useState<string | null | undefined>(undefined); // undefined = closed
+  // Reward projects use the pledge cart; ?cart=open reopens it after logging in.
+  const isRewardProject = project.model === 'reward';
+  const [cartOpen, setCartOpen] = useState(() => new URLSearchParams(location.search).get('cart') === 'open');
+  const cart = useCart(project.id);
+  const cartSummary = priceCart(cart, project.rewards);
+  const cartLabel =
+    cartSummary.count > 0
+      ? t('cart.button', { count: cartSummary.count, amount: formatMoney(cartSummary.total, true) })
+      : t(`contribute.cta.${project.model}`);
   const [copied, setCopied] = useState(false);
 
   const isLive = project.status === 'active' && daysLeft(project.endsAt) > 0;
@@ -83,6 +94,11 @@ function ProjectView({ project }: { project: ProjectDetail }) {
   const credit = photoCredit(project.coverUrl);
 
   function openContribute(rewardId: string | null = null) {
+    if (isRewardProject) {
+      if (rewardId) cartActions(project.id).add(rewardId);
+      setCartOpen(true); // logging in is asked only when paying
+      return;
+    }
     if (!user) {
       navigate(`${paths.login}?next=${encodeURIComponent(location.pathname)}`);
       return;
@@ -301,7 +317,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
             <div className="space-y-2.5">
               {isLive && !isOwner && (
                 <Button onClick={() => openContribute()} fullWidth className="py-3.5">
-                  {t(`contribute.cta.${project.model}`)}
+                  {isRewardProject ? cartLabel : t(`contribute.cta.${project.model}`)}
                 </Button>
               )}
               {isOwner && <Alert variant="info">{t('project.youOwnThis')}</Alert>}
@@ -610,12 +626,14 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                 </div>
               </div>
               <Button onClick={() => openContribute()} className="shrink-0 py-3">
-                {t(`contribute.cta.${project.model}`)}
+                {isRewardProject ? cartLabel : t(`contribute.cta.${project.model}`)}
               </Button>
             </div>
           </div>
         </>
       )}
+
+      {cartOpen && <CartDrawer project={project} title={title} onClose={() => setCartOpen(false)} />}
 
       {dialogReward !== undefined && (
         <ContributeDialog

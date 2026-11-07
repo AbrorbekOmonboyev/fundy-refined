@@ -133,8 +133,24 @@ export function BackerDashboardPage() {
                         )}
                       </td>
                       <td className="py-3 px-4 text-slate-600">
-                        {c.reward && (
-                          <span className="block">{t('contribute.successReward', { reward: c.reward.title })}</span>
+                        {c.contribution_items.length > 0 ? (
+                          <ul className="space-y-0.5">
+                            {c.contribution_items.map((item, i) => (
+                              <li key={i}>
+                                {item.reward?.title ?? '—'}
+                                {item.quantity > 1 && <strong className="text-ink"> ×{item.quantity}</strong>}
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          c.reward && (
+                            <span className="block">{t('contribute.successReward', { reward: c.reward.title })}</span>
+                          )
+                        )}
+                        {c.extra_amount > 0 && c.contribution_items.length > 0 && (
+                          <span className="block text-slate-500">
+                            {t('cart.extra')}: {formatMoney(c.extra_amount)}
+                          </span>
                         )}
                         {c.equity_share_pct != null && (
                           <span className="block">{t('dashboard.backer.share', { share: c.equity_share_pct })}</span>

@@ -34,6 +34,7 @@ const BY_CODE: Record<string, ErrorKey> = {
   addon_needs_reward: 'errors.addonNeedsReward',
   reward_not_available_now: 'errors.rewardNotAvailableNow',
   reward_limit_per_backer: 'errors.rewardLimitPerBacker',
+  cart_invalid: 'errors.cartInvalid',
   project_not_accepting_contributions: 'errors.projectClosed',
   cannot_back_own_project: 'errors.ownProject',
   cannot_review_own_project: 'errors.cannotReviewOwn',
