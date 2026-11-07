@@ -479,24 +479,7 @@
     "pageOf": "Page {{page}} of {{pages}}",
     "filters": "Filters",
     "closeFilters": "Close",
-    "showResults": "Show ({{formatted}})",
-    "sentence": {
-      "text": "Show me {status} projects in {category} from {region}, sorted by {sort}",
-      "status": {
-        "all": "all",
-        "live": "live",
-        "funded": "funded"
-      },
-      "allCategories": "all categories",
-      "allRegions": "all of Uzbekistan",
-      "sort": {
-        "most_funded": "most funded",
-        "newest": "newest",
-        "ending_soon": "ending soon",
-        "most_backers": "most backers",
-        "target_low": "smallest goal"
-      }
-    }
+    "showResults": "Show ({{formatted}})"
   },
   "project": {
     "save": "Save project",

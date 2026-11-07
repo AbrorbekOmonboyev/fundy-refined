@@ -485,24 +485,7 @@
     "pageOf": "Страница {{page}} из {{pages}}",
     "filters": "Фильтры",
     "closeFilters": "Закрыть",
-    "showResults": "Показать ({{formatted}})",
-    "sentence": {
-      "text": "Показать: {status} проекты · {category} · {region} · сначала {sort}",
-      "status": {
-        "all": "все",
-        "live": "активные",
-        "funded": "успешные"
-      },
-      "allCategories": "все категории",
-      "allRegions": "весь Узбекистан",
-      "sort": {
-        "most_funded": "больше собрано",
-        "newest": "новые",
-        "ending_soon": "скоро завершатся",
-        "most_backers": "больше сторонников",
-        "target_low": "меньшая цель"
-      }
-    }
+    "showResults": "Показать ({{formatted}})"
   },
   "project": {
     "save": "Сохранить",
