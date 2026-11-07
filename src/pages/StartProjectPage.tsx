@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { paths } from '@/app/routes';
 import { useAuth } from '@/features/auth/AuthContext';
 import { BasicsStep } from '@/features/wizard/steps/BasicsStep';
@@ -22,28 +22,26 @@ export function StartLandingPage() {
         <p className="text-base text-slate-600">{t('start.intro')}</p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-        <section className="lg:col-span-3 bg-card rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-4">
+      {/* Plain columns separated by lines, no boxes */}
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12">
+        <section className="lg:col-span-3 pt-5 border-t border-slate-200 space-y-4">
           <h2 className="text-xl text-ink">{t('start.needTitle')}</h2>
-          <ul className="space-y-3">
+          <ul className="divide-y divide-slate-200">
             {([1, 2, 3, 4, 5, 6] as const).map(i => (
-              <li key={i} className="flex gap-3 text-sm text-slate-700">
-                <CheckCircle2 className="w-5 h-5 text-brand-deep shrink-0" aria-hidden />
+              <li key={i} className="py-3 text-base text-slate-700">
                 {t(`start.need${i}`)}
               </li>
             ))}
           </ul>
         </section>
 
-        <div className="lg:col-span-2 space-y-6">
-          <section className="bg-card rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-4">
+        <div className="lg:col-span-2 space-y-10">
+          <section className="pt-5 border-t border-slate-200 space-y-4">
             <h2 className="text-xl text-ink">{t('start.timeTitle')}</h2>
-            <ol className="space-y-3">
+            <ol className="space-y-4">
               {([1, 2, 3, 4] as const).map(i => (
-                <li key={i} className="flex gap-3 text-sm">
-                  <span className="w-6 h-6 rounded-full bg-brand text-ink text-xs font-bold flex items-center justify-center shrink-0">
-                    {i}
-                  </span>
+                <li key={i} className="flex gap-4 text-sm">
+                  <span className="w-6 shrink-0 font-bold text-slate-400 font-mono-numbers">0{i}</span>
                   <span>
                     <span className="block font-semibold text-ink">{t(`start.time${i}Title`)}</span>
                     <span className="text-slate-600">{t(`start.time${i}Text`)}</span>
@@ -52,9 +50,9 @@ export function StartLandingPage() {
               ))}
             </ol>
           </section>
-          <section className="bg-brand-soft rounded-2xl border border-brand p-6 space-y-2">
-            <h2 className="text-lg text-ink">{t('start.feesTitle')}</h2>
-            <p className="text-sm text-slate-700">{t('start.fees')}</p>
+          <section className="pt-5 border-t border-slate-200 space-y-2">
+            <h2 className="text-xl text-ink">{t('start.feesTitle')}</h2>
+            <p className="text-sm text-slate-700 leading-relaxed">{t('start.fees')}</p>
           </section>
         </div>
       </div>

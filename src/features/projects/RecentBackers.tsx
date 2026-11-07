@@ -46,7 +46,7 @@ export function RecentBackers({ projectId }: { projectId: string }) {
           <li key={i} className="flex items-center gap-3 text-sm">
             <span
               aria-hidden
-              className="w-8 h-8 rounded-full bg-brand-soft text-ink text-xs font-bold flex items-center justify-center shrink-0"
+              className="w-8 h-8 rounded-full bg-track text-ink text-xs font-bold flex items-center justify-center shrink-0"
             >
               {b.first_name.charAt(0)}
             </span>

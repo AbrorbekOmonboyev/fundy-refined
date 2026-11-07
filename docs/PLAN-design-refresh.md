@@ -4,6 +4,8 @@ Goal: Fundy should look like Kickstarter / GoFundMe / Indiegogo / Republic, not 
 landing page. **Colours stay exactly as they are**: chartreuse #B5F23D, ink #15122B,
 shadow green #90D508, white, page grey #F4F6FB (and the current dark mode palette).
 
+**Status (2026-11-06): all 10 steps done and live.** Restore point for the old look: git tag `design-original`; every design commit starts with "Design refresh:".
+
 ## Why the site looks "AI-made" today (found on www.fundy.uz and in the code)
 
 | Pattern | Where | How often |

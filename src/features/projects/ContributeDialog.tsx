@@ -144,7 +144,7 @@ export function ContributeDialog({
             {tier && <p className="text-xs text-slate-500">{t('contribute.successReward', { reward: tier.title })}</p>}
 
             {/* Every backer can bring the next one */}
-            <div className="rounded-2xl bg-brand-soft border border-brand p-4 space-y-3 text-left">
+            <div className="rounded-2xl border border-slate-200 p-4 space-y-3 text-left">
               <p className="text-sm font-semibold text-ink">{t('contribute.shareTitle')}</p>
               <p className="text-sm text-slate-700">{t('contribute.shareText')}</p>
               <div className="grid grid-cols-2 gap-2">
@@ -247,7 +247,7 @@ export function ContributeDialog({
             </fieldset>
 
             {project.equity && (
-              <div className="rounded-lg bg-brand-soft border border-brand p-3 text-xs text-ink">
+              <div className="rounded-lg bg-page border border-slate-200 p-3 text-xs text-ink">
                 {t('contribute.equityShare', {
                   share: formatNumber(share, 2),
                   pool: project.equity.investor_profit_share_pct,

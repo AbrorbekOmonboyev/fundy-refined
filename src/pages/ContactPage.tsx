@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CheckCircle2, Mail } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { useAuth } from '@/features/auth/AuthContext';
 import { errorKey } from '@/features/auth/errors';
 import { isValidEmail, isValidName } from '@/features/auth/validation';
@@ -52,10 +52,7 @@ export function ContactPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 lg:py-14">
       <header>
-        <p className="inline-flex items-center gap-2 rounded-full bg-brand px-3 py-1 text-xs font-semibold text-ink">
-          <Mail className="w-3.5 h-3.5" aria-hidden />
-          {t('contact.kicker')}
-        </p>
+        <p className="text-sm font-semibold text-slate-500">{t('contact.kicker')}</p>
         <h1 className="mt-4 text-3xl sm:text-4xl text-ink">{t('contact.title')}</h1>
         <p className="mt-4 text-slate-600 leading-relaxed">{t('contact.intro')}</p>
       </header>

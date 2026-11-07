@@ -33,9 +33,7 @@ export function AdminLayout() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid gap-8 lg:grid-cols-[210px_1fr]">
       <nav aria-label={t('admin.title')} className="lg:sticky lg:top-24 self-start">
-        <p className="hidden lg:block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2 px-3">
-          {t('admin.title')}
-        </p>
+        <p className="hidden lg:block text-sm font-semibold text-ink mb-2 px-3">{t('admin.title')}</p>
         <ul className="flex lg:flex-col gap-1 overflow-x-auto pb-2 lg:pb-0">
           {links.map(({ to, label, Icon, end }) => (
             <li key={to}>

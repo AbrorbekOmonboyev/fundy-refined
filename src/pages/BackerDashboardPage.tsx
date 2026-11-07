@@ -1,7 +1,6 @@
 import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { Bookmark, Gift, HandCoins, TrendingUp } from 'lucide-react';
 import { paths } from '@/app/routes';
 import { useAuth } from '@/features/auth/AuthContext';
 import { pickText, type MyContribution } from '@/features/projects/api';
@@ -30,10 +29,10 @@ export function BackerDashboardPage() {
   const rewards = confirmed.filter(c => c.reward).length;
 
   const tiles = [
-    { Icon: HandCoins, label: t('dashboard.backer.total'), value: formatMoney(total, true) },
-    { Icon: Bookmark, label: t('dashboard.backer.projects'), value: formatNumber(projectsBacked) },
-    { Icon: TrendingUp, label: t('dashboard.backer.musharakah'), value: formatMoney(musharakah, true) },
-    { Icon: Gift, label: t('dashboard.backer.rewards'), value: formatNumber(rewards) },
+    { label: t('dashboard.backer.total'), value: formatMoney(total, true) },
+    { label: t('dashboard.backer.projects'), value: formatNumber(projectsBacked) },
+    { label: t('dashboard.backer.musharakah'), value: formatMoney(musharakah, true) },
+    { label: t('dashboard.backer.rewards'), value: formatNumber(rewards) },
   ];
 
   return (
@@ -41,7 +40,7 @@ export function BackerDashboardPage() {
       <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-6">
         <div>
           <p className="text-xs font-semibold text-ink">{t('account.contributions')}</p>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-ink mt-1">
+          <h1 className="text-[1.75rem] sm:text-4xl text-ink mt-1">
             {t('dashboard.backer.title', { name: profile?.full_name })}
           </h1>
         </div>
@@ -53,21 +52,19 @@ export function BackerDashboardPage() {
         </Link>
       </header>
 
-      <dl className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {tiles.map(({ Icon, label, value }) => (
-          <div key={label} className="bg-card rounded-xl border border-slate-200 p-4">
-            <dt className="flex items-center gap-1.5 text-xs text-slate-500">
-              <Icon className="w-3.5 h-3.5 text-ink" aria-hidden />
-              {label}
-            </dt>
-            <dd className="mt-1 text-xl font-bold text-ink font-mono-numbers">
+      {/* Plain numbers, no icon boxes */}
+      <dl className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        {tiles.map(({ label, value }) => (
+          <div key={label}>
+            <dt className="text-sm text-slate-500">{label}</dt>
+            <dd className="mt-1 text-2xl font-bold text-ink font-mono-numbers">
               {contributions.isPending ? '…' : value}
             </dd>
           </div>
         ))}
       </dl>
 
-      <div className="flex gap-2 border-b border-slate-200" role="tablist">
+      <div className="flex gap-6 border-b border-slate-200" role="tablist">
         {(['contributions', 'saved'] as const).map(id => (
           <button
             key={id}
@@ -75,8 +72,10 @@ export function BackerDashboardPage() {
             role="tab"
             aria-selected={tab === id}
             onClick={() => setTab(id)}
-            className={`py-3 px-3 text-xs font-semibold border-b-2 -mb-px cursor-pointer ${
-              tab === id ? 'border-ink text-ink' : 'border-transparent text-slate-500 hover:text-ink'
+            className={`py-3.5 text-sm border-b-[3px] -mb-px cursor-pointer ${
+              tab === id
+                ? 'border-brand-deep text-ink font-semibold'
+                : 'border-transparent text-slate-600 hover:text-ink'
             }`}
           >
             {id === 'contributions'
@@ -196,11 +195,11 @@ export function BackerDashboardPage() {
 function Empty({ text }: { text: string }) {
   const { t } = useTranslation();
   return (
-    <div className="p-12 text-center bg-card rounded-2xl border border-slate-200 space-y-4">
+    <div className="py-12 text-center border-y border-slate-200 space-y-4">
       <p className="text-sm text-slate-600">{text}</p>
       <Link
         to={paths.explore}
-        className="inline-block px-4 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand rounded-md"
+        className="inline-block px-4 py-2 text-sm font-semibold text-white bg-night hover:bg-night-soft rounded-md"
       >
         {t('home.hero.explore')}
       </Link>
@@ -238,7 +237,7 @@ function MoneyStatus({ c }: { c: MyContribution }) {
     <div className="space-y-1.5 min-w-40">
       <p className="text-ink font-semibold">{t('dashboard.backer.money.released', { percent: released })}</p>
       <div className="h-1.5 rounded-full bg-track overflow-hidden" aria-hidden>
-        <div className="h-full bg-brand rounded-full" style={{ width: `${released}%` }} />
+        <div className="h-full bg-brand-deep rounded-full" style={{ width: `${released}%` }} />
       </div>
       {nextPayout && <p className="text-slate-500">{t('dashboard.backer.money.nextPayout', { date: nextPayout })}</p>}
     </div>

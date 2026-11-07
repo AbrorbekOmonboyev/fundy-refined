@@ -36,7 +36,7 @@ export function FounderDashboardPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
       <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-6">
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-ink">{t('account.projects')}</h1>
+        <h1 className="text-[1.75rem] sm:text-4xl text-ink">{t('account.projects')}</h1>
         <Link
           to={paths.newProject}
           className="px-4 py-2 text-xs font-semibold text-white bg-night hover:bg-night-soft rounded-md self-start sm:self-auto"

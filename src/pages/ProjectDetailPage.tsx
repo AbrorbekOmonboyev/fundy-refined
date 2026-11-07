@@ -749,7 +749,7 @@ function EvaluationPanel({ project }: { project: ProjectDetail }) {
             </p>
           </div>
           <p>
-            <span className="text-3xl font-extrabold text-ink font-mono-numbers">{e.overall_score}</span>
+            <span className="text-3xl font-bold text-ink font-mono-numbers">{e.overall_score}</span>
             <span className="text-slate-400 text-sm"> / 100</span>
           </p>
         </div>

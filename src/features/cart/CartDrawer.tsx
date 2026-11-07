@@ -120,7 +120,7 @@ export function CartDrawer({
             <p className="text-sm text-slate-600">
               {t('cart.successText', { amount: formatMoney(done.total), count: done.count })}
             </p>
-            <div className="rounded-2xl bg-brand-soft border border-brand p-4 space-y-3 text-left">
+            <div className="rounded-2xl border border-slate-200 p-4 space-y-3 text-left">
               <p className="text-sm font-semibold text-ink">{t('contribute.shareTitle')}</p>
               <div className="grid grid-cols-2 gap-2">
                 <a

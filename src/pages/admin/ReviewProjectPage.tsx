@@ -107,9 +107,7 @@ function Review({ draft, evaluation }: { draft: Draft; evaluation: Evaluation | 
             <p className="text-sm text-slate-700 whitespace-pre-line">{text?.story}</p>
             {text?.risks && (
               <div className="rounded-2xl bg-page p-4">
-                <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-1">
-                  {t('wizard.story.risks')}
-                </h3>
+                <h3 className="text-sm font-semibold text-ink mb-1">{t('wizard.story.risks')}</h3>
                 <p className="text-sm text-slate-700 whitespace-pre-line">{text.risks}</p>
               </div>
             )}
@@ -277,9 +275,7 @@ function FounderSection({ draft }: { draft: Draft }) {
       )}
       {error && <Alert variant="error">{error}</Alert>}
 
-      <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 pt-2">
-        {t('wizard.founder.documents')}
-      </h3>
+      <h3 className="text-sm font-semibold text-ink pt-2">{t('wizard.founder.documents')}</h3>
       {draft.documents.length === 0 ? (
         <p className="text-sm text-slate-500">{t('admin.review.noDocuments')}</p>
       ) : (

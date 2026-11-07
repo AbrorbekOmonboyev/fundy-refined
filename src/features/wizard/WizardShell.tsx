@@ -83,7 +83,7 @@ export function WizardShell({
 
         {/* A short, real-looking example for this step */}
         {step !== 'review' && (
-          <details className="group rounded-xl border border-brand bg-brand-soft px-4 py-3 text-sm">
+          <details className="group rounded-xl border border-slate-200 bg-card px-4 py-3 text-sm">
             <summary className="cursor-pointer font-semibold text-ink list-none flex items-center justify-between gap-2">
               {t('wizard.example.title')}
               <span aria-hidden className="text-xs text-slate-500 group-open:hidden">
