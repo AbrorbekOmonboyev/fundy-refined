@@ -224,6 +224,7 @@ const translationRows: string[] = [];
 const budgetRows: string[] = [];
 const milestoneRows: string[] = [];
 const tierRows: string[] = [];
+const componentRows: string[] = [];
 const equityRows: string[] = [];
 const evaluationRows: string[] = [];
 const founderRows: string[] = [];
@@ -321,9 +322,23 @@ INITIAL_PROJECTS.forEach((p, index) => {
     description: uz.rewards![i].description,
     items: uz.rewards![i].items,
     estimatedDelivery: uz.rewards![i].delivery,
+    extra: uz.rewards![i],
     uuid: uuid(`reward:${p.slug}:${r.id}`),
     position: i,
     claimed: 0,
+  }));
+  // Add-ons exist only in the Uzbek data; nobody has bought them yet.
+  const addons = (uz.addons ?? []).map((a, i) => ({
+    uuid: uuid(`addon:${p.slug}:${i}`),
+    position: tiers.length + i,
+    title: a.title,
+    description: a.description,
+    amount: a.amount,
+    items: (a.components ?? []).map(c => c[0]),
+    estimatedDelivery: a.delivery,
+    availableCount: a.limit ?? null,
+    claimed: 0,
+    extra: a,
   }));
 
   if (p.equityTerms) {
@@ -404,13 +419,42 @@ INITIAL_PROJECTS.forEach((p, index) => {
   fixed.filter(f => f.amount > 0).forEach(f => record(f.backer, f.amount, f.tierKey));
   free.forEach((b, i) => record(b, amounts[i]));
 
-  for (const t of tiers) {
-    live.push(
-      `update public.reward_tiers set title = ${q(t.title)}, description = ${q(t.description)}, items = ${qArr(t.items)}, estimated_delivery = ${q(t.estimatedDelivery)} where id = ${q(t.uuid)};`,
-    );
-    tierRows.push(
-      `(${q(t.uuid)}, ${q(projectId)}, ${t.position}, ${q(t.title)}, ${q(t.description)}, ${t.amount}, ${qArr(t.items)}, ${q(t.estimatedDelivery)}, ${t.availableCount ?? 'null'}, ${t.claimed})`,
-    );
+  for (const [kind, list] of [['reward', tiers], ['addon', addons]] as const) {
+    for (const t of list) {
+      const x = t.extra;
+      const until = x.earlyBirdDays ? `now() + interval '${x.earlyBirdDays} days'` : 'null';
+      const rich = `'${kind}', ${x.compareAt ?? 'null'}, ${qArr(x.images ?? [])}, ${q(x.longDescription ?? '')}, ${!!x.featured}, ${!!x.digital}, ${x.perBackerLimit ?? 'null'}, ${until}`;
+      tierRows.push(
+        `(${q(t.uuid)}, ${q(projectId)}, ${t.position}, ${q(t.title)}, ${q(t.description)}, ${t.amount}, ${qArr(t.items)}, ${q(t.estimatedDelivery)}, ${t.availableCount ?? 'null'}, ${t.claimed}, ${rich})`,
+      );
+      if (kind === 'reward') {
+        live.push(
+          `update public.reward_tiers set title = ${q(t.title)}, description = ${q(t.description)}, items = ${qArr(t.items)}, estimated_delivery = ${q(t.estimatedDelivery)},
+  kind = 'reward', compare_at_amount = ${x.compareAt ?? 'null'}, image_paths = ${qArr(x.images ?? [])}, long_description = ${q(x.longDescription ?? '')},
+  is_featured = ${!!x.featured}, is_digital = ${!!x.digital}, per_backer_limit = ${x.perBackerLimit ?? 'null'}, available_until = ${until}
+  where id = ${q(t.uuid)};`,
+        );
+      } else {
+        live.push(
+          `insert into public.reward_tiers (id, project_id, position, title, description, amount, items, estimated_delivery, quantity_limit, claimed_count,
+  kind, compare_at_amount, image_paths, long_description, is_featured, is_digital, per_backer_limit, available_until)
+  select ${q(t.uuid)}, ${q(projectId)}, ${t.position}, ${q(t.title)}, ${q(t.description)}, ${t.amount}, ${qArr(t.items)}, ${q(t.estimatedDelivery)}, ${t.availableCount ?? 'null'}, 0, ${rich}
+  where ${exists(projectId)}
+  on conflict (id) do nothing;`,
+        );
+      }
+      const components = x.components ?? t.items.map(name => [name, 1] as [string, number]);
+      live.push(`delete from public.reward_components where reward_tier_id = ${q(t.uuid)};`);
+      components.forEach(([name, qty], i) => {
+        const row = `(${q(uuid(`component:${t.uuid}:${i}`))}, ${q(t.uuid)}, ${i}, ${q(name)}, ${qty})`;
+        componentRows.push(row);
+        live.push(
+          `insert into public.reward_components (id, reward_tier_id, position, name, quantity)
+  select ${q(uuid(`component:${t.uuid}:${i}`))}::uuid, ${q(t.uuid)}::uuid, ${i}, ${q(name)}, ${qty}
+  where exists (select 1 from public.reward_tiers where id = ${q(t.uuid)}) on conflict (id) do nothing;`,
+        );
+      });
+    }
   }
 
   // --- Updates (with likes from backers) ---
@@ -506,9 +550,14 @@ insert into public.milestones (id, project_id, position, title, description, tar
 values
   ${values(milestoneRows)};
 
-insert into public.reward_tiers (id, project_id, position, title, description, amount, items, estimated_delivery, quantity_limit, claimed_count)
+insert into public.reward_tiers (id, project_id, position, title, description, amount, items, estimated_delivery, quantity_limit, claimed_count,
+                                 kind, compare_at_amount, image_paths, long_description, is_featured, is_digital, per_backer_limit, available_until)
 values
   ${values(tierRows)};
+
+insert into public.reward_components (id, reward_tier_id, position, name, quantity)
+values
+  ${values(componentRows)};
 
 insert into public.equity_terms
   (project_id, contract_type, investor_profit_share_pct, min_investment, projected_annual_return, distribution_schedule, exit_horizon_years)

@@ -684,13 +684,43 @@ values
   ('bf77bda8-5e6a-4fa5-a3b4-1531cfa3b97e', '3107824e-03ea-4634-a63a-a6f273994879', 2, 'Bozorda sinov', 'Andijon markaziy bozoridagi haydovchilarga 20 ta sinov mototsiklini berish.', '4-oy', 20),
   ('f326469f-552a-423b-aeb4-1bef700b95ca', '3107824e-03ea-4634-a63a-a6f273994879', 3, 'Seriyali ishlab chiqarish', 'Oyiga 50 ta mototsikl ishlab chiqarish va buyurtmalarni bajarish.', '6-oy', 10);
 
-insert into public.reward_tiers (id, project_id, position, title, description, amount, items, estimated_delivery, quantity_limit, claimed_count)
+insert into public.reward_tiers (id, project_id, position, title, description, amount, items, estimated_delivery, quantity_limit, claimed_count,
+                                 kind, compare_at_amount, image_paths, long_description, is_featured, is_digital, per_backer_limit, available_until)
 values
-  ('135e3a9a-73c8-473a-ac31-7c63e401d60a', 'e1419726-cc75-4e37-a75a-8219566f2ff7', 0, 'Samarqand kobalt piyolasi va likopchasi', 'Qoʻlda yasalgan, anʼanaviy Samarqand naqshli sopol piyola. Usta imzosi bilan.', 350000, array['Sopol piyola', 'Likopcha', 'Kelib chiqish sertifikati'], '2026-yil dekabr', 100, 17),
-  ('ef31f3ee-f395-4bfa-aa0c-325aea9a786f', 'e1419726-cc75-4e37-a75a-8219566f2ff7', 1, 'Qoʻlda toʻqilgan ipak atlas roʻmol (180×50 sm)', 'Tabiiy boʻyoqlar bilan, yogʻoch dastgohda toʻqilgan "bodom" naqshli sof ipak roʻmol.', 850000, array['Sof ipak roʻmol', 'Yogʻoch sovgʻa qutisi', 'Samarqand toʻquvchilari haqida kitobcha'], '2027-yil yanvar', 50, 26),
-  ('298d61ad-97f5-4a88-a7ce-41e6c6738802', 'e1419726-cc75-4e37-a75a-8219566f2ff7', 2, 'Master-klass va 7 qismli sopol toʻplam', 'Osh uchun katta lagan va 6 ta piyola, hamda Samarqanddagi ustaxonada yarim kunlik shaxsiy mashgʻulot.', 2500000, array['Katta lagan (38 sm)', '6 ta piyola', '4 soatlik master-klass', 'Uyushmada umrbod 15% chegirma'], '2027-yil yanvar', 20, 0),
-  ('8297f50b-72e1-4a9f-aa86-606527beda91', 'c425ad3b-ebfc-49d6-a8a7-d237cc54b3c3', 0, 'Anʼanaviy Chust pichogʻi (12 sm)', 'Jilolangan jez va suyak dastali, charx toshida qoʻlda oʻtkirlangan 12 sm li pichoq.', 280000, array['Chust pichogʻi', 'Boʻrtma naqshli charm gʻilof', 'Charx tosh'], '2026-yil dekabr', 60, 23),
-  ('20864980-7dad-4fe0-a7c2-73bbc3901554', 'c425ad3b-ebfc-49d6-a8a7-d237cc54b3c3', 1, 'Osh pichogʻi, katta (22 sm)', '67 qatlamli damask tigʻ va Fargʻona yongʻogʻidan dasta. Osh tayyorlash va goʻsht uchun.', 650000, array['Katta Chust pichogʻi', 'Yogʻoch sovgʻa qutisi', 'Haqiqiylik sertifikati'], '2027-yil yanvar', 75, 15);
+  ('135e3a9a-73c8-473a-ac31-7c63e401d60a', 'e1419726-cc75-4e37-a75a-8219566f2ff7', 0, 'Samarqand kobalt piyolasi va likopchasi', 'Qoʻlda yasalgan, anʼanaviy Samarqand naqshli sopol piyola. Usta imzosi bilan.', 350000, array['Sopol piyola', 'Likopcha', 'Kelib chiqish sertifikati'], '2026-yil dekabr', 100, 17, 'reward', 450000, array['/images/samarkand-craft.jpg'], 'Har bir piyola Mahmud aka tomonidan charxda qoʻlda yasaladi va kobalt sir bilan 1 180°C da kuydiriladi. Ostida usta muhri va raqam bor. Hajmi 220 ml. Idish yuvish mashinasida yuvsa boʻladi.', false, false, null, null),
+  ('ef31f3ee-f395-4bfa-aa0c-325aea9a786f', 'e1419726-cc75-4e37-a75a-8219566f2ff7', 1, 'Qoʻlda toʻqilgan ipak atlas roʻmol (180×50 sm)', 'Tabiiy boʻyoqlar bilan, yogʻoch dastgohda toʻqilgan "bodom" naqshli sof ipak roʻmol.', 850000, array['Sof ipak roʻmol', 'Yogʻoch sovgʻa qutisi', 'Samarqand toʻquvchilari haqida kitobcha'], '2027-yil yanvar', 50, 26, 'reward', 1100000, array['/images/samarkand-craft.jpg'], 'Margʻilon pillasidan olingan sof ipak, yongʻoq poʻsti, ruyan va anor bilan boʻyalgan. «Bodom» naqshi yogʻoch dastgohda 2 kun davomida toʻqiladi. Erta homiylar narxi cheklangan muddatga amal qiladi.', true, false, 2, now() + interval '6 days'),
+  ('298d61ad-97f5-4a88-a7ce-41e6c6738802', 'e1419726-cc75-4e37-a75a-8219566f2ff7', 2, 'Master-klass va 7 qismli sopol toʻplam', 'Osh uchun katta lagan va 6 ta piyola, hamda Samarqanddagi ustaxonada yarim kunlik shaxsiy mashgʻulot.', 2500000, array['Katta lagan (38 sm)', '6 ta piyola', '4 soatlik master-klass', 'Uyushmada umrbod 15% chegirma'], '2027-yil yanvar', 20, 0, 'reward', 3200000, array['/images/samarkand-craft.jpg'], '', false, false, null, null),
+  ('e548d183-ecc3-437a-a1ce-5ececfd4d779', 'e1419726-cc75-4e37-a75a-8219566f2ff7', 3, 'Qoʻshimcha kobalt piyola', 'Toʻplamingizga yana bitta qoʻlda yasalgan piyola.', 120000, array['Sopol piyola'], '2026-yil dekabr', null, 0, 'addon', 150000, '{}'::text[], '', false, false, null, null),
+  ('6a673d5d-2cc3-492e-abe4-11d100cdcf90', 'e1419726-cc75-4e37-a75a-8219566f2ff7', 4, 'Ipak sovgʻa xaltachasi', 'Atlas qoldiqlaridan tikilgan kichik xaltacha — sovgʻa uchun.', 90000, array['Atlas xaltacha'], '2027-yil yanvar', 60, 0, 'addon', null, '{}'::text[], '', false, false, null, null),
+  ('dab853e2-888a-4ab6-a25b-03ad3ee356aa', 'e1419726-cc75-4e37-a75a-8219566f2ff7', 5, 'Onlayn darslik: atlas qanday toʻqiladi', '40 daqiqalik video — ipakni boʻyashdan dastgohgacha.', 60000, array['Video darslik havolasi'], '2026-yil dekabr', null, 0, 'addon', null, '{}'::text[], '', false, true, null, null),
+  ('8297f50b-72e1-4a9f-aa86-606527beda91', 'c425ad3b-ebfc-49d6-a8a7-d237cc54b3c3', 0, 'Anʼanaviy Chust pichogʻi (12 sm)', 'Jilolangan jez va suyak dastali, charx toshida qoʻlda oʻtkirlangan 12 sm li pichoq.', 280000, array['Chust pichogʻi', 'Boʻrtma naqshli charm gʻilof', 'Charx tosh'], '2026-yil dekabr', 60, 23, 'reward', 350000, array['/images/projects/chust-knives.jpg'], '', false, false, 3, null),
+  ('20864980-7dad-4fe0-a7c2-73bbc3901554', 'c425ad3b-ebfc-49d6-a8a7-d237cc54b3c3', 1, 'Osh pichogʻi, katta (22 sm)', '67 qatlamli damask tigʻ va Fargʻona yongʻogʻidan dasta. Osh tayyorlash va goʻsht uchun.', 650000, array['Katta Chust pichogʻi', 'Yogʻoch sovgʻa qutisi', 'Haqiqiylik sertifikati'], '2027-yil yanvar', 75, 15, 'reward', 850000, array['/images/projects/chust-knives.jpg'], '67 qatlamli damask poʻlat, 14° burchakda charxlangan. Dastasi quritilgan Fargʻona yongʻogʻidan, jez bilan mahkamlangan. Har bir tigʻda raqam va usta muhri bor.', true, false, null, null),
+  ('7b773a43-d95e-4d09-ae8e-8d70f4ee89ac', 'c425ad3b-ebfc-49d6-a8a7-d237cc54b3c3', 2, 'Charm gʻilof (alohida)', 'Qoʻlda tikilgan, boʻrtma naqshli charm gʻilof.', 95000, array['Charm gʻilof'], '2026-yil dekabr', null, 0, 'addon', 120000, '{}'::text[], '', false, false, null, null),
+  ('a0862a63-6517-420e-a978-7dcff5c13041', 'c425ad3b-ebfc-49d6-a8a7-d237cc54b3c3', 3, 'Ikki tomonlama charx tosh', '1000/6000 donadorlik — pichoqni uyda oʻtkir saqlash uchun.', 120000, array['Charx tosh 1000/6000'], '2026-yil dekabr', 80, 0, 'addon', null, '{}'::text[], '', false, false, null, null);
+
+insert into public.reward_components (id, reward_tier_id, position, name, quantity)
+values
+  ('92185aa6-631b-42b0-ab00-7d849e45302b', '135e3a9a-73c8-473a-ac31-7c63e401d60a', 0, 'Sopol piyola', 1),
+  ('4e03c6cd-2e46-4b94-a27b-e95801153324', '135e3a9a-73c8-473a-ac31-7c63e401d60a', 1, 'Likopcha', 1),
+  ('a2cea0a4-8b8e-461e-abab-3d7301fbcc2c', '135e3a9a-73c8-473a-ac31-7c63e401d60a', 2, 'Kelib chiqish sertifikati', 1),
+  ('2ade5be7-b4f5-4615-a8f0-4d98e7bb7bbd', 'ef31f3ee-f395-4bfa-aa0c-325aea9a786f', 0, 'Sof ipak roʻmol 180×50 sm', 1),
+  ('eb75e49b-c7db-4c80-aab8-4eaef9f480a8', 'ef31f3ee-f395-4bfa-aa0c-325aea9a786f', 1, 'Yogʻoch sovgʻa qutisi', 1),
+  ('7f757ac8-ba17-433a-ac2a-e44e64c227dc', 'ef31f3ee-f395-4bfa-aa0c-325aea9a786f', 2, 'Samarqand toʻquvchilari haqida kitobcha', 1),
+  ('fa1247ca-61bd-4034-a13a-5ba3c1f1c9d8', '298d61ad-97f5-4a88-a7ce-41e6c6738802', 0, 'Katta lagan (38 sm)', 1),
+  ('c112975a-d4c0-44f4-a4e5-60bae42bf5d1', '298d61ad-97f5-4a88-a7ce-41e6c6738802', 1, 'Piyola', 6),
+  ('90bdf491-1efd-4150-a060-db145f7653bf', '298d61ad-97f5-4a88-a7ce-41e6c6738802', 2, '4 soatlik master-klass Samarqandda', 1),
+  ('b10545a8-90d5-47dc-a7f9-8f9d7e366bda', '298d61ad-97f5-4a88-a7ce-41e6c6738802', 3, 'Uyushmada umrbod 15% chegirma', 1),
+  ('3efb9d34-378f-46e9-aee9-1d75374fe4d3', 'e548d183-ecc3-437a-a1ce-5ececfd4d779', 0, 'Sopol piyola', 1),
+  ('e55d563f-ce98-421a-abe8-93872d2e5f82', '6a673d5d-2cc3-492e-abe4-11d100cdcf90', 0, 'Atlas xaltacha', 1),
+  ('0a7c0399-e7e5-4f92-a5f1-c75abffed537', 'dab853e2-888a-4ab6-a25b-03ad3ee356aa', 0, 'Video darslik havolasi', 1),
+  ('353cc1e6-3382-41d6-a56a-a2c0a50dfdaf', '8297f50b-72e1-4a9f-aa86-606527beda91', 0, 'Chust pichogʻi 12 sm', 1),
+  ('051c24a0-3952-4dd0-a237-40e366388245', '8297f50b-72e1-4a9f-aa86-606527beda91', 1, 'Boʻrtma naqshli charm gʻilof', 1),
+  ('f7c93980-fbb8-4714-ae72-cab01ad46a44', '8297f50b-72e1-4a9f-aa86-606527beda91', 2, 'Charx tosh', 1),
+  ('3760c00e-b5c1-439f-a9a4-ba3b0e38e059', '20864980-7dad-4fe0-a7c2-73bbc3901554', 0, 'Katta Chust pichogʻi 22 sm', 1),
+  ('33a19292-0c3a-4eec-a903-84e0103b1725', '20864980-7dad-4fe0-a7c2-73bbc3901554', 1, 'Yogʻoch sovgʻa qutisi', 1),
+  ('d7812dab-4798-497d-acb6-c0b64ad789cc', '20864980-7dad-4fe0-a7c2-73bbc3901554', 2, 'Haqiqiylik sertifikati', 1),
+  ('a38f34ff-878f-4b74-aafd-1a08f5a091ad', '7b773a43-d95e-4d09-ae8e-8d70f4ee89ac', 0, 'Charm gʻilof', 1),
+  ('e0b180db-0dde-4573-adaf-baf6bdc3703f', 'a0862a63-6517-420e-a978-7dcff5c13041', 0, 'Charx tosh 1000/6000', 1);
 
 insert into public.equity_terms
   (project_id, contract_type, investor_profit_share_pct, min_investment, projected_annual_return, distribution_schedule, exit_horizon_years)

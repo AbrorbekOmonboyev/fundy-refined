@@ -19,12 +19,32 @@ export type UzProject = {
   founder: { name: string; role: string; organization: string; location: string; bio: string; registration: string };
   budget: [category: string, description: string][];
   milestones: [title: string, description: string, when: string][];
-  rewards?: { title: string; description: string; items: string[]; delivery: string }[];
+  rewards?: (UzReward & { items: string[] })[];
+  /** Extra products backers can add to a main reward (Phase A shows them; the cart comes in Phase B). */
+  addons?: (UzReward & { amount: number; limit?: number })[];
   /** Profit forecast in so'm (never an annual % rate — Musharakah is not interest). */
   projected?: string;
   evaluation: { summary: string; strengths: string[]; risks: string[] };
   updates: [title: string, body: string][];
   comments: { author: string; city: string; body: string; reply?: string }[];
+};
+
+/** Optional details for richer reward cards (docs/PLAN-rewards-and-pledges.md, Phase A). */
+export type UzReward = {
+  title: string;
+  description: string;
+  delivery: string;
+  /** Retail price, shown crossed out ("−20%"). Must be a real price. */
+  compareAt?: number;
+  featured?: boolean;
+  digital?: boolean;
+  perBackerLimit?: number;
+  /** Early-bird price: available for this many days from the seed date. */
+  earlyBirdDays?: number;
+  longDescription?: string;
+  images?: string[];
+  /** What the reward consists of, with quantities. */
+  components?: [name: string, quantity: number][];
 };
 
 const month = (n: number) => `${n}-oy`;
@@ -166,12 +186,33 @@ Homiylar raqamlangan buyumlar oladi: qoʻlda toʻqilgan ipak roʻmol, usta muhri
         description: 'Qoʻlda yasalgan, anʼanaviy Samarqand naqshli sopol piyola. Usta imzosi bilan.',
         items: ['Sopol piyola', 'Likopcha', 'Kelib chiqish sertifikati'],
         delivery: '2026-yil dekabr',
+        compareAt: 450_000,
+        images: ['/images/samarkand-craft.jpg'],
+        components: [
+          ['Sopol piyola', 1],
+          ['Likopcha', 1],
+          ['Kelib chiqish sertifikati', 1],
+        ],
+        longDescription:
+          'Har bir piyola Mahmud aka tomonidan charxda qoʻlda yasaladi va kobalt sir bilan 1 180°C da kuydiriladi. Ostida usta muhri va raqam bor. Hajmi 220 ml. Idish yuvish mashinasida yuvsa boʻladi.',
       },
       {
         title: 'Qoʻlda toʻqilgan ipak atlas roʻmol (180×50 sm)',
         description: 'Tabiiy boʻyoqlar bilan, yogʻoch dastgohda toʻqilgan "bodom" naqshli sof ipak roʻmol.',
         items: ['Sof ipak roʻmol', 'Yogʻoch sovgʻa qutisi', 'Samarqand toʻquvchilari haqida kitobcha'],
         delivery: '2027-yil yanvar',
+        compareAt: 1_100_000,
+        featured: true,
+        perBackerLimit: 2,
+        earlyBirdDays: 6,
+        images: ['/images/samarkand-craft.jpg'],
+        components: [
+          ['Sof ipak roʻmol 180×50 sm', 1],
+          ['Yogʻoch sovgʻa qutisi', 1],
+          ['Samarqand toʻquvchilari haqida kitobcha', 1],
+        ],
+        longDescription:
+          'Margʻilon pillasidan olingan sof ipak, yongʻoq poʻsti, ruyan va anor bilan boʻyalgan. «Bodom» naqshi yogʻoch dastgohda 2 kun davomida toʻqiladi. Erta homiylar narxi cheklangan muddatga amal qiladi.',
       },
       {
         title: 'Master-klass va 7 qismli sopol toʻplam',
@@ -179,6 +220,40 @@ Homiylar raqamlangan buyumlar oladi: qoʻlda toʻqilgan ipak roʻmol, usta muhri
           'Osh uchun katta lagan va 6 ta piyola, hamda Samarqanddagi ustaxonada yarim kunlik shaxsiy mashgʻulot.',
         items: ['Katta lagan (38 sm)', '6 ta piyola', '4 soatlik master-klass', 'Uyushmada umrbod 15% chegirma'],
         delivery: '2027-yil yanvar',
+        compareAt: 3_200_000,
+        images: ['/images/samarkand-craft.jpg'],
+        components: [
+          ['Katta lagan (38 sm)', 1],
+          ['Piyola', 6],
+          ['4 soatlik master-klass Samarqandda', 1],
+          ['Uyushmada umrbod 15% chegirma', 1],
+        ],
+      },
+    ],
+    addons: [
+      {
+        title: 'Qoʻshimcha kobalt piyola',
+        description: 'Toʻplamingizga yana bitta qoʻlda yasalgan piyola.',
+        amount: 120_000,
+        compareAt: 150_000,
+        delivery: '2026-yil dekabr',
+        components: [['Sopol piyola', 1]],
+      },
+      {
+        title: 'Ipak sovgʻa xaltachasi',
+        description: 'Atlas qoldiqlaridan tikilgan kichik xaltacha — sovgʻa uchun.',
+        amount: 90_000,
+        delivery: '2027-yil yanvar',
+        limit: 60,
+        components: [['Atlas xaltacha', 1]],
+      },
+      {
+        title: 'Onlayn darslik: atlas qanday toʻqiladi',
+        description: '40 daqiqalik video — ipakni boʻyashdan dastgohgacha.',
+        amount: 60_000,
+        delivery: '2026-yil dekabr',
+        digital: true,
+        components: [['Video darslik havolasi', 1]],
       },
     ],
     evaluation: {
@@ -479,12 +554,48 @@ Homiylar har biri raqamlangan, qoʻlda yasalgan pichoq oladi: oshxona pichogʻi,
         description: 'Jilolangan jez va suyak dastali, charx toshida qoʻlda oʻtkirlangan 12 sm li pichoq.',
         items: ['Chust pichogʻi', 'Boʻrtma naqshli charm gʻilof', 'Charx tosh'],
         delivery: '2026-yil dekabr',
+        compareAt: 350_000,
+        perBackerLimit: 3,
+        images: ['/images/projects/chust-knives.jpg'],
+        components: [
+          ['Chust pichogʻi 12 sm', 1],
+          ['Boʻrtma naqshli charm gʻilof', 1],
+          ['Charx tosh', 1],
+        ],
       },
       {
         title: 'Osh pichogʻi, katta (22 sm)',
         description: '67 qatlamli damask tigʻ va Fargʻona yongʻogʻidan dasta. Osh tayyorlash va goʻsht uchun.',
         items: ['Katta Chust pichogʻi', 'Yogʻoch sovgʻa qutisi', 'Haqiqiylik sertifikati'],
         delivery: '2027-yil yanvar',
+        compareAt: 850_000,
+        featured: true,
+        images: ['/images/projects/chust-knives.jpg'],
+        components: [
+          ['Katta Chust pichogʻi 22 sm', 1],
+          ['Yogʻoch sovgʻa qutisi', 1],
+          ['Haqiqiylik sertifikati', 1],
+        ],
+        longDescription:
+          '67 qatlamli damask poʻlat, 14° burchakda charxlangan. Dastasi quritilgan Fargʻona yongʻogʻidan, jez bilan mahkamlangan. Har bir tigʻda raqam va usta muhri bor.',
+      },
+    ],
+    addons: [
+      {
+        title: 'Charm gʻilof (alohida)',
+        description: 'Qoʻlda tikilgan, boʻrtma naqshli charm gʻilof.',
+        amount: 95_000,
+        compareAt: 120_000,
+        delivery: '2026-yil dekabr',
+        components: [['Charm gʻilof', 1]],
+      },
+      {
+        title: 'Ikki tomonlama charx tosh',
+        description: '1000/6000 donadorlik — pichoqni uyda oʻtkir saqlash uchun.',
+        amount: 120_000,
+        delivery: '2026-yil dekabr',
+        limit: 80,
+        components: [['Charx tosh 1000/6000', 1]],
       },
     ],
     evaluation: {

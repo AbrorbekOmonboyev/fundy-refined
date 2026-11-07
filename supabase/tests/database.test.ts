@@ -1315,3 +1315,85 @@ describe('telegram notifications', () => {
     assert.equal(await status(), false);
   });
 });
+
+describe('richer rewards (phase A)', () => {
+  let projectId: string;
+  let scarf: string;
+  let addon: string;
+  before(async () => {
+    [{ id: projectId }] = await as<{ id: string }>(
+      db,
+      owner,
+      `select id from public.projects where slug = 'silkroad-samarkand-ikat-weavers'`,
+    );
+    [{ id: scarf }] = await as<{ id: string }>(
+      db,
+      owner,
+      `select id from public.reward_tiers where project_id = $1 and per_backer_limit = 2`,
+      [projectId],
+    );
+    [{ id: addon }] = await as<{ id: string }>(
+      db,
+      owner,
+      `select id from public.reward_tiers where project_id = $1 and kind = 'addon' limit 1`,
+      [projectId],
+    );
+  });
+
+  test('visitors see rewards with their contents; they cannot change them', async () => {
+    const rows = await as<{ name: string; quantity: number }>(
+      db,
+      anon,
+      `select c.name, c.quantity from public.reward_components c
+       join public.reward_tiers t on t.id = c.reward_tier_id where t.project_id = $1`,
+      [projectId],
+    );
+    assert.ok(rows.some(r => r.quantity === 6)); // "Piyola ×6" in the big set
+    await rejects(
+      as(db, user(bob), `insert into public.reward_components (reward_tier_id, name) values ($1, 'x')`, [scarf]),
+      /row-level security|permission denied/,
+    );
+  });
+
+  test('retail price must be above the price', async () => {
+    await rejects(
+      db.query(`update public.reward_tiers set compare_at_amount = amount where id = $1`, [scarf]),
+      /reward_compare_at_above_price/,
+    );
+  });
+
+  test('a per-backer limit stops the third scarf', async () => {
+    const back = () =>
+      as(db, user(carol), `select public.contribute($1, 850000, 'click', $2)`, [projectId, scarf]);
+    await back();
+    await back();
+    await rejects(back(), /reward_limit_per_backer/);
+  });
+
+  test('add-ons cannot be backed on their own (yet)', async () => {
+    await rejects(
+      as(db, user(carol), `select public.contribute($1, 200000, 'click', $2)`, [projectId, addon]),
+      /addon_needs_reward/,
+    );
+  });
+
+  test('hidden or ended rewards cannot be chosen', async () => {
+    const [{ id: cup }] = await as<{ id: string }>(
+      db,
+      owner,
+      `select id from public.reward_tiers where project_id = $1 and kind = 'reward' order by position limit 1`,
+      [projectId],
+    );
+    await db.query(`update public.reward_tiers set available_until = now() - interval '1 hour' where id = $1`, [cup]);
+    await rejects(
+      as(db, user(carol), `select public.contribute($1, 400000, 'click', $2)`, [projectId, cup]),
+      /reward_not_available_now/,
+    );
+    await db.query(`update public.reward_tiers set available_until = null, is_hidden = true where id = $1`, [cup]);
+    await rejects(
+      as(db, user(carol), `select public.contribute($1, 400000, 'click', $2)`, [projectId, cup]),
+      /reward_not_found/,
+    );
+    await db.query(`update public.reward_tiers set is_hidden = false where id = $1`, [cup]);
+  });
+});
