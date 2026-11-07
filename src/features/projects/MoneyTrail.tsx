@@ -21,7 +21,7 @@ export function MoneyTrail({ project }: { project: ProjectDetail }) {
   const raising = project.status === 'active';
 
   return (
-    <section aria-labelledby="money-trail" className="bg-card rounded-2xl border border-slate-200 p-5 space-y-4">
+    <section aria-labelledby="money-trail" className="space-y-4">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <h2 id="money-trail" className="text-base font-bold text-ink">
           {t('project.money.title')}
@@ -139,7 +139,7 @@ export function ChecksList({ project }: { project: ProjectDetail }) {
   if (items.length === 0) return null;
 
   return (
-    <section aria-labelledby="checks" className="rounded-2xl border border-slate-200 bg-card p-5">
+    <section aria-labelledby="checks" className="pt-6 border-t border-slate-200">
       <h2 id="checks" className="text-base font-bold text-ink mb-3">
         {t('project.checks.title')}
       </h2>

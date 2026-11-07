@@ -37,7 +37,7 @@ export function RecentBackers({ projectId }: { projectId: string }) {
   if (data.length === 0) return null;
 
   return (
-    <section aria-labelledby="recent-backers" className="rounded-2xl border border-slate-200 bg-card p-5">
+    <section aria-labelledby="recent-backers" className="pt-6 border-t border-slate-200">
       <h2 id="recent-backers" className="text-base font-bold text-ink mb-3">
         {t('project.recentBackers')}
       </h2>

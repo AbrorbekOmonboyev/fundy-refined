@@ -2,19 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useQueryClient } from '@tanstack/react-query';
-import {
-  AlertCircle,
-  Bookmark,
-  CheckCircle,
-  Clock,
-  Languages,
-  Link2,
-  Send,
-  ShoppingBag,
-  Sparkles,
-  TrendingUp,
-  Users,
-} from 'lucide-react';
+import { AlertCircle, Bookmark, CheckCircle, Languages, Link2, Send, ShoppingBag, TrendingUp } from 'lucide-react';
 import { paths } from '@/app/routes';
 import { useAuth } from '@/features/auth/AuthContext';
 import { errorKey } from '@/features/auth/errors';
@@ -150,7 +138,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10 space-y-8 lg:space-y-10">
       <nav aria-label={t('project.breadcrumb')} className="flex items-center gap-2 text-xs text-slate-500 min-w-0">
         <Link to={paths.home} className="hover:text-ink shrink-0">
           {t('project.home')}
@@ -174,42 +162,42 @@ function ProjectView({ project }: { project: ProjectDetail }) {
         </Alert>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-        {/* Left: story header */}
-        <div className="lg:col-span-7 space-y-4">
-          <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-            <span className="font-semibold text-ink bg-brand-soft px-2 py-0.5 rounded">
-              {t(`models.${project.model}.name`)}
-            </span>
-            <span aria-hidden>·</span>
-            <span>{nameOf(project.categoryId)}</span>
-            {project.location && (
-              <>
-                <span aria-hidden>·</span>
-                <span>{project.location}</span>
-              </>
-            )}
-          </div>
-          <h1 lang={text?.language} className="text-2xl sm:text-3xl font-extrabold text-ink leading-tight">
-            {title}
-          </h1>
-          <p lang={text?.language} className="text-sm text-slate-600 leading-relaxed">
-            {text?.tagline}
-          </p>
-
-          {isFallback && text && (
-            <p className="flex items-center gap-1.5 text-xs text-slate-500">
-              <Languages className="w-3.5 h-3.5" aria-hidden />
-              {t('project.originalLanguage', { language: t(`languages.${text.language}`) })}
-            </p>
+      {/* Title across the page, like the big platforms */}
+      <header className="max-w-3xl space-y-3">
+        <p className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-sm text-slate-500">
+          <span className="font-semibold text-ink">{t(`models.${project.model}.name`)}</span>
+          <span aria-hidden>·</span>
+          <span>{nameOf(project.categoryId)}</span>
+          {project.location && (
+            <>
+              <span aria-hidden>·</span>
+              <span>{project.location}</span>
+            </>
           )}
+        </p>
+        <h1 lang={text?.language} className="text-[1.75rem] sm:text-4xl lg:text-[2.625rem] text-ink leading-tight">
+          {title}
+        </h1>
+        <p lang={text?.language} className="text-base sm:text-lg text-slate-600 leading-relaxed">
+          {text?.tagline}
+        </p>
+        {isFallback && text && (
+          <p className="flex items-center gap-1.5 text-xs text-slate-500">
+            <Languages className="w-3.5 h-3.5" aria-hidden />
+            {t('project.originalLanguage', { language: t(`languages.${text.language}`) })}
+          </p>
+        )}
+      </header>
 
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        {/* Left: the photo, who is behind it, where the money goes */}
+        <div className="order-1 lg:order-none lg:col-span-8 lg:row-start-1">
           {project.coverUrl && (
             <figure className="space-y-1.5">
-              <div className="rounded-2xl overflow-hidden aspect-[16/10] bg-slate-100 border border-slate-200">
+              <div className="rounded-2xl overflow-hidden aspect-[16/10] bg-slate-100">
                 <img
                   {...responsiveImage(project.coverUrl)}
-                  sizes="(min-width: 1024px) 700px, 100vw"
+                  sizes="(min-width: 1024px) 800px, 100vw"
                   alt={title}
                   className="w-full h-full object-cover"
                 />
@@ -229,105 +217,104 @@ function ProjectView({ project }: { project: ProjectDetail }) {
               )}
             </figure>
           )}
+        </div>
 
-          <MoneyTrail project={project} />
-
-          {/* Founder */}
-          <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3 min-w-0">
-              <Avatar name={project.founderName} url={project.founderAvatarUrl} />
-              <div className="text-xs min-w-0">
-                <p className="flex items-center gap-1.5 font-bold text-ink">
-                  {project.founderName}
-                  {project.founderVerified && (
-                    <CheckCircle className="w-3.5 h-3.5 text-ink" aria-label={t('project.verifiedFounder')} />
-                  )}
-                </p>
-                {(project.founder?.role_title || project.founder?.organization) && (
-                  <p className="text-slate-500 truncate">
-                    {[project.founder?.role_title, project.founder?.organization].filter(Boolean).join(' · ')}
+        {/* Phones: numbers and button come right after the photo (order-2); wide screens: right column */}
+        <div className="order-3 lg:order-none lg:col-span-8 lg:row-start-2 space-y-8">
+          {/* Founder, between two thin lines */}
+          <div>
+            <div className="py-4 border-y border-slate-200 flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3 min-w-0">
+                <Avatar name={project.founderName} url={project.founderAvatarUrl} />
+                <div className="text-sm min-w-0">
+                  <p className="flex items-center gap-1.5 font-bold text-ink">
+                    {project.founderName}
+                    {project.founderVerified && (
+                      <CheckCircle className="w-4 h-4 text-ink" aria-label={t('project.verifiedFounder')} />
+                    )}
                   </p>
-                )}
-                {project.founder?.registration_number && (
-                  <p className="text-xs text-slate-400 mt-0.5">{project.founder.registration_number}</p>
-                )}
+                  {(project.founder?.role_title || project.founder?.organization) && (
+                    <p className="text-slate-500 truncate">
+                      {[project.founder?.role_title, project.founder?.organization].filter(Boolean).join(' · ')}
+                    </p>
+                  )}
+                  {project.founder?.registration_number && (
+                    <p className="text-xs text-slate-500 mt-0.5">{project.founder.registration_number}</p>
+                  )}
+                </div>
               </div>
+              {project.founder?.experience_years != null && (
+                <div className="text-right text-sm shrink-0 hidden sm:block">
+                  <span className="text-slate-500">{t('project.experience')}</span>
+                  <p className="font-bold text-ink">
+                    {t('project.years', { count: project.founder.experience_years })}
+                  </p>
+                </div>
+              )}
             </div>
-            {project.founder?.experience_years != null && (
-              <div className="text-right text-xs shrink-0 hidden sm:block">
-                <span className="text-slate-400">{t('project.experience')}</span>
-                <p className="font-bold text-slate-700">
-                  {t('project.years', { count: project.founder.experience_years })}
-                </p>
+            {!isOwner && (
+              <div className="pt-2 text-right">
+                <ReportButton target="user" targetId={project.ownerId} label={t('community.reportFounder')} />
               </div>
             )}
           </div>
-          {!isOwner && (
-            <div className="text-right">
-              <ReportButton target="user" targetId={project.ownerId} label={t('community.reportFounder')} />
-            </div>
-          )}
+
+          <MoneyTrail project={project} />
           <ChecksList project={project} />
         </div>
 
-        {/* Right: funding box */}
-        <aside className="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
-          <div className="bg-card rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
-            <div className="space-y-2">
-              <div className="flex items-baseline justify-between gap-3">
-                <div>
-                  <p className="text-2xl sm:text-3xl font-extrabold text-ink font-mono-numbers">
-                    {formatMoney(project.raisedAmount)}
-                  </p>
-                  <p className="text-xs text-slate-500 mt-0.5">
-                    {t('project.raisedOf', { goal: formatMoney(project.targetAmount) })}
-                  </p>
-                </div>
-                <span className="text-2xl font-bold text-ink font-mono-numbers">{project.fundedPercent}%</span>
-              </div>
-              <div className="w-full bg-track rounded-full h-2.5 overflow-hidden" aria-hidden>
-                <div
-                  className="bg-brand h-full rounded-full"
-                  style={{ width: `${Math.min(project.fundedPercent, 100)}%` }}
-                />
-              </div>
-              <dl className="grid grid-cols-2 gap-4 pt-3 border-t border-slate-100 text-xs">
-                <div>
-                  <dt className="text-slate-400 flex items-center gap-1">
-                    <Users className="w-3.5 h-3.5" aria-hidden /> {t('project.backersLabel')}
-                  </dt>
-                  <dd className="text-base font-bold text-ink font-mono-numbers mt-0.5">
-                    {formatNumber(project.backerCount)}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-slate-400 flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" aria-hidden />{' '}
-                    {isLive ? t('project.timeLeft') : t('project.statusLabel')}
-                  </dt>
-                  <dd className="text-base font-bold text-ink font-mono-numbers mt-0.5">
-                    {isLive
-                      ? t('project.daysLeft', { count: daysLeft(project.endsAt) })
-                      : t(`status.${project.status}`)}
-                  </dd>
-                </div>
-              </dl>
+        {/* Right: the funding numbers, big, and one button (Kickstarter style) */}
+        <aside className="order-2 lg:order-none lg:col-span-4 space-y-8 lg:sticky lg:top-24 lg:row-start-1 lg:row-span-2 lg:col-start-9">
+          <div className="space-y-6">
+            <div
+              className="w-full bg-track rounded-full h-2 overflow-hidden"
+              role="progressbar"
+              aria-valuenow={project.fundedPercent}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label={t('project.funded', { percent: project.fundedPercent })}
+            >
+              <div
+                className="bg-brand-deep h-full rounded-full"
+                style={{ width: `${Math.min(project.fundedPercent, 100)}%` }}
+              />
             </div>
+            <dl className="space-y-4 font-mono-numbers">
+              <div className="flex flex-col-reverse">
+                <dt className="text-sm text-slate-500">
+                  {t('project.raisedOf', { goal: formatMoney(project.targetAmount) })} ·{' '}
+                  <strong className="font-semibold text-ink">{project.fundedPercent}%</strong>
+                </dt>
+                <dd className="text-[1.75rem] sm:text-[2rem] font-bold text-ink leading-tight">
+                  {formatMoney(project.raisedAmount)}
+                </dd>
+              </div>
+              <div className="flex flex-col-reverse">
+                <dt className="text-sm text-slate-500">{t('project.backersLabel')}</dt>
+                <dd className="text-2xl font-bold text-ink leading-tight">{formatNumber(project.backerCount)}</dd>
+              </div>
+              <div className="flex flex-col-reverse">
+                <dt className="text-sm text-slate-500">{isLive ? t('project.timeLeft') : t('project.statusLabel')}</dt>
+                <dd className="text-2xl font-bold text-ink leading-tight">
+                  {isLive ? t('project.daysLeft', { count: daysLeft(project.endsAt) }) : t(`status.${project.status}`)}
+                </dd>
+              </div>
+            </dl>
 
             {project.equity && (
-              <div className="p-4 bg-brand-soft border border-brand rounded-xl text-xs space-y-2">
+              <div className="p-4 border border-slate-200 rounded-xl text-sm space-y-2">
                 <p className="flex items-center gap-1.5 font-bold text-ink">
                   <TrendingUp className="w-4 h-4 text-ink" aria-hidden />
                   {t(`project.contract.${project.equity.contract_type}`)}
                 </p>
-                <p className="text-slate-700 leading-relaxed text-xs">
+                <p className="text-slate-600 leading-relaxed">
                   {t('project.equitySummary', {
                     percent: project.equity.investor_profit_share_pct,
                     schedule: t(`project.schedule.${project.equity.distribution_schedule}`),
                     years: project.equity.exit_horizon_years,
                   })}
                 </p>
-                <div className="pt-1 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600 border-t border-brand">
+                <div className="pt-2 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600 border-t border-slate-200">
                   <span>{t('project.minInvestment', { amount: formatMoney(project.equity.min_investment) })}</span>
                   {project.equity.projected_annual_return && (
                     <span>{t('project.projectedReturn', { value: project.equity.projected_annual_return })}</span>
@@ -336,82 +323,85 @@ function ProjectView({ project }: { project: ProjectDetail }) {
               </div>
             )}
 
-            <div className="space-y-2.5">
+            <div className="space-y-4">
               {isLive && !isOwner && (
-                <Button onClick={() => openContribute()} fullWidth className="py-3.5">
+                <Button onClick={() => openContribute()} fullWidth className="py-3.5 text-base">
                   {isRewardProject ? cartLabel : t(`contribute.cta.${project.model}`)}
                 </Button>
               )}
               {isOwner && <Alert variant="info">{t('project.youOwnThis')}</Alert>}
               {!isLive && !isOwner && <Alert variant="info">{t('project.notAccepting')}</Alert>}
-              <div className="grid grid-cols-2 gap-2">
+
+              {/* Quiet secondary actions: plain text, not more buttons */}
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-slate-700">
                 <button
                   type="button"
                   onClick={() => saved.toggle(project.id)}
                   aria-pressed={isSaved}
-                  className={`py-2 px-3 rounded-lg border text-xs font-semibold flex items-center justify-center gap-1.5 cursor-pointer ${
-                    isSaved
-                      ? 'border-rose-200 bg-rose-50 text-rose-700'
-                      : 'border-slate-200 hover:bg-slate-50 text-slate-700'
-                  }`}
+                  className="inline-flex items-center gap-1.5 hover:text-ink cursor-pointer"
                 >
-                  <Bookmark className={`w-3.5 h-3.5 ${isSaved ? 'fill-rose-500 text-rose-500' : ''}`} aria-hidden />
+                  <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-ink text-ink' : ''}`} aria-hidden />
                   {isSaved ? t('project.saved') : t('project.save')}
                 </button>
                 <button
                   type="button"
                   onClick={copyLink}
-                  className="py-2 px-3 rounded-md border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 hover:text-ink cursor-pointer"
                 >
-                  <Link2 className="w-3.5 h-3.5" aria-hidden />
+                  <Link2 className="w-4 h-4" aria-hidden />
                   {copied ? t('project.copied') : t('project.copyLink')}
                 </button>
+                <a
+                  href={`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(title)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 hover:text-ink"
+                >
+                  <Send className="w-4 h-4" aria-hidden />
+                  {t('project.shareTelegram')}
+                </a>
               </div>
-              <a
-                href={`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(title)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full py-2 px-3 rounded-lg border border-sky-200 bg-sky-50 hover:bg-sky-100 text-xs font-semibold text-sky-800 text-center"
-              >
-                {t('project.shareTelegram')}
-              </a>
-              {!isOwner && (
-                <div className="text-center">
-                  <ReportButton target="project" targetId={project.id} />
-                </div>
-              )}
             </div>
 
             {project.evaluation && (
               <button
                 type="button"
                 onClick={() => setTab('evaluation')}
-                className="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between text-left hover:border-slate-300"
+                className="w-full py-3 border-y border-slate-200 flex items-center justify-between text-left group cursor-pointer"
               >
-                <span className="flex items-center gap-2 text-xs">
-                  <Sparkles className="w-4 h-4 text-ink" aria-hidden />
-                  <span>
-                    <span className="block font-bold text-ink">{t('project.evaluationScore')}</span>
-                    <span className="text-xs text-slate-500">
-                      {t(`project.confidence.${project.evaluation.confidence}`)}
-                    </span>
+                <span className="text-sm">
+                  <span className="block font-semibold text-ink group-hover:underline underline-offset-4">
+                    {t('project.evaluationScore')}
+                  </span>
+                  <span className="text-xs text-slate-500">
+                    {t(`project.confidence.${project.evaluation.confidence}`)}
                   </span>
                 </span>
-                <span className="text-base font-extrabold text-ink font-mono-numbers">
+                <span className="text-xl font-bold text-ink font-mono-numbers">
                   {project.evaluation.overall_score}/100
                 </span>
               </button>
             )}
 
-            <p className="text-xs text-slate-400 text-center leading-normal">{t('contribute.demoNote')}</p>
+            <div className="flex items-start justify-between gap-4">
+              <p className="text-xs text-slate-500 leading-normal">{t('contribute.demoNote')}</p>
+              {!isOwner && (
+                <div className="shrink-0">
+                  <ReportButton target="project" targetId={project.id} />
+                </div>
+              )}
+            </div>
           </div>
           <RecentBackers projectId={project.id} />
         </aside>
       </div>
 
-      {/* Tabs */}
-      <section className="pt-6 border-t border-slate-200">
-        <div className="flex items-center gap-2 border-b border-slate-200 overflow-x-auto" role="tablist">
+      {/* Tabs: the bar sticks under the header while reading */}
+      <section>
+        <div
+          className="sticky top-16 z-20 bg-page flex items-center gap-6 border-b border-slate-200 overflow-x-auto [scrollbar-width:none]"
+          role="tablist"
+        >
           {tabs
             .filter(x => x.show)
             .map(x => (
@@ -421,8 +411,10 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                 role="tab"
                 aria-selected={tab === x.id}
                 onClick={() => setTab(x.id)}
-                className={`py-3 px-3 text-xs font-semibold whitespace-nowrap border-b-2 -mb-px cursor-pointer ${
-                  tab === x.id ? 'border-ink text-ink' : 'border-transparent text-slate-500 hover:text-ink'
+                className={`py-3.5 text-sm whitespace-nowrap border-b-[3px] -mb-px cursor-pointer ${
+                  tab === x.id
+                    ? 'border-brand-deep text-ink font-semibold'
+                    : 'border-transparent text-slate-600 hover:text-ink'
                 }`}
               >
                 {x.label}
@@ -433,28 +425,26 @@ function ProjectView({ project }: { project: ProjectDetail }) {
         <div className="py-8" role="tabpanel">
           {tab === 'story' && (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-              <div className="lg:col-span-8 space-y-6 text-sm text-slate-700 leading-relaxed">
+              <div className="lg:col-span-8 space-y-6 text-base text-slate-700 leading-relaxed">
                 <h2 className="text-lg font-bold text-ink">{t('project.about')}</h2>
                 <div lang={text?.language} className="whitespace-pre-line text-slate-600">
                   {text?.story}
                 </div>
                 {project.founder?.bio && (
-                  <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                    <h3 className="font-bold text-ink text-xs uppercase tracking-wider">{t('project.founderBio')}</h3>
-                    <p className="text-xs text-slate-600 leading-relaxed">{project.founder.bio}</p>
+                  <div className="pl-4 border-l-[3px] border-brand-deep space-y-1">
+                    <h3 className="font-bold text-ink text-sm">{t('project.founderBio')}</h3>
+                    <p className="text-sm text-slate-600 leading-relaxed">{project.founder.bio}</p>
                   </div>
                 )}
               </div>
               {mainRewards.length > 0 && (
                 <div className="lg:col-span-4 space-y-3">
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">{t('project.rewards')}</h3>
-                  <ul className="rounded-2xl border border-slate-200 bg-card divide-y divide-slate-100">
+                  <h3 className="text-base font-bold text-ink">{t('project.rewards')}</h3>
+                  <ul className="border-t border-slate-200 divide-y divide-slate-200">
                     {mainRewards.slice(0, 4).map(r => (
-                      <li key={r.id} className="flex items-center justify-between gap-3 p-3 text-sm">
-                        <span className="min-w-0 text-ink font-medium line-clamp-2">{r.title}</span>
-                        <span className="shrink-0 font-semibold text-ink font-mono-numbers">
-                          {formatMoney(r.amount, true)}
-                        </span>
+                      <li key={r.id} className="py-3">
+                        <p className="text-base font-bold text-ink font-mono-numbers">{formatMoney(r.amount)}</p>
+                        <p className="mt-0.5 text-sm text-slate-600 line-clamp-2">{r.title}</p>
                       </li>
                     ))}
                   </ul>
@@ -544,7 +534,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                   return (
                     <li
                       key={m.id}
-                      className={`p-4 rounded-xl border ${approved ? 'bg-brand-soft border-brand' : 'bg-card border-slate-200'}`}
+                      className={`p-4 rounded-xl border bg-card ${approved ? 'border-brand-deep' : 'border-slate-200'}`}
                     >
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex items-start gap-3">
@@ -619,7 +609,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
               {t('project.viewAll')}
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-10">
             {related.data.items.map(p => (
               <ProjectCard key={p.id} project={p} />
             ))}
@@ -785,7 +775,7 @@ function EvaluationPanel({ project }: { project: ProjectDetail }) {
             </div>
           )}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="bg-brand-soft p-3 rounded-lg border border-brand">
+            <div className="bg-page p-3 rounded-lg border border-slate-200">
               <h3 className="font-bold text-ink mb-1.5">{t('project.strengths')}</h3>
               <ul className="space-y-1 text-slate-600">
                 {e.strengths.map(s => (
