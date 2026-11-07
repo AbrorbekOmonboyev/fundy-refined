@@ -765,7 +765,13 @@
       "story": "Full story",
       "storyHint": "At least 200 characters: the problem, your solution, the team, how the money helps.",
       "risks": "Risks and challenges",
-      "risksHint": "What could go wrong, and how will you handle it? Honesty builds trust."
+      "risksHint": "What could go wrong, and how will you handle it? Honesty builds trust.",
+      "coverTip1": "A real photo of people, the product or the place",
+      "coverTip2": "Not a logo, text or an advert banner",
+      "coverTip3": "Landscape, at least 1600 pixels wide",
+      "coverSmall": "This photo is small ({{w}}×{{h}} pixels). One at least 1600 pixels wide will look sharper.",
+      "coverPortrait": "This photo is upright. Its top and bottom will be cut off on the project page and card.",
+      "coverCardPreview": "How it looks in the project list"
     },
     "budget": {
       "title": "Budget",

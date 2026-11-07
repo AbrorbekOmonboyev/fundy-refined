@@ -765,7 +765,13 @@
       "story": "Toʻliq hikoya",
       "storyHint": "Kamida 200 belgi: muammo, yechim, jamoa, mablagʻ qanday yordam beradi.",
       "risks": "Xavflar va qiyinchiliklar",
-      "risksHint": "Nima notoʻgʻri ketishi mumkin va qanday hal qilasiz? Ochiqlik ishonch uygʻotadi."
+      "risksHint": "Nima notoʻgʻri ketishi mumkin va qanday hal qilasiz? Ochiqlik ishonch uygʻotadi.",
+      "coverTip1": "Odamlar, mahsulot yoki joyning haqiqiy surati",
+      "coverTip2": "Logo, matn yoki reklama banneri emas",
+      "coverTip3": "Gorizontal, kamida 1600 piksel kenglikda",
+      "coverSmall": "Rasm kichik ({{w}}×{{h}} piksel). Kamida 1600 piksel kenglikdagi rasm tiniqroq koʻrinadi.",
+      "coverPortrait": "Rasm tik turibdi. Loyiha sahifasi va kartochkada uning yuqori va pastki qismi kesiladi.",
+      "coverCardPreview": "Loyihalar roʻyxatida shunday koʻrinadi"
     },
     "budget": {
       "title": "Byudjet",
