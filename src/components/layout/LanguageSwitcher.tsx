@@ -72,7 +72,7 @@ export function LanguageMenu({ className = '' }: { className?: string }) {
       <select
         value={current}
         onChange={e => choose(e.target.value as Choice)}
-        className="appearance-none bg-transparent pl-7 pr-2 py-2.5 rounded-lg cursor-pointer hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+        className="appearance-none bg-transparent pl-7 pr-2 py-2.5 rounded-lg cursor-pointer hover:bg-slate-100 focus:outline-none focus-visible:ring-1 focus-visible:ring-ink"
       >
         {CHOICES.map(c => (
           <option key={c.id} value={c.id} className="text-ink bg-card">

@@ -1,6 +1,5 @@
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { ShieldCheck } from 'lucide-react';
 import { paths } from '@/app/routes';
 import { Logo } from '@/components/Logo';
 
@@ -48,7 +47,6 @@ export function Footer() {
             <Logo variant="dark" className="h-8" />
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">{t('footer.about')}</p>
             <div className="pt-2 flex items-center gap-2 text-xs text-slate-400">
-              <ShieldCheck className="w-4 h-4 text-brand shrink-0" />
               <span>{t('footer.simulated')}</span>
             </div>
           </div>
@@ -56,7 +54,7 @@ export function Footer() {
           {/* Link columns */}
           {columns.map(column => (
             <div key={column.title}>
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-brand mb-3">{column.title}</h4>
+              <h4 className="text-sm font-semibold text-white mb-3">{column.title}</h4>
               <ul className="space-y-2 text-xs">
                 {column.links.map(link => (
                   <li key={link.label}>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Check, Columns3, ImageOff, Info, Minus, Sparkles, X } from 'lucide-react';
+import { Check, Columns3, ImageOff, Info, Minus, X } from 'lucide-react';
 import type { ProjectDetail } from '@/features/projects/api';
 import { discountPercent, isLowStock, rewardStatus, sortRewards, unitsLeft } from '@/features/projects/rewards';
 import { publicFileUrl, responsiveImage } from '@/lib/supabase';
@@ -308,12 +308,7 @@ function RewardCard({
             </label>
           )}
         </div>
-        {compact && (
-          <p className="text-xs text-slate-500 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5" aria-hidden />
-            {t('rewards.addonHint')}
-          </p>
-        )}
+        {compact && <p className="text-xs text-slate-500">{t('rewards.addonHint')}</p>}
       </div>
     </article>
   );

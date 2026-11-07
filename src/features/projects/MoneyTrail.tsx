@@ -86,11 +86,7 @@ export function MoneyTrail({ project }: { project: ProjectDetail }) {
               )}
               <span
                 className={`relative z-10 mx-auto w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
-                  done
-                    ? 'bg-brand text-ink'
-                    : now
-                      ? 'bg-night text-white ring-4 ring-brand-soft'
-                      : 'bg-slate-100 text-slate-500'
+                  done ? 'bg-brand text-ink' : now ? 'bg-night text-white' : 'bg-slate-100 text-slate-500'
                 }`}
               >
                 {done ? <Check className="w-4 h-4" aria-label={t('project.milestoneStatus.approved')} /> : i + 1}

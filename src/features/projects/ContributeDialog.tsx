@@ -239,7 +239,7 @@ export function ContributeDialog({
                   step={1000}
                   value={amount || ''}
                   onChange={e => setAmount(Math.round(Number(e.target.value)))}
-                  className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm font-mono-numbers focus:outline-none focus:ring-2 focus:ring-brand"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm font-mono-numbers focus:outline-none focus:ring-1 focus:ring-ink focus:border-ink"
                 />
               </label>
               <p className="text-xs text-slate-500">{t('contribute.minimum', { min: formatMoney(minimum) })}</p>

@@ -2,7 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useQueryClient } from '@tanstack/react-query';
-import { AlertCircle, Bookmark, CheckCircle, Languages, Link2, Send, ShoppingBag, TrendingUp } from 'lucide-react';
+import { AlertCircle, Bookmark, CheckCircle, Languages, Link2, Send, ShoppingBag } from 'lucide-react';
 import { paths } from '@/app/routes';
 import { useAuth } from '@/features/auth/AuthContext';
 import { errorKey } from '@/features/auth/errors';
@@ -304,7 +304,6 @@ function ProjectView({ project }: { project: ProjectDetail }) {
             {project.equity && (
               <div className="p-4 border border-slate-200 rounded-xl text-sm space-y-2">
                 <p className="flex items-center gap-1.5 font-bold text-ink">
-                  <TrendingUp className="w-4 h-4 text-ink" aria-hidden />
                   {t(`project.contract.${project.equity.contract_type}`)}
                 </p>
                 <p className="text-slate-600 leading-relaxed">
@@ -857,7 +856,7 @@ function CommentsPanel({ project, isOwner }: { project: ProjectDetail; isOwner: 
             placeholder={t('project.commentPlaceholder')}
             value={body}
             onChange={e => setBody(e.target.value)}
-            className="w-full text-sm p-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand"
+            className="w-full text-sm p-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-ink focus:border-ink"
           />
           {error && <Alert variant="error">{error}</Alert>}
           <div className="flex justify-end">
@@ -958,7 +957,7 @@ function CommentItem({
               value={reply}
               onChange={e => setReply(e.target.value)}
               aria-label={t('project.reply')}
-              className="w-full text-xs p-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand"
+              className="w-full text-xs p-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-ink focus:border-ink"
             />
             <div className="flex justify-end gap-2">
               <Button variant="secondary" onClick={() => setReplying(false)}>

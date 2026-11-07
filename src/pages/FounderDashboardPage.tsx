@@ -2,7 +2,6 @@ import { useState, type FormEvent } from 'react';
 import { Link, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useQueryClient } from '@tanstack/react-query';
-import { Rocket } from 'lucide-react';
 import { paths } from '@/app/routes';
 import { useAuth } from '@/features/auth/AuthContext';
 import { errorKey } from '@/features/auth/errors';
@@ -53,8 +52,7 @@ export function FounderDashboardPage() {
       ) : isError ? (
         <Alert variant="error">{t('errors.generic')}</Alert>
       ) : data.length === 0 ? (
-        <div className="p-12 text-center bg-card rounded-2xl border border-slate-200 space-y-4">
-          <Rocket className="w-10 h-10 text-ink mx-auto" aria-hidden />
+        <div className="py-12 text-center border-y border-slate-200 space-y-4">
           <h2 className="text-lg font-bold text-ink">{t('dashboard.founder.emptyTitle')}</h2>
           <p className="text-sm text-slate-600 max-w-md mx-auto">{t('dashboard.founder.emptyText')}</p>
           <Link

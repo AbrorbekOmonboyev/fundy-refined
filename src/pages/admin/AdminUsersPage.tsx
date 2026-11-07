@@ -65,7 +65,7 @@ export function AdminUsersPage() {
             value={input}
             onChange={e => setInput(e.target.value)}
             placeholder={t('admin.users.search')}
-            className="w-full pl-9 pr-3 py-2 text-sm rounded-full border border-slate-200 bg-card focus:outline-none focus:ring-2 focus:ring-brand"
+            className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-slate-200 bg-card focus:outline-none focus:ring-1 focus:ring-ink focus:border-ink"
           />
         </label>
       </AdminHeader>

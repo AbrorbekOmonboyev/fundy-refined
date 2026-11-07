@@ -40,9 +40,7 @@ export function ArticlePage({
       <div className={`mt-10 grid gap-10 ${showContents ? 'lg:grid-cols-[220px_1fr]' : ''}`}>
         {showContents && (
           <nav aria-label={t('content.onThisPage')} className="hidden lg:block lg:sticky lg:top-24 self-start">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
-              {t('content.onThisPage')}
-            </p>
+            <p className="text-sm font-semibold text-ink mb-3">{t('content.onThisPage')}</p>
             <ol className="space-y-2 text-sm">
               {a.sections.map(s => (
                 <li key={s.id}>

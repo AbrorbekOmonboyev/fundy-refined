@@ -242,7 +242,7 @@ export function CartDrawer({
                     value={cart.extra || ''}
                     placeholder={t('cart.extraOther')}
                     onChange={e => actions.setExtra(Number(e.target.value))}
-                    className="w-full rounded-xl border border-slate-300 bg-card px-3 py-2.5 text-sm font-mono-numbers focus:outline-none focus:ring-2 focus:ring-brand"
+                    className="w-full rounded-xl border border-slate-300 bg-card px-3 py-2.5 text-sm font-mono-numbers focus:outline-none focus:ring-1 focus:ring-ink focus:border-ink"
                   />
                 </label>
               </fieldset>

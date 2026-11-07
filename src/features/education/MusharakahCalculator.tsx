@@ -1,6 +1,5 @@
 import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Calculator } from 'lucide-react';
 import { formatMoney, formatNumber } from '@/lib/money';
 
 /**
@@ -30,9 +29,6 @@ export function MusharakahCalculator({ showHeader = true }: { showHeader?: boole
     >
       {showHeader && (
         <header className="flex items-start gap-3">
-          <span className="w-10 h-10 rounded-2xl bg-brand text-ink flex items-center justify-center shrink-0">
-            <Calculator className="w-5 h-5" aria-hidden />
-          </span>
           <div>
             <h2 id="calc-title" className="text-xl text-ink">
               {t('education.calc.title')}
