@@ -9,6 +9,8 @@ import { paths } from '@/app/routes';
 import { ScrollManager } from '@/app/ScrollManager';
 
 import { HomePage } from '@/pages/HomePage';
+import { AppHomePage, SavedPage } from '@/features/app/AppScreens';
+import { isAppMode } from '@/lib/appMode';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { GuestOnly, RequireAdmin, RequireAuth } from '@/features/auth/guards';
 import { page } from '@/app/lazyPage';
@@ -59,7 +61,9 @@ export function App() {
         <ErrorBoundary resetKey={pathname}>
           <Suspense fallback={<PageSpinner />}>
             <Routes>
-              <Route path={paths.home} element={<HomePage />} />
+              {/* Inside the Android app the home is a "Discover" screen, not the website's landing page */}
+              <Route path={paths.home} element={isAppMode() ? <AppHomePage /> : <HomePage />} />
+              <Route path={paths.saved} element={<SavedPage />} />
               <Route path={paths.explore} element={<ExplorePage />} />
               <Route path="/projects/:slug" element={<ProjectDetailPage />} />
               <Route path={paths.education} element={<EducationPage />} />

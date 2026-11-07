@@ -2,7 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useQueryClient } from '@tanstack/react-query';
-import { AlertCircle, Bookmark, CheckCircle, Languages, Link2, Send, ShoppingBag } from 'lucide-react';
+import { AlertCircle, ArrowLeft, Bookmark, CheckCircle, Languages, Link2, Send, ShoppingBag } from 'lucide-react';
 import { paths } from '@/app/routes';
 import { useAuth } from '@/features/auth/AuthContext';
 import { errorKey } from '@/features/auth/errors';
@@ -26,6 +26,7 @@ import { OPEN_CART_EVENT, cartActions, priceCart, useCart } from '@/features/car
 import { formatDate, formatMoney, formatNumber } from '@/lib/money';
 import { publicFileUrl, responsiveImage } from '@/lib/supabase';
 import { usePageMeta } from '@/lib/usePageMeta';
+import { isAppMode } from '@/lib/appMode';
 
 type Tab = 'story' | 'rewards' | 'budget' | 'milestones' | 'evaluation' | 'risks' | 'updates' | 'comments';
 const BUDGET_COLORS = ['bg-brand', 'bg-night', 'bg-brand-deep', 'bg-slate-400', 'bg-night-soft', 'bg-track'];
@@ -158,6 +159,39 @@ function ProjectView({ project }: { project: ProjectDetail }) {
         <span className="text-ink font-medium truncate">{title}</span>
       </nav>
 
+      {/* App: the photo edge to edge at the very top, with round back and save buttons on it */}
+      {isAppMode() && (
+        <div className="-mx-4 -mt-6 relative">
+          <div className="aspect-[4/3] bg-slate-100 overflow-hidden">
+            {project.coverUrl && (
+              <img
+                {...responsiveImage(project.coverUrl)}
+                sizes="100vw"
+                alt={title}
+                className="w-full h-full object-cover"
+              />
+            )}
+          </div>
+          <button
+            type="button"
+            onClick={() => (window.history.length > 1 ? navigate(-1) : navigate(paths.home))}
+            aria-label={t('appNav.back')}
+            className="absolute top-[max(0.75rem,env(safe-area-inset-top))] left-3 w-10 h-10 rounded-full bg-card text-ink flex items-center justify-center shadow-lg cursor-pointer"
+          >
+            <ArrowLeft className="w-5 h-5" aria-hidden />
+          </button>
+          <button
+            type="button"
+            onClick={() => saved.toggle(project.id)}
+            aria-pressed={isSaved}
+            aria-label={isSaved ? t('project.unsave') : t('project.save')}
+            className="absolute top-[max(0.75rem,env(safe-area-inset-top))] right-3 w-10 h-10 rounded-full bg-card text-ink flex items-center justify-center shadow-lg cursor-pointer"
+          >
+            <Bookmark className={`w-5 h-5 ${isSaved ? 'fill-ink' : ''}`} aria-hidden />
+          </button>
+        </div>
+      )}
+
       {/* The founder looking at a project that isn't public yet */}
       {['draft', 'changes_requested', 'pending_review'].includes(project.status) && (
         <Alert variant="info">
@@ -168,7 +202,9 @@ function ProjectView({ project }: { project: ProjectDetail }) {
       {/* Title across the page, like the big platforms */}
       <header className="max-w-3xl space-y-3">
         <p className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-sm text-slate-500">
-          <span className="font-semibold text-ink">{t(`models.${project.model}.name`)}</span>
+          <span className="font-semibold text-ink [.app-mode_&]:bg-brand [.app-mode_&]:text-night [.app-mode_&]:px-2.5 [.app-mode_&]:py-0.5 [.app-mode_&]:rounded-full">
+            {t(`models.${project.model}.name`)}
+          </span>
           <span aria-hidden>·</span>
           <span>{nameOf(project.categoryId)}</span>
           {project.location && (
@@ -196,7 +232,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
         {/* Left: the photo, who is behind it, where the money goes */}
         <div className="order-1 lg:order-none lg:col-span-8 lg:row-start-1">
           {project.coverUrl && (
-            <figure className="space-y-1.5">
+            <figure className="app-hide space-y-1.5">
               <div className="rounded-2xl overflow-hidden aspect-[16/10] bg-slate-100">
                 <img
                   {...responsiveImage(project.coverUrl)}

@@ -650,7 +650,11 @@
     "bringsCloser": "Bu summa loyihani maqsadga yana {{percent}}% yaqinlashtiradi.",
     "shareTitle": "Yana bitta homiy topishga yordam bering",
     "shareText": "Doʻstlaringizga yuboring. Bitta ulashish koʻpincha yangi homiy olib keladi.",
-    "shareMessage": "Men «{{project}}» loyihasini qoʻllab-quvvatladim. Siz ham qoʻshiling:"
+    "shareMessage": "Men «{{project}}» loyihasini qoʻllab-quvvatladim. Siz ham qoʻshiling:",
+    "backerTitle": "Siz homiysiz!",
+    "backerFollow": "Loyiha qanday borayotganini sizga xabar qilib turamiz.",
+    "shareFriends": "Doʻstlarga ulashish",
+    "backHome": "Bosh sahifaga"
   },
   "dashboard": {
     "backer": {
@@ -1150,8 +1154,23 @@
     "home": "Bosh sahifa",
     "explore": "Loyihalar",
     "start": "Joylash",
-    "account": "Hisob",
+    "account": "Profil",
     "theme": "Tungi rejim",
-    "back": "Orqaga"
+    "back": "Orqaga",
+    "saved": "Saqlangan"
+  },
+  "appHome": {
+    "trending": "Ommabop",
+    "seeAll": "Hammasi"
+  },
+  "appWelcome": {
+    "title": "Kichik orzudan katta oʻzgarishgacha",
+    "text": "Mablagʻ yigʻing, ishonch qozoning va gʻoyangizni amalga oshiring.",
+    "start": "Boshlash",
+    "haveAccount": "Hisobim bor"
+  },
+  "appSaved": {
+    "loginText": "Yoqqan loyihalarni saqlash uchun hisobingizga kiring.",
+    "empty": "Hali hech narsa saqlanmagan. Loyihadagi belgi tugmasini bosing."
   }
 }

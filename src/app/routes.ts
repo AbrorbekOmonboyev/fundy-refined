@@ -6,6 +6,7 @@
 export const paths = {
   home: '/',
   explore: '/explore',
+  saved: '/saved', // bookmarks (the app's Saved tab)
   project: (slug: string) => `/projects/${slug}`,
   startProject: '/start', // what founders need, open to everyone
   newProject: '/start/new', // the application itself (signed in)

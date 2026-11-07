@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQueryClient } from '@tanstack/react-query';
-import { CheckCircle2, ShieldAlert, X } from 'lucide-react';
+import { ShieldAlert, X } from 'lucide-react';
 import { contribute, type ProjectDetail } from '@/features/projects/api';
 import { projectKeys } from '@/features/projects/hooks';
 import { rewardStatus } from '@/features/projects/rewards';
@@ -9,6 +9,7 @@ import { errorKey } from '@/features/auth/errors';
 import { formatMoney, formatNumber } from '@/lib/money';
 import { Alert, Button } from '@/components/ui';
 import type { Database } from '@/lib/database.types';
+import { BackerSuccess } from '@/features/projects/BackerSuccess';
 
 type PaymentMethod = Database['public']['Enums']['payment_method'];
 const METHODS: PaymentMethod[] = ['click', 'payme', 'uzcard', 'humo', 'bank_wire'];
@@ -49,7 +50,6 @@ export function ContributeDialog({
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
-  const [copied, setCopied] = useState(false);
   const shareUrl = `${window.location.origin}/projects/${project.slug}`;
 
   const minimum = Math.max(project.minContribution, project.equity?.min_investment ?? 0);
@@ -135,44 +135,13 @@ export function ContributeDialog({
         </header>
 
         {done ? (
-          <div className="p-6 space-y-4 text-center">
-            <CheckCircle2 className="w-12 h-12 text-ink mx-auto" aria-hidden />
-            <h3 className="text-lg font-bold text-ink">{t('contribute.successTitle')}</h3>
-            <p className="text-sm text-slate-600">
-              {t('contribute.successText', { amount: formatMoney(amount), project: title })}
-            </p>
-            {tier && <p className="text-xs text-slate-500">{t('contribute.successReward', { reward: tier.title })}</p>}
-
-            {/* Every backer can bring the next one */}
-            <div className="rounded-2xl border border-slate-200 p-4 space-y-3 text-left">
-              <p className="text-sm font-semibold text-ink">{t('contribute.shareTitle')}</p>
-              <p className="text-sm text-slate-700">{t('contribute.shareText')}</p>
-              <div className="grid grid-cols-2 gap-2">
-                <a
-                  href={`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(t('contribute.shareMessage', { project: title }))}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="py-3 rounded-xl bg-[#229ED9] text-white text-sm font-semibold text-center hover:opacity-90"
-                >
-                  Telegram
-                </a>
-                <button
-                  type="button"
-                  onClick={() => {
-                    void navigator.clipboard?.writeText(shareUrl).then(() => setCopied(true));
-                  }}
-                  className="py-3 rounded-xl border border-slate-300 bg-card text-sm font-semibold text-ink cursor-pointer"
-                >
-                  {copied ? t('project.copied') : t('project.copyLink')}
-                </button>
-              </div>
-            </div>
-
-            <p className="text-xs text-slate-500">{t('contribute.demoNote')}</p>
-            <Button onClick={onClose} fullWidth variant="secondary">
-              {t('common.close')}
-            </Button>
-          </div>
+          <BackerSuccess
+            title={title}
+            shareUrl={shareUrl}
+            detail={t('contribute.successText', { amount: formatMoney(amount), project: title })}
+            extra={tier ? t('contribute.successReward', { reward: tier.title }) : undefined}
+            onClose={onClose}
+          />
         ) : (
           <form onSubmit={handleSubmit} className="p-5 space-y-5">
             {project.model === 'reward' && choosable.length > 0 && (

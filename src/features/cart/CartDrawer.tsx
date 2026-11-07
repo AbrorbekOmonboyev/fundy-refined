@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useQueryClient } from '@tanstack/react-query';
-import { CheckCircle2, Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
+import { Minus, Plus, ShoppingBag, Trash2, X } from 'lucide-react';
 import { paths } from '@/app/routes';
 import { useAuth } from '@/features/auth/AuthContext';
 import { errorKey } from '@/features/auth/errors';
@@ -12,6 +12,7 @@ import { cartActions, maxQuantity, priceCart, useCart } from '@/features/cart/ca
 import { Alert, Button } from '@/components/ui';
 import { formatMoney } from '@/lib/money';
 import type { Database } from '@/lib/database.types';
+import { BackerSuccess } from '@/features/projects/BackerSuccess';
 
 type PaymentMethod = Database['public']['Enums']['payment_method'];
 const METHODS: PaymentMethod[] = ['click', 'payme', 'uzcard', 'humo', 'bank_wire'];
@@ -43,7 +44,6 @@ export function CartDrawer({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<{ total: number; count: number } | null>(null);
-  const [copied, setCopied] = useState(false);
   const shareUrl = `${window.location.origin}/projects/${project.slug}`;
 
   const addonAlone = priced.hasAddon && !priced.hasMain && !project.allowAddonsOnly;
@@ -114,37 +114,12 @@ export function CartDrawer({
         </header>
 
         {done ? (
-          <div className="flex-1 overflow-y-auto p-6 space-y-5 text-center">
-            <CheckCircle2 className="w-14 h-14 mx-auto text-brand-deep" aria-hidden />
-            <h3 className="text-xl text-ink">{t('contribute.successTitle')}</h3>
-            <p className="text-sm text-slate-600">
-              {t('cart.successText', { amount: formatMoney(done.total), count: done.count })}
-            </p>
-            <div className="rounded-2xl border border-slate-200 p-4 space-y-3 text-left">
-              <p className="text-sm font-semibold text-ink">{t('contribute.shareTitle')}</p>
-              <div className="grid grid-cols-2 gap-2">
-                <a
-                  href={`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(t('contribute.shareMessage', { project: title }))}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="py-3 rounded-md bg-[#229ED9] text-white text-sm font-semibold text-center hover:opacity-90"
-                >
-                  Telegram
-                </a>
-                <button
-                  type="button"
-                  onClick={() => void navigator.clipboard?.writeText(shareUrl).then(() => setCopied(true))}
-                  className="py-3 rounded-md border border-slate-300 bg-card text-sm font-semibold text-ink cursor-pointer"
-                >
-                  {copied ? t('project.copied') : t('project.copyLink')}
-                </button>
-              </div>
-            </div>
-            <p className="text-xs text-slate-500">{t('contribute.demoNote')}</p>
-            <Button variant="secondary" fullWidth onClick={onClose}>
-              {t('common.close')}
-            </Button>
-          </div>
+          <BackerSuccess
+            title={title}
+            shareUrl={shareUrl}
+            detail={t('cart.successText', { amount: formatMoney(done.total), count: done.count })}
+            onClose={onClose}
+          />
         ) : (
           <>
             <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">

@@ -30,7 +30,7 @@ export function Header() {
   // Explore has its own search box right on the page.
   const { pathname } = useLocation();
   const onExplore = pathname === paths.explore;
-  const TAB_ROOTS: string[] = [paths.home, paths.explore, paths.startProject];
+  const TAB_ROOTS: string[] = [paths.home, paths.explore, paths.saved];
   const showBack = isAppMode() && !TAB_ROOTS.includes(pathname);
 
   const search = (e: React.FormEvent) => {
@@ -53,7 +53,9 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-card border-b border-slate-200">
+      <header
+        className={`sticky top-0 z-40 bg-card border-b border-slate-200 ${isAppMode() && pathname.startsWith('/projects/') ? 'app-hide' : ''}`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-6 h-16">
             {/* Logo; in the app, inner screens also get a back arrow like any phone app */}

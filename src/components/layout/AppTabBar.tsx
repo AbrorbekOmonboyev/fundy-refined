@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { ChevronRight, Compass, Home, LogOut, PlusSquare, UserRound, X } from 'lucide-react';
+import { Bookmark, ChevronRight, Compass, Home, LogOut, UserRound, X } from 'lucide-react';
 import { paths } from '@/app/routes';
 import { useAuth } from '@/features/auth/AuthContext';
 import { Avatar } from '@/components/Avatar';
@@ -33,7 +33,7 @@ export function AppTabBar() {
 
   const tab = ({ isActive }: { isActive: boolean }) =>
     `flex-1 flex flex-col items-center justify-center gap-1 pt-2 pb-1.5 text-[11px] font-medium border-t-2 ${
-      isActive ? 'border-brand-deep text-ink' : 'border-transparent text-slate-500'
+      isActive ? 'border-transparent text-ink font-semibold' : 'border-transparent text-slate-500'
     }`;
 
   return (
@@ -52,9 +52,19 @@ export function AppTabBar() {
           <Compass className="w-6 h-6" aria-hidden />
           {t('appNav.explore')}
         </NavLink>
-        <NavLink to={paths.startProject} end className={tab}>
-          <PlusSquare className="w-6 h-6" aria-hidden />
-          {t('appNav.start')}
+        {/* The big round "f": start a project */}
+        <Link
+          to={paths.newProject}
+          aria-label={t('appNav.start')}
+          className="flex-1 flex items-start justify-center border-t-2 border-transparent"
+        >
+          <span className="-mt-5 w-14 h-14 rounded-full bg-brand ring-4 ring-card flex items-center justify-center">
+            <img src="/brand/fundy-symbol-on-chartreuse.svg" alt="" className="w-8 h-8" />
+          </span>
+        </Link>
+        <NavLink to={paths.saved} className={tab}>
+          <Bookmark className="w-6 h-6" aria-hidden />
+          {t('appNav.saved')}
         </NavLink>
         <button
           type="button"

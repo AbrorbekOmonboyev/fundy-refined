@@ -650,7 +650,11 @@
     "bringsCloser": "This brings the project {{percent}}% closer to its goal.",
     "shareTitle": "Help find one more backer",
     "shareText": "Send it to friends. One share often brings a new backer.",
-    "shareMessage": "I backed \"{{project}}\". Join me:"
+    "shareMessage": "I backed \"{{project}}\". Join me:",
+    "backerTitle": "You're a backer!",
+    "backerFollow": "We'll keep you posted on its progress.",
+    "shareFriends": "Share with friends",
+    "backHome": "Back to home"
   },
   "dashboard": {
     "backer": {
@@ -1150,8 +1154,23 @@
     "home": "Home",
     "explore": "Explore",
     "start": "Start",
-    "account": "Account",
+    "account": "Profile",
     "theme": "Dark mode",
-    "back": "Back"
+    "back": "Back",
+    "saved": "Saved"
+  },
+  "appHome": {
+    "trending": "Trending",
+    "seeAll": "See all"
+  },
+  "appWelcome": {
+    "title": "From small dreams to big change",
+    "text": "Raise funds, gain trust, and make it real.",
+    "start": "Get started",
+    "haveAccount": "I already have an account"
+  },
+  "appSaved": {
+    "loginText": "Log in to save the projects you like.",
+    "empty": "Nothing saved yet. Tap the bookmark on a project."
   }
 }
