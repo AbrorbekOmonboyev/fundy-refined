@@ -481,7 +481,24 @@
     "pageOf": "{{page}}-sahifa, jami {{pages}}",
     "filters": "Filtr",
     "closeFilters": "Yopish",
-    "showResults": "Koʻrsatish ({{formatted}})"
+    "showResults": "Koʻrsatish ({{formatted}})",
+    "sentence": {
+      "text": "Koʻrsat: {status} loyihalar · {category} · {region} · saralash: {sort}",
+      "status": {
+        "all": "barcha",
+        "live": "faol",
+        "funded": "moliyalashtirilgan"
+      },
+      "allCategories": "barcha sohalar",
+      "allRegions": "butun Oʻzbekiston",
+      "sort": {
+        "most_funded": "eng koʻp toʻplangan",
+        "newest": "eng yangi",
+        "ending_soon": "tez tugaydigan",
+        "most_backers": "eng koʻp homiyli",
+        "target_low": "eng kichik maqsadli"
+      }
+    }
   },
   "project": {
     "save": "Saqlash",

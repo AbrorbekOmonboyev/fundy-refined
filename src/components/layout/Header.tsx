@@ -26,6 +26,8 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
+  // Explore has its own search box right on the page.
+  const onExplore = useLocation().pathname === paths.explore;
 
   const search = (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,7 +70,11 @@ export function Header() {
             </nav>
 
             {/* Search, always in sight on bigger screens (like Kickstarter) */}
-            <form role="search" onSubmit={search} className="hidden md:flex flex-1 min-w-40 max-w-xs ml-auto relative">
+            <form
+              role="search"
+              onSubmit={search}
+              className={`${onExplore ? 'md:invisible' : ''} hidden md:flex flex-1 min-w-40 max-w-xs ml-auto relative`}
+            >
               <Search
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"
                 aria-hidden
