@@ -406,7 +406,17 @@
       "text": "Loyihangizni joylang — odamlar xayriya, oldindan buyurtma yoki mushoraka orqali qoʻllab-quvvatlaydi. Pul faqat bajarilgan bosqich uchun beriladi.",
       "explore": "Loyihalarni koʻrish",
       "start": "Loyiha joylash",
-      "cardKicker": "Hozir mablagʻ yigʻmoqda"
+      "cardKicker": "Hozir mablagʻ yigʻmoqda",
+      "statsRaised": "Toʻplangan mablagʻ",
+      "statsBackers": "Homiylar",
+      "statsLive": "Faol loyihalar"
+    },
+    "pick": {
+      "label": "Fundy tanlovi",
+      "view": "Loyihani koʻrish"
+    },
+    "ending": {
+      "title": "Tugashiga oz qoldi"
     },
     "featured": {
       "title": "Hozir mablagʻ yigʻayotgan loyihalar",

@@ -81,7 +81,9 @@ export function MusharakahCalculator({ showHeader = true }: { showHeader?: boole
         />
       </div>
 
-      <dl className={`grid gap-4 sm:grid-cols-3 rounded-2xl p-5 ${isLoss ? 'bg-rose-50' : 'bg-brand-soft'}`}>
+      <dl
+        className={`grid gap-4 sm:grid-cols-3 rounded-2xl p-5 border ${isLoss ? 'bg-rose-50 border-rose-200' : 'bg-page border-slate-200'}`}
+      >
         <div>
           <dt className="text-xs text-slate-600">{t('education.calc.ownership')}</dt>
           <dd className="font-display text-2xl text-ink">{formatNumber(ownership * 100, 2)}%</dd>

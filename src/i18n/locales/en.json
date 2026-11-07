@@ -406,7 +406,17 @@
       "text": "Post your project — people back it with a donation, a pre-order or Musharakah. Money is released only for a finished stage.",
       "explore": "Browse projects",
       "start": "Post a project",
-      "cardKicker": "Raising now"
+      "cardKicker": "Raising now",
+      "statsRaised": "Raised",
+      "statsBackers": "Backers",
+      "statsLive": "Live projects"
+    },
+    "pick": {
+      "label": "Fundy pick",
+      "view": "View project"
+    },
+    "ending": {
+      "title": "Ending soon"
     },
     "featured": {
       "title": "Projects raising money now",
