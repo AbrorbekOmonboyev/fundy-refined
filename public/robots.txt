@@ -1,0 +1,18 @@
+# Fundy — rules for search engines (Google, Yandex, Bing…)
+# Public pages are open; private and account pages are not worth indexing.
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /settings
+Disallow: /saved
+Disallow: /start/new
+Disallow: /login
+Disallow: /signup
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /auth/
+Disallow: /welcome
+Disallow: /api/
+
+Sitemap: https://www.fundy.uz/sitemap.xml
