@@ -1612,6 +1612,17 @@ values
   ('8dd02dc0-0b60-4585-abc5-7918cc8fca8d', '3107824e-03ea-4634-a63a-a6f273994879', '911aa87c-6169-4791-a923-c83eb9c5f978', 7550000, null, 'bank_wire', 0.4314, '2026-10-22T00:11:19.304Z'),
   ('5120b697-9440-49b8-a273-d96700a9cce6', '3107824e-03ea-4634-a63a-a6f273994879', '186a0a2d-4dec-48bc-a503-554196bf63dd', 6200000, null, 'humo', 0.3543, '2026-09-15T11:58:35.823Z');
 
+-- Pledges with a reward are one cart item each; the rest of the amount is extra support.
+insert into public.contribution_items (contribution_id, reward_tier_id, kind, quantity, unit_amount)
+select c.id, c.reward_tier_id, t.kind, 1, t.amount
+from public.contributions c join public.reward_tiers t on t.id = c.reward_tier_id;
+
+update public.contributions c set extra_amount = greatest(c.amount - t.amount, 0)
+from public.reward_tiers t where t.id = c.reward_tier_id;
+
+update public.contributions c set extra_amount = c.amount
+from public.projects p where p.id = c.project_id and p.model = 'reward' and c.reward_tier_id is null;
+
 -- Totals come from the contributions themselves.
 update public.projects p
 set raised_amount = t.total, backer_count = t.backers

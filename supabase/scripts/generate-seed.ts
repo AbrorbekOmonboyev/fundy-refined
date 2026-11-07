@@ -578,6 +578,17 @@ insert into public.contributions (id, project_id, backer_id, amount, reward_tier
 values
   ${values(contributions.map(c => `(${q(c.id)}, ${q(c.projectId)}, ${q(c.backerId)}, ${c.amount}, ${q(c.tierId)}, '${c.method}', ${c.share ?? 'null'}, ${ts(c.at)})`))};
 
+-- Pledges with a reward are one cart item each; the rest of the amount is extra support.
+insert into public.contribution_items (contribution_id, reward_tier_id, kind, quantity, unit_amount)
+select c.id, c.reward_tier_id, t.kind, 1, t.amount
+from public.contributions c join public.reward_tiers t on t.id = c.reward_tier_id;
+
+update public.contributions c set extra_amount = greatest(c.amount - t.amount, 0)
+from public.reward_tiers t where t.id = c.reward_tier_id;
+
+update public.contributions c set extra_amount = c.amount
+from public.projects p where p.id = c.project_id and p.model = 'reward' and c.reward_tier_id is null;
+
 -- Totals come from the contributions themselves.
 update public.projects p
 set raised_amount = t.total, backer_count = t.backers

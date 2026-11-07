@@ -1370,9 +1370,9 @@ describe('richer rewards (phase A)', () => {
     await rejects(back(), /reward_limit_per_backer/);
   });
 
-  test('add-ons cannot be backed on their own (yet)', async () => {
+  test('add-ons cannot be backed on their own', async () => {
     await rejects(
-      as(db, user(carol), `select public.contribute($1, 200000, 'click', $2)`, [projectId, addon]),
+      as(db, user(alice), `select public.contribute($1, 200000, 'click', $2)`, [projectId, addon]),
       /addon_needs_reward/,
     );
   });
@@ -1395,5 +1395,129 @@ describe('richer rewards (phase A)', () => {
       /reward_not_found/,
     );
     await db.query(`update public.reward_tiers set is_hidden = false where id = $1`, [cup]);
+  });
+});
+
+describe('pledge cart (phase B)', () => {
+  let projectId: string;
+  let knife: string; // main reward, 280 000, max 3 per person
+  let sheath: string; // add-on, 95 000
+  let stone: string; // add-on, 120 000, 80 in stock
+  let erin: string;
+  const cart = (who: string, items: unknown, extra = 0) =>
+    as<{ id: string }>(db, user(who), `select public.contribute_cart($1, $2::jsonb, $3) as id`, [
+      projectId,
+      JSON.stringify(items),
+      extra,
+    ]);
+
+  before(async () => {
+    [{ id: projectId }] = await as<{ id: string }>(
+      db,
+      owner,
+      `select id from public.projects where slug = 'chust-master-cutlery-works'`,
+    );
+    const tiers = await as<{ id: string; title: string; kind: string; amount: string }>(
+      db,
+      owner,
+      `select id, title, kind, amount from public.reward_tiers where project_id = $1 order by position`,
+      [projectId],
+    );
+    knife = tiers.find(t => t.kind === 'reward' && Number(t.amount) === 280000)!.id;
+    sheath = tiers.find(t => t.kind === 'addon' && Number(t.amount) === 95000)!.id;
+    stone = tiers.find(t => t.kind === 'addon' && Number(t.amount) === 120000)!.id;
+    erin = await createUser(db, 'Erin Cart');
+  });
+
+  test('one payment: 2 knives + a sheath + extra support; prices come from the database', async () => {
+    const [before] = await as<{ raised_amount: string }>(db, anon, `select raised_amount from public.projects where id = $1`, [projectId]);
+    const [{ id }] = await cart(
+      erin,
+      [
+        { reward_id: knife, quantity: 2, amount: 1 }, // a price sent by the browser is ignored
+        { reward_id: sheath, quantity: 1 },
+      ],
+      50_000,
+    );
+    const [c] = await as<{ amount: string; extra_amount: string }>(
+      db,
+      user(erin),
+      `select amount, extra_amount from public.contributions where id = $1`,
+      [id],
+    );
+    assert.equal(Number(c.amount), 2 * 280_000 + 95_000 + 50_000);
+    assert.equal(Number(c.extra_amount), 50_000);
+    const items = await as<{ quantity: number; unit_amount: string }>(
+      db,
+      user(erin),
+      `select quantity, unit_amount from public.contribution_items where contribution_id = $1 order by unit_amount`,
+      [id],
+    );
+    assert.deepEqual(
+      items.map(i => [i.quantity, Number(i.unit_amount)]),
+      [
+        [1, 95_000],
+        [2, 280_000],
+      ],
+    );
+    const [after] = await as<{ raised_amount: string }>(db, anon, `select raised_amount from public.projects where id = $1`, [projectId]);
+    assert.equal(Number(after.raised_amount) - Number(before.raised_amount), 705_000);
+    // other people can't see Erin's items
+    assert.equal((await as(db, user(carol), `select * from public.contribution_items where contribution_id = $1`, [id])).length, 0);
+  });
+
+  test('the per-person limit counts every cart (2 + 2 > 3)', async () => {
+    await rejects(cart(erin, [{ reward_id: knife, quantity: 2 }]), /reward_limit_per_backer/);
+    await cart(erin, [{ reward_id: knife, quantity: 1 }]); // exactly 3
+  });
+
+  test('add-ons later are fine for someone who already has a main reward; not for others', async () => {
+    await cart(erin, [{ reward_id: stone, quantity: 1 }]);
+    const frank = await createUser(db, 'Frank Addon');
+    await rejects(cart(frank, [{ reward_id: stone, quantity: 1 }]), /addon_needs_reward/);
+    await db.query(`update public.projects set allow_addons_only = true where id = $1`, [projectId]);
+    await cart(frank, [{ reward_id: stone, quantity: 1 }]);
+    await db.query(`update public.projects set allow_addons_only = false where id = $1`, [projectId]);
+  });
+
+  test('stock: you cannot take more than what is left', async () => {
+    await db.query(`update public.reward_tiers set quantity_limit = claimed_count + 1 where id = $1`, [stone]);
+    await rejects(cart(erin, [{ reward_id: stone, quantity: 2 }]), /reward_sold_out/);
+    await cart(erin, [{ reward_id: stone, quantity: 1 }]);
+    await rejects(cart(erin, [{ reward_id: stone, quantity: 1 }]), /reward_sold_out/);
+  });
+
+  test('bad carts are refused', async () => {
+    await rejects(cart(erin, [{ reward_id: knife, quantity: 0 }]), /cart_invalid/);
+    await rejects(cart(erin, [{ reward_id: 'not-a-uuid', quantity: 1 }]), /cart_invalid/);
+    await rejects(cart(erin, [], 5_000), /amount_below_minimum/); // below the project minimum
+    const [{ id: other }] = await as<{ id: string }>(
+      db,
+      owner,
+      `select r.id from public.reward_tiers r join public.projects p on p.id = r.project_id
+       where p.slug = 'silkroad-samarkand-ikat-weavers' and r.kind = 'reward' limit 1`,
+    );
+    await rejects(cart(erin, [{ reward_id: other, quantity: 1 }]), /reward_not_found/); // another project's reward
+    await rejects(
+      as(db, anon, `select public.contribute_cart($1, '[]'::jsonb, 100000)`, [projectId]),
+      /permission denied|not_signed_in/,
+    );
+  });
+
+  test('support only (no reward) works as a cart with an extra amount', async () => {
+    const [{ id }] = await cart(erin, [], 100_000);
+    const items = await as(db, user(erin), `select * from public.contribution_items where contribution_id = $1`, [id]);
+    assert.equal(items.length, 0);
+  });
+
+  test('old pledges with a reward were turned into items', async () => {
+    const [{ n }] = await as<{ n: number }>(
+      db,
+      owner,
+      `select count(*)::int as n from public.contributions c
+       where c.reward_tier_id is not null
+         and not exists (select 1 from public.contribution_items i where i.contribution_id = c.id)`,
+    );
+    assert.equal(n, 0);
   });
 });
