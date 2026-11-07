@@ -6,6 +6,7 @@ import { useAuth } from '@/features/auth/AuthContext';
 import { paths } from '@/app/routes';
 import { LanguageMenu, LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
+import { CartButton } from '@/components/layout/CartButton';
 import { NotificationBell } from '@/components/layout/NotificationBell';
 import { Logo } from '@/components/Logo';
 import { UserMenu } from '@/components/layout/UserMenu';
@@ -62,6 +63,7 @@ export function Header() {
           {/* Actions */}
           <div className="flex items-center gap-2 shrink-0">
             <LanguageMenu className="hidden sm:flex" />
+            <CartButton />
             <ThemeToggle />
 
             {user && <NotificationBell />}

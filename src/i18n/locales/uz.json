@@ -1122,6 +1122,10 @@
     "button_one": "Savat · {{count}} · {{amount}}",
     "button_other": "Savat · {{count}} · {{amount}}",
     "successText_one": "{{amount}} — {{count}} ta mahsulot bilan. Rahmat!",
-    "successText_other": "{{amount}} — {{count}} ta mahsulot bilan. Rahmat!"
+    "successText_other": "{{amount}} — {{count}} ta mahsulot bilan. Rahmat!",
+    "added": "Savatga qoʻshildi ✓",
+    "view": "Savatni ochish",
+    "open_one": "Savat: {{count}} ta mahsulot",
+    "open_other": "Savat: {{count}} ta mahsulot"
   }
 }

@@ -9,7 +9,8 @@ import { useSyncExternalStore } from 'react';
 import { rewardStatus, unitsLeft, type RewardLike } from '@/features/projects/rewards';
 
 export type CartLine = { rewardId: string; quantity: number };
-export type Cart = { lines: CartLine[]; extra: number };
+/** slug + updatedAt let the header icon link to the right project page. */
+export type Cart = { lines: CartLine[]; extra: number; slug?: string; updatedAt?: number };
 
 export const MAX_QTY = 99;
 const EMPTY: Cart = { lines: [], extra: 0 };
@@ -35,6 +36,8 @@ function read(projectId: string): Cart {
           .filter(l => typeof l.rewardId === 'string' && Number.isInteger(l.quantity) && l.quantity > 0)
           .map(l => ({ rewardId: l.rewardId, quantity: Math.min(l.quantity, MAX_QTY) })),
         extra: Math.max(0, Math.round(Number(parsed.extra) || 0)),
+        slug: typeof parsed.slug === 'string' ? parsed.slug : undefined,
+        updatedAt: Number(parsed.updatedAt) || 0,
       };
     }
   } catch {
@@ -54,8 +57,9 @@ function write(projectId: string, cart: Cart) {
   listeners.forEach(l => l());
 }
 
-export function cartActions(projectId: string) {
-  const update = (fn: (c: Cart) => Cart) => write(projectId, fn(read(projectId)));
+export function cartActions(projectId: string, slug?: string) {
+  const update = (fn: (c: Cart) => Cart) =>
+    write(projectId, { ...fn(read(projectId)), slug: slug ?? read(projectId).slug, updatedAt: Date.now() });
   return {
     add: (rewardId: string, quantity = 1) =>
       update(c => {
@@ -152,4 +156,62 @@ export function priceCart(cart: Cart, rewards: CartReward[], now = new Date()) {
 export function maxQuantity(r: CartReward): number {
   const left = unitsLeft(r);
   return Math.max(1, Math.min(MAX_QTY, left ?? MAX_QTY, r.per_backer_limit ?? MAX_QTY));
+}
+
+// ---------------------------------------------------------------------------
+// All carts in this browser (for the header icon)
+// ---------------------------------------------------------------------------
+export type CartRef = { projectId: string; slug: string };
+export type CartsSummary = { count: number; latest: CartRef | null; all: CartRef[] };
+const NO_CARTS: CartsSummary = { count: 0, latest: null, all: [] };
+let summaryCache: { sig: string; value: CartsSummary } = { sig: '', value: NO_CARTS };
+
+function readSummary(): CartsSummary {
+  const carts: { projectId: string; cart: Cart }[] = [];
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k?.startsWith('fundy-cart:')) {
+        const projectId = k.slice('fundy-cart:'.length);
+        carts.push({ projectId, cart: read(projectId) });
+      }
+    }
+  } catch {
+    return NO_CARTS;
+  }
+  const count = carts.reduce(
+    (s, c) =>
+      s + c.cart.lines.reduce((n, l) => n + l.quantity, 0) + (c.cart.extra > 0 && c.cart.lines.length === 0 ? 1 : 0),
+    0,
+  );
+  const withItems = carts
+    .filter(c => c.cart.slug && (c.cart.lines.length > 0 || c.cart.extra > 0))
+    .sort((a, b) => (b.cart.updatedAt ?? 0) - (a.cart.updatedAt ?? 0))
+    .map(c => ({ projectId: c.projectId, slug: c.cart.slug! }));
+  const value: CartsSummary = { count, latest: withItems[0] ?? null, all: withItems };
+  const sig = JSON.stringify(value);
+  if (sig !== summaryCache.sig) summaryCache = { sig, value };
+  return summaryCache.value;
+}
+
+export function useCartsSummary(): CartsSummary {
+  return useSyncExternalStore(
+    l => {
+      listeners.add(l);
+      const onStorage = (e: StorageEvent) => e.key?.startsWith('fundy-cart:') && l();
+      window.addEventListener('storage', onStorage);
+      return () => {
+        listeners.delete(l);
+        window.removeEventListener('storage', onStorage);
+      };
+    },
+    readSummary,
+    () => NO_CARTS,
+  );
+}
+
+/** Ask the open project page to show its cart (the header icon uses this). */
+export const OPEN_CART_EVENT = 'fundy:open-cart';
+export function requestOpenCart(projectId: string) {
+  window.dispatchEvent(new CustomEvent(OPEN_CART_EVENT, { detail: { projectId } }));
 }

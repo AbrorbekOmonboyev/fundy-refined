@@ -1162,6 +1162,12 @@
     "successText_one": "{{amount}} — {{count}} товар. Спасибо!",
     "successText_few": "{{amount}} — {{count}} товара. Спасибо!",
     "successText_many": "{{amount}} — {{count}} товаров. Спасибо!",
-    "successText_other": "{{amount}} — {{count}} товара. Спасибо!"
+    "successText_other": "{{amount}} — {{count}} товара. Спасибо!",
+    "added": "Добавлено в корзину ✓",
+    "view": "Открыть корзину",
+    "open_one": "Корзина: {{count}} товар",
+    "open_few": "Корзина: {{count}} товара",
+    "open_many": "Корзина: {{count}} товаров",
+    "open_other": "Корзина: {{count}} товара"
   }
 }

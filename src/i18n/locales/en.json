@@ -1122,6 +1122,10 @@
     "button_one": "Cart · {{count}} · {{amount}}",
     "button_other": "Cart · {{count}} · {{amount}}",
     "successText_one": "{{amount}} with {{count}} item. Thank you!",
-    "successText_other": "{{amount}} with {{count}} items. Thank you!"
+    "successText_other": "{{amount}} with {{count}} items. Thank you!",
+    "added": "Added to cart ✓",
+    "view": "View cart",
+    "open_one": "Cart: {{count}} item",
+    "open_other": "Cart: {{count}} items"
   }
 }

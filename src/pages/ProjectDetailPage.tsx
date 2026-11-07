@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useQueryClient } from '@tanstack/react-query';
@@ -10,6 +10,7 @@ import {
   Languages,
   Link2,
   Send,
+  ShoppingBag,
   Sparkles,
   TrendingUp,
   Users,
@@ -33,7 +34,7 @@ import { ChecksList, MoneyTrail } from '@/features/projects/MoneyTrail';
 import { RecentBackers } from '@/features/projects/RecentBackers';
 import { RewardsSection } from '@/features/projects/RewardCards';
 import { CartDrawer } from '@/features/cart/CartDrawer';
-import { cartActions, priceCart, useCart } from '@/features/cart/cart';
+import { OPEN_CART_EVENT, cartActions, priceCart, useCart } from '@/features/cart/cart';
 import { formatDate, formatMoney, formatNumber } from '@/lib/money';
 import { publicFileUrl, responsiveImage } from '@/lib/supabase';
 import { usePageMeta } from '@/lib/usePageMeta';
@@ -81,6 +82,21 @@ function ProjectView({ project }: { project: ProjectDetail }) {
   const [cartOpen, setCartOpen] = useState(() => new URLSearchParams(location.search).get('cart') === 'open');
   const cart = useCart(project.id);
   const cartSummary = priceCart(cart, project.rewards);
+  // "✓ added" message after Add to cart (the cart itself stays closed)
+  const [added, setAdded] = useState<{ title: string; key: number } | null>(null);
+  useEffect(() => {
+    if (!added) return;
+    const id = window.setTimeout(() => setAdded(null), 4000);
+    return () => window.clearTimeout(id);
+  }, [added]);
+  // The header cart icon asks this page to open its cart.
+  useEffect(() => {
+    const onOpen = (e: Event) => {
+      if ((e as CustomEvent<{ projectId: string }>).detail?.projectId === project.id) setCartOpen(true);
+    };
+    window.addEventListener(OPEN_CART_EVENT, onOpen);
+    return () => window.removeEventListener(OPEN_CART_EVENT, onOpen);
+  }, [project.id]);
   const cartLabel =
     cartSummary.count > 0
       ? t('cart.button', { count: cartSummary.count, amount: formatMoney(cartSummary.total, true) })
@@ -95,8 +111,14 @@ function ProjectView({ project }: { project: ProjectDetail }) {
 
   function openContribute(rewardId: string | null = null) {
     if (isRewardProject) {
-      if (rewardId) cartActions(project.id).add(rewardId);
-      setCartOpen(true); // logging in is asked only when paying
+      if (rewardId) {
+        // Add right away and say so; the cart opens from the icon or the cart button.
+        cartActions(project.id, project.slug).add(rewardId);
+        const reward = project.rewards.find(r => r.id === rewardId);
+        setAdded({ title: reward?.title ?? '', key: Date.now() });
+      } else {
+        setCartOpen(true); // logging in is asked only when paying
+      }
       return;
     }
     if (!user) {
@@ -634,6 +656,40 @@ function ProjectView({ project }: { project: ProjectDetail }) {
       )}
 
       {cartOpen && <CartDrawer project={project} title={title} onClose={() => setCartOpen(false)} />}
+
+      {/* "✓ Added" message */}
+      {added && !cartOpen && (
+        <div
+          key={added.key}
+          role="status"
+          className="fixed z-40 left-1/2 -translate-x-1/2 bottom-32 lg:bottom-8 w-[calc(100%-2rem)] max-w-md rounded-2xl bg-night text-white shadow-xl px-4 py-3 flex items-center gap-3"
+        >
+          <CheckCircle className="w-5 h-5 text-brand shrink-0" aria-hidden />
+          <p className="text-sm min-w-0 flex-1">
+            <span className="block font-semibold">{t('cart.added')}</span>
+            <span className="block text-slate-300 truncate">{added.title}</span>
+          </p>
+          <button
+            type="button"
+            onClick={() => setCartOpen(true)}
+            className="shrink-0 rounded-full bg-brand text-night px-4 py-2 text-sm font-semibold cursor-pointer"
+          >
+            {t('cart.view')}
+          </button>
+        </div>
+      )}
+
+      {/* Floating cart button (wide screens; phones have the bottom bar) */}
+      {isRewardProject && cartSummary.count > 0 && !cartOpen && !added && (
+        <button
+          type="button"
+          onClick={() => setCartOpen(true)}
+          className="hidden lg:inline-flex fixed z-30 right-6 bottom-6 items-center gap-2 rounded-full bg-night text-white pl-4 pr-5 py-3 shadow-xl hover:bg-night-soft cursor-pointer"
+        >
+          <ShoppingBag className="w-5 h-5 text-brand" aria-hidden />
+          <span className="text-sm font-semibold font-mono-numbers">{cartLabel}</span>
+        </button>
+      )}
 
       {dialogReward !== undefined && (
         <ContributeDialog
