@@ -4,6 +4,7 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { DemoBanner } from '@/components/layout/DemoBanner';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { AppTabBar } from '@/components/layout/AppTabBar';
 import { paths } from '@/app/routes';
 import { ScrollManager } from '@/app/ScrollManager';
 
@@ -174,6 +175,7 @@ export function App() {
       </main>
 
       <Footer />
+      <AppTabBar />
     </div>
   );
 }

@@ -8,6 +8,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { startMonitoring } from '@/lib/monitoring';
 import { watchSystemTheme } from '@/lib/theme';
 import { startScript } from '@/lib/script';
+import { startAppMode } from '@/lib/appMode';
 import '@/i18n';
 import '@/index.css';
 
@@ -19,6 +20,7 @@ const queryClient = new QueryClient({
 startMonitoring();
 watchSystemTheme();
 startScript();
+startAppMode();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

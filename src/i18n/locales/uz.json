@@ -1144,5 +1144,14 @@
     "view": "Savatni ochish",
     "open_one": "Savat: {{count}} ta mahsulot",
     "open_other": "Savat: {{count}} ta mahsulot"
+  },
+  "appNav": {
+    "label": "Ilova menyusi",
+    "home": "Bosh sahifa",
+    "explore": "Loyihalar",
+    "start": "Joylash",
+    "account": "Hisob",
+    "theme": "Tungi rejim",
+    "back": "Orqaga"
   }
 }

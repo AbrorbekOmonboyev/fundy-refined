@@ -175,6 +175,24 @@
   filter: brightness(0.92);
 }
 
+/* ===========================================================================
+ * App mode (inside the Android app, see src/lib/appMode.ts): no website chrome,
+ * no grey flash when tapping, no rubber-band pull at the page edges.
+ * ======================================================================== */
+.app-mode .app-hide {
+  display: none !important;
+}
+.app-mode {
+  -webkit-tap-highlight-color: transparent;
+}
+.app-mode body {
+  overscroll-behavior-y: none;
+}
+.app-mode :is(button, a, nav) {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 /* Theme switch: the new theme spreads out in a circle from the button. */
 ::view-transition-old(root),
 ::view-transition-new(root) {

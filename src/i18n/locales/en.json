@@ -1144,5 +1144,14 @@
     "view": "View cart",
     "open_one": "Cart: {{count}} item",
     "open_other": "Cart: {{count}} items"
+  },
+  "appNav": {
+    "label": "App menu",
+    "home": "Home",
+    "explore": "Explore",
+    "start": "Start",
+    "account": "Account",
+    "theme": "Dark mode",
+    "back": "Back"
   }
 }

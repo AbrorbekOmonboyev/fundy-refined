@@ -139,7 +139,10 @@ function ProjectView({ project }: { project: ProjectDetail }) {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10 space-y-8 lg:space-y-10">
-      <nav aria-label={t('project.breadcrumb')} className="flex items-center gap-2 text-xs text-slate-500 min-w-0">
+      <nav
+        aria-label={t('project.breadcrumb')}
+        className="app-hide flex items-center gap-2 text-xs text-slate-500 min-w-0"
+      >
         <Link to={paths.home} className="hover:text-ink shrink-0">
           {t('project.home')}
         </Link>

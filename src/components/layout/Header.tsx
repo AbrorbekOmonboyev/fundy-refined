@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { Menu, Search, X } from 'lucide-react';
+import { ArrowLeft, Menu, Search, X } from 'lucide-react';
 import { useAuth } from '@/features/auth/AuthContext';
 import { paths } from '@/app/routes';
 import { LanguageMenu, LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
@@ -12,6 +12,7 @@ import { Logo } from '@/components/Logo';
 import { UserMenu } from '@/components/layout/UserMenu';
 import { useAccountLinks } from '@/components/layout/useAccountLinks';
 import { useCategories } from '@/features/reference/useReference';
+import { isAppMode } from '@/lib/appMode';
 
 const desktopLink = ({ isActive }: { isActive: boolean }) =>
   `hover:text-ink transition-colors whitespace-nowrap ${isActive ? 'text-ink font-semibold underline decoration-brand decoration-[3px] underline-offset-[10px]' : ''}`;
@@ -27,7 +28,10 @@ export function Header() {
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
   // Explore has its own search box right on the page.
-  const onExplore = useLocation().pathname === paths.explore;
+  const { pathname } = useLocation();
+  const onExplore = pathname === paths.explore;
+  const TAB_ROOTS: string[] = [paths.home, paths.explore, paths.startProject];
+  const showBack = isAppMode() && !TAB_ROOTS.includes(pathname);
 
   const search = (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,14 +56,26 @@ export function Header() {
       <header className="sticky top-0 z-40 bg-card border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-6 h-16">
-            {/* Logo */}
-            <Link to={paths.home} className="shrink-0" aria-label="Fundy">
-              <Logo className="h-7 sm:h-8" />
-            </Link>
+            {/* Logo; in the app, inner screens also get a back arrow like any phone app */}
+            <div className="flex items-center gap-1 shrink-0">
+              {showBack && (
+                <button
+                  type="button"
+                  onClick={() => (window.history.length > 1 ? navigate(-1) : navigate(paths.home))}
+                  aria-label={t('appNav.back')}
+                  className="-ml-2 w-11 h-11 flex items-center justify-center text-ink cursor-pointer"
+                >
+                  <ArrowLeft className="w-6 h-6" aria-hidden />
+                </button>
+              )}
+              <Link to={paths.home} aria-label="Fundy">
+                <Logo className="h-7 sm:h-8" />
+              </Link>
+            </div>
 
             {/* Desktop navigation. "How it works" lives in the phone menu and on the home page,
                 to leave room for search. */}
-            <nav className="hidden xl:flex items-center gap-5 text-sm font-medium text-slate-600">
+            <nav className="app-hide hidden xl:flex items-center gap-5 text-sm font-medium text-slate-600">
               {links
                 .filter(link => !link.section)
                 .map(link => (
@@ -73,7 +89,7 @@ export function Header() {
             <form
               role="search"
               onSubmit={search}
-              className={`${onExplore ? 'md:invisible' : ''} hidden md:flex flex-1 min-w-40 max-w-xs ml-auto relative`}
+              className={`${onExplore ? 'md:invisible' : ''} app-hide hidden md:flex flex-1 min-w-40 max-w-xs ml-auto relative`}
             >
               <Search
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"
@@ -91,16 +107,16 @@ export function Header() {
 
             {/* Actions */}
             <div className="flex items-center gap-2 shrink-0">
-              <LanguageMenu className="hidden sm:flex" />
+              <LanguageMenu className="app-hide hidden sm:flex" />
               <CartButton />
-              <ThemeToggle />
+              <ThemeToggle className="app-hide" />
 
               {user && <NotificationBell />}
 
               {showLogin && (
                 <Link
                   to={paths.login}
-                  className="hidden sm:inline-block px-3 py-2 text-sm font-semibold text-slate-700 hover:text-ink whitespace-nowrap"
+                  className="app-hide hidden sm:inline-block px-3 py-2 text-sm font-semibold text-slate-700 hover:text-ink whitespace-nowrap"
                 >
                   {t('account.login')}
                 </Link>
@@ -109,17 +125,21 @@ export function Header() {
               {/* The one primary action */}
               <Link
                 to={paths.startProject}
-                className="hidden sm:inline-block px-4 py-2 text-sm font-semibold text-white bg-night hover:bg-night-soft active:bg-night rounded-md transition-colors whitespace-nowrap"
+                className="app-hide hidden sm:inline-block px-4 py-2 text-sm font-semibold text-white bg-night hover:bg-night-soft active:bg-night rounded-md transition-colors whitespace-nowrap"
               >
                 {t('nav.startProject')}
               </Link>
 
-              {user && <UserMenu />}
+              {user && (
+                <div className="app-hide">
+                  <UserMenu />
+                </div>
+              )}
 
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="xl:hidden w-11 h-11 flex items-center justify-center text-slate-600 hover:text-ink rounded-lg hover:bg-slate-100 transition-colors"
+                className="app-hide xl:hidden w-11 h-11 flex items-center justify-center text-slate-600 hover:text-ink rounded-lg hover:bg-slate-100 transition-colors"
                 aria-label={t('header.toggleMenu')}
                 aria-expanded={mobileMenuOpen}
               >
@@ -230,8 +250,8 @@ function CategoryBar() {
   const { options } = useCategories();
   const { pathname } = useLocation();
 
-  // Explore has its own category filter, so the bar is not repeated there.
-  const showOn = pathname === paths.home || pathname.startsWith('/projects/');
+  // Only on project pages: the home page and Explore don't repeat it, and the app never shows it.
+  const showOn = pathname.startsWith('/projects/') && !isAppMode();
   if (!showOn || options.length === 0) return null;
 
   return (
