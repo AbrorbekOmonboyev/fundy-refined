@@ -9,18 +9,10 @@ import {
   type RewardTier,
 } from '@/features/wizard/api';
 import { useStepSave } from '@/features/wizard/hooks';
-import { ListRow, WizardShell } from '@/features/wizard/WizardShell';
-import { Alert, Button, ChoiceGroup, NumberField, SelectField, TextAreaField, TextField } from '@/components/ui';
+import { WizardShell } from '@/features/wizard/WizardShell';
+import { EMPTY_TIER, RewardEditor, rewardProblems } from '@/features/wizard/steps/RewardEditor';
+import { Alert, Button, ChoiceGroup, NumberField, SelectField, TextField } from '@/components/ui';
 import { formatMoney } from '@/lib/money';
-
-const EMPTY_TIER: RewardTier = {
-  title: '',
-  description: '',
-  amount: 0,
-  items: [],
-  estimated_delivery: '',
-  quantity_limit: null,
-};
 
 /** Step 5: what backers get — rewards, Musharakah terms, or (donations) just the minimum amount. */
 export function TermsStep({ draft }: { draft: Draft }) {
@@ -42,6 +34,13 @@ export function TermsStep({ draft }: { draft: Draft }) {
   );
   const updateTier = (index: number, patch: Partial<RewardTier>) =>
     setTiers(list => list.map((tier, i) => (i === index ? { ...tier, ...patch } : tier)));
+  const moveTier = (from: number, to: number) =>
+    setTiers(list => {
+      const next = [...list];
+      const [moved] = next.splice(from, 1);
+      next.splice(to, 0, moved);
+      return next;
+    });
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -50,9 +49,12 @@ export function TermsStep({ draft }: { draft: Draft }) {
       return;
     }
     if (model === 'reward') {
-      const filled = tiers.filter(r => r.title.trim() || r.amount);
-      if (filled.length === 0 || filled.some(r => r.title.trim().length < 2 || r.amount < minContribution)) {
-        setError(t('wizard.terms.tierError', { min: formatMoney(minContribution) }));
+      const filled = tiers
+        .filter(r => r.title.trim() || r.amount)
+        .map(r => ({ ...r, components: r.components.filter(c => c.name.trim()) }));
+      const problems = rewardProblems(filled, minContribution);
+      if (problems.length) {
+        setError(problems.map(p => t(p, { min: formatMoney(minContribution) })).join(' '));
         return;
       }
       void run(async () => {
@@ -63,7 +65,9 @@ export function TermsStep({ draft }: { draft: Draft }) {
             ...r,
             title: r.title.trim(),
             description: r.description.trim(),
+            long_description: r.long_description.trim(),
             estimated_delivery: r.estimated_delivery?.trim() || null,
+            components: r.components.map(c => ({ name: c.name.trim(), quantity: c.quantity })),
           })),
         );
       });
@@ -105,62 +109,25 @@ export function TermsStep({ draft }: { draft: Draft }) {
       {model === 'reward' && (
         <div className="space-y-4">
           {tiers.map((tier, index) => (
-            <ListRow key={index} index={index} onRemove={() => setTiers(list => list.filter((_, i) => i !== index))}>
-              <div className="grid gap-3 sm:grid-cols-[1fr_180px]">
-                <TextField
-                  label={t('wizard.terms.tierName')}
-                  maxLength={160}
-                  value={tier.title}
-                  onChange={e => updateTier(index, { title: e.target.value })}
-                />
-                <NumberField
-                  label={t('wizard.terms.tierPrice')}
-                  value={tier.amount}
-                  onValue={v => updateTier(index, { amount: Math.round(v) })}
-                />
-              </div>
-              <TextAreaField
-                label={t('project.budgetDescription')}
-                rows={2}
-                maxLength={2000}
-                value={tier.description}
-                onChange={e => updateTier(index, { description: e.target.value })}
-              />
-              <TextAreaField
-                label={t('wizard.terms.tierItems')}
-                hint={t('wizard.terms.tierItemsHint')}
-                rows={3}
-                value={tier.items.join('\n')}
-                onChange={e =>
-                  updateTier(index, {
-                    items: e.target.value
-                      .split('\n')
-                      .map(s => s.trim())
-                      .filter(Boolean)
-                      .slice(0, 20),
-                  })
-                }
-              />
-              <div className="grid gap-3 sm:grid-cols-2">
-                <TextField
-                  label={t('wizard.terms.delivery')}
-                  maxLength={60}
-                  value={tier.estimated_delivery ?? ''}
-                  onChange={e => updateTier(index, { estimated_delivery: e.target.value })}
-                  placeholder={t('wizard.terms.deliveryPlaceholder')}
-                />
-                <NumberField
-                  label={t('wizard.terms.limit')}
-                  hint={t('wizard.terms.limitHint')}
-                  value={tier.quantity_limit ?? 0}
-                  onValue={v => updateTier(index, { quantity_limit: v > 0 ? Math.round(v) : null })}
-                />
-              </div>
-            </ListRow>
+            <RewardEditor
+              key={index}
+              draft={draft}
+              tier={tier}
+              index={index}
+              count={tiers.length}
+              onChange={patch => updateTier(index, patch)}
+              onMove={to => moveTier(index, to)}
+              onRemove={() => setTiers(list => list.filter((_, i) => i !== index))}
+            />
           ))}
-          <Button variant="secondary" onClick={() => setTiers(list => [...list, { ...EMPTY_TIER }])}>
-            + {t('wizard.terms.addTier')}
-          </Button>
+          <div className="flex flex-wrap gap-2">
+            <Button variant="secondary" onClick={() => setTiers(list => [...list, { ...EMPTY_TIER }])}>
+              + {t('wizard.terms.addTier')}
+            </Button>
+            <Button variant="secondary" onClick={() => setTiers(list => [...list, { ...EMPTY_TIER, kind: 'addon' }])}>
+              + {t('wizard.rewards.addAddon')}
+            </Button>
+          </div>
         </div>
       )}
 

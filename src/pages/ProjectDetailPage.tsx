@@ -31,11 +31,12 @@ import { NotFoundPage } from '@/pages/NotFoundPage';
 import { photoCredit } from '@/data/photoCredits';
 import { ChecksList, MoneyTrail } from '@/features/projects/MoneyTrail';
 import { RecentBackers } from '@/features/projects/RecentBackers';
+import { RewardsSection } from '@/features/projects/RewardCards';
 import { formatDate, formatMoney, formatNumber } from '@/lib/money';
 import { publicFileUrl, responsiveImage } from '@/lib/supabase';
 import { usePageMeta } from '@/lib/usePageMeta';
 
-type Tab = 'story' | 'budget' | 'milestones' | 'evaluation' | 'risks' | 'updates' | 'comments';
+type Tab = 'story' | 'rewards' | 'budget' | 'milestones' | 'evaluation' | 'risks' | 'updates' | 'comments';
 const BUDGET_COLORS = ['bg-brand', 'bg-night', 'bg-brand-deep', 'bg-slate-400', 'bg-night-soft', 'bg-track'];
 
 export function ProjectDetailPage() {
@@ -71,6 +72,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
   usePageMeta(title, text?.tagline);
 
   const [tab, setTab] = useState<Tab>('story');
+  const mainRewards = project.rewards.filter(r => r.kind === 'reward' && !r.is_hidden);
   const [dialogReward, setDialogReward] = useState<string | null | undefined>(undefined); // undefined = closed
   const [copied, setCopied] = useState(false);
 
@@ -100,6 +102,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
 
   const tabs: { id: Tab; label: string; show: boolean }[] = [
     { id: 'story', label: t('project.tabs.story'), show: true },
+    { id: 'rewards', label: t('project.tabs.rewards'), show: project.rewards.some(r => !r.is_hidden) },
     { id: 'budget', label: t('project.tabs.budget'), show: project.budget.length > 0 },
     { id: 'milestones', label: t('project.tabs.milestones'), show: project.milestones.length > 0 },
     { id: 'evaluation', label: t('project.tabs.evaluation'), show: !!project.evaluation },
@@ -404,54 +407,33 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                   </div>
                 )}
               </div>
-              {project.rewards.length > 0 && (
+              {mainRewards.length > 0 && (
                 <div className="lg:col-span-4 space-y-3">
                   <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">{t('project.rewards')}</h3>
-                  {project.rewards.map(r => {
-                    const soldOut = r.quantity_limit !== null && r.claimed_count >= r.quantity_limit;
-                    return (
-                      <div key={r.id} className="bg-card p-4 rounded-xl border border-slate-200 space-y-2 shadow-sm">
-                        <div className="flex justify-between items-baseline gap-2">
-                          <span className="font-bold text-ink text-xs">{r.title}</span>
-                          <span className="text-xs font-bold text-ink font-mono-numbers shrink-0">
-                            {formatMoney(r.amount)}
-                          </span>
-                        </div>
-                        <p className="text-xs text-slate-600 leading-relaxed">{r.description}</p>
-                        {r.items.length > 0 && (
-                          <ul className="text-xs text-slate-500 space-y-1 pt-1">
-                            {r.items.map(item => (
-                              <li key={item} className="flex items-center gap-1.5">
-                                <span className="w-1.5 h-1.5 rounded-full bg-brand shrink-0" aria-hidden />
-                                {item}
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                        <div className="pt-2 flex items-center justify-between text-xs text-slate-400 border-t border-slate-100">
-                          {r.estimated_delivery && <span>{t('project.delivery', { when: r.estimated_delivery })}</span>}
-                          <span className="font-mono-numbers">
-                            {r.quantity_limit !== null
-                              ? t('project.claimedOf', { claimed: r.claimed_count, limit: r.quantity_limit })
-                              : t('project.claimed', { count: r.claimed_count })}
-                          </span>
-                        </div>
-                        {isLive && !isOwner && (
-                          <button
-                            type="button"
-                            disabled={soldOut}
-                            onClick={() => openContribute(r.id)}
-                            className="w-full mt-2 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand disabled:opacity-50 rounded-lg"
-                          >
-                            {soldOut ? t('project.soldOut') : t('project.selectReward')}
-                          </button>
-                        )}
-                      </div>
-                    );
-                  })}
+                  <ul className="rounded-2xl border border-slate-200 bg-card divide-y divide-slate-100">
+                    {mainRewards.slice(0, 4).map(r => (
+                      <li key={r.id} className="flex items-center justify-between gap-3 p-3 text-sm">
+                        <span className="min-w-0 text-ink font-medium line-clamp-2">{r.title}</span>
+                        <span className="shrink-0 font-semibold text-ink font-mono-numbers">
+                          {formatMoney(r.amount, true)}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <button
+                    type="button"
+                    onClick={() => setTab('rewards')}
+                    className="w-full py-2.5 rounded-full border border-slate-300 text-sm font-semibold text-ink hover:bg-slate-50 cursor-pointer"
+                  >
+                    {t('rewards.seeAll')}
+                  </button>
                 </div>
               )}
             </div>
+          )}
+
+          {tab === 'rewards' && (
+            <RewardsSection project={project} canBack={isLive && !isOwner} onChoose={id => openContribute(id)} />
           )}
 
           {tab === 'budget' && (

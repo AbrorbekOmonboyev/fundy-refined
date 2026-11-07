@@ -191,7 +191,9 @@ const DETAIL_COLUMNS = `
   owner_id, min_contribution, starts_at,
   budget_items ( id, position, category, description, amount ),
   milestones ( id, position, title, description, target_label, release_percent, status ),
-  reward_tiers ( id, position, title, description, amount, items, estimated_delivery, quantity_limit, claimed_count ),
+  reward_tiers ( id, position, title, description, amount, items, estimated_delivery, quantity_limit, claimed_count,
+    kind, compare_at_amount, image_paths, long_description, is_featured, is_digital, is_hidden, per_backer_limit,
+    available_from, available_until, reward_components ( id, position, name, quantity ) ),
   equity_terms ( * ),
   project_updates ( id, title, body, likes_count, created_at, author:profiles!project_updates_author_id_fkey ( full_name ) ),
   comments ( id, body, created_at, parent_id, is_backer, author:profiles!comments_author_id_fkey ( id, full_name, city, avatar_path ) )
@@ -213,7 +215,9 @@ type DetailRow = Omit<CardRow, 'evaluations' | 'owner'> & {
     Tables['milestones']['Row'],
     'id' | 'position' | 'title' | 'description' | 'target_label' | 'release_percent' | 'status'
   >[];
-  reward_tiers: Omit<Tables['reward_tiers']['Row'], 'project_id'>[];
+  reward_tiers: (Omit<Tables['reward_tiers']['Row'], 'project_id'> & {
+    reward_components: Pick<Tables['reward_components']['Row'], 'id' | 'position' | 'name' | 'quantity'>[];
+  })[];
   equity_terms: Tables['equity_terms']['Row'] | null;
   project_updates: {
     id: string;
@@ -287,7 +291,9 @@ export async function getProject(slug: string): Promise<ProjectDetail | null> {
     founderAvatarUrl: publicFileUrl('avatars', data.owner?.avatar_path),
     budget: [...data.budget_items].sort(byPosition),
     milestones: [...data.milestones].sort(byPosition),
-    rewards: [...data.reward_tiers].sort(byPosition),
+    rewards: [...data.reward_tiers]
+      .sort(byPosition)
+      .map(r => ({ ...r, reward_components: [...r.reward_components].sort(byPosition) })),
     equity: data.equity_terms,
     updates: [...data.project_updates].sort(newestFirst),
     comments: topLevel.map(c => ({ ...c, replies: replies.filter(r => r.parent_id === c.id) })),

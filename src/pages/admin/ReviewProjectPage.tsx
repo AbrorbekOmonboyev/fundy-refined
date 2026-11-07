@@ -21,7 +21,7 @@ import { Alert, Button, ChoiceGroup, NumberField, PageSpinner, TextAreaField } f
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { AdminHeader } from '@/pages/admin/AdminLayout';
 import { publicFileUrl } from '@/lib/supabase';
-import { formatMoney } from '@/lib/money';
+import { formatDate, formatMoney } from '@/lib/money';
 import { usePageMeta } from '@/lib/usePageMeta';
 
 /** Everything a founder submitted, the evaluation form, and the decision. */
@@ -128,7 +128,24 @@ function Review({ draft, evaluation }: { draft: Draft; evaluation: Evaluation | 
 
           {p.model === 'reward' && (
             <Section title={t('project.rewards')}>
-              <Table rows={draft.rewards.map(r => [r.title, r.items.join(', '), formatMoney(r.amount)])} />
+              <p className="text-sm text-slate-600 mb-3">{t('admin.review.rewardChecks')}</p>
+              <Table
+                rows={draft.rewards.map(r => [
+                  `${r.title} · ${t(`wizard.rewards.kind.${r.kind}`)}${r.is_hidden ? ` · ${t('wizard.rewards.is_hidden')}` : ''}`,
+                  r.components.map(c => (c.quantity > 1 ? `${c.name} ×${c.quantity}` : c.name)).join(', '),
+                  [
+                    r.estimated_delivery,
+                    r.quantity_limit ? `≤ ${r.quantity_limit}` : null,
+                    r.per_backer_limit ? `${t('wizard.rewards.perBacker')}: ${r.per_backer_limit}` : null,
+                    r.available_until ? `${t('wizard.rewards.until')}: ${formatDate(r.available_until)}` : null,
+                  ]
+                    .filter(Boolean)
+                    .join(' · '),
+                  r.compare_at_amount
+                    ? `${formatMoney(r.amount)} (${formatMoney(r.compare_at_amount)})`
+                    : formatMoney(r.amount),
+                ])}
+              />
             </Section>
           )}
           {p.model === 'equity' && draft.equity && (

@@ -20,8 +20,27 @@ export type BudgetItem = Pick<Tables['budget_items']['Row'], 'category' | 'descr
 export type Milestone = Pick<Tables['milestones']['Row'], 'title' | 'description' | 'target_label' | 'release_percent'>;
 export type RewardTier = Pick<
   Tables['reward_tiers']['Row'],
-  'title' | 'description' | 'amount' | 'items' | 'estimated_delivery' | 'quantity_limit'
-> & { id?: string; claimed_count?: number };
+  | 'title'
+  | 'description'
+  | 'amount'
+  | 'items'
+  | 'estimated_delivery'
+  | 'quantity_limit'
+  | 'kind'
+  | 'compare_at_amount'
+  | 'image_paths'
+  | 'long_description'
+  | 'is_featured'
+  | 'is_digital'
+  | 'is_hidden'
+  | 'per_backer_limit'
+  | 'available_from'
+  | 'available_until'
+> & { id?: string; claimed_count?: number; components: { name: string; quantity: number }[] };
+
+const REWARD_COLUMNS = `id, title, description, amount, items, estimated_delivery, quantity_limit, claimed_count,
+  kind, compare_at_amount, image_paths, long_description, is_featured, is_digital, is_hidden, per_backer_limit,
+  available_from, available_until, reward_components ( name, quantity, position )`;
 export type EquityTerms = Omit<Tables['equity_terms']['Row'], 'project_id'>;
 export type FounderProfile = Tables['founder_profiles']['Row'];
 export type ProjectDocument = Tables['project_documents']['Row'];
@@ -65,11 +84,7 @@ export async function getDraft(projectId: string, userId: string, { anyOwner = f
       .select('title, description, target_label, release_percent')
       .eq('project_id', projectId)
       .order('position'),
-    db()
-      .from('reward_tiers')
-      .select('id, title, description, amount, items, estimated_delivery, quantity_limit, claimed_count')
-      .eq('project_id', projectId)
-      .order('position'),
+    db().from('reward_tiers').select(REWARD_COLUMNS).eq('project_id', projectId).order('position'),
     db().from('equity_terms').select('*').eq('project_id', projectId).maybeSingle(),
     db().from('project_documents').select('*').eq('project_id', projectId).order('created_at'),
     db().from('founder_profiles').select('*').eq('user_id', project.owner_id).maybeSingle(),
@@ -82,7 +97,15 @@ export async function getDraft(projectId: string, userId: string, { anyOwner = f
     text: text.data,
     budget: budget.data ?? [],
     milestones: milestones.data ?? [],
-    rewards: rewards.data ?? [],
+    rewards: (rewards.data ?? []).map(({ reward_components, ...r }) => ({
+      ...r,
+      // older rewards may have only the free-text list
+      components: reward_components.length
+        ? [...reward_components]
+            .sort((a, b) => a.position - b.position)
+            .map(({ name, quantity }) => ({ name, quantity }))
+        : r.items.map(name => ({ name, quantity: 1 })),
+    })),
     equity: equityRow
       ? {
           contract_type: equityRow.contract_type,
@@ -233,26 +256,57 @@ export async function saveMilestones(projectId: string, items: Milestone[]) {
 }
 
 export async function saveRewards(projectId: string, items: RewardTier[]) {
+  // Deleting a reward also deletes its components (on delete cascade).
   fail((await db().from('reward_tiers').delete().eq('project_id', projectId)).error);
   if (items.length === 0) return;
-  fail(
-    (
-      await db()
-        .from('reward_tiers')
-        .insert(
-          items.map(({ title, description, amount, items: list, estimated_delivery, quantity_limit }, position) => ({
-            project_id: projectId,
-            position,
-            title,
-            description,
-            amount,
-            items: list,
-            estimated_delivery,
-            quantity_limit,
-          })),
-        )
-    ).error,
+  const { data, error } = await db()
+    .from('reward_tiers')
+    .insert(
+      items.map((r, position) => ({
+        project_id: projectId,
+        position,
+        title: r.title,
+        description: r.description,
+        amount: r.amount,
+        items: r.components.map(c => c.name), // kept for older screens
+        estimated_delivery: r.estimated_delivery,
+        quantity_limit: r.quantity_limit,
+        kind: r.kind,
+        compare_at_amount: r.compare_at_amount,
+        image_paths: r.image_paths,
+        long_description: r.long_description,
+        is_featured: r.is_featured,
+        is_digital: r.is_digital,
+        is_hidden: r.is_hidden,
+        per_backer_limit: r.per_backer_limit,
+        available_from: r.available_from,
+        available_until: r.available_until,
+      })),
+    )
+    .select('id, position');
+  fail(error);
+  const components = (data ?? []).flatMap(row =>
+    items[row.position].components.map((c, position) => ({
+      reward_tier_id: row.id,
+      position,
+      name: c.name,
+      quantity: c.quantity,
+    })),
   );
+  if (components.length) fail((await db().from('reward_components').insert(components)).error);
+}
+
+export const REWARD_IMAGE_MAX = 6;
+
+/** Upload a photo for a reward (stored like the cover, in the owner's folder). */
+export async function uploadRewardImage(draft: Draft, file: File): Promise<string> {
+  if (!IMAGE_TYPES.includes(file.type)) throw new Error('image_type');
+  if (file.size > COVER_MAX_BYTES) throw new Error('image_size');
+  const ext = file.type.split('/')[1].replace('jpeg', 'jpg');
+  const path = `${draft.project.owner_id}/${draft.project.id}/reward-${Date.now()}-${Math.round(Math.random() * 1e6)}.${ext}`;
+  const upload = await db().storage.from('project-images').upload(path, file, { contentType: file.type });
+  fail(upload.error);
+  return path;
 }
 
 export async function saveEquity(projectId: string, terms: EquityTerms) {

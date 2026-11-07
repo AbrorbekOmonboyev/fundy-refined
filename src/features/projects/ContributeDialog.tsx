@@ -4,6 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { CheckCircle2, ShieldAlert, X } from 'lucide-react';
 import { contribute, type ProjectDetail } from '@/features/projects/api';
 import { projectKeys } from '@/features/projects/hooks';
+import { rewardStatus } from '@/features/projects/rewards';
 import { errorKey } from '@/features/auth/errors';
 import { formatMoney, formatNumber } from '@/lib/money';
 import { Alert, Button } from '@/components/ui';
@@ -53,6 +54,8 @@ export function ContributeDialog({
 
   const minimum = Math.max(project.minContribution, project.equity?.min_investment ?? 0);
   const tier = project.rewards.find(r => r.id === rewardId) ?? null;
+  // Only main rewards; add-ons come with the cart (Phase B). Hidden ones never show.
+  const choosable = project.rewards.filter(r => r.kind === 'reward' && !r.is_hidden);
   const share = project.equity ? (amount / project.targetAmount) * project.equity.investor_profit_share_pct : 0;
   // What this amount does for the project, in plain words.
   const remaining = Math.max(0, project.targetAmount - project.raisedAmount);
@@ -172,11 +175,12 @@ export function ContributeDialog({
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="p-5 space-y-5">
-            {project.model === 'reward' && project.rewards.length > 0 && (
+            {project.model === 'reward' && choosable.length > 0 && (
               <fieldset className="space-y-2">
                 <legend className="text-sm font-medium text-slate-700 mb-1">{t('contribute.reward')}</legend>
-                {[null, ...project.rewards].map(r => {
-                  const soldOut = !!r && r.quantity_limit !== null && r.claimed_count >= r.quantity_limit;
+                {[null, ...choosable].map(r => {
+                  // sold out, not yet open or ended: shown but can't be picked
+                  const soldOut = !!r && rewardStatus(r) !== 'available';
                   return (
                     <label
                       key={r?.id ?? 'none'}

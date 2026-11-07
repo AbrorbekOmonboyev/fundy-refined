@@ -112,7 +112,10 @@
     "reviewNoteRequired": "Please write a note of at least 10 characters.",
     "crashTitle": "Something went wrong",
     "crashText": "This page hit an error. Reloading usually fixes it. We have been notified.",
-    "reload": "Reload the page"
+    "reload": "Reload the page",
+    "addonNeedsReward": "Add-ons can only be taken together with a main reward.",
+    "rewardNotAvailableNow": "This reward isn't available right now.",
+    "rewardLimitPerBacker": "This reward is limited per person — you've reached the limit."
   },
   "auth": {
     "fields": {
@@ -254,7 +257,8 @@
         "approve": "Approve and publish",
         "request_changes": "Send back for changes",
         "reject": "Reject project"
-      }
+      },
+      "rewardChecks": "Check: is the shop price real, is the delivery date realistic, are the contents complete?"
     },
     "projects": {
       "hint": "All projects in every status. The star features a live project on the home page.",
@@ -519,7 +523,8 @@
       "evaluation": "Evaluation",
       "risks": "Risks",
       "updates": "Updates ({{count}})",
-      "comments": "Questions ({{count}})"
+      "comments": "Questions ({{count}})",
+      "rewards": "Rewards"
     },
     "about": "About this project",
     "founderBio": "About the founder",
@@ -868,6 +873,41 @@
       "milestones": "Each stage is a result someone can check:\n1. Foundation ready — month 1 — 30%\n2. Frame and panels installed — month 2 — 40%\n3. First crop planted — month 3 — 20%\n4. First harvest delivered to shops — month 5 — 10%\nProof: photos, video, an invoice or a signed handover act.",
       "terms": "Reward: \"A hand-made piyola — 350 000 so'm, delivered December 2026, 100 available\".\nMusharakah: \"28% of net profit to backers, every quarter, for 5 years. Minimum share 2 500 000 so'm\".\nWrite exact terms, not promises.",
       "founder": "\"Graduate of Tashkent State Agrarian University. Has built greenhouse systems for 11 years: 3 in Kuva, 2 in Turkey.\"\nWrite the full registration number: \"LLC certificate No. 309812490\"."
+    },
+    "rewards": {
+      "kindLabel": "Type",
+      "kind": {
+        "reward": "Main reward",
+        "addon": "Add-on"
+      },
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "compareAt": "Shop price (optional)",
+      "compareAtHint": "If it's a real retail price, the saving is shown. Fundy checks it.",
+      "saving": "Backers save {{pct}}%",
+      "short": "Short description",
+      "components": "What's inside",
+      "componentName": "Item {{n}}",
+      "qty": "Qty",
+      "addComponent": "Add item",
+      "photos": "Photos (up to {{max}})",
+      "addPhoto": "Add photo",
+      "long": "Full description",
+      "longHint": "Size, material, warranty, delivery terms — everything a backer should know.",
+      "accessWhen": "When access starts",
+      "perBacker": "Limit per person",
+      "perBackerHint": "0 = no limit. Stops one person taking every early-backer place.",
+      "from": "Available from (optional)",
+      "fromHint": "Empty — right away",
+      "until": "Available until (optional)",
+      "untilHint": "For an early-backer price: can't be chosen after this",
+      "is_featured": "Recommended",
+      "is_digital": "Digital (no delivery)",
+      "is_hidden": "Hide for now",
+      "addAddon": "Add-on",
+      "needMain": "You need at least one visible main reward.",
+      "compareError": "The shop price must be higher than the reward price.",
+      "windowError": "The 'from' date must be before the 'until' date."
     }
   },
   "notifications": {
@@ -1010,5 +1050,48 @@
     "disconnect": "Disconnect",
     "linked": "Telegram connected",
     "waiting": "Telegram is open — press Start in the bot. Once linked, it shows here."
+  },
+  "rewards": {
+    "title": "Rewards",
+    "hint": "Back the project and be among the first to get the finished product.",
+    "compareHint": "Tick two or more rewards to compare them",
+    "addonsTitle": "Add-ons",
+    "addonsHint": "Added on top of a main reward.",
+    "addonSoon": "Adding to a cart is coming soon — for now you can look.",
+    "selected_one": "{{count}} selected",
+    "selected_other": "{{count}} selected",
+    "compare": "Compare",
+    "compareOne": "Compare",
+    "clearCompare": "Clear selection",
+    "compareNote": "Contents as published by the founder.",
+    "featured": "Recommended",
+    "soldOut": "Sold out",
+    "ended": "Ended",
+    "upcoming": "Coming soon",
+    "available": "Choose",
+    "fewLeft_one": "{{count}} left",
+    "fewLeft_other": "{{count}} left",
+    "earlyBird": "Early-backer price",
+    "digital": "Digital",
+    "delivery": "Delivery",
+    "access": "Access",
+    "leftLabel": "Left",
+    "leftOf": "{{left}} of {{total}}",
+    "chosenLabel": "Chosen",
+    "chosen_one": "{{formatted}} time",
+    "chosen_other": "{{formatted}} times",
+    "perBacker_one": "Up to {{count}} per person",
+    "perBacker_other": "Up to {{count}} per person",
+    "until": "This price until {{date}}",
+    "choose": "Choose",
+    "details": "Details",
+    "consistsOf": "What's inside",
+    "zoom": "Zoom",
+    "photo": "Photo {{n}}",
+    "price": "Price",
+    "included": "Included",
+    "notIncluded": "Not included",
+    "unlimited": "Unlimited",
+    "seeAll": "All rewards"
   }
 }

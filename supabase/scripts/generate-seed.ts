@@ -419,7 +419,10 @@ INITIAL_PROJECTS.forEach((p, index) => {
   fixed.filter(f => f.amount > 0).forEach(f => record(f.backer, f.amount, f.tierKey));
   free.forEach((b, i) => record(b, amounts[i]));
 
-  for (const [kind, list] of [['reward', tiers], ['addon', addons]] as const) {
+  for (const [kind, list] of [
+    ['reward', tiers],
+    ['addon', addons],
+  ] as const) {
     for (const t of list) {
       const x = t.extra;
       const until = x.earlyBirdDays ? `now() + interval '${x.earlyBirdDays} days'` : 'null';

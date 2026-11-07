@@ -112,7 +112,10 @@
     "reviewNoteRequired": "Kamida 10 ta belgidan iborat izoh yozing.",
     "crashTitle": "Nimadir xato ketdi",
     "crashText": "Bu sahifada xatolik yuz berdi. Odatda sahifani yangilash yordam beradi. Bizga xabar yuborildi.",
-    "reload": "Sahifani yangilash"
+    "reload": "Sahifani yangilash",
+    "addonNeedsReward": "Qoʻshimcha mahsulotni faqat asosiy mukofot bilan olish mumkin.",
+    "rewardNotAvailableNow": "Bu mukofot hozir mavjud emas.",
+    "rewardLimitPerBacker": "Bu mukofotni bir kishi cheklangan miqdorda oladi — limitga yetdingiz."
   },
   "auth": {
     "fields": {
@@ -254,7 +257,8 @@
         "approve": "Tasdiqlash va eʼlon qilish",
         "request_changes": "Oʻzgartirish uchun qaytarish",
         "reject": "Loyihani rad etish"
-      }
+      },
+      "rewardChecks": "Tekshiring: doʻkondagi narx haqiqiymi, yetkazish muddati realmi, tarkib toʻliqmi."
     },
     "projects": {
       "hint": "Barcha holatdagi loyihalar. Yulduzcha faol loyihani bosh sahifada koʻrsatadi.",
@@ -519,7 +523,8 @@
       "evaluation": "Baholash",
       "risks": "Xavflar",
       "updates": "Yangiliklar ({{count}})",
-      "comments": "Savollar ({{count}})"
+      "comments": "Savollar ({{count}})",
+      "rewards": "Mukofotlar"
     },
     "about": "Loyiha haqida",
     "founderBio": "Asoschi haqida",
@@ -868,6 +873,41 @@
       "milestones": "Har bir bosqich — tekshirsa boʻladigan natija:\n1. Poydevor tayyor — 1-oy — 30%\n2. Karkas va panellar oʻrnatildi — 2-oy — 40%\n3. Birinchi ekin ekildi — 3-oy — 20%\n4. Birinchi hosil doʻkonlarga topshirildi — 5-oy — 10%\nDalil: surat, video, hisob-faktura yoki dalolatnoma.",
       "terms": "Mukofot: «Qoʻlda yasalgan piyola — 350 000 soʻm, 2026-yil dekabrda yetkaziladi, 100 dona».\nMushoraka: «Sof foydaning 28% — homiylarga, har chorakda, 5 yil. Minimal ulush 2 500 000 soʻm».\nVaʼda emas, aniq shart yozing.",
       "founder": "«Toshkent davlat agrar universiteti bitiruvchisi. 11 yildan beri issiqxona tizimlarini quradi: Quvada 3 ta, Turkiyada 2 ta.»\nGuvohnoma raqamini toʻliq yozing: «MChJ guvohnomasi № 309812490»."
+    },
+    "rewards": {
+      "kindLabel": "Turi",
+      "kind": {
+        "reward": "Asosiy mukofot",
+        "addon": "Qoʻshimcha mahsulot"
+      },
+      "moveUp": "Yuqoriga",
+      "moveDown": "Pastga",
+      "compareAt": "Doʻkondagi narxi (ixtiyoriy)",
+      "compareAtHint": "Haqiqiy chakana narx boʻlsa, chegirma koʻrsatiladi. Fundy tekshiradi.",
+      "saving": "Homiylar {{pct}}% tejaydi",
+      "short": "Qisqa tavsif",
+      "components": "Tarkibi (nima kiradi)",
+      "componentName": "{{n}}-narsa",
+      "qty": "Soni",
+      "addComponent": "Narsa qoʻshish",
+      "photos": "Suratlar (koʻpi bilan {{max}} ta)",
+      "addPhoto": "Surat qoʻshish",
+      "long": "Batafsil tavsif",
+      "longHint": "Oʻlcham, material, kafolat, yetkazish shartlari — homiy bilishi kerak boʻlgan hamma narsa.",
+      "accessWhen": "Qachon foydalanish mumkin",
+      "perBacker": "Bir kishiga cheklov",
+      "perBackerHint": "0 = cheklovsiz. Erta homiylar narxini bir kishi hammasini olib qoʻymasligi uchun.",
+      "from": "Qachondan (ixtiyoriy)",
+      "fromHint": "Boʻsh — darhol",
+      "until": "Qachongacha (ixtiyoriy)",
+      "untilHint": "Erta homiylar narxi uchun: shu vaqtdan keyin tanlab boʻlmaydi",
+      "is_featured": "Tavsiya etilgan",
+      "is_digital": "Raqamli (yetkazish kerak emas)",
+      "is_hidden": "Vaqtincha yashirish",
+      "addAddon": "Qoʻshimcha mahsulot",
+      "needMain": "Kamida bitta koʻrinadigan asosiy mukofot kerak.",
+      "compareError": "Doʻkondagi narx mukofot narxidan yuqori boʻlishi kerak.",
+      "windowError": "«Qachondan» sanasi «Qachongacha» dan oldin boʻlishi kerak."
     }
   },
   "notifications": {
@@ -1010,5 +1050,48 @@
     "disconnect": "Uzish",
     "linked": "Telegram ulangan",
     "waiting": "Telegram ochildi — botda «Start» tugmasini bosing. Ulangach, shu yerda koʻrinadi."
+  },
+  "rewards": {
+    "title": "Mukofotlar",
+    "hint": "Loyihani qoʻllab-quvvatlang va tayyor mahsulotni birinchilardan boʻlib oling.",
+    "compareHint": "Ikki yoki undan koʻp mukofotni belgilab, solishtiring",
+    "addonsTitle": "Qoʻshimcha mahsulotlar",
+    "addonsHint": "Asosiy mukofotga qoʻshib olinadi.",
+    "addonSoon": "Savatga qoʻshish tez orada — hozircha faqat koʻrish mumkin.",
+    "selected_one": "{{count}} ta tanlandi",
+    "selected_other": "{{count}} ta tanlandi",
+    "compare": "Solishtirish",
+    "compareOne": "Solishtirish",
+    "clearCompare": "Tanlovni tozalash",
+    "compareNote": "Tarkib asoschi eʼlon qilgan maʼlumotlarga asoslangan.",
+    "featured": "Tavsiya etiladi",
+    "soldOut": "Tugadi",
+    "ended": "Muddati tugadi",
+    "upcoming": "Tez orada",
+    "available": "Tanlash",
+    "fewLeft_one": "{{count}} ta qoldi",
+    "fewLeft_other": "{{count}} ta qoldi",
+    "earlyBird": "Erta homiylar narxi",
+    "digital": "Raqamli",
+    "delivery": "Yetkazish",
+    "access": "Kirish",
+    "leftLabel": "Qoldi",
+    "leftOf": "{{left}} / {{total}}",
+    "chosenLabel": "Tanlangan",
+    "chosen_one": "{{formatted}} marta",
+    "chosen_other": "{{formatted}} marta",
+    "perBacker_one": "Bir kishiga {{count}} tagacha",
+    "perBacker_other": "Bir kishiga {{count}} tagacha",
+    "until": "Bu narx {{date}} gacha",
+    "choose": "Tanlash",
+    "details": "Batafsil",
+    "consistsOf": "Tarkibi",
+    "zoom": "Kattalashtirish",
+    "photo": "{{n}}-surat",
+    "price": "Narx",
+    "included": "Bor",
+    "notIncluded": "Yoʻq",
+    "unlimited": "Cheklanmagan",
+    "seeAll": "Barcha mukofotlar"
   }
 }

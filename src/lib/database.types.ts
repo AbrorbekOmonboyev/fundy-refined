@@ -960,8 +960,50 @@ export type Database = {
           },
         ]
       }
+      reward_components: {
+        Row: {
+          id: string
+          name: string
+          position: number
+          quantity: number
+          reward_tier_id: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          position?: number
+          quantity?: number
+          reward_tier_id: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          position?: number
+          quantity?: number
+          reward_tier_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reward_components_reward_tier_id_fkey"
+            columns: ["reward_tier_id"]
+            isOneToOne: false
+            referencedRelation: "reward_tiers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reward_tiers: {
         Row: {
+          available_from: string | null
+          available_until: string | null
+          compare_at_amount: number | null
+          image_paths: string[]
+          is_digital: boolean
+          is_featured: boolean
+          is_hidden: boolean
+          kind: Database["public"]["Enums"]["reward_kind"]
+          long_description: string
+          per_backer_limit: number | null
           amount: number
           claimed_count: number
           description: string
@@ -974,6 +1016,16 @@ export type Database = {
           title: string
         }
         Insert: {
+          available_from?: string | null
+          available_until?: string | null
+          compare_at_amount?: number | null
+          image_paths?: string[]
+          is_digital?: boolean
+          is_featured?: boolean
+          is_hidden?: boolean
+          kind?: Database["public"]["Enums"]["reward_kind"]
+          long_description?: string
+          per_backer_limit?: number | null
           amount: number
           claimed_count?: number
           description?: string
@@ -986,6 +1038,16 @@ export type Database = {
           title: string
         }
         Update: {
+          available_from?: string | null
+          available_until?: string | null
+          compare_at_amount?: number | null
+          image_paths?: string[]
+          is_digital?: boolean
+          is_featured?: boolean
+          is_hidden?: boolean
+          kind?: Database["public"]["Enums"]["reward_kind"]
+          long_description?: string
+          per_backer_limit?: number | null
           amount?: number
           claimed_count?: number
           description?: string
@@ -1221,6 +1283,7 @@ export type Database = {
         | "completed"
       report_status: "open" | "resolved" | "dismissed"
       report_target: "project" | "comment" | "update" | "user"
+      reward_kind: "reward" | "addon"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1395,6 +1458,7 @@ export const Constants = {
       ],
       report_status: ["open", "resolved", "dismissed"],
       report_target: ["project", "comment", "update", "user"],
+      reward_kind: ["reward", "addon"],
     },
   },
 } as const
