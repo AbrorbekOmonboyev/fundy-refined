@@ -79,6 +79,11 @@ const TEXT: Record<string, Record<Lang, string>> = {
   },
   open: { uz: 'Ochish', ru: 'Открыть', en: 'Open' },
   user_signed_up: { uz: '👤 Yangi foydalanuvchi', ru: '👤 Новый пользователь', en: '👤 New user signed up' },
+  page_feedback: { uz: '💬 Sahifa haqida fikr', ru: '💬 Отзыв о странице', en: '💬 Page feedback' },
+  fb_bug: { uz: 'Nimadir ishlamayapti', ru: 'Что-то не работает', en: 'Something is broken' },
+  fb_confusing: { uz: 'Tushunarsiz', ru: 'Непонятно', en: 'Unclear' },
+  fb_idea: { uz: 'Taklif', ru: 'Идея', en: 'Idea' },
+  fb_other: { uz: 'Boshqa', ru: 'Другое', en: 'Other' },
   adminOnly: {
     uz: 'Bu buyruq faqat Fundy admini uchun. Avval admin hisobini Sozlamalarda Telegramga ulang.',
     ru: 'Эта команда только для админа Fundy. Сначала подключите Telegram в настройках админ-аккаунта.',
@@ -139,7 +144,10 @@ type ReportRow = {
   comments: number;
 };
 
-const soum = (n: number) => `${Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} soʻm`;
+const soum = (n: number) =>
+  `${Math.round(n)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} soʻm`;
 const csvCell = (v: unknown) => `"${String(v ?? '').replace(/"/g, '""')}"`;
 
 /** /getreports — only for a chat linked to an admin (checked in the database). */
@@ -180,16 +188,40 @@ async function sendReport(chatId: number, lang: string) {
   await telegram('sendMessage', { chat_id: chatId, text: text.slice(0, 4000), parse_mode: 'HTML' });
 
   // Full list as a spreadsheet file (opens in Excel / Google Sheets).
-  const header = ['Ism', 'Email', 'Rol', 'Roʻyxatdan oʻtgan', 'Hissa (soʻm)', 'Toʻlovlar', 'Loyihalar', 'Yangiliklar', 'Izohlar'];
+  const header = [
+    'Ism',
+    'Email',
+    'Rol',
+    'Roʻyxatdan oʻtgan',
+    'Hissa (soʻm)',
+    'Toʻlovlar',
+    'Loyihalar',
+    'Yangiliklar',
+    'Izohlar',
+  ];
   const lines = rows.map(r =>
-    [r.full_name, r.email, r.role, r.signed_up_at.slice(0, 16).replace('T', ' '), r.contributed, r.contributions, r.projects, r.updates, r.comments]
+    [
+      r.full_name,
+      r.email,
+      r.role,
+      r.signed_up_at.slice(0, 16).replace('T', ' '),
+      r.contributed,
+      r.contributions,
+      r.projects,
+      r.updates,
+      r.comments,
+    ]
       .map(csvCell)
       .join(','),
   );
   const csv = '\uFEFF' + [header.map(csvCell).join(','), ...lines].join('\r\n'); // BOM so Excel shows Uzbek letters
   const form = new FormData();
   form.append('chat_id', String(chatId));
-  form.append('document', new Blob([csv], { type: 'text/csv' }), `fundy-users-${new Date().toISOString().slice(0, 10)}.csv`);
+  form.append(
+    'document',
+    new Blob([csv], { type: 'text/csv' }),
+    `fundy-users-${new Date().toISOString().slice(0, 10)}.csv`,
+  );
   await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, { method: 'POST', body: form });
 }
 
@@ -203,21 +235,26 @@ async function sendPending() {
     chat_id: number;
     type: string;
     language: string;
-    data: { name?: string; email?: string } | null;
+    data: { name?: string; email?: string; page?: string; kind?: string; message?: string } | null;
     project_slug: string | null;
     project_title: string | null;
   }[]) {
     const isSignup = n.type === 'user_signed_up';
+    const isFeedback = n.type === 'page_feedback';
     const url = isSignup
       ? `${SITE}/admin/users`
-      : n.project_slug
-        ? `${SITE}/projects/${n.project_slug}`
-        : `${SITE}/dashboard/backer`;
+      : isFeedback
+        ? `${SITE}/admin/messages?tab=feedback`
+        : n.project_slug
+          ? `${SITE}/projects/${n.project_slug}`
+          : `${SITE}/dashboard/backer`;
     const title = isSignup
       ? `\n<b>${escapeHtml(n.data?.name || '—')}</b>\n${escapeHtml(n.data?.email ?? '')}`
-      : n.project_title
-        ? `\n<b>${escapeHtml(n.project_title)}</b>`
-        : '';
+      : isFeedback
+        ? `\n<b>${escapeHtml(say(`fb_${n.data?.kind ?? 'other'}`, n.language))}</b> · ${escapeHtml(n.data?.page ?? '/')}\n\n${escapeHtml(n.data?.message ?? '')}`
+        : n.project_title
+          ? `\n<b>${escapeHtml(n.project_title)}</b>`
+          : '';
     const res = await telegram('sendMessage', {
       chat_id: n.chat_id,
       text: `${say(n.type, n.language)}${title}`,

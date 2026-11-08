@@ -355,6 +355,16 @@
       "dismiss": "Rad etish",
       "hideUpdate": "Yangilikni yashirish",
       "blockUser": "Foydalanuvchini bloklash"
+    },
+    "feedback": {
+      "tabs": {
+        "contact": "Aloqa xabarlari",
+        "feedback": "Sahifa fikrlari"
+      },
+      "hint": "Saytdagi «Kamchilik topdingizmi?» tugmasi orqali kelgan fikrlar. Tuzatgach, koʻrib chiqilgan deb belgilang.",
+      "empty": "Bu yerda fikrlar yoʻq.",
+      "openPage": "Sahifani ochish",
+      "guest": "mehmon"
     }
   },
   "money": {
@@ -952,7 +962,8 @@
     "milestone_submitted": "{{project}} bosqich bajarilganini xabar qildi",
     "milestone_returned": "{{project}} bosqichi uchun qoʻshimcha dalil kerak",
     "content_reported": "Kimdir kontent ustidan shikoyat qildi",
-    "user_signed_up": "Yangi foydalanuvchi: {{name}} ({{email}})"
+    "user_signed_up": "Yangi foydalanuvchi: {{name}} ({{email}})",
+    "page_feedback": "Sahifa haqida yangi fikr: {{page}}"
   },
   "content": {
     "updated": "Oxirgi yangilanish: {{date}}",
@@ -1173,5 +1184,29 @@
   "appSaved": {
     "loginText": "Yoqqan loyihalarni saqlash uchun hisobingizga kiring.",
     "empty": "Hali hech narsa saqlanmagan. Loyihadagi belgi tugmasini bosing."
+  },
+  "feedback": {
+    "prompt": "Shu sahifada nima kamchilik koʻrdingiz?",
+    "promptShort": "Kamchilik topdingizmi?",
+    "intro": "Xato, tushunarsiz joy yoki taklif — qisqa yozing. Har bir xabarni oʻqiymiz.",
+    "kindLabel": "Bu nima haqida?",
+    "kinds": {
+      "bug": "Nimadir ishlamayapti",
+      "confusing": "Tushunarsiz",
+      "idea": "Taklif",
+      "other": "Boshqa"
+    },
+    "message": "Nimani koʻrdingiz?",
+    "placeholder": "Masalan: «Filtrni bosganimda roʻyxat oʻzgarmadi»",
+    "email": "Emailingiz (ixtiyoriy)",
+    "emailHint": "Javob kerak boʻlsa yozing.",
+    "context": "Sahifa manzili, til va ekran oʻlchami avtomatik qoʻshiladi.",
+    "send": "Yuborish",
+    "cancel": "Bekor qilish",
+    "close": "Yopish",
+    "thanks": "Rahmat! Fikringiz jamoaga yetib bordi.",
+    "thanksHint": "Shu kabi xabarlar Fundy’ni yaxshiroq qiladi.",
+    "another": "Yana yozish",
+    "tooShort": "Kamida 3 ta belgi yozing."
   }
 }

@@ -1088,6 +1088,92 @@ describe('contact messages', () => {
   });
 });
 
+describe('page feedback', () => {
+  test('a visitor sends feedback about a page; admins are notified and can read it', async () => {
+    await as(
+      db,
+      anon,
+      `insert into public.page_feedback (page, kind, message, email, context) values ('/explore', 'bug', '  Filter button does nothing  ', ' Guest@Example.com ', '{"lang":"uz","width":390}')`,
+    );
+    const rows = await as<{ message: string; email: string; status: string }>(
+      db,
+      user(admin),
+      `select message, email, status from public.page_feedback where page = '/explore'`,
+    );
+    assert.equal(rows.length, 1);
+    assert.equal(rows[0].message, 'Filter button does nothing');
+    assert.equal(rows[0].email, 'guest@example.com');
+    assert.equal(rows[0].status, 'new');
+    const notes = await as<{ data: { page: string; kind: string } }>(
+      db,
+      user(admin),
+      `select data from public.notifications where type = 'page_feedback'`,
+    );
+    assert.equal(notes[0].data.page, '/explore');
+    assert.equal(notes[0].data.kind, 'bug');
+  });
+
+  test('only admins read it; bad input and posing as someone else are refused', async () => {
+    assert.equal((await as(db, user(bob), `select id from public.page_feedback`)).length, 0);
+    await rejects(as(db, anon, `select id from public.page_feedback`), /permission denied/);
+    await rejects(
+      as(db, anon, `insert into public.page_feedback (page, kind, message) values ('/', 'spam', 'Hello there')`),
+      /check constraint/,
+    );
+    for (const page of ['javascript:alert(1)', '//evil.example', 'https://evil.example']) {
+      await rejects(
+        as(db, anon, `insert into public.page_feedback (page, message) values ($1, 'Only site paths')`, [page]),
+        /check constraint/,
+      );
+    }
+    await rejects(
+      as(
+        db,
+        user(bob),
+        `insert into public.page_feedback (page, message, user_id) values ('/', 'Pretending to be Carol', $1)`,
+        [carol],
+      ),
+      /row-level security/,
+    );
+    await rejects(
+      as(db, anon, `insert into public.page_feedback (page, message, status) values ('/', 'Self handled', 'handled')`),
+      /permission denied/,
+    );
+  });
+
+  test('more than 5 in 10 minutes from one person are refused', async () => {
+    for (let i = 0; i < 5; i++) {
+      await as(db, user(carol), `insert into public.page_feedback (page, message, user_id) values ('/', $1, $2)`, [
+        `Note number ${i}`,
+        carol,
+      ]);
+    }
+    await rejects(
+      as(db, user(carol), `insert into public.page_feedback (page, message, user_id) values ('/', 'One more', $1)`, [
+        carol,
+      ]),
+      /too_many_messages/,
+    );
+  });
+
+  test('admins mark feedback handled (audited); others cannot', async () => {
+    const [f] = await as<{ id: string }>(
+      db,
+      user(admin),
+      `select id from public.page_feedback where page = '/explore'`,
+    );
+    await rejects(as(db, user(bob), `select public.admin_set_feedback_handled($1, true)`, [f.id]), /admin_only/);
+    await as(db, user(admin), `select public.admin_set_feedback_handled($1, true)`, [f.id]);
+    const log = await as(
+      db,
+      user(admin),
+      `select id from public.audit_log where action = 'feedback.handled' and target_id = $1`,
+      [f.id],
+    );
+    assert.equal(log.length, 1);
+  });
+});
+
 describe('admin panel', () => {
   test('admins list users with email and activity; others cannot', async () => {
     const rows = await as<{ email: string; contribution_total: string; total_count: string }>(
@@ -1363,8 +1449,7 @@ describe('richer rewards (phase A)', () => {
   });
 
   test('a per-backer limit stops the third scarf', async () => {
-    const back = () =>
-      as(db, user(carol), `select public.contribute($1, 850000, 'click', $2)`, [projectId, scarf]);
+    const back = () => as(db, user(carol), `select public.contribute($1, 850000, 'click', $2)`, [projectId, scarf]);
     await back();
     await back();
     await rejects(back(), /reward_limit_per_backer/);
@@ -1430,7 +1515,12 @@ describe('pledge cart (phase B)', () => {
   });
 
   test('one payment: 2 knives + a sheath + extra support; prices come from the database', async () => {
-    const [before] = await as<{ raised_amount: string }>(db, anon, `select raised_amount from public.projects where id = $1`, [projectId]);
+    const [before] = await as<{ raised_amount: string }>(
+      db,
+      anon,
+      `select raised_amount from public.projects where id = $1`,
+      [projectId],
+    );
     const [{ id }] = await cart(
       erin,
       [
@@ -1460,10 +1550,18 @@ describe('pledge cart (phase B)', () => {
         [2, 280_000],
       ],
     );
-    const [after] = await as<{ raised_amount: string }>(db, anon, `select raised_amount from public.projects where id = $1`, [projectId]);
+    const [after] = await as<{ raised_amount: string }>(
+      db,
+      anon,
+      `select raised_amount from public.projects where id = $1`,
+      [projectId],
+    );
     assert.equal(Number(after.raised_amount) - Number(before.raised_amount), 705_000);
     // other people can't see Erin's items
-    assert.equal((await as(db, user(carol), `select * from public.contribution_items where contribution_id = $1`, [id])).length, 0);
+    assert.equal(
+      (await as(db, user(carol), `select * from public.contribution_items where contribution_id = $1`, [id])).length,
+      0,
+    );
   });
 
   test('the per-person limit counts every cart (2 + 2 > 3)', async () => {
@@ -1535,7 +1633,12 @@ describe('owner alerts and /getreports', () => {
     assert.equal(rows[0].data.name, 'Nora Newcomer');
     assert.match(rows[0].data.email, /@test\.local$/);
     // members don't get it
-    const forBob = await as(db, user(bob), `select 1 from public.notifications where type = 'user_signed_up' and user_id = $1`, [bob]);
+    const forBob = await as(
+      db,
+      user(bob),
+      `select 1 from public.notifications where type = 'user_signed_up' and user_id = $1`,
+      [bob],
+    );
     assert.equal(forBob.length, 0);
   });
 

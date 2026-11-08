@@ -355,6 +355,16 @@
       "dismiss": "Dismiss",
       "hideUpdate": "Hide update",
       "blockUser": "Block user"
+    },
+    "feedback": {
+      "tabs": {
+        "contact": "Contact messages",
+        "feedback": "Page feedback"
+      },
+      "hint": "Notes sent with the “Spotted a problem?” button on the site. Mark them handled once fixed.",
+      "empty": "No feedback here.",
+      "openPage": "Open page",
+      "guest": "guest"
     }
   },
   "money": {
@@ -952,7 +962,8 @@
     "milestone_submitted": "{{project}} reported a milestone as done",
     "milestone_returned": "Our team needs more evidence for a milestone of {{project}}",
     "content_reported": "Someone reported content",
-    "user_signed_up": "New user signed up: {{name}} ({{email}})"
+    "user_signed_up": "New user signed up: {{name}} ({{email}})",
+    "page_feedback": "New page feedback: {{page}}"
   },
   "content": {
     "updated": "Last updated: {{date}}",
@@ -1173,5 +1184,29 @@
   "appSaved": {
     "loginText": "Log in to save the projects you like.",
     "empty": "Nothing saved yet. Tap the bookmark on a project."
+  },
+  "feedback": {
+    "prompt": "What’s wrong on this page?",
+    "promptShort": "Spotted a problem?",
+    "intro": "A bug, something unclear or an idea — write a line. We read every message.",
+    "kindLabel": "What is it about?",
+    "kinds": {
+      "bug": "Something is broken",
+      "confusing": "Unclear",
+      "idea": "Idea",
+      "other": "Other"
+    },
+    "message": "What did you notice?",
+    "placeholder": "For example: “I tapped the filter and the list didn’t change”",
+    "email": "Your email (optional)",
+    "emailHint": "Only if you’d like a reply.",
+    "context": "The page address, language and screen size are added automatically.",
+    "send": "Send",
+    "cancel": "Cancel",
+    "close": "Close",
+    "thanks": "Thank you! Your feedback reached the team.",
+    "thanksHint": "Notes like this make Fundy better.",
+    "another": "Write another",
+    "tooShort": "Write at least 3 characters."
   }
 }

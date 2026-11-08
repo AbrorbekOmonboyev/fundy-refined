@@ -630,6 +630,48 @@ export type Database = {
           },
         ]
       }
+      page_feedback: {
+        Row: {
+          context: Json
+          created_at: string
+          email: string | null
+          handled_at: string | null
+          handled_by: string | null
+          id: string
+          kind: string
+          message: string
+          page: string
+          status: Database["public"]["Enums"]["contact_status"]
+          user_id: string | null
+        }
+        Insert: {
+          context?: Json
+          created_at?: string
+          email?: string | null
+          handled_at?: string | null
+          handled_by?: string | null
+          id?: string
+          kind?: string
+          message: string
+          page: string
+          status?: Database["public"]["Enums"]["contact_status"]
+          user_id?: string | null
+        }
+        Update: {
+          context?: Json
+          created_at?: string
+          email?: string | null
+          handled_at?: string | null
+          handled_by?: string | null
+          id?: string
+          kind?: string
+          message?: string
+          page?: string
+          status?: Database["public"]["Enums"]["contact_status"]
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_path: string | null
@@ -1235,6 +1277,10 @@ export type Database = {
         }
         Returns: undefined
       }
+      admin_set_feedback_handled: {
+        Args: { p_feedback_id: string; p_handled: boolean }
+        Returns: undefined
+      }
       admin_set_message_handled: {
         Args: { p_handled: boolean; p_message_id: string }
         Returns: undefined
@@ -1333,6 +1379,7 @@ export type Database = {
         | "milestone_returned"
         | "content_reported"
         | "user_signed_up"
+        | "page_feedback"
       payment_method: "click" | "payme" | "uzcard" | "humo" | "bank_wire"
       project_status:
         | "draft"
@@ -1507,6 +1554,7 @@ export const Constants = {
         "milestone_returned",
         "content_reported",
         "user_signed_up",
+        "page_feedback",
       ],
       payment_method: ["click", "payme", "uzcard", "humo", "bank_wire"],
       project_status: [

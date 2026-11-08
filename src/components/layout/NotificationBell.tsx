@@ -11,6 +11,7 @@ import {
   Mail,
   Megaphone,
   MessageSquare,
+  MessageSquareWarning,
   Rocket,
   Trophy,
   UserPlus,
@@ -35,6 +36,7 @@ const ICONS: Record<AppNotification['type'], typeof Bell> = {
   content_reported: Flag,
   user_signed_up: UserPlus,
   contact_message: Mail,
+  page_feedback: MessageSquareWarning,
 };
 
 /** 🔔 in the header: the signed-in user's real notifications, updated live. */

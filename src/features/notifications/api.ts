@@ -20,6 +20,9 @@ export type AppNotification = {
     update_id?: string;
     name?: string;
     email?: string;
+    page?: string;
+    kind?: string;
+    message?: string;
   };
   read_at: string | null;
   created_at: string;

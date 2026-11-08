@@ -47,6 +47,7 @@ const BY_CODE: Record<string, ErrorKey> = {
   review_note_required: 'errors.reviewNoteRequired',
   account_blocked: 'errors.blocked',
   not_signed_in: 'errors.notSignedIn',
+  too_many_messages: 'errors.rateLimit',
 };
 
 export function errorKey(error: unknown): ErrorKey {
