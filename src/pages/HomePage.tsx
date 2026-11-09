@@ -88,12 +88,12 @@ export function HomePage() {
       </div>
 
       {/* Have an idea? */}
-      <section className="mt-20 lg:mt-28 bg-brand">
+      <section className="mt-20 lg:mt-28 bg-night">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16 flex flex-col items-center text-center gap-6">
-          <h2 className="text-3xl sm:text-4xl text-ink">{t('home.final.title')}</h2>
+          <h2 className="text-3xl sm:text-4xl text-white">{t('home.final.title')}</h2>
           <Link
             to={paths.startProject}
-            className="px-8 py-3.5 text-base font-semibold text-white bg-night hover:bg-night-soft rounded-full"
+            className="px-8 py-3.5 text-base font-semibold text-white bg-brand hover:bg-brand-deep rounded-full"
           >
             {t('home.final.start')}
           </Link>
@@ -154,7 +154,7 @@ function Hero() {
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
             to={paths.startProject}
-            className="w-full sm:w-auto px-8 py-3.5 text-base font-semibold text-night bg-brand hover:bg-brand-deep rounded-full"
+            className="w-full sm:w-auto px-8 py-3.5 text-base font-semibold text-white bg-brand hover:bg-brand-deep rounded-full"
           >
             {t('home.hero.start')}
           </Link>

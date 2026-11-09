@@ -692,7 +692,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
           role="status"
           className="fixed z-40 left-1/2 -translate-x-1/2 bottom-32 lg:bottom-8 w-[calc(100%-2rem)] max-w-md rounded-2xl bg-night text-white shadow-xl px-4 py-3 flex items-center gap-3"
         >
-          <CheckCircle className="w-5 h-5 text-brand shrink-0" aria-hidden />
+          <CheckCircle className="w-5 h-5 text-brand-light shrink-0" aria-hidden />
           <p className="text-sm min-w-0 flex-1">
             <span className="block font-semibold">{t('cart.added')}</span>
             <span className="block text-slate-300 truncate">{added.title}</span>
@@ -714,7 +714,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
           onClick={() => setCartOpen(true)}
           className="hidden lg:inline-flex fixed z-30 right-6 bottom-6 items-center gap-2 rounded-md bg-night text-white pl-4 pr-5 py-3 shadow-xl hover:bg-night-soft cursor-pointer"
         >
-          <ShoppingBag className="w-5 h-5 text-brand" aria-hidden />
+          <ShoppingBag className="w-5 h-5 text-brand-light" aria-hidden />
           <span className="text-sm font-semibold font-mono-numbers">{cartLabel}</span>
         </button>
       )}

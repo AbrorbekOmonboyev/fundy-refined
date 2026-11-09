@@ -129,7 +129,7 @@ export function AdminProjectsPage() {
                         className="p-1.5 rounded-full hover:bg-page disabled:opacity-30"
                       >
                         <Star
-                          className={`w-5 h-5 ${p.is_featured ? 'fill-brand text-ink' : 'text-slate-400'}`}
+                          className={`w-5 h-5 ${p.is_featured ? 'fill-gold text-gold' : 'text-slate-400'}`}
                           aria-hidden
                         />
                         <span className="sr-only">{t('admin.projects.featureToggle')}</span>

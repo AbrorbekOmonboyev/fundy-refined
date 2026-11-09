@@ -26,7 +26,7 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
       />
       <Moon
         aria-hidden
-        className={`absolute w-[18px] h-[18px] text-brand transition-all duration-500 ${dark ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-50'}`}
+        className={`absolute w-[18px] h-[18px] text-brand-light transition-all duration-500 ${dark ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-50'}`}
       />
     </button>
   );

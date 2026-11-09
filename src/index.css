@@ -2,11 +2,14 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * Fundy brand (see docs/brand/README.txt)
- *   Chartreuse  #B5F23D  backgrounds, highlights, progress bars — never for text on white
- *   Ink         #15122B  text and buttons (also text on chartreuse)
- *   Shadow      #90D508  the layer behind the f; deeper chartreuse
- *   Grey        #F4F6FB  page background
+ * Fundy colours — "Ishonch" (trust) palette, chosen for older visitors and for trust
+ * (research: blue/navy and calm green read as trustworthy; high contrast for ageing eyes).
+ * The earlier chartreuse look is tagged in git as `before-ishonch`.
+ *   Green   #0B6B45  buttons, progress, highlights — white text on it (6.5:1)
+ *   Navy    #14304F  headings, header/footer, dark buttons (13:1 on white)
+ *   Ink     #132A45  body text
+ *   Gold    #C8962E  rare accents only (featured star)
+ *   Warm white #FAF9F6  page background
  * Fonts: Onest Bold for headlines (was Unbounded in the brand kit; the logo keeps its own lettering), Plus Jakarta Sans for everything else.
  *
  * Use as Tailwind classes: bg-brand, text-ink, bg-brand-soft, font-display, bg-page …
@@ -18,15 +21,17 @@
  *   text-white              text on dark surfaces → always white
  */
 @theme {
-  --color-brand: #b5f23d;
-  --color-brand-deep: #90d508;
-  --color-brand-soft: #effcd6; /* light chartreuse tint for selected / highlighted areas */
-  --color-ink: #15122b;
-  --color-night: #15122b; /* dark surfaces; same in both themes */
-  --color-night-soft: #2a2647; /* slightly lighter night for surfaces on dark sections */
+  --color-brand: #0b6b45; /* deep green: buttons, progress — white text on it */
+  --color-brand-deep: #08553a; /* hover / pressed green, progress fill */
+  --color-brand-soft: #e6f2eb; /* light green tint for selected / highlighted areas */
+  --color-brand-light: #5fcf94; /* green for icons and text on navy / dark surfaces */
+  --color-gold: #c8962e; /* rare accent */
+  --color-ink: #132a45;
+  --color-night: #14304f; /* navy: dark surfaces; same in both themes */
+  --color-night-soft: #1e4268; /* slightly lighter navy */
   --color-card: #ffffff;
-  --color-page: #f4f6fb;
-  --color-track: #e3e7f1; /* empty part of progress bars, image placeholders */
+  --color-page: #faf9f6;
+  --color-track: #e4e9e6; /* empty part of progress bars, image placeholders */
 
   /* Smallest text is 13.5px (Tailwind's default 12px is hard to read on phones);
      small body text is 15px. */
@@ -72,7 +77,7 @@
 
   ::selection {
     background-color: var(--color-brand);
-    color: var(--color-night);
+    color: #ffffff;
   }
 
   :focus-visible {
@@ -87,30 +92,32 @@
 }
 
 /* ===========================================================================
- * Dark mode: "Tashkent at night" — deep indigo sky, chartreuse as the glow.
+ * Dark mode: "Tashkent at night" — deep navy sky, green as the light.
  * The theme is switched by the .dark class on <html> (see src/lib/theme.ts).
  * Most of the site re-colours itself through these variables.
  * ======================================================================== */
 .dark {
   color-scheme: dark;
 
-  --color-ink: #eeedf7;
-  --color-card: #19162e;
-  --color-page: #0d0b1a;
-  --color-track: #2c2849;
-  --color-brand-soft: rgb(181 242 61 / 0.13);
+  --color-ink: #e9eef5;
+  --color-card: #12223a;
+  --color-page: #0b1726;
+  --color-track: #22364f;
+  --color-brand: #18804f; /* a touch brighter so buttons stand off the dark page (white text 4.9:1) */
+  --color-brand-deep: #136b42;
+  --color-brand-soft: rgb(63 191 127 / 0.14);
 
-  /* Greys with a hint of the brand's indigo. Light shades become dark and back. */
-  --color-slate-50: #1f1c37;
-  --color-slate-100: #26223f;
-  --color-slate-200: #302b4e;
-  --color-slate-300: #423c66;
-  --color-slate-400: #7a769c;
-  --color-slate-500: #9894b6;
-  --color-slate-600: #b3b0cc;
-  --color-slate-700: #cbc9df;
-  --color-slate-800: #e1dfed;
-  --color-slate-900: #f0eff7;
+  /* Greys with a hint of navy. Light shades become dark and back. */
+  --color-slate-50: #142640;
+  --color-slate-100: #182c48;
+  --color-slate-200: #213754;
+  --color-slate-300: #314a6a;
+  --color-slate-400: #6f85a3;
+  --color-slate-500: #8fa2bb;
+  --color-slate-600: #aebdd0;
+  --color-slate-700: #c8d3e1;
+  --color-slate-800: #dfe6ee;
+  --color-slate-900: #eff3f7;
 
   /* Message boxes: soft glows instead of pastel blocks; text gets lighter. */
   --color-rose-50: rgb(244 63 94 / 0.12);
@@ -134,14 +141,14 @@
   --color-orange-800: oklch(90.1% 0.076 70.697);
 }
 
-/* Chartreuse and night areas were designed with light-mode colours inside them
-   (dark text on chartreuse, light greys on night), so they keep those. */
+/* Green and navy areas were designed with light-mode colours inside them
+   (light greys on navy), so they keep those. */
 .dark :is(.bg-brand, .bg-brand-deep, .bg-night, .bg-night-soft, .from-night) {
-  --color-ink: #15122b;
+  --color-ink: #132a45;
   --color-card: #ffffff;
-  --color-page: #f4f6fb;
-  --color-track: #e3e7f1;
-  --color-brand-soft: #effcd6;
+  --color-page: #faf9f6;
+  --color-track: #e4e9e6;
+  --color-brand-soft: #e6f2eb;
   --color-slate-50: oklch(98.4% 0.003 247.858);
   --color-slate-100: oklch(96.8% 0.007 247.896);
   --color-slate-200: oklch(92.9% 0.013 255.508);
@@ -154,14 +161,23 @@
   --color-slate-900: oklch(20.8% 0.042 265.755);
 }
 
-/* Primary buttons light up in chartreuse (a dark button on a dark page would vanish). */
+/* Primary buttons turn green in dark mode (a navy button on a navy page would vanish). */
 .dark :is(button, a).bg-night:not(.bg-brand *) {
   background-color: var(--color-brand);
-  color: var(--color-night);
-  --color-ink: #15122b;
+  color: #ffffff;
+  --color-ink: #ffffff;
 }
 .dark :is(button, a).bg-night:not(.bg-brand *):hover {
   background-color: var(--color-brand-deep);
+}
+
+/* Text on green is always white (the old chartreuse had dark text on it). */
+:is(.bg-brand, .bg-brand-deep) {
+  --color-ink: #ffffff;
+}
+:is(.bg-brand, .bg-brand-deep):is(.text-night, .text-ink),
+:is(.bg-brand, .bg-brand-deep) :is(.text-night, .text-ink):not(.bg-card, .bg-card *, .bg-page, .bg-page *) {
+  color: #ffffff;
 }
 
 /* Dark panels and badges get a hairline edge so they stand off the night page. */

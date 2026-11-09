@@ -1,8 +1,8 @@
 {
   "name": "Fundy",
   "short_name": "Fundy",
-  "theme_color": "#B5F23D",
-  "background_color": "#B5F23D",
+  "theme_color": "#14304F",
+  "background_color": "#FAF9F6",
   "display": "standalone",
   "icons": [
     {

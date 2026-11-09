@@ -49,7 +49,7 @@ function WelcomeScreen({ onDone }: { onDone: () => void }) {
         <button
           type="button"
           onClick={() => finish()}
-          className="w-full mt-2 py-4 rounded-full bg-night text-brand text-base font-semibold cursor-pointer"
+          className="w-full mt-2 py-4 rounded-full bg-night text-brand-light text-base font-semibold cursor-pointer"
         >
           {t('appWelcome.start')}
         </button>

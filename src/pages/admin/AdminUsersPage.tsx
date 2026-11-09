@@ -95,7 +95,7 @@ export function AdminUsersPage() {
                       <p className="font-semibold text-ink">
                         {u.full_name || '—'}
                         {u.role === 'admin' && (
-                          <span className="ml-2 rounded-full bg-night text-brand px-2 py-0.5 text-xs font-semibold align-middle">
+                          <span className="ml-2 rounded-full bg-night text-brand-light px-2 py-0.5 text-xs font-semibold align-middle">
                             {t('admin.users.admin')}
                           </span>
                         )}
