@@ -280,6 +280,7 @@ export type Database = {
           project_id: string
           reward_tier_id: string | null
           status: Database["public"]["Enums"]["contribution_status"]
+          charge_authorized_at: string | null
         }
         Insert: {
           extra_amount?: number
@@ -295,6 +296,7 @@ export type Database = {
           project_id: string
           reward_tier_id?: string | null
           status?: Database["public"]["Enums"]["contribution_status"]
+          charge_authorized_at?: string | null
         }
         Update: {
           extra_amount?: number
@@ -310,6 +312,7 @@ export type Database = {
           project_id?: string
           reward_tier_id?: string | null
           status?: Database["public"]["Enums"]["contribution_status"]
+          charge_authorized_at?: string | null
         }
         Relationships: [
           {
@@ -919,6 +922,7 @@ export type Database = {
           original_language: Database["public"]["Enums"]["app_language"]
           organizer_type: Database["public"]["Enums"]["organizer_type"] | null
           owner_id: string
+          charge_at: string | null
           pay_after_registration: boolean
           pledge_payment_due_at: string | null
           raised_amount: number
@@ -952,6 +956,7 @@ export type Database = {
           original_language?: Database["public"]["Enums"]["app_language"]
           organizer_type?: Database["public"]["Enums"]["organizer_type"] | null
           owner_id: string
+          charge_at?: string | null
           pay_after_registration?: boolean
           pledge_payment_due_at?: string | null
           raised_amount?: number
@@ -985,6 +990,7 @@ export type Database = {
           original_language?: Database["public"]["Enums"]["app_language"]
           organizer_type?: Database["public"]["Enums"]["organizer_type"] | null
           owner_id?: string
+          charge_at?: string | null
           pay_after_registration?: boolean
           pledge_payment_due_at?: string | null
           raised_amount?: number

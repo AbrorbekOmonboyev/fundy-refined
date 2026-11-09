@@ -388,9 +388,9 @@
       "title": "Company registration",
       "due": "The goal was reached. The founder must register an MChJ by {{date}}.",
       "number": "Number given",
-      "howTo": "Check the number on my.gov.uz or orginfo.uz: it must be an MChJ owned by this founder. Then confirm, and investors get 7 days to pay.",
-      "confirm": "Company checked: ask investors to pay",
-      "confirmAsk": "Is this MChJ registered and owned by the founder? Investors will be asked to pay.",
+      "howTo": "Check the number on my.gov.uz or orginfo.uz: it must be an MChJ owned by this founder. Then confirm. Investors' cards are charged the day after the registration deadline.",
+      "confirm": "Company checked: charge investors on schedule",
+      "confirmAsk": "Is this MChJ registered and owned by the founder? Investors' cards will be charged the day after the deadline.",
       "waiting": "The founder hasn't added a company number yet."
     }
   },
@@ -726,7 +726,7 @@
     "shareFriends": "Share with friends",
     "backHome": "Back to home",
     "submitPledge": "Pledge {{amount}}",
-    "pledgeSuccess": "Your pledge of {{amount}} to “{{project}}” is recorded. No money was taken. If the goal is reached and the founder registers a company within {{days}} days, we will ask you to pay."
+    "pledgeSuccess": "Your pledge of {{amount}} to “{{project}}” is recorded. Nothing was taken. Your card will be charged on {{date}}, only if the founder registers a company by then."
   },
   "dashboard": {
     "backer": {
@@ -1043,10 +1043,12 @@
     "new_pledge": "New pledge of {{amount}} for {{project}}",
     "pledge_paid": "An investor paid {{amount}} for {{project}}",
     "pledge_recorded": "Your pledge of {{amount}} for {{project}} is recorded. Nothing is taken yet",
-    "pledge_payment_due": "{{project}} is now a registered company. Pay your pledge by {{date}}",
-    "pledge_payment_due_owner": "Company confirmed. Investors in {{project}} pay by {{date}}",
+    "pledge_payment_due": "{{project}} registered its company. Your card will be charged on {{date}}",
+    "pledge_payment_due_owner": "Company confirmed. Investors' cards for {{project}} are charged on {{date}}",
     "pledges_cancelled": "{{project}}: no company was registered in time, so pledges are cancelled. Nothing was taken",
-    "pledges_unpaid": "{{project}}: {{amount}} in pledges wasn't paid in time and was removed"
+    "pledges_unpaid": "{{project}}: {{amount}} in pledges wasn't paid in time and was removed",
+    "pledges_charged_owner": "Investors' cards for {{project}} were charged",
+    "pledge_charge_failed": "Your card payment for {{project}} didn't go through. Please pay by {{date}}"
   },
   "content": {
     "updated": "Last updated: {{date}}",
@@ -1328,7 +1330,7 @@
     },
     "ngoDonationOnly": "Non-profits run donation projects.",
     "payLaterShort": "No company yet? Investors pledge now and pay after you register an MChJ.",
-    "payLaterRule": "Musharakah without a company: investors pledge and no money is taken. If you reach your goal, register an MChJ within 60 days and add its number. Our team checks it, then investors pay within 7 days. Stage money is released as usual after that."
+    "payLaterRule": "Musharakah without a company: investors pledge and allow us to charge their card later; nothing is taken now. If you reach your goal, register an MChJ within 60 days and add its number. Our team checks it, and the cards are charged the day after your registration deadline. If you don't register in time, no card is charged."
   },
   "identity": {
     "sectionTitle": "Who you are",
@@ -1346,26 +1348,31 @@
   },
   "payLater": {
     "label": "pay after registration",
-    "dialog": "The founder has no company yet, so this is a pledge: no money is taken now. If the goal is reached, the founder has {{days}} days to register an MChJ. Once our team checks it, you pay within {{payDays}} days. If they don't register, the pledge is cancelled.",
+    "dialog": "The founder has no company yet, so nothing is taken now. If the goal is reached, the founder has {{days}} days to register an MChJ. Your card is charged once, on {{date}} (the day after that deadline), only if the company was registered. If not, nothing is charged.",
     "note": {
-      "active": "No company yet: investors pledge now and no money is taken. If the goal is reached, the founder registers an MChJ within {{days}} days, then investors pay within {{payDays}} days.",
-      "registering": "Goal reached. The founder is registering a company (by {{date}}). Investors pay after that.",
-      "paying": "The company is registered. Investors pay their pledges by {{date}}."
+      "active": "No company yet: investors pledge now and nothing is taken. If the goal is reached, the founder has {{days}} days to register an MChJ; cards are charged the day after that deadline, only if they did.",
+      "registering": "Goal reached. The founder is registering a company (by {{date}}). Cards are charged on {{charge}}, only if they do.",
+      "registered": "The company is registered. Investors’ cards are charged on {{date}}.",
+      "charged": "Cards were charged. Investors whose payment failed can pay by hand until {{date}}."
     },
     "backer": {
       "pledged": "Pledged, not paid",
-      "noMoneyYet": "No money taken. You pay only if the company is registered.",
-      "waitingCompany": "Waiting for the company (by {{date}})",
+      "noMoneyYet": "Nothing taken. Your card is charged only if the company is registered.",
+      "waitingCompany": "Waiting for the company (by {{date}}). Nothing is charged if it isn’t registered.",
       "payBy": "Pay by {{date}}",
-      "payNow": "Pay now",
       "payConfirm": "Pay {{amount}} now? (Demo: no real money moves.)",
-      "cancelled": "Pledge cancelled, nothing taken"
+      "cancelled": "Pledge cancelled, nothing taken",
+      "chargeOn": "Company registered. Your card will be charged on {{date}}.",
+      "chargeFailed": "Your card payment didn’t go through",
+      "payNow": "Pay now"
     },
     "founder": {
       "active": "Investors pledge now and no money is taken yet. If you reach the goal, you will have 60 days to register an MChJ.",
-      "register": "Goal reached! Register an MChJ by {{date}} and add its number here. You can register online at my.gov.uz. If you don't, every pledge is cancelled.",
-      "checking": "Thank you. Our team is checking your company. Then investors are asked to pay within 7 days.",
-      "paying": "Company confirmed. Investors pay their pledges by {{date}}. Unpaid pledges drop out after that."
-    }
+      "register": "Goal reached! Register an MChJ by {{date}} and add its number here. You can register online at my.gov.uz. If you don't, no investor's card is charged and the pledges are cancelled.",
+      "checking": "Thank you. Our team is checking your company. Investors' cards are charged the day after your registration deadline.",
+      "paying": "Cards were charged. Investors whose payment failed can pay until {{date}}; after that their pledges drop out.",
+      "confirmed": "Company confirmed. Investors' cards are charged on {{date}}."
+    },
+    "allowCharge": "I allow Fundy to charge my card on {{date}}, only if the founder registers a company by then. If the charge fails, I have 7 days to pay by hand."
   }
 }

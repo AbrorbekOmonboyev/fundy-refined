@@ -134,17 +134,24 @@ export function useNotificationView() {
       },
       pledge_payment_due: n.data.owner
         ? {
-            text: t('notifications.pledge_payment_due_owner', {
-              project: title,
-              date: formatDate(String(n.data.due_at ?? '')),
-            }),
+            text: n.data.charged
+              ? t('notifications.pledges_charged_owner', { project: title })
+              : t('notifications.pledge_payment_due_owner', {
+                  project: title,
+                  date: formatDate(String(n.data.charge_at ?? n.data.due_at ?? '')),
+                }),
             to: paths.founderDashboard,
           }
         : {
-            text: t('notifications.pledge_payment_due', {
-              project: title,
-              date: formatDate(String(n.data.due_at ?? '')),
-            }),
+            text: n.data.failed
+              ? t('notifications.pledge_charge_failed', {
+                  project: title,
+                  date: formatDate(String(n.data.due_at ?? '')),
+                })
+              : t('notifications.pledge_payment_due', {
+                  project: title,
+                  date: formatDate(String(n.data.charge_at ?? n.data.due_at ?? '')),
+                }),
             to: paths.backerDashboard,
           },
       pledges_cancelled: {

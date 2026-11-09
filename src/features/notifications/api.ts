@@ -27,6 +27,9 @@ export type AppNotification = {
     registration?: boolean;
     registration_due_at?: string | null;
     due_at?: string;
+    charge_at?: string;
+    charged?: boolean;
+    failed?: boolean;
     pledged?: boolean;
     paid?: boolean;
     owner?: boolean;

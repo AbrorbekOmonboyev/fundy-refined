@@ -1874,6 +1874,11 @@ describe('Musharakah: pledge now, pay after registration', () => {
     await as(db, user(carol), `select public.contribute($1, 4000000, 'payme')`, [projectId]);
     assert.deepEqual(await statuses(projectId), ['pledged', 'pledged']);
     assert.equal((await project(projectId)).raised_amount, '10000000');
+    const { rows } = await db.query<{ n: number }>(
+      `select count(*)::int as n from public.contributions where project_id = $1 and charge_authorized_at is not null`,
+      [projectId],
+    );
+    assert.equal(rows[0].n, 2, 'each pledge is a permission to charge the card later');
   });
 
   test('paying is not possible before the company is registered', async () => {
@@ -1895,7 +1900,7 @@ describe('Musharakah: pledge now, pay after registration', () => {
     assert.ok(days > 59 && days <= 60);
   });
 
-  test('an admin confirms the MChJ once its number is given; investors are then asked to pay', async () => {
+  test('an admin confirms the MChJ; cards are charged the day after the registration deadline', async () => {
     await rejects(
       as(db, user(admin), `select public.admin_confirm_registration($1)`, [projectId]),
       /registration_number_missing/,
@@ -1916,6 +1921,11 @@ describe('Musharakah: pledge now, pay after registration', () => {
     assert.equal(told.length, 1, 'admins hear that the company number was added');
     await as(db, user(admin), `select public.admin_confirm_registration($1)`, [projectId]);
     assert.equal((await project(projectId)).organizer_type, 'mchj');
+    const { rows } = await db.query<{ ok: boolean }>(
+      `select charge_at = registration_due_at + interval '1 day' as ok from public.projects where id = $1`,
+      [projectId],
+    );
+    assert.ok(rows[0].ok);
     const due = await as(
       db,
       user(bob),
@@ -1925,7 +1935,7 @@ describe('Musharakah: pledge now, pay after registration', () => {
     assert.equal(due.length, 1);
   });
 
-  test('stage money waits until pledges are paid; unpaid pledges are dropped after 7 days', async () => {
+  test('charge day: authorised cards are charged; a failed charge gets 7 days, then drops out', async () => {
     const [{ id: milestoneId }] = await as<{ id: string }>(
       db,
       anon,
@@ -1943,24 +1953,54 @@ describe('Musharakah: pledge now, pay after registration', () => {
       /pledges_not_paid_yet/,
     );
 
-    const [{ id: bobPledge }] = await as<{ id: string }>(
+    // Before the charge day nothing happens and nobody can pay by hand.
+    await close();
+    assert.deepEqual(await statuses(projectId), ['pledged', 'pledged']);
+    const [{ id: carolPledge }] = await as<{ id: string }>(
       db,
-      user(bob),
+      user(carol),
       `select id from public.contributions where project_id = $1 and backer_id = $2`,
-      [projectId, bob],
+      [projectId, carol],
     );
-    await rejects(as(db, user(carol), `select public.pay_pledge($1, 'click')`, [bobPledge]), /contribution_not_found/);
-    await as(db, user(bob), `select public.pay_pledge($1, 'uzcard')`, [bobPledge]);
-    await rejects(as(db, user(bob), `select public.pay_pledge($1, 'uzcard')`, [bobPledge]), /pledge_not_open/);
+    await rejects(
+      as(db, user(carol), `select public.pay_pledge($1, 'click')`, [carolPledge]),
+      /pledge_payment_not_open/,
+    );
 
-    // Carol never pays.
+    // Carol's card charge fails (simulated by removing her permission); Bob's goes through.
+    await db.query(`update public.contributions set charge_authorized_at = null where id = $1`, [carolPledge]);
+    await db.query(`update public.projects set charge_at = now() - interval '1 minute' where id = $1`, [projectId]);
+    await close();
+    assert.deepEqual(await statuses(projectId), ['confirmed', 'pledged']);
+    await close(); // runs only once per project
+    assert.deepEqual(await statuses(projectId), ['confirmed', 'pledged']);
+
+    await rejects(as(db, user(bob), `select public.pay_pledge($1, 'click')`, [carolPledge]), /contribution_not_found/);
+    await as(db, user(carol), `select public.pay_pledge($1, 'uzcard')`, [carolPledge]);
+    await rejects(as(db, user(carol), `select public.pay_pledge($1, 'uzcard')`, [carolPledge]), /pledge_not_open/);
+    assert.deepEqual(await statuses(projectId), ['confirmed', 'confirmed']);
+    await as(db, user(admin), `select public.admin_approve_milestone($1)`, [milestoneId]);
+  });
+
+  test('a pledge not paid within 7 days of a failed charge is dropped from the total', async () => {
+    const id = await liveStartup('sardor-unpaid');
+    await as(db, user(bob), `select public.contribute($1, 7000000, 'click')`, [id]);
+    await as(db, user(carol), `select public.contribute($1, 3000000, 'click')`, [id]);
+    await endNow(id);
+    await close();
+    await as(db, user(admin), `select public.admin_confirm_registration($1)`, [id]);
+    await db.query(
+      `update public.contributions set charge_authorized_at = null where project_id = $1 and backer_id = $2`,
+      [id, carol],
+    );
+    await db.query(`update public.projects set charge_at = now() - interval '1 minute' where id = $1`, [id]);
+    await close();
     await db.query(`update public.projects set pledge_payment_due_at = now() - interval '1 minute' where id = $1`, [
-      projectId,
+      id,
     ]);
     await close();
-    assert.deepEqual(await statuses(projectId), ['confirmed', 'cancelled']);
-    assert.equal((await project(projectId)).raised_amount, '6000000');
-    await as(db, user(admin), `select public.admin_approve_milestone($1)`, [milestoneId]);
+    assert.deepEqual(await statuses(id), ['confirmed', 'cancelled']);
+    assert.equal((await project(id)).raised_amount, '7000000');
   });
 
   test('no registration in 60 days → the campaign closes and every pledge is cancelled', async () => {

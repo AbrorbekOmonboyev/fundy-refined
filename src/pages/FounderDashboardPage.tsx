@@ -347,8 +347,11 @@ function RegisterBeforePayout({
 /** Musharakah without a company yet: what the founder does at each stage. */
 function PayLaterStatus({ project: p }: { project: MyProject }) {
   const { t } = useTranslation();
-  if (p.registrationConfirmedAt) {
+  if (p.pledgePaymentDueAt) {
     return <Alert variant="success">{t('payLater.founder.paying', { date: formatDate(p.pledgePaymentDueAt) })}</Alert>;
+  }
+  if (p.registrationConfirmedAt) {
+    return <Alert variant="success">{t('payLater.founder.confirmed', { date: formatDate(p.chargeAt) })}</Alert>;
   }
   if (p.status === 'funded') {
     return (

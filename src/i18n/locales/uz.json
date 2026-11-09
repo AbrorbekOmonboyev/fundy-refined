@@ -388,9 +388,9 @@
       "title": "Kompaniya roʻyxati",
       "due": "Maqsadga yetildi. Asoschi {{date}} gacha MChJ roʻyxatdan oʻtkazishi kerak.",
       "number": "Berilgan raqam",
-      "howTo": "Raqamni my.gov.uz yoki orginfo.uz da tekshiring: bu asoschiga tegishli MChJ boʻlishi kerak. Soʻng tasdiqlang, sarmoyadorlarga toʻlash uchun 7 kun beriladi.",
-      "confirm": "Kompaniya tekshirildi: sarmoyadorlardan toʻlovni soʻrash",
-      "confirmAsk": "Bu MChJ roʻyxatdan oʻtganmi va asoschiga tegishlimi? Sarmoyadorlardan toʻlov soʻraladi.",
+      "howTo": "Raqamni my.gov.uz yoki orginfo.uz da tekshiring: bu asoschiga tegishli MChJ boʻlishi kerak. Soʻng tasdiqlang. Sarmoyadorlar kartasidan pul roʻyxat muddatidan keyingi kuni yechiladi.",
+      "confirm": "Kompaniya tekshirildi: belgilangan kuni pul yechilsin",
+      "confirmAsk": "Bu MChJ roʻyxatdan oʻtganmi va asoschiga tegishlimi? Sarmoyadorlar kartasidan pul muddatdan keyingi kuni yechiladi.",
       "waiting": "Asoschi hali kompaniya raqamini qoʻshmagan."
     }
   },
@@ -726,7 +726,7 @@
     "shareFriends": "Doʻstlarga ulashish",
     "backHome": "Bosh sahifaga",
     "submitPledge": "{{amount}} vaʼda qilish",
-    "pledgeSuccess": "«{{project}}» uchun {{amount}} vaʼdangiz qayd etildi. Hech qanday pul olinmadi. Maqsadga yetilsa va asoschi {{days}} kun ichida kompaniya ochsa, sizdan toʻlovni soʻraymiz."
+    "pledgeSuccess": "«{{project}}» uchun {{amount}} vaʼdangiz qayd etildi. Hech narsa olinmadi. Kartangizdan pul {{date}} kuni yechiladi, faqat asoschi shu kungacha kompaniya ochsa."
   },
   "dashboard": {
     "backer": {
@@ -1043,10 +1043,12 @@
     "new_pledge": "{{project}} uchun {{amount}} yangi vaʼda",
     "pledge_paid": "Sarmoyador {{project}} uchun {{amount}} toʻladi",
     "pledge_recorded": "{{project}} uchun {{amount}} vaʼdangiz qayd etildi. Hali hech narsa olinmadi",
-    "pledge_payment_due": "{{project}} endi roʻyxatdan oʻtgan kompaniya. Vaʼdangizni {{date}} gacha toʻlang",
-    "pledge_payment_due_owner": "Kompaniya tasdiqlandi. {{project}} sarmoyadorlari {{date}} gacha toʻlaydi",
+    "pledge_payment_due": "{{project}} kompaniyasini roʻyxatdan oʻtkazdi. Kartangizdan pul {{date}} kuni yechiladi",
+    "pledge_payment_due_owner": "Kompaniya tasdiqlandi. {{project}} sarmoyadorlari kartasidan pul {{date}} kuni yechiladi",
     "pledges_cancelled": "{{project}}: kompaniya oʻz vaqtida ochilmadi, vaʼdalar bekor qilindi. Hech qanday pul olinmagan",
-    "pledges_unpaid": "{{project}}: {{amount}} vaʼda oʻz vaqtida toʻlanmadi va chiqarib tashlandi"
+    "pledges_unpaid": "{{project}}: {{amount}} vaʼda oʻz vaqtida toʻlanmadi va chiqarib tashlandi",
+    "pledges_charged_owner": "{{project}} sarmoyadorlari kartasidan pul yechildi",
+    "pledge_charge_failed": "{{project}} uchun kartangizdan toʻlov oʻtmadi. Iltimos, {{date}} gacha toʻlang"
   },
   "content": {
     "updated": "Oxirgi yangilanish: {{date}}",
@@ -1328,7 +1330,7 @@
     },
     "ngoDonationOnly": "Notijorat tashkilotlar xayriya loyihalarini olib boradi.",
     "payLaterShort": "Kompaniya yoʻqmi? Sarmoyadorlar hozir vaʼda beradi, MChJ ochganingizdan keyin toʻlaydi.",
-    "payLaterRule": "Kompaniyasiz mushoraka: sarmoyadorlar vaʼda beradi, hech qanday pul olinmaydi. Maqsadga yetsangiz, 60 kun ichida MChJ roʻyxatdan oʻtkazing va raqamini qoʻshing. Jamoamiz tekshiradi, soʻng sarmoyadorlar 7 kun ichida toʻlaydi. Shundan keyin bosqich pullari odatdagidek beriladi."
+    "payLaterRule": "Kompaniyasiz mushoraka: sarmoyadorlar vaʼda beradi va kartasidan keyinroq pul yechishga ruxsat beradi; hozir hech narsa olinmaydi. Maqsadga yetsangiz, 60 kun ichida MChJ roʻyxatdan oʻtkazing va raqamini qoʻshing. Jamoamiz tekshiradi, kartalardan pul roʻyxat muddatidan keyingi kuni yechiladi. Oʻz vaqtida roʻyxatdan oʻtmasangiz, hech kimning kartasidan pul yechilmaydi."
   },
   "identity": {
     "sectionTitle": "Siz kimsiz",
@@ -1346,26 +1348,31 @@
   },
   "payLater": {
     "label": "roʻyxatdan keyin toʻlov",
-    "dialog": "Asoschining hali kompaniyasi yoʻq, shuning uchun bu vaʼda: hozir pul olinmaydi. Maqsadga yetilsa, asoschida MChJ ochish uchun {{days}} kun bor. Jamoamiz tekshirgach, siz {{payDays}} kun ichida toʻlaysiz. Kompaniya ochilmasa, vaʼda bekor qilinadi.",
+    "dialog": "Asoschining hali kompaniyasi yoʻq, shuning uchun hozir hech narsa olinmaydi. Maqsadga yetilsa, asoschida MChJ ochish uchun {{days}} kun bor. Kartangizdan pul bir marta, {{date}} kuni (muddatdan keyingi kun) yechiladi, faqat kompaniya ochilgan boʻlsa. Aks holda hech narsa yechilmaydi.",
     "note": {
-      "active": "Hali kompaniya yoʻq: sarmoyadorlar hozir vaʼda beradi, pul olinmaydi. Maqsadga yetilsa, asoschi {{days}} kun ichida MChJ ochadi, soʻng sarmoyadorlar {{payDays}} kun ichida toʻlaydi.",
-      "registering": "Maqsadga yetildi. Asoschi kompaniya ochmoqda ({{date}} gacha). Sarmoyadorlar shundan keyin toʻlaydi.",
-      "paying": "Kompaniya roʻyxatdan oʻtdi. Sarmoyadorlar vaʼdalarini {{date}} gacha toʻlaydi."
+      "active": "Hali kompaniya yoʻq: sarmoyadorlar hozir vaʼda beradi, hech narsa olinmaydi. Maqsadga yetilsa, asoschida MChJ ochish uchun {{days}} kun bor; kartalardan pul shu muddatdan keyingi kuni yechiladi, faqat kompaniya ochilgan boʻlsa.",
+      "registering": "Maqsadga yetildi. Asoschi kompaniya ochmoqda ({{date}} gacha). Kartalardan pul {{charge}} kuni yechiladi, faqat kompaniya ochilsa.",
+      "registered": "Kompaniya roʻyxatdan oʻtdi. Sarmoyadorlar kartasidan pul {{date}} kuni yechiladi.",
+      "charged": "Kartalardan pul yechildi. Toʻlovi oʻtmagan sarmoyadorlar {{date}} gacha qoʻlda toʻlashi mumkin."
     },
     "backer": {
       "pledged": "Vaʼda berilgan, toʻlanmagan",
-      "noMoneyYet": "Pul olinmagan. Faqat kompaniya roʻyxatdan oʻtsa toʻlaysiz.",
-      "waitingCompany": "Kompaniya kutilmoqda ({{date}} gacha)",
+      "noMoneyYet": "Hech narsa olinmagan. Kartangizdan faqat kompaniya roʻyxatdan oʻtsa pul yechiladi.",
+      "waitingCompany": "Kompaniya kutilmoqda ({{date}} gacha). Ochilmasa, hech narsa yechilmaydi.",
       "payBy": "{{date}} gacha toʻlang",
-      "payNow": "Hozir toʻlash",
       "payConfirm": "{{amount}} hozir toʻlansinmi? (Demo: haqiqiy pul oʻtkazilmaydi.)",
-      "cancelled": "Vaʼda bekor qilindi, pul olinmagan"
+      "cancelled": "Vaʼda bekor qilindi, pul olinmagan",
+      "chargeOn": "Kompaniya roʻyxatdan oʻtdi. Kartangizdan pul {{date}} kuni yechiladi.",
+      "chargeFailed": "Kartangizdan toʻlov oʻtmadi",
+      "payNow": "Hozir toʻlash"
     },
     "founder": {
       "active": "Sarmoyadorlar hozir vaʼda beradi, hali pul olinmaydi. Maqsadga yetsangiz, MChJ ochish uchun 60 kuningiz boʻladi.",
-      "register": "Maqsadga yetdingiz! {{date}} gacha MChJ roʻyxatdan oʻtkazing va raqamini shu yerga qoʻshing. Buni my.gov.uz orqali onlayn qilish mumkin. Aks holda barcha vaʼdalar bekor qilinadi.",
-      "checking": "Rahmat. Jamoamiz kompaniyangizni tekshirmoqda. Soʻng sarmoyadorlardan 7 kun ichida toʻlash soʻraladi.",
-      "paying": "Kompaniya tasdiqlandi. Sarmoyadorlar vaʼdalarini {{date}} gacha toʻlaydi. Toʻlanmagan vaʼdalar shundan keyin chiqarib tashlanadi."
-    }
+      "register": "Maqsadga yetdingiz! {{date}} gacha MChJ roʻyxatdan oʻtkazing va raqamini shu yerga qoʻshing. Buni my.gov.uz orqali onlayn qilish mumkin. Aks holda hech bir sarmoyadorning kartasidan pul yechilmaydi va vaʼdalar bekor qilinadi.",
+      "checking": "Rahmat. Jamoamiz kompaniyangizni tekshirmoqda. Sarmoyadorlar kartasidan pul roʻyxat muddatidan keyingi kuni yechiladi.",
+      "paying": "Kartalardan pul yechildi. Toʻlovi oʻtmagan sarmoyadorlar {{date}} gacha toʻlashi mumkin; shundan keyin ularning vaʼdasi chiqarib tashlanadi.",
+      "confirmed": "Kompaniya tasdiqlandi. Sarmoyadorlar kartasidan pul {{date}} kuni yechiladi."
+    },
+    "allowCharge": "Fundy’ga {{date}} kuni kartamdan pul yechishga ruxsat beraman, faqat asoschi shu kungacha kompaniya ochsa. Yechib boʻlmasa, qoʻlda toʻlash uchun 7 kunim boʻladi."
   }
 }

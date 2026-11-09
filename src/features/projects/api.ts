@@ -189,7 +189,7 @@ const DETAIL_COLUMNS = `
       'owner:profiles!projects_owner_id_fkey ( id, full_name, avatar_path, founder_profiles!founder_profiles_user_id_fkey ( * ) )',
     )},
   owner_id, min_contribution, allow_addons_only, starts_at,
-  pay_after_registration, registration_due_at, registration_confirmed_at, pledge_payment_due_at,
+  pay_after_registration, registration_due_at, registration_confirmed_at, pledge_payment_due_at, charge_at,
   budget_items ( id, position, category, description, amount ),
   milestones ( id, position, title, description, target_label, release_percent, status ),
   reward_tiers ( id, position, title, description, amount, items, estimated_delivery, quantity_limit, claimed_count,
@@ -245,19 +245,22 @@ export type ProjectComment = DetailRow['comments'][number] & { replies: DetailRo
 /** Musharakah without a company yet: investors pledge, then pay once an MChJ is registered. */
 type PledgeDates = Pick<
   Tables['projects']['Row'],
-  'pay_after_registration' | 'registration_due_at' | 'registration_confirmed_at' | 'pledge_payment_due_at'
+  'pay_after_registration' | 'registration_due_at' | 'registration_confirmed_at' | 'pledge_payment_due_at' | 'charge_at'
 >;
 export type PayLater = {
   payAfterRegistration: boolean;
   registrationDueAt: string | null;
   registrationConfirmedAt: string | null;
   pledgePaymentDueAt: string | null;
+  /** The day pledged cards are charged: the registration deadline + 1 day. */
+  chargeAt: string | null;
 };
 const toPayLater = (r: PledgeDates): PayLater => ({
   payAfterRegistration: r.pay_after_registration,
   registrationDueAt: r.registration_due_at,
   registrationConfirmedAt: r.registration_confirmed_at,
   pledgePaymentDueAt: r.pledge_payment_due_at,
+  chargeAt: r.charge_at,
 });
 
 export type ProjectDetail = ProjectCardData &
@@ -450,7 +453,7 @@ export async function getMyContributions(userId: string): Promise<MyContribution
        contribution_items ( quantity, unit_amount, reward:reward_tiers ( title ) ),
        reward:reward_tiers ( title ),
        project:projects ( slug, model, status, ends_at, original_language,
-         pay_after_registration, registration_due_at, registration_confirmed_at, pledge_payment_due_at, project_translations ( language, title, tagline ),
+         pay_after_registration, registration_due_at, registration_confirmed_at, pledge_payment_due_at, charge_at, project_translations ( language, title, tagline ),
          milestones ( release_percent, status ), equity_terms ( distribution_schedule ) )`,
     )
     .eq('backer_id', userId)
@@ -472,7 +475,7 @@ export async function getMyProjects(userId: string): Promise<MyProject[]> {
     .from('projects')
     .select(
       `${CARD_COLUMNS}, review_note, organizer_type,
-       pay_after_registration, registration_due_at, registration_confirmed_at, pledge_payment_due_at`,
+       pay_after_registration, registration_due_at, registration_confirmed_at, pledge_payment_due_at, charge_at`,
     )
     .eq('owner_id', userId)
     .order('created_at', { ascending: false })

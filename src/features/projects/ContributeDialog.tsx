@@ -6,11 +6,11 @@ import { contribute, type ProjectDetail } from '@/features/projects/api';
 import { projectKeys } from '@/features/projects/hooks';
 import { rewardStatus } from '@/features/projects/rewards';
 import { errorKey } from '@/features/auth/errors';
-import { formatMoney, formatNumber } from '@/lib/money';
+import { formatDate, formatMoney, formatNumber } from '@/lib/money';
 import { Alert, Button } from '@/components/ui';
 import type { Database } from '@/lib/database.types';
 import { BackerSuccess } from '@/features/projects/BackerSuccess';
-import { PAYMENT_DAYS, REGISTRATION_DAYS } from '@/features/wizard/organizer';
+import { PAYMENT_DAYS, REGISTRATION_DAYS, expectedChargeDate } from '@/features/wizard/organizer';
 
 type PaymentMethod = Database['public']['Enums']['payment_method'];
 const METHODS: PaymentMethod[] = ['click', 'payme', 'uzcard', 'humo', 'bank_wire'];
@@ -54,6 +54,9 @@ export function ContributeDialog({
   const shareUrl = `${window.location.origin}/projects/${project.slug}`;
   // No company yet: this is a promise to invest. Payment comes after the MChJ is registered.
   const pledge = project.payAfterRegistration;
+  // Pledging = permission to charge the card on this day, only if the company is registered.
+  const chargeDate = formatDate(expectedChargeDate(project));
+  const [allowCharge, setAllowCharge] = useState(false);
 
   const minimum = Math.max(project.minContribution, project.equity?.min_investment ?? 0);
   const tier = project.rewards.find(r => r.id === rewardId) ?? null;
@@ -146,7 +149,7 @@ export function ContributeDialog({
                 ? t('contribute.pledgeSuccess', {
                     amount: formatMoney(amount),
                     project: title,
-                    days: REGISTRATION_DAYS,
+                    date: chargeDate,
                   })
                 : t('contribute.successText', { amount: formatMoney(amount), project: title })
             }
@@ -235,9 +238,12 @@ export function ContributeDialog({
               </div>
             )}
 
-            {pledge ? (
-              <Alert variant="info">{t('payLater.dialog', { days: REGISTRATION_DAYS, payDays: PAYMENT_DAYS })}</Alert>
-            ) : (
+            {pledge && (
+              <Alert variant="info">
+                {t('payLater.dialog', { days: REGISTRATION_DAYS, payDays: PAYMENT_DAYS, date: chargeDate })}
+              </Alert>
+            )}
+            {(
               <fieldset className="space-y-2">
                 <legend className="text-sm font-medium text-slate-700 mb-1">{t('contribute.method')}</legend>
                 <div className="flex flex-wrap gap-2">
@@ -285,9 +291,21 @@ export function ContributeDialog({
               </label>
             )}
 
+            {pledge && (
+              <label className="flex items-start gap-2 text-xs text-slate-700 rounded-lg border border-slate-200 bg-page p-3">
+                <input
+                  type="checkbox"
+                  checked={allowCharge}
+                  onChange={e => setAllowCharge(e.target.checked)}
+                  className="mt-0.5 accent-ink"
+                />
+                <span>{t('payLater.allowCharge', { date: chargeDate })}</span>
+              </label>
+            )}
+
             {error && <Alert variant="error">{error}</Alert>}
 
-            <Button type="submit" fullWidth loading={busy} disabled={!acceptedRisk}>
+            <Button type="submit" fullWidth loading={busy} disabled={!acceptedRisk || (pledge && !allowCharge)}>
               {pledge
                 ? t('contribute.submitPledge', { amount: formatMoney(amount || 0) })
                 : t('contribute.submit', { amount: formatMoney(amount || 0) })}

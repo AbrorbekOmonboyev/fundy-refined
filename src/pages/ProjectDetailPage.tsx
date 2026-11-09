@@ -22,7 +22,7 @@ import { ChecksList, MoneyTrail } from '@/features/projects/MoneyTrail';
 import { RecentBackers } from '@/features/projects/RecentBackers';
 import { RewardsSection } from '@/features/projects/RewardCards';
 import { CartDrawer } from '@/features/cart/CartDrawer';
-import { PAYMENT_DAYS, REGISTRATION_DAYS } from '@/features/wizard/organizer';
+import { PAYMENT_DAYS, REGISTRATION_DAYS, expectedChargeDate } from '@/features/wizard/organizer';
 import { OPEN_CART_EVENT, cartActions, priceCart, useCart } from '@/features/cart/cart';
 import { formatDate, formatMoney, formatNumber } from '@/lib/money';
 import { publicFileUrl, responsiveImage } from '@/lib/supabase';
@@ -1023,10 +1023,13 @@ function CommentItem({
 /** Where a pledge-now, pay-after-registration Musharakah stands, in plain words. */
 function PayLaterNote({ project }: { project: ProjectDetail }) {
   const { t } = useTranslation();
-  const text = project.registrationConfirmedAt
-    ? t('payLater.note.paying', { date: formatDate(project.pledgePaymentDueAt) })
-    : project.status === 'funded'
-      ? t('payLater.note.registering', { date: formatDate(project.registrationDueAt) })
-      : t('payLater.note.active', { days: REGISTRATION_DAYS, payDays: PAYMENT_DAYS });
+  const charge = formatDate(expectedChargeDate(project));
+  const text = project.pledgePaymentDueAt
+    ? t('payLater.note.charged', { date: formatDate(project.pledgePaymentDueAt), payDays: PAYMENT_DAYS })
+    : project.registrationConfirmedAt
+      ? t('payLater.note.registered', { date: charge })
+      : project.status === 'funded'
+        ? t('payLater.note.registering', { date: formatDate(project.registrationDueAt), charge })
+        : t('payLater.note.active', { days: REGISTRATION_DAYS });
   return <p className="pt-2 border-t border-slate-200 text-slate-700 leading-relaxed">{text}</p>;
 }

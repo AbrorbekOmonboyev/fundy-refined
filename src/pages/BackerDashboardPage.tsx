@@ -284,18 +284,20 @@ function PledgeStatus({ c }: { c: MyContribution }) {
       <div className="space-y-1 min-w-40">
         <Badge tone="slate">{t('payLater.backer.pledged')}</Badge>
         <p className="text-slate-500">
-          {p.status === 'funded' && p.registration_due_at
-            ? t('payLater.backer.waitingCompany', { date: formatDate(p.registration_due_at) })
-            : t('payLater.backer.noMoneyYet')}
+          {p.registration_confirmed_at && p.charge_at
+            ? t('payLater.backer.chargeOn', { date: formatDate(p.charge_at) })
+            : p.status === 'funded' && p.registration_due_at
+              ? t('payLater.backer.waitingCompany', { date: formatDate(p.registration_due_at) })
+              : t('payLater.backer.noMoneyYet')}
         </p>
       </div>
     );
   }
+  // The scheduled card charge failed: 7 days to pay by hand.
   return (
     <div className="space-y-1.5 min-w-40">
-      <p className="text-ink font-semibold">
-        {t('payLater.backer.payBy', { date: formatDate(p.pledge_payment_due_at) })}
-      </p>
+      <p className="text-ink font-semibold">{t('payLater.backer.chargeFailed')}</p>
+      <p className="text-slate-500">{t('payLater.backer.payBy', { date: formatDate(p.pledge_payment_due_at) })}</p>
       <Button loading={busy} onClick={pay} className="!px-3 !py-1.5 text-xs">
         {t('payLater.backer.payNow')}
       </Button>

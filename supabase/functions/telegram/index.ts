@@ -78,9 +78,9 @@ const TEXT: Record<string, Record<Lang, string>> = {
     en: '↩️ Stage proof was sent back',
   },
   pledge_payment_due: {
-    uz: '🏢 Kompaniya roʻyxatdan oʻtdi — vaʼdangizni 7 kun ichida toʻlang',
-    ru: '🏢 Компания зарегистрирована — оплатите обещанную сумму в течение 7 дней',
-    en: '🏢 The company is registered — pay your pledge within 7 days',
+    uz: '🏢 Sarmoya vaʼdangiz boʻyicha yangilik (toʻlov sanasi)',
+    ru: '🏢 Новости по вашему обещанию инвестировать (дата оплаты)',
+    en: '🏢 News about your investment pledge (payment date)',
   },
   pledges_cancelled: {
     uz: 'Vaʼdalar bekor qilindi — hech qanday pul olinmadi',
