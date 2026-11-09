@@ -28,16 +28,23 @@ async function rejects(promise: Promise<unknown>, message: RegExp) {
 }
 
 /** A complete draft project owned by `ownerId`, ready to submit. */
-async function createDraft(ownerId: string, slug: string, opts: { target?: number; model?: string } = {}) {
+async function createDraft(
+  ownerId: string,
+  slug: string,
+  opts: { target?: number; model?: string; organizer?: string; identity?: boolean } = {},
+) {
   const target = opts.target ?? 10_000_000;
   const model = opts.model ?? 'donation';
+  const organizer = opts.organizer ?? (model === 'equity' ? 'mchj' : 'individual');
   const [project] = await as<{ id: string }>(
     db,
     user(ownerId),
-    `insert into public.projects (owner_id, slug, model, category_id, target_amount, cover_image_path)
-     values ($1, $2, $3, 'technology', $4, 'x/cover.jpg') returning id`,
-    [ownerId, slug, model, target],
+    `insert into public.projects (owner_id, slug, model, organizer_type, category_id, target_amount, cover_image_path)
+     values ($1, $2, $3, $4, 'technology', $5, 'x/cover.jpg') returning id`,
+    [ownerId, slug, model, organizer, target],
   );
+  if (opts.identity !== false) await addDocument(ownerId, project.id, 'identity');
+  if (organizer !== 'individual') await addDocument(ownerId, project.id, 'registration');
   await as(
     db,
     user(ownerId),
@@ -60,6 +67,18 @@ async function createDraft(ownerId: string, slug: string, opts: { target?: numbe
   return project.id;
 }
 
+/** A private document (ID, certificate, ...) the founder uploaded for the review team. */
+async function addDocument(ownerId: string, projectId: string, kind: string) {
+  const path = `${ownerId}/${projectId}/${kind}-${Math.random().toString(36).slice(2, 8)}.pdf`;
+  await as(db, user(ownerId), `insert into storage.objects (bucket_id, name) values ('project-documents', $1)`, [path]);
+  await as(
+    db,
+    user(ownerId),
+    `insert into public.project_documents (project_id, kind, storage_path, file_name, uploaded_by) values ($1, $2, $3, $4, $5)`,
+    [projectId, kind, path, `${kind}.pdf`, ownerId],
+  );
+}
+
 async function evaluateAndApprove(projectId: string) {
   await as(
     db,
@@ -79,7 +98,7 @@ before(async () => {
   await as(
     db,
     user(alice),
-    `insert into public.founder_profiles (user_id, display_name) values ($1, 'Alice Founder')`,
+    `insert into public.founder_profiles (user_id, display_name, registration_number) values ($1, 'Alice Founder', 'YaTT 4012345')`,
     [alice],
   );
 });
@@ -592,8 +611,8 @@ describe('project wizard (the exact writes the app makes)', () => {
       db,
       user(dina),
       `
-      insert into public.projects (owner_id, slug, model, category_id, region_id, location, target_amount, duration_days, original_language)
-      values ($1, 'dina-solar-bakery', 'equity', 'food', 'samarkand', 'Samarkand', 50000000, 45, 'uz') returning id`,
+      insert into public.projects (owner_id, slug, model, organizer_type, category_id, region_id, location, target_amount, duration_days, original_language)
+      values ($1, 'dina-solar-bakery', 'equity', 'mchj', 'food', 'samarkand', 'Samarkand', 50000000, 45, 'uz') returning id`,
       [dina],
     );
     projectId = p.id;
@@ -681,7 +700,7 @@ describe('project wizard (the exact writes the app makes)', () => {
     await as(
       db,
       user(dina),
-      `insert into public.founder_profiles (user_id, display_name, role_title) values ($1, 'Dina', 'Founder')`,
+      `insert into public.founder_profiles (user_id, display_name, role_title, registration_number) values ($1, 'Dina', 'Founder', 'MChJ 309812490')`,
       [dina],
     );
     await as(db, user(dina), `insert into storage.objects (bucket_id, name) values ('project-documents', $1)`, [
@@ -693,6 +712,7 @@ describe('project wizard (the exact writes the app makes)', () => {
       `insert into public.project_documents (project_id, kind, storage_path, file_name, uploaded_by) values ($1, 'registration', $2, 'license.pdf', $3)`,
       [projectId, `${dina}/${projectId}/license.pdf`, dina],
     );
+    await addDocument(dina, projectId, 'identity');
     assert.equal(
       (await as(db, user(bob), `select id from public.project_documents where project_id = $1`, [projectId])).length,
       0,
@@ -1660,5 +1680,90 @@ describe('owner alerts and /getreports', () => {
     await rejects(as(db, owner, `select * from public.telegram_admin_report(9002)`), /admin_only/); // Bob isn't an admin
     await rejects(as(db, owner, `select * from public.telegram_admin_report(12345)`), /admin_only/); // unknown chat
     await rejects(as(db, user(admin), `select * from public.telegram_admin_report(9001)`), /permission denied/); // not from the website
+  });
+});
+
+describe('who is raising the money (organiser type)', () => {
+  let gulnora: string; // a student with only a passport
+
+  before(async () => {
+    gulnora = await createUser(db, 'Gulnora Student');
+    await as(db, user(gulnora), `insert into public.founder_profiles (user_id, display_name) values ($1, 'Gulnora')`, [
+      gulnora,
+    ]);
+  });
+
+  test('musharakah needs a company, and a non-profit runs donations only', async () => {
+    for (const [organizer, model] of [
+      ['individual', 'equity'],
+      ['yatt', 'equity'],
+      ['ngo', 'equity'],
+      ['ngo', 'reward'],
+    ]) {
+      await rejects(
+        createDraft(gulnora, `bad-${organizer}-${model}`, { organizer, model }),
+        /projects_model_fits_organizer/,
+      );
+    }
+    const id = await createDraft(gulnora, 'ok-individual-reward', { model: 'reward', organizer: 'individual' });
+    await rejects(
+      as(db, user(gulnora), `update public.projects set model = 'equity' where id = $1`, [id]),
+      /projects_model_fits_organizer/,
+    );
+  });
+
+  test('submitting needs the organiser type and an ID document', async () => {
+    const noType = await createDraft(gulnora, 'no-type');
+    await db.query(`update public.projects set organizer_type = null where id = $1`, [noType]);
+    await rejects(as(db, user(gulnora), `select public.submit_project($1)`, [noType]), /organizer_type_missing/);
+
+    const noId = await createDraft(gulnora, 'no-id', { identity: false });
+    await rejects(as(db, user(gulnora), `select public.submit_project($1)`, [noId]), /identity_document_missing/);
+  });
+
+  test('a registered organiser also needs the number and the certificate', async () => {
+    const id = await createDraft(gulnora, 'gulnora-yatt', { organizer: 'yatt' });
+    await rejects(as(db, user(gulnora), `select public.submit_project($1)`, [id]), /registration_number_missing/);
+    await as(
+      db,
+      user(gulnora),
+      `update public.founder_profiles set registration_number = 'YaTT 777' where user_id = $1`,
+      [gulnora],
+    );
+    await db.query(`delete from public.project_documents where project_id = $1 and kind = 'registration'`, [id]);
+    await rejects(as(db, user(gulnora), `select public.submit_project($1)`, [id]), /registration_document_missing/);
+    await as(db, user(gulnora), `update public.founder_profiles set registration_number = null where user_id = $1`, [
+      gulnora,
+    ]);
+  });
+
+  test('an individual applies with a passport, but is paid only after registering', async () => {
+    const id = await createDraft(gulnora, 'gulnora-passport-only');
+    await as(db, user(gulnora), `select public.submit_project($1)`, [id]); // passport is enough to apply
+    await evaluateAndApprove(id);
+    await db.query(`update public.projects set status = 'funded' where id = $1`, [id]);
+    const [{ id: milestoneId }] = await as<{ id: string }>(
+      db,
+      anon,
+      `select id from public.milestones where project_id = $1 order by position limit 1`,
+      [id],
+    );
+    await as(
+      db,
+      user(gulnora),
+      `select public.submit_milestone($1, 'Stage one is done; photos and receipts attached.')`,
+      [milestoneId],
+    );
+    await rejects(
+      as(db, user(admin), `select public.admin_approve_milestone($1)`, [milestoneId]),
+      /registration_required_before_payout/,
+    );
+    await as(
+      db,
+      user(gulnora),
+      `update public.founder_profiles set registration_number = 'YaTT 5550001' where user_id = $1`,
+      [gulnora],
+    );
+    await as(db, user(admin), `select public.admin_approve_milestone($1)`, [milestoneId]);
   });
 });

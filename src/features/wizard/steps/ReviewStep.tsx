@@ -6,7 +6,7 @@ import { CheckCircle2, CircleAlert, Clock } from 'lucide-react';
 import { paths } from '@/app/routes';
 import { wizardErrorText } from '@/features/wizard/errors';
 import { submitDraft, withdrawSubmission, type Draft } from '@/features/wizard/api';
-import { STEPS, budgetTotal, isEditable, releaseTotal, stepComplete } from '@/features/wizard/checks';
+import { STEPS, budgetTotal, founderGaps, isEditable, releaseTotal, stepComplete } from '@/features/wizard/checks';
 import { draftKey } from '@/features/wizard/hooks';
 import { WizardShell } from '@/features/wizard/WizardShell';
 import { Alert, Button } from '@/components/ui';
@@ -34,8 +34,12 @@ export function ReviewStep({ draft }: { draft: Draft }) {
         });
       case 'milestones':
         return t('wizard.review.milestonesProblem', { total: releaseTotal(draft) });
+      case 'founder':
+        return founderGaps(draft)
+          .map(g => t(`wizard.founder.gap.${g}`))
+          .join(' ');
       default:
-        return t(`wizard.review.problem.${step as 'basics' | 'story' | 'terms' | 'founder'}`);
+        return t(`wizard.review.problem.${step as 'basics' | 'story' | 'terms'}`);
     }
   };
 

@@ -3,6 +3,7 @@
  * (supabase/migrations/*_functions.sql) so founders see problems before submitting.
  */
 import type { Draft } from '@/features/wizard/api';
+import { needsRegistration } from '@/features/wizard/organizer';
 
 export const STEPS = ['basics', 'story', 'budget', 'milestones', 'terms', 'founder', 'review'] as const;
 export type Step = (typeof STEPS)[number];
@@ -14,10 +15,25 @@ export const MIN_STORY = 200;
 export const budgetTotal = (d: Draft) => d.budget.reduce((s, b) => s + b.amount, 0);
 export const releaseTotal = (d: Draft) => d.milestones.reduce((s, m) => s + Number(m.release_percent), 0);
 
+/** What step 6 still needs (same order as submit_project() checks them). */
+export type FounderGap = 'profile' | 'identity' | 'registrationNumber' | 'registrationDocument';
+export function founderGaps(d: Draft): FounderGap[] {
+  const gaps: FounderGap[] = [];
+  if (!d.founder) gaps.push('profile');
+  if (!d.documents.some(doc => doc.kind === 'identity')) gaps.push('identity');
+  if (needsRegistration(d.project.organizer_type)) {
+    if (!d.founder?.registration_number?.trim()) gaps.push('registrationNumber');
+    if (!d.documents.some(doc => doc.kind === 'registration')) gaps.push('registrationDocument');
+  }
+  return gaps;
+}
+
 export function stepComplete(d: Draft, step: Step): boolean {
   switch (step) {
     case 'basics':
-      return !!d.text && d.text.title.trim().length >= 5 && d.text.tagline.trim().length > 0;
+      return (
+        !!d.project.organizer_type && !!d.text && d.text.title.trim().length >= 5 && d.text.tagline.trim().length > 0
+      );
     case 'story':
       return !!d.text && d.text.story.trim().length >= MIN_STORY && !!d.project.cover_image_path;
     case 'budget':
@@ -29,7 +45,7 @@ export function stepComplete(d: Draft, step: Step): boolean {
       if (d.project.model === 'equity') return !!d.equity;
       return true;
     case 'founder':
-      return !!d.founder;
+      return founderGaps(d).length === 0;
     case 'review':
       return STEPS.filter(s => s !== 'review').every(s => stepComplete(d, s));
   }

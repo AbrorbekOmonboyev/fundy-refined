@@ -117,7 +117,8 @@
     "addonNeedsReward": "Qoʻshimcha mahsulotni faqat asosiy mukofot bilan olish mumkin.",
     "rewardNotAvailableNow": "Bu mukofot hozir mavjud emas.",
     "rewardLimitPerBacker": "Bu mukofotni bir kishi cheklangan miqdorda oladi. Siz limitga yetdingiz.",
-    "cartInvalid": "Savatda xatolik bor. Sahifani yangilab, qaytadan urinib koʻring."
+    "cartInvalid": "Savatda xatolik bor. Sahifani yangilab, qaytadan urinib koʻring.",
+    "registrationBeforePayout": "Asoschi hali roʻyxatdan oʻtmagan (YaTT/MChJ raqami yoʻq). Raqam qoʻshilmaguncha pul berilmaydi."
   },
   "auth": {
     "fields": {
@@ -438,7 +439,7 @@
     "how": {
       "title": "Pul qanday yoʻl bosadi",
       "step1Title": "Asoschi ariza beradi",
-      "step1Text": "MChJ yoki YaTT guvohnomasi, pasport, bank hisobi, soʻmdagi byudjet va 3–6 ta bosqich.",
+      "step1Text": "Pasport, soʻmdagi byudjet va bosqichlar. Kompaniya va YaTT guvohnomasini ham qoʻshadi.",
       "step2Title": "Biz tekshiramiz va baholaymiz",
       "step2Text": "Hujjatlarni tekshiramiz va loyihani 100 ballik tizimda baholaymiz: biznes-reja, jamoa, bozor, moliya va xatar, har biri 20 balldan. Baho loyiha sahifasida ochiq turadi.",
       "step3Title": "Odamlar qoʻllab-quvvatlaydi",
@@ -780,7 +781,9 @@
       "targetError": "Maqsad kamida {{min}} boʻlishi kerak.",
       "duration": "Kampaniya muddati (kun)",
       "durationHint": "7 dan 90 kungacha.",
-      "durationError": "7 dan 90 kungacha tanlang."
+      "durationError": "7 dan 90 kungacha tanlang.",
+      "organizer": "Pulni kim yigʻyapti?",
+      "organizerError": "Pulni kim yigʻayotganini tanlang."
     },
     "story": {
       "title": "Hikoya va rasm",
@@ -883,6 +886,22 @@
         "identity": "Shaxsni tasdiqlovchi hujjat",
         "financials": "Moliyaviy hisobotlar",
         "other": "Boshqa"
+      },
+      "registrationRequired": "Roʻyxat raqami (YaTT / MChJ / NNT yoki STIR)",
+      "registrationLaterHint": "Hali roʻyxatdan oʻtmagan boʻlsangiz, boʻsh qoldiring. Birinchi toʻlovdan oldin kerak boʻladi.",
+      "neededTitle": "Bizga kerak",
+      "need": {
+        "identity": "Pasport yoki ID-karta (rasm yoki PDF)",
+        "registrationNumber": "Roʻyxat raqami",
+        "registrationDocument": "Roʻyxatdan oʻtganlik guvohnomasi"
+      },
+      "needDone": "tayyor",
+      "needMissing": "hali kerak",
+      "gap": {
+        "profile": "Asoschi profilini toʻldiring.",
+        "identity": "Pasport yoki ID-kartangizni yuklang.",
+        "registrationNumber": "Roʻyxat raqamini kiriting.",
+        "registrationDocument": "Roʻyxatdan oʻtganlik guvohnomasini yuklang."
       }
     },
     "review": {
@@ -897,7 +916,7 @@
       "budgetProblem": "Byudjet jami {{total}}, maqsad esa {{goal}}.",
       "milestonesProblem": "Foizlar jami {{total}}%, 100% boʻlishi kerak.",
       "problem": {
-        "basics": "Nom va qisqa tavsif kerak.",
+        "basics": "Nomi, qisqa tavsifi va pulni kim yigʻayotgani kerak.",
         "story": "200+ belgili hikoya va muqova rasmi kerak.",
         "terms": "Kamida bitta mukofot yoki hamkorlik shartlarini qoʻshing.",
         "founder": "Asoschi profilingizni toʻldiring."
@@ -924,7 +943,11 @@
       "milestones_must_total_100": "Bosqich foizlari jami 100% boʻlishi kerak (4-qadam).",
       "reward_tiers_missing": "Kamida bitta mukofot qoʻshing (5-qadam).",
       "equity_terms_missing": "Hamkorlik shartlarini qoʻshing (5-qadam).",
-      "project_not_editable": "Bu loyihani endi oʻzgartirib boʻlmaydi."
+      "project_not_editable": "Bu loyihani endi oʻzgartirib boʻlmaydi.",
+      "organizer_type_missing": "1-qadamda pulni kim yigʻayotganini tanlang.",
+      "identity_document_missing": "6-qadamda pasport yoki ID-kartangizni yuklang.",
+      "registration_number_missing": "6-qadamda roʻyxat raqamini kiriting.",
+      "registration_document_missing": "6-qadamda roʻyxatdan oʻtganlik guvohnomasini yuklang."
     },
     "preview": "Homiy koʻzi bilan koʻrish",
     "example": {
@@ -1075,12 +1098,6 @@
     "title": "Fundyʼda loyiha joylash",
     "intro": "Ariza 20–30 daqiqa oladi. Qoralama saqlanib turadi, istalgan vaqtda davom ettirasiz.",
     "needTitle": "Nima kerak boʻladi",
-    "need1": "MChJ yoki YaTT guvohnomasi (xayriya loyihalari uchun NNT ham boʻladi)",
-    "need2": "Rahbar yoki asoschining pasporti",
-    "need3": "Tashkilot nomiga ochilgan bank hisobi",
-    "need4": "Soʻmdagi byudjet: har bir xarajat alohida qatorda",
-    "need5": "3–6 ta bosqich: nima qilinadi, qachon va pulning necha foizi",
-    "need6": "Muqova surati va loyiha hikoyasi (kamida 200 belgi)",
     "timeTitle": "Qancha vaqt oladi",
     "time1Title": "Ariza",
     "time1Text": "20–30 daqiqa",
@@ -1093,7 +1110,17 @@
     "feesTitle": "Xarajatlar",
     "fees": "Demo davrida Fundy hech qanday toʻlov olmaydi. Haqiqiy toʻlovlar ishga tushganda komissiya shu sahifada oldindan eʼlon qilinadi.",
     "cta": "Arizani boshlash",
-    "ctaHint": "Avval kirasiz yoki roʻyxatdan oʻtasiz. Bu bir daqiqa oladi."
+    "ctaHint": "Avval kirasiz yoki roʻyxatdan oʻtasiz. Bu bir daqiqa oladi.",
+    "whoTitle": "Pulni kim yigʻyapti?",
+    "whoHint": "Javobingizga qarab qaysi hujjatlar kerakligi va qaysi moliyalashtirish turidan foydalanish mumkinligi aniqlanadi.",
+    "applyTitle": "Ariza uchun",
+    "payoutTitle": "Pul berilishidan oldin",
+    "modelsTitle": "Mumkin boʻlgan turlar",
+    "needId": "Loyihani yuritadigan shaxsning pasporti yoki ID-kartasi",
+    "needBudget": "Soʻmdagi byudjet, har bir xarajat alohida qatorda",
+    "needStages": "Bosqichlar (odatda 3–6 ta): nima, qachon qilinadi va pulning qancha ulushi beriladi",
+    "needStory": "Muqova rasmi va loyiha hikoyasi (kamida 200 belgi)",
+    "continueDraft": "Qoralamani davom ettirish: {{title}}"
   },
   "time": {
     "now": "hozirgina",
@@ -1239,5 +1266,39 @@
     "thanksHint": "Shu kabi xabarlar Fundy’ni yaxshiroq qiladi.",
     "another": "Yana yozish",
     "tooShort": "Kamida 3 ta belgi yozing."
+  },
+  "organizer": {
+    "individual": {
+      "name": "Shaxs yoki jamoa",
+      "short": "Hali kompaniya yoʻq. Ariza uchun pasport yetarli.",
+      "payout": "YaTT yoki MChJ sifatida roʻyxatdan oʻting va raqamini qoʻshing. Buni my.gov.uz orqali onlayn qilish mumkin.",
+      "payoutRule": "Pasport bilan ariza berib, pul yigʻishingiz mumkin. Birinchi bosqich puli berilishidan oldin YaTT (yoki MChJ) sifatida roʻyxatdan oʻting va raqamini qoʻshing. Buni my.gov.uz orqali onlayn qilish mumkin.",
+      "dashboardNotice": "Birinchi bosqich puli berilishidan oldin YaTT yoki MChJ sifatida roʻyxatdan oʻting va roʻyxat raqamini shu yerga qoʻshing. Roʻyxatdan my.gov.uz orqali onlayn oʻtish mumkin.",
+      "saveNumber": "Raqamni saqlash"
+    },
+    "yatt": {
+      "name": "Yakka tartibdagi tadbirkor (YaTT)",
+      "short": "YaTT sifatida roʻyxatdan oʻtgansiz.",
+      "apply": "YaTT guvohnomasi va uning raqami",
+      "payout": "YaTT nomidagi bank hisobi",
+      "numberHint": "YaTT guvohnomasi raqami yoki STIR."
+    },
+    "mchj": {
+      "name": "Kompaniya (MChJ)",
+      "short": "Masʼuliyati cheklangan jamiyat. Mushoraka faqat shu bilan mumkin.",
+      "apply": "Kompaniyaning roʻyxatdan oʻtganlik guvohnomasi va uning raqami",
+      "applyEquity": "Mushoraka uchun: soʻnggi moliyaviy hisobotlar (tavsiya etiladi)",
+      "payout": "Kompaniya nomidagi bank hisobi",
+      "numberHint": "MChJ guvohnomasi raqami yoki STIR."
+    },
+    "ngo": {
+      "name": "Notijorat tashkilot (NNT)",
+      "short": "Roʻyxatdan oʻtgan nodavlat notijorat tashkilot. Xayriya loyihalari.",
+      "apply": "Tashkilotning roʻyxatdan oʻtganlik guvohnomasi va uning raqami",
+      "payout": "Tashkilot nomidagi bank hisobi",
+      "numberHint": "NNT roʻyxat raqami yoki STIR."
+    },
+    "equityNeedsMchj": "Roʻyxatdan oʻtgan kompaniya (MChJ) kerak.",
+    "ngoDonationOnly": "Notijorat tashkilotlar xayriya loyihalarini olib boradi."
   }
 }

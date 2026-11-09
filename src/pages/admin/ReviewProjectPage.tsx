@@ -86,7 +86,11 @@ function Review({ draft, evaluation }: { draft: Draft; evaluation: Evaluation | 
                 className="w-full aspect-[16/9] object-cover rounded-2xl"
               />
             )}
-            <dl className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+            <dl className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
+              <Fact
+                label={t('wizard.basics.organizer')}
+                value={p.organizer_type ? t(`organizer.${p.organizer_type}.name`) : '—'}
+              />
               <Fact label={t('wizard.basics.model')} value={t(`models.${p.model}.name`)} />
               <Fact label={t('wizard.basics.target')} value={formatMoney(p.target_amount)} />
               <Fact label={t('wizard.basics.duration')} value={String(p.duration_days)} />

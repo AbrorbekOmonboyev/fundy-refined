@@ -1,13 +1,19 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { paths } from '@/app/routes';
 import { useAuth } from '@/features/auth/AuthContext';
 import { errorKey } from '@/features/auth/errors';
 import { pickText, type MyProject } from '@/features/projects/api';
 import { useMyProjects } from '@/features/projects/hooks';
-import { deleteDraft, postUpdate, withdrawSubmission } from '@/features/wizard/api';
+import {
+  deleteDraft,
+  getFounderRegistration,
+  postUpdate,
+  saveRegistrationNumber,
+  withdrawSubmission,
+} from '@/features/wizard/api';
 import { FounderMilestones } from '@/features/community/FounderMilestones';
 import { Alert, Button, PageSpinner, TextAreaField, TextField } from '@/components/ui';
 import { formatMoney } from '@/lib/money';
@@ -142,6 +148,9 @@ function ProjectRow({ project: p }: { project: MyProject }) {
         </Alert>
       )}
       {error && <Alert variant="error">{error}</Alert>}
+      {p.organizerType === 'individual' && ['pending_review', 'active', 'funded'].includes(p.status) && (
+        <RegisterBeforePayout />
+      )}
 
       <div className="flex flex-wrap gap-2">
         {editable && (
@@ -258,6 +267,66 @@ function UpdateForm({ projectId, slug, onDone }: { projectId: string; slug: stri
           {t('dashboard.founder.publish')}
         </Button>
       </div>
+    </form>
+  );
+}
+
+/**
+ * Someone who applied with only a passport must register (YaTT or MChJ) before the
+ * first stage's money is released. Shown until their founder profile has the number.
+ */
+function RegisterBeforePayout() {
+  const { t } = useTranslation();
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
+  const key = ['founder-registration', user?.id];
+  const { data: saved, isPending } = useQuery({
+    queryKey: key,
+    queryFn: () => getFounderRegistration(user!.id),
+    enabled: !!user,
+  });
+  const [number, setNumber] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  if (isPending || saved) return null;
+
+  async function save(e: FormEvent) {
+    e.preventDefault();
+    if (!number.trim()) return;
+    setBusy(true);
+    setError(null);
+    try {
+      await saveRegistrationNumber(user!.id, number.trim());
+      await queryClient.invalidateQueries({ queryKey: key });
+    } catch (err) {
+      setError(t(errorKey(err)));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <form
+      onSubmit={save}
+      className="rounded-lg border border-amber-200 bg-amber-50 p-3 space-y-3 text-sm text-amber-900"
+    >
+      <p>{t('organizer.individual.dashboardNotice')}</p>
+      <div className="flex flex-col sm:flex-row sm:items-end gap-2">
+        <div className="flex-1">
+          <TextField
+            label={t('wizard.founder.registrationRequired')}
+            hint={t('organizer.yatt.numberHint')}
+            maxLength={120}
+            value={number}
+            onChange={e => setNumber(e.target.value)}
+          />
+        </div>
+        <Button type="submit" loading={busy} disabled={!number.trim()}>
+          {t('organizer.individual.saveNumber')}
+        </Button>
+      </div>
+      {error && <Alert variant="error">{error}</Alert>}
     </form>
   );
 }

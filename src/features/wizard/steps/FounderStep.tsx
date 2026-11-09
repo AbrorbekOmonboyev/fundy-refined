@@ -1,7 +1,7 @@
 import { useRef, useState, type ChangeEvent, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQueryClient } from '@tanstack/react-query';
-import { FileText, Trash2, Upload } from 'lucide-react';
+import { Check, Circle, FileText, Trash2, Upload } from 'lucide-react';
 import { useAuth } from '@/features/auth/AuthContext';
 import { wizardErrorText } from '@/features/wizard/errors';
 import {
@@ -13,6 +13,8 @@ import {
   type FounderFields,
 } from '@/features/wizard/api';
 import { draftKey, useStepSave } from '@/features/wizard/hooks';
+import { founderGaps } from '@/features/wizard/checks';
+import { needsRegistration } from '@/features/wizard/organizer';
 import { WizardShell } from '@/features/wizard/WizardShell';
 import { Alert, Button, NumberField, SelectField, TextAreaField, TextField } from '@/components/ui';
 import type { Database } from '@/lib/database.types';
@@ -40,7 +42,18 @@ export function FounderStep({ draft }: { draft: Draft }) {
   });
   const set = <K extends keyof FounderFields>(key: K, value: FounderFields[K]) =>
     setForm(x => ({ ...x, [key]: value }));
-  const [kind, setKind] = useState<DocumentKind>('registration');
+  const organizer = draft.project.organizer_type;
+  const registered = needsRegistration(organizer);
+  const hasDoc = (k: DocumentKind) => draft.documents.some(doc => doc.kind === k);
+  // Start the picker on the first document we still need.
+  const [kind, setKind] = useState<DocumentKind>(
+    !hasDoc('identity') ? 'identity' : registered && !hasDoc('registration') ? 'registration' : 'business_plan',
+  );
+  const gaps = founderGaps(draft);
+  // What step 6 asks for: always an ID; a registered organiser also its number and certificate.
+  const needed = (
+    registered ? (['identity', 'registrationNumber', 'registrationDocument'] as const) : (['identity'] as const)
+  ).map(key => ({ key, done: !gaps.includes(key) }));
   const [uploading, setUploading] = useState(false);
   const [docError, setDocError] = useState<string | null>(null);
 
@@ -66,6 +79,10 @@ export function FounderStep({ draft }: { draft: Draft }) {
     e.preventDefault();
     if (form.display_name.trim().length < 2) {
       setError(t('validation.name'));
+      return;
+    }
+    if (registered && !form.registration_number?.trim()) {
+      setError(t('wizard.founder.gap.registrationNumber'));
       return;
     }
     const clean = (s: string | null) => s?.trim() || null;
@@ -113,8 +130,8 @@ export function FounderStep({ draft }: { draft: Draft }) {
           onChange={e => set('organization', e.target.value)}
         />
         <TextField
-          label={t('wizard.founder.registration')}
-          hint={t('wizard.founder.registrationHint')}
+          label={t(registered ? 'wizard.founder.registrationRequired' : 'wizard.founder.registration')}
+          hint={t(registered ? `organizer.${organizer!}.numberHint` : 'wizard.founder.registrationLaterHint')}
           maxLength={120}
           value={form.registration_number ?? ''}
           onChange={e => set('registration_number', e.target.value)}
@@ -143,6 +160,25 @@ export function FounderStep({ draft }: { draft: Draft }) {
       <section className="space-y-3 pt-4 border-t border-slate-100">
         <h2 className="text-sm font-semibold text-ink">{t('wizard.founder.documents')}</h2>
         <p className="text-xs text-slate-500">{t('wizard.founder.documentsHint')}</p>
+        <ul className="space-y-1.5" aria-label={t('wizard.founder.neededTitle')}>
+          {needed.map(n => (
+            <li key={n.key} className="flex items-center gap-2 text-sm">
+              {n.done ? (
+                <Check className="w-4 h-4 text-brand-deep shrink-0" aria-hidden />
+              ) : (
+                <Circle className="w-4 h-4 text-slate-400 shrink-0" aria-hidden />
+              )}
+              <span className={n.done ? 'text-slate-500' : 'text-ink'}>
+                {t(`wizard.founder.need.${n.key}`)}
+                <span className="sr-only">
+                  {' '}
+                  — {t(n.done ? 'wizard.founder.needDone' : 'wizard.founder.needMissing')}
+                </span>
+              </span>
+            </li>
+          ))}
+        </ul>
+        {organizer === 'individual' && <Alert variant="info">{t('organizer.individual.payoutRule')}</Alert>}
         {draft.documents.length > 0 && (
           <ul className="divide-y divide-slate-100 border border-slate-200 rounded-lg">
             {draft.documents.map(doc => (

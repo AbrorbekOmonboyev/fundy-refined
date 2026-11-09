@@ -9,6 +9,7 @@ import { supabase } from '@/lib/supabase';
 import type { Database } from '@/lib/database.types';
 import type { Language } from '@/i18n';
 import { slugify } from '@/features/wizard/slug';
+import type { OrganizerType } from '@/features/wizard/organizer';
 
 type Tables = Database['public']['Tables'];
 type Enums = Database['public']['Enums'];
@@ -127,6 +128,7 @@ export async function getDraft(projectId: string, userId: string, { anyOwner = f
 export type Basics = {
   title: string;
   tagline: string;
+  organizer_type: OrganizerType | null;
   model: FundingModel;
   category_id: string;
   region_id: string | null;
@@ -146,6 +148,7 @@ export async function createDraft(userId: string, basics: Basics): Promise<strin
       .insert({
         owner_id: userId,
         slug,
+        organizer_type: basics.organizer_type,
         model: basics.model,
         category_id: basics.category_id,
         region_id: basics.region_id,
@@ -174,6 +177,7 @@ export async function updateBasics(draft: Draft, basics: Basics) {
   const { error } = await db()
     .from('projects')
     .update({
+      organizer_type: basics.organizer_type,
       model: basics.model,
       category_id: basics.category_id,
       region_id: basics.region_id,
@@ -342,6 +346,26 @@ export async function saveFounder(userId: string, exists: boolean, fields: Found
     : await db()
         .from('founder_profiles')
         .insert({ user_id: userId, ...fields });
+  fail(error);
+}
+
+/** The founder's registration number (YaTT / MChJ), or null if they haven't registered yet. */
+export async function getFounderRegistration(userId: string): Promise<string | null> {
+  const { data, error } = await db()
+    .from('founder_profiles')
+    .select('registration_number')
+    .eq('user_id', userId)
+    .maybeSingle();
+  fail(error);
+  return data?.registration_number?.trim() || null;
+}
+
+/** Added after registering, so the first stage's money can be released. */
+export async function saveRegistrationNumber(userId: string, registrationNumber: string) {
+  const { error } = await db()
+    .from('founder_profiles')
+    .update({ registration_number: registrationNumber })
+    .eq('user_id', userId);
   fail(error);
 }
 

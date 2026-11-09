@@ -427,15 +427,18 @@ export async function getMyContributions(userId: string): Promise<MyContribution
 }
 
 /** Projects the user owns, in every status (drafts included), newest first. */
-export type MyProject = ProjectCardData & { reviewNote: string | null };
+export type MyProject = ProjectCardData & {
+  reviewNote: string | null;
+  organizerType: Database['public']['Enums']['organizer_type'] | null;
+};
 
 export async function getMyProjects(userId: string): Promise<MyProject[]> {
   const { data, error } = await client()
     .from('projects')
-    .select(`${CARD_COLUMNS}, review_note`)
+    .select(`${CARD_COLUMNS}, review_note, organizer_type`)
     .eq('owner_id', userId)
     .order('created_at', { ascending: false })
-    .returns<(CardRow & { review_note: string | null })[]>();
+    .returns<(CardRow & { review_note: string | null; organizer_type: MyProject['organizerType'] })[]>();
   if (error) throw error;
-  return (data ?? []).map(row => ({ ...toCard(row), reviewNote: row.review_note }));
+  return (data ?? []).map(row => ({ ...toCard(row), reviewNote: row.review_note, organizerType: row.organizer_type }));
 }

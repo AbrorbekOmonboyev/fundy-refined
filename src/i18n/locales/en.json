@@ -117,7 +117,8 @@
     "addonNeedsReward": "Add-ons can only be taken together with a main reward.",
     "rewardNotAvailableNow": "This reward isn't available right now.",
     "rewardLimitPerBacker": "This reward is limited per person, and you've reached the limit.",
-    "cartInvalid": "Something is wrong with the cart. Reload the page and try again."
+    "cartInvalid": "Something is wrong with the cart. Reload the page and try again.",
+    "registrationBeforePayout": "The founder hasn't registered yet (no YaTT/MChJ number). The money can't be released until the number is added."
   },
   "auth": {
     "fields": {
@@ -438,7 +439,7 @@
     "how": {
       "title": "How the money moves",
       "step1Title": "The founder applies",
-      "step1Text": "LLC or sole-trader certificate, passport, bank account, a budget in so'm and 3–6 stages.",
+      "step1Text": "A passport, a budget in so'm and the stages. Companies and sole traders also add their certificate.",
       "step2Title": "We check and score it",
       "step2Text": "We check the documents and score the project out of 100: business plan, team, market, finances and risk, 20 points each. The score is public on the project page.",
       "step3Title": "People back it",
@@ -780,7 +781,9 @@
       "targetError": "The goal must be at least {{min}}.",
       "duration": "Campaign length (days)",
       "durationHint": "Between 7 and 90 days.",
-      "durationError": "Choose between 7 and 90 days."
+      "durationError": "Choose between 7 and 90 days.",
+      "organizer": "Who is raising the money?",
+      "organizerError": "Choose who is raising the money."
     },
     "story": {
       "title": "Story and photo",
@@ -883,6 +886,22 @@
         "identity": "ID document",
         "financials": "Financial statements",
         "other": "Other"
+      },
+      "registrationRequired": "Registration number (YaTT / MChJ / NNT or STIR)",
+      "registrationLaterHint": "Leave it empty if you aren't registered yet. You'll need it before the first payout.",
+      "neededTitle": "What we need",
+      "need": {
+        "identity": "Passport or ID card (photo or PDF)",
+        "registrationNumber": "Registration number",
+        "registrationDocument": "Registration certificate"
+      },
+      "needDone": "done",
+      "needMissing": "still needed",
+      "gap": {
+        "profile": "Fill in your founder profile.",
+        "identity": "Upload your passport or ID card.",
+        "registrationNumber": "Add your registration number.",
+        "registrationDocument": "Upload your registration certificate."
       }
     },
     "review": {
@@ -897,7 +916,7 @@
       "budgetProblem": "Budget totals {{total}}, but the goal is {{goal}}.",
       "milestonesProblem": "Release percentages total {{total}}%, they must total 100%.",
       "problem": {
-        "basics": "Name and summary are needed.",
+        "basics": "Name, summary and who is raising the money are needed.",
         "story": "Needs a story of 200+ characters and a cover photo.",
         "terms": "Add at least one reward or the partnership terms.",
         "founder": "Fill in your founder profile."
@@ -924,7 +943,11 @@
       "milestones_must_total_100": "Milestone percentages must total 100% (step 4).",
       "reward_tiers_missing": "Add at least one reward (step 5).",
       "equity_terms_missing": "Add the partnership terms (step 5).",
-      "project_not_editable": "This project can no longer be changed."
+      "project_not_editable": "This project can no longer be changed.",
+      "organizer_type_missing": "In step 1, choose who is raising the money.",
+      "identity_document_missing": "In step 6, upload your passport or ID card.",
+      "registration_number_missing": "In step 6, add your registration number.",
+      "registration_document_missing": "In step 6, upload your registration certificate."
     },
     "preview": "See it as a backer",
     "example": {
@@ -1075,12 +1098,6 @@
     "title": "Post a project on Fundy",
     "intro": "The application takes 20–30 minutes. Your draft is saved, so you can continue any time.",
     "needTitle": "What you'll need",
-    "need1": "An LLC (MChJ) or sole-trader (YaTT) certificate (NGOs can run donation projects)",
-    "need2": "The director's or founder's passport",
-    "need3": "A bank account in the organisation's name",
-    "need4": "A budget in so'm, one line per expense",
-    "need5": "3–6 stages: what gets done, when, and what share of the money",
-    "need6": "A cover photo and the project story (at least 200 characters)",
     "timeTitle": "How long it takes",
     "time1Title": "Application",
     "time1Text": "20–30 minutes",
@@ -1093,7 +1110,17 @@
     "feesTitle": "Fees",
     "fees": "During the demo Fundy charges nothing. When real payments start, the fee will be published on this page in advance.",
     "cta": "Start the application",
-    "ctaHint": "You'll log in or sign up first. It takes a minute."
+    "ctaHint": "You'll log in or sign up first. It takes a minute.",
+    "whoTitle": "Who is raising the money?",
+    "whoHint": "Your answer decides which documents you need and which kinds of funding you can use.",
+    "applyTitle": "To apply",
+    "payoutTitle": "Before the money is paid out",
+    "modelsTitle": "Funding you can use",
+    "needId": "Passport or ID card of the person running the project",
+    "needBudget": "A budget in so'm, one line per expense",
+    "needStages": "Stages (usually 3–6): what gets done, when, and what share of the money",
+    "needStory": "A cover photo and the project story (at least 200 characters)",
+    "continueDraft": "Continue your draft: {{title}}"
   },
   "time": {
     "now": "just now",
@@ -1239,5 +1266,39 @@
     "thanksHint": "Notes like this make Fundy better.",
     "another": "Write another",
     "tooShort": "Write at least 3 characters."
+  },
+  "organizer": {
+    "individual": {
+      "name": "A person or team",
+      "short": "No company yet. Your passport is enough to apply.",
+      "payout": "Register as a sole trader (YaTT) or a company (MChJ) and add the number. You can do it online at my.gov.uz.",
+      "payoutRule": "You can apply and raise money with your passport. Before the first stage's money is released, register as a YaTT (or MChJ) and add the number. You can do it online at my.gov.uz.",
+      "dashboardNotice": "Before the first stage's money is released, register as a sole trader (YaTT) or a company (MChJ) and add the registration number here. You can register online at my.gov.uz.",
+      "saveNumber": "Save number"
+    },
+    "yatt": {
+      "name": "Sole trader (YaTT)",
+      "short": "You are registered as a yakka tartibdagi tadbirkor.",
+      "apply": "Your YaTT certificate and its number",
+      "payout": "A bank account in the YaTT's name",
+      "numberHint": "YaTT certificate number or STIR (TIN)."
+    },
+    "mchj": {
+      "name": "Company (MChJ)",
+      "short": "A limited liability company. The only way to offer musharakah.",
+      "apply": "The company's registration certificate and its number",
+      "applyEquity": "For musharakah: the latest financial statements (recommended)",
+      "payout": "A bank account in the company's name",
+      "numberHint": "MChJ certificate number or STIR (TIN)."
+    },
+    "ngo": {
+      "name": "Non-profit (NNT)",
+      "short": "A registered non-governmental organisation. Donation projects.",
+      "apply": "The organisation's registration certificate and its number",
+      "payout": "A bank account in the organisation's name",
+      "numberHint": "NNT registration number or STIR (TIN)."
+    },
+    "equityNeedsMchj": "Needs a registered company (MChJ).",
+    "ngoDonationOnly": "Non-profits run donation projects."
   }
 }

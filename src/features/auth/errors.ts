@@ -44,6 +44,7 @@ const BY_CODE: Record<string, ErrorKey> = {
   evidence_too_short: 'errors.evidenceTooShort',
   milestone_already_submitted: 'errors.milestoneChanged',
   milestone_not_submitted: 'errors.milestoneChanged',
+  registration_required_before_payout: 'errors.registrationBeforePayout',
   review_note_required: 'errors.reviewNoteRequired',
   account_blocked: 'errors.blocked',
   not_signed_in: 'errors.notSignedIn',

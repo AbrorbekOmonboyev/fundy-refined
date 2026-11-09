@@ -1,10 +1,12 @@
 import { useState, type FormEvent } from 'react';
+import { useSearchParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/features/auth/AuthContext';
 import { useCategories, useRegions } from '@/features/reference/useReference';
 import { createDraft, updateBasics, type Basics, type Draft } from '@/features/wizard/api';
 import { MAX_TARGET, MIN_TARGET } from '@/features/wizard/checks';
 import { useStepSave } from '@/features/wizard/hooks';
+import { ORGANIZERS, allowedModels, isOrganizer, modelAllowed, type OrganizerType } from '@/features/wizard/organizer';
 import { WizardShell } from '@/features/wizard/WizardShell';
 import { ChoiceGroup, NumberField, SelectField, TextField } from '@/components/ui';
 import { LANGUAGES, type Language } from '@/i18n';
@@ -17,11 +19,20 @@ export function BasicsStep({ draft }: { draft: Draft | null }) {
   const categories = useCategories();
   const regions = useRegions();
   const { run, busy, error } = useStepSave(draft?.project.id ?? null, 'basics');
+  // /start sends people here with ?as=individual|yatt|mchj|ngo once they picked who they are.
+  const [params] = useSearchParams();
+  const fromStart = params.get('as');
+  const initialOrganizer = draft?.project.organizer_type ?? (isOrganizer(fromStart) ? fromStart : null);
+  const initialModel = draft?.project.model ?? 'reward';
 
   const [form, setForm] = useState<Basics>({
     title: draft?.text?.title ?? '',
     tagline: draft?.text?.tagline ?? '',
-    model: draft?.project.model ?? 'reward',
+    organizer_type: initialOrganizer,
+    model:
+      initialOrganizer && !modelAllowed(initialOrganizer, initialModel)
+        ? allowedModels(initialOrganizer)[0]
+        : initialModel,
     category_id: draft?.project.category_id ?? '',
     region_id: draft?.project.region_id ?? null,
     location: draft?.project.location ?? '',
@@ -31,10 +42,14 @@ export function BasicsStep({ draft }: { draft: Draft | null }) {
   });
   const [errors, setErrors] = useState<Partial<Record<keyof Basics, string>>>({});
   const set = <K extends keyof Basics>(key: K, value: Basics[K]) => setForm(f => ({ ...f, [key]: value }));
+  /** Picking who you are also drops a funding model that is no longer allowed. */
+  const setOrganizer = (o: OrganizerType) =>
+    setForm(f => ({ ...f, organizer_type: o, model: modelAllowed(o, f.model) ? f.model : allowedModels(o)[0] }));
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const found: typeof errors = {};
+    if (!form.organizer_type) found.organizer_type = t('wizard.basics.organizerError');
     if (form.title.trim().length < 5 || form.title.trim().length > 140) found.title = t('wizard.basics.titleError');
     if (!form.tagline.trim()) found.tagline = t('wizard.required');
     if (!form.category_id) found.category_id = t('wizard.required');
@@ -80,14 +95,31 @@ export function BasicsStep({ draft }: { draft: Draft | null }) {
         hint={t('wizard.basics.taglineHint')}
       />
       <ChoiceGroup
+        label={t('wizard.basics.organizer')}
+        value={form.organizer_type}
+        onChange={setOrganizer}
+        error={errors.organizer_type}
+        options={ORGANIZERS.map(o => ({
+          value: o,
+          label: t(`organizer.${o}.name`),
+          description: t(`organizer.${o}.short`),
+        }))}
+      />
+      <ChoiceGroup
         label={t('wizard.basics.model')}
         value={form.model}
         onChange={m => set('model', m)}
-        options={(['donation', 'reward', 'equity'] as const).map(m => ({
-          value: m,
-          label: t(`models.${m}.name`),
-          description: t(`models.${m}.subtitle`),
-        }))}
+        options={(['donation', 'reward', 'equity'] as const).map(m => {
+          const blocked = !!form.organizer_type && !modelAllowed(form.organizer_type, m);
+          return {
+            value: m,
+            label: t(`models.${m}.name`),
+            description: blocked
+              ? t(m === 'equity' ? 'organizer.equityNeedsMchj' : 'organizer.ngoDonationOnly')
+              : t(`models.${m}.subtitle`),
+            disabled: blocked,
+          };
+        })}
       />
       <div className="grid gap-4 sm:grid-cols-2">
         <SelectField

@@ -875,6 +875,7 @@ export type Database = {
           min_contribution: number
           model: Database["public"]["Enums"]["funding_model"]
           original_language: Database["public"]["Enums"]["app_language"]
+          organizer_type: Database["public"]["Enums"]["organizer_type"] | null
           owner_id: string
           raised_amount: number
           region_id: string | null
@@ -903,6 +904,7 @@ export type Database = {
           min_contribution?: number
           model: Database["public"]["Enums"]["funding_model"]
           original_language?: Database["public"]["Enums"]["app_language"]
+          organizer_type?: Database["public"]["Enums"]["organizer_type"] | null
           owner_id: string
           raised_amount?: number
           region_id?: string | null
@@ -931,6 +933,7 @@ export type Database = {
           min_contribution?: number
           model?: Database["public"]["Enums"]["funding_model"]
           original_language?: Database["public"]["Enums"]["app_language"]
+          organizer_type?: Database["public"]["Enums"]["organizer_type"] | null
           owner_id?: string
           raised_amount?: number
           region_id?: string | null
@@ -1361,6 +1364,7 @@ export type Database = {
         | "other"
       evaluation_confidence: "high" | "moderate" | "in_review"
       funding_model: "donation" | "reward" | "equity"
+      organizer_type: "individual" | "yatt" | "mchj" | "ngo"
       milestone_status: "pending" | "submitted" | "approved"
       notification_type:
         | "project_submitted"
@@ -1536,6 +1540,7 @@ export const Constants = {
       ],
       evaluation_confidence: ["high", "moderate", "in_review"],
       funding_model: ["donation", "reward", "equity"],
+      organizer_type: ["individual", "yatt", "mchj", "ngo"],
       milestone_status: ["pending", "submitted", "approved"],
       notification_type: [
         "project_submitted",

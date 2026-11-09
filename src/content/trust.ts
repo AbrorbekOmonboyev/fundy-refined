@@ -12,7 +12,7 @@ export const trust: Localized<Article> = {
         heading: 'Loyihalar qanday tekshiriladi',
         paragraphs: ['Loyiha eʼlon qilinishidan oldin Fundy koʻrib chiqish jamoasi:'],
         bullets: [
-          'Asoschini va uning tashkiloti roʻyxatdan oʻtganligini (MChJ, YaTT yoki STIR) tekshiradi.',
+          'Asoschining shaxsini (pasport) va, agar tashkilot boʻlsa, uning roʻyxatdan oʻtganligini (MChJ, YaTT, NNT yoki STIR) tekshiradi. Kompaniyasi yoʻq asoschi birinchi toʻlovdan oldin roʻyxatdan oʻtadi.',
           'Hujjatlarni koʻrib chiqadi: roʻyxatdan oʻtganlik guvohnomasi, biznes reja, moliyaviy hisobotlar.',
           'Byudjet maqsadga aniq teng ekanini va bosqichlar mantiqiy ekanini tekshiradi.',
           'Loyihani beshta yoʻnalish boʻyicha baholaydi (har biri 0–20 ball): biznes reja, jamoa, bozor, moliya va xavflarni boshqarish.',
@@ -72,7 +72,7 @@ export const trust: Localized<Article> = {
         heading: 'Как проверяются проекты',
         paragraphs: ['Перед публикацией команда проверки Fundy:'],
         bullets: [
-          'Проверяет автора и регистрацию его организации (ООО, ИП или ИНН).',
+          'Проверяет личность автора (паспорт) и, если есть организация, её регистрацию (ООО, ИП, ННО или ИНН). Автор без компании регистрируется до первой выплаты.',
           'Изучает документы: свидетельство о регистрации, бизнес-план, финансовую отчётность.',
           'Проверяет, что бюджет точно равен цели, а этапы логичны.',
           'Оценивает проект по пяти направлениям (0–20 баллов каждое): бизнес-план, команда, рынок, финансы и управление рисками.',
@@ -132,7 +132,7 @@ export const trust: Localized<Article> = {
         heading: 'How projects are checked',
         paragraphs: ["Before a project goes live, Fundy's review team:"],
         bullets: [
-          "Checks the founder and their organisation's registration (MChJ, YaTT or TIN).",
+          "Checks the founder's identity (passport) and, if they have an organisation, its registration (MChJ, YaTT, NNT or TIN). A founder without a company registers before the first payout.",
           'Reviews documents: registration certificate, business plan, financial statements.',
           'Checks that the budget exactly matches the goal and the milestones make sense.',
           'Scores the project in five areas (0–20 each): business plan, team, market, financials and risk management.',

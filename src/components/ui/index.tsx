@@ -158,11 +158,14 @@ export function ChoiceGroup<T extends string>({
   value,
   onChange,
   options,
+  error,
 }: {
   label: string;
-  value: T;
+  value: T | null;
   onChange: (value: T) => void;
-  options: { value: T; label: string; description?: string }[];
+  /** A disabled option stays visible (greyed out), so people can see what it needs. */
+  options: { value: T; label: string; description?: string; disabled?: boolean }[];
+  error?: string;
 }) {
   const name = useId();
   return (
@@ -172,8 +175,12 @@ export function ChoiceGroup<T extends string>({
         {options.map(o => (
           <label
             key={o.value}
-            className={`flex items-start gap-2.5 rounded-lg border p-3 cursor-pointer text-sm transition-colors ${
-              value === o.value ? 'border-ink bg-brand-soft' : 'border-slate-200 hover:border-slate-300'
+            className={`flex items-start gap-2.5 rounded-lg border p-3 text-sm transition-colors ${
+              o.disabled
+                ? 'border-slate-200 opacity-60 cursor-not-allowed'
+                : value === o.value
+                  ? 'border-ink bg-brand-soft cursor-pointer'
+                  : 'border-slate-200 hover:border-slate-300 cursor-pointer'
             }`}
           >
             <input
@@ -181,6 +188,7 @@ export function ChoiceGroup<T extends string>({
               name={name}
               value={o.value}
               checked={value === o.value}
+              disabled={o.disabled}
               onChange={() => onChange(o.value)}
               className="mt-0.5 accent-ink"
             />
@@ -191,6 +199,11 @@ export function ChoiceGroup<T extends string>({
           </label>
         ))}
       </div>
+      {error && (
+        <p role="alert" className="text-xs text-rose-600">
+          {error}
+        </p>
+      )}
     </fieldset>
   );
 }
