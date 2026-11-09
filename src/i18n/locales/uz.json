@@ -411,14 +411,15 @@
   },
   "home": {
     "hero": {
-      "title": "Foizsiz kraudfanding. Oʻzbekiston uchun.",
-      "text": "Loyihangizni joylang. Odamlar uni xayriya, oldindan buyurtma yoki mushoraka orqali qoʻllab-quvvatlaydi. Pul faqat bajarilgan bosqich uchun beriladi.",
+      "title": "Yaxshi loyihalar shu yerdan boshlanadi",
+      "text": "Foizsiz kraudfanding — Oʻzbekiston uchun.",
       "explore": "Loyihalarni koʻrish",
-      "start": "Loyiha joylash",
+      "start": "Loyiha boshlash",
       "cardKicker": "Hozir mablagʻ yigʻmoqda",
       "statsRaised": "Toʻplangan mablagʻ",
       "statsBackers": "Homiylar",
-      "statsLive": "Faol loyihalar"
+      "statsLive": "Faol loyihalar",
+      "photos": "Foto mualliflari"
     },
     "pick": {
       "label": "Fundy tanlovi",
@@ -451,6 +452,25 @@
       "title": "Loyihangiz bormi?",
       "text": "Nima kerakligi, qancha vaqt olishi va xarajatlarni oldindan koʻring. Roʻyxatdan keyin oʻtasiz.",
       "start": "Talablarni koʻrish"
+    },
+    "projects": {
+      "title": "Qoʻllab-quvvatlash uchun loyihalar",
+      "empty": "Birinchi loyihalar tez orada shu yerda boʻladi.",
+      "emptyCta": "Birinchilardan boʻling"
+    },
+    "simple": {
+      "title": "Oddiy, shaffof va adolatli",
+      "s1Title": "Joylang",
+      "s1Text": "Loyihangizni bir necha daqiqada joylang.",
+      "s2Title": "Ulashing",
+      "s2Text": "Odamlar xayriya, oldindan buyurtma yoki sheriklik orqali qoʻllaydi.",
+      "s3Title": "Bosqichma-bosqich",
+      "s3Text": "Pul faqat bajarilgan bosqich uchun beriladi.",
+      "more": "Qanday ishlashi haqida batafsil"
+    },
+    "final": {
+      "title": "Gʻoyangiz bormi?",
+      "start": "Loyiha boshlash"
     }
   },
   "explore": {

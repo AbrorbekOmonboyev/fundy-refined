@@ -411,14 +411,15 @@
   },
   "home": {
     "hero": {
-      "title": "Interest-free crowdfunding. For Uzbekistan.",
-      "text": "Post your project. People back it with a donation, a pre-order or Musharakah. Money is released only for a finished stage.",
+      "title": "Great projects start here",
+      "text": "Interest-free crowdfunding for Uzbekistan.",
       "explore": "Browse projects",
-      "start": "Post a project",
+      "start": "Start a project",
       "cardKicker": "Raising now",
       "statsRaised": "Raised",
       "statsBackers": "Backers",
-      "statsLive": "Live projects"
+      "statsLive": "Live projects",
+      "photos": "Photo credits"
     },
     "pick": {
       "label": "Fundy pick",
@@ -451,6 +452,25 @@
       "title": "Have a project?",
       "text": "See what you need, how long it takes and what it costs first. Sign up later.",
       "start": "See the requirements"
+    },
+    "projects": {
+      "title": "Projects to support",
+      "empty": "The first projects will be here soon.",
+      "emptyCta": "Be one of the first"
+    },
+    "simple": {
+      "title": "Simple, open and fair",
+      "s1Title": "Post",
+      "s1Text": "Put your project up in a few minutes.",
+      "s2Title": "Share",
+      "s2Text": "People back it with a donation, a pre-order or a partnership.",
+      "s3Title": "Step by step",
+      "s3Text": "Money is paid out only for a finished stage.",
+      "more": "More on how it works"
+    },
+    "final": {
+      "title": "Have an idea?",
+      "start": "Start a project"
     }
   },
   "explore": {

@@ -45,7 +45,7 @@ export function Header() {
   // `section` links point at an anchor on another page, so they never show as "active".
   const links = [
     { to: paths.explore, label: t('nav.explore') },
-    { to: `${paths.home}#how-it-works`, label: t('nav.howItWorks'), section: true },
+    { to: `${paths.education}#how-it-works`, label: t('nav.howItWorks'), section: true },
     { to: paths.education, label: t('nav.learn') },
     { to: paths.trustSafety, label: t('nav.trustSafety') },
   ];
