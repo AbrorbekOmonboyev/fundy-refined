@@ -154,8 +154,8 @@ const soum = (n: number) =>
     .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} soʻm`;
 const csvCell = (v: unknown) => `"${String(v ?? '').replace(/"/g, '""')}"`;
 
-/** /video — the 60 s stick-man story (Bek's bakery: crowdfunding + how Fundy works, made with /brag), only for a chat linked to an admin. */
-const LAUNCH_VIDEO = `${SITE}/media/fundy-stickman.mp4`;
+/** /video — the 82 s talking stick-man story (Bek's bakery: crowdfunding + how Fundy works, made with /brag), only for a chat linked to an admin. */
+const LAUNCH_VIDEO = `${SITE}/media/fundy-stickman-talking.mp4`;
 async function sendLaunchVideo(chatId: number, lang: string) {
   // Same admin check as /getreports: the database refuses chats not linked to an admin.
   const { error } = await db.rpc('telegram_admin_report', { p_chat_id: chatId });
@@ -164,7 +164,7 @@ async function sendLaunchVideo(chatId: number, lang: string) {
     return;
   }
   const caption =
-    "🎬 <b>Bek's Bakery: crowdfunding in one minute</b>\n\nBek has a great idea but no money, and a loan costs extra. " +
+    "🎬 <b>Bek's Bakery: Bek explains crowdfunding</b> 🔊\n\nBek has a great idea but no money, and a loan costs extra. " +
     'Many people each give a little instead — and on fundy.uz every project is checked and money is paid out stage by stage.';
   const sent = await telegram('sendVideo', {
     chat_id: chatId,
@@ -174,7 +174,7 @@ async function sendLaunchVideo(chatId: number, lang: string) {
     supports_streaming: true,
     width: 1920,
     height: 1080,
-    duration: 60,
+    duration: 83,
   });
   // If Telegram can't take it as a video, send it as a file, and as a last resort the link.
   if (!sent.ok) {
