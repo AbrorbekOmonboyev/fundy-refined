@@ -892,7 +892,8 @@
       "projected": "Profit forecast in so'm (optional)",
       "projectedHint": "This is not an interest rate but an estimate in so'm. E.g. \"~200,000 so'm a year per 1 mln so'm share\". Not a promise.",
       "equityError": "Check the terms: profit share 1–99%, minimum investment, and 1–30 years.",
-      "equityNote": "Musharakah terms are reviewed by the Fundy team before the project goes live."
+      "equityNote": "Musharakah terms are reviewed by the Fundy team before the project goes live.",
+      "minFixed": "The minimum anyone can give is {{amount}}. It is the same for all projects."
     },
     "founder": {
       "title": "You and your documents",
