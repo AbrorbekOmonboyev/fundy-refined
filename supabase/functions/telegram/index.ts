@@ -123,6 +123,10 @@ async function handleUpdate(update: {
     await sendReport(msg.chat.id, lang);
     return;
   }
+  if (/^\/video(@\w+)?$/i.test(msg.text.trim())) {
+    await sendLaunchVideo(msg.chat.id, lang);
+    return;
+  }
   const code = /^\/start\s+([0-9a-f]{32})$/.exec(msg.text.trim())?.[1];
   if (!code) {
     await telegram('sendMessage', { chat_id: msg.chat.id, text: say('hello', lang) });
@@ -149,6 +153,35 @@ const soum = (n: number) =>
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} soʻm`;
 const csvCell = (v: unknown) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+
+/** /video — the launch video (made with /brag), only for a chat linked to an admin. */
+const LAUNCH_VIDEO = `${SITE}/media/fundy-launch.mp4`;
+async function sendLaunchVideo(chatId: number, lang: string) {
+  // Same admin check as /getreports: the database refuses chats not linked to an admin.
+  const { error } = await db.rpc('telegram_admin_report', { p_chat_id: chatId });
+  if (error) {
+    await telegram('sendMessage', { chat_id: chatId, text: say('adminOnly', lang) });
+    return;
+  }
+  const caption =
+    '🎬 <b>Fundy launch video</b> (20 s)\n\nRaise money for your idea in Uzbekistan — and pay zero interest. ' +
+    'Every project is checked, and money is paid out only for finished stages. fundy.uz';
+  const sent = await telegram('sendVideo', {
+    chat_id: chatId,
+    video: LAUNCH_VIDEO,
+    caption,
+    parse_mode: 'HTML',
+    supports_streaming: true,
+    width: 1920,
+    height: 1080,
+    duration: 20,
+  });
+  // If Telegram can't take it as a video, send it as a file, and as a last resort the link.
+  if (!sent.ok) {
+    const doc = await telegram('sendDocument', { chat_id: chatId, document: LAUNCH_VIDEO, caption, parse_mode: 'HTML' });
+    if (!doc.ok) await telegram('sendMessage', { chat_id: chatId, text: LAUNCH_VIDEO });
+  }
+}
 
 /** /getreports — only for a chat linked to an admin (checked in the database). */
 async function sendReport(chatId: number, lang: string) {
