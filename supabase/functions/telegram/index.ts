@@ -155,7 +155,7 @@ const soum = (n: number) =>
 const csvCell = (v: unknown) => `"${String(v ?? '').replace(/"/g, '""')}"`;
 
 /** /video — the 60 s explainer (crowdfunding + how Fundy works, made with /brag), only for a chat linked to an admin. */
-const LAUNCH_VIDEO = `${SITE}/media/fundy-explainer.mp4`;
+const LAUNCH_VIDEO = `${SITE}/media/fundy-explainer-v2.mp4`;
 async function sendLaunchVideo(chatId: number, lang: string) {
   // Same admin check as /getreports: the database refuses chats not linked to an admin.
   const { error } = await db.rpc('telegram_admin_report', { p_chat_id: chatId });
