@@ -2,7 +2,8 @@
  * Translations setup.
  *
  * - Texts live in ./locales/{uz,ru,en}.json — same keys in every file.
- * - Uzbek is the default; the visitor's choice is remembered in localStorage.
+ * - English is the default for a first visit (owner's request, 2026-11-08); the visitor's
+ *   choice is remembered in localStorage. Signed-in users get the language saved in their profile.
  * - In components: `const { t } = useTranslation();` then `t('nav.explore')`.
  * - en.json is the reference: TypeScript flags any key that doesn't exist there.
  */
@@ -15,7 +16,7 @@ import uz from './locales/uz.json';
 
 export const LANGUAGES = ['uz', 'ru', 'en'] as const;
 export type Language = (typeof LANGUAGES)[number];
-export const DEFAULT_LANGUAGE: Language = 'uz';
+export const DEFAULT_LANGUAGE: Language = 'en';
 
 export const resources = {
   uz: { translation: uz },
@@ -33,9 +34,11 @@ void i18n
     nonExplicitSupportedLngs: true, // "ru-RU" → "ru"
     interpolation: { escapeValue: false }, // React already escapes output
     detection: {
-      // Only a choice the visitor made counts; otherwise Uzbek.
+      // Only a choice the visitor made counts; otherwise English.
+      // New key (was fundy_language): the old one also held Uzbek saved automatically
+      // for visitors who never chose, so everyone starts again from English once.
       order: ['localStorage'],
-      lookupLocalStorage: 'fundy_language',
+      lookupLocalStorage: 'fundy_lang',
       caches: ['localStorage'],
     },
   });
