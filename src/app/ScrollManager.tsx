@@ -10,11 +10,16 @@ export function ScrollManager() {
 
   useEffect(() => {
     if (hash) {
-      // Wait a tick so the new page has rendered the target element.
-      const id = window.setTimeout(() => {
-        document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'smooth' });
+      // The new page may still be loading (pages load in parts): look for the target for up to 2 s.
+      let tries = 0;
+      const id = window.setInterval(() => {
+        const el = document.getElementById(hash.slice(1));
+        if (el || ++tries > 40) {
+          window.clearInterval(id);
+          el?.scrollIntoView({ behavior: 'smooth' });
+        }
       }, 50);
-      return () => window.clearTimeout(id);
+      return () => window.clearInterval(id);
     }
     window.scrollTo({ top: 0 });
   }, [pathname, hash]);

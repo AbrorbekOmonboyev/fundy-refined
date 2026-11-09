@@ -7,6 +7,7 @@ import { errorKey } from '@/features/auth/errors';
 import { isValidEmail } from '@/features/auth/validation';
 import { Alert, Button, TextAreaField, TextField } from '@/components/ui';
 import { FEEDBACK_KINDS, sendFeedback, type FeedbackKind } from '@/features/feedback/api';
+import { isAppMode } from '@/lib/appMode';
 
 /** Pages where a feedback button would only get in the way. */
 const HIDE_ON = [/^\/admin/, /^\/start\/new/, /^\/auth\//];
@@ -14,10 +15,9 @@ const HIDE_ON = [/^\/admin/, /^\/start\/new/, /^\/auth\//];
 type State = 'closed' | 'open' | 'sent';
 
 /**
- * "Shu sahifada nima kamchilik koʻrdingiz?" — always on screen, on every page:
- *   computers: a pill in the bottom-left corner (the cart button lives bottom-right);
- *   phones: a slim tab on the left edge, half-way down — clear of the bottom buy bar,
- *   the app's tab bar and pop-up messages.
+ * "Shu sahifada nima kamchilik koʻrdingiz?" — always on screen, on every page: a pill in the
+ * bottom-left corner (the cart button lives bottom-right). On phones it moves up above the
+ * project page's "back this" bar and the app's tab bar.
  * It opens a small panel (computers) or a bottom sheet (phones). Mounted once for the
  * whole visit, so a half-written note survives moving between pages; the page address
  * is taken when the note is sent.
@@ -36,7 +36,6 @@ export function PageFeedback() {
   const titleId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
   const pillRef = useRef<HTMLButtonElement>(null);
-  const tabRef = useRef<HTMLButtonElement>(null);
   const returnFocus = useRef(false);
 
   // Going to another page closes the panel (the draft is kept).
@@ -50,7 +49,7 @@ export function PageFeedback() {
   useEffect(() => {
     if (state === 'closed' && returnFocus.current) {
       returnFocus.current = false;
-      (pillRef.current?.offsetParent ? pillRef.current : tabRef.current)?.focus();
+      pillRef.current?.focus();
     }
   }, [state]);
 
@@ -104,37 +103,25 @@ export function PageFeedback() {
   }
 
   const isOpen = state !== 'closed';
+  // Phones: project pages have a "back this" bar at the bottom, the app has its tab bar.
+  const raised =
+    pathname.startsWith('/projects/') || (isAppMode() && !/^\/(start\/new|dashboard\/founder\/)/.test(pathname));
 
   return (
     <>
-      {/* Computers: pill, bottom-left */}
+      {/* Pill, bottom-left. On phones it sits above a bottom bar when the page has one. */}
       {!isOpen && (
         <button
           ref={pillRef}
           type="button"
           onClick={() => setState('open')}
           aria-haspopup="dialog"
-          className="feedback-trigger hidden lg:inline-flex fixed z-40 left-6 bottom-6 items-center gap-2.5 rounded-full border border-slate-200 bg-card py-2 pl-2 pr-4 shadow-lg transition-colors hover:border-ink cursor-pointer"
+          className={`feedback-trigger inline-flex fixed z-40 left-3 lg:left-6 ${raised ? 'bottom-[calc(5rem+env(safe-area-inset-bottom))]' : 'bottom-3'} lg:bottom-6 items-center gap-2 lg:gap-2.5 rounded-full border border-slate-200 bg-card py-1.5 pl-1.5 pr-3.5 lg:py-2 lg:pl-2 lg:pr-4 shadow-lg transition-colors hover:border-ink cursor-pointer`}
         >
-          <span className="w-8 h-8 rounded-full bg-brand text-night flex items-center justify-center">
+          <span className="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-brand text-night flex items-center justify-center">
             <MessageSquareWarning className="w-4 h-4" aria-hidden />
           </span>
-          <span className="text-sm font-semibold text-ink whitespace-nowrap">{t('feedback.promptShort')}</span>
-        </button>
-      )}
-
-      {/* Phones and tablets: slim tab on the left edge */}
-      {!isOpen && (
-        <button
-          ref={tabRef}
-          type="button"
-          onClick={() => setState('open')}
-          aria-haspopup="dialog"
-          aria-label={t('feedback.prompt')}
-          className="feedback-trigger lg:hidden fixed z-40 left-0 top-[58%] -translate-y-1/2 flex flex-col items-center gap-1.5 rounded-r-xl bg-brand text-night pl-1.5 pr-2 py-3 shadow-lg cursor-pointer"
-        >
-          <MessageSquareWarning className="w-4 h-4" aria-hidden />
-          <span className="text-xs font-bold [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">
+          <span className="text-xs lg:text-sm font-semibold text-ink whitespace-nowrap">
             {t('feedback.promptShort')}
           </span>
         </button>
