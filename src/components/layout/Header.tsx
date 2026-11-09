@@ -127,7 +127,7 @@ export function Header() {
               {/* The one primary action */}
               <Link
                 to={paths.startProject}
-                className="app-hide hidden sm:inline-block px-4 py-2 text-sm font-semibold text-white bg-night hover:bg-night-soft active:bg-night rounded-md transition-colors whitespace-nowrap"
+                className="app-hide hidden sm:inline-block px-4 py-2 text-sm font-semibold text-white bg-brand hover:bg-brand-deep rounded-md transition-colors whitespace-nowrap"
               >
                 {t('nav.startProject')}
               </Link>
@@ -230,7 +230,7 @@ export function Header() {
               <Link
                 to={paths.startProject}
                 onClick={closeMenu}
-                className="block w-full py-2.5 text-center text-sm font-semibold text-white bg-night rounded-lg shadow-sm"
+                className="block w-full py-3 text-center text-sm font-semibold text-white bg-brand rounded-lg shadow-sm"
               >
                 {t('nav.startProject')}
               </Link>

@@ -38,6 +38,16 @@ export function PageFeedback() {
   const pillRef = useRef<HTMLButtonElement>(null);
   const returnFocus = useRef(false);
 
+  // Once the visitor scrolls down, the pill shrinks to its icon so it never sits on top of
+  // headings; near the top of the page (and on hover/focus) the words show.
+  const [compact, setCompact] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setCompact(window.scrollY > 240);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [pathname]);
+
   // Going to another page closes the panel (the draft is kept).
   const [lastPath, setLastPath] = useState(pathname);
   if (pathname !== lastPath) {
@@ -116,12 +126,20 @@ export function PageFeedback() {
           type="button"
           onClick={() => setState('open')}
           aria-haspopup="dialog"
-          className={`feedback-trigger inline-flex fixed z-40 left-3 lg:left-6 ${raised ? 'bottom-[calc(5rem+env(safe-area-inset-bottom))]' : 'bottom-3'} lg:bottom-6 items-center gap-2 lg:gap-2.5 rounded-full border border-slate-200 bg-card py-1.5 pl-1.5 pr-3.5 lg:py-2 lg:pl-2 lg:pr-4 shadow-lg transition-colors hover:border-ink cursor-pointer`}
+          aria-label={t('feedback.promptShort')}
+          className={`group/fb feedback-trigger inline-flex fixed z-40 left-3 lg:left-6 ${raised ? 'bottom-[calc(5rem+env(safe-area-inset-bottom))]' : 'bottom-3'} lg:bottom-6 items-center min-h-11 rounded-full border border-slate-200 bg-card p-1.5 lg:p-2 shadow-lg transition-colors hover:border-ink cursor-pointer`}
         >
-          <span className="w-7 h-7 lg:w-8 lg:h-8 rounded-full bg-brand text-night flex items-center justify-center">
+          <span className="w-8 h-8 rounded-full bg-brand text-white flex items-center justify-center">
             <MessageSquareWarning className="w-4 h-4" aria-hidden />
           </span>
-          <span className="text-xs lg:text-sm font-semibold text-ink whitespace-nowrap">
+          <span
+            aria-hidden
+            className={`text-sm font-semibold text-ink whitespace-nowrap overflow-hidden transition-[max-width,padding] duration-300 ${
+              compact
+                ? 'max-w-0 group-hover/fb:max-w-60 group-hover/fb:px-2.5 group-focus-visible/fb:max-w-60 group-focus-visible/fb:px-2.5'
+                : 'max-w-60 px-2.5'
+            }`}
+          >
             {t('feedback.promptShort')}
           </span>
         </button>

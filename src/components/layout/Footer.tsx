@@ -40,13 +40,13 @@ export function Footer() {
 
   return (
     <footer className="app-hide bg-night text-slate-400 text-sm border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 lg:pt-16 pb-24 lg:pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* About */}
           <div className="lg:col-span-2 space-y-4">
             <Logo variant="dark" className="h-8" />
-            <p className="text-xs text-slate-400 leading-relaxed max-w-sm">{t('footer.about')}</p>
-            <div className="pt-2 flex items-center gap-2 text-xs text-slate-400">
+            <p className="text-sm text-slate-300 leading-relaxed max-w-sm">{t('footer.about')}</p>
+            <div className="pt-2 flex items-center gap-2 text-sm text-slate-300">
               <span>{t('footer.simulated')}</span>
             </div>
           </div>
@@ -54,11 +54,14 @@ export function Footer() {
           {/* Link columns */}
           {columns.map(column => (
             <div key={column.title}>
-              <h4 className="text-sm font-semibold text-white mb-3">{column.title}</h4>
-              <ul className="space-y-2 text-xs">
+              <h2 className="font-sans text-base font-semibold tracking-normal text-white mb-2">{column.title}</h2>
+              <ul className="text-sm">
                 {column.links.map(link => (
                   <li key={link.label}>
-                    <Link to={link.to} className="hover:text-brand-light transition-colors">
+                    <Link
+                      to={link.to}
+                      className="inline-flex items-center min-h-10 text-slate-300 hover:text-brand-light transition-colors"
+                    >
                       {link.label}
                     </Link>
                   </li>
@@ -68,13 +71,13 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-300">
           <p>{t('footer.copyright', { year: new Date().getFullYear() })}</p>
           {/* Quiet link to the Android test app (android/twa-manifest.json; rebuilt APK goes to public/downloads) */}
           <a
             href="/downloads/fundy-android.apk"
             download="Fundy.apk"
-            className="text-slate-500 hover:text-slate-300 underline-offset-4 hover:underline"
+            className="inline-flex items-center min-h-11 text-slate-300 hover:text-white underline-offset-4 hover:underline"
           >
             {t('footer.androidApp')}
           </a>

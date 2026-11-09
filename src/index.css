@@ -81,8 +81,13 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-ink);
+    outline: 3px solid var(--color-ink);
     outline-offset: 2px;
+  }
+  /* On navy and green areas the ink outline would vanish: use white there. */
+  :is(.bg-night, .bg-night-soft, .bg-brand, .bg-brand-deep) :focus-visible,
+  :is(.bg-night, .bg-night-soft, .bg-brand, .bg-brand-deep):focus-visible {
+    outline-color: #ffffff;
   }
 
   /* Numbers that should line up (money, percentages). */

@@ -10,7 +10,7 @@
     "howItWorks": "How It Works",
     "learn": "Education & Musharakah",
     "trustSafety": "Trust & Safety",
-    "startProject": "Post a project"
+    "startProject": "Start a project"
   },
   "header": {
     "notifications": "Notifications",
@@ -412,14 +412,17 @@
   "home": {
     "hero": {
       "title": "Great projects start here",
-      "text": "Interest-free crowdfunding for Uzbekistan.",
+      "text": "Support local projects — safely and without interest.",
       "explore": "Browse projects",
       "start": "Start a project",
       "cardKicker": "Raising now",
       "statsRaised": "Raised",
       "statsBackers": "Backers",
       "statsLive": "Live projects",
-      "photos": "Photo credits"
+      "photos": "Photo credits",
+      "trust1": "Interest-free",
+      "trust2": "Every project is checked",
+      "trust3": "Money is paid out stage by stage"
     },
     "pick": {
       "label": "Fundy pick",
@@ -456,12 +459,18 @@
     "projects": {
       "title": "Projects to support",
       "empty": "The first projects will be here soon.",
-      "emptyCta": "Be one of the first"
+      "emptyCta": "Be one of the first",
+      "soonTitle": "The first projects are being checked",
+      "soonText": "We check every project — its documents, plan and team. Approved ones will appear here.",
+      "soonHow": "How projects are checked",
+      "errorTitle": "Couldn’t load projects",
+      "errorText": "Check your internet connection and try again.",
+      "retry": "Try again"
     },
     "simple": {
       "title": "Simple, open and fair",
       "s1Title": "Post",
-      "s1Text": "Put your project up in a few minutes.",
+      "s1Text": "A founder posts a project and we check it.",
       "s2Title": "Share",
       "s2Text": "People back it with a donation, a pre-order or a partnership.",
       "s3Title": "Step by step",
@@ -469,8 +478,10 @@
       "more": "More on how it works"
     },
     "final": {
-      "title": "Have an idea?",
-      "start": "Start a project"
+      "title": "Have an idea, or want to help?",
+      "start": "Start a project",
+      "text": "Questions? Write to us and we’ll answer.",
+      "contact": "Write to us"
     }
   },
   "explore": {
@@ -1207,7 +1218,7 @@
   },
   "feedback": {
     "prompt": "What’s wrong on this page?",
-    "promptShort": "Spotted a problem?",
+    "promptShort": "Share feedback",
     "intro": "A bug, something unclear or an idea — write a line. We read every message.",
     "kindLabel": "What is it about?",
     "kinds": {

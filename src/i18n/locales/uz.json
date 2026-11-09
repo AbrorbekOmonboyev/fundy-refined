@@ -10,7 +10,7 @@
     "howItWorks": "Qanday ishlaydi",
     "learn": "Taʼlim va mushoraka",
     "trustSafety": "Ishonch va xavfsizlik",
-    "startProject": "Loyiha joylash"
+    "startProject": "Loyiha boshlash"
   },
   "header": {
     "notifications": "Bildirishnomalar",
@@ -412,14 +412,17 @@
   "home": {
     "hero": {
       "title": "Yaxshi loyihalar shu yerdan boshlanadi",
-      "text": "Foizsiz kraudfanding — Oʻzbekiston uchun.",
+      "text": "Mahalliy loyihalarni qoʻllab-quvvatlang — ishonchli va foizsiz.",
       "explore": "Loyihalarni koʻrish",
       "start": "Loyiha boshlash",
       "cardKicker": "Hozir mablagʻ yigʻmoqda",
       "statsRaised": "Toʻplangan mablagʻ",
       "statsBackers": "Homiylar",
       "statsLive": "Faol loyihalar",
-      "photos": "Foto mualliflari"
+      "photos": "Foto mualliflari",
+      "trust1": "Foizsiz",
+      "trust2": "Har bir loyiha tekshiriladi",
+      "trust3": "Pul bosqichma-bosqich beriladi"
     },
     "pick": {
       "label": "Fundy tanlovi",
@@ -456,12 +459,18 @@
     "projects": {
       "title": "Qoʻllab-quvvatlash uchun loyihalar",
       "empty": "Birinchi loyihalar tez orada shu yerda boʻladi.",
-      "emptyCta": "Birinchilardan boʻling"
+      "emptyCta": "Birinchilardan boʻling",
+      "soonTitle": "Birinchi loyihalar tekshiruvdan oʻtmoqda",
+      "soonText": "Har bir loyihani hujjatlari, rejasi va jamoasi boʻyicha tekshiramiz. Tayyor boʻlganlari shu yerda paydo boʻladi.",
+      "soonHow": "Loyihalar qanday tekshiriladi",
+      "errorTitle": "Loyihalarni yuklab boʻlmadi",
+      "errorText": "Internet aloqasini tekshirib, qayta urinib koʻring.",
+      "retry": "Qayta urinish"
     },
     "simple": {
       "title": "Oddiy, shaffof va adolatli",
       "s1Title": "Joylang",
-      "s1Text": "Loyihangizni bir necha daqiqada joylang.",
+      "s1Text": "Asoschi loyihasini joylaydi, biz uni tekshiramiz.",
       "s2Title": "Ulashing",
       "s2Text": "Odamlar xayriya, oldindan buyurtma yoki sheriklik orqali qoʻllaydi.",
       "s3Title": "Bosqichma-bosqich",
@@ -469,8 +478,10 @@
       "more": "Qanday ishlashi haqida batafsil"
     },
     "final": {
-      "title": "Gʻoyangiz bormi?",
-      "start": "Loyiha boshlash"
+      "title": "Gʻoyangiz bormi yoki yordam bermoqchimisiz?",
+      "start": "Loyiha boshlash",
+      "text": "Savollaringiz boʻlsa, bizga yozing — javob beramiz.",
+      "contact": "Bizga yozing"
     }
   },
   "explore": {
@@ -1207,7 +1218,7 @@
   },
   "feedback": {
     "prompt": "Shu sahifada nima kamchilik koʻrdingiz?",
-    "promptShort": "Kamchilik topdingizmi?",
+    "promptShort": "Fikr bildiring",
     "intro": "Xato, tushunarsiz joy yoki taklif — qisqa yozing. Har bir xabarni oʻqiymiz.",
     "kindLabel": "Bu nima haqida?",
     "kinds": {
