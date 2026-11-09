@@ -118,7 +118,15 @@
     "rewardNotAvailableNow": "This reward isn't available right now.",
     "rewardLimitPerBacker": "This reward is limited per person, and you've reached the limit.",
     "cartInvalid": "Something is wrong with the cart. Reload the page and try again.",
-    "registrationBeforePayout": "The founder hasn't registered yet (no YaTT/MChJ number). The money can't be released until the number is added."
+    "registrationBeforePayout": "The founder hasn't registered yet (no YaTT/MChJ number). The money can't be released until the number is added.",
+    "identityNotConfirmed": "Confirm the founder's identity first (OneID or a video call).",
+    "registrationNotAwaited": "This project isn't waiting for a company check.",
+    "registrationNumberMissing": "The founder hasn't added a registration number yet.",
+    "pledgesNotPaidYet": "Some investors haven't paid their pledges yet. Stage money waits until the payment window closes.",
+    "pledgePaymentNotOpen": "You can pay once the founder's company is registered.",
+    "pledgePaymentClosed": "The payment window for this pledge has closed.",
+    "pledgeNotOpen": "This pledge is already paid or cancelled.",
+    "contributionNotFound": "We couldn't find this pledge."
   },
   "auth": {
     "fields": {
@@ -366,6 +374,24 @@
       "empty": "No feedback here.",
       "openPage": "Open page",
       "guest": "guest"
+    },
+    "identity": {
+      "title": "Identity",
+      "howTo": "OneID isn't connected yet. Hold a short video call: the founder shows their passport or ID card next to their face. Check the name matches the profile, then confirm.",
+      "note": "Note (private)",
+      "noteHint": "For example the date of the call. Never write the full passport number.",
+      "confirm": "Confirm identity after a video call",
+      "confirmAsk": "Confirm you saw this founder's passport or ID card on a video call?",
+      "undo": "Undo confirmation"
+    },
+    "registration": {
+      "title": "Company registration",
+      "due": "The goal was reached. The founder must register an MChJ by {{date}}.",
+      "number": "Number given",
+      "howTo": "Check the number on my.gov.uz or orginfo.uz: it must be an MChJ owned by this founder. Then confirm, and investors get 7 days to pay.",
+      "confirm": "Company checked: ask investors to pay",
+      "confirmAsk": "Is this MChJ registered and owned by the founder? Investors will be asked to pay.",
+      "waiting": "The founder hasn't added a company number yet."
     }
   },
   "money": {
@@ -439,7 +465,7 @@
     "how": {
       "title": "How the money moves",
       "step1Title": "The founder applies",
-      "step1Text": "A passport, a budget in so'm and the stages. Companies and sole traders also add their certificate.",
+      "step1Text": "Your identity (OneID), a budget in so'm and the stages. Companies and sole traders add their registration number.",
       "step2Title": "We check and score it",
       "step2Text": "We check the documents and score the project out of 100: business plan, team, market, finances and risk, 20 points each. The score is public on the project page.",
       "step3Title": "People back it",
@@ -660,12 +686,14 @@
     "title": {
       "donation": "Make a donation",
       "reward": "Back this project",
-      "equity": "Become a partner"
+      "equity": "Become a partner",
+      "pledge": "Pledge to invest"
     },
     "cta": {
       "donation": "Donate",
       "reward": "Back this project",
-      "equity": "Invest (Musharakah)"
+      "equity": "Invest (Musharakah)",
+      "pledge": "Pledge to invest"
     },
     "reward": "Choose a reward",
     "noReward": "No reward, just support",
@@ -696,7 +724,9 @@
     "backerTitle": "You're a backer!",
     "backerFollow": "We'll keep you posted on its progress.",
     "shareFriends": "Share with friends",
-    "backHome": "Back to home"
+    "backHome": "Back to home",
+    "submitPledge": "Pledge {{amount}}",
+    "pledgeSuccess": "Your pledge of {{amount}} to “{{project}}” is recorded. No money was taken. If the goal is reached and the founder registers a company within {{days}} days, we will ask you to pay."
   },
   "dashboard": {
     "backer": {
@@ -876,8 +906,8 @@
       "experience": "Years of experience",
       "bio": "About you",
       "bioHint": "Your background and why you are the right person for this.",
-      "documents": "Documents for review (private)",
-      "documentsHint": "Only you and the Fundy review team can see these. PDF, JPG or PNG up to 10 MB.",
+      "documents": "Extra documents (optional, private)",
+      "documentsHint": "A business plan or financial statements help the review. Please don't upload your passport. Only you and the review team see these. PDF, JPG or PNG up to 10 MB.",
       "kind": "Document type",
       "upload": "Upload document",
       "kinds": {
@@ -889,19 +919,9 @@
       },
       "registrationRequired": "Registration number (YaTT / MChJ / NNT or STIR)",
       "registrationLaterHint": "Leave it empty if you aren't registered yet. You'll need it before the first payout.",
-      "neededTitle": "What we need",
-      "need": {
-        "identity": "Passport or ID card (photo or PDF)",
-        "registrationNumber": "Registration number",
-        "registrationDocument": "Registration certificate"
-      },
-      "needDone": "done",
-      "needMissing": "still needed",
       "gap": {
         "profile": "Fill in your founder profile.",
-        "identity": "Upload your passport or ID card.",
-        "registrationNumber": "Add your registration number.",
-        "registrationDocument": "Upload your registration certificate."
+        "registrationNumber": "Add your registration number."
       }
     },
     "review": {
@@ -1017,7 +1037,16 @@
     "milestone_returned": "Our team needs more evidence for a milestone of {{project}}",
     "content_reported": "Someone reported content",
     "user_signed_up": "New user signed up: {{name}} ({{email}})",
-    "page_feedback": "New page feedback: {{page}}"
+    "page_feedback": "New page feedback: {{page}}",
+    "registration_added": "{{project}}: the founder added a company number. Please check it",
+    "project_funded_register": "{{project}} reached its goal! Register an MChJ by {{date}} so investors can pay",
+    "new_pledge": "New pledge of {{amount}} for {{project}}",
+    "pledge_paid": "An investor paid {{amount}} for {{project}}",
+    "pledge_recorded": "Your pledge of {{amount}} for {{project}} is recorded. Nothing is taken yet",
+    "pledge_payment_due": "{{project}} is now a registered company. Pay your pledge by {{date}}",
+    "pledge_payment_due_owner": "Company confirmed. Investors in {{project}} pay by {{date}}",
+    "pledges_cancelled": "{{project}}: no company was registered in time, so pledges are cancelled. Nothing was taken",
+    "pledges_unpaid": "{{project}}: {{amount}} in pledges wasn't paid in time and was removed"
   },
   "content": {
     "updated": "Last updated: {{date}}",
@@ -1116,7 +1145,7 @@
     "applyTitle": "To apply",
     "payoutTitle": "Before the money is paid out",
     "modelsTitle": "Funding you can use",
-    "needId": "Passport or ID card of the person running the project",
+    "needId": "Confirm who you are with OneID (id.egov.uz). No passport upload; until OneID is ready, a short video call",
     "needBudget": "A budget in so'm, one line per expense",
     "needStages": "Stages (usually 3–6): what gets done, when, and what share of the money",
     "needStory": "A cover photo and the project story (at least 200 characters)",
@@ -1270,35 +1299,73 @@
   "organizer": {
     "individual": {
       "name": "A person or team",
-      "short": "No company yet. Your passport is enough to apply.",
+      "short": "No company yet. You can apply as you are.",
       "payout": "Register as a sole trader (YaTT) or a company (MChJ) and add the number. You can do it online at my.gov.uz.",
-      "payoutRule": "You can apply and raise money with your passport. Before the first stage's money is released, register as a YaTT (or MChJ) and add the number. You can do it online at my.gov.uz.",
+      "payoutRule": "You can apply and raise money without a company. Before the first stage's money is released, register as a YaTT (or MChJ) and add the number. You can do it online at my.gov.uz.",
       "dashboardNotice": "Before the first stage's money is released, register as a sole trader (YaTT) or a company (MChJ) and add the registration number here. You can register online at my.gov.uz.",
       "saveNumber": "Save number"
     },
     "yatt": {
       "name": "Sole trader (YaTT)",
       "short": "You are registered as a yakka tartibdagi tadbirkor.",
-      "apply": "Your YaTT certificate and its number",
+      "apply": "Your YaTT registration number (STIR)",
       "payout": "A bank account in the YaTT's name",
       "numberHint": "YaTT certificate number or STIR (TIN)."
     },
     "mchj": {
       "name": "Company (MChJ)",
-      "short": "A limited liability company. The only way to offer musharakah.",
-      "apply": "The company's registration certificate and its number",
-      "applyEquity": "For musharakah: the latest financial statements (recommended)",
+      "short": "A limited liability company. Musharakah investors pay straight away.",
+      "apply": "The company's registration number (STIR)",
       "payout": "A bank account in the company's name",
       "numberHint": "MChJ certificate number or STIR (TIN)."
     },
     "ngo": {
       "name": "Non-profit (NNT)",
       "short": "A registered non-governmental organisation. Donation projects.",
-      "apply": "The organisation's registration certificate and its number",
+      "apply": "The organisation's registration number (STIR)",
       "payout": "A bank account in the organisation's name",
       "numberHint": "NNT registration number or STIR (TIN)."
     },
-    "equityNeedsMchj": "Needs a registered company (MChJ).",
-    "ngoDonationOnly": "Non-profits run donation projects."
+    "ngoDonationOnly": "Non-profits run donation projects.",
+    "payLaterShort": "No company yet? Investors pledge now and pay after you register an MChJ.",
+    "payLaterRule": "Musharakah without a company: investors pledge and no money is taken. If you reach your goal, register an MChJ within 60 days and add its number. Our team checks it, then investors pay within 7 days. Stage money is released as usual after that."
+  },
+  "identity": {
+    "sectionTitle": "Who you are",
+    "title": "Confirm who you are",
+    "noUpload": "No passport upload. Sign in with OneID (id.egov.uz) and your name and passport details come from the government record. Only the review team sees them.",
+    "verifyOneId": "Verify with OneID",
+    "comingSoon": "Coming soon",
+    "videoCallMeanwhile": "Until OneID is connected, our team confirms who you are on a short video call while reviewing your project. Have your passport or ID card at hand.",
+    "oneidFailed": "The OneID check didn't work. Please try again.",
+    "confirmedTitle": "Identity confirmed",
+    "confirmedBy": {
+      "oneid": "Confirmed with OneID on {{date}}.",
+      "video_call": "Confirmed by the Fundy team on a video call on {{date}}."
+    }
+  },
+  "payLater": {
+    "label": "pay after registration",
+    "dialog": "The founder has no company yet, so this is a pledge: no money is taken now. If the goal is reached, the founder has {{days}} days to register an MChJ. Once our team checks it, you pay within {{payDays}} days. If they don't register, the pledge is cancelled.",
+    "note": {
+      "active": "No company yet: investors pledge now and no money is taken. If the goal is reached, the founder registers an MChJ within {{days}} days, then investors pay within {{payDays}} days.",
+      "registering": "Goal reached. The founder is registering a company (by {{date}}). Investors pay after that.",
+      "paying": "The company is registered. Investors pay their pledges by {{date}}."
+    },
+    "backer": {
+      "pledged": "Pledged, not paid",
+      "noMoneyYet": "No money taken. You pay only if the company is registered.",
+      "waitingCompany": "Waiting for the company (by {{date}})",
+      "payBy": "Pay by {{date}}",
+      "payNow": "Pay now",
+      "payConfirm": "Pay {{amount}} now? (Demo: no real money moves.)",
+      "cancelled": "Pledge cancelled, nothing taken"
+    },
+    "founder": {
+      "active": "Investors pledge now and no money is taken yet. If you reach the goal, you will have 60 days to register an MChJ.",
+      "register": "Goal reached! Register an MChJ by {{date}} and add its number here. You can register online at my.gov.uz. If you don't, every pledge is cancelled.",
+      "checking": "Thank you. Our team is checking your company. Then investors are asked to pay within 7 days.",
+      "paying": "Company confirmed. Investors pay their pledges by {{date}}. Unpaid pledges drop out after that."
+    }
   }
 }

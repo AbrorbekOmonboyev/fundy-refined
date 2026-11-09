@@ -1,12 +1,14 @@
 import { useState, type ReactNode } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { paths } from '@/app/routes';
 import { useAuth } from '@/features/auth/AuthContext';
-import { pickText, type MyContribution } from '@/features/projects/api';
+import { payPledge, pickText, type MyContribution } from '@/features/projects/api';
+import { errorKey } from '@/features/auth/errors';
 import { useMyContributions, useSavedProjectCards } from '@/features/projects/hooks';
 import { ProjectCard } from '@/components/ProjectCard';
-import { Alert, PageSpinner } from '@/components/ui';
+import { Alert, Button, PageSpinner } from '@/components/ui';
 import { formatDate, formatMoney, formatNumber } from '@/lib/money';
 import { usePageMeta } from '@/lib/usePageMeta';
 
@@ -224,6 +226,8 @@ function MoneyStatus({ c }: { c: MyContribution }) {
   const p = c.project;
   if (!p) return null;
   if (c.status === 'refunded') return <Badge tone="rose">{t('dashboard.backer.money.refunded')}</Badge>;
+  if (c.status === 'cancelled') return <Badge tone="slate">{t('payLater.backer.cancelled')}</Badge>;
+  if (c.status === 'pledged') return <PledgeStatus c={c} />;
   if (p.status === 'active') return <Badge tone="slate">{t('dashboard.backer.money.waiting')}</Badge>;
   if (p.status === 'unsuccessful') return <Badge tone="rose">{t('dashboard.backer.money.refunding')}</Badge>;
 
@@ -248,5 +252,54 @@ function Badge({ tone, children }: { tone: 'rose' | 'slate'; children: ReactNode
   const style = tone === 'rose' ? 'bg-rose-50 text-rose-700' : 'bg-slate-100 text-slate-700';
   return (
     <span className={`inline-block rounded-full px-2.5 py-1 font-semibold whitespace-nowrap ${style}`}>{children}</span>
+  );
+}
+
+/** A Musharakah pledge: waiting for the founder's company, then "Pay now" for 7 days. */
+function PledgeStatus({ c }: { c: MyContribution }) {
+  const { t } = useTranslation();
+  const queryClient = useQueryClient();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const p = c.project!;
+  const canPay =
+    !!p.registration_confirmed_at && !!p.pledge_payment_due_at && new Date(p.pledge_payment_due_at) > new Date();
+
+  async function pay() {
+    if (!window.confirm(t('payLater.backer.payConfirm', { amount: formatMoney(c.amount) }))) return;
+    setBusy(true);
+    setError(null);
+    try {
+      await payPledge(c.id, c.payment_method);
+      await queryClient.invalidateQueries({ queryKey: ['projects'] });
+    } catch (e) {
+      setError(t(errorKey(e)));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  if (!canPay) {
+    return (
+      <div className="space-y-1 min-w-40">
+        <Badge tone="slate">{t('payLater.backer.pledged')}</Badge>
+        <p className="text-slate-500">
+          {p.status === 'funded' && p.registration_due_at
+            ? t('payLater.backer.waitingCompany', { date: formatDate(p.registration_due_at) })
+            : t('payLater.backer.noMoneyYet')}
+        </p>
+      </div>
+    );
+  }
+  return (
+    <div className="space-y-1.5 min-w-40">
+      <p className="text-ink font-semibold">
+        {t('payLater.backer.payBy', { date: formatDate(p.pledge_payment_due_at) })}
+      </p>
+      <Button loading={busy} onClick={pay} className="!px-3 !py-1.5 text-xs">
+        {t('payLater.backer.payNow')}
+      </Button>
+      {error && <p className="text-rose-600">{error}</p>}
+    </div>
   );
 }

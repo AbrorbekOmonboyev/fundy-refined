@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { slugify } from '@/features/wizard/slug';
 import { MIN_STORY, founderGaps, stepComplete, type Step } from '@/features/wizard/checks';
-import { allowedModels, modelAllowed } from '@/features/wizard/organizer';
+import { allowedModels, modelAllowed, paysAfterRegistration } from '@/features/wizard/organizer';
 import type { Draft } from '@/features/wizard/api';
 
 describe('web address from a title', () => {
@@ -61,7 +61,6 @@ describe('project wizard checks', () => {
     ['milestones', d => (d.milestones[0].release_percent = 50)],
     ['basics', d => (d.project.organizer_type = null)],
     ['founder', d => (d.founder = null)],
-    ['founder', d => (d.documents = [])],
   ];
   it.each(broken)('flags a problem in "%s"', (step, breakIt) => {
     const d = draft();
@@ -78,23 +77,27 @@ describe('project wizard checks', () => {
 });
 
 describe('who is raising the money', () => {
-  it('musharakah only for a company, non-profits run donations', () => {
-    expect(modelAllowed('individual', 'equity')).toBe(false);
-    expect(modelAllowed('yatt', 'equity')).toBe(false);
-    expect(modelAllowed('mchj', 'equity')).toBe(true);
+  it('anyone may run Musharakah; without a company investors pay after registration', () => {
+    expect(modelAllowed('individual', 'equity')).toBe(true);
+    expect(modelAllowed('yatt', 'equity')).toBe(true);
     expect(allowedModels('ngo')).toEqual(['donation']);
+    expect(paysAfterRegistration('individual', 'equity')).toBe(true);
+    expect(paysAfterRegistration('yatt', 'equity')).toBe(true);
+    expect(paysAfterRegistration('mchj', 'equity')).toBe(false);
+    expect(paysAfterRegistration('individual', 'reward')).toBe(false);
   });
 
-  it('a person applies with a passport only', () => {
-    expect(founderGaps(draft())).toEqual([]);
+  it('nothing to upload: a person needs only a founder profile', () => {
+    const d = draft();
+    d.documents = [];
+    expect(founderGaps(d)).toEqual([]);
   });
 
-  it('a registered organiser also needs the number and the certificate', () => {
+  it('a registered organiser types its number (no certificate upload)', () => {
     const d = draft();
     d.project.organizer_type = 'yatt';
-    expect(founderGaps(d)).toEqual(['registrationNumber', 'registrationDocument']);
+    expect(founderGaps(d)).toEqual(['registrationNumber']);
     d.founder!.registration_number = 'YaTT 4012345';
-    d.documents.push({ kind: 'registration' } as Draft['documents'][number]);
     expect(founderGaps(d)).toEqual([]);
   });
 });

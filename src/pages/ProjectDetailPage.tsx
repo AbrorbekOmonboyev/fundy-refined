@@ -22,6 +22,7 @@ import { ChecksList, MoneyTrail } from '@/features/projects/MoneyTrail';
 import { RecentBackers } from '@/features/projects/RecentBackers';
 import { RewardsSection } from '@/features/projects/RewardCards';
 import { CartDrawer } from '@/features/cart/CartDrawer';
+import { PAYMENT_DAYS, REGISTRATION_DAYS } from '@/features/wizard/organizer';
 import { OPEN_CART_EVENT, cartActions, priceCart, useCart } from '@/features/cart/cart';
 import { formatDate, formatMoney, formatNumber } from '@/lib/money';
 import { publicFileUrl, responsiveImage } from '@/lib/supabase';
@@ -90,6 +91,8 @@ function ProjectView({ project }: { project: ProjectDetail }) {
     cartSummary.count > 0
       ? t('cart.button', { count: cartSummary.count, amount: formatMoney(cartSummary.total, true) })
       : t(`contribute.cta.${project.model}`);
+  // Musharakah without a company yet: investors pledge now and pay later.
+  const ctaLabel = project.payAfterRegistration ? t('contribute.cta.pledge') : t(`contribute.cta.${project.model}`);
   const [copied, setCopied] = useState(false);
 
   const isLive = project.status === 'active' && daysLeft(project.endsAt) > 0;
@@ -358,13 +361,14 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                     <span>{t('project.projectedReturn', { value: project.equity.projected_annual_return })}</span>
                   )}
                 </div>
+                {project.payAfterRegistration && <PayLaterNote project={project} />}
               </div>
             )}
 
             <div className="space-y-4">
               {isLive && !isOwner && (
                 <Button onClick={() => openContribute()} fullWidth className="py-3.5 text-base">
-                  {isRewardProject ? cartLabel : t(`contribute.cta.${project.model}`)}
+                  {isRewardProject ? cartLabel : ctaLabel}
                 </Button>
               )}
               {isOwner && <Alert variant="info">{t('project.youOwnThis')}</Alert>}
@@ -676,7 +680,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                 </div>
               </div>
               <Button onClick={() => openContribute()} className="shrink-0 py-3">
-                {isRewardProject ? cartLabel : t(`contribute.cta.${project.model}`)}
+                {isRewardProject ? cartLabel : ctaLabel}
               </Button>
             </div>
           </div>
@@ -1014,4 +1018,15 @@ function CommentItem({
         ))}
     </li>
   );
+}
+
+/** Where a pledge-now, pay-after-registration Musharakah stands, in plain words. */
+function PayLaterNote({ project }: { project: ProjectDetail }) {
+  const { t } = useTranslation();
+  const text = project.registrationConfirmedAt
+    ? t('payLater.note.paying', { date: formatDate(project.pledgePaymentDueAt) })
+    : project.status === 'funded'
+      ? t('payLater.note.registering', { date: formatDate(project.registrationDueAt) })
+      : t('payLater.note.active', { days: REGISTRATION_DAYS, payDays: PAYMENT_DAYS });
+  return <p className="pt-2 border-t border-slate-200 text-slate-700 leading-relaxed">{text}</p>;
 }

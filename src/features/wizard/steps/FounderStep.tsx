@@ -1,7 +1,7 @@
 import { useRef, useState, type ChangeEvent, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQueryClient } from '@tanstack/react-query';
-import { Check, Circle, FileText, Trash2, Upload } from 'lucide-react';
+import { FileText, Trash2, Upload } from 'lucide-react';
 import { useAuth } from '@/features/auth/AuthContext';
 import { wizardErrorText } from '@/features/wizard/errors';
 import {
@@ -13,14 +13,15 @@ import {
   type FounderFields,
 } from '@/features/wizard/api';
 import { draftKey, useStepSave } from '@/features/wizard/hooks';
-import { founderGaps } from '@/features/wizard/checks';
-import { needsRegistration } from '@/features/wizard/organizer';
+import { needsRegistration, paysAfterRegistration } from '@/features/wizard/organizer';
+import { IdentityCard } from '@/features/wizard/IdentityCard';
 import { WizardShell } from '@/features/wizard/WizardShell';
 import { Alert, Button, NumberField, SelectField, TextAreaField, TextField } from '@/components/ui';
 import type { Database } from '@/lib/database.types';
 
 type DocumentKind = Database['public']['Enums']['document_kind'];
-const KINDS: DocumentKind[] = ['registration', 'business_plan', 'identity', 'financials', 'other'];
+// Optional extras for the review team. No passports: identity comes from OneID or a video call.
+const KINDS: DocumentKind[] = ['business_plan', 'registration', 'financials', 'other'];
 
 /** Step 6: who is behind the project, plus private documents for the review team. */
 export function FounderStep({ draft }: { draft: Draft }) {
@@ -44,16 +45,8 @@ export function FounderStep({ draft }: { draft: Draft }) {
     setForm(x => ({ ...x, [key]: value }));
   const organizer = draft.project.organizer_type;
   const registered = needsRegistration(organizer);
-  const hasDoc = (k: DocumentKind) => draft.documents.some(doc => doc.kind === k);
-  // Start the picker on the first document we still need.
-  const [kind, setKind] = useState<DocumentKind>(
-    !hasDoc('identity') ? 'identity' : registered && !hasDoc('registration') ? 'registration' : 'business_plan',
-  );
-  const gaps = founderGaps(draft);
-  // What step 6 asks for: always an ID; a registered organiser also its number and certificate.
-  const needed = (
-    registered ? (['identity', 'registrationNumber', 'registrationDocument'] as const) : (['identity'] as const)
-  ).map(key => ({ key, done: !gaps.includes(key) }));
+  const payLater = paysAfterRegistration(organizer, draft.project.model);
+  const [kind, setKind] = useState<DocumentKind>('business_plan');
   const [uploading, setUploading] = useState(false);
   const [docError, setDocError] = useState<string | null>(null);
 
@@ -158,27 +151,18 @@ export function FounderStep({ draft }: { draft: Draft }) {
       />
 
       <section className="space-y-3 pt-4 border-t border-slate-100">
+        <h2 className="text-sm font-semibold text-ink">{t('identity.sectionTitle')}</h2>
+        <IdentityCard userId={user!.id} />
+        {payLater ? (
+          <Alert variant="info">{t('organizer.payLaterRule')}</Alert>
+        ) : (
+          organizer === 'individual' && <Alert variant="info">{t('organizer.individual.payoutRule')}</Alert>
+        )}
+      </section>
+
+      <section className="space-y-3 pt-4 border-t border-slate-100">
         <h2 className="text-sm font-semibold text-ink">{t('wizard.founder.documents')}</h2>
         <p className="text-xs text-slate-500">{t('wizard.founder.documentsHint')}</p>
-        <ul className="space-y-1.5" aria-label={t('wizard.founder.neededTitle')}>
-          {needed.map(n => (
-            <li key={n.key} className="flex items-center gap-2 text-sm">
-              {n.done ? (
-                <Check className="w-4 h-4 text-brand-deep shrink-0" aria-hidden />
-              ) : (
-                <Circle className="w-4 h-4 text-slate-400 shrink-0" aria-hidden />
-              )}
-              <span className={n.done ? 'text-slate-500' : 'text-ink'}>
-                {t(`wizard.founder.need.${n.key}`)}
-                <span className="sr-only">
-                  {' '}
-                  — {t(n.done ? 'wizard.founder.needDone' : 'wizard.founder.needMissing')}
-                </span>
-              </span>
-            </li>
-          ))}
-        </ul>
-        {organizer === 'individual' && <Alert variant="info">{t('organizer.individual.payoutRule')}</Alert>}
         {draft.documents.length > 0 && (
           <ul className="divide-y divide-slate-100 border border-slate-200 rounded-lg">
             {draft.documents.map(doc => (

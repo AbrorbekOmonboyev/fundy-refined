@@ -181,3 +181,20 @@ export async function listAudit(): Promise<AuditEntry[]> {
   fail(error);
   return data ?? [];
 }
+
+// ---------------------------------------------------------------------------
+// Identity and company checks
+// ---------------------------------------------------------------------------
+/** After a short video call (until OneID is connected). Never for yourself. */
+export async function confirmIdentity(userId: string, note: string | null) {
+  fail((await db().rpc('admin_confirm_identity', { p_user_id: userId, p_note: note ?? undefined })).error);
+}
+
+export async function clearIdentity(userId: string) {
+  fail((await db().rpc('admin_clear_identity', { p_user_id: userId })).error);
+}
+
+/** The founder registered an MChJ: investors are asked to pay their pledges within 7 days. */
+export async function confirmRegistration(projectId: string) {
+  fail((await db().rpc('admin_confirm_registration', { p_project_id: projectId })).error);
+}

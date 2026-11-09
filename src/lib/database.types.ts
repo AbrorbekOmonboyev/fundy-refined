@@ -472,6 +472,48 @@ export type Database = {
           },
         ]
       }
+      founder_identities: {
+        Row: {
+          birth_date: string | null
+          company_name: string | null
+          company_tin: string | null
+          full_name: string | null
+          method: Database["public"]["Enums"]["identity_method"]
+          note: string | null
+          passport_number: string | null
+          pinfl: string | null
+          user_id: string
+          verified_at: string
+          verified_by: string | null
+        }
+        Insert: {
+          birth_date?: string | null
+          company_name?: string | null
+          company_tin?: string | null
+          full_name?: string | null
+          method: Database["public"]["Enums"]["identity_method"]
+          note?: string | null
+          passport_number?: string | null
+          pinfl?: string | null
+          user_id: string
+          verified_at?: string
+          verified_by?: string | null
+        }
+        Update: {
+          birth_date?: string | null
+          company_name?: string | null
+          company_tin?: string | null
+          full_name?: string | null
+          method?: Database["public"]["Enums"]["identity_method"]
+          note?: string | null
+          passport_number?: string | null
+          pinfl?: string | null
+          user_id?: string
+          verified_at?: string
+          verified_by?: string | null
+        }
+        Relationships: []
+      }
       founder_profiles: {
         Row: {
           bio: string | null
@@ -877,8 +919,12 @@ export type Database = {
           original_language: Database["public"]["Enums"]["app_language"]
           organizer_type: Database["public"]["Enums"]["organizer_type"] | null
           owner_id: string
+          pay_after_registration: boolean
+          pledge_payment_due_at: string | null
           raised_amount: number
           region_id: string | null
+          registration_confirmed_at: string | null
+          registration_due_at: string | null
           review_note: string | null
           reviewed_at: string | null
           reviewed_by: string | null
@@ -906,8 +952,12 @@ export type Database = {
           original_language?: Database["public"]["Enums"]["app_language"]
           organizer_type?: Database["public"]["Enums"]["organizer_type"] | null
           owner_id: string
+          pay_after_registration?: boolean
+          pledge_payment_due_at?: string | null
           raised_amount?: number
           region_id?: string | null
+          registration_confirmed_at?: string | null
+          registration_due_at?: string | null
           review_note?: string | null
           reviewed_at?: string | null
           reviewed_by?: string | null
@@ -935,8 +985,12 @@ export type Database = {
           original_language?: Database["public"]["Enums"]["app_language"]
           organizer_type?: Database["public"]["Enums"]["organizer_type"] | null
           owner_id?: string
+          pay_after_registration?: boolean
+          pledge_payment_due_at?: string | null
           raised_amount?: number
           region_id?: string | null
+          registration_confirmed_at?: string | null
+          registration_due_at?: string | null
           review_note?: string | null
           reviewed_at?: string | null
           reviewed_by?: string | null
@@ -1299,6 +1353,15 @@ export type Database = {
         Args: { p_blocked: boolean; p_user_id: string }
         Returns: undefined
       }
+      admin_clear_identity: { Args: { p_user_id: string }; Returns: undefined }
+      admin_confirm_identity: {
+        Args: { p_note?: string; p_user_id: string }
+        Returns: undefined
+      }
+      admin_confirm_registration: {
+        Args: { p_project_id: string }
+        Returns: undefined
+      }
       admin_verify_founder: {
         Args: { p_user_id: string; p_verified: boolean }
         Returns: undefined
@@ -1329,6 +1392,13 @@ export type Database = {
         Returns: boolean
       }
       mark_all_notifications_read: { Args: never; Returns: number }
+      pay_pledge: {
+        Args: {
+          p_contribution_id: string
+          p_payment_method: Database["public"]["Enums"]["payment_method"]
+        }
+        Returns: undefined
+      }
       platform_stats: { Args: never; Returns: Json }
       telegram_link_token: { Args: never; Returns: string }
       telegram_status: { Args: never; Returns: boolean }
@@ -1354,7 +1424,7 @@ export type Database = {
       contact_status: "new" | "handled"
       contact_topic: "general" | "founder" | "backer" | "report" | "partnership"
       contract_type: "musharakah" | "mudarabah"
-      contribution_status: "confirmed" | "refunded"
+      contribution_status: "confirmed" | "refunded" | "pledged" | "cancelled"
       distribution_schedule: "quarterly" | "biannually" | "annually"
       document_kind:
         | "registration"
@@ -1365,6 +1435,7 @@ export type Database = {
       evaluation_confidence: "high" | "moderate" | "in_review"
       funding_model: "donation" | "reward" | "equity"
       organizer_type: "individual" | "yatt" | "mchj" | "ngo"
+      identity_method: "oneid" | "video_call"
       milestone_status: "pending" | "submitted" | "approved"
       notification_type:
         | "project_submitted"
@@ -1384,6 +1455,8 @@ export type Database = {
         | "content_reported"
         | "user_signed_up"
         | "page_feedback"
+        | "pledge_payment_due"
+        | "pledges_cancelled"
       payment_method: "click" | "payme" | "uzcard" | "humo" | "bank_wire"
       project_status:
         | "draft"
@@ -1529,7 +1602,7 @@ export const Constants = {
       contact_status: ["new", "handled"],
       contact_topic: ["general", "founder", "backer", "report", "partnership"],
       contract_type: ["musharakah", "mudarabah"],
-      contribution_status: ["confirmed", "refunded"],
+      contribution_status: ["confirmed", "refunded", "pledged", "cancelled"],
       distribution_schedule: ["quarterly", "biannually", "annually"],
       document_kind: [
         "registration",
@@ -1541,6 +1614,7 @@ export const Constants = {
       evaluation_confidence: ["high", "moderate", "in_review"],
       funding_model: ["donation", "reward", "equity"],
       organizer_type: ["individual", "yatt", "mchj", "ngo"],
+      identity_method: ["oneid", "video_call"],
       milestone_status: ["pending", "submitted", "approved"],
       notification_type: [
         "project_submitted",
@@ -1560,6 +1634,8 @@ export const Constants = {
         "content_reported",
         "user_signed_up",
         "page_feedback",
+        "pledge_payment_due",
+        "pledges_cancelled",
       ],
       payment_method: ["click", "payme", "uzcard", "humo", "bank_wire"],
       project_status: [

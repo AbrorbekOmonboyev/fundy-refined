@@ -369,6 +369,43 @@ export async function saveRegistrationNumber(userId: string, registrationNumber:
   fail(error);
 }
 
+// ---------------------------------------------------------------------------
+// Identity: confirmed by OneID (id.egov.uz) or by our team on a video call.
+// Nobody uploads a passport. Only the founder and admins can read this row.
+// ---------------------------------------------------------------------------
+export type Identity = Pick<
+  Tables['founder_identities']['Row'],
+  'method' | 'verified_at' | 'full_name' | 'company_name' | 'note'
+>;
+
+export const identityKey = (userId: string | undefined) => ['identity', userId] as const;
+
+export async function getIdentity(userId: string): Promise<Identity | null> {
+  const { data, error } = await db()
+    .from('founder_identities')
+    .select('method, verified_at, full_name, company_name, note')
+    .eq('user_id', userId)
+    .maybeSingle();
+  fail(error);
+  return data;
+}
+
+/** OneID is switched on once Fundy has its OneID keys (see docs/ONEID.md). */
+export const oneIdEnabled = import.meta.env.VITE_ONEID_ENABLED === 'true';
+
+/**
+ * Start a OneID sign-in. The oneid edge function sends the founder to id.egov.uz
+ * and back to `returnTo` with ?oneid=ok (or ?oneid=error).
+ */
+export async function startOneId(returnTo: string) {
+  const { data, error } = await db().functions.invoke<{ url: string }>('oneid', {
+    body: { action: 'start', returnTo },
+  });
+  fail(error);
+  if (!data?.url) throw new Error('oneid_unavailable');
+  window.location.assign(data.url);
+}
+
 const DOCUMENT_TYPES = ['application/pdf', 'image/jpeg', 'image/png'];
 export const DOCUMENT_MAX_BYTES = 10 * 1024 * 1024;
 

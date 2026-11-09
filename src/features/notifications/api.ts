@@ -23,6 +23,14 @@ export type AppNotification = {
     page?: string;
     kind?: string;
     message?: string;
+    /** Musharakah pledges (pay after registration) */
+    registration?: boolean;
+    registration_due_at?: string | null;
+    due_at?: string;
+    pledged?: boolean;
+    paid?: boolean;
+    owner?: boolean;
+    reason?: string;
   };
   read_at: string | null;
   created_at: string;

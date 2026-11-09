@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '@/features/auth/AuthContext';
 import { pickText } from '@/features/projects/api';
-import { formatMoney } from '@/lib/money';
+import { formatDate, formatMoney } from '@/lib/money';
 import { paths } from '@/app/routes';
 import {
   listNotifications,
@@ -78,7 +78,9 @@ export function useNotificationView() {
 
     const view: Record<NotificationType, { text: string; to: string }> = {
       project_submitted: {
-        text: t('notifications.project_submitted', { project: title }),
+        text: n.data.registration
+          ? t('notifications.registration_added', { project: title })
+          : t('notifications.project_submitted', { project: title }),
         to: n.data.project_id ? paths.adminReviewProject(n.data.project_id) : paths.adminReview,
       },
       project_approved: { text: t('notifications.project_approved', { project: title }), to: projectPage },
@@ -90,16 +92,27 @@ export function useNotificationView() {
       project_ended: {
         text:
           n.data.status === 'funded'
-            ? t('notifications.project_funded', { project: title })
+            ? n.data.registration_due_at && n.data.owner
+              ? t('notifications.project_funded_register', {
+                  project: title,
+                  date: formatDate(String(n.data.registration_due_at)),
+                })
+              : t('notifications.project_funded', { project: title })
             : t('notifications.project_unsuccessful', { project: title }),
         to: projectPage,
       },
       new_contribution: {
-        text: t('notifications.new_contribution', { project: title, amount }),
+        text: n.data.pledged
+          ? t('notifications.new_pledge', { project: title, amount })
+          : n.data.paid
+            ? t('notifications.pledge_paid', { project: title, amount })
+            : t('notifications.new_contribution', { project: title, amount }),
         to: paths.founderDashboard,
       },
       contribution_confirmed: {
-        text: t('notifications.contribution_confirmed', { project: title, amount }),
+        text: n.data.pledged
+          ? t('notifications.pledge_recorded', { project: title, amount })
+          : t('notifications.contribution_confirmed', { project: title, amount }),
         to: paths.backerDashboard,
       },
       new_comment: { text: t('notifications.new_comment', { project: title }), to: projectPage },
@@ -118,6 +131,28 @@ export function useNotificationView() {
       milestone_returned: {
         text: t('notifications.milestone_returned', { project: title }),
         to: paths.founderDashboard,
+      },
+      pledge_payment_due: n.data.owner
+        ? {
+            text: t('notifications.pledge_payment_due_owner', {
+              project: title,
+              date: formatDate(String(n.data.due_at ?? '')),
+            }),
+            to: paths.founderDashboard,
+          }
+        : {
+            text: t('notifications.pledge_payment_due', {
+              project: title,
+              date: formatDate(String(n.data.due_at ?? '')),
+            }),
+            to: paths.backerDashboard,
+          },
+      pledges_cancelled: {
+        text:
+          n.data.reason === 'not_paid'
+            ? t('notifications.pledges_unpaid', { project: title, amount })
+            : t('notifications.pledges_cancelled', { project: title }),
+        to: n.data.reason === 'not_paid' ? paths.founderDashboard : paths.backerDashboard,
       },
       content_reported: { text: t('notifications.content_reported'), to: paths.adminReports },
       user_signed_up: {

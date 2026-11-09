@@ -37,6 +37,8 @@ const ICONS: Record<AppNotification['type'], typeof Bell> = {
   user_signed_up: UserPlus,
   contact_message: Mail,
   page_feedback: MessageSquareWarning,
+  pledge_payment_due: HandCoins,
+  pledges_cancelled: CircleAlert,
 };
 
 /** 🔔 in the header: the signed-in user's real notifications, updated live. */

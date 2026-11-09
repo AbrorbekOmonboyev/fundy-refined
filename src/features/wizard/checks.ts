@@ -16,14 +16,13 @@ export const budgetTotal = (d: Draft) => d.budget.reduce((s, b) => s + b.amount,
 export const releaseTotal = (d: Draft) => d.milestones.reduce((s, m) => s + Number(m.release_percent), 0);
 
 /** What step 6 still needs (same order as submit_project() checks them). */
-export type FounderGap = 'profile' | 'identity' | 'registrationNumber' | 'registrationDocument';
+// Identity is not a gap here: it is confirmed by OneID or by our team during review.
+export type FounderGap = 'profile' | 'registrationNumber';
 export function founderGaps(d: Draft): FounderGap[] {
   const gaps: FounderGap[] = [];
   if (!d.founder) gaps.push('profile');
-  if (!d.documents.some(doc => doc.kind === 'identity')) gaps.push('identity');
-  if (needsRegistration(d.project.organizer_type)) {
-    if (!d.founder?.registration_number?.trim()) gaps.push('registrationNumber');
-    if (!d.documents.some(doc => doc.kind === 'registration')) gaps.push('registrationDocument');
+  if (needsRegistration(d.project.organizer_type) && !d.founder?.registration_number?.trim()) {
+    gaps.push('registrationNumber');
   }
   return gaps;
 }

@@ -118,7 +118,15 @@
     "rewardNotAvailableNow": "Bu mukofot hozir mavjud emas.",
     "rewardLimitPerBacker": "Bu mukofotni bir kishi cheklangan miqdorda oladi. Siz limitga yetdingiz.",
     "cartInvalid": "Savatda xatolik bor. Sahifani yangilab, qaytadan urinib koʻring.",
-    "registrationBeforePayout": "Asoschi hali roʻyxatdan oʻtmagan (YaTT/MChJ raqami yoʻq). Raqam qoʻshilmaguncha pul berilmaydi."
+    "registrationBeforePayout": "Asoschi hali roʻyxatdan oʻtmagan (YaTT/MChJ raqami yoʻq). Raqam qoʻshilmaguncha pul berilmaydi.",
+    "identityNotConfirmed": "Avval asoschining shaxsini tasdiqlang (OneID yoki videoqoʻngʻiroq).",
+    "registrationNotAwaited": "Bu loyiha kompaniya tekshiruvini kutmayapti.",
+    "registrationNumberMissing": "Asoschi hali roʻyxat raqamini qoʻshmagan.",
+    "pledgesNotPaidYet": "Baʼzi sarmoyadorlar hali vaʼdasini toʻlamagan. Bosqich puli toʻlov muddati tugaguncha kutadi.",
+    "pledgePaymentNotOpen": "Asoschining kompaniyasi roʻyxatdan oʻtgach toʻlashingiz mumkin.",
+    "pledgePaymentClosed": "Bu vaʼda uchun toʻlov muddati tugagan.",
+    "pledgeNotOpen": "Bu vaʼda allaqachon toʻlangan yoki bekor qilingan.",
+    "contributionNotFound": "Bu vaʼda topilmadi."
   },
   "auth": {
     "fields": {
@@ -366,6 +374,24 @@
       "empty": "Bu yerda fikrlar yoʻq.",
       "openPage": "Sahifani ochish",
       "guest": "mehmon"
+    },
+    "identity": {
+      "title": "Shaxs",
+      "howTo": "OneID hali ulanmagan. Qisqa videoqoʻngʻiroq qiling: asoschi pasport yoki ID-kartasini yuzi yonida koʻrsatadi. Ism profil bilan mosligini tekshiring va tasdiqlang.",
+      "note": "Izoh (maxfiy)",
+      "noteHint": "Masalan, qoʻngʻiroq sanasi. Pasport raqamini toʻliq yozmang.",
+      "confirm": "Videoqoʻngʻiroqdan soʻng shaxsni tasdiqlash",
+      "confirmAsk": "Bu asoschining pasporti yoki ID-kartasini videoqoʻngʻiroqda koʻrdingizmi?",
+      "undo": "Tasdiqni bekor qilish"
+    },
+    "registration": {
+      "title": "Kompaniya roʻyxati",
+      "due": "Maqsadga yetildi. Asoschi {{date}} gacha MChJ roʻyxatdan oʻtkazishi kerak.",
+      "number": "Berilgan raqam",
+      "howTo": "Raqamni my.gov.uz yoki orginfo.uz da tekshiring: bu asoschiga tegishli MChJ boʻlishi kerak. Soʻng tasdiqlang, sarmoyadorlarga toʻlash uchun 7 kun beriladi.",
+      "confirm": "Kompaniya tekshirildi: sarmoyadorlardan toʻlovni soʻrash",
+      "confirmAsk": "Bu MChJ roʻyxatdan oʻtganmi va asoschiga tegishlimi? Sarmoyadorlardan toʻlov soʻraladi.",
+      "waiting": "Asoschi hali kompaniya raqamini qoʻshmagan."
     }
   },
   "money": {
@@ -439,7 +465,7 @@
     "how": {
       "title": "Pul qanday yoʻl bosadi",
       "step1Title": "Asoschi ariza beradi",
-      "step1Text": "Pasport, soʻmdagi byudjet va bosqichlar. Kompaniya va YaTT guvohnomasini ham qoʻshadi.",
+      "step1Text": "Shaxsingiz (OneID), soʻmdagi byudjet va bosqichlar. Kompaniya va YaTT roʻyxat raqamini qoʻshadi.",
       "step2Title": "Biz tekshiramiz va baholaymiz",
       "step2Text": "Hujjatlarni tekshiramiz va loyihani 100 ballik tizimda baholaymiz: biznes-reja, jamoa, bozor, moliya va xatar, har biri 20 balldan. Baho loyiha sahifasida ochiq turadi.",
       "step3Title": "Odamlar qoʻllab-quvvatlaydi",
@@ -660,12 +686,14 @@
     "title": {
       "donation": "Xayriya qilish",
       "reward": "Loyihani qoʻllab-quvvatlash",
-      "equity": "Hamkor boʻlish"
+      "equity": "Hamkor boʻlish",
+      "pledge": "Sarmoya vaʼda qilish"
     },
     "cta": {
       "donation": "Xayriya qilish",
       "reward": "Loyihani qoʻllab-quvvatlash",
-      "equity": "Sarmoya kiritish (mushoraka)"
+      "equity": "Sarmoya kiritish (mushoraka)",
+      "pledge": "Sarmoya vaʼda qilish"
     },
     "reward": "Mukofotni tanlang",
     "noReward": "Mukofotsiz, shunchaki qoʻllab-quvvatlash",
@@ -696,7 +724,9 @@
     "backerTitle": "Siz homiysiz!",
     "backerFollow": "Loyiha qanday borayotganini sizga xabar qilib turamiz.",
     "shareFriends": "Doʻstlarga ulashish",
-    "backHome": "Bosh sahifaga"
+    "backHome": "Bosh sahifaga",
+    "submitPledge": "{{amount}} vaʼda qilish",
+    "pledgeSuccess": "«{{project}}» uchun {{amount}} vaʼdangiz qayd etildi. Hech qanday pul olinmadi. Maqsadga yetilsa va asoschi {{days}} kun ichida kompaniya ochsa, sizdan toʻlovni soʻraymiz."
   },
   "dashboard": {
     "backer": {
@@ -876,8 +906,8 @@
       "experience": "Tajriba (yil)",
       "bio": "Oʻzingiz haqingizda",
       "bioHint": "Tajribangiz va nima uchun aynan siz buni uddalay olishingiz.",
-      "documents": "Koʻrib chiqish uchun hujjatlar (maxfiy)",
-      "documentsHint": "Ularni faqat siz va Fundy koʻrib chiqish jamoasi koʻradi. PDF, JPG yoki PNG, 10 MB gacha.",
+      "documents": "Qoʻshimcha hujjatlar (ixtiyoriy, maxfiy)",
+      "documentsHint": "Biznes-reja yoki moliyaviy hisobotlar tekshiruvga yordam beradi. Pasportingizni yuklamang. Bularni faqat siz va tekshiruv jamoasi koʻradi. PDF, JPG yoki PNG, 10 MB gacha.",
       "kind": "Hujjat turi",
       "upload": "Hujjat yuklash",
       "kinds": {
@@ -889,19 +919,9 @@
       },
       "registrationRequired": "Roʻyxat raqami (YaTT / MChJ / NNT yoki STIR)",
       "registrationLaterHint": "Hali roʻyxatdan oʻtmagan boʻlsangiz, boʻsh qoldiring. Birinchi toʻlovdan oldin kerak boʻladi.",
-      "neededTitle": "Bizga kerak",
-      "need": {
-        "identity": "Pasport yoki ID-karta (rasm yoki PDF)",
-        "registrationNumber": "Roʻyxat raqami",
-        "registrationDocument": "Roʻyxatdan oʻtganlik guvohnomasi"
-      },
-      "needDone": "tayyor",
-      "needMissing": "hali kerak",
       "gap": {
         "profile": "Asoschi profilini toʻldiring.",
-        "identity": "Pasport yoki ID-kartangizni yuklang.",
-        "registrationNumber": "Roʻyxat raqamini kiriting.",
-        "registrationDocument": "Roʻyxatdan oʻtganlik guvohnomasini yuklang."
+        "registrationNumber": "Roʻyxat raqamini kiriting."
       }
     },
     "review": {
@@ -1017,7 +1037,16 @@
     "milestone_returned": "{{project}} bosqichi uchun qoʻshimcha dalil kerak",
     "content_reported": "Kimdir kontent ustidan shikoyat qildi",
     "user_signed_up": "Yangi foydalanuvchi: {{name}} ({{email}})",
-    "page_feedback": "Sahifa haqida yangi fikr: {{page}}"
+    "page_feedback": "Sahifa haqida yangi fikr: {{page}}",
+    "registration_added": "{{project}}: asoschi kompaniya raqamini qoʻshdi. Tekshirib chiqing",
+    "project_funded_register": "{{project}} maqsadga yetdi! Sarmoyadorlar toʻlashi uchun {{date}} gacha MChJ oching",
+    "new_pledge": "{{project}} uchun {{amount}} yangi vaʼda",
+    "pledge_paid": "Sarmoyador {{project}} uchun {{amount}} toʻladi",
+    "pledge_recorded": "{{project}} uchun {{amount}} vaʼdangiz qayd etildi. Hali hech narsa olinmadi",
+    "pledge_payment_due": "{{project}} endi roʻyxatdan oʻtgan kompaniya. Vaʼdangizni {{date}} gacha toʻlang",
+    "pledge_payment_due_owner": "Kompaniya tasdiqlandi. {{project}} sarmoyadorlari {{date}} gacha toʻlaydi",
+    "pledges_cancelled": "{{project}}: kompaniya oʻz vaqtida ochilmadi, vaʼdalar bekor qilindi. Hech qanday pul olinmagan",
+    "pledges_unpaid": "{{project}}: {{amount}} vaʼda oʻz vaqtida toʻlanmadi va chiqarib tashlandi"
   },
   "content": {
     "updated": "Oxirgi yangilanish: {{date}}",
@@ -1116,7 +1145,7 @@
     "applyTitle": "Ariza uchun",
     "payoutTitle": "Pul berilishidan oldin",
     "modelsTitle": "Mumkin boʻlgan turlar",
-    "needId": "Loyihani yuritadigan shaxsning pasporti yoki ID-kartasi",
+    "needId": "OneID (id.egov.uz) orqali shaxsingizni tasdiqlash. Pasport yuklanmaydi; OneID ulanguncha qisqa videoqoʻngʻiroq",
     "needBudget": "Soʻmdagi byudjet, har bir xarajat alohida qatorda",
     "needStages": "Bosqichlar (odatda 3–6 ta): nima, qachon qilinadi va pulning qancha ulushi beriladi",
     "needStory": "Muqova rasmi va loyiha hikoyasi (kamida 200 belgi)",
@@ -1270,35 +1299,73 @@
   "organizer": {
     "individual": {
       "name": "Shaxs yoki jamoa",
-      "short": "Hali kompaniya yoʻq. Ariza uchun pasport yetarli.",
+      "short": "Hali kompaniya yoʻq. Shu holingizda ariza berishingiz mumkin.",
       "payout": "YaTT yoki MChJ sifatida roʻyxatdan oʻting va raqamini qoʻshing. Buni my.gov.uz orqali onlayn qilish mumkin.",
-      "payoutRule": "Pasport bilan ariza berib, pul yigʻishingiz mumkin. Birinchi bosqich puli berilishidan oldin YaTT (yoki MChJ) sifatida roʻyxatdan oʻting va raqamini qoʻshing. Buni my.gov.uz orqali onlayn qilish mumkin.",
+      "payoutRule": "Kompaniyasiz ham ariza berib, pul yigʻishingiz mumkin. Birinchi bosqich puli berilishidan oldin YaTT (yoki MChJ) sifatida roʻyxatdan oʻting va raqamini qoʻshing. Buni my.gov.uz orqali onlayn qilish mumkin.",
       "dashboardNotice": "Birinchi bosqich puli berilishidan oldin YaTT yoki MChJ sifatida roʻyxatdan oʻting va roʻyxat raqamini shu yerga qoʻshing. Roʻyxatdan my.gov.uz orqali onlayn oʻtish mumkin.",
       "saveNumber": "Raqamni saqlash"
     },
     "yatt": {
       "name": "Yakka tartibdagi tadbirkor (YaTT)",
       "short": "YaTT sifatida roʻyxatdan oʻtgansiz.",
-      "apply": "YaTT guvohnomasi va uning raqami",
+      "apply": "YaTT roʻyxat raqamingiz (STIR)",
       "payout": "YaTT nomidagi bank hisobi",
       "numberHint": "YaTT guvohnomasi raqami yoki STIR."
     },
     "mchj": {
       "name": "Kompaniya (MChJ)",
-      "short": "Masʼuliyati cheklangan jamiyat. Mushoraka faqat shu bilan mumkin.",
-      "apply": "Kompaniyaning roʻyxatdan oʻtganlik guvohnomasi va uning raqami",
-      "applyEquity": "Mushoraka uchun: soʻnggi moliyaviy hisobotlar (tavsiya etiladi)",
+      "short": "Masʼuliyati cheklangan jamiyat. Mushoraka sarmoyadorlari darhol toʻlaydi.",
+      "apply": "Kompaniyaning roʻyxat raqami (STIR)",
       "payout": "Kompaniya nomidagi bank hisobi",
       "numberHint": "MChJ guvohnomasi raqami yoki STIR."
     },
     "ngo": {
       "name": "Notijorat tashkilot (NNT)",
       "short": "Roʻyxatdan oʻtgan nodavlat notijorat tashkilot. Xayriya loyihalari.",
-      "apply": "Tashkilotning roʻyxatdan oʻtganlik guvohnomasi va uning raqami",
+      "apply": "Tashkilotning roʻyxat raqami (STIR)",
       "payout": "Tashkilot nomidagi bank hisobi",
       "numberHint": "NNT roʻyxat raqami yoki STIR."
     },
-    "equityNeedsMchj": "Roʻyxatdan oʻtgan kompaniya (MChJ) kerak.",
-    "ngoDonationOnly": "Notijorat tashkilotlar xayriya loyihalarini olib boradi."
+    "ngoDonationOnly": "Notijorat tashkilotlar xayriya loyihalarini olib boradi.",
+    "payLaterShort": "Kompaniya yoʻqmi? Sarmoyadorlar hozir vaʼda beradi, MChJ ochganingizdan keyin toʻlaydi.",
+    "payLaterRule": "Kompaniyasiz mushoraka: sarmoyadorlar vaʼda beradi, hech qanday pul olinmaydi. Maqsadga yetsangiz, 60 kun ichida MChJ roʻyxatdan oʻtkazing va raqamini qoʻshing. Jamoamiz tekshiradi, soʻng sarmoyadorlar 7 kun ichida toʻlaydi. Shundan keyin bosqich pullari odatdagidek beriladi."
+  },
+  "identity": {
+    "sectionTitle": "Siz kimsiz",
+    "title": "Shaxsingizni tasdiqlang",
+    "noUpload": "Pasport yuklash shart emas. OneID (id.egov.uz) orqali kiring: ism-familiyangiz va pasport maʼlumotlaringiz davlat bazasidan olinadi. Ularni faqat tekshiruv jamoasi koʻradi.",
+    "verifyOneId": "OneID orqali tasdiqlash",
+    "comingSoon": "Tez orada",
+    "videoCallMeanwhile": "OneID ulanguncha loyihangizni koʻrib chiqishda jamoamiz qisqa videoqoʻngʻiroq orqali shaxsingizni tasdiqlaydi. Pasport yoki ID-kartangizni yoningizda tuting.",
+    "oneidFailed": "OneID orqali tekshirib boʻlmadi. Qaytadan urinib koʻring.",
+    "confirmedTitle": "Shaxs tasdiqlandi",
+    "confirmedBy": {
+      "oneid": "{{date}} kuni OneID orqali tasdiqlangan.",
+      "video_call": "{{date}} kuni Fundy jamoasi videoqoʻngʻiroqda tasdiqlagan."
+    }
+  },
+  "payLater": {
+    "label": "roʻyxatdan keyin toʻlov",
+    "dialog": "Asoschining hali kompaniyasi yoʻq, shuning uchun bu vaʼda: hozir pul olinmaydi. Maqsadga yetilsa, asoschida MChJ ochish uchun {{days}} kun bor. Jamoamiz tekshirgach, siz {{payDays}} kun ichida toʻlaysiz. Kompaniya ochilmasa, vaʼda bekor qilinadi.",
+    "note": {
+      "active": "Hali kompaniya yoʻq: sarmoyadorlar hozir vaʼda beradi, pul olinmaydi. Maqsadga yetilsa, asoschi {{days}} kun ichida MChJ ochadi, soʻng sarmoyadorlar {{payDays}} kun ichida toʻlaydi.",
+      "registering": "Maqsadga yetildi. Asoschi kompaniya ochmoqda ({{date}} gacha). Sarmoyadorlar shundan keyin toʻlaydi.",
+      "paying": "Kompaniya roʻyxatdan oʻtdi. Sarmoyadorlar vaʼdalarini {{date}} gacha toʻlaydi."
+    },
+    "backer": {
+      "pledged": "Vaʼda berilgan, toʻlanmagan",
+      "noMoneyYet": "Pul olinmagan. Faqat kompaniya roʻyxatdan oʻtsa toʻlaysiz.",
+      "waitingCompany": "Kompaniya kutilmoqda ({{date}} gacha)",
+      "payBy": "{{date}} gacha toʻlang",
+      "payNow": "Hozir toʻlash",
+      "payConfirm": "{{amount}} hozir toʻlansinmi? (Demo: haqiqiy pul oʻtkazilmaydi.)",
+      "cancelled": "Vaʼda bekor qilindi, pul olinmagan"
+    },
+    "founder": {
+      "active": "Sarmoyadorlar hozir vaʼda beradi, hali pul olinmaydi. Maqsadga yetsangiz, MChJ ochish uchun 60 kuningiz boʻladi.",
+      "register": "Maqsadga yetdingiz! {{date}} gacha MChJ roʻyxatdan oʻtkazing va raqamini shu yerga qoʻshing. Buni my.gov.uz orqali onlayn qilish mumkin. Aks holda barcha vaʼdalar bekor qilinadi.",
+      "checking": "Rahmat. Jamoamiz kompaniyangizni tekshirmoqda. Soʻng sarmoyadorlardan 7 kun ichida toʻlash soʻraladi.",
+      "paying": "Kompaniya tasdiqlandi. Sarmoyadorlar vaʼdalarini {{date}} gacha toʻlaydi. Toʻlanmagan vaʼdalar shundan keyin chiqarib tashlanadi."
+    }
   }
 }

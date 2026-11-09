@@ -77,6 +77,16 @@ const TEXT: Record<string, Record<Lang, string>> = {
     ru: '↩️ Подтверждение этапа вернули',
     en: '↩️ Stage proof was sent back',
   },
+  pledge_payment_due: {
+    uz: '🏢 Kompaniya roʻyxatdan oʻtdi — vaʼdangizni 7 kun ichida toʻlang',
+    ru: '🏢 Компания зарегистрирована — оплатите обещанную сумму в течение 7 дней',
+    en: '🏢 The company is registered — pay your pledge within 7 days',
+  },
+  pledges_cancelled: {
+    uz: 'Vaʼdalar bekor qilindi — hech qanday pul olinmadi',
+    ru: 'Обещания отменены — деньги не списывались',
+    en: 'Pledges were cancelled — no money was taken',
+  },
   open: { uz: 'Ochish', ru: 'Открыть', en: 'Open' },
   user_signed_up: { uz: '👤 Yangi foydalanuvchi', ru: '👤 Новый пользователь', en: '👤 New user signed up' },
   page_feedback: { uz: '💬 Sahifa haqida fikr', ru: '💬 Отзыв о странице', en: '💬 Page feedback' },
@@ -178,7 +188,12 @@ async function sendLaunchVideo(chatId: number, lang: string) {
   });
   // If Telegram can't take it as a video, send it as a file, and as a last resort the link.
   if (!sent.ok) {
-    const doc = await telegram('sendDocument', { chat_id: chatId, document: LAUNCH_VIDEO, caption, parse_mode: 'HTML' });
+    const doc = await telegram('sendDocument', {
+      chat_id: chatId,
+      document: LAUNCH_VIDEO,
+      caption,
+      parse_mode: 'HTML',
+    });
     if (!doc.ok) await telegram('sendMessage', { chat_id: chatId, text: LAUNCH_VIDEO });
   }
 }

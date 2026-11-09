@@ -10,6 +10,7 @@ import { formatMoney, formatNumber } from '@/lib/money';
 import { Alert, Button } from '@/components/ui';
 import type { Database } from '@/lib/database.types';
 import { BackerSuccess } from '@/features/projects/BackerSuccess';
+import { PAYMENT_DAYS, REGISTRATION_DAYS } from '@/features/wizard/organizer';
 
 type PaymentMethod = Database['public']['Enums']['payment_method'];
 const METHODS: PaymentMethod[] = ['click', 'payme', 'uzcard', 'humo', 'bank_wire'];
@@ -51,6 +52,8 @@ export function ContributeDialog({
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
   const shareUrl = `${window.location.origin}/projects/${project.slug}`;
+  // No company yet: this is a promise to invest. Payment comes after the MChJ is registered.
+  const pledge = project.payAfterRegistration;
 
   const minimum = Math.max(project.minContribution, project.equity?.min_investment ?? 0);
   const tier = project.rewards.find(r => r.id === rewardId) ?? null;
@@ -120,7 +123,7 @@ export function ContributeDialog({
         <header className="sticky top-0 bg-card border-b border-slate-100 px-5 py-4 flex items-start justify-between gap-4">
           <div>
             <h2 id="contribute-title" className="text-base font-bold text-ink">
-              {t(`contribute.title.${project.model}`)}
+              {pledge ? t('contribute.title.pledge') : t(`contribute.title.${project.model}`)}
             </h2>
             <p className="text-xs text-slate-500 line-clamp-1">{title}</p>
           </div>
@@ -138,7 +141,15 @@ export function ContributeDialog({
           <BackerSuccess
             title={title}
             shareUrl={shareUrl}
-            detail={t('contribute.successText', { amount: formatMoney(amount), project: title })}
+            detail={
+              pledge
+                ? t('contribute.pledgeSuccess', {
+                    amount: formatMoney(amount),
+                    project: title,
+                    days: REGISTRATION_DAYS,
+                  })
+                : t('contribute.successText', { amount: formatMoney(amount), project: title })
+            }
             extra={tier ? t('contribute.successReward', { reward: tier.title }) : undefined}
             onClose={onClose}
           />
@@ -224,26 +235,30 @@ export function ContributeDialog({
               </div>
             )}
 
-            <fieldset className="space-y-2">
-              <legend className="text-sm font-medium text-slate-700 mb-1">{t('contribute.method')}</legend>
-              <div className="flex flex-wrap gap-2">
-                {METHODS.map(m => (
-                  <button
-                    key={m}
-                    type="button"
-                    aria-pressed={method === m}
-                    onClick={() => setMethod(m)}
-                    className={`px-3 py-1.5 rounded-lg border text-xs font-semibold ${
-                      method === m
-                        ? 'border-ink bg-brand-soft text-ink'
-                        : 'border-slate-200 text-slate-700 hover:bg-slate-50'
-                    }`}
-                  >
-                    {t(`contribute.methods.${m}`)}
-                  </button>
-                ))}
-              </div>
-            </fieldset>
+            {pledge ? (
+              <Alert variant="info">{t('payLater.dialog', { days: REGISTRATION_DAYS, payDays: PAYMENT_DAYS })}</Alert>
+            ) : (
+              <fieldset className="space-y-2">
+                <legend className="text-sm font-medium text-slate-700 mb-1">{t('contribute.method')}</legend>
+                <div className="flex flex-wrap gap-2">
+                  {METHODS.map(m => (
+                    <button
+                      key={m}
+                      type="button"
+                      aria-pressed={method === m}
+                      onClick={() => setMethod(m)}
+                      className={`px-3 py-1.5 rounded-lg border text-xs font-semibold ${
+                        method === m
+                          ? 'border-ink bg-brand-soft text-ink'
+                          : 'border-slate-200 text-slate-700 hover:bg-slate-50'
+                      }`}
+                    >
+                      {t(`contribute.methods.${m}`)}
+                    </button>
+                  ))}
+                </div>
+              </fieldset>
+            )}
 
             <label className="flex items-start gap-2 text-sm text-slate-700">
               <input
@@ -273,7 +288,9 @@ export function ContributeDialog({
             {error && <Alert variant="error">{error}</Alert>}
 
             <Button type="submit" fullWidth loading={busy} disabled={!acceptedRisk}>
-              {t('contribute.submit', { amount: formatMoney(amount || 0) })}
+              {pledge
+                ? t('contribute.submitPledge', { amount: formatMoney(amount || 0) })
+                : t('contribute.submit', { amount: formatMoney(amount || 0) })}
             </Button>
             <p className="text-xs text-slate-400 text-center">{t('contribute.demoNote')}</p>
           </form>

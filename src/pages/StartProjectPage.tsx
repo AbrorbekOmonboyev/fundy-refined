@@ -6,14 +6,20 @@ import { useAuth } from '@/features/auth/AuthContext';
 import { pickText } from '@/features/projects/api';
 import { useMyProjects } from '@/features/projects/hooks';
 import { BasicsStep } from '@/features/wizard/steps/BasicsStep';
-import { ORGANIZERS, allowedModels, isOrganizer, type OrganizerType } from '@/features/wizard/organizer';
+import {
+  ORGANIZERS,
+  allowedModels,
+  isOrganizer,
+  paysAfterRegistration,
+  type OrganizerType,
+} from '@/features/wizard/organizer';
 import { usePageMeta } from '@/lib/usePageMeta';
 
-/** What each kind of organiser adds when applying, after the passport. Same rules as submit_project(). */
+/** What each kind of organiser adds when applying, after the identity check. Same rules as submit_project(). */
 const APPLY_EXTRA = {
   individual: [],
   yatt: ['organizer.yatt.apply'],
-  mchj: ['organizer.mchj.apply', 'organizer.mchj.applyEquity'],
+  mchj: ['organizer.mchj.apply'],
   ngo: ['organizer.ngo.apply'],
 } as const satisfies Record<OrganizerType, readonly string[]>;
 
@@ -133,7 +139,12 @@ export function StartLandingPage() {
             <ul className="space-y-1.5 text-base text-slate-700">
               {(['donation', 'reward', 'equity'] as const).map(m =>
                 models.includes(m) ? (
-                  <li key={m}>{t(`models.${m}.name`)}</li>
+                  <li key={m}>
+                    {t(`models.${m}.name`)}
+                    {paysAfterRegistration(who, m) && (
+                      <span className="block text-sm text-slate-600">{t('organizer.payLaterShort')}</span>
+                    )}
+                  </li>
                 ) : (
                   <li key={m} className="flex items-baseline gap-1.5 text-slate-500">
                     <Lock className="w-3.5 h-3.5 shrink-0 self-center" aria-hidden />
@@ -141,7 +152,7 @@ export function StartLandingPage() {
                       {t(`models.${m}.name`)}
                       <span className="text-sm">
                         {' · '}
-                        {t(m === 'equity' ? 'organizer.equityNeedsMchj' : 'organizer.ngoDonationOnly')}
+                        {t('organizer.ngoDonationOnly')}
                       </span>
                     </span>
                   </li>

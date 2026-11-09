@@ -43,8 +43,8 @@ async function createDraft(
      values ($1, $2, $3, $4, 'technology', $5, 'x/cover.jpg') returning id`,
     [ownerId, slug, model, organizer, target],
   );
-  if (opts.identity !== false) await addDocument(ownerId, project.id, 'identity');
-  if (organizer !== 'individual') await addDocument(ownerId, project.id, 'registration');
+  // Identity is confirmed outside the wizard (OneID, or an admin after a video call).
+  if (opts.identity !== false) await confirmIdentity(ownerId);
   await as(
     db,
     user(ownerId),
@@ -65,6 +65,14 @@ async function createDraft(
     [project.id],
   );
   return project.id;
+}
+
+/** The founder's identity is confirmed (written as the database owner, like the OneID function does). */
+async function confirmIdentity(userId: string) {
+  await db.query(
+    `insert into public.founder_identities (user_id, method) values ($1, 'oneid') on conflict (user_id) do nothing`,
+    [userId],
+  );
 }
 
 /** A private document (ID, certificate, ...) the founder uploaded for the review team. */
@@ -1693,35 +1701,27 @@ describe('who is raising the money (organiser type)', () => {
     ]);
   });
 
-  test('musharakah needs a company, and a non-profit runs donations only', async () => {
-    for (const [organizer, model] of [
-      ['individual', 'equity'],
-      ['yatt', 'equity'],
-      ['ngo', 'equity'],
-      ['ngo', 'reward'],
-    ]) {
+  test('anyone may run Musharakah, but a non-profit runs donations only', async () => {
+    for (const model of ['equity', 'reward']) {
       await rejects(
-        createDraft(gulnora, `bad-${organizer}-${model}`, { organizer, model }),
+        createDraft(gulnora, `bad-ngo-${model}`, { organizer: 'ngo', model }),
         /projects_model_fits_organizer/,
       );
     }
-    const id = await createDraft(gulnora, 'ok-individual-reward', { model: 'reward', organizer: 'individual' });
-    await rejects(
-      as(db, user(gulnora), `update public.projects set model = 'equity' where id = $1`, [id]),
-      /projects_model_fits_organizer/,
-    );
+    await createDraft(gulnora, 'ok-individual-equity', { model: 'equity', organizer: 'individual' });
+    await createDraft(gulnora, 'ok-yatt-equity', { model: 'equity', organizer: 'yatt' });
   });
 
-  test('submitting needs the organiser type and an ID document', async () => {
+  test('submitting needs the organiser type, but no uploaded ID', async () => {
     const noType = await createDraft(gulnora, 'no-type');
     await db.query(`update public.projects set organizer_type = null where id = $1`, [noType]);
     await rejects(as(db, user(gulnora), `select public.submit_project($1)`, [noType]), /organizer_type_missing/);
 
-    const noId = await createDraft(gulnora, 'no-id', { identity: false });
-    await rejects(as(db, user(gulnora), `select public.submit_project($1)`, [noId]), /identity_document_missing/);
+    const noUpload = await createDraft(gulnora, 'no-upload', { identity: false });
+    await as(db, user(gulnora), `select public.submit_project($1)`, [noUpload]);
   });
 
-  test('a registered organiser also needs the number and the certificate', async () => {
+  test('a registered organiser types its number (no certificate upload)', async () => {
     const id = await createDraft(gulnora, 'gulnora-yatt', { organizer: 'yatt' });
     await rejects(as(db, user(gulnora), `select public.submit_project($1)`, [id]), /registration_number_missing/);
     await as(
@@ -1730,16 +1730,15 @@ describe('who is raising the money (organiser type)', () => {
       `update public.founder_profiles set registration_number = 'YaTT 777' where user_id = $1`,
       [gulnora],
     );
-    await db.query(`delete from public.project_documents where project_id = $1 and kind = 'registration'`, [id]);
-    await rejects(as(db, user(gulnora), `select public.submit_project($1)`, [id]), /registration_document_missing/);
+    await as(db, user(gulnora), `select public.submit_project($1)`, [id]);
     await as(db, user(gulnora), `update public.founder_profiles set registration_number = null where user_id = $1`, [
       gulnora,
     ]);
   });
 
-  test('an individual applies with a passport, but is paid only after registering', async () => {
+  test('an individual applies without a company, but is paid only after registering', async () => {
     const id = await createDraft(gulnora, 'gulnora-passport-only');
-    await as(db, user(gulnora), `select public.submit_project($1)`, [id]); // passport is enough to apply
+    await as(db, user(gulnora), `select public.submit_project($1)`, [id]);
     await evaluateAndApprove(id);
     await db.query(`update public.projects set status = 'funded' where id = $1`, [id]);
     const [{ id: milestoneId }] = await as<{ id: string }>(
@@ -1765,5 +1764,231 @@ describe('who is raising the money (organiser type)', () => {
       [gulnora],
     );
     await as(db, user(admin), `select public.admin_approve_milestone($1)`, [milestoneId]);
+  });
+});
+
+describe('identity without uploading a passport', () => {
+  let timur: string;
+
+  before(async () => {
+    timur = await createUser(db, 'Timur Founder');
+    await as(db, user(timur), `insert into public.founder_profiles (user_id, display_name) values ($1, 'Timur')`, [
+      timur,
+    ]);
+  });
+
+  test('an admin approves only once the identity is confirmed', async () => {
+    const id = await createDraft(timur, 'timur-unchecked', { identity: false });
+    await as(db, user(timur), `select public.submit_project($1)`, [id]);
+    await rejects(evaluateAndApprove(id), /identity_not_confirmed/);
+    await as(db, user(admin), `select public.admin_confirm_identity($1, 'Video call, face matched the profile')`, [
+      timur,
+    ]);
+    await as(db, user(admin), `select public.admin_review_project($1, 'approve')`, [id]);
+  });
+
+  test('only the founder and admins can see it, and nobody writes it directly', async () => {
+    const read = (who: string) =>
+      as(db, user(who), `select * from public.founder_identities where user_id = $1`, [timur]);
+    assert.equal((await read(timur)).length, 1);
+    assert.equal((await read(admin)).length, 1);
+    assert.equal((await read(bob)).length, 0);
+    await rejects(
+      as(db, user(bob), `insert into public.founder_identities (user_id, method) values ($1, 'oneid')`, [bob]),
+      /permission denied/,
+    );
+    await rejects(as(db, user(bob), `select public.admin_confirm_identity($1)`, [bob]), /admin|permission/);
+    await rejects(as(db, user(admin), `select public.admin_confirm_identity($1)`, [admin]), /cannot_verify_self/);
+  });
+
+  test('a video call never replaces a OneID check', async () => {
+    const zara = await createUser(db, 'Zara OneID');
+    await db.query(
+      `insert into public.founder_identities (user_id, method, pinfl) values ($1, 'oneid', '12345678901234')`,
+      [zara],
+    );
+    await as(db, user(admin), `select public.admin_confirm_identity($1, 'call')`, [zara]);
+    await as(db, user(admin), `select public.admin_clear_identity($1)`, [zara]);
+    const [row] = await as<{ method: string }>(
+      db,
+      user(admin),
+      `select method::text from public.founder_identities where user_id = $1`,
+      [zara],
+    );
+    assert.equal(row.method, 'oneid');
+  });
+});
+
+describe('Musharakah: pledge now, pay after registration', () => {
+  let sardor: string; // a founder with no company yet
+  let projectId: string;
+
+  async function equityTerms(ownerId: string, id: string) {
+    await as(
+      db,
+      user(ownerId),
+      `insert into public.equity_terms (project_id, contract_type, investor_profit_share_pct, min_investment, distribution_schedule, exit_horizon_years) values ($1, 'musharakah', 20, 1000000, 'quarterly', 5)`,
+      [id],
+    );
+  }
+  async function liveStartup(slug: string) {
+    const id = await createDraft(sardor, slug, { model: 'equity', organizer: 'individual' });
+    await equityTerms(sardor, id);
+    await as(db, user(sardor), `select public.submit_project($1)`, [id]);
+    await evaluateAndApprove(id);
+    return id;
+  }
+  async function statuses(id: string) {
+    const { rows } = await db.query<{ status: string }>(
+      `select status::text from public.contributions where project_id = $1 order by created_at, amount desc`,
+      [id],
+    );
+    return rows.map(r => r.status);
+  }
+  async function project(id: string) {
+    const { rows } = await db.query<{
+      status: string;
+      raised_amount: string;
+      registration_due_at: string | null;
+      organizer_type: string;
+    }>(
+      `select status::text, raised_amount::text, registration_due_at, organizer_type::text from public.projects where id = $1`,
+      [id],
+    );
+    return rows[0];
+  }
+  const close = () => db.query(`select private.close_ended_projects()`);
+  const endNow = (id: string) =>
+    db.query(`update public.projects set ends_at = now() - interval '1 minute' where id = $1`, [id]);
+
+  before(async () => {
+    sardor = await createUser(db, 'Sardor Startup');
+    await as(db, user(sardor), `insert into public.founder_profiles (user_id, display_name) values ($1, 'Sardor')`, [
+      sardor,
+    ]);
+    projectId = await liveStartup('sardor-startup');
+  });
+
+  test('investing is a pledge: it counts toward the goal, but no money is taken', async () => {
+    await as(db, user(bob), `select public.contribute($1, 6000000, 'click')`, [projectId]);
+    await as(db, user(carol), `select public.contribute($1, 4000000, 'payme')`, [projectId]);
+    assert.deepEqual(await statuses(projectId), ['pledged', 'pledged']);
+    assert.equal((await project(projectId)).raised_amount, '10000000');
+  });
+
+  test('paying is not possible before the company is registered', async () => {
+    const [{ id }] = await as<{ id: string }>(
+      db,
+      user(bob),
+      `select id from public.contributions where project_id = $1 and backer_id = $2`,
+      [projectId, bob],
+    );
+    await rejects(as(db, user(bob), `select public.pay_pledge($1, 'click')`, [id]), /pledge_payment_not_open/);
+  });
+
+  test('goal reached → the founder gets 60 days to register', async () => {
+    await endNow(projectId);
+    await close();
+    const p = await project(projectId);
+    assert.equal(p.status, 'funded');
+    const days = (new Date(p.registration_due_at!).getTime() - Date.now()) / 86_400_000;
+    assert.ok(days > 59 && days <= 60);
+  });
+
+  test('an admin confirms the MChJ once its number is given; investors are then asked to pay', async () => {
+    await rejects(
+      as(db, user(admin), `select public.admin_confirm_registration($1)`, [projectId]),
+      /registration_number_missing/,
+    );
+    await rejects(as(db, user(bob), `select public.admin_confirm_registration($1)`, [projectId]), /admin|permission/);
+    await as(
+      db,
+      user(sardor),
+      `update public.founder_profiles set registration_number = 'MChJ 312345678' where user_id = $1`,
+      [sardor],
+    );
+    const told = await as(
+      db,
+      user(admin),
+      `select 1 from public.notifications where user_id = $1 and type = 'project_submitted' and data->>'registration' = 'true' and data->>'project_id' = $2`,
+      [admin, projectId],
+    );
+    assert.equal(told.length, 1, 'admins hear that the company number was added');
+    await as(db, user(admin), `select public.admin_confirm_registration($1)`, [projectId]);
+    assert.equal((await project(projectId)).organizer_type, 'mchj');
+    const due = await as(
+      db,
+      user(bob),
+      `select 1 from public.notifications where user_id = $1 and type = 'pledge_payment_due' and data->>'project_id' = $2`,
+      [bob, projectId],
+    );
+    assert.equal(due.length, 1);
+  });
+
+  test('stage money waits until pledges are paid; unpaid pledges are dropped after 7 days', async () => {
+    const [{ id: milestoneId }] = await as<{ id: string }>(
+      db,
+      anon,
+      `select id from public.milestones where project_id = $1 order by position limit 1`,
+      [projectId],
+    );
+    await as(
+      db,
+      user(sardor),
+      `select public.submit_milestone($1, 'Stage one is done; photos and receipts attached.')`,
+      [milestoneId],
+    );
+    await rejects(
+      as(db, user(admin), `select public.admin_approve_milestone($1)`, [milestoneId]),
+      /pledges_not_paid_yet/,
+    );
+
+    const [{ id: bobPledge }] = await as<{ id: string }>(
+      db,
+      user(bob),
+      `select id from public.contributions where project_id = $1 and backer_id = $2`,
+      [projectId, bob],
+    );
+    await rejects(as(db, user(carol), `select public.pay_pledge($1, 'click')`, [bobPledge]), /contribution_not_found/);
+    await as(db, user(bob), `select public.pay_pledge($1, 'uzcard')`, [bobPledge]);
+    await rejects(as(db, user(bob), `select public.pay_pledge($1, 'uzcard')`, [bobPledge]), /pledge_not_open/);
+
+    // Carol never pays.
+    await db.query(`update public.projects set pledge_payment_due_at = now() - interval '1 minute' where id = $1`, [
+      projectId,
+    ]);
+    await close();
+    assert.deepEqual(await statuses(projectId), ['confirmed', 'cancelled']);
+    assert.equal((await project(projectId)).raised_amount, '6000000');
+    await as(db, user(admin), `select public.admin_approve_milestone($1)`, [milestoneId]);
+  });
+
+  test('no registration in 60 days → the campaign closes and every pledge is cancelled', async () => {
+    const id = await liveStartup('sardor-second-try');
+    await as(db, user(bob), `select public.contribute($1, 10000000, 'click')`, [id]);
+    await endNow(id);
+    await close();
+    await db.query(`update public.projects set registration_due_at = now() - interval '1 minute' where id = $1`, [id]);
+    await close();
+    assert.equal((await project(id)).status, 'unsuccessful');
+    assert.deepEqual(await statuses(id), ['cancelled']);
+  });
+
+  test('a campaign that misses its goal cancels pledges instead of refunding', async () => {
+    const id = await liveStartup('sardor-too-small');
+    await as(db, user(bob), `select public.contribute($1, 2000000, 'click')`, [id]);
+    await endNow(id);
+    await close();
+    assert.equal((await project(id)).status, 'unsuccessful');
+    assert.deepEqual(await statuses(id), ['cancelled']);
+  });
+
+  test('a company runs Musharakah as before: investors pay straight away', async () => {
+    const id = await createDraft(alice, 'alice-company-equity', { model: 'equity', organizer: 'mchj' });
+    await equityTerms(alice, id);
+    await as(db, user(alice), `select public.submit_project($1)`, [id]);
+    await evaluateAndApprove(id);
+    await as(db, user(bob), `select public.contribute($1, 2000000, 'click')`, [id]);
+    assert.deepEqual(await statuses(id), ['confirmed']);
   });
 });

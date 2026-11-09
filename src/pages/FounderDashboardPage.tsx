@@ -16,7 +16,7 @@ import {
 } from '@/features/wizard/api';
 import { FounderMilestones } from '@/features/community/FounderMilestones';
 import { Alert, Button, PageSpinner, TextAreaField, TextField } from '@/components/ui';
-import { formatMoney } from '@/lib/money';
+import { formatDate, formatMoney } from '@/lib/money';
 import { usePageMeta } from '@/lib/usePageMeta';
 
 const STATUS_STYLE: Record<string, string> = {
@@ -148,8 +148,11 @@ function ProjectRow({ project: p }: { project: MyProject }) {
         </Alert>
       )}
       {error && <Alert variant="error">{error}</Alert>}
-      {p.organizerType === 'individual' && ['pending_review', 'active', 'funded'].includes(p.status) && (
-        <RegisterBeforePayout />
+      {p.payAfterRegistration ? (
+        <PayLaterStatus project={p} />
+      ) : (
+        p.organizerType === 'individual' &&
+        ['pending_review', 'active', 'funded'].includes(p.status) && <RegisterBeforePayout />
       )}
 
       <div className="flex flex-wrap gap-2">
@@ -275,7 +278,16 @@ function UpdateForm({ projectId, slug, onDone }: { projectId: string; slug: stri
  * Someone who applied with only a passport must register (YaTT or MChJ) before the
  * first stage's money is released. Shown until their founder profile has the number.
  */
-function RegisterBeforePayout() {
+function RegisterBeforePayout({
+  notice,
+  hint,
+  savedText,
+}: {
+  notice?: string;
+  hint?: string;
+  /** Shown once the number is saved; without it the form simply disappears. */
+  savedText?: string;
+} = {}) {
   const { t } = useTranslation();
   const { user } = useAuth();
   const queryClient = useQueryClient();
@@ -289,7 +301,8 @@ function RegisterBeforePayout() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  if (isPending || saved) return null;
+  if (isPending) return null;
+  if (saved) return savedText ? <Alert variant="info">{savedText}</Alert> : null;
 
   async function save(e: FormEvent) {
     e.preventDefault();
@@ -311,12 +324,12 @@ function RegisterBeforePayout() {
       onSubmit={save}
       className="rounded-lg border border-amber-200 bg-amber-50 p-3 space-y-3 text-sm text-amber-900"
     >
-      <p>{t('organizer.individual.dashboardNotice')}</p>
+      <p>{notice ?? t('organizer.individual.dashboardNotice')}</p>
       <div className="flex flex-col sm:flex-row sm:items-end gap-2">
         <div className="flex-1">
           <TextField
             label={t('wizard.founder.registrationRequired')}
-            hint={t('organizer.yatt.numberHint')}
+            hint={hint ?? t('organizer.yatt.numberHint')}
             maxLength={120}
             value={number}
             onChange={e => setNumber(e.target.value)}
@@ -329,4 +342,25 @@ function RegisterBeforePayout() {
       {error && <Alert variant="error">{error}</Alert>}
     </form>
   );
+}
+
+/** Musharakah without a company yet: what the founder does at each stage. */
+function PayLaterStatus({ project: p }: { project: MyProject }) {
+  const { t } = useTranslation();
+  if (p.registrationConfirmedAt) {
+    return <Alert variant="success">{t('payLater.founder.paying', { date: formatDate(p.pledgePaymentDueAt) })}</Alert>;
+  }
+  if (p.status === 'funded') {
+    return (
+      <RegisterBeforePayout
+        notice={t('payLater.founder.register', { date: formatDate(p.registrationDueAt) })}
+        hint={t('organizer.mchj.numberHint')}
+        savedText={t('payLater.founder.checking')}
+      />
+    );
+  }
+  if (p.status === 'pending_review' || p.status === 'active') {
+    return <Alert variant="info">{t('payLater.founder.active')}</Alert>;
+  }
+  return null;
 }

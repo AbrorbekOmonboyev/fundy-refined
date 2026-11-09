@@ -189,6 +189,7 @@ const DETAIL_COLUMNS = `
       'owner:profiles!projects_owner_id_fkey ( id, full_name, avatar_path, founder_profiles!founder_profiles_user_id_fkey ( * ) )',
     )},
   owner_id, min_contribution, allow_addons_only, starts_at,
+  pay_after_registration, registration_due_at, registration_confirmed_at, pledge_payment_due_at,
   budget_items ( id, position, category, description, amount ),
   milestones ( id, position, title, description, target_label, release_percent, status ),
   reward_tiers ( id, position, title, description, amount, items, estimated_delivery, quantity_limit, claimed_count,
@@ -205,56 +206,76 @@ type DetailRow = Omit<CardRow, 'evaluations' | 'owner'> & {
   allow_addons_only: boolean;
   starts_at: string | null;
   evaluations: Tables['evaluations']['Row'] | null;
-  owner: {
-    id: string;
-    full_name: string;
-    avatar_path: string | null;
-    founder_profiles: Tables['founder_profiles']['Row'] | null;
-  } | null;
-  budget_items: Pick<Tables['budget_items']['Row'], 'id' | 'position' | 'category' | 'description' | 'amount'>[];
-  milestones: Pick<
-    Tables['milestones']['Row'],
-    'id' | 'position' | 'title' | 'description' | 'target_label' | 'release_percent' | 'status'
-  >[];
-  reward_tiers: (Omit<Tables['reward_tiers']['Row'], 'project_id'> & {
-    reward_components: Pick<Tables['reward_components']['Row'], 'id' | 'position' | 'name' | 'quantity'>[];
-  })[];
-  equity_terms: Tables['equity_terms']['Row'] | null;
-  project_updates: {
-    id: string;
-    title: string;
-    body: string;
-    likes_count: number;
-    created_at: string;
-    author: { full_name: string } | null;
-  }[];
-  comments: {
-    id: string;
-    body: string;
-    created_at: string;
-    parent_id: string | null;
-    is_backer: boolean;
-    author: { id: string; full_name: string; city: string | null; avatar_path: string | null } | null;
-  }[];
-};
+} & PledgeDates & {
+    owner: {
+      id: string;
+      full_name: string;
+      avatar_path: string | null;
+      founder_profiles: Tables['founder_profiles']['Row'] | null;
+    } | null;
+    budget_items: Pick<Tables['budget_items']['Row'], 'id' | 'position' | 'category' | 'description' | 'amount'>[];
+    milestones: Pick<
+      Tables['milestones']['Row'],
+      'id' | 'position' | 'title' | 'description' | 'target_label' | 'release_percent' | 'status'
+    >[];
+    reward_tiers: (Omit<Tables['reward_tiers']['Row'], 'project_id'> & {
+      reward_components: Pick<Tables['reward_components']['Row'], 'id' | 'position' | 'name' | 'quantity'>[];
+    })[];
+    equity_terms: Tables['equity_terms']['Row'] | null;
+    project_updates: {
+      id: string;
+      title: string;
+      body: string;
+      likes_count: number;
+      created_at: string;
+      author: { full_name: string } | null;
+    }[];
+    comments: {
+      id: string;
+      body: string;
+      created_at: string;
+      parent_id: string | null;
+      is_backer: boolean;
+      author: { id: string; full_name: string; city: string | null; avatar_path: string | null } | null;
+    }[];
+  };
 
 export type ProjectComment = DetailRow['comments'][number] & { replies: DetailRow['comments'] };
 
-export type ProjectDetail = ProjectCardData & {
-  ownerId: string;
-  minContribution: number;
-  allowAddonsOnly: boolean;
-  startsAt: string | null;
-  evaluation: Tables['evaluations']['Row'] | null;
-  founder: Tables['founder_profiles']['Row'] | null;
-  founderAvatarUrl: string | null;
-  budget: DetailRow['budget_items'];
-  milestones: DetailRow['milestones'];
-  rewards: DetailRow['reward_tiers'];
-  equity: Tables['equity_terms']['Row'] | null;
-  updates: DetailRow['project_updates'];
-  comments: ProjectComment[];
+/** Musharakah without a company yet: investors pledge, then pay once an MChJ is registered. */
+type PledgeDates = Pick<
+  Tables['projects']['Row'],
+  'pay_after_registration' | 'registration_due_at' | 'registration_confirmed_at' | 'pledge_payment_due_at'
+>;
+export type PayLater = {
+  payAfterRegistration: boolean;
+  registrationDueAt: string | null;
+  registrationConfirmedAt: string | null;
+  pledgePaymentDueAt: string | null;
 };
+const toPayLater = (r: PledgeDates): PayLater => ({
+  payAfterRegistration: r.pay_after_registration,
+  registrationDueAt: r.registration_due_at,
+  registrationConfirmedAt: r.registration_confirmed_at,
+  pledgePaymentDueAt: r.pledge_payment_due_at,
+});
+
+export type ProjectDetail = ProjectCardData &
+  PayLater & {
+    ownerId: string;
+    minContribution: number;
+    allowAddonsOnly: boolean;
+    startsAt: string | null;
+    evaluation: Tables['evaluations']['Row'] | null;
+    founder: Tables['founder_profiles']['Row'] | null;
+    founderAvatarUrl: string | null;
+    budget: DetailRow['budget_items'];
+    milestones: DetailRow['milestones'];
+    rewards: DetailRow['reward_tiers'];
+    equity: Tables['equity_terms']['Row'] | null;
+    updates: DetailRow['project_updates'];
+    comments: ProjectComment[];
+  };
 
 const byPosition = (a: { position: number }, b: { position: number }) => a.position - b.position;
 const newestFirst = (a: { created_at: string }, b: { created_at: string }) => b.created_at.localeCompare(a.created_at);
@@ -289,6 +310,7 @@ export async function getProject(slug: string): Promise<ProjectDetail | null> {
     minContribution: data.min_contribution,
     allowAddonsOnly: data.allow_addons_only,
     startsAt: data.starts_at,
+    ...toPayLater(data),
     evaluation: data.evaluations?.is_published ? data.evaluations : null,
     founder: data.owner?.founder_profiles ?? null,
     founderAvatarUrl: publicFileUrl('avatars', data.owner?.avatar_path),
@@ -363,6 +385,15 @@ export async function contribute(args: {
   return data;
 }
 
+/** Pay a Musharakah pledge once the founder's company is registered (simulated payment). */
+export async function payPledge(contributionId: string, paymentMethod: Enums['payment_method']) {
+  const { error } = await client().rpc('pay_pledge', {
+    p_contribution_id: contributionId,
+    p_payment_method: paymentMethod,
+  });
+  if (error) throw error;
+}
+
 /** One payment for several rewards and add-ons (+ extra support). Prices are taken by the database. */
 export async function contributeCart(args: {
   projectId: string;
@@ -396,16 +427,18 @@ export type MyContribution = {
   reward: { title: string } | null;
   extra_amount: number;
   contribution_items: { quantity: number; unit_amount: number; reward: { title: string } | null }[];
-  project: {
-    slug: string;
-    model: FundingModel;
-    status: ProjectStatus;
-    original_language: Language;
-    project_translations: Translation[];
-    ends_at: string | null;
-    milestones: { release_percent: number; status: Enums['milestone_status'] }[];
-    equity_terms: { distribution_schedule: Enums['distribution_schedule'] } | null;
-  } | null;
+  project:
+    | ({
+        slug: string;
+        model: FundingModel;
+        status: ProjectStatus;
+        original_language: Language;
+        project_translations: Translation[];
+        ends_at: string | null;
+        milestones: { release_percent: number; status: Enums['milestone_status'] }[];
+        equity_terms: { distribution_schedule: Enums['distribution_schedule'] } | null;
+      } & PledgeDates)
+    | null;
 };
 
 /** The signed-in user's contributions, newest first. */
@@ -416,7 +449,8 @@ export async function getMyContributions(userId: string): Promise<MyContribution
       `id, amount, payment_method, equity_share_pct, status, is_anonymous, created_at, extra_amount,
        contribution_items ( quantity, unit_amount, reward:reward_tiers ( title ) ),
        reward:reward_tiers ( title ),
-       project:projects ( slug, model, status, ends_at, original_language, project_translations ( language, title, tagline ),
+       project:projects ( slug, model, status, ends_at, original_language,
+         pay_after_registration, registration_due_at, registration_confirmed_at, pledge_payment_due_at, project_translations ( language, title, tagline ),
          milestones ( release_percent, status ), equity_terms ( distribution_schedule ) )`,
     )
     .eq('backer_id', userId)
@@ -427,18 +461,27 @@ export async function getMyContributions(userId: string): Promise<MyContribution
 }
 
 /** Projects the user owns, in every status (drafts included), newest first. */
-export type MyProject = ProjectCardData & {
-  reviewNote: string | null;
-  organizerType: Database['public']['Enums']['organizer_type'] | null;
-};
+export type MyProject = ProjectCardData &
+  PayLater & {
+    reviewNote: string | null;
+    organizerType: Database['public']['Enums']['organizer_type'] | null;
+  };
 
 export async function getMyProjects(userId: string): Promise<MyProject[]> {
   const { data, error } = await client()
     .from('projects')
-    .select(`${CARD_COLUMNS}, review_note, organizer_type`)
+    .select(
+      `${CARD_COLUMNS}, review_note, organizer_type,
+       pay_after_registration, registration_due_at, registration_confirmed_at, pledge_payment_due_at`,
+    )
     .eq('owner_id', userId)
     .order('created_at', { ascending: false })
-    .returns<(CardRow & { review_note: string | null; organizer_type: MyProject['organizerType'] })[]>();
+    .returns<(CardRow & PledgeDates & { review_note: string | null; organizer_type: MyProject['organizerType'] })[]>();
   if (error) throw error;
-  return (data ?? []).map(row => ({ ...toCard(row), reviewNote: row.review_note, organizerType: row.organizer_type }));
+  return (data ?? []).map(row => ({
+    ...toCard(row),
+    ...toPayLater(row),
+    reviewNote: row.review_note,
+    organizerType: row.organizer_type,
+  }));
 }

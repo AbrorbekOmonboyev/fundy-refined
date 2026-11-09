@@ -6,7 +6,14 @@ import { useCategories, useRegions } from '@/features/reference/useReference';
 import { createDraft, updateBasics, type Basics, type Draft } from '@/features/wizard/api';
 import { MAX_TARGET, MIN_TARGET } from '@/features/wizard/checks';
 import { useStepSave } from '@/features/wizard/hooks';
-import { ORGANIZERS, allowedModels, isOrganizer, modelAllowed, type OrganizerType } from '@/features/wizard/organizer';
+import {
+  ORGANIZERS,
+  allowedModels,
+  isOrganizer,
+  modelAllowed,
+  paysAfterRegistration,
+  type OrganizerType,
+} from '@/features/wizard/organizer';
 import { WizardShell } from '@/features/wizard/WizardShell';
 import { ChoiceGroup, NumberField, SelectField, TextField } from '@/components/ui';
 import { LANGUAGES, type Language } from '@/i18n';
@@ -115,8 +122,10 @@ export function BasicsStep({ draft }: { draft: Draft | null }) {
             value: m,
             label: t(`models.${m}.name`),
             description: blocked
-              ? t(m === 'equity' ? 'organizer.equityNeedsMchj' : 'organizer.ngoDonationOnly')
-              : t(`models.${m}.subtitle`),
+              ? t('organizer.ngoDonationOnly')
+              : paysAfterRegistration(form.organizer_type, m)
+                ? t('organizer.payLaterShort')
+                : t(`models.${m}.subtitle`),
             disabled: blocked,
           };
         })}
