@@ -6,6 +6,11 @@
 export type PhotoCredit = { author: string; license: string; source: string };
 
 export const PHOTO_CREDITS: Record<string, PhotoCredit> = {
+  '/images/projects/rashidov-classroom.jpg': {
+    author: 'Kamol Azzam (cropped)',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:O%CA%BBquv_xonasi.jpg',
+  },
   '/images/projects/aral-saxaul.jpg': {
     author: 'Humoyun Mehridinov',
     license: 'CC BY-SA 4.0',
