@@ -893,7 +893,7 @@
       "projectedHint": "Bu foiz stavkasi emas, soʻmdagi taxmin. Masalan: «1 mln soʻm ulushga yiliga ~200 ming soʻm». Bu vaʼda emas.",
       "equityError": "Shartlarni tekshiring: foyda ulushi 1–99%, minimal sarmoya va 1–30 yil.",
       "equityNote": "Mushoraka shartlari loyiha faollashishidan oldin Fundy jamoasi tomonidan koʻrib chiqiladi.",
-      "minFixed": "Eng kam miqdor: {{amount}}. Barcha loyihalar uchun bir xil."
+      "donationMinFixed": "Minimal xayriya: {{amount}}. Barcha xayriya loyihalari uchun bir xil."
     },
     "founder": {
       "title": "Siz va hujjatlaringiz",

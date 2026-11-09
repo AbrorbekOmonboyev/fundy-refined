@@ -34,11 +34,7 @@ export const REGISTRATION_DAYS = 60;
 export const PAYMENT_DAYS = 7;
 
 /** When pledged cards will be charged: the registration deadline + 1 day (estimated before the campaign ends). */
-export function expectedChargeDate(p: {
-  endsAt: string | null;
-  registrationDueAt: string | null;
-  chargeAt: string | null;
-}) {
+export function expectedChargeDate(p: { endsAt: string | null; registrationDueAt: string | null; chargeAt: string | null }) {
   if (p.chargeAt) return p.chargeAt;
   const base = p.registrationDueAt ? new Date(p.registrationDueAt) : p.endsAt ? new Date(p.endsAt) : null;
   if (!base) return null;

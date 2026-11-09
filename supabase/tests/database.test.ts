@@ -453,7 +453,10 @@ describe('contributions', () => {
       `
       select p.id, p.target_amount::text from public.projects p where slug = 'agrosmart-fergana-greenhouse'`,
     );
-    await rejects(as(db, user(carol), `select public.contribute($1, 5000, 'uzcard')`, [p.id]), /amount_below_minimum/);
+    await rejects(
+      as(db, user(carol), `select public.contribute($1, 1000000, 'uzcard')`, [p.id]),
+      /amount_below_minimum/,
+    );
     await as(db, user(carol), `select public.contribute($1, 24000000, 'uzcard')`, [p.id]);
     const [c] = await as<{ equity_share_pct: string }>(
       db,
@@ -2030,7 +2033,7 @@ describe('Musharakah: pledge now, pay after registration', () => {
   });
 });
 
-describe('the minimum is 10,000 on every project', () => {
+describe('donation minimum', () => {
   const minOf = async (id: string) => {
     const { rows } = await db.query<{ m: string }>(
       `select min_contribution::text as m from public.projects where id = $1`,
@@ -2039,26 +2042,13 @@ describe('the minimum is 10,000 on every project', () => {
     return rows[0].m;
   };
 
-  test('founders cannot change it, on any kind of project', async () => {
-    for (const model of ['donation', 'reward', 'equity']) {
-      const id = await createDraft(alice, `minimum-${model}`, { model });
-      await as(db, user(alice), `update public.projects set min_contribution = 30000000 where id = $1`, [id]);
-      assert.equal(await minOf(id), '10000');
-    }
-  });
-
-  test('a Musharakah minimum investment is 10,000 too', async () => {
-    const id = await createDraft(alice, 'minimum-investment', { model: 'equity' });
-    await as(
-      db,
-      user(alice),
-      `insert into public.equity_terms (project_id, contract_type, investor_profit_share_pct, min_investment, distribution_schedule, exit_horizon_years) values ($1, 'musharakah', 20, 5000000, 'quarterly', 5)`,
-      [id],
-    );
-    const { rows } = await db.query<{ m: string }>(
-      `select min_investment::text as m from public.equity_terms where project_id = $1`,
-      [id],
-    );
-    assert.equal(rows[0].m, '10000');
+  test('every donation project stays at 10,000; other models keep their own', async () => {
+    const id = await createDraft(alice, 'donation-minimum', { model: 'reward' });
+    await as(db, user(alice), `update public.projects set min_contribution = 500000 where id = $1`, [id]);
+    assert.equal(await minOf(id), '500000');
+    await as(db, user(alice), `update public.projects set model = 'donation' where id = $1`, [id]);
+    assert.equal(await minOf(id), '10000');
+    await as(db, user(alice), `update public.projects set min_contribution = 30000000 where id = $1`, [id]);
+    assert.equal(await minOf(id), '10000');
   });
 });

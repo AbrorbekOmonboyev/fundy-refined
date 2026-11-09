@@ -328,6 +328,10 @@ export async function saveEquity(projectId: string, terms: EquityTerms) {
   );
 }
 
+export async function saveMinContribution(projectId: string, amount: number) {
+  fail((await db().from('projects').update({ min_contribution: amount }).eq('id', projectId)).error);
+}
+
 // ---------------------------------------------------------------------------
 // Step 6 — founder and documents
 // ---------------------------------------------------------------------------

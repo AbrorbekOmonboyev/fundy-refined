@@ -1,14 +1,21 @@
 import { useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { saveEquity, saveRewards, type Draft, type EquityTerms, type RewardTier } from '@/features/wizard/api';
+import {
+  saveEquity,
+  saveMinContribution,
+  saveRewards,
+  type Draft,
+  type EquityTerms,
+  type RewardTier,
+} from '@/features/wizard/api';
 import { useStepSave } from '@/features/wizard/hooks';
 import { WizardShell } from '@/features/wizard/WizardShell';
 import { EMPTY_TIER, RewardEditor, rewardProblems } from '@/features/wizard/steps/RewardEditor';
 import { Alert, Button, ChoiceGroup, NumberField, SelectField, TextField } from '@/components/ui';
 import { formatMoney } from '@/lib/money';
 
-/** The lowest amount anyone can give, the same on every project (the database enforces it: migration 30). */
-const MINIMUM_AMOUNT = 10_000;
+/** The minimum donation, the same on every donation project (the database enforces it: migration 30). */
+const DONATION_MINIMUM = 10_000;
 
 /** Step 5: what backers get — rewards, Musharakah terms, or (donations) just the minimum amount. */
 export function TermsStep({ draft }: { draft: Draft }) {
@@ -16,12 +23,13 @@ export function TermsStep({ draft }: { draft: Draft }) {
   const { run, busy, error, setError } = useStepSave(draft.project.id, 'terms');
   const model = draft.project.model;
 
+  const [minContribution, setMinContribution] = useState(draft.project.min_contribution);
   const [tiers, setTiers] = useState<RewardTier[]>(draft.rewards.length ? draft.rewards : [{ ...EMPTY_TIER }]);
   const [equity, setEquity] = useState<EquityTerms>(
     draft.equity ?? {
       contract_type: 'musharakah',
       investor_profit_share_pct: 25,
-      min_investment: MINIMUM_AMOUNT,
+      min_investment: 1_000_000,
       projected_annual_return: '',
       distribution_schedule: 'quarterly',
       exit_horizon_years: 5,
@@ -39,16 +47,21 @@ export function TermsStep({ draft }: { draft: Draft }) {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    if (minContribution < 1000) {
+      setError(t('wizard.terms.minError'));
+      return;
+    }
     if (model === 'reward') {
       const filled = tiers
         .filter(r => r.title.trim() || r.amount)
         .map(r => ({ ...r, components: r.components.filter(c => c.name.trim()) }));
-      const problems = rewardProblems(filled, MINIMUM_AMOUNT);
+      const problems = rewardProblems(filled, minContribution);
       if (problems.length) {
-        setError(problems.map(p => t(p, { min: formatMoney(MINIMUM_AMOUNT) })).join(' '));
+        setError(problems.map(p => t(p, { min: formatMoney(minContribution) })).join(' '));
         return;
       }
       void run(async () => {
+        await saveMinContribution(draft.project.id, minContribution);
         await saveRewards(
           draft.project.id,
           filled.map(r => ({
@@ -62,20 +75,20 @@ export function TermsStep({ draft }: { draft: Draft }) {
         );
       });
     } else if (model === 'equity') {
-      const { investor_profit_share_pct: pct, exit_horizon_years: years } = equity;
-      if (pct <= 0 || pct >= 100 || years < 1 || years > 30) {
+      const { investor_profit_share_pct: pct, min_investment: min, exit_horizon_years: years } = equity;
+      if (pct <= 0 || pct >= 100 || min < 1000 || years < 1 || years > 30) {
         setError(t('wizard.terms.equityError'));
         return;
       }
       void run(async () => {
+        await saveMinContribution(draft.project.id, Math.min(minContribution, min));
         await saveEquity(draft.project.id, {
           ...equity,
-          min_investment: MINIMUM_AMOUNT,
           projected_annual_return: equity.projected_annual_return?.trim() || null,
         });
       });
     } else {
-      void run(async () => {});
+      void run(() => saveMinContribution(draft.project.id, DONATION_MINIMUM));
     }
   }
 
@@ -89,7 +102,18 @@ export function TermsStep({ draft }: { draft: Draft }) {
       busy={busy}
       onSubmit={handleSubmit}
     >
-      <p className="text-sm text-slate-700">{t('wizard.terms.minFixed', { amount: formatMoney(MINIMUM_AMOUNT) })}</p>
+      {model === 'donation' ? (
+        <p className="text-sm text-slate-700">
+          {t('wizard.terms.donationMinFixed', { amount: formatMoney(DONATION_MINIMUM) })}
+        </p>
+      ) : (
+        <NumberField
+          label={t('wizard.terms.minContribution')}
+          value={minContribution}
+          onValue={v => setMinContribution(Math.round(v))}
+          hint={formatMoney(minContribution || 0)}
+        />
+      )}
 
       {model === 'reward' && (
         <div className="space-y-4">
@@ -134,6 +158,12 @@ export function TermsStep({ draft }: { draft: Draft }) {
               hint={t('wizard.terms.shareHint')}
               value={equity.investor_profit_share_pct}
               onValue={v => setEquity(e => ({ ...e, investor_profit_share_pct: v }))}
+            />
+            <NumberField
+              label={t('wizard.terms.minInvestment')}
+              hint={formatMoney(equity.min_investment || 0)}
+              value={equity.min_investment}
+              onValue={v => setEquity(e => ({ ...e, min_investment: Math.round(v) }))}
             />
             <SelectField
               label={t('wizard.terms.schedule')}
