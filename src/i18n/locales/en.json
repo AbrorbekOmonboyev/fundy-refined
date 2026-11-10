@@ -680,7 +680,9 @@
     "backedFrom": "{{name}}, {{city}}",
     "backed": "{{name}}",
     "previewTitle": "Preview.",
-    "previewText": "This project isn't published yet. Only you and the Fundy team can see it."
+    "previewText": "This project isn't published yet. Only you and the Fundy team can see it.",
+    "demoBadge": "Sample",
+    "demoNotice": "This is a made-up sample project for demonstration. The business, the people and the numbers are not real."
   },
   "contribute": {
     "title": {

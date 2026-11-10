@@ -223,6 +223,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
         <p lang={text?.language} className="text-base sm:text-lg text-slate-600 leading-relaxed">
           {text?.tagline}
         </p>
+        {project.isDemo && <Alert variant="warning">{t('project.demoNotice')}</Alert>}
         {isFallback && text && (
           <p className="flex items-center gap-1.5 text-xs text-slate-500">
             <Languages className="w-3.5 h-3.5" aria-hidden />

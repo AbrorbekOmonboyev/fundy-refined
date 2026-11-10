@@ -38,7 +38,7 @@ export function daysLeft(endsAt: string | null): number {
 // ---------------------------------------------------------------------------
 const CARD_COLUMNS = `
   id, slug, model, category_id, region_id, location, cover_image_path, original_language,
-  target_amount, raised_amount, backer_count, funded_percent, status, is_featured, ends_at, created_at,
+  target_amount, raised_amount, backer_count, funded_percent, status, is_featured, is_demo, ends_at, created_at,
   project_translations ( language, title, tagline ),
   evaluations ( overall_score, is_published ),
   owner:profiles!projects_owner_id_fkey ( full_name, founder_profiles!founder_profiles_user_id_fkey ( display_name, is_verified ) )
@@ -59,6 +59,7 @@ type CardRow = {
   funded_percent: number | null;
   status: ProjectStatus;
   is_featured: boolean;
+  is_demo: boolean;
   ends_at: string | null;
   created_at: string;
   project_translations: Translation[];
@@ -79,6 +80,8 @@ export type ProjectCardData = {
   backerCount: number;
   fundedPercent: number;
   status: ProjectStatus;
+  /** A made-up sample for the demo, not a real project. */
+  isDemo: boolean;
   endsAt: string | null;
   translations: Translation[];
   originalLanguage: Language;
@@ -101,6 +104,7 @@ function toCard(row: CardRow): ProjectCardData {
     backerCount: row.backer_count,
     fundedPercent: Math.round(row.funded_percent ?? 0),
     status: row.status,
+    isDemo: row.is_demo,
     endsAt: row.ends_at,
     translations: row.project_translations,
     originalLanguage: row.original_language,

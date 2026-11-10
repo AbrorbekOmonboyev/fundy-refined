@@ -37,6 +37,12 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
           </div>
         )}
 
+        {project.isDemo && (
+          <span className="absolute top-2 left-2 z-20 rounded-md bg-night px-2 py-1 text-xs font-semibold text-white">
+            {t('project.demoBadge')}
+          </span>
+        )}
+
         <button
           type="button"
           onClick={() => saved.toggle(project.id)}

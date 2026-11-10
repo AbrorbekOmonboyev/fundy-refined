@@ -915,6 +915,7 @@ export type Database = {
           ends_at: string | null
           funded_percent: number | null
           id: string
+          is_demo: boolean
           is_featured: boolean
           location: string | null
           min_contribution: number
@@ -949,6 +950,7 @@ export type Database = {
           ends_at?: string | null
           funded_percent?: number | null
           id?: string
+          is_demo?: boolean
           is_featured?: boolean
           location?: string | null
           min_contribution?: number
@@ -983,6 +985,7 @@ export type Database = {
           ends_at?: string | null
           funded_percent?: number | null
           id?: string
+          is_demo?: boolean
           is_featured?: boolean
           location?: string | null
           min_contribution?: number
