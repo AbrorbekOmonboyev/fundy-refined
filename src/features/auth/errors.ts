@@ -57,6 +57,13 @@ const BY_CODE: Record<string, ErrorKey> = {
   account_blocked: 'errors.blocked',
   not_signed_in: 'errors.notSignedIn',
   too_many_messages: 'errors.rateLimit',
+  donation_only: 'errors.donationOnly',
+  not_a_fund: 'errors.notAFund',
+  tip_invalid: 'errors.tipInvalid',
+  tip_only_for_donations: 'errors.tipInvalid',
+  receipt_not_yours: 'errors.receiptUpload',
+  too_many_receipts: 'errors.tooManyReceipts',
+  spent_amount_invalid: 'errors.spentInvalid',
 };
 
 export function errorKey(error: unknown): ErrorKey {

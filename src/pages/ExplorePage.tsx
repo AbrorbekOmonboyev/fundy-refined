@@ -9,9 +9,11 @@ import type { FundingModel, ProjectFilters, ProjectSort } from '@/features/proje
 import { useCategories, useRegions } from '@/features/reference/useReference';
 import { usePageMeta } from '@/lib/usePageMeta';
 import { formatNumber } from '@/lib/money';
+import { DONATION_ONLY } from '@/lib/focus';
 
 const PAGE_SIZE = 12;
 const MODELS: FundingModel[] = ['equity', 'reward', 'donation'];
+const SHOW_MODEL_FILTER = !DONATION_ONLY;
 const SORTS: ProjectSort[] = ['most_funded', 'newest', 'ending_soon', 'most_backers', 'target_low'];
 const STATUSES = ['all', 'live', 'funded'] as const;
 
@@ -198,25 +200,27 @@ export function ExplorePage() {
             </button>
           </div>
 
-          <div
-            className="flex items-center gap-1 p-1 bg-slate-100 rounded-lg overflow-x-auto"
-            role="group"
-            aria-label={t('explore.model')}
-          >
-            {[null, ...MODELS].map(model => (
-              <button
-                key={model ?? 'all'}
-                type="button"
-                aria-pressed={filters.model === model}
-                onClick={() => setFilter('model', model)}
-                className={`px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-colors cursor-pointer ${
-                  filters.model === model ? 'bg-card text-ink shadow-sm' : 'text-slate-600 hover:text-ink'
-                }`}
-              >
-                {model ? t(`models.${model}.name`) : t('explore.allModels')}
-              </button>
-            ))}
-          </div>
+          {SHOW_MODEL_FILTER && (
+            <div
+              className="flex items-center gap-1 p-1 bg-slate-100 rounded-lg overflow-x-auto"
+              role="group"
+              aria-label={t('explore.model')}
+            >
+              {[null, ...MODELS].map(model => (
+                <button
+                  key={model ?? 'all'}
+                  type="button"
+                  aria-pressed={filters.model === model}
+                  onClick={() => setFilter('model', model)}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-md whitespace-nowrap transition-colors cursor-pointer ${
+                    filters.model === model ? 'bg-card text-ink shadow-sm' : 'text-slate-600 hover:text-ink'
+                  }`}
+                >
+                  {model ? t(`models.${model}.name`) : t('explore.allModels')}
+                </button>
+              ))}
+            </div>
+          )}
 
           <div className="hidden lg:flex flex-wrap items-center gap-2">{selects('')}</div>
         </div>

@@ -10,9 +10,13 @@ import { formatDate, formatMoney, formatNumber } from '@/lib/money';
 import { Alert, Button } from '@/components/ui';
 import type { Database } from '@/lib/database.types';
 import { BackerSuccess } from '@/features/projects/BackerSuccess';
+import { paths } from '@/app/routes';
 import { PAYMENT_DAYS, REGISTRATION_DAYS, expectedChargeDate } from '@/features/wizard/organizer';
 
 type PaymentMethod = Database['public']['Enums']['payment_method'];
+/** Optional tip for Fundy, as a share of the donation. Starts at 0: the donor chooses. */
+const TIP_PERCENTS = [0, 5, 10, 15] as const;
+const tipFor = (amount: number, percent: number) => Math.round((amount * percent) / 100 / 1000) * 1000;
 const METHODS: PaymentMethod[] = ['click', 'payme', 'uzcard', 'humo', 'bank_wire'];
 
 function presets(project: ProjectDetail): number[] {
@@ -51,6 +55,10 @@ export function ContributeDialog({
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
+  const [contributionId, setContributionId] = useState<string | null>(null);
+  const [tipPercent, setTipPercent] = useState<number>(0);
+  const tips = project.model === 'donation';
+  const tip = tips ? tipFor(amount || 0, tipPercent) : 0;
   const shareUrl = `${window.location.origin}/projects/${project.slug}`;
   // No company yet: this is a promise to invest. Payment comes after the MChJ is registered.
   const pledge = project.payAfterRegistration;
@@ -99,7 +107,15 @@ export function ContributeDialog({
     }
     setBusy(true);
     try {
-      await contribute({ projectId: project.id, amount, paymentMethod: method, rewardTierId: rewardId, anonymous });
+      const id = await contribute({
+        projectId: project.id,
+        amount,
+        paymentMethod: method,
+        rewardTierId: rewardId,
+        anonymous,
+        tipAmount: tip,
+      });
+      setContributionId(id);
       setDone(true);
       void queryClient.invalidateQueries({ queryKey: projectKeys.all });
     } catch (e) {
@@ -154,6 +170,7 @@ export function ContributeDialog({
                 : t('contribute.successText', { amount: formatMoney(amount), project: title })
             }
             extra={tier ? t('contribute.successReward', { reward: tier.title }) : undefined}
+            receiptHref={contributionId && !pledge ? paths.receipt(contributionId) : undefined}
             onClose={onClose}
           />
         ) : (
@@ -238,12 +255,41 @@ export function ContributeDialog({
               </div>
             )}
 
+            {tips && (
+              <fieldset className="space-y-2">
+                <legend className="text-sm font-medium text-slate-700 mb-1">{t('contribute.tip.title')}</legend>
+                <p className="text-xs text-slate-500">{t('contribute.tip.hint')}</p>
+                <div className="grid grid-cols-4 gap-2">
+                  {TIP_PERCENTS.map(p => (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => setTipPercent(p)}
+                      aria-pressed={tipPercent === p}
+                      className={`py-2 rounded-lg border text-xs font-semibold font-mono-numbers ${
+                        tipPercent === p
+                          ? 'border-ink bg-brand-soft text-ink'
+                          : 'border-slate-200 text-slate-700 hover:bg-slate-50'
+                      }`}
+                    >
+                      {p === 0 ? t('contribute.tip.none') : `${p}%`}
+                    </button>
+                  ))}
+                </div>
+                {tip > 0 && (
+                  <p className="text-xs text-slate-600">
+                    {t('contribute.tip.summary', { tip: formatMoney(tip), total: formatMoney(amount + tip) })}
+                  </p>
+                )}
+              </fieldset>
+            )}
+
             {pledge && (
               <Alert variant="info">
                 {t('payLater.dialog', { days: REGISTRATION_DAYS, payDays: PAYMENT_DAYS, date: chargeDate })}
               </Alert>
             )}
-            {(
+            {
               <fieldset className="space-y-2">
                 <legend className="text-sm font-medium text-slate-700 mb-1">{t('contribute.method')}</legend>
                 <div className="flex flex-wrap gap-2">
@@ -264,7 +310,7 @@ export function ContributeDialog({
                   ))}
                 </div>
               </fieldset>
-            )}
+            }
 
             <label className="flex items-start gap-2 text-sm text-slate-700">
               <input
@@ -308,7 +354,7 @@ export function ContributeDialog({
             <Button type="submit" fullWidth loading={busy} disabled={!acceptedRisk || (pledge && !allowCharge)}>
               {pledge
                 ? t('contribute.submitPledge', { amount: formatMoney(amount || 0) })
-                : t('contribute.submit', { amount: formatMoney(amount || 0) })}
+                : t('contribute.submit', { amount: formatMoney((amount || 0) + tip) })}
             </Button>
             <p className="text-xs text-slate-400 text-center">{t('contribute.demoNote')}</p>
           </form>

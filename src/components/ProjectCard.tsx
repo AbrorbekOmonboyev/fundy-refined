@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { Bookmark, CheckCircle, ImageOff } from 'lucide-react';
+import { BadgeCheck, Bookmark, CheckCircle, ImageOff } from 'lucide-react';
 import { responsiveImage } from '@/lib/supabase';
 import { paths } from '@/app/routes';
 import { daysLeft, pickText, type ProjectCardData } from '@/features/projects/api';
@@ -85,6 +85,12 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
             <span>{t('project.by', { name: project.founderName })}</span>
             {project.founderVerified && (
               <CheckCircle className="w-3.5 h-3.5 text-ink" aria-label={t('project.verifiedFounder')} />
+            )}
+            {project.verifiedFund !== null && (
+              <span className="inline-flex items-center gap-1 font-semibold text-brand-deep">
+                <BadgeCheck className="w-3.5 h-3.5" aria-hidden />
+                {t('project.verifiedFund')}
+              </span>
             )}
             {project.score !== null && (
               <>

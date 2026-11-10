@@ -127,7 +127,7 @@ export function PageFeedback() {
           onClick={() => setState('open')}
           aria-haspopup="dialog"
           aria-label={t('feedback.promptShort')}
-          className={`group/fb feedback-trigger inline-flex fixed z-40 left-3 lg:left-6 ${raised ? 'bottom-[calc(5rem+env(safe-area-inset-bottom))]' : 'bottom-3'} lg:bottom-6 items-center min-h-11 rounded-full border border-slate-200 bg-card p-1.5 lg:p-2 shadow-lg transition-colors hover:border-ink cursor-pointer`}
+          className={`print:hidden group/fb feedback-trigger inline-flex fixed z-40 left-3 lg:left-6 ${raised ? 'bottom-[calc(5rem+env(safe-area-inset-bottom))]' : 'bottom-3'} lg:bottom-6 items-center min-h-11 rounded-full border border-slate-200 bg-card p-1.5 lg:p-2 shadow-lg transition-colors hover:border-ink cursor-pointer`}
         >
           <span className="w-8 h-8 rounded-full bg-brand text-white flex items-center justify-center">
             <MessageSquareWarning className="w-4 h-4" aria-hidden />

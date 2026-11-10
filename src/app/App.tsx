@@ -25,6 +25,7 @@ const StartLandingPage = page(() => import('@/pages/StartProjectPage'), 'StartLa
 const ProjectEditorPage = page(() => import('@/pages/ProjectEditorPage'), 'ProjectEditorPage');
 const FounderDashboardPage = page(() => import('@/pages/FounderDashboardPage'), 'FounderDashboardPage');
 const BackerDashboardPage = page(() => import('@/pages/BackerDashboardPage'), 'BackerDashboardPage');
+const ReceiptPage = page(() => import('@/pages/ReceiptPage'), 'ReceiptPage');
 const AboutPage = page(() => import('@/pages/ContentPages'), 'AboutPage');
 const EducationPage = page(() => import('@/pages/ContentPages'), 'EducationPage');
 const PrivacyPage = page(() => import('@/pages/ContentPages'), 'PrivacyPage');
@@ -98,6 +99,14 @@ export function App() {
                 element={
                   <RequireAuth>
                     <ProjectEditorPage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/receipts/:id"
+                element={
+                  <RequireAuth>
+                    <ReceiptPage />
                   </RequireAuth>
                 }
               />

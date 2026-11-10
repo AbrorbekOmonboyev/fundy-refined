@@ -9,6 +9,7 @@ import { supabase } from '@/lib/supabase';
 import { publicFileUrl } from '@/lib/supabase';
 import type { Database } from '@/lib/database.types';
 import type { Language } from '@/i18n';
+import { DONATION_ONLY } from '@/lib/focus';
 
 type Tables = Database['public']['Tables'];
 type Enums = Database['public']['Enums'];
@@ -39,6 +40,7 @@ export function daysLeft(endsAt: string | null): number {
 const CARD_COLUMNS = `
   id, slug, model, category_id, region_id, location, cover_image_path, original_language,
   target_amount, raised_amount, backer_count, funded_percent, status, is_featured, is_demo, ends_at, created_at,
+  fund_verified_at, fund_registration_number,
   project_translations ( language, title, tagline ),
   evaluations ( overall_score, is_published ),
   owner:profiles!projects_owner_id_fkey ( full_name, founder_profiles!founder_profiles_user_id_fkey ( display_name, is_verified ) )
@@ -62,6 +64,8 @@ type CardRow = {
   is_demo: boolean;
   ends_at: string | null;
   created_at: string;
+  fund_verified_at: string | null;
+  fund_registration_number: string | null;
   project_translations: Translation[];
   evaluations: { overall_score: number | null; is_published: boolean } | null;
   owner: { full_name: string; founder_profiles: { display_name: string; is_verified: boolean } | null } | null;
@@ -82,6 +86,8 @@ export type ProjectCardData = {
   status: ProjectStatus;
   /** A made-up sample for the demo, not a real project. */
   isDemo: boolean;
+  /** The fund's registration number when Fundy has verified the fund, otherwise null. */
+  verifiedFund: string | null;
   endsAt: string | null;
   translations: Translation[];
   originalLanguage: Language;
@@ -105,6 +111,7 @@ function toCard(row: CardRow): ProjectCardData {
     fundedPercent: Math.round(row.funded_percent ?? 0),
     status: row.status,
     isDemo: row.is_demo,
+    verifiedFund: row.fund_verified_at ? (row.fund_registration_number ?? '') : null,
     endsAt: row.ends_at,
     translations: row.project_translations,
     originalLanguage: row.original_language,
@@ -154,6 +161,8 @@ export async function listProjects(filters: ProjectFilters): Promise<{ items: Pr
   if (filters.category) query = query.eq('category_id', filters.category);
   if (filters.region) query = query.eq('region_id', filters.region);
   if (filters.featured) query = query.eq('is_featured', true);
+  // Donation-only: real equity/reward projects already live run to their end; samples of them are hidden.
+  if (DONATION_ONLY) query = query.or('model.eq.donation,is_demo.eq.false');
   if (filters.excludeId) query = query.neq('id', filters.excludeId);
 
   switch (filters.sort ?? 'most_funded') {
@@ -197,7 +206,7 @@ const DETAIL_COLUMNS = `
   owner_id, min_contribution, allow_addons_only, starts_at,
   pay_after_registration, registration_due_at, registration_confirmed_at, pledge_payment_due_at, charge_at,
   budget_items ( id, position, category, description, amount ),
-  milestones ( id, position, title, description, target_label, release_percent, status ),
+  milestones ( id, position, title, description, target_label, release_percent, status, evidence, spent_amount, receipt_paths, approved_at ),
   reward_tiers ( id, position, title, description, amount, items, estimated_delivery, quantity_limit, claimed_count,
     kind, compare_at_amount, image_paths, long_description, is_featured, is_digital, is_hidden, per_backer_limit,
     available_from, available_until, reward_components ( id, position, name, quantity ) ),
@@ -222,7 +231,17 @@ type DetailRow = Omit<CardRow, 'evaluations' | 'owner'> & {
     budget_items: Pick<Tables['budget_items']['Row'], 'id' | 'position' | 'category' | 'description' | 'amount'>[];
     milestones: Pick<
       Tables['milestones']['Row'],
-      'id' | 'position' | 'title' | 'description' | 'target_label' | 'release_percent' | 'status'
+      | 'id'
+      | 'position'
+      | 'title'
+      | 'description'
+      | 'target_label'
+      | 'release_percent'
+      | 'status'
+      | 'evidence'
+      | 'spent_amount'
+      | 'receipt_paths'
+      | 'approved_at'
     >[];
     reward_tiers: (Omit<Tables['reward_tiers']['Row'], 'project_id'> & {
       reward_components: Pick<Tables['reward_components']['Row'], 'id' | 'position' | 'name' | 'quantity'>[];
@@ -382,6 +401,8 @@ export async function contribute(args: {
   paymentMethod: Enums['payment_method'];
   rewardTierId?: string | null;
   anonymous?: boolean;
+  /** Optional tip for Fundy on a donation; not part of the project's total. */
+  tipAmount?: number;
 }): Promise<string> {
   const { data, error } = await client().rpc('contribute', {
     p_project_id: args.projectId,
@@ -389,6 +410,7 @@ export async function contribute(args: {
     p_payment_method: args.paymentMethod,
     p_reward_tier_id: args.rewardTierId ?? undefined,
     p_is_anonymous: args.anonymous ?? false,
+    p_tip_amount: args.tipAmount ?? 0,
   });
   if (error) throw error;
   return data;
@@ -435,6 +457,7 @@ export type MyContribution = {
   created_at: string;
   reward: { title: string } | null;
   extra_amount: number;
+  tip_amount: number;
   contribution_items: { quantity: number; unit_amount: number; reward: { title: string } | null }[];
   project:
     | ({
@@ -450,12 +473,52 @@ export type MyContribution = {
     | null;
 };
 
+export type Receipt = {
+  id: string;
+  amount: number;
+  tip_amount: number;
+  payment_method: Enums['payment_method'];
+  status: Enums['contribution_status'];
+  created_at: string;
+  backer: { full_name: string } | null;
+  project: {
+    slug: string;
+    original_language: Language;
+    fund_verified_at: string | null;
+    fund_registration_number: string | null;
+    project_translations: Translation[];
+    owner: {
+      full_name: string;
+      founder_profiles: { display_name: string; organization: string | null } | null;
+    } | null;
+  } | null;
+};
+
+/** One contribution as a receipt. Only the backer can read it (row level security). */
+export async function getReceipt(id: string): Promise<Receipt | null> {
+  const { data, error } = await client()
+    .from('contributions')
+    .select(
+      `id, amount, tip_amount, payment_method, status, created_at,
+       backer:profiles!contributions_backer_id_fkey ( full_name ),
+       project:projects ( slug, original_language, fund_verified_at, fund_registration_number,
+         project_translations ( language, title, tagline ),
+         owner:profiles!projects_owner_id_fkey ( full_name,
+           founder_profiles!founder_profiles_user_id_fkey ( display_name, organization ) ) )`,
+    )
+    .eq('id', id)
+    .returns<Receipt[]>()
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
 /** The signed-in user's contributions, newest first. */
 export async function getMyContributions(userId: string): Promise<MyContribution[]> {
   const { data, error } = await client()
     .from('contributions')
     .select(
-      `id, amount, payment_method, equity_share_pct, status, is_anonymous, created_at, extra_amount,
+      `id, amount, payment_method, equity_share_pct, status, is_anonymous, created_at, extra_amount, tip_amount,
        contribution_items ( quantity, unit_amount, reward:reward_tiers ( title ) ),
        reward:reward_tiers ( title ),
        project:projects ( slug, model, status, ends_at, original_language,

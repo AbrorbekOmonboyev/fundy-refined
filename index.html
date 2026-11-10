@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fundy — interest-free crowdfunding for Uzbekistan</title>
+    <title>Fundy — crowdfunding for good causes in Uzbekistan</title>
     <meta
       name="description"
-      content="Post your project and people back it with a donation, a pre-order or a partnership (musharakah). Every project is checked, and money is paid out stage by stage."
+      content="Donate to checked causes in Uzbekistan. Money is paid out stage by stage, with a public report of what was spent."
     />
 
     <!-- Icons (from the brand kit, 03-Favicon) -->
@@ -18,16 +18,19 @@
     <!-- Dark mode before the first paint (no white flash); see src/lib/theme.ts -->
     <script>
       try {
-        var t = localStorage.getItem("fundy-theme");
-        if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches))
-          document.documentElement.classList.add("dark");
+        var t = localStorage.getItem('fundy-theme');
+        if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches))
+          document.documentElement.classList.add('dark');
       } catch (e) {}
     </script>
 
     <!-- Link previews (Telegram, Facebook, X) -->
     <meta property="og:site_name" content="Fundy" />
-    <meta property="og:title" content="Fundy — interest-free crowdfunding for Uzbekistan" />
-    <meta property="og:description" content="Post your project and people back it with a donation, a pre-order or a partnership (musharakah). Every project is checked, and money is paid out stage by stage." />
+    <meta property="og:title" content="Fundy — crowdfunding for good causes in Uzbekistan" />
+    <meta
+      property="og:description"
+      content="Donate to checked causes in Uzbekistan. Money is paid out stage by stage, with a public report of what was spent."
+    />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://www.fundy.uz/og-image.png" />
     <meta property="og:url" content="https://www.fundy.uz/" />

@@ -21,6 +21,8 @@ export type Milestone = Pick<
   | 'evidence'
   | 'review_note'
   | 'approved_at'
+  | 'spent_amount'
+  | 'receipt_paths'
 >;
 
 function db() {
@@ -196,7 +198,7 @@ export async function hidePost(target: 'comment' | 'update', id: string) {
 // Milestones
 // ---------------------------------------------------------------------------
 const MILESTONE_COLUMNS =
-  'id, position, title, description, target_label, release_percent, status, evidence, review_note, approved_at';
+  'id, position, title, description, target_label, release_percent, status, evidence, review_note, approved_at, spent_amount, receipt_paths';
 
 export async function listMilestones(projectId: string): Promise<Milestone[]> {
   const { data, error } = await db()
@@ -208,9 +210,37 @@ export async function listMilestones(projectId: string): Promise<Milestone[]> {
   return data ?? [];
 }
 
-/** Founder reports a milestone as done (project must be funded). */
-export async function submitMilestone(milestoneId: string, evidence: string) {
-  fail((await db().rpc('submit_milestone', { p_milestone_id: milestoneId, p_evidence: evidence.trim() })).error);
+/** Founder reports a milestone as done (project must be funded), with what was spent and receipt photos. */
+export async function submitMilestone(
+  milestoneId: string,
+  evidence: string,
+  spentAmount: number | null = null,
+  receiptPaths: string[] = [],
+) {
+  fail(
+    (
+      await db().rpc('submit_milestone', {
+        p_milestone_id: milestoneId,
+        p_evidence: evidence.trim(),
+        p_spent_amount: spentAmount ?? undefined,
+        p_receipt_paths: receiptPaths,
+      })
+    ).error,
+  );
+}
+
+const RECEIPT_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+const RECEIPT_MAX_BYTES = 5 * 1024 * 1024;
+export const RECEIPTS_MAX = 10;
+
+/** A receipt photo goes to the founder's own folder; it becomes public with the approved report. */
+export async function uploadReceipt(ownerId: string, milestoneId: string, file: File): Promise<string> {
+  if (!RECEIPT_TYPES.includes(file.type)) throw new Error('image_type');
+  if (file.size > RECEIPT_MAX_BYTES) throw new Error('image_size');
+  const ext = file.type.split('/')[1].replace('jpeg', 'jpg');
+  const path = `${ownerId}/receipts/${milestoneId}/${Date.now()}-${Math.round(Math.random() * 1e6)}.${ext}`;
+  fail((await db().storage.from('project-images').upload(path, file, { contentType: file.type })).error);
+  return path;
 }
 
 export type SubmittedMilestone = Milestone & {

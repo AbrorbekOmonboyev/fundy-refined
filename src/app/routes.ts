@@ -13,6 +13,7 @@ export const paths = {
   editProject: (id: string, step: string = 'basics') => `/dashboard/founder/${id}/${step}`,
   founderDashboard: '/dashboard/founder',
   backerDashboard: '/dashboard/backer',
+  receipt: (id: string) => `/receipts/${id}`,
   education: '/learn',
   trustSafety: '/trust-and-safety',
   about: '/about',

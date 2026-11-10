@@ -194,6 +194,15 @@ export async function clearIdentity(userId: string) {
   fail((await db().rpc('admin_clear_identity', { p_user_id: userId })).error);
 }
 
+/** Mark a non-profit's project as a verified fund (copies the registration number it was checked with). */
+export async function verifyFund(projectId: string) {
+  fail((await db().rpc('admin_verify_fund', { p_project_id: projectId })).error);
+}
+
+export async function unverifyFund(projectId: string) {
+  fail((await db().rpc('admin_unverify_fund', { p_project_id: projectId })).error);
+}
+
 /** The founder registered an MChJ: investors are asked to pay their pledges within 7 days. */
 export async function confirmRegistration(projectId: string) {
   fail((await db().rpc('admin_confirm_registration', { p_project_id: projectId })).error);

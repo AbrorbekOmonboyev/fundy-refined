@@ -20,7 +20,7 @@ import {
 import { Alert, Button, ChoiceGroup, NumberField, PageSpinner, TextAreaField } from '@/components/ui';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { AdminHeader } from '@/pages/admin/AdminLayout';
-import { IdentityPanel, RegistrationPanel } from '@/pages/admin/IdentityPanels';
+import { FundPanel, IdentityPanel, RegistrationPanel } from '@/pages/admin/IdentityPanels';
 import { publicFileUrl } from '@/lib/supabase';
 import { formatDate, formatMoney } from '@/lib/money';
 import { usePageMeta } from '@/lib/usePageMeta';
@@ -183,6 +183,7 @@ function Review({ draft, evaluation }: { draft: Draft; evaluation: Evaluation | 
                 <RegistrationPanel draft={draft} />
               )}
               <IdentityPanel ownerId={p.owner_id} />
+              {p.organizer_type === 'ngo' && <FundPanel draft={draft} />}
               <EvaluationForm projectId={p.id} evaluation={evaluation} />
               {isPending && <DecisionPanel projectId={p.id} hasEvaluation={!!evaluation} />}
             </>

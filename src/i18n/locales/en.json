@@ -29,7 +29,7 @@
     "short": "Payments are simulated."
   },
   "footer": {
-    "about": "Interest-free crowdfunding for Uzbekistan. Entrepreneurs, craftspeople and community projects raise money through donations, rewards or Musharakah.",
+    "about": "Crowdfunding for good causes in Uzbekistan. Checked funds and teams raise donations, and every stage is reported.",
     "simulated": "Demo version · Built for Uzbekistan",
     "models": "Models",
     "platform": "Platform",
@@ -126,7 +126,13 @@
     "pledgePaymentNotOpen": "You can pay once the founder's company is registered.",
     "pledgePaymentClosed": "The payment window for this pledge has closed.",
     "pledgeNotOpen": "This pledge is already paid or cancelled.",
-    "contributionNotFound": "We couldn't find this pledge."
+    "contributionNotFound": "We couldn't find this pledge.",
+    "donationOnly": "For now Fundy accepts donation campaigns only. Change the funding type to donation in step 1.",
+    "notAFund": "Only a project run by a non-profit (NNT) can be marked as a verified fund.",
+    "tipInvalid": "This tip amount can't be used. Try another amount or leave it at zero.",
+    "receiptUpload": "A receipt photo couldn't be attached. Upload it again.",
+    "tooManyReceipts": "You can attach up to 10 receipt photos per stage.",
+    "spentInvalid": "Enter the amount spent in so'm, 0 or more."
   },
   "auth": {
     "fields": {
@@ -187,9 +193,9 @@
     "language": "Language",
     "intent": "What brings you here?",
     "intentBack": "Support projects",
-    "intentBackHint": "Back causes, pre-order rewards or join Musharakah partnerships.",
+    "intentBackHint": "Donate to checked causes and follow how the money is spent.",
     "intentLaunch": "Launch a project",
-    "intentLaunchHint": "Raise interest-free funding for your idea or business.",
+    "intentLaunchHint": "Raise donations for your cause or community project.",
     "submit": "Continue"
   },
   "settings": {
@@ -392,6 +398,15 @@
       "confirm": "Company checked: charge investors on schedule",
       "confirmAsk": "Is this MChJ registered and owned by the founder? Investors' cards will be charged the day after the deadline.",
       "waiting": "The founder hasn't added a company number yet."
+    },
+    "fund": {
+      "title": "Verified fund",
+      "howTo": "Check this number in the official register of non-profits (NNT) and that the fund's bank account is in its own name. Then mark it as verified.",
+      "confirm": "Mark as verified fund",
+      "confirmAsk": "Mark this project as a verified fund with registration {{number}}? Donors will see the badge and the number.",
+      "verified": "Verified on {{date}} with registration {{number}}.",
+      "undo": "Remove the mark",
+      "noNumber": "The organiser hasn't added the fund's registration number yet."
     }
   },
   "money": {
@@ -439,7 +454,7 @@
   "home": {
     "hero": {
       "title": "Great projects start here",
-      "text": "Support local projects — safely and without interest.",
+      "text": "Give to checked causes in Uzbekistan and see where every so'm goes.",
       "explore": "Browse projects",
       "start": "Start a project",
       "cardKicker": "Raising now",
@@ -447,7 +462,7 @@
       "statsBackers": "Backers",
       "statsLive": "Live projects",
       "photos": "Photo credits",
-      "trust1": "Interest-free",
+      "trust1": "No commission",
       "trust2": "Every project is checked",
       "trust3": "Money is paid out stage by stage"
     },
@@ -468,10 +483,10 @@
       "step1Text": "Your identity (OneID), a budget in so'm and the stages. Companies and sole traders add their registration number.",
       "step2Title": "We check and score it",
       "step2Text": "We check the documents and score the project out of 100: business plan, team, market, finances and risk, 20 points each. The score is public on the project page.",
-      "step3Title": "People back it",
-      "step3Text": "A donation, a reward (pre-order) or Musharakah. Pay with Click, Payme, Uzcard or Humo. In the demo no money is charged.",
+      "step3Title": "People donate",
+      "step3Text": "Donate with Click, Payme, Uzcard or Humo, and add an optional tip for Fundy if you like. In the demo no money is charged.",
       "step4Title": "Money is released stage by stage",
-      "step4Text": "The founder finishes a stage and uploads proof. Once Fundy checks it, the next part is released. No stage, no money."
+      "step4Text": "The organiser finishes a stage and reports what was spent, with receipts. Once Fundy checks it, the next part is released. No stage, no money."
     },
     "musharakah": {
       "title": "Musharakah: a partnership, not a loan",
@@ -497,11 +512,11 @@
     "simple": {
       "title": "Simple, open and fair",
       "s1Title": "Post",
-      "s1Text": "A founder posts a project and we check it.",
+      "s1Text": "A fund or team posts a cause, and we check it.",
       "s2Title": "Share",
-      "s2Text": "People back it with a donation, a pre-order or a partnership.",
+      "s2Text": "People donate to the causes they care about.",
       "s3Title": "Step by step",
-      "s3Text": "Money is paid out only for a finished stage.",
+      "s3Text": "Money is paid out stage by stage, with a report of what was spent.",
       "more": "More on how it works"
     },
     "final": {
@@ -621,7 +636,7 @@
     "budgetAmount": "Amount",
     "budgetTotal": "Total goal",
     "milestonesTitle": "Milestones",
-    "milestonesText": "Money is released to the founder in stages, after each milestone is verified.",
+    "milestonesText": "Money is released to the organiser in stages, after each stage is checked. Approved stages show what was spent, with receipts.",
     "milestoneStatus": {
       "pending": "Upcoming",
       "submitted": "Under review",
@@ -674,14 +689,17 @@
       "registration": "Registered: {{number}}",
       "budget_one": "Budget published in {{count}} line",
       "budget_other": "Budget published in {{count}} lines",
-      "score": "Expert score: {{score}}/100 (5 criteria)"
+      "score": "Expert score: {{score}}/100 (5 criteria)",
+      "verifiedFund": "Verified fund: Fundy checked its registration ({{number}})"
     },
     "recentBackers": "Recent backers",
     "backedFrom": "{{name}}, {{city}}",
     "backed": "{{name}}",
     "previewTitle": "Preview.",
     "previewText": "This project isn't published yet. Only you and the Fundy team can see it.",
-    "demoBadge": "Sample"
+    "demoBadge": "Sample",
+    "verifiedFund": "Verified fund",
+    "verifiedFundNumber": "Verified fund · registration {{number}}"
   },
   "contribute": {
     "title": {
@@ -727,7 +745,13 @@
     "shareFriends": "Share with friends",
     "backHome": "Back to home",
     "submitPledge": "Pledge {{amount}}",
-    "pledgeSuccess": "Your pledge of {{amount}} to “{{project}}” is recorded. Nothing was taken. Your card will be charged on {{date}}, only if the founder registers a company by then."
+    "pledgeSuccess": "Your pledge of {{amount}} to “{{project}}” is recorded. Nothing was taken. Your card will be charged on {{date}}, only if the founder registers a company by then.",
+    "tip": {
+      "title": "Add a tip for Fundy (optional)",
+      "hint": "Fundy takes no commission. The project gets your whole donation; a tip keeps the platform running.",
+      "none": "No tip",
+      "summary": "Tip for Fundy: {{tip}}. You pay {{total}} in total."
+    }
   },
   "dashboard": {
     "backer": {
@@ -814,7 +838,8 @@
       "durationHint": "Between 7 and 90 days.",
       "durationError": "Choose between 7 and 90 days.",
       "organizer": "Who is raising the money?",
-      "organizerError": "Choose who is raising the money."
+      "organizerError": "Choose who is raising the money.",
+      "donationOnly": "Funding type: donation. For now Fundy runs donation campaigns only."
     },
     "story": {
       "title": "Story and photo",
@@ -1112,10 +1137,10 @@
   "milestones": {
     "manage": "Milestones",
     "none": "This project has no milestones.",
-    "founderIntro": "When you finish a milestone, report it with evidence. After our team checks it, that share of the money is released.",
+    "founderIntro": "When you finish a stage, report what was done and what was spent, with photos of the receipts. After our team checks it, the report is shown on the project page and that share of the money is released.",
     "report": "Report as done",
-    "evidence": "Evidence",
-    "evidenceHint": "Describe what was done and add links to photos, documents or receipts.",
+    "evidence": "What was done",
+    "evidenceHint": "Describe what was done and what the money was spent on. This text is public once the stage is approved.",
     "evidenceTooShort": "Please write at least {{count}} characters.",
     "send": "Send for review",
     "waiting": "Sent. Waiting for our team to check it.",
@@ -1125,7 +1150,14 @@
       "pending": "Not done yet",
       "submitted": "Being checked",
       "approved": "Done and verified"
-    }
+    },
+    "spent": "Amount spent (so'm)",
+    "spentHint": "This stage releases {{percent}}% of the money. Enter what was actually spent.",
+    "spentRequired": "Enter the amount spent in so'm.",
+    "receipts": "Receipt photos",
+    "receiptsHint": "Up to {{count}} photos (JPG, PNG or WebP, 5 MB each). They are public once the stage is approved, so cover any personal details.",
+    "addReceipts": "Add receipt photos",
+    "removeReceipt": "Remove receipt {{n}}"
   },
   "start": {
     "title": "Post a project on Fundy",
@@ -1145,7 +1177,7 @@
     "cta": "Start the application",
     "ctaHint": "You'll log in or sign up first. It takes a minute.",
     "whoTitle": "Who is raising the money?",
-    "whoHint": "Your answer decides which documents you need and which kinds of funding you can use.",
+    "whoHint": "Your answer decides which documents you need.",
     "applyTitle": "To apply",
     "payoutTitle": "Before the money is paid out",
     "modelsTitle": "Funding you can use",
@@ -1153,7 +1185,8 @@
     "needBudget": "A budget in so'm, one line per expense",
     "needStages": "Stages (usually 3–6): what gets done, when, and what share of the money",
     "needStory": "A cover photo and the project story (at least 200 characters)",
-    "continueDraft": "Continue your draft: {{title}}"
+    "continueDraft": "Continue your draft: {{title}}",
+    "donationOnly": "Donations. For now Fundy runs donation campaigns only; rewards and Musharakah will come later."
   },
   "time": {
     "now": "just now",
@@ -1318,14 +1351,14 @@
     },
     "mchj": {
       "name": "Company (MChJ)",
-      "short": "A limited liability company. Musharakah investors pay straight away.",
+      "short": "A limited liability company.",
       "apply": "The company's registration number (STIR)",
       "payout": "A bank account in the company's name",
       "numberHint": "MChJ certificate number or STIR (TIN)."
     },
     "ngo": {
       "name": "Non-profit (NNT)",
-      "short": "A registered non-governmental organisation. Donation projects.",
+      "short": "A registered charitable fund or NGO. Can be marked as a verified fund.",
       "apply": "The organisation's registration number (STIR)",
       "payout": "A bank account in the organisation's name",
       "numberHint": "NNT registration number or STIR (TIN)."
@@ -1376,5 +1409,38 @@
       "confirmed": "Company confirmed. Investors' cards are charged on {{date}}."
     },
     "allowCharge": "I allow Fundy to charge my card on {{date}}, only if the founder registers a company by then. If the charge fails, I have 7 days to pay by hand."
+  },
+  "spending": {
+    "title": "Spending report",
+    "spent": "Spent:",
+    "receipts": "Receipts",
+    "receiptAlt": "Receipt {{n}}"
+  },
+  "receipt": {
+    "title": "Donation receipt",
+    "thanks": "Thank you for your support. Keep this receipt for your records.",
+    "number": "Receipt number",
+    "date": "Date",
+    "donor": "Donor",
+    "project": "Project",
+    "organiser": "Organiser",
+    "registration": "Fund registration",
+    "method": "Payment method",
+    "status": "Status",
+    "statuses": {
+      "confirmed": "Paid",
+      "refunded": "Refunded",
+      "pledged": "Pledged, not paid yet",
+      "cancelled": "Cancelled"
+    },
+    "donation": "Donation to the project",
+    "tip": "Tip for Fundy",
+    "tipShort": "+ {{amount}} tip",
+    "total": "Total paid",
+    "note": "Demo: payments are simulated and no real money was charged. This receipt is not a tax document.",
+    "print": "Print or save as PDF",
+    "toProject": "Back to the project",
+    "open": "View receipt",
+    "link": "Receipt"
   }
 }

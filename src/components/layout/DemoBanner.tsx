@@ -7,7 +7,7 @@ export function DemoBanner() {
   return (
     <aside
       aria-label={t('banner.label')}
-      className="bg-night text-slate-300 border-b border-white/10 text-xs py-2 px-4"
+      className="print:hidden bg-night text-slate-300 border-b border-white/10 text-xs py-2 px-4"
     >
       <p className="max-w-7xl mx-auto">
         <span className="font-medium text-slate-200">{t('banner.label')}</span> {t('banner.full')}

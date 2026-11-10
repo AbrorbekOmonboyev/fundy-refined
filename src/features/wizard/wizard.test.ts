@@ -1,8 +1,12 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { slugify } from '@/features/wizard/slug';
 import { MIN_STORY, founderGaps, stepComplete, type Step } from '@/features/wizard/checks';
 import { allowedModels, modelAllowed, paysAfterRegistration } from '@/features/wizard/organizer';
 import type { Draft } from '@/features/wizard/api';
+import * as focus from '@/lib/focus';
+
+// The rules for when every model is open again; donation-only is tested on its own below.
+vi.mock('@/lib/focus', () => ({ DONATION_ONLY: false }));
 
 describe('web address from a title', () => {
   it('handles Uzbek apostrophes in every form', () => {
@@ -85,6 +89,10 @@ describe('who is raising the money', () => {
     expect(paysAfterRegistration('yatt', 'equity')).toBe(true);
     expect(paysAfterRegistration('mchj', 'equity')).toBe(false);
     expect(paysAfterRegistration('individual', 'reward')).toBe(false);
+  });
+
+  it('the switch that makes Fundy donation-only exists', () => {
+    expect(typeof focus.DONATION_ONLY).toBe('boolean');
   });
 
   it('nothing to upload: a person needs only a founder profile', () => {

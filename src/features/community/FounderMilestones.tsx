@@ -1,10 +1,13 @@
-import { useState, type FormEvent } from 'react';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { CheckCircle2, Circle, Clock } from 'lucide-react';
+import { CheckCircle2, Circle, Clock, X } from 'lucide-react';
+import { useAuth } from '@/features/auth/AuthContext';
+import { wizardErrorText } from '@/features/wizard/errors';
 import { errorKey } from '@/features/auth/errors';
-import { listMilestones, submitMilestone, type Milestone } from '@/features/community/api';
-import { Alert, Button, TextAreaField } from '@/components/ui';
+import { RECEIPTS_MAX, listMilestones, submitMilestone, uploadReceipt, type Milestone } from '@/features/community/api';
+import { Alert, Button, NumberField, TextAreaField } from '@/components/ui';
+import { publicFileUrl } from '@/lib/supabase';
 import { formatDate } from '@/lib/money';
 
 const MIN_EVIDENCE = 20;
@@ -40,10 +43,32 @@ export function FounderMilestones({ projectId }: { projectId: string }) {
 function MilestoneItem({ projectId, milestone: m }: { projectId: string; milestone: Milestone }) {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
+  const { user } = useAuth();
   const [open, setOpen] = useState(false);
   const [evidence, setEvidence] = useState(m.evidence ?? '');
+  const [spent, setSpent] = useState(m.spent_amount ?? 0);
+  const [receipts, setReceipts] = useState<string[]>(m.receipt_paths ?? []);
+  const [uploading, setUploading] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  async function addReceipts(e: ChangeEvent<HTMLInputElement>) {
+    const files = Array.from(e.target.files ?? []).slice(0, RECEIPTS_MAX - receipts.length);
+    e.target.value = '';
+    if (!user || files.length === 0) return;
+    setUploading(true);
+    setError(null);
+    try {
+      for (const file of files) {
+        const path = await uploadReceipt(user.id, m.id, file);
+        setReceipts(r => [...r, path]);
+      }
+    } catch (err) {
+      setError(wizardErrorText(t, err));
+    } finally {
+      setUploading(false);
+    }
+  }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -51,10 +76,14 @@ function MilestoneItem({ projectId, milestone: m }: { projectId: string; milesto
       setError(t('milestones.evidenceTooShort', { count: MIN_EVIDENCE }));
       return;
     }
+    if (!spent || spent <= 0) {
+      setError(t('milestones.spentRequired'));
+      return;
+    }
     setBusy(true);
     setError(null);
     try {
-      await submitMilestone(m.id, evidence);
+      await submitMilestone(m.id, evidence, spent, receipts);
       await queryClient.invalidateQueries({ queryKey: ['milestones', projectId] });
       await queryClient.invalidateQueries({ queryKey: ['projects'] });
       setOpen(false);
@@ -107,12 +136,56 @@ function MilestoneItem({ projectId, milestone: m }: { projectId: string; milesto
             value={evidence}
             onChange={e => setEvidence(e.target.value)}
           />
+          <NumberField
+            label={t('milestones.spent')}
+            hint={t('milestones.spentHint', { percent: m.release_percent })}
+            value={spent}
+            onValue={v => setSpent(Math.max(0, Math.round(v)))}
+          />
+          <div className="space-y-2">
+            <p className="text-sm font-medium text-ink">{t('milestones.receipts')}</p>
+            <p className="text-xs text-slate-500">{t('milestones.receiptsHint', { count: RECEIPTS_MAX })}</p>
+            {receipts.length > 0 && (
+              <ul className="flex flex-wrap gap-2">
+                {receipts.map((path, i) => (
+                  <li key={path} className="relative w-16 h-16 rounded-md overflow-hidden border border-slate-200">
+                    <img
+                      src={publicFileUrl('project-images', path) ?? ''}
+                      alt={t('spending.receiptAlt', { n: i + 1 })}
+                      className="w-full h-full object-cover"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setReceipts(r => r.filter(p => p !== path))}
+                      aria-label={t('milestones.removeReceipt', { n: i + 1 })}
+                      className="absolute top-0.5 right-0.5 w-6 h-6 rounded-full bg-night/80 text-white flex items-center justify-center cursor-pointer"
+                    >
+                      <X className="w-3.5 h-3.5" aria-hidden />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {receipts.length < RECEIPTS_MAX && (
+              <label className="inline-flex items-center gap-2 text-sm font-semibold text-ink underline underline-offset-4 cursor-pointer">
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  multiple
+                  className="sr-only"
+                  onChange={e => void addReceipts(e)}
+                  disabled={uploading}
+                />
+                {uploading ? t('common.loading') : t('milestones.addReceipts')}
+              </label>
+            )}
+          </div>
           {error && <Alert variant="error">{error}</Alert>}
           <div className="flex justify-end gap-2">
             <Button variant="secondary" onClick={() => setOpen(false)}>
               {t('common.cancel')}
             </Button>
-            <Button type="submit" loading={busy}>
+            <Button type="submit" loading={busy} disabled={uploading}>
               {t('milestones.send')}
             </Button>
           </div>

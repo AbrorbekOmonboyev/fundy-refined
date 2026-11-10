@@ -169,6 +169,19 @@ export function BackerDashboardPage() {
                       </td>
                       <td className="py-3 px-4 text-right font-mono-numbers font-semibold text-ink whitespace-nowrap">
                         {formatMoney(c.amount)}
+                        {c.tip_amount > 0 && (
+                          <span className="block text-xs font-normal text-slate-500">
+                            {t('receipt.tipShort', { amount: formatMoney(c.tip_amount) })}
+                          </span>
+                        )}
+                        {(c.status === 'confirmed' || c.status === 'refunded') && (
+                          <Link
+                            to={paths.receipt(c.id)}
+                            className="block mt-1 text-xs font-sans font-semibold text-ink underline underline-offset-4"
+                          >
+                            {t('receipt.link')}
+                          </Link>
+                        )}
                       </td>
                     </tr>
                   );

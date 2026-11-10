@@ -123,7 +123,9 @@ export function ChecksList({ project }: { project: ProjectDetail }) {
   const { t } = useTranslation();
   const items: { Icon: typeof Check; text: string }[] = [];
   if (project.founderVerified) items.push({ Icon: BadgeCheck, text: t('project.checks.identity') });
-  if (project.founder?.registration_number)
+  if (project.verifiedFund !== null)
+    items.push({ Icon: BadgeCheck, text: t('project.checks.verifiedFund', { number: project.verifiedFund }) });
+  if (project.founder?.registration_number && project.verifiedFund === null)
     items.push({
       Icon: FileText,
       text: t('project.checks.registration', { number: project.founder.registration_number }),

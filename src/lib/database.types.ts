@@ -268,6 +268,7 @@ export type Database = {
       contributions: {
         Row: {
           extra_amount: number
+          tip_amount: number
           shipping_amount: number
           amount: number
           backer_id: string
@@ -284,6 +285,7 @@ export type Database = {
         }
         Insert: {
           extra_amount?: number
+          tip_amount?: number
           shipping_amount?: number
           amount: number
           backer_id: string
@@ -300,6 +302,7 @@ export type Database = {
         }
         Update: {
           extra_amount?: number
+          tip_amount?: number
           shipping_amount?: number
           amount?: number
           backer_id?: string
@@ -586,6 +589,8 @@ export type Database = {
           approved_by: string | null
           description: string
           evidence: string | null
+          receipt_paths: string[]
+          spent_amount: number | null
           id: string
           position: number
           project_id: string
@@ -600,6 +605,8 @@ export type Database = {
           approved_by?: string | null
           description?: string
           evidence?: string | null
+          receipt_paths?: string[]
+          spent_amount?: number | null
           id?: string
           position?: number
           project_id: string
@@ -614,6 +621,8 @@ export type Database = {
           approved_by?: string | null
           description?: string
           evidence?: string | null
+          receipt_paths?: string[]
+          spent_amount?: number | null
           id?: string
           position?: number
           project_id?: string
@@ -915,6 +924,8 @@ export type Database = {
           ends_at: string | null
           funded_percent: number | null
           id: string
+          fund_registration_number: string | null
+          fund_verified_at: string | null
           is_demo: boolean
           is_featured: boolean
           location: string | null
@@ -950,6 +961,8 @@ export type Database = {
           ends_at?: string | null
           funded_percent?: number | null
           id?: string
+          fund_registration_number?: string | null
+          fund_verified_at?: string | null
           is_demo?: boolean
           is_featured?: boolean
           location?: string | null
@@ -985,6 +998,8 @@ export type Database = {
           ends_at?: string | null
           funded_percent?: number | null
           id?: string
+          fund_registration_number?: string | null
+          fund_verified_at?: string | null
           is_demo?: boolean
           is_featured?: boolean
           location?: string | null
@@ -1363,6 +1378,8 @@ export type Database = {
         Returns: undefined
       }
       admin_clear_identity: { Args: { p_user_id: string }; Returns: undefined }
+      admin_unverify_fund: { Args: { p_project_id: string }; Returns: undefined }
+      admin_verify_fund: { Args: { p_project_id: string }; Returns: undefined }
       admin_confirm_identity: {
         Args: { p_note?: string; p_user_id: string }
         Returns: undefined
@@ -1382,6 +1399,7 @@ export type Database = {
           p_payment_method: Database["public"]["Enums"]["payment_method"]
           p_project_id: string
           p_reward_tier_id?: string
+          p_tip_amount?: number
         }
         Returns: string
       }
@@ -1418,7 +1436,12 @@ export type Database = {
       }
       search_project_ids: { Args: { p_query: string }; Returns: string[] }
       submit_milestone: {
-        Args: { p_evidence: string; p_milestone_id: string }
+        Args: {
+          p_evidence: string
+          p_milestone_id: string
+          p_receipt_paths?: string[]
+          p_spent_amount?: number
+        }
         Returns: undefined
       }
       submit_project: { Args: { p_project_id: string }; Returns: undefined }

@@ -2052,3 +2052,137 @@ describe('donation minimum', () => {
     assert.equal(await minOf(id), '10000');
   });
 });
+
+describe('donation focus', () => {
+  let fund: string;
+  const donationOnly = (on: boolean) =>
+    db.query(`update private.settings set value = $1 where key = 'donation_only'`, [on ? 'true' : 'false']);
+
+  before(async () => {
+    fund = await createUser(db, 'Mehr Fund');
+    await as(
+      db,
+      user(fund),
+      `insert into public.founder_profiles (user_id, display_name, registration_number) values ($1, 'Mehr', 'NNT-0042')`,
+      [fund],
+    );
+  });
+
+  test('while donation-only is on, only donation projects can be submitted; live ones keep running', async () => {
+    const live = await createDraft(alice, 'focus-live-reward', { model: 'reward', target: 5_000_000 });
+    await as(db, owner, `insert into public.reward_tiers (project_id, title, amount) values ($1, 'Thanks', 100000)`, [
+      live,
+    ]);
+    await as(db, user(alice), `select public.submit_project($1)`, [live]);
+    await evaluateAndApprove(live);
+
+    await donationOnly(true);
+    try {
+      const reward = await createDraft(alice, 'focus-reward', { model: 'reward', target: 5_000_000 });
+      await as(db, owner, `insert into public.reward_tiers (project_id, title, amount) values ($1, 'Mug', 100000)`, [
+        reward,
+      ]);
+      await rejects(as(db, user(alice), `select public.submit_project($1)`, [reward]), /donation_only/);
+      const donation = await createDraft(alice, 'focus-donation');
+      await as(db, user(alice), `select public.submit_project($1)`, [donation]);
+      // The reward project approved earlier still takes backers.
+      await as(db, user(bob), `select public.contribute($1, 100000, 'click')`, [live]);
+    } finally {
+      await donationOnly(false);
+    }
+  });
+
+  test('an admin marks a fund as verified; founders cannot, and a new registration number clears it', async () => {
+    const id = await createDraft(fund, 'mehr-winter-coats', { organizer: 'ngo' });
+    const notFund = await createDraft(alice, 'alice-not-a-fund');
+    await rejects(as(db, user(admin), `select public.admin_verify_fund($1)`, [notFund]), /not_a_fund/);
+    await rejects(
+      as(db, user(fund), `update public.projects set fund_verified_at = now() where id = $1`, [id]),
+      /permission denied/,
+    );
+    await rejects(as(db, user(fund), `select public.admin_verify_fund($1)`, [id]), /admin/);
+
+    await as(db, user(admin), `select public.admin_verify_fund($1)`, [id]);
+    const [p] = await as<{ n: string; v: boolean }>(
+      db,
+      owner,
+      `select fund_registration_number as n, fund_verified_at is not null as v from public.projects where id = $1`,
+      [id],
+    );
+    assert.deepEqual(p, { n: 'NNT-0042', v: true });
+
+    await as(db, user(fund), `update public.founder_profiles set registration_number = 'NNT-9999' where user_id = $1`, [
+      fund,
+    ]);
+    const [after] = await as<{ v: boolean }>(
+      db,
+      owner,
+      `select fund_verified_at is not null as v from public.projects where id = $1`,
+      [id],
+    );
+    assert.equal(after.v, false);
+  });
+
+  test('a tip for Fundy is saved apart from the donation and only on donation projects', async () => {
+    const id = await createDraft(fund, 'mehr-school-books', { organizer: 'ngo' });
+    await as(db, user(fund), `select public.submit_project($1)`, [id]);
+    await evaluateAndApprove(id);
+    await as(db, user(bob), `select public.contribute($1, 50000, 'click', null, false, 5000)`, [id]);
+    const [row] = await as<{ amount: string; tip: string; raised: string }>(
+      db,
+      owner,
+      `select c.amount::text as amount, c.tip_amount::text as tip, p.raised_amount::text as raised
+       from public.contributions c join public.projects p on p.id = c.project_id where c.project_id = $1`,
+      [id],
+    );
+    assert.deepEqual(row, { amount: '50000', tip: '5000', raised: '50000' });
+    await rejects(
+      as(db, user(bob), `select public.contribute($1, 50000, 'click', null, false, -1)`, [id]),
+      /tip_invalid/,
+    );
+
+    const equity = await createDraft(alice, 'alice-equity-tip', { model: 'equity', organizer: 'mchj' });
+    await as(
+      db,
+      owner,
+      `insert into public.equity_terms (project_id, investor_profit_share_pct, min_investment, exit_horizon_years) values ($1, 20, 100000, 3)`,
+      [equity],
+    );
+    await as(db, user(alice), `select public.submit_project($1)`, [equity]);
+    await evaluateAndApprove(equity);
+    await rejects(
+      as(db, user(bob), `select public.contribute($1, 500000, 'click', null, false, 5000)`, [equity]),
+      /tip_only_for_donations/,
+    );
+  });
+
+  test('a stage report carries the amount spent and the founder’s own receipt photos', async () => {
+    const id = await createDraft(fund, 'mehr-clinic-beds', { organizer: 'ngo' });
+    await as(db, user(fund), `select public.submit_project($1)`, [id]);
+    await evaluateAndApprove(id);
+    await db.query(`update public.projects set status = 'funded' where id = $1`, [id]);
+    const [{ id: stage }] = await as<{ id: string }>(
+      db,
+      anon,
+      `select id from public.milestones where project_id = $1 order by position limit 1`,
+      [id],
+    );
+    const evidence = 'Bought 12 beds from Toshkent Mebel, delivered 3 May.';
+    await rejects(
+      as(db, user(fund), `select public.submit_milestone($1, $2, 5000000, $3)`, [stage, evidence, [`${alice}/x.jpg`]]),
+      /receipt_not_yours/,
+    );
+    await as(db, user(fund), `select public.submit_milestone($1, $2, 5800000, $3)`, [
+      stage,
+      evidence,
+      [`${fund}/receipts/a.jpg`, `${fund}/receipts/b.jpg`],
+    ]);
+    const [m] = await as<{ spent: string; n: number }>(
+      db,
+      anon,
+      `select spent_amount::text as spent, cardinality(receipt_paths) as n from public.milestones where id = $1`,
+      [stage],
+    );
+    assert.deepEqual(m, { spent: '5800000', n: 2 });
+  });
+});

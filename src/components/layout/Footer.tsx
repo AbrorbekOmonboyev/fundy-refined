@@ -2,20 +2,26 @@ import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { paths } from '@/app/routes';
 import { Logo } from '@/components/Logo';
+import { DONATION_ONLY } from '@/lib/focus';
 
 export function Footer() {
   const { t } = useTranslation();
 
   const columns = [
-    {
-      title: t('footer.models'),
-      links: [
-        { to: `${paths.explore}?model=donation`, label: t('footer.donation') },
-        { to: `${paths.explore}?model=reward`, label: t('footer.reward') },
-        { to: `${paths.explore}?model=equity`, label: t('footer.musharakah') },
-        { to: `${paths.education}#calculator`, label: t('footer.calculator') },
-      ],
-    },
+    // While donation-only, the model links would lead to an empty or hidden list.
+    ...(DONATION_ONLY
+      ? []
+      : [
+          {
+            title: t('footer.models'),
+            links: [
+              { to: `${paths.explore}?model=donation`, label: t('footer.donation') },
+              { to: `${paths.explore}?model=reward`, label: t('footer.reward') },
+              { to: `${paths.explore}?model=equity`, label: t('footer.musharakah') },
+              { to: `${paths.education}#calculator`, label: t('footer.calculator') },
+            ],
+          },
+        ]),
     {
       title: t('footer.platform'),
       links: [
@@ -39,7 +45,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="app-hide bg-night text-slate-400 text-sm border-t border-white/10">
+    <footer className="app-hide print:hidden bg-night text-slate-400 text-sm border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 lg:pt-16 pb-24 lg:pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* About */}

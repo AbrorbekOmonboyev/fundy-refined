@@ -9,7 +9,11 @@ import { PGlite } from '@electric-sql/pglite';
 
 const SUPABASE_DIR = join(import.meta.dirname, '..');
 
-export async function createTestDb({ seed = false } = {}) {
+/**
+ * donationOnly: the live site only accepts donation projects (migration 32). Most tests
+ * still cover the other models, so it is off unless a test asks for it.
+ */
+export async function createTestDb({ seed = false, donationOnly = false } = {}) {
   const db = new PGlite();
   await db.exec(readFileSync(join(import.meta.dirname, 'supabase-stub.sql'), 'utf8'));
 
@@ -23,6 +27,8 @@ export async function createTestDb({ seed = false } = {}) {
       throw new Error(`Migration ${file} failed: ${(error as Error).message}`, { cause: error });
     }
   }
+
+  if (!donationOnly) await db.exec(`update private.settings set value = 'false' where key = 'donation_only'`);
 
   if (seed) {
     try {

@@ -19,7 +19,7 @@ export const about: Localized<Article> = {
         id: 'how',
         heading: 'Qanday ishlaymiz',
         bullets: [
-          'Uch xil model: xayriya, mukofotli loyihalar va mushoraka (foyda va xavfni baham koʻrish).',
+          'Biz xayriyadan boshlaymiz: tekshirilgan fondlar va jamoalar ezgu loyihalar uchun pul yigʻadi. Mukofotli loyihalar va mushoraka keyinroq qoʻshiladi.',
           'Har bir loyiha byudjeti soʻmma-soʻm eʼlon qilinadi.',
           'Loyihalar eʼlon qilinishidan oldin tekshiriladi va 100 ballik tizimda baholanadi.',
           'Mablagʻ bosqichma-bosqich, bajarilgan ish uchun beriladi.',
@@ -60,7 +60,7 @@ export const about: Localized<Article> = {
         id: 'how',
         heading: 'Как мы работаем',
         bullets: [
-          'Три модели: пожертвования, проекты с вознаграждением и мушарака (раздел прибыли и риска).',
+          'Мы начинаем с пожертвований: проверенные фонды и команды собирают деньги на добрые дела. Проекты с вознаграждением и мушарака появятся позже.',
           'Бюджет каждого проекта публикуется до последнего сума.',
           'Проекты проверяются до публикации и получают оценку по 100-балльной шкале.',
           'Деньги выдаются по этапам, за выполненную работу.',
@@ -101,7 +101,7 @@ export const about: Localized<Article> = {
         id: 'how',
         heading: 'How we work',
         bullets: [
-          'Three models: donations, reward projects and Musharakah (sharing profit and risk).',
+          'We start with donations: checked funds and teams raise money for good causes. Reward projects and Musharakah will come later.',
           "Every project's budget is published down to the last so'm.",
           'Projects are checked before they go live and scored out of 100.',
           'Money is released in stages, for work actually delivered.',

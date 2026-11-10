@@ -2,7 +2,17 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useQueryClient } from '@tanstack/react-query';
-import { AlertCircle, ArrowLeft, Bookmark, CheckCircle, Languages, Link2, Send, ShoppingBag } from 'lucide-react';
+import {
+  AlertCircle,
+  ArrowLeft,
+  BadgeCheck,
+  Bookmark,
+  CheckCircle,
+  Languages,
+  Link2,
+  Send,
+  ShoppingBag,
+} from 'lucide-react';
 import { paths } from '@/app/routes';
 import { useAuth } from '@/features/auth/AuthContext';
 import { errorKey } from '@/features/auth/errors';
@@ -20,6 +30,7 @@ import { NotFoundPage } from '@/pages/NotFoundPage';
 import { photoCredit } from '@/data/photoCredits';
 import { ChecksList, MoneyTrail } from '@/features/projects/MoneyTrail';
 import { RecentBackers } from '@/features/projects/RecentBackers';
+import { SpendingReport } from '@/features/projects/SpendingReport';
 import { RewardsSection } from '@/features/projects/RewardCards';
 import { CartDrawer } from '@/features/cart/CartDrawer';
 import { PAYMENT_DAYS, REGISTRATION_DAYS, expectedChargeDate } from '@/features/wizard/organizer';
@@ -280,8 +291,15 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                       {[project.founder?.role_title, project.founder?.organization].filter(Boolean).join(' · ')}
                     </p>
                   )}
-                  {project.founder?.registration_number && (
-                    <p className="text-xs text-slate-500 mt-0.5">{project.founder.registration_number}</p>
+                  {project.verifiedFund !== null ? (
+                    <p className="mt-0.5 flex items-center gap-1 text-xs font-semibold text-brand-deep">
+                      <BadgeCheck className="w-3.5 h-3.5 shrink-0" aria-hidden />
+                      {t('project.verifiedFundNumber', { number: project.verifiedFund })}
+                    </p>
+                  ) : (
+                    project.founder?.registration_number && (
+                      <p className="text-xs text-slate-500 mt-0.5">{project.founder.registration_number}</p>
+                    )
                   )}
                 </div>
               </div>
@@ -604,6 +622,15 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                           <strong className="text-ink">{t('project.release', { percent: m.release_percent })}</strong>
                         </div>
                       </div>
+                      {approved && (
+                        <div className="mt-3">
+                          <SpendingReport
+                            evidence={m.evidence}
+                            spentAmount={m.spent_amount}
+                            receiptPaths={m.receipt_paths ?? []}
+                          />
+                        </div>
+                      )}
                     </li>
                   );
                 })}

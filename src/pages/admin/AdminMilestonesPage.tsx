@@ -15,6 +15,7 @@ import { pickText } from '@/features/projects/api';
 import { Alert, Button, PageSpinner, TextAreaField } from '@/components/ui';
 import { usePageMeta } from '@/lib/usePageMeta';
 import { AdminHeader } from '@/pages/admin/AdminLayout';
+import { SpendingReport } from '@/features/projects/SpendingReport';
 
 const MIN_NOTE = 10;
 
@@ -95,10 +96,7 @@ function MilestoneReview({ milestone: m }: { milestone: SubmittedMilestone }) {
           {m.target_label} · {t('milestones.release', { percent: m.release_percent })}
         </p>
       </div>
-      <div className="rounded-xl bg-page p-3">
-        <p className="text-xs font-semibold text-slate-700 mb-1">{t('milestones.evidence')}</p>
-        <p className="text-sm text-slate-700 whitespace-pre-line break-words">{m.evidence}</p>
-      </div>
+      <SpendingReport evidence={m.evidence} spentAmount={m.spent_amount} receiptPaths={m.receipt_paths ?? []} />
 
       {isOwn && <Alert variant="info">{t('errors.cannotReviewOwn')}</Alert>}
       {error && <Alert variant="error">{error}</Alert>}

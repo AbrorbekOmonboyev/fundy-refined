@@ -14,6 +14,7 @@ import {
   type OrganizerType,
 } from '@/features/wizard/organizer';
 import { usePageMeta } from '@/lib/usePageMeta';
+import { DONATION_ONLY } from '@/lib/focus';
 
 /** What each kind of organiser adds when applying, after the identity check. Same rules as submit_project(). */
 const APPLY_EXTRA = {
@@ -134,32 +135,39 @@ export function StartLandingPage() {
             <p className="py-3 text-base text-slate-700">{t(`organizer.${who}.payout`)}</p>
           </div>
 
-          <div className="space-y-2">
-            <h3 className="text-sm font-semibold text-ink">{t('start.modelsTitle')}</h3>
-            <ul className="space-y-1.5 text-base text-slate-700">
-              {(['donation', 'reward', 'equity'] as const).map(m =>
-                models.includes(m) ? (
-                  <li key={m}>
-                    {t(`models.${m}.name`)}
-                    {paysAfterRegistration(who, m) && (
-                      <span className="block text-sm text-slate-600">{t('organizer.payLaterShort')}</span>
-                    )}
-                  </li>
-                ) : (
-                  <li key={m} className="flex items-baseline gap-1.5 text-slate-500">
-                    <Lock className="w-3.5 h-3.5 shrink-0 self-center" aria-hidden />
-                    <span>
+          {DONATION_ONLY ? (
+            <div className="space-y-1">
+              <h3 className="text-sm font-semibold text-ink">{t('start.modelsTitle')}</h3>
+              <p className="py-3 text-base text-slate-700">{t('start.donationOnly')}</p>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              <h3 className="text-sm font-semibold text-ink">{t('start.modelsTitle')}</h3>
+              <ul className="space-y-1.5 text-base text-slate-700">
+                {(['donation', 'reward', 'equity'] as const).map(m =>
+                  models.includes(m) ? (
+                    <li key={m}>
                       {t(`models.${m}.name`)}
-                      <span className="text-sm">
-                        {' · '}
-                        {t('organizer.ngoDonationOnly')}
+                      {paysAfterRegistration(who, m) && (
+                        <span className="block text-sm text-slate-600">{t('organizer.payLaterShort')}</span>
+                      )}
+                    </li>
+                  ) : (
+                    <li key={m} className="flex items-baseline gap-1.5 text-slate-500">
+                      <Lock className="w-3.5 h-3.5 shrink-0 self-center" aria-hidden />
+                      <span>
+                        {t(`models.${m}.name`)}
+                        <span className="text-sm">
+                          {' · '}
+                          {t('organizer.ngoDonationOnly')}
+                        </span>
                       </span>
-                    </span>
-                  </li>
-                ),
-              )}
-            </ul>
-          </div>
+                    </li>
+                  ),
+                )}
+              </ul>
+            </div>
+          )}
         </section>
 
         <div className="lg:col-span-2 space-y-10">

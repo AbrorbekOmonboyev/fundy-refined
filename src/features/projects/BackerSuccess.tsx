@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { Check } from 'lucide-react';
 import { paths } from '@/app/routes';
@@ -13,6 +13,7 @@ export function BackerSuccess({
   shareUrl,
   detail,
   extra,
+  receiptHref,
   onClose,
 }: {
   /** Project title, used in the share message. */
@@ -21,6 +22,8 @@ export function BackerSuccess({
   /** "Your 650 000 so'm for … has been recorded." */
   detail: ReactNode;
   extra?: ReactNode;
+  /** Link to the donation receipt, when there is one. */
+  receiptHref?: string;
   onClose: () => void;
 }) {
   const { t } = useTranslation();
@@ -70,6 +73,15 @@ export function BackerSuccess({
         >
           {t('contribute.backHome')}
         </button>
+        {receiptHref && (
+          <Link
+            to={receiptHref}
+            onClick={onClose}
+            className="block w-full py-3.5 rounded-full border border-slate-300 text-ink text-sm font-semibold"
+          >
+            {t('receipt.open')}
+          </Link>
+        )}
         <button
           type="button"
           onClick={() => void navigator.clipboard?.writeText(shareUrl).then(() => setCopied(true))}

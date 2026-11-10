@@ -1,9 +1,9 @@
 import { useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { ShieldCheck } from 'lucide-react';
+import { BadgeCheck, ShieldCheck } from 'lucide-react';
 import { errorKey } from '@/features/auth/errors';
-import { clearIdentity, confirmIdentity, confirmRegistration } from '@/features/admin/api';
+import { clearIdentity, confirmIdentity, confirmRegistration, unverifyFund, verifyFund } from '@/features/admin/api';
 import { getIdentity, identityKey, type Draft } from '@/features/wizard/api';
 import { Alert, Button, TextAreaField } from '@/components/ui';
 import { formatDate } from '@/lib/money';
@@ -122,6 +122,71 @@ export function RegistrationPanel({ draft }: { draft: Draft }) {
         </>
       ) : (
         <p className="text-sm text-ink">{t('admin.registration.waiting')}</p>
+      )}
+      {error && <Alert variant="error">{error}</Alert>}
+    </section>
+  );
+}
+
+/**
+ * A non-profit's project: once the admin has checked the fund's registration (STIR and
+ * the official registry), it is marked "Verified fund" with that number on every card.
+ */
+export function FundPanel({ draft }: { draft: Draft }) {
+  const { t } = useTranslation();
+  const queryClient = useQueryClient();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const p = draft.project;
+  const number = draft.founder?.registration_number?.trim();
+
+  async function run(action: () => Promise<void>, ask?: string) {
+    if (ask && !window.confirm(ask)) return;
+    setBusy(true);
+    setError(null);
+    try {
+      await action();
+      await queryClient.invalidateQueries({ queryKey: ['admin'] });
+      await queryClient.invalidateQueries({ queryKey: ['projects'] });
+    } catch (e) {
+      setError(t(errorKey(e)));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <section className="bg-card rounded-2xl border border-slate-200 p-5 sm:p-6 space-y-3">
+      <h2 className="text-base text-ink flex items-center gap-2">
+        <BadgeCheck className={`w-5 h-5 ${p.fund_verified_at ? 'text-brand-deep' : 'text-slate-400'}`} aria-hidden />
+        {t('admin.fund.title')}
+      </h2>
+      {p.fund_verified_at ? (
+        <>
+          <p className="text-sm text-slate-700">
+            {t('admin.fund.verified', { number: p.fund_registration_number, date: formatDate(p.fund_verified_at) })}
+          </p>
+          <Button variant="link" loading={busy} onClick={() => void run(() => unverifyFund(p.id))}>
+            {t('admin.fund.undo')}
+          </Button>
+        </>
+      ) : number ? (
+        <>
+          <p className="text-sm text-slate-700">
+            {t('admin.registration.number')}: <strong>{number}</strong>
+          </p>
+          <p className="text-sm text-slate-700">{t('admin.fund.howTo')}</p>
+          <Button
+            variant="secondary"
+            loading={busy}
+            fullWidth
+            onClick={() => void run(() => verifyFund(p.id), t('admin.fund.confirmAsk', { number }))}
+          >
+            {t('admin.fund.confirm')}
+          </Button>
+        </>
+      ) : (
+        <p className="text-sm text-slate-700">{t('admin.fund.noNumber')}</p>
       )}
       {error && <Alert variant="error">{error}</Alert>}
     </section>

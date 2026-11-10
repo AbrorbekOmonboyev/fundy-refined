@@ -18,6 +18,7 @@ import { WizardShell } from '@/features/wizard/WizardShell';
 import { ChoiceGroup, NumberField, SelectField, TextField } from '@/components/ui';
 import { LANGUAGES, type Language } from '@/i18n';
 import { formatMoney } from '@/lib/money';
+import { DONATION_ONLY } from '@/lib/focus';
 
 /** Step 1: what the project is. Creates the draft the first time it's saved. */
 export function BasicsStep({ draft }: { draft: Draft | null }) {
@@ -30,7 +31,7 @@ export function BasicsStep({ draft }: { draft: Draft | null }) {
   const [params] = useSearchParams();
   const fromStart = params.get('as');
   const initialOrganizer = draft?.project.organizer_type ?? (isOrganizer(fromStart) ? fromStart : null);
-  const initialModel = draft?.project.model ?? 'reward';
+  const initialModel = DONATION_ONLY ? 'donation' : (draft?.project.model ?? 'reward');
 
   const [form, setForm] = useState<Basics>({
     title: draft?.text?.title ?? '',
@@ -112,24 +113,28 @@ export function BasicsStep({ draft }: { draft: Draft | null }) {
           description: t(`organizer.${o}.short`),
         }))}
       />
-      <ChoiceGroup
-        label={t('wizard.basics.model')}
-        value={form.model}
-        onChange={m => set('model', m)}
-        options={(['donation', 'reward', 'equity'] as const).map(m => {
-          const blocked = !!form.organizer_type && !modelAllowed(form.organizer_type, m);
-          return {
-            value: m,
-            label: t(`models.${m}.name`),
-            description: blocked
-              ? t('organizer.ngoDonationOnly')
-              : paysAfterRegistration(form.organizer_type, m)
-                ? t('organizer.payLaterShort')
-                : t(`models.${m}.subtitle`),
-            disabled: blocked,
-          };
-        })}
-      />
+      {DONATION_ONLY ? (
+        <p className="text-sm text-slate-600">{t('wizard.basics.donationOnly')}</p>
+      ) : (
+        <ChoiceGroup
+          label={t('wizard.basics.model')}
+          value={form.model}
+          onChange={m => set('model', m)}
+          options={(['donation', 'reward', 'equity'] as const).map(m => {
+            const blocked = !!form.organizer_type && !modelAllowed(form.organizer_type, m);
+            return {
+              value: m,
+              label: t(`models.${m}.name`),
+              description: blocked
+                ? t('organizer.ngoDonationOnly')
+                : paysAfterRegistration(form.organizer_type, m)
+                  ? t('organizer.payLaterShort')
+                  : t(`models.${m}.subtitle`),
+              disabled: blocked,
+            };
+          })}
+        />
+      )}
       <div className="grid gap-4 sm:grid-cols-2">
         <SelectField
           label={t('explore.category')}
