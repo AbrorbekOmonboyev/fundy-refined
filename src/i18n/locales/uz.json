@@ -681,8 +681,7 @@
     "backed": "{{name}}",
     "previewTitle": "Oldindan koʻrish.",
     "previewText": "Loyiha hali eʼlon qilinmagan. Uni faqat siz va Fundy jamoasi koʻradi.",
-    "demoBadge": "Namuna",
-    "demoNotice": "Bu namoyish uchun oʻylab topilgan namuna loyiha. Biznes, odamlar va raqamlar haqiqiy emas."
+    "demoBadge": "Namuna"
   },
   "contribute": {
     "title": {
