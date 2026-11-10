@@ -164,8 +164,8 @@ const soum = (n: number) =>
     .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} soʻm`;
 const csvCell = (v: unknown) => `"${String(v ?? '').replace(/"/g, '""')}"`;
 
-/** /video — the 89 s hand-drawn ink story (Bek's bakery: crowdfunding + how Fundy works, made with OpenMontage Ink Theater; Bek wears a striped Uzbek chapan), only for a chat linked to an admin. */
-const LAUNCH_VIDEO = `${SITE}/media/fundy-ink-story-v2.mp4`;
+/** /video — the 3 min 23 s pixel-art story (Aziz has a business plan but no money; why we made Fundy), 720p, only for a chat linked to an admin. */
+const LAUNCH_VIDEO = `${SITE}/media/fundy-pixel-story.mp4`;
 async function sendLaunchVideo(chatId: number, lang: string) {
   // Same admin check as /getreports: the database refuses chats not linked to an admin.
   const { error } = await db.rpc('telegram_admin_report', { p_chat_id: chatId });
@@ -174,17 +174,18 @@ async function sendLaunchVideo(chatId: number, lang: string) {
     return;
   }
   const caption =
-    "🎬 <b>Bek's Bakery: how crowdfunding works</b> 🔊\n\nBek dreams of a bakery, but a bank loan means paying back more. " +
-    'So lots of people each chip in a little — and on fundy.uz every project is checked and the money is paid out stage by stage.';
+    '🎬 <b>Great projects start here</b> 🔊\n\nAziz has the idea, the motivation and a business plan. He just doesn’t have the money. ' +
+    'A short pixel-art story about how people build things together, and why we made Fundy: interest-free crowdfunding built for Uzbekistan.\n\n' +
+    'Music: Sascha Ende, ende.app (CC BY 4.0)';
   const sent = await telegram('sendVideo', {
     chat_id: chatId,
     video: LAUNCH_VIDEO,
     caption,
     parse_mode: 'HTML',
     supports_streaming: true,
-    width: 1920,
-    height: 1080,
-    duration: 89,
+    width: 1280,
+    height: 720,
+    duration: 203,
   });
   // If Telegram can't take it as a video, send it as a file, and as a last resort the link.
   if (!sent.ok) {
