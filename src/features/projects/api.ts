@@ -170,7 +170,9 @@ export async function listProjects(filters: ProjectFilters): Promise<{ items: Pr
       query = query.order('target_amount', { ascending: true });
       break;
     default:
-      query = query.order('funded_percent', { ascending: false });
+      // Real projects before the hackathon samples, which are far better funded and would
+      // otherwise fill the home page. Makes no difference once the samples are removed.
+      query = query.order('is_demo', { ascending: true }).order('funded_percent', { ascending: false });
   }
   query = query.order('id').range((page - 1) * pageSize, page * pageSize - 1);
 
