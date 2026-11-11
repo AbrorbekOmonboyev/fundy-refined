@@ -455,7 +455,7 @@
   "home": {
     "hero": {
       "title": "Koʻrinib turadigan yordam",
-      "text": "Oʻzbekistondagi tekshirilgan ezgu ishlarga xayriya qiling. Pul bosqichma-bosqich beriladi, har bir bosqich cheklar bilan hisobot qilinadi.",
+      "text": "Oʻzbekistondagi tekshirilgan ezgu ishlarga komissiyasiz xayriya qiling. Pul bosqichma-bosqich beriladi, har bir bosqich cheklar bilan hisobot qilinadi.",
       "explore": "Loyihalarni koʻrish",
       "start": "Loyiha boshlash",
       "cardKicker": "Hozir mablagʻ yigʻmoqda",
@@ -466,7 +466,6 @@
       "trust1": "Komissiyasiz",
       "trust2": "Har bir loyiha tekshiriladi",
       "trust3": "Pul bosqichma-bosqich beriladi",
-      "eyebrow": "Har bir yigʻim tekshiriladi",
       "give": "Xayriya qilish",
       "trust4": "Har bir xayriya uchun kvitansiya"
     },
@@ -503,7 +502,7 @@
       "start": "Talablarni koʻrish"
     },
     "projects": {
-      "title": "Maqsadiga yaqin yigʻimlar",
+      "title": "Qoʻllab-quvvatlash uchun yigʻimlar",
       "empty": "Birinchi loyihalar tez orada shu yerda boʻladi.",
       "emptyCta": "Birinchilardan boʻling",
       "soonTitle": "Birinchi loyihalar tekshiruvdan oʻtmoqda",
@@ -512,7 +511,7 @@
       "errorTitle": "Loyihalarni yuklab boʻlmadi",
       "errorText": "Internet aloqasini tekshirib, qayta urinib koʻring.",
       "retry": "Qayta urinish",
-      "sub": "Aynan sizning xayriyangiz uni yakunlashi mumkin."
+      "sub": "Har biri tekshirilgan. Aynan sizning xayriyangiz uni yakunlashi mumkin."
     },
     "simple": {
       "title": "Xayriyangiz qanday himoyalanadi",

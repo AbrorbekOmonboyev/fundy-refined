@@ -348,7 +348,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                 aria-label={t('project.funded', { percent: project.fundedPercent })}
               >
                 <div
-                  className="bg-brand h-full rounded-full"
+                  className="progress-fill bg-brand h-full rounded-full"
                   style={{ width: `${Math.min(project.fundedPercent, 100)}%` }}
                 />
               </div>
@@ -510,7 +510,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
                   {text?.story}
                 </div>
                 {project.founder?.bio && (
-                  <div className="pl-4 border-l-[3px] border-brand-deep space-y-1">
+                  <div className="rounded-xl bg-slate-50 p-4 space-y-1">
                     <h3 className="font-bold text-ink text-sm">{t('project.founderBio')}</h3>
                     <p className="text-sm text-slate-600 leading-relaxed">{project.founder.bio}</p>
                   </div>

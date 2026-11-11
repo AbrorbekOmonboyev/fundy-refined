@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import {
   ArrowRight,
-  BadgePercent,
   BookOpen,
   Check,
   ClipboardCheck,
@@ -47,7 +46,7 @@ export function HomePage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Causes to support, nearest to their goal first */}
-        <section className="mt-14 lg:mt-24" aria-labelledby="home-projects">
+        <section className="mt-10 lg:mt-24" aria-labelledby="home-projects">
           <div className="flex items-end justify-between gap-4 mb-6">
             <div>
               <h2 id="home-projects" className="text-[1.625rem] sm:text-3xl text-ink">
@@ -172,11 +171,7 @@ function Hero() {
     <section className="relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 lg:pt-16 lg:pb-4 grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] gap-10 lg:gap-14 items-center">
         <div className="text-left">
-          <p className="inline-flex items-center gap-2 rounded-full bg-brand-soft text-brand-deep dark:text-brand-light px-3.5 py-1.5 text-sm font-semibold">
-            <ShieldCheck className="w-4 h-4" aria-hidden />
-            {t('home.hero.eyebrow')}
-          </p>
-          <h1 className="mt-5 text-[2.5rem] sm:text-5xl lg:text-[3.75rem] leading-[1.04] font-extrabold tracking-[-0.03em] text-ink text-balance">
+          <h1 className="text-[2.5rem] sm:text-5xl lg:text-[3.75rem] leading-[1.04] font-extrabold tracking-[-0.03em] text-ink text-balance">
             {t('home.hero.title')}
           </h1>
           <p className="mt-5 text-lg sm:text-xl text-slate-700 leading-relaxed max-w-xl">{t('home.hero.text')}</p>
@@ -197,19 +192,17 @@ function Hero() {
             </Link>
           </div>
 
-          {/* Why it is safe, in three plain points */}
-          <ul className="mt-8 grid gap-3 text-base font-medium text-ink">
+          {/* Why it is safe: checked, stage by stage, receipts */}
+          <ul className="mt-6 flex flex-wrap gap-2 text-sm font-semibold text-ink">
             {(
               [
-                [BadgePercent, 'trust1'],
+                [ShieldCheck, 'trust2'],
                 [ListChecks, 'trust3'],
                 [Receipt, 'trust4'],
               ] as const
             ).map(([Icon, key]) => (
-              <li key={key} className="flex items-center gap-3">
-                <span className="w-8 h-8 shrink-0 rounded-full bg-brand-soft text-brand dark:text-brand-light flex items-center justify-center">
-                  <Icon className="w-[18px] h-[18px]" aria-hidden />
-                </span>
+              <li key={key} className="inline-flex items-center gap-1.5 min-h-9 rounded-full bg-brand-soft px-3 py-1.5">
+                <Icon className="w-4 h-4 shrink-0 text-brand dark:text-brand-light" aria-hidden />
                 {t(`home.hero.${key}`)}
               </li>
             ))}
@@ -217,10 +210,7 @@ function Hero() {
         </div>
 
         {/* Real faces and places: one large photo and four small, like the big giving sites */}
-        <div
-          aria-hidden
-          className="grid grid-cols-3 grid-rows-[repeat(2,minmax(0,1fr))] gap-2.5 sm:gap-3 h-[300px] sm:h-[420px] lg:h-[520px]"
-        >
+        <div aria-hidden className="hidden lg:grid grid-cols-3 grid-rows-[repeat(2,minmax(0,1fr))] gap-3 h-[520px]">
           {PHOTOS.map((p, i) => (
             <img
               key={p.src}
@@ -228,14 +218,14 @@ function Hero() {
               alt=""
               loading={i === 0 ? 'eager' : 'lazy'}
               decoding="async"
-              className={`w-full h-full object-cover rounded-2xl ${i === 0 ? 'col-span-2 row-span-2' : ''} ${i >= 3 ? 'hidden sm:block' : ''}`}
+              className={`w-full h-full object-cover rounded-2xl ${i === 0 ? 'col-span-2 row-span-2' : ''}`}
             />
           ))}
         </div>
       </div>
 
       {/* CC BY / CC BY-SA need the authors named */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2 text-sm text-slate-600 lg:text-right">
+      <div className="hidden lg:block max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2 text-sm text-slate-600 text-right">
         <button
           type="button"
           onClick={() => setShowCredits(v => !v)}

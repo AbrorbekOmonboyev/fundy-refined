@@ -254,7 +254,7 @@ export function ContributeDialog({
                   >
                     {formatMoney(p, true)}
                     {p === suggested && (
-                      <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-brand text-white px-2 py-0.5 text-[0.75rem] font-semibold leading-tight">
+                      <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-brand text-white px-2 py-0.5 text-xs font-semibold leading-tight">
                         {t('contribute.suggested')}
                       </span>
                     )}

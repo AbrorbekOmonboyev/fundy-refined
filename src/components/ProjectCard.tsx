@@ -131,7 +131,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
             aria-label={t('project.funded', { percent: project.fundedPercent })}
           >
             <div
-              className="h-full rounded-full bg-brand"
+              className="progress-fill h-full rounded-full bg-brand"
               style={{ width: `${Math.min(project.fundedPercent, 100)}%` }}
             />
           </div>

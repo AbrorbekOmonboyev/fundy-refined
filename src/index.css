@@ -44,7 +44,7 @@
   --color-slate-200: #e1e5e0;
   --color-slate-300: #c9d0c9;
   --color-slate-400: #97a29a;
-  --color-slate-500: #6b776f;
+  --color-slate-500: #5f6b63; /* 5.3:1 on the page ground (AA) */
   --color-slate-600: #525d56;
   --color-slate-700: #3d4741;
   --color-slate-800: #29312c;
@@ -89,6 +89,26 @@
     hyphens: auto;
   }
 
+  html {
+    scrollbar-color: var(--color-slate-300) var(--color-page);
+  }
+
+  /* Progress fills grow in once when they appear; still under reduced motion. */
+  .progress-fill {
+    transform-origin: left;
+    animation: progress-fill 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes progress-fill {
+    from {
+      transform: scaleX(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .progress-fill {
+      animation: none;
+    }
+  }
+
   ::selection {
     background-color: var(--color-brand);
     color: #ffffff;
@@ -125,7 +145,7 @@
   --color-brand: #18804f; /* a touch brighter so buttons stand off the dark page (white text 4.9:1) */
   --color-brand-deep: #136b42;
   --color-brand-soft: rgb(63 191 127 / 0.14);
-  --color-warm-soft: rgb(232 149 43 / 0.16);
+  --color-warm-soft: #3b2a12; /* opaque so it reads over photos */
   --color-warm-ink: #f6c27a;
 
   /* Greys with a hint of forest. Light shades become dark and back. */
@@ -175,7 +195,7 @@
   --color-slate-200: #e1e5e0;
   --color-slate-300: #c9d0c9;
   --color-slate-400: #97a29a;
-  --color-slate-500: #6b776f;
+  --color-slate-500: #5f6b63; /* 5.3:1 on the page ground (AA) */
   --color-slate-600: #525d56;
   --color-slate-700: #3d4741;
   --color-slate-800: #29312c;
