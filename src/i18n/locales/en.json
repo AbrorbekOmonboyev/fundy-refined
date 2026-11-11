@@ -457,7 +457,7 @@
   "home": {
     "hero": {
       "title": "Help that you can see",
-      "text": "Give to checked causes in Uzbekistan, with no commission. The money is paid out stage by stage, and every stage is reported with receipts.",
+      "text": "Give to checked causes in Uzbekistan. Every stage is reported with receipts.",
       "explore": "Browse projects",
       "start": "Start a fundraiser",
       "cardKicker": "Raising now",
@@ -469,7 +469,8 @@
       "trust2": "Every project is checked",
       "trust3": "Money is paid out stage by stage",
       "give": "Donate to a cause",
-      "trust4": "A receipt for every donation"
+      "trust4": "A receipt for every donation",
+      "orStart": "or start a fundraiser"
     },
     "pick": {
       "label": "Fundy pick",

@@ -457,7 +457,7 @@
   "home": {
     "hero": {
       "title": "Koʻrinib turadigan yordam",
-      "text": "Oʻzbekistondagi tekshirilgan ezgu ishlarga komissiyasiz xayriya qiling. Pul bosqichma-bosqich beriladi, har bir bosqich cheklar bilan hisobot qilinadi.",
+      "text": "Oʻzbekistondagi tekshirilgan ezgu ishlarga xayriya qiling. Har bir bosqich cheklar bilan hisobot qilinadi.",
       "explore": "Loyihalarni koʻrish",
       "start": "Yigʻim boshlash",
       "cardKicker": "Hozir mablagʻ yigʻmoqda",
@@ -469,7 +469,8 @@
       "trust2": "Har bir loyiha tekshiriladi",
       "trust3": "Pul bosqichma-bosqich beriladi",
       "give": "Xayriya qilish",
-      "trust4": "Har bir xayriya uchun kvitansiya"
+      "trust4": "Har bir xayriya uchun kvitansiya",
+      "orStart": "yoki yigʻim boshlang"
     },
     "pick": {
       "label": "Fundy tanlovi",

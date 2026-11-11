@@ -42,7 +42,8 @@ export function PageFeedback() {
   // headings; near the top of the page (and on hover/focus) the words show.
   const [compact, setCompact] = useState(false);
   useEffect(() => {
-    const onScroll = () => setCompact(window.scrollY > 240);
+    // Phones always show just the icon: the words would cover the page.
+    const onScroll = () => setCompact(window.scrollY > 240 || window.innerWidth < 640);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);

@@ -56,7 +56,7 @@ export function HomePage() {
               <h2 id="home-projects" className="text-[1.625rem] sm:text-3xl text-ink">
                 {t('home.projects.title')}
               </h2>
-              <p className="mt-1 text-base text-slate-600">{t('home.projects.sub')}</p>
+              <p className="hidden sm:block mt-1 text-base text-slate-600">{t('home.projects.sub')}</p>
             </div>
             {items.length > 0 && (
               <span className="hidden sm:block">
@@ -182,7 +182,8 @@ function Hero() {
           </h1>
           <p className="mt-5 text-lg sm:text-xl text-slate-700 leading-relaxed max-w-xl">{t('home.hero.text')}</p>
 
-          <div className="mt-8 flex flex-col sm:flex-row gap-3">
+          {/* One clear action; starting a fundraiser is a quiet second path on phones */}
+          <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-3">
             <Link
               to={paths.explore}
               className="inline-flex items-center justify-center gap-2 min-h-13 px-8 text-[1.0625rem] font-semibold text-white bg-brand hover:bg-brand-deep rounded-full shadow-sm transition-colors"
@@ -192,14 +193,21 @@ function Hero() {
             </Link>
             <Link
               to={paths.startProject}
-              className="inline-flex items-center justify-center min-h-13 px-8 text-[1.0625rem] font-semibold text-ink bg-card border border-slate-300 hover:border-ink rounded-full transition-colors"
+              className="sm:hidden self-center inline-flex items-center min-h-11 text-base font-semibold text-ink underline underline-offset-4 decoration-slate-300"
+            >
+              {t('home.hero.orStart')}
+            </Link>
+            <Link
+              to={paths.startProject}
+              className="hidden sm:inline-flex items-center justify-center min-h-13 px-8 text-[1.0625rem] font-semibold text-ink bg-card border border-slate-300 hover:border-ink rounded-full transition-colors"
             >
               {t('nav.startProject')}
             </Link>
           </div>
 
           {/* Why it is safe: checked, stage by stage, receipts */}
-          <ul className="mt-6 flex flex-wrap gap-2 text-sm font-semibold text-ink">
+          {/* Wide screens only: on phones the safety story has its own section further down */}
+          <ul className="hidden sm:flex mt-6 flex-wrap gap-2 text-sm font-semibold text-ink">
             {(
               [
                 [ShieldCheck, 'trust2'],
