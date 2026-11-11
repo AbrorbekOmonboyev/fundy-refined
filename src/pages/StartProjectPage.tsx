@@ -6,6 +6,7 @@ import {
   Building2,
   Check,
   ClipboardCheck,
+  Clock,
   FileText,
   HandCoins,
   Landmark,
@@ -21,14 +22,17 @@ import { pickText } from '@/features/projects/api';
 import { useMyProjects } from '@/features/projects/hooks';
 import { BasicsStep } from '@/features/wizard/steps/BasicsStep';
 import {
-  ORGANIZERS,
+  ORGANIZERS_IN_ORDER,
+  INDIVIDUAL_FIRST_CAP,
   allowedModels,
+  organizerOpen,
   isOrganizer,
   paysAfterRegistration,
   type OrganizerType,
 } from '@/features/wizard/organizer';
 import { usePageMeta } from '@/lib/usePageMeta';
 import { DONATION_ONLY } from '@/lib/focus';
+import { formatMoney } from '@/lib/money';
 
 /** What each kind of organiser adds when applying, after the identity check. Same rules as submit_project(). */
 const APPLY_EXTRA = {
@@ -45,9 +49,6 @@ const ORGANIZER_ICONS: Record<OrganizerType, LucideIcon> = {
   mchj: Building2,
 };
 
-/** While Fundy is donation-only, registered funds come first: they are who Fundy partners with. */
-const ORDER: readonly OrganizerType[] = DONATION_ONLY ? ['ngo', 'individual', 'yatt', 'mchj'] : ORGANIZERS;
-
 /**
  * /start — open to everyone. A fundraiser landing page in the donation-site standard:
  * the promise and the button first, then who is raising the money (which decides the
@@ -62,7 +63,8 @@ export function StartLandingPage() {
   usePageMeta(t('start.title'), t('start.intro'));
 
   const asParam = params.get('as');
-  const who: OrganizerType = isOrganizer(asParam) ? asParam : DONATION_ONLY ? 'ngo' : 'individual';
+  const who: OrganizerType =
+    isOrganizer(asParam) && organizerOpen(asParam) ? asParam : DONATION_ONLY ? 'ngo' : 'individual';
   const choose = (o: OrganizerType) => setParams({ as: o }, { replace: true, preventScrollReset: true });
 
   const draft = myProjects.data?.find(p => p.status === 'draft' || p.status === 'changes_requested');
@@ -134,8 +136,29 @@ export function StartLandingPage() {
           <legend className="text-[1.625rem] sm:text-3xl text-ink font-bold">{t('start.whoTitle')}</legend>
           <p className="mt-2 text-base text-slate-600 max-w-2xl">{t('start.whoHint')}</p>
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {ORDER.map(o => {
+            {ORGANIZERS_IN_ORDER.map(o => {
               const Icon = ORGANIZER_ICONS[o];
+              if (!organizerOpen(o)) {
+                // Planned, visible, not selectable yet.
+                return (
+                  <div
+                    key={o}
+                    aria-disabled="true"
+                    className="flex flex-col gap-3 rounded-2xl border border-dashed border-slate-300 p-5"
+                  >
+                    <span className="flex items-center justify-between gap-3">
+                      <span className="w-11 h-11 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center">
+                        <Icon className="w-5 h-5" aria-hidden />
+                      </span>
+                      <SoonTag />
+                    </span>
+                    <span>
+                      <span className="block text-lg font-bold text-slate-700">{t(`organizer.${o}.name`)}</span>
+                      <span className="block text-sm text-slate-600 mt-1 leading-relaxed">{t('soon.organizer')}</span>
+                    </span>
+                  </div>
+                );
+              }
               const on = who === o;
               return (
                 <label
@@ -181,6 +204,11 @@ export function StartLandingPage() {
                       {t('start.fundBadge')}
                     </span>
                   )}
+                  {DONATION_ONLY && o === 'individual' && (
+                    <span className="text-xs font-semibold text-slate-600">
+                      {t('start.capNote', { cap: formatMoney(INDIVIDUAL_FIRST_CAP, true) })}
+                    </span>
+                  )}
                 </label>
               );
             })}
@@ -221,7 +249,27 @@ export function StartLandingPage() {
                   <HandCoins className="w-5 h-5 text-brand dark:text-brand-light" aria-hidden />
                   {t('start.modelsTitle')}
                 </h3>
-                <p className="mt-2 text-base text-slate-700 leading-relaxed">{t('start.donationOnly')}</p>
+                <ul className="mt-4 space-y-3">
+                  {(['donation', 'reward', 'equity'] as const).map(m => (
+                    <li key={m} className="flex items-start justify-between gap-3">
+                      <span>
+                        <span className={`block font-semibold ${m === 'donation' ? 'text-ink' : 'text-slate-600'}`}>
+                          {t(`models.${m}.name`)}
+                        </span>
+                        <span className="block text-sm text-slate-600">
+                          {m === 'donation' ? t('models.donation.subtitle') : t(`soon.${m}`)}
+                        </span>
+                      </span>
+                      {m === 'donation' ? (
+                        <span className="shrink-0 rounded-full bg-brand-soft text-brand-deep dark:text-brand-light px-2.5 py-1 text-xs font-semibold">
+                          {t('soon.open')}
+                        </span>
+                      ) : (
+                        <SoonTag />
+                      )}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ) : (
               <div className="rounded-3xl bg-card border border-slate-200 p-6 sm:p-8">
@@ -303,6 +351,17 @@ export function StartLandingPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+/** A quiet "coming soon" pill for planned features. */
+function SoonTag() {
+  const { t } = useTranslation();
+  return (
+    <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-warm-soft text-warm-ink px-2.5 py-1 text-xs font-semibold">
+      <Clock className="w-3.5 h-3.5" aria-hidden />
+      {t('soon.tag')}
+    </span>
   );
 }
 

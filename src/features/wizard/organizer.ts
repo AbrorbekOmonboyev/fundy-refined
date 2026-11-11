@@ -12,6 +12,21 @@ type FundingModel = Database['public']['Enums']['funding_model'];
 
 export const ORGANIZERS: readonly OrganizerType[] = ['individual', 'yatt', 'mchj', 'ngo'];
 
+/**
+ * While donation-only, funds and people can apply; sole traders and companies come back
+ * with rewards and Musharakah (shown as "coming soon"). Same rule as
+ * private.block_non_donation_submit() in 20261111000034_donation_organisers.sql.
+ */
+export const OPEN_ORGANIZERS: readonly OrganizerType[] = DONATION_ONLY ? ['ngo', 'individual'] : ORGANIZERS;
+export const organizerOpen = (o: OrganizerType) => OPEN_ORGANIZERS.includes(o);
+/** Every organiser, the open ones first. */
+export const ORGANIZERS_IN_ORDER: readonly OrganizerType[] = [
+  ...OPEN_ORGANIZERS,
+  ...ORGANIZERS.filter(o => !OPEN_ORGANIZERS.includes(o)),
+];
+/** A person's first donation campaign is capped (private.settings 'individual_first_cap'). */
+export const INDIVIDUAL_FIRST_CAP = 50_000_000;
+
 const ALLOWED: Record<OrganizerType, readonly FundingModel[]> = {
   individual: ['donation', 'reward', 'equity'],
   yatt: ['donation', 'reward', 'equity'],

@@ -8,9 +8,18 @@ export function Footer() {
   const { t } = useTranslation();
 
   const columns = [
-    // While donation-only, the model links would lead to an empty or hidden list.
+    // While donation-only, rewards and Musharakah are listed as coming soon (no link).
     ...(DONATION_ONLY
-      ? []
+      ? [
+          {
+            title: t('footer.models'),
+            links: [
+              { to: paths.explore, label: t('footer.donation') },
+              { to: null, label: t('footer.reward') },
+              { to: null, label: t('footer.musharakah') },
+            ],
+          },
+        ]
       : [
           {
             title: t('footer.models'),
@@ -64,12 +73,21 @@ export function Footer() {
               <ul className="text-sm">
                 {column.links.map(link => (
                   <li key={link.label}>
-                    <Link
-                      to={link.to}
-                      className="inline-flex items-center min-h-10 text-slate-300 hover:text-brand-light transition-colors"
-                    >
-                      {link.label}
-                    </Link>
+                    {link.to ? (
+                      <Link
+                        to={link.to}
+                        className="inline-flex items-center min-h-10 text-slate-300 hover:text-brand-light transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <span className="inline-flex items-center gap-2 min-h-10 text-slate-400">
+                        {link.label}
+                        <span className="whitespace-nowrap rounded-full border border-white/20 px-2 py-0.5 text-xs text-slate-300">
+                          {t('soon.tag')}
+                        </span>
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>

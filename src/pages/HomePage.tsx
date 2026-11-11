@@ -6,6 +6,9 @@ import {
   BookOpen,
   Check,
   ClipboardCheck,
+  Clock,
+  Gift,
+  Handshake,
   HeartHandshake,
   Leaf,
   ListChecks,
@@ -27,6 +30,7 @@ import { PHOTO_CREDITS } from '@/data/photoCredits';
 import { useProjectList } from '@/features/projects/hooks';
 import { useCategories } from '@/features/reference/useReference';
 import { usePageMeta } from '@/lib/usePageMeta';
+import { DONATION_ONLY } from '@/lib/focus';
 
 /**
  * Home page in the donation-site standard (GoFundMe, charity: water, Kitabisa, JustGiving):
@@ -117,6 +121,8 @@ export function HomePage() {
         <Causes />
 
         <SafeGiving />
+
+        {DONATION_ONLY && <ComingSoon />}
       </div>
 
       {/* Closing band for organisers and donors */}
@@ -390,6 +396,41 @@ function TrailStep({
         <p className="mt-0.5 text-sm text-slate-600">{note}</p>
       </div>
     </li>
+  );
+}
+
+/** On the roadmap: shown so visitors (and reviewers) see what comes after donations. Not selectable yet. */
+function ComingSoon() {
+  const { t } = useTranslation();
+  const items = [
+    ['reward', Gift],
+    ['equity', Handshake],
+  ] as const;
+  return (
+    <section className="mt-16 lg:mt-28" aria-labelledby="home-soon">
+      <h2 id="home-soon" className="text-[1.625rem] sm:text-3xl text-ink">
+        {t('soon.homeTitle')}
+      </h2>
+      <p className="mt-2 text-base text-slate-600 max-w-2xl">{t('soon.homeText')}</p>
+      <ul className="mt-6 grid gap-4 md:grid-cols-2">
+        {items.map(([m, Icon]) => (
+          <li key={m} className="rounded-3xl border border-dashed border-slate-300 p-6 sm:p-8">
+            <div className="flex items-center justify-between gap-3">
+              <span className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center">
+                <Icon className="w-6 h-6" aria-hidden />
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-warm-soft text-warm-ink px-2.5 py-1 text-xs font-semibold">
+                <Clock className="w-3.5 h-3.5" aria-hidden />
+                {t('soon.tag')}
+              </span>
+            </div>
+            <h3 className="mt-5 text-xl font-bold text-ink">{t(`models.${m}.name`)}</h3>
+            <p className="mt-1 text-sm font-semibold text-slate-600">{t(`models.${m}.subtitle`)}</p>
+            <p className="mt-3 text-base text-slate-700 leading-relaxed">{t(`models.${m}.text`)}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 

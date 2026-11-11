@@ -165,7 +165,7 @@ export function ChoiceGroup<T extends string>({
   value: T | null;
   onChange: (value: T) => void;
   /** A disabled option stays visible (greyed out), so people can see what it needs. */
-  options: { value: T; label: string; description?: string; disabled?: boolean }[];
+  options: { value: T; label: string; description?: string; disabled?: boolean; tag?: string }[];
   error?: string;
 }) {
   const name = useId();
@@ -178,7 +178,7 @@ export function ChoiceGroup<T extends string>({
             key={o.value}
             className={`flex items-start gap-2.5 rounded-lg border p-3 text-sm transition-colors ${
               o.disabled
-                ? 'border-slate-200 opacity-60 cursor-not-allowed'
+                ? 'border-dashed border-slate-300 cursor-not-allowed [&>input]:opacity-50'
                 : value === o.value
                   ? 'border-ink bg-brand-soft cursor-pointer'
                   : 'border-slate-200 hover:border-slate-300 cursor-pointer'
@@ -194,7 +194,14 @@ export function ChoiceGroup<T extends string>({
               className="mt-0.5 accent-ink"
             />
             <span>
-              <span className="block font-medium text-ink">{o.label}</span>
+              <span className="flex flex-wrap items-center gap-x-2 gap-y-1 font-medium text-ink">
+                {o.label}
+                {o.tag && (
+                  <span className="rounded-full bg-warm-soft text-warm-ink px-2 py-0.5 text-xs font-semibold">
+                    {o.tag}
+                  </span>
+                )}
+              </span>
               {o.description && <span className="block text-xs text-slate-500 mt-0.5">{o.description}</span>}
             </span>
           </label>

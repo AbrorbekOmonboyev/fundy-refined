@@ -7,7 +7,8 @@ import { createDraft, updateBasics, type Basics, type Draft } from '@/features/w
 import { MAX_TARGET, MIN_TARGET } from '@/features/wizard/checks';
 import { useStepSave } from '@/features/wizard/hooks';
 import {
-  ORGANIZERS,
+  ORGANIZERS_IN_ORDER,
+  organizerOpen,
   allowedModels,
   isOrganizer,
   modelAllowed,
@@ -30,7 +31,8 @@ export function BasicsStep({ draft }: { draft: Draft | null }) {
   // /start sends people here with ?as=individual|yatt|mchj|ngo once they picked who they are.
   const [params] = useSearchParams();
   const fromStart = params.get('as');
-  const initialOrganizer = draft?.project.organizer_type ?? (isOrganizer(fromStart) ? fromStart : null);
+  const initialOrganizer =
+    draft?.project.organizer_type ?? (isOrganizer(fromStart) && organizerOpen(fromStart) ? fromStart : null);
   const initialModel = DONATION_ONLY ? 'donation' : (draft?.project.model ?? 'reward');
 
   const [form, setForm] = useState<Basics>({
@@ -107,14 +109,27 @@ export function BasicsStep({ draft }: { draft: Draft | null }) {
         value={form.organizer_type}
         onChange={setOrganizer}
         error={errors.organizer_type}
-        options={ORGANIZERS.map(o => ({
+        options={ORGANIZERS_IN_ORDER.map(o => ({
           value: o,
           label: t(`organizer.${o}.name`),
-          description: t(`organizer.${o}.short`),
+          description: organizerOpen(o) ? t(`organizer.${o}.short`) : t('soon.organizer'),
+          disabled: !organizerOpen(o),
+          tag: organizerOpen(o) ? undefined : t('soon.tag'),
         }))}
       />
       {DONATION_ONLY ? (
-        <p className="text-sm text-slate-600">{t('wizard.basics.donationOnly')}</p>
+        <ChoiceGroup
+          label={t('wizard.basics.model')}
+          value={'donation' as const}
+          onChange={() => set('model', 'donation')}
+          options={(['donation', 'reward', 'equity'] as const).map(m => ({
+            value: m,
+            label: t(`models.${m}.name`),
+            description: m === 'donation' ? t('models.donation.subtitle') : t(`soon.${m}`),
+            disabled: m !== 'donation',
+            tag: m === 'donation' ? undefined : t('soon.tag'),
+          }))}
+        />
       ) : (
         <ChoiceGroup
           label={t('wizard.basics.model')}

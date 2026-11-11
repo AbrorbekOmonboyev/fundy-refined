@@ -1736,7 +1736,7 @@ describe('who is raising the money (organiser type)', () => {
     ]);
   });
 
-  test('an individual applies without a company, but is paid only after registering', async () => {
+  test('a person raising donations is paid without a company; rewards still need registration', async () => {
     const id = await createDraft(gulnora, 'gulnora-passport-only');
     await as(db, user(gulnora), `select public.submit_project($1)`, [id]);
     await evaluateAndApprove(id);
@@ -1753,17 +1753,33 @@ describe('who is raising the money (organiser type)', () => {
       `select public.submit_milestone($1, 'Stage one is done; photos and receipts attached.')`,
       [milestoneId],
     );
-    await rejects(
-      as(db, user(admin), `select public.admin_approve_milestone($1)`, [milestoneId]),
-      /registration_required_before_payout/,
+    // Donation + confirmed identity: no YaTT/MChJ needed.
+    await as(db, user(admin), `select public.admin_approve_milestone($1)`, [milestoneId]);
+
+    // A reward project by a person still waits for a registration number.
+    const reward = await createDraft(gulnora, 'gulnora-reward', { model: 'reward', target: 5_000_000 });
+    await as(db, owner, `insert into public.reward_tiers (project_id, title, amount) values ($1, 'Thanks', 100000)`, [
+      reward,
+    ]);
+    await as(db, user(gulnora), `select public.submit_project($1)`, [reward]);
+    await evaluateAndApprove(reward);
+    await db.query(`update public.projects set status = 'funded' where id = $1`, [reward]);
+    const [{ id: rewardStage }] = await as<{ id: string }>(
+      db,
+      anon,
+      `select id from public.milestones where project_id = $1 order by position limit 1`,
+      [reward],
     );
     await as(
       db,
       user(gulnora),
-      `update public.founder_profiles set registration_number = 'YaTT 5550001' where user_id = $1`,
-      [gulnora],
+      `select public.submit_milestone($1, 'Stage one is done; photos and receipts attached.')`,
+      [rewardStage],
     );
-    await as(db, user(admin), `select public.admin_approve_milestone($1)`, [milestoneId]);
+    await rejects(
+      as(db, user(admin), `select public.admin_approve_milestone($1)`, [rewardStage]),
+      /registration_required_before_payout/,
+    );
   });
 });
 
@@ -2090,6 +2106,56 @@ describe('donation focus', () => {
     } finally {
       await donationOnly(false);
     }
+  });
+
+  test('while donation-only is on, only funds and people can apply, and a first campaign by a person is capped', async () => {
+    const kamola = await createUser(db, 'Kamola Person');
+    await as(db, user(kamola), `insert into public.founder_profiles (user_id, display_name) values ($1, 'Kamola')`, [
+      kamola,
+    ]);
+    await donationOnly(true);
+    try {
+      const trader = await createDraft(alice, 'focus-yatt', { organizer: 'yatt' });
+      await rejects(as(db, user(alice), `select public.submit_project($1)`, [trader]), /organizer_not_open/);
+
+      const big = await createDraft(kamola, 'focus-person-big', { target: 60_000_000 });
+      await rejects(as(db, user(kamola), `select public.submit_project($1)`, [big]), /individual_cap_exceeded/);
+      const small = await createDraft(kamola, 'focus-person-small', { target: 50_000_000 });
+      await as(db, user(kamola), `select public.submit_project($1)`, [small]);
+
+      // A fund has no cap; a person with a completed campaign neither.
+      const fundBig = await createDraft(fund, 'focus-fund-big', { organizer: 'ngo', target: 200_000_000 });
+      await as(db, user(fund), `select public.submit_project($1)`, [fundBig]);
+      await db.query(
+        `update public.projects set status = 'completed', starts_at = now() - interval '40 days', ends_at = now() - interval '10 days' where id = $1`,
+        [small],
+      );
+      await as(db, user(kamola), `select public.submit_project($1)`, [big]);
+    } finally {
+      await donationOnly(false);
+    }
+  });
+
+  test('a person is paid only once their identity is confirmed', async () => {
+    const zuhra = await createUser(db, 'Zuhra Person');
+    await as(db, user(zuhra), `insert into public.founder_profiles (user_id, display_name) values ($1, 'Zuhra')`, [
+      zuhra,
+    ]);
+    const id = await createDraft(zuhra, 'zuhra-stage');
+    await as(db, user(zuhra), `select public.submit_project($1)`, [id]);
+    await evaluateAndApprove(id);
+    await db.query(`update public.projects set status = 'funded' where id = $1`, [id]);
+    const [{ id: stage }] = await as<{ id: string }>(
+      db,
+      anon,
+      `select id from public.milestones where project_id = $1 order by position limit 1`,
+      [id],
+    );
+    await as(db, user(zuhra), `select public.submit_milestone($1, 'Stage one is done; receipts attached here.')`, [
+      stage,
+    ]);
+    await db.query(`delete from public.founder_identities where user_id = $1`, [zuhra]);
+    await rejects(as(db, user(admin), `select public.admin_approve_milestone($1)`, [stage]), /identity_not_confirmed/);
   });
 
   test('an admin marks a fund as verified; founders cannot, and a new registration number clears it', async () => {

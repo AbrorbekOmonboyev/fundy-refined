@@ -133,7 +133,9 @@
     "receiptUpload": "Chek rasmini biriktirib boʻlmadi. Uni qayta yuklang.",
     "tooManyReceipts": "Har bir bosqichga 10 tagacha chek rasmi biriktirish mumkin.",
     "spentInvalid": "Sarflangan summani soʻmda kiriting, 0 yoki undan koʻp.",
-    "amountAboveRemaining": "Maqsadgacha faqat {{left}} qoldi. Shuncha yoki kamroq summa kiriting."
+    "amountAboveRemaining": "Maqsadgacha faqat {{left}} qoldi. Shuncha yoki kamroq summa kiriting.",
+    "organizerNotOpen": "Hozircha faqat roʻyxatdagi fondlar va shaxslar yigʻim boshlay oladi. YaTT va kompaniyalar mukofot va mushoraka bilan qoʻshiladi.",
+    "individualCap": "Shaxsning birinchi yigʻimi 50 mln soʻmgacha boʻlishi mumkin. Hisobotlari bilan yakunlangan yigʻimdan keyin kattaroq maqsad qoʻyishingiz mumkin."
   },
   "auth": {
     "fields": {
@@ -1210,13 +1212,14 @@
     "needStages": "Bosqichlar (odatda 3–6 ta): nima, qachon qilinadi va pulning qancha ulushi beriladi",
     "needStory": "Muqova rasmi va loyiha hikoyasi (kamida 200 belgi)",
     "continueDraft": "Qoralamani davom ettirish: {{title}}",
-    "donationOnly": "Xayriya. Hozircha Fundyʼda faqat xayriya yigʻimlari oʻtkaziladi; mukofot va mushoraka keyinroq qoʻshiladi.",
+    "donationOnly": "Hozir xayriya ochiq. Mukofot va mushoraka yoʻlda.",
     "perk1": "Xayriyalardan komissiya yoʻq",
     "perk2": "Roʻyxatdagi fondlar uchun «Tasdiqlangan fond» belgisi",
     "perk3": "Har bir xayriyachiga kvitansiya",
     "fundBadge": "«Tasdiqlangan fond» belgisini olishi mumkin",
     "step": "{{n}}-qadam",
-    "closing": "Ezgu ishingiz uchun mablagʻ yigʻishga tayyormisiz?"
+    "closing": "Ezgu ishingiz uchun mablagʻ yigʻishga tayyormisiz?",
+    "capNote": "Birinchi yigʻim: {{cap}} gacha"
   },
   "time": {
     "now": "hozirgina",
@@ -1366,8 +1369,8 @@
   "organizer": {
     "individual": {
       "name": "Shaxs yoki jamoa",
-      "short": "Hali kompaniya yoʻq. Shu holingizda ariza berishingiz mumkin.",
-      "payout": "YaTT yoki MChJ sifatida roʻyxatdan oʻting va raqamini qoʻshing. Buni my.gov.uz orqali onlayn qilish mumkin.",
+      "short": "Ezgu ish uchun pul yigʻayotgan shaxs yoki guruh. OneID orqali tasdiqlanadi.",
+      "payout": "Pul faqat oʻz nomingizdagi — OneIDʼdagi ism bilan bir xil — karta yoki bank hisobiga beriladi. Iloji boʻlsa, bosqich puli toʻgʻridan-toʻgʻri yetkazib beruvchiga, masalan, shifoxona yoki maktab hisobiga toʻlanadi.",
       "payoutRule": "Kompaniyasiz ham ariza berib, pul yigʻishingiz mumkin. Birinchi bosqich puli berilishidan oldin YaTT (yoki MChJ) sifatida roʻyxatdan oʻting va raqamini qoʻshing. Buni my.gov.uz orqali onlayn qilish mumkin.",
       "dashboardNotice": "Birinchi bosqich puli berilishidan oldin YaTT yoki MChJ sifatida roʻyxatdan oʻting va roʻyxat raqamini shu yerga qoʻshing. Roʻyxatdan my.gov.uz orqali onlayn oʻtish mumkin.",
       "saveNumber": "Raqamni saqlash"
@@ -1472,5 +1475,14 @@
     "toProject": "Loyihaga qaytish",
     "open": "Kvitansiyani koʻrish",
     "link": "Kvitansiya"
+  },
+  "soon": {
+    "tag": "Tez kunda",
+    "open": "Hozir ochiq",
+    "reward": "Homiylar ishlab chiqaruvchilardan mahsulotni oldindan buyurtma qiladi. Xayriyadan keyin qoʻshiladi.",
+    "equity": "Real bizneslarga foizsiz sarmoya va foydani taqsimlash. Xayriyadan keyin qoʻshiladi.",
+    "organizer": "Tez kunda, mukofot va mushoraka bilan birga.",
+    "homeTitle": "Fundyʼda keyingi qadamlar",
+    "homeText": "Biz xayriyadan boshlaymiz. Keyin Oʻzbekistonda ezgu ishlarni moliyalashning yana ikki usuli qoʻshiladi — xuddi shu tekshiruv va bosqichma-bosqich toʻlovlar bilan."
   }
 }

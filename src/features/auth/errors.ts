@@ -30,6 +30,8 @@ const BY_CODE: Record<string, ErrorKey> = {
   amount_below_minimum: 'errors.amountBelowMinimum',
   amount_above_maximum: 'errors.amountAboveMaximum',
   amount_above_remaining: 'errors.amountAboveRemaining',
+  organizer_not_open: 'errors.organizerNotOpen',
+  individual_cap_exceeded: 'errors.individualCap',
   amount_below_reward_price: 'errors.amountBelowRewardPrice',
   reward_sold_out: 'errors.rewardSoldOut',
   addon_needs_reward: 'errors.addonNeedsReward',

@@ -133,7 +133,9 @@
     "receiptUpload": "A receipt photo couldn't be attached. Upload it again.",
     "tooManyReceipts": "You can attach up to 10 receipt photos per stage.",
     "spentInvalid": "Enter the amount spent in so'm, 0 or more.",
-    "amountAboveRemaining": "Only {{left}} is left until the goal. Please pledge that much or less."
+    "amountAboveRemaining": "Only {{left}} is left until the goal. Please pledge that much or less.",
+    "organizerNotOpen": "For now only registered funds and people can start fundraisers. Sole traders and companies come with rewards and Musharakah.",
+    "individualCap": "A person's first fundraiser can raise up to 50 million so'm. After a finished campaign with reports, you can set a larger goal."
   },
   "auth": {
     "fields": {
@@ -1210,13 +1212,14 @@
     "needStages": "Stages (usually 3–6): what gets done, when, and what share of the money",
     "needStory": "A cover photo and the project story (at least 200 characters)",
     "continueDraft": "Continue your draft: {{title}}",
-    "donationOnly": "Donations. For now Fundy runs donation campaigns only; rewards and Musharakah will come later.",
+    "donationOnly": "Donations are open now. Rewards and Musharakah are on the way.",
     "perk1": "No commission on donations",
     "perk2": "Verified fund badge for registered funds",
     "perk3": "A receipt for every donor",
     "fundBadge": "Can get the Verified fund badge",
     "step": "Step {{n}}",
-    "closing": "Ready to raise money for your cause?"
+    "closing": "Ready to raise money for your cause?",
+    "capNote": "First campaign: up to {{cap}}"
   },
   "time": {
     "now": "just now",
@@ -1366,8 +1369,8 @@
   "organizer": {
     "individual": {
       "name": "A person or team",
-      "short": "No company yet. You can apply as you are.",
-      "payout": "Register as a sole trader (YaTT) or a company (MChJ) and add the number. You can do it online at my.gov.uz.",
+      "short": "A person or a group raising money for a cause. Confirmed with OneID.",
+      "payout": "Money is paid only to a card or bank account in your own name, the same name as on OneID. Where possible a stage is paid straight to the supplier, for example a hospital or school bill.",
       "payoutRule": "You can apply and raise money without a company. Before the first stage's money is released, register as a YaTT (or MChJ) and add the number. You can do it online at my.gov.uz.",
       "dashboardNotice": "Before the first stage's money is released, register as a sole trader (YaTT) or a company (MChJ) and add the registration number here. You can register online at my.gov.uz.",
       "saveNumber": "Save number"
@@ -1472,5 +1475,14 @@
     "toProject": "Back to the project",
     "open": "View receipt",
     "link": "Receipt"
+  },
+  "soon": {
+    "tag": "Coming soon",
+    "open": "Open now",
+    "reward": "Backers pre-order products from makers. Coming after donations.",
+    "equity": "Interest-free investment in real businesses, with profit sharing. Coming after donations.",
+    "organizer": "Coming soon, together with rewards and Musharakah.",
+    "homeTitle": "Coming next on Fundy",
+    "homeText": "We start with donations. Next, two more ways to fund good work in Uzbekistan, with the same checks and stage-by-stage payouts."
   }
 }
