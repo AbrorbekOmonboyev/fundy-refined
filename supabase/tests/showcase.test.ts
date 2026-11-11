@@ -43,12 +43,30 @@ describe('hackathon showcase', () => {
     );
     await db.query(`delete from public.notifications`);
     await db.exec(script('showcase.sql'));
+    await db.exec(script('showcase-more.sql'));
   });
 
   const user = (userId: string) => ({ role: 'authenticated', userId }) as const;
 
-  test('adds exactly 8 marked projects and 97 demo accounts, and no admin', async () => {
-    assert.equal(await one(db, `select count(*)::int as n from public.projects where is_demo`), 8);
+  test('adds exactly 11 marked projects (6 donations) and 97 demo accounts, and no admin', async () => {
+    assert.equal(await one(db, `select count(*)::int as n from public.projects where is_demo`), 11);
+    assert.equal(
+      await one(
+        db,
+        `select count(*)::int as n from public.projects where is_demo and model = 'donation' and status = 'active'`,
+      ),
+      6,
+    );
+    assert.equal(
+      await one(
+        db,
+        `select count(*)::int as n from public.projects p where p.is_demo
+         and (select count(*) from public.project_translations t where t.project_id = p.id) >= 2
+         and (select sum(amount) from public.budget_items b where b.project_id = p.id) = p.target_amount
+         and (select sum(release_percent) from public.milestones m where m.project_id = p.id) = 100`,
+      ),
+      11,
+    );
     assert.equal(await one(db, `select count(*)::int as n from auth.users where email like '%@demo.fundy.uz'`), 97);
     assert.equal(await one(db, `select count(*)::int as n from public.profiles where role = 'admin'`), 1);
     assert.equal(await one(db, `select count(*)::int as n from public.projects where not is_demo`), 1);
