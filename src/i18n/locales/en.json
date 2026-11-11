@@ -1188,7 +1188,7 @@
   },
   "start": {
     "title": "Start a fundraiser for a good cause",
-    "intro": "Free for organisers. Money is paid out stage by stage, with public reports.",
+    "intro": "Free for organisers. Fundy checks your campaign, so donors trust it: the money is paid out stage by stage, with public reports and receipts.",
     "needTitle": "What you'll need",
     "timeTitle": "How long it takes",
     "time1Title": "Application",
@@ -1200,11 +1200,11 @@
     "time4Title": "Money by stage",
     "time4Text": "after each stage's proof is checked",
     "feesTitle": "What it costs",
-    "fees": "No commission. Donors may add an optional tip for Fundy. Payments are simulated during the demo.",
+    "fees": "Fundy takes no commission from donations: your campaign gets every so'm donated. Donors can add an optional tip for Fundy, which keeps the platform running. During the demo all payments are simulated.",
     "cta": "Start your fundraiser",
     "ctaHint": "You'll log in or sign up first. It takes a minute.",
     "whoTitle": "Who is raising the money?",
-    "whoHint": "This decides what you need to apply.",
+    "whoHint": "Your answer decides which documents you need.",
     "applyTitle": "To apply",
     "payoutTitle": "Before the money is paid out",
     "modelsTitle": "Funding you can use",
@@ -1220,8 +1220,7 @@
     "fundBadge": "Can get the Verified fund badge",
     "step": "Step {{n}}",
     "closing": "Ready to raise money for your cause?",
-    "capNote": "First campaign: up to {{cap}}",
-    "soonOrganizers": "Sole traders (YaTT) and companies (MChJ)"
+    "capNote": "First campaign: up to {{cap}}"
   },
   "time": {
     "now": "just now",
