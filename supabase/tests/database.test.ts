@@ -2186,3 +2186,53 @@ describe('donation focus', () => {
     assert.deepEqual(m, { spent: '5800000', n: 2 });
   });
 });
+
+describe('investment raises close at their goal', () => {
+  let malika: string;
+  let id: string;
+  const state = async () =>
+    (
+      await db.query<{ status: string; raised_amount: string; registration_due_at: string | null }>(
+        `select status::text, raised_amount::text, registration_due_at from public.projects where id = $1`,
+        [id],
+      )
+    ).rows[0];
+
+  before(async () => {
+    malika = await createUser(db, 'Malika Startup');
+    await as(db, user(malika), `insert into public.founder_profiles (user_id, display_name) values ($1, 'Malika')`, [
+      malika,
+    ]);
+    id = await createDraft(malika, 'malika-startup', { model: 'equity', organizer: 'individual' });
+    await as(
+      db,
+      user(malika),
+      `insert into public.equity_terms (project_id, contract_type, investor_profit_share_pct, min_investment, distribution_schedule, exit_horizon_years) values ($1, 'musharakah', 20, 3000000, 'quarterly', 5)`,
+      [id],
+    );
+    await as(db, user(malika), `select public.submit_project($1)`, [id]);
+    await evaluateAndApprove(id);
+  });
+
+  test('a pledge can not go past the goal', async () => {
+    await as(db, user(bob), `select public.contribute($1, 8000000, 'click')`, [id]);
+    await rejects(
+      as(db, user(carol), `select public.contribute($1, 3000000, 'click')`, [id]),
+      /amount_above_remaining/,
+    );
+    assert.equal((await state()).status, 'active');
+  });
+
+  test('the last piece may be under the minimum, and it closes the raise at once', async () => {
+    await as(db, user(carol), `select public.contribute($1, 2000000, 'payme')`, [id]);
+    const p = await state();
+    assert.equal(p.raised_amount, '10000000');
+    assert.equal(p.status, 'funded');
+    const days = (new Date(p.registration_due_at!).getTime() - Date.now()) / 86_400_000;
+    assert.ok(days > 59 && days <= 60, 'the 60-day registration clock starts now');
+    await rejects(
+      as(db, user(admin), `select public.contribute($1, 3000000, 'click')`, [id]),
+      /project_not_accepting_contributions/,
+    );
+  });
+});

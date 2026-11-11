@@ -132,7 +132,8 @@
     "tipInvalid": "Bu hissa miqdorini qoʻllab boʻlmaydi. Boshqa summani kiriting yoki nol qoldiring.",
     "receiptUpload": "Chek rasmini biriktirib boʻlmadi. Uni qayta yuklang.",
     "tooManyReceipts": "Har bir bosqichga 10 tagacha chek rasmi biriktirish mumkin.",
-    "spentInvalid": "Sarflangan summani soʻmda kiriting, 0 yoki undan koʻp."
+    "spentInvalid": "Sarflangan summani soʻmda kiriting, 0 yoki undan koʻp.",
+    "amountAboveRemaining": "Maqsadgacha faqat {{left}} qoldi. Shuncha yoki kamroq summa kiriting."
   },
   "auth": {
     "fields": {
@@ -751,7 +752,8 @@
       "hint": "Fundy komissiya olmaydi. Loyiha xayriyangizning hammasini oladi; hissangiz platformani yuritishga ketadi.",
       "none": "Kerak emas",
       "summary": "Fundyʼga hissa: {{tip}}. Jami toʻlov: {{total}}."
-    }
+    },
+    "upTo": "{{left}} gacha (maqsadgacha qolgani)"
   },
   "dashboard": {
     "backer": {

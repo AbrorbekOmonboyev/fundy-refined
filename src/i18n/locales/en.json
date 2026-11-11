@@ -132,7 +132,8 @@
     "tipInvalid": "This tip amount can't be used. Try another amount or leave it at zero.",
     "receiptUpload": "A receipt photo couldn't be attached. Upload it again.",
     "tooManyReceipts": "You can attach up to 10 receipt photos per stage.",
-    "spentInvalid": "Enter the amount spent in so'm, 0 or more."
+    "spentInvalid": "Enter the amount spent in so'm, 0 or more.",
+    "amountAboveRemaining": "Only {{left}} is left until the goal. Please pledge that much or less."
   },
   "auth": {
     "fields": {
@@ -751,7 +752,8 @@
       "hint": "Fundy takes no commission. The project gets your whole donation; a tip keeps the platform running.",
       "none": "No tip",
       "summary": "Tip for Fundy: {{tip}}. You pay {{total}} in total."
-    }
+    },
+    "upTo": "up to {{left}} (left until the goal)"
   },
   "dashboard": {
     "backer": {

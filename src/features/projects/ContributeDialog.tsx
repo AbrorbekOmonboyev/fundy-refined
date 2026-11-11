@@ -21,8 +21,11 @@ const METHODS: PaymentMethod[] = ['click', 'payme', 'uzcard', 'humo', 'bank_wire
 
 function presets(project: ProjectDetail): number[] {
   if (project.model === 'equity' && project.equity) {
+    // Never more than what is left of the goal (the database refuses it too).
+    const left = Math.max(0, project.targetAmount - project.raisedAmount);
     const min = project.equity.min_investment;
-    return [min, min * 2, min * 5, min * 10];
+    const fit = [min, min * 2, min * 5, min * 10].filter(a => a < left);
+    return left > 0 ? [...fit.slice(0, 3), left] : fit;
   }
   return [50_000, 100_000, 250_000, 500_000, 1_000_000].filter(a => a >= project.minContribution).slice(0, 4);
 }
@@ -66,13 +69,16 @@ export function ContributeDialog({
   const chargeDate = formatDate(expectedChargeDate(project));
   const [allowCharge, setAllowCharge] = useState(false);
 
-  const minimum = Math.max(project.minContribution, project.equity?.min_investment ?? 0);
+  // What is left of the goal. Investment pledges stop there; the last piece may be under the minimum.
+  const remaining = Math.max(0, project.targetAmount - project.raisedAmount);
+  const capped = project.model === 'equity';
+  const fullMinimum = Math.max(project.minContribution, project.equity?.min_investment ?? 0);
+  const minimum = capped && remaining > 0 ? Math.min(fullMinimum, remaining) : fullMinimum;
   const tier = project.rewards.find(r => r.id === rewardId) ?? null;
   // Only main rewards; add-ons come with the cart (Phase B). Hidden ones never show.
   const choosable = project.rewards.filter(r => r.kind === 'reward' && !r.is_hidden);
   const share = project.equity ? (amount / project.targetAmount) * project.equity.investor_profit_share_pct : 0;
   // What this amount does for the project, in plain words.
-  const remaining = Math.max(0, project.targetAmount - project.raisedAmount);
   const impact =
     !amount || amount < minimum
       ? null
@@ -101,6 +107,10 @@ export function ContributeDialog({
       setError(t('errors.amountBelowMinimum', { min: formatMoney(minimum) }));
       return;
     }
+    if (capped && amount > remaining) {
+      setError(t('errors.amountAboveRemaining', { left: formatMoney(remaining) }));
+      return;
+    }
     if (tier && amount < tier.amount) {
       setError(t('errors.amountBelowRewardPrice'));
       return;
@@ -120,7 +130,13 @@ export function ContributeDialog({
       void queryClient.invalidateQueries({ queryKey: projectKeys.all });
     } catch (e) {
       const key = errorKey(e);
-      setError(key === 'errors.amountBelowMinimum' ? t(key, { min: formatMoney(minimum) }) : t(key));
+      setError(
+        key === 'errors.amountBelowMinimum'
+          ? t(key, { min: formatMoney(minimum) })
+          : key === 'errors.amountAboveRemaining'
+            ? t(key, { left: formatMoney(remaining) })
+            : t(key),
+      );
     } finally {
       setBusy(false);
     }
@@ -236,13 +252,17 @@ export function ContributeDialog({
                   type="number"
                   inputMode="numeric"
                   min={minimum}
+                  max={capped ? remaining : undefined}
                   step={1000}
                   value={amount || ''}
                   onChange={e => setAmount(Math.round(Number(e.target.value)))}
                   className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm font-mono-numbers focus:outline-none focus:ring-1 focus:ring-ink focus:border-ink"
                 />
               </label>
-              <p className="text-xs text-slate-500">{t('contribute.minimum', { min: formatMoney(minimum) })}</p>
+              <p className="text-xs text-slate-500">
+                {t('contribute.minimum', { min: formatMoney(minimum) })}
+                {capped && <> · {t('contribute.upTo', { left: formatMoney(remaining) })}</>}
+              </p>
               {impact && <p className="text-sm font-medium text-ink">{impact}</p>}
             </fieldset>
 
