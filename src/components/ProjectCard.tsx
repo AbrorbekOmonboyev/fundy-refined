@@ -1,14 +1,13 @@
 import { useEffect, useRef, type PointerEvent } from 'react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { BadgeCheck, Bookmark, CheckCircle, Flame, ImageOff, MapPin } from 'lucide-react';
+import { BadgeCheck, Bookmark, Flame, ImageOff, MapPin } from 'lucide-react';
 import { DONATION_ONLY } from '@/lib/focus';
 import { responsiveImage } from '@/lib/supabase';
 import { paths } from '@/app/routes';
-import { daysLeft, pickText, type ProjectCardData } from '@/features/projects/api';
+import { pickText, type ProjectCardData } from '@/features/projects/api';
 import { useSavedProjects } from '@/features/projects/hooks';
-import { useCategories } from '@/features/reference/useReference';
-import { formatMoney, formatNumber } from '@/lib/money';
+import { formatMoney } from '@/lib/money';
 
 /**
  * Phones have no hover: the card passing through the middle of the screen while scrolling
@@ -43,13 +42,11 @@ function followPointer(e: PointerEvent<HTMLElement>) {
 export function ProjectCard({ project }: { project: ProjectCardData }) {
   const { t, i18n } = useTranslation();
   const glassRef = useCenterFocus();
-  const { nameOf } = useCategories();
   const saved = useSavedProjects();
   const { text } = pickText(project.translations, i18n.resolvedLanguage ?? 'uz', project.originalLanguage);
   const title = text?.title ?? project.slug;
   const isSaved = saved.isSaved(project.id);
   const href = paths.project(project.slug);
-  const days = daysLeft(project.endsAt);
   // Goal-gradient: campaigns close to their goal draw more gifts, so say so plainly.
   const almost = project.status === 'active' && project.fundedPercent >= 75 && project.fundedPercent < 100;
 
@@ -101,22 +98,20 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
         </button>
       </div>
 
-      <div className="pt-4 flex-1 flex flex-col justify-between">
+      {/* Only what a donor needs to choose: where, what, how far along. Details live on the campaign page. */}
+      <div className="pt-3.5 flex-1 flex flex-col justify-between">
         <div>
-          {/* Category and place as separate items, spaced, not joined by dots */}
-          <p className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs text-slate-500 mb-1.5">
-            {!DONATION_ONLY && <span className="font-semibold text-ink">{t(`models.${project.model}.name`)}</span>}
-            {nameOf(project.categoryId) && (
-              <span className="font-medium text-slate-600">{nameOf(project.categoryId)}</span>
-            )}
-            {project.location && (
-              <span className="inline-flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5" aria-hidden />
-                {project.location.split(',')[0]}
-              </span>
-            )}
-          </p>
-
+          {(project.location || !DONATION_ONLY) && (
+            <p className="flex flex-wrap items-center gap-x-3 text-xs text-slate-600 mb-1">
+              {!DONATION_ONLY && <span className="font-semibold text-ink">{t(`models.${project.model}.name`)}</span>}
+              {project.location && (
+                <span className="inline-flex items-center gap-1">
+                  <MapPin className="w-3.5 h-3.5" aria-hidden />
+                  {project.location.split(',')[0]}
+                </span>
+              )}
+            </p>
+          )}
           <h3 lang={text?.language} className="text-[1.0625rem] font-bold text-ink line-clamp-2 leading-snug">
             {/* The whole card is clickable through this link's stretched area. */}
             <Link
@@ -126,27 +121,9 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
               {title}
             </Link>
           </h3>
-
-          <p lang={text?.language} className="mt-1.5 text-sm text-slate-600 line-clamp-2 leading-relaxed">
-            {text?.tagline}
-          </p>
-
-          <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-600">
-            <span className="inline-flex items-center gap-1">
-              {t('project.by', { name: project.founderName })}
-              {project.founderVerified && (
-                <CheckCircle className="w-3.5 h-3.5 text-ink" aria-label={t('project.verifiedFounder')} />
-              )}
-            </span>
-            {project.score !== null && (
-              <span className="font-mono-numbers" title={t('project.scoreHint')}>
-                {t('project.score')} {project.score}/100
-              </span>
-            )}
-          </p>
         </div>
 
-        <div className="mt-4">
+        <div className="mt-3">
           <div
             className="w-full bg-track rounded-full h-2 overflow-hidden"
             role="progressbar"
@@ -160,19 +137,13 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
               style={{ width: `${Math.min(project.fundedPercent, 100)}%` }}
             />
           </div>
-          <p className="mt-2.5 font-mono-numbers">
-            <span className="text-base font-bold text-ink">{formatMoney(project.raisedAmount, true)}</span>
-            <span className="text-sm text-slate-500 ml-1.5">
-              {t('project.ofGoal', { goal: formatMoney(project.targetAmount, true) })}
+          <p className="mt-2 flex items-baseline justify-between gap-3 font-mono-numbers">
+            <span className="text-base font-bold text-ink">
+              {formatMoney(project.raisedAmount, true)}
+              <span className="sr-only"> {t('project.ofGoal', { goal: formatMoney(project.targetAmount, true) })}</span>
             </span>
-          </p>
-          <p className="mt-1 flex flex-wrap gap-x-4 gap-y-0.5 text-sm text-slate-600 font-mono-numbers">
-            <strong className="font-semibold text-ink">{project.fundedPercent}%</strong>
-            <span>
-              {project.status === 'active' ? t('project.daysLeft', { count: days }) : t(`status.${project.status}`)}
-            </span>
-            <span>
-              {t('project.backers', { count: project.backerCount, formatted: formatNumber(project.backerCount) })}
+            <span className="text-sm font-semibold text-slate-600">
+              {project.status === 'active' ? `${project.fundedPercent}%` : t(`status.${project.status}`)}
             </span>
           </p>
         </div>

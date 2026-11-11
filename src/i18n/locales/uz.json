@@ -701,10 +701,10 @@
       "released": "Asoschiga berildi",
       "review": "Dalil tekshirilmoqda",
       "held": "Bosqichni kutmoqda",
-      "raisingNote": "Mablagʻ yigʻilmoqda. Maqsadga yetguncha pul hech kimga berilmaydi. Yetmasa, pul homiylarga qaytariladi. Yetsa, har bir bosqich bajarilgach oʻz ulushi beriladi."
+      "raisingNote": "Maqsadga yetguncha saqlanadi, keyin bosqichma-bosqich beriladi."
     },
     "checks": {
-      "title": "Fundy nimani tekshirdi",
+      "title": "Fundy tekshirgan",
       "identity": "Asoschining shaxsi tasdiqlangan",
       "registration": "Roʻyxatdan oʻtgan: {{number}}",
       "budget_one": "Byudjet {{count}} ta bandga boʻlib eʼlon qilingan",

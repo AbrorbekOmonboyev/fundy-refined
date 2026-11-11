@@ -7,7 +7,7 @@ type Backer = { first_name: string; city: string | null; backed_at: string };
 
 async function fetchRecentBackers(projectId: string): Promise<Backer[]> {
   if (!supabase) return [];
-  const { data, error } = await supabase.rpc('recent_backers', { p_project_id: projectId, p_limit: 5 });
+  const { data, error } = await supabase.rpc('recent_backers', { p_project_id: projectId, p_limit: 3 });
   if (error) throw error;
   return data ?? [];
 }

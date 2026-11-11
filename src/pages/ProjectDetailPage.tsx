@@ -442,34 +442,12 @@ function ProjectView({ project }: { project: ProjectDetail }) {
               </div>
             </div>
 
-            {project.evaluation && (
-              <button
-                type="button"
-                onClick={() => setTab('evaluation')}
-                className="w-full py-3 border-y border-slate-200 flex items-center justify-between text-left group cursor-pointer"
-              >
-                <span className="text-sm">
-                  <span className="block font-semibold text-ink group-hover:underline underline-offset-4">
-                    {t('project.evaluationScore')}
-                  </span>
-                  <span className="text-xs text-slate-500">
-                    {t(`project.confidence.${project.evaluation.confidence}`)}
-                  </span>
-                </span>
-                <span className="text-xl font-bold text-ink font-mono-numbers">
-                  {project.evaluation.overall_score}/100
-                </span>
-              </button>
+            {/* The site-wide demo banner already says payments are simulated. */}
+            {!isOwner && (
+              <div className="text-right">
+                <ReportButton target="project" targetId={project.id} />
+              </div>
             )}
-
-            <div className="flex items-start justify-between gap-4">
-              <p className="text-xs text-slate-500 leading-normal">{t('contribute.demoNote')}</p>
-              {!isOwner && (
-                <div className="shrink-0">
-                  <ReportButton target="project" targetId={project.id} />
-                </div>
-              )}
-            </div>
           </div>
           <RecentBackers projectId={project.id} />
         </aside>
