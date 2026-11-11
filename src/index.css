@@ -2,36 +2,53 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * Fundy colours — "Ishonch" (trust) palette, chosen for older visitors and for trust
- * (research: blue/navy and calm green read as trustworthy; high contrast for ageing eyes).
- * The earlier chartreuse look is tagged in git as `before-ishonch`.
- *   Green   #0B6B45  buttons, progress, highlights — white text on it (6.5:1)
- *   Navy    #14304F  headings, header/footer, dark buttons (13:1 on white)
- *   Ink     #132A45  body text
- *   Gold    #C8962E  rare accents only (featured star)
- *   Warm white #FAF9F6  page background
- * Fonts: Onest Bold for headlines (was Unbounded in the brand kit; the logo keeps its own lettering), Plus Jakarta Sans for everything else.
- *
- * Use as Tailwind classes: bg-brand, text-ink, bg-brand-soft, font-display, bg-page …
+ * Fundy design system — "Redesign" 2026-11 (restore point: git tag `before-redesign`).
+ * The familiar donation-site standard (GoFundMe, charity: water, Kitabisa, JustGiving) at full
+ * craft. Research behind the colours (PRODUCT.md, docs in the redesign commit):
+ *   - warm colours raise affect-based trust on crowdfunding pages (Zhang et al., JMIR 2021);
+ *   - blue/green tones support helping behaviour more than red (Nie et al., Frontiers 2020);
+ *   - so: calm green for every action and progress, warm white grounds, one warm amber
+ *     reserved for "almost there" (goal-gradient: campaigns near their goal draw more gifts).
+ *   Green   #0B6B45  the only action + progress colour, white text on it (6.5:1)
+ *   Forest  #0F2A20  dark surfaces (footer, dark bands) — replaces the old navy
+ *   Ink     #17201B  text (near-black with a green cast)
+ *   Amber   #E8952B  "almost there" only, never for text on white
+ *   Page    #FAF9F6  warm white; cards are pure white
+ * One font everywhere: Onest (Latin, Uzbek oʻ gʻ, Cyrillic).
  *
  * Color roles (so dark mode can flip them):
  *   text-ink / border-ink   main text colour  → turns light in dark mode
- *   bg-night / bg-night-soft dark surfaces (footer, buttons, dark panels) → stay dark
+ *   bg-night / bg-night-soft dark surfaces (footer, dark panels) → stay dark
  *   bg-card                 cards, inputs, header → turns dark in dark mode
  *   text-white              text on dark surfaces → always white
  */
 @theme {
-  --color-brand: #0b6b45; /* deep green: buttons, progress — white text on it */
+  --color-brand: #0b6b45; /* green: buttons, progress — white text on it */
   --color-brand-deep: #08553a; /* hover / pressed green, progress fill */
-  --color-brand-soft: #e6f2eb; /* light green tint for selected / highlighted areas */
-  --color-brand-light: #5fcf94; /* green for icons and text on navy / dark surfaces */
-  --color-gold: #c8962e; /* rare accent */
-  --color-ink: #132a45;
-  --color-night: #14304f; /* navy: dark surfaces; same in both themes */
-  --color-night-soft: #1e4268; /* slightly lighter navy */
+  --color-brand-soft: #e7f3ec; /* light green tint for selected / highlighted areas */
+  --color-brand-light: #6fd6a0; /* green for icons and text on dark surfaces */
+  --color-gold: #e8952b; /* kept name: the warm amber accent */
+  --color-warm: #e8952b; /* "almost there" fills and icons */
+  --color-warm-soft: #fdf0dc; /* "almost there" badge ground */
+  --color-warm-ink: #7a4505; /* text on warm-soft (7.6:1) */
+  --color-ink: #17201b;
+  --color-night: #0f2a20; /* forest: dark surfaces; same in both themes */
+  --color-night-soft: #18392c;
   --color-card: #ffffff;
   --color-page: #faf9f6;
-  --color-track: #e4e9e6; /* empty part of progress bars, image placeholders */
+  --color-track: #e3e8e4; /* empty part of progress bars, image placeholders */
+
+  /* Neutral greys with a faint green-warm cast (Tailwind's slate is blue). */
+  --color-slate-50: #f6f7f5;
+  --color-slate-100: #eef0ec;
+  --color-slate-200: #e1e5e0;
+  --color-slate-300: #c9d0c9;
+  --color-slate-400: #97a29a;
+  --color-slate-500: #6b776f;
+  --color-slate-600: #525d56;
+  --color-slate-700: #3d4741;
+  --color-slate-800: #29312c;
+  --color-slate-900: #1a201c;
 
   /* Smallest text is 13.5px (Tailwind's default 12px is hard to read on phones);
      small body text is 15px. */
@@ -40,22 +57,19 @@
   --text-sm: 0.9375rem;
   --text-sm--line-height: calc(1.4 / 0.9375);
 
-  /* Design refresh (docs/PLAN-design-refresh.md): small, firm corners like the big
-     crowdfunding sites instead of soft bubbly boxes. Pills (rounded-full) are kept only
-     for avatars, counters, tags and progress bars. */
-  --radius-md: 0.375rem; /* buttons, inputs */
-  --radius-lg: 0.375rem;
-  --radius-xl: 0.5rem; /* panels */
-  --radius-2xl: 0.5rem; /* cards, images */
-  --radius-3xl: 0.75rem;
+  /* Friendly, rounded shapes like the big donation sites: 10px controls, 16px cards. */
+  --radius-md: 0.625rem; /* buttons, inputs */
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem; /* panels */
+  --radius-2xl: 1rem; /* cards, images */
+  --radius-3xl: 1.5rem;
 
-  /* No soft shadows on cards and buttons: thin lines separate things.
-     Bigger shadows stay for things that float (menus, dialogs, drawers). */
-  --shadow-sm: 0 0 #0000;
-  --shadow-md: 0 0 #0000;
+  /* Cards sit on a soft lift; floating things (menus, dialogs) keep bigger shadows. */
+  --shadow-sm: 0 1px 2px rgb(16 32 24 / 0.06);
+  --shadow-md: 0 2px 6px rgb(16 32 24 / 0.07), 0 8px 24px rgb(16 32 24 / 0.06);
 
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-display: 'Onest', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans: 'Onest', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Onest', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
 @layer base {
@@ -97,32 +111,34 @@
 }
 
 /* ===========================================================================
- * Dark mode: "Tashkent at night" — deep navy sky, green as the light.
+ * Dark mode: deep forest night, green as the light.
  * The theme is switched by the .dark class on <html> (see src/lib/theme.ts).
  * Most of the site re-colours itself through these variables.
  * ======================================================================== */
 .dark {
   color-scheme: dark;
 
-  --color-ink: #e9eef5;
-  --color-card: #12223a;
-  --color-page: #0b1726;
-  --color-track: #22364f;
+  --color-ink: #ecf1ed;
+  --color-card: #15211b;
+  --color-page: #0c1511;
+  --color-track: #26352d;
   --color-brand: #18804f; /* a touch brighter so buttons stand off the dark page (white text 4.9:1) */
   --color-brand-deep: #136b42;
   --color-brand-soft: rgb(63 191 127 / 0.14);
+  --color-warm-soft: rgb(232 149 43 / 0.16);
+  --color-warm-ink: #f6c27a;
 
-  /* Greys with a hint of navy. Light shades become dark and back. */
-  --color-slate-50: #142640;
-  --color-slate-100: #182c48;
-  --color-slate-200: #213754;
-  --color-slate-300: #314a6a;
-  --color-slate-400: #6f85a3;
-  --color-slate-500: #8fa2bb;
-  --color-slate-600: #aebdd0;
-  --color-slate-700: #c8d3e1;
-  --color-slate-800: #dfe6ee;
-  --color-slate-900: #eff3f7;
+  /* Greys with a hint of forest. Light shades become dark and back. */
+  --color-slate-50: #16231c;
+  --color-slate-100: #1b2a22;
+  --color-slate-200: #24352c;
+  --color-slate-300: #34483d;
+  --color-slate-400: #74887c;
+  --color-slate-500: #93a499;
+  --color-slate-600: #b0bdb4;
+  --color-slate-700: #c9d3cc;
+  --color-slate-800: #e0e7e2;
+  --color-slate-900: #f0f4f1;
 
   /* Message boxes: soft glows instead of pastel blocks; text gets lighter. */
   --color-rose-50: rgb(244 63 94 / 0.12);
@@ -146,24 +162,24 @@
   --color-orange-800: oklch(90.1% 0.076 70.697);
 }
 
-/* Green and navy areas were designed with light-mode colours inside them
+/* Green and forest areas were designed with light-mode colours inside them
    (light greys on navy), so they keep those. */
 .dark :is(.bg-brand, .bg-brand-deep, .bg-night, .bg-night-soft, .from-night) {
-  --color-ink: #132a45;
+  --color-ink: #17201b;
   --color-card: #ffffff;
   --color-page: #faf9f6;
-  --color-track: #e4e9e6;
-  --color-brand-soft: #e6f2eb;
-  --color-slate-50: oklch(98.4% 0.003 247.858);
-  --color-slate-100: oklch(96.8% 0.007 247.896);
-  --color-slate-200: oklch(92.9% 0.013 255.508);
-  --color-slate-300: oklch(86.9% 0.022 252.894);
-  --color-slate-400: oklch(70.4% 0.04 256.788);
-  --color-slate-500: oklch(55.4% 0.046 257.417);
-  --color-slate-600: oklch(44.6% 0.043 257.281);
-  --color-slate-700: oklch(37.2% 0.044 257.287);
-  --color-slate-800: oklch(27.9% 0.041 260.031);
-  --color-slate-900: oklch(20.8% 0.042 265.755);
+  --color-track: #e3e8e4;
+  --color-brand-soft: #e7f3ec;
+  --color-slate-50: #f6f7f5;
+  --color-slate-100: #eef0ec;
+  --color-slate-200: #e1e5e0;
+  --color-slate-300: #c9d0c9;
+  --color-slate-400: #97a29a;
+  --color-slate-500: #6b776f;
+  --color-slate-600: #525d56;
+  --color-slate-700: #3d4741;
+  --color-slate-800: #29312c;
+  --color-slate-900: #1a201c;
 }
 
 /* Primary buttons turn green in dark mode (a navy button on a navy page would vanish). */

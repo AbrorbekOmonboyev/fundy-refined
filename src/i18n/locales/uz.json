@@ -8,7 +8,7 @@
   "nav": {
     "explore": "Loyihalar",
     "howItWorks": "Qanday ishlaydi",
-    "learn": "Taʼlim va mushoraka",
+    "learn": "Xayriya qanday ishlaydi",
     "trustSafety": "Ishonch va xavfsizlik",
     "startProject": "Loyiha boshlash"
   },
@@ -454,8 +454,8 @@
   },
   "home": {
     "hero": {
-      "title": "Yaxshi loyihalar shu yerdan boshlanadi",
-      "text": "Oʻzbekistondagi tekshirilgan xayriya loyihalariga yordam bering va har bir soʻm qayerga ketganini koʻring.",
+      "title": "Koʻrinib turadigan yordam",
+      "text": "Oʻzbekistondagi tekshirilgan ezgu ishlarga xayriya qiling. Pul bosqichma-bosqich beriladi, har bir bosqich cheklar bilan hisobot qilinadi.",
       "explore": "Loyihalarni koʻrish",
       "start": "Loyiha boshlash",
       "cardKicker": "Hozir mablagʻ yigʻmoqda",
@@ -465,7 +465,10 @@
       "photos": "Foto mualliflari",
       "trust1": "Komissiyasiz",
       "trust2": "Har bir loyiha tekshiriladi",
-      "trust3": "Pul bosqichma-bosqich beriladi"
+      "trust3": "Pul bosqichma-bosqich beriladi",
+      "eyebrow": "Har bir yigʻim tekshiriladi",
+      "give": "Xayriya qilish",
+      "trust4": "Har bir xayriya uchun kvitansiya"
     },
     "pick": {
       "label": "Fundy tanlovi",
@@ -500,7 +503,7 @@
       "start": "Talablarni koʻrish"
     },
     "projects": {
-      "title": "Qoʻllab-quvvatlash uchun loyihalar",
+      "title": "Maqsadiga yaqin yigʻimlar",
       "empty": "Birinchi loyihalar tez orada shu yerda boʻladi.",
       "emptyCta": "Birinchilardan boʻling",
       "soonTitle": "Birinchi loyihalar tekshiruvdan oʻtmoqda",
@@ -508,10 +511,11 @@
       "soonHow": "Loyihalar qanday tekshiriladi",
       "errorTitle": "Loyihalarni yuklab boʻlmadi",
       "errorText": "Internet aloqasini tekshirib, qayta urinib koʻring.",
-      "retry": "Qayta urinish"
+      "retry": "Qayta urinish",
+      "sub": "Aynan sizning xayriyangiz uni yakunlashi mumkin."
     },
     "simple": {
-      "title": "Oddiy, shaffof va adolatli",
+      "title": "Xayriyangiz qanday himoyalanadi",
       "s1Title": "Joylang",
       "s1Text": "Fond yoki jamoa loyihani joylaydi, biz uni tekshiramiz.",
       "s2Title": "Ulashing",
@@ -521,17 +525,30 @@
       "more": "Qanday ishlashi haqida batafsil"
     },
     "final": {
-      "title": "Gʻoyangiz bormi yoki yordam bermoqchimisiz?",
+      "title": "Ezgu ish uchun mablagʻ yigʻyapsizmi?",
       "start": "Loyiha boshlash",
       "text": "Savollaringiz boʻlsa, bizga yozing — javob beramiz.",
       "contact": "Bizga yozing"
+    },
+    "causes": {
+      "title": "Oʻzingizga yaqin ezgu ishni toping"
+    },
+    "safe": {
+      "title": "Pul qayerda",
+      "example": "Namuna",
+      "collected": "Pul yigʻildi",
+      "collectedNote": "Birinchi bosqich boshlanguncha saqlanadi",
+      "stage1": "1-bosqich bajarildi · cheklar bilan hisobot",
+      "stage1Note": "Fundy tekshirgan, loyiha sahifasida hammaga ochiq",
+      "stage2": "2-bosqich · kutilmoqda",
+      "stage2Note": "Faqat 1-bosqich hisoboti bilan beriladi"
     }
   },
   "explore": {
-    "title": "Loyihalar",
-    "subtitle": "Oʻzbekiston boʻylab tekshirilgan, foizsiz moliyalashtiriladigan loyihalar.",
+    "title": "Qoʻllab-quvvatlash uchun ezgu ish toping",
+    "subtitle": "Oʻzbekiston boʻylab tekshirilgan yigʻimlar. Pul bosqichma-bosqich, cheklar bilan beriladi.",
     "search": "Loyihalarni qidirish",
-    "searchPlaceholder": "Loyiha, asoschi yoki joy boʻyicha qidiring (masalan, Fargʻona)…",
+    "searchPlaceholder": "Ezgu ish yoki joy boʻyicha qidiring (masalan, Fargʻona)…",
     "clearSearch": "Qidiruvni tozalash",
     "model": "Moliyalashtirish modeli",
     "allModels": "Barcha modellar",
@@ -700,7 +717,12 @@
     "previewText": "Loyiha hali eʼlon qilinmagan. Uni faqat siz va Fundy jamoasi koʻradi.",
     "demoBadge": "Namuna",
     "verifiedFund": "Tasdiqlangan fond",
-    "verifiedFundNumber": "Tasdiqlangan fond · roʻyxat raqami {{number}}"
+    "verifiedFundNumber": "Tasdiqlangan fond · roʻyxat raqami {{number}}",
+    "almostThere": "Maqsadga oz qoldi",
+    "fundedLabel": "yigʻildi",
+    "daysLeftLabel": "kun qoldi",
+    "almostThereText": "Maqsadga oz qoldi: yana atigi {{left}}.",
+    "backersShort": "xayriyachi"
   },
   "contribute": {
     "title": {
@@ -753,7 +775,8 @@
       "none": "Kerak emas",
       "summary": "Fundyʼga hissa: {{tip}}. Jami toʻlov: {{total}}."
     },
-    "upTo": "{{left}} gacha (maqsadgacha qolgani)"
+    "upTo": "{{left}} gacha (maqsadgacha qolgani)",
+    "suggested": "Tavsiya"
   },
   "dashboard": {
     "backer": {

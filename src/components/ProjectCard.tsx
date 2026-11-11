@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { BadgeCheck, Bookmark, CheckCircle, ImageOff } from 'lucide-react';
+import { BadgeCheck, Bookmark, CheckCircle, Flame, ImageOff } from 'lucide-react';
+import { DONATION_ONLY } from '@/lib/focus';
 import { responsiveImage } from '@/lib/supabase';
 import { paths } from '@/app/routes';
 import { daysLeft, pickText, type ProjectCardData } from '@/features/projects/api';
@@ -17,11 +18,13 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
   const isSaved = saved.isSaved(project.id);
   const href = paths.project(project.slug);
   const days = daysLeft(project.endsAt);
+  // Goal-gradient: campaigns close to their goal draw more gifts, so say so plainly.
+  const almost = project.status === 'active' && project.fundedPercent >= 75 && project.fundedPercent < 100;
 
   return (
     // Plain card in the style of the big platforms: the photo and the numbers do the work.
     <article className="group relative flex flex-col">
-      <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-slate-100">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100">
         {project.coverUrl ? (
           <img
             {...responsiveImage(project.coverUrl)}
@@ -29,11 +32,28 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
             alt={title}
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-slate-300">
             <ImageOff className="w-8 h-8" aria-hidden />
+          </div>
+        )}
+
+        {(almost || project.verifiedFund !== null) && (
+          <div className="absolute left-2.5 bottom-2.5 z-20 flex flex-wrap gap-1.5">
+            {almost && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-warm-soft text-warm-ink px-2.5 py-1 text-xs font-semibold shadow-sm">
+                <Flame className="w-3.5 h-3.5 text-warm" aria-hidden />
+                {t('project.almostThere')}
+              </span>
+            )}
+            {project.verifiedFund !== null && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-card text-brand-deep px-2.5 py-1 text-xs font-semibold shadow-sm">
+                <BadgeCheck className="w-3.5 h-3.5" aria-hidden />
+                {t('project.verifiedFund')}
+              </span>
+            )}
           </div>
         )}
 
@@ -43,21 +63,23 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
           aria-pressed={isSaved}
           aria-label={isSaved ? t('project.unsave') : t('project.save')}
           title={isSaved ? t('project.unsave') : t('project.save')}
-          className="absolute top-2 right-2 z-20 w-10 h-10 rounded-md bg-card flex items-center justify-center text-slate-700 hover:text-ink cursor-pointer"
+          className="absolute top-2.5 right-2.5 z-20 w-11 h-11 rounded-full bg-card/95 shadow-sm flex items-center justify-center text-slate-700 hover:text-ink cursor-pointer"
         >
-          <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-ink text-ink' : ''}`} />
+          <Bookmark className={`w-[18px] h-[18px] ${isSaved ? 'fill-brand text-brand' : ''}`} />
         </button>
       </div>
 
       <div className="pt-4 flex-1 flex flex-col justify-between">
         <div>
           <p className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-xs text-slate-500 mb-1.5">
-            <span className="font-semibold text-ink">{t(`models.${project.model}.name`)}</span>
-            {nameOf(project.categoryId) && (
+            {!DONATION_ONLY && (
               <>
-                <span aria-hidden>·</span>
-                <span>{nameOf(project.categoryId)}</span>
+                <span className="font-semibold text-ink">{t(`models.${project.model}.name`)}</span>
+                {nameOf(project.categoryId) && <span aria-hidden>·</span>}
               </>
+            )}
+            {nameOf(project.categoryId) && (
+              <span className="font-medium text-slate-600">{nameOf(project.categoryId)}</span>
             )}
             {project.location && (
               <>
@@ -86,12 +108,6 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
             {project.founderVerified && (
               <CheckCircle className="w-3.5 h-3.5 text-ink" aria-label={t('project.verifiedFounder')} />
             )}
-            {project.verifiedFund !== null && (
-              <span className="inline-flex items-center gap-1 font-semibold text-brand-deep">
-                <BadgeCheck className="w-3.5 h-3.5" aria-hidden />
-                {t('project.verifiedFund')}
-              </span>
-            )}
             {project.score !== null && (
               <>
                 <span aria-hidden className="text-slate-300">
@@ -107,7 +123,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
 
         <div className="mt-4">
           <div
-            className="w-full bg-track rounded-full h-1.5 overflow-hidden"
+            className="w-full bg-track rounded-full h-2 overflow-hidden"
             role="progressbar"
             aria-valuenow={project.fundedPercent}
             aria-valuemin={0}
@@ -115,7 +131,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
             aria-label={t('project.funded', { percent: project.fundedPercent })}
           >
             <div
-              className="h-full rounded-full bg-brand-deep"
+              className="h-full rounded-full bg-brand"
               style={{ width: `${Math.min(project.fundedPercent, 100)}%` }}
             />
           </div>
@@ -146,7 +162,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
 export function ProjectCardSkeleton() {
   return (
     <div aria-hidden className="animate-pulse">
-      <div className="aspect-[16/10] rounded-2xl bg-slate-100" />
+      <div className="aspect-[4/3] rounded-2xl bg-slate-100" />
       <div className="pt-4 space-y-3">
         <div className="h-3 w-1/3 rounded bg-slate-100" />
         <div className="h-5 w-4/5 rounded bg-slate-100" />

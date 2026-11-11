@@ -155,8 +155,10 @@ export function ExplorePage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
       <header className="border-b border-slate-200 pb-6">
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">{t('explore.title')}</h1>
-        <p className="text-sm text-slate-600 mt-1">{t('explore.subtitle')}</p>
+        <h1 className="text-[1.75rem] sm:text-4xl font-extrabold text-ink tracking-tight text-balance">
+          {t('explore.title')}
+        </h1>
+        <p className="text-base text-slate-600 mt-2 max-w-2xl">{t('explore.subtitle')}</p>
       </header>
 
       <div className="space-y-4">

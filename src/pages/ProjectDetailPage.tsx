@@ -8,6 +8,7 @@ import {
   BadgeCheck,
   Bookmark,
   CheckCircle,
+  Flame,
   Languages,
   Link2,
   Send,
@@ -39,6 +40,7 @@ import { formatDate, formatMoney, formatNumber } from '@/lib/money';
 import { publicFileUrl, responsiveImage } from '@/lib/supabase';
 import { usePageMeta } from '@/lib/usePageMeta';
 import { isAppMode } from '@/lib/appMode';
+import { DONATION_ONLY } from '@/lib/focus';
 
 type Tab = 'story' | 'rewards' | 'budget' | 'milestones' | 'evaluation' | 'risks' | 'updates' | 'comments';
 const BUDGET_COLORS = ['bg-brand', 'bg-night', 'bg-brand-deep', 'bg-slate-400', 'bg-night-soft', 'bg-track'];
@@ -216,11 +218,15 @@ function ProjectView({ project }: { project: ProjectDetail }) {
       {/* Title across the page, like the big platforms */}
       <header className="max-w-3xl space-y-3">
         <p className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-sm text-slate-500">
-          <span className="font-semibold text-ink [.app-mode_&]:bg-brand [.app-mode_&]:text-night [.app-mode_&]:px-2.5 [.app-mode_&]:py-0.5 [.app-mode_&]:rounded-full">
-            {t(`models.${project.model}.name`)}
-          </span>
-          <span aria-hidden>·</span>
-          <span>{nameOf(project.categoryId)}</span>
+          {!(DONATION_ONLY && project.model === 'donation') && (
+            <>
+              <span className="font-semibold text-ink [.app-mode_&]:bg-brand [.app-mode_&]:text-night [.app-mode_&]:px-2.5 [.app-mode_&]:py-0.5 [.app-mode_&]:rounded-full">
+                {t(`models.${project.model}.name`)}
+              </span>
+              <span aria-hidden>·</span>
+            </>
+          )}
+          <span className="font-medium text-slate-600">{nameOf(project.categoryId)}</span>
           {project.location && (
             <>
               <span aria-hidden>·</span>
@@ -325,41 +331,54 @@ function ProjectView({ project }: { project: ProjectDetail }) {
 
         {/* Right: the funding numbers, big, and one button (Kickstarter style) */}
         <aside className="order-2 lg:order-none lg:col-span-4 space-y-8 lg:sticky lg:top-24 lg:row-start-1 lg:row-span-2 lg:col-start-9">
-          <div className="space-y-6">
-            <div
-              className="w-full bg-track rounded-full h-2 overflow-hidden"
-              role="progressbar"
-              aria-valuenow={project.fundedPercent}
-              aria-valuemin={0}
-              aria-valuemax={100}
-              aria-label={t('project.funded', { percent: project.fundedPercent })}
-            >
+          <div className="space-y-6 lg:rounded-3xl lg:bg-card lg:border lg:border-slate-200 lg:shadow-md lg:p-6">
+            <div className="font-mono-numbers">
+              <p className="text-[1.75rem] sm:text-[2rem] font-bold text-ink leading-tight">
+                {formatMoney(project.raisedAmount)}
+              </p>
+              <p className="mt-1 text-sm text-slate-600">
+                {t('project.raisedOf', { goal: formatMoney(project.targetAmount) })}
+              </p>
               <div
-                className="bg-brand-deep h-full rounded-full"
-                style={{ width: `${Math.min(project.fundedPercent, 100)}%` }}
-              />
+                className="mt-4 w-full bg-track rounded-full h-2.5 overflow-hidden"
+                role="progressbar"
+                aria-valuenow={project.fundedPercent}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label={t('project.funded', { percent: project.fundedPercent })}
+              >
+                <div
+                  className="bg-brand h-full rounded-full"
+                  style={{ width: `${Math.min(project.fundedPercent, 100)}%` }}
+                />
+              </div>
+              <dl className="mt-4 grid grid-cols-3 gap-2 text-center">
+                <div className="rounded-2xl bg-page px-2 py-3">
+                  <dd className="text-xl font-bold text-ink leading-tight">{project.fundedPercent}%</dd>
+                  <dt className="mt-0.5 text-xs text-slate-600">{t('project.fundedLabel')}</dt>
+                </div>
+                <div className="rounded-2xl bg-page px-2 py-3">
+                  <dd className="text-xl font-bold text-ink leading-tight">{formatNumber(project.backerCount)}</dd>
+                  <dt className="mt-0.5 text-xs text-slate-600">{t('project.backersShort')}</dt>
+                </div>
+                <div className="rounded-2xl bg-page px-2 py-3">
+                  <dd className="text-xl font-bold text-ink leading-tight">
+                    {isLive ? daysLeft(project.endsAt) : '—'}
+                  </dd>
+                  <dt className="mt-0.5 text-xs text-slate-600">
+                    {isLive ? t('project.daysLeftLabel') : t(`status.${project.status}`)}
+                  </dt>
+                </div>
+              </dl>
+              {isLive && project.fundedPercent >= 75 && project.fundedPercent < 100 && (
+                <p className="mt-4 flex items-start gap-2 rounded-2xl bg-warm-soft text-warm-ink px-3.5 py-2.5 text-sm font-medium">
+                  <Flame className="w-4 h-4 mt-0.5 shrink-0 text-warm" aria-hidden />
+                  {t('project.almostThereText', {
+                    left: formatMoney(Math.max(0, project.targetAmount - project.raisedAmount), true),
+                  })}
+                </p>
+              )}
             </div>
-            <dl className="space-y-4 font-mono-numbers">
-              <div className="flex flex-col-reverse">
-                <dt className="text-sm text-slate-500">
-                  {t('project.raisedOf', { goal: formatMoney(project.targetAmount) })} ·{' '}
-                  <strong className="font-semibold text-ink">{project.fundedPercent}%</strong>
-                </dt>
-                <dd className="text-[1.75rem] sm:text-[2rem] font-bold text-ink leading-tight">
-                  {formatMoney(project.raisedAmount)}
-                </dd>
-              </div>
-              <div className="flex flex-col-reverse">
-                <dt className="text-sm text-slate-500">{t('project.backersLabel')}</dt>
-                <dd className="text-2xl font-bold text-ink leading-tight">{formatNumber(project.backerCount)}</dd>
-              </div>
-              <div className="flex flex-col-reverse">
-                <dt className="text-sm text-slate-500">{isLive ? t('project.timeLeft') : t('project.statusLabel')}</dt>
-                <dd className="text-2xl font-bold text-ink leading-tight">
-                  {isLive ? t('project.daysLeft', { count: daysLeft(project.endsAt) }) : t(`status.${project.status}`)}
-                </dd>
-              </div>
-            </dl>
 
             {project.equity && (
               <div className="p-4 border border-slate-200 rounded-xl text-sm space-y-2">
@@ -1000,7 +1019,7 @@ function CommentItem({
       {user && user.id !== comment.author?.id && <ReportButton target="comment" targetId={comment.id} />}
 
       {comment.replies.map(r => (
-        <div key={r.id} className="mt-2 pl-3 border-l-2 border-ink space-y-1 bg-slate-50/60 p-2 rounded-r-lg">
+        <div key={r.id} className="mt-2 ml-4 space-y-1 rounded-2xl bg-slate-100 p-3">
           <div className="flex items-center justify-between text-xs text-slate-600">
             <strong className="text-ink">{t('project.founderReply', { name: r.author?.full_name })}</strong>
             <time className="text-slate-400">{formatDate(r.created_at)}</time>

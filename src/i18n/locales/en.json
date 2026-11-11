@@ -8,7 +8,7 @@
   "nav": {
     "explore": "Explore Projects",
     "howItWorks": "How It Works",
-    "learn": "Education & Musharakah",
+    "learn": "How giving works",
     "trustSafety": "Trust & Safety",
     "startProject": "Start a project"
   },
@@ -454,8 +454,8 @@
   },
   "home": {
     "hero": {
-      "title": "Great projects start here",
-      "text": "Give to checked causes in Uzbekistan and see where every so'm goes.",
+      "title": "Help that you can see",
+      "text": "Give to checked causes in Uzbekistan. The money is paid out stage by stage, and every stage is reported with receipts.",
       "explore": "Browse projects",
       "start": "Start a project",
       "cardKicker": "Raising now",
@@ -465,7 +465,10 @@
       "photos": "Photo credits",
       "trust1": "No commission",
       "trust2": "Every project is checked",
-      "trust3": "Money is paid out stage by stage"
+      "trust3": "Money is paid out stage by stage",
+      "eyebrow": "Every campaign is checked",
+      "give": "Donate to a cause",
+      "trust4": "A receipt for every donation"
     },
     "pick": {
       "label": "Fundy pick",
@@ -500,7 +503,7 @@
       "start": "See the requirements"
     },
     "projects": {
-      "title": "Projects to support",
+      "title": "Causes close to their goal",
       "empty": "The first projects will be here soon.",
       "emptyCta": "Be one of the first",
       "soonTitle": "The first projects are being checked",
@@ -508,10 +511,11 @@
       "soonHow": "How projects are checked",
       "errorTitle": "Couldn’t load projects",
       "errorText": "Check your internet connection and try again.",
-      "retry": "Try again"
+      "retry": "Try again",
+      "sub": "Your gift can be the one that finishes it."
     },
     "simple": {
-      "title": "Simple, open and fair",
+      "title": "How your donation stays safe",
       "s1Title": "Post",
       "s1Text": "A fund or team posts a cause, and we check it.",
       "s2Title": "Share",
@@ -521,17 +525,30 @@
       "more": "More on how it works"
     },
     "final": {
-      "title": "Have an idea, or want to help?",
+      "title": "Raising money for a good cause?",
       "start": "Start a project",
       "text": "Questions? Write to us and we’ll answer.",
       "contact": "Write to us"
+    },
+    "causes": {
+      "title": "Find a cause you care about"
+    },
+    "safe": {
+      "title": "Where the money is",
+      "example": "Example",
+      "collected": "Money collected",
+      "collectedNote": "Held until the first stage starts",
+      "stage1": "Stage 1 done · report with receipts",
+      "stage1Note": "Checked by Fundy, public on the campaign page",
+      "stage2": "Stage 2 · waiting",
+      "stage2Note": "Paid out only after stage 1 is reported"
     }
   },
   "explore": {
-    "title": "Explore projects",
-    "subtitle": "Reviewed projects across Uzbekistan, funded without interest.",
+    "title": "Find a cause to support",
+    "subtitle": "Checked campaigns across Uzbekistan. Money is paid out stage by stage, with receipts.",
     "search": "Search projects",
-    "searchPlaceholder": "Search by project, founder or place (e.g. Fergana)…",
+    "searchPlaceholder": "Search causes or places (e.g. Fergana)…",
     "clearSearch": "Clear search",
     "model": "Funding model",
     "allModels": "All models",
@@ -700,7 +717,12 @@
     "previewText": "This project isn't published yet. Only you and the Fundy team can see it.",
     "demoBadge": "Sample",
     "verifiedFund": "Verified fund",
-    "verifiedFundNumber": "Verified fund · registration {{number}}"
+    "verifiedFundNumber": "Verified fund · registration {{number}}",
+    "almostThere": "Almost there",
+    "fundedLabel": "funded",
+    "daysLeftLabel": "days left",
+    "almostThereText": "Almost there: only {{left}} left until the goal.",
+    "backersShort": "donors"
   },
   "contribute": {
     "title": {
@@ -753,7 +775,8 @@
       "none": "No tip",
       "summary": "Tip for Fundy: {{tip}}. You pay {{total}} in total."
     },
-    "upTo": "up to {{left}} (left until the goal)"
+    "upTo": "up to {{left}} (left until the goal)",
+    "suggested": "Suggested"
   },
   "dashboard": {
     "backer": {

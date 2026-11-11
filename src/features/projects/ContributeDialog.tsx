@@ -18,6 +18,12 @@ type PaymentMethod = Database['public']['Enums']['payment_method'];
 const TIP_PERCENTS = [0, 5, 10, 15] as const;
 const tipFor = (amount: number, percent: number) => Math.round((amount * percent) / 100 / 1000) * 1000;
 const METHODS: PaymentMethod[] = ['click', 'payme', 'uzcard', 'humo', 'bank_wire'];
+/**
+ * Which preset starts selected and carries the "Suggested" tag. Research on suggested amounts
+ * (Goswami & Urminsky 2016): a low default brings more donors, a high one a bigger average;
+ * a middle preset keeps both.
+ */
+const SUGGESTED = 1;
 
 function presets(project: ProjectDetail): number[] {
   if (project.model === 'equity' && project.equity) {
@@ -51,7 +57,11 @@ export function ContributeDialog({
 
   const initialTier = project.rewards.find(r => r.id === initialRewardId) ?? null;
   const [rewardId, setRewardId] = useState<string | null>(initialTier?.id ?? null);
-  const [amount, setAmount] = useState<number>(initialTier?.amount ?? presets(project)[0] ?? project.minContribution);
+  const amountPresets = presets(project);
+  const suggested = project.model === 'donation' ? (amountPresets[SUGGESTED] ?? null) : null;
+  const [amount, setAmount] = useState<number>(
+    initialTier?.amount ?? suggested ?? amountPresets[0] ?? project.minContribution,
+  );
   const [method, setMethod] = useState<PaymentMethod>('click');
   const [anonymous, setAnonymous] = useState(false);
   const [acceptedRisk, setAcceptedRisk] = useState(project.model !== 'equity');
@@ -229,20 +239,25 @@ export function ContributeDialog({
 
             <fieldset className="space-y-2">
               <legend className="text-sm font-medium text-slate-700 mb-1">{t('contribute.amount')}</legend>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                {presets(project).map(p => (
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2">
+                {amountPresets.map(p => (
                   <button
                     key={p}
                     type="button"
                     onClick={() => setAmount(p)}
                     aria-pressed={amount === p}
-                    className={`py-3 rounded-xl border text-sm font-semibold font-mono-numbers ${
+                    className={`relative min-h-14 rounded-2xl border text-base font-semibold font-mono-numbers transition-colors cursor-pointer ${
                       amount === p
-                        ? 'border-ink bg-brand-soft text-ink'
-                        : 'border-slate-200 text-slate-700 hover:bg-slate-50'
+                        ? 'border-brand bg-brand-soft text-ink ring-1 ring-brand'
+                        : 'border-slate-200 text-slate-700 hover:border-slate-400'
                     }`}
                   >
                     {formatMoney(p, true)}
+                    {p === suggested && (
+                      <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-brand text-white px-2 py-0.5 text-[0.75rem] font-semibold leading-tight">
+                        {t('contribute.suggested')}
+                      </span>
+                    )}
                   </button>
                 ))}
               </div>
@@ -256,7 +271,7 @@ export function ContributeDialog({
                   step={1000}
                   value={amount || ''}
                   onChange={e => setAmount(Math.round(Number(e.target.value)))}
-                  className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm font-mono-numbers focus:outline-none focus:ring-1 focus:ring-ink focus:border-ink"
+                  className="w-full min-h-12 rounded-2xl border border-slate-300 bg-card px-4 py-3 text-lg font-semibold font-mono-numbers text-ink focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                 />
               </label>
               <p className="text-xs text-slate-500">
@@ -286,9 +301,9 @@ export function ContributeDialog({
                       type="button"
                       onClick={() => setTipPercent(p)}
                       aria-pressed={tipPercent === p}
-                      className={`py-2 rounded-lg border text-xs font-semibold font-mono-numbers ${
+                      className={`min-h-11 rounded-full border text-sm font-semibold font-mono-numbers cursor-pointer ${
                         tipPercent === p
-                          ? 'border-ink bg-brand-soft text-ink'
+                          ? 'border-brand bg-brand-soft text-ink ring-1 ring-brand'
                           : 'border-slate-200 text-slate-700 hover:bg-slate-50'
                       }`}
                     >
@@ -319,9 +334,9 @@ export function ContributeDialog({
                       type="button"
                       aria-pressed={method === m}
                       onClick={() => setMethod(m)}
-                      className={`px-3 py-1.5 rounded-lg border text-xs font-semibold ${
+                      className={`min-h-11 px-4 rounded-full border text-sm font-semibold cursor-pointer ${
                         method === m
-                          ? 'border-ink bg-brand-soft text-ink'
+                          ? 'border-brand bg-brand-soft text-ink ring-1 ring-brand'
                           : 'border-slate-200 text-slate-700 hover:bg-slate-50'
                       }`}
                     >

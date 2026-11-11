@@ -24,9 +24,10 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   fullWidth?: boolean;
 };
 
+// Green is the one action colour across Fundy; secondary is a quiet outline.
 const BUTTON_STYLES = {
-  primary: 'bg-night text-white hover:bg-night-soft active:bg-night',
-  secondary: 'bg-card text-slate-700 border border-slate-300 hover:bg-slate-50',
+  primary: 'bg-brand text-white hover:bg-brand-deep active:bg-brand-deep',
+  secondary: 'bg-card text-ink border border-slate-300 hover:border-ink hover:bg-slate-50',
   danger: 'bg-rose-600 text-white hover:bg-rose-700',
   link: 'text-ink hover:text-ink underline-offset-2 hover:underline px-0 py-0',
 };
@@ -46,8 +47,8 @@ export function Button({
       type={type}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
-      className={`inline-flex items-center justify-center gap-2 rounded-md text-sm font-semibold transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${
-        variant === 'link' ? '' : 'px-4 py-2.5'
+      className={`inline-flex items-center justify-center gap-2 rounded-full text-sm font-semibold transition-[color,background-color,border-color,transform] duration-150 active:scale-[0.98] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100 ${
+        variant === 'link' ? '' : 'min-h-11 px-5 py-2.5'
       } ${BUTTON_STYLES[variant]} ${fullWidth ? 'w-full' : ''} ${className}`}
       {...rest}
     >
@@ -83,7 +84,7 @@ function FieldShell({ id, label, error, hint, children }: FieldShellProps) {
 }
 
 const INPUT_STYLES =
-  'block w-full rounded-xl border bg-card px-3 py-2.5 text-sm text-ink placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-ink focus:border-ink disabled:bg-slate-100';
+  'block w-full min-h-11 rounded-md border bg-card px-3.5 py-2.5 text-base text-ink placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand disabled:bg-slate-100';
 
 type TextFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'id'> & {
   label: string;
