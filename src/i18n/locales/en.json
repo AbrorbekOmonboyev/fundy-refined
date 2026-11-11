@@ -701,10 +701,10 @@
       "released": "Paid to the founder",
       "review": "Proof being checked",
       "held": "Waiting for its stage",
-      "raisingNote": "Held until the goal is reached, then paid out stage by stage."
+      "raisingNote": "Still raising: until the goal is reached, nobody gets the money. If it isn't reached, backers are refunded. If it is, each part is paid once its stage is done."
     },
     "checks": {
-      "title": "Checked by Fundy",
+      "title": "What Fundy checked",
       "identity": "Founder's identity confirmed",
       "registration": "Registered: {{number}}",
       "budget_one": "Budget published in {{count}} line",

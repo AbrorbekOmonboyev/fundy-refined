@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { BadgeCheck, Check, ChevronDown, FileText, ListChecks, Scale } from 'lucide-react';
+import { BadgeCheck, Check, FileText, ListChecks, Scale } from 'lucide-react';
 import type { ProjectDetail } from '@/features/projects/api';
 import { formatMoney } from '@/lib/money';
 
@@ -136,18 +136,12 @@ export function ChecksList({ project }: { project: ProjectDetail }) {
     items.push({ Icon: Scale, text: t('project.checks.score', { score: project.evaluation.overall_score }) });
   if (items.length === 0) return null;
 
-  // One line by default; the details open on a tap, so the page stays light.
   return (
-    <details className="group pt-5 border-t border-slate-200">
-      <summary className="flex items-center justify-between gap-3 min-h-11 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-        <span className="flex items-center gap-2 text-base font-bold text-ink">
-          <BadgeCheck className="w-5 h-5 text-brand dark:text-brand-light" aria-hidden />
-          {t('project.checks.title')}
-          <span className="text-sm font-semibold text-slate-500">({items.length})</span>
-        </span>
-        <ChevronDown className="w-5 h-5 text-slate-500 transition-transform group-open:rotate-180" aria-hidden />
-      </summary>
-      <ul className="mt-2 space-y-2">
+    <section aria-labelledby="checks" className="pt-6 border-t border-slate-200">
+      <h2 id="checks" className="text-base font-bold text-ink mb-3">
+        {t('project.checks.title')}
+      </h2>
+      <ul className="space-y-2">
         {items.map(({ Icon, text }) => (
           <li key={text} className="flex items-start gap-2.5 text-sm text-slate-700">
             <Icon className="w-4 h-4 mt-0.5 text-brand-deep shrink-0" aria-hidden />
@@ -155,6 +149,6 @@ export function ChecksList({ project }: { project: ProjectDetail }) {
           </li>
         ))}
       </ul>
-    </details>
+    </section>
   );
 }
