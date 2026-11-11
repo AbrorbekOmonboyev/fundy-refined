@@ -5,9 +5,8 @@ import {
   BadgeCheck,
   Building2,
   Check,
-  ClipboardCheck,
+  ChevronDown,
   Clock,
-  FileText,
   HandCoins,
   Landmark,
   Lock,
@@ -22,7 +21,7 @@ import { pickText } from '@/features/projects/api';
 import { useMyProjects } from '@/features/projects/hooks';
 import { BasicsStep } from '@/features/wizard/steps/BasicsStep';
 import {
-  ORGANIZERS_IN_ORDER,
+  OPEN_ORGANIZERS,
   INDIVIDUAL_FIRST_CAP,
   allowedModels,
   organizerOpen,
@@ -112,7 +111,7 @@ export function StartLandingPage() {
             {t('start.title')}
           </h1>
           <p className="mt-5 text-lg sm:text-xl text-slate-700 leading-relaxed">{t('start.intro')}</p>
-          <ul className="mt-6 flex flex-wrap gap-2 text-sm font-semibold text-ink">
+          <ul className="hidden sm:flex mt-6 flex-wrap gap-2 text-sm font-semibold text-ink">
             {(
               [
                 [HandCoins, 'start.perk1'],
@@ -135,30 +134,9 @@ export function StartLandingPage() {
         <fieldset>
           <legend className="text-[1.625rem] sm:text-3xl text-ink font-bold">{t('start.whoTitle')}</legend>
           <p className="mt-2 text-base text-slate-600 max-w-2xl">{t('start.whoHint')}</p>
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {ORGANIZERS_IN_ORDER.map(o => {
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 max-w-3xl">
+            {OPEN_ORGANIZERS.map(o => {
               const Icon = ORGANIZER_ICONS[o];
-              if (!organizerOpen(o)) {
-                // Planned, visible, not selectable yet.
-                return (
-                  <div
-                    key={o}
-                    aria-disabled="true"
-                    className="flex flex-col gap-3 rounded-2xl border border-dashed border-slate-300 p-5"
-                  >
-                    <span className="flex items-center justify-between gap-3">
-                      <span className="w-11 h-11 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center">
-                        <Icon className="w-5 h-5" aria-hidden />
-                      </span>
-                      <SoonTag />
-                    </span>
-                    <span>
-                      <span className="block text-lg font-bold text-slate-700">{t(`organizer.${o}.name`)}</span>
-                      <span className="block text-sm text-slate-600 mt-1 leading-relaxed">{t('soon.organizer')}</span>
-                    </span>
-                  </div>
-                );
-              }
               const on = who === o;
               return (
                 <label
@@ -213,6 +191,13 @@ export function StartLandingPage() {
               );
             })}
           </div>
+          {/* Planned organisers: one quiet line instead of two more cards */}
+          {DONATION_ONLY && (
+            <p className="mt-4 flex flex-wrap items-center gap-2 text-sm text-slate-600">
+              <SoonTag />
+              {t('start.soonOrganizers')}
+            </p>
+          )}
         </fieldset>
 
         {/* What to prepare, and what comes before the payout */}
@@ -221,17 +206,27 @@ export function StartLandingPage() {
             <h2 id="start-need" className="text-[1.625rem] sm:text-3xl text-ink">
               {t('start.needTitle')}
             </h2>
-            <h3 className="mt-6 text-base font-semibold text-slate-600">{t('start.applyTitle')}</h3>
-            <ul className="mt-3 space-y-3">
-              {applyItems.map(key => (
-                <li key={key} className="flex gap-3 text-base text-ink leading-relaxed">
-                  <span className="mt-0.5 w-6 h-6 shrink-0 rounded-full bg-brand-soft text-brand dark:text-brand-light flex items-center justify-center">
-                    <Check className="w-3.5 h-3.5" aria-hidden />
-                  </span>
-                  {t(key)}
-                </li>
-              ))}
-            </ul>
+            <details className="group mt-4 rounded-2xl border border-slate-200 bg-card px-5">
+              <summary className="flex items-center justify-between gap-3 min-h-14 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                <span className="text-base font-semibold text-ink">
+                  {t('start.applyTitle')} <span className="text-slate-500">({applyItems.length})</span>
+                </span>
+                <ChevronDown
+                  className="w-5 h-5 text-slate-500 transition-transform group-open:rotate-180"
+                  aria-hidden
+                />
+              </summary>
+              <ul className="pb-5 space-y-3">
+                {applyItems.map(key => (
+                  <li key={key} className="flex gap-3 text-base text-ink leading-relaxed">
+                    <span className="mt-0.5 w-6 h-6 shrink-0 rounded-full bg-brand-soft text-brand dark:text-brand-light flex items-center justify-center">
+                      <Check className="w-3.5 h-3.5" aria-hidden />
+                    </span>
+                    {t(key)}
+                  </li>
+                ))}
+              </ul>
+            </details>
           </div>
 
           <div className="space-y-6">
@@ -255,9 +250,6 @@ export function StartLandingPage() {
                       <span>
                         <span className={`block font-semibold ${m === 'donation' ? 'text-ink' : 'text-slate-600'}`}>
                           {t(`models.${m}.name`)}
-                        </span>
-                        <span className="block text-sm text-slate-600">
-                          {m === 'donation' ? t('models.donation.subtitle') : t(`soon.${m}`)}
                         </span>
                       </span>
                       {m === 'donation' ? (
@@ -303,26 +295,11 @@ export function StartLandingPage() {
           <h2 id="start-time" className="text-[1.625rem] sm:text-3xl text-ink">
             {t('start.timeTitle')}
           </h2>
-          <ol className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {(
-              [
-                [1, FileText],
-                [2, ClipboardCheck],
-                [3, HandCoins],
-                [4, Receipt],
-              ] as const
-            ).map(([i, Icon]) => (
-              <li key={i} className="rounded-2xl bg-card border border-slate-200 p-5">
-                <span className="flex items-center justify-between">
-                  <span className="w-11 h-11 rounded-2xl bg-brand-soft text-brand dark:text-brand-light flex items-center justify-center">
-                    <Icon className="w-5 h-5" aria-hidden />
-                  </span>
-                  <span className="text-sm font-semibold text-slate-500 font-mono-numbers">
-                    {t('start.step', { n: i })}
-                  </span>
-                </span>
-                <h3 className="mt-4 text-lg font-bold text-ink">{t(`start.time${i}Title`)}</h3>
-                <p className="mt-1 text-base text-slate-700">{t(`start.time${i}Text`)}</p>
+          <ol className="mt-6 grid gap-x-10 sm:grid-cols-2 max-w-3xl divide-y divide-slate-200 sm:divide-y-0">
+            {([1, 2, 3, 4] as const).map(i => (
+              <li key={i} className="flex items-baseline justify-between gap-4 py-3">
+                <span className="text-base font-semibold text-ink">{t(`start.time${i}Title`)}</span>
+                <span className="text-sm text-slate-600 text-right">{t(`start.time${i}Text`)}</span>
               </li>
             ))}
           </ol>

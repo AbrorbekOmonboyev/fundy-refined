@@ -52,7 +52,6 @@ export function ContactPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 lg:py-14">
       <header>
-        <p className="text-sm font-semibold text-slate-500">{t('contact.kicker')}</p>
         <h1 className="mt-4 text-3xl sm:text-4xl text-ink">{t('contact.title')}</h1>
         <p className="mt-4 text-slate-600 leading-relaxed">{t('contact.intro')}</p>
       </header>

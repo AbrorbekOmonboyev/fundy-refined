@@ -1188,7 +1188,7 @@
   },
   "start": {
     "title": "Ezgu ish uchun xayriya yigʻimini boshlang",
-    "intro": "Tashkilotchilar uchun bepul. Fundy yigʻimingizni tekshiradi, shuning uchun xayriyachilar ishonadi: pul bosqichma-bosqich, ochiq hisobot va cheklar bilan beriladi.",
+    "intro": "Tashkilotchilar uchun bepul. Pul bosqichma-bosqich, ochiq hisobot bilan beriladi.",
     "needTitle": "Nima kerak boʻladi",
     "timeTitle": "Qancha vaqt oladi",
     "time1Title": "Ariza",
@@ -1200,11 +1200,11 @@
     "time4Title": "Bosqichlar boʻyicha pul",
     "time4Text": "har bir bosqich dalili tekshirilgach",
     "feesTitle": "Bu qancha turadi",
-    "fees": "Fundy xayriyalardan komissiya olmaydi: yigʻimingiz har bir xayriya qilingan soʻmni oladi. Xayriyachilar xohlasa Fundyʼga ixtiyoriy hissa qoʻshishi mumkin — u platformani yuritishga ketadi. Demo davrida barcha toʻlovlar simulyatsiya qilinadi.",
+    "fees": "Komissiya yoʻq. Xayriyachilar xohlasa Fundyʼga ixtiyoriy hissa qoʻshishi mumkin. Demo davrida toʻlovlar simulyatsiya qilinadi.",
     "cta": "Yigʻimni boshlash",
     "ctaHint": "Avval kirasiz yoki roʻyxatdan oʻtasiz. Bu bir daqiqa oladi.",
     "whoTitle": "Pulni kim yigʻyapti?",
-    "whoHint": "Javobingizga qarab qaysi hujjatlar kerakligi belgilanadi.",
+    "whoHint": "Bunga qarab ariza uchun nima kerakligi belgilanadi.",
     "applyTitle": "Ariza uchun",
     "payoutTitle": "Pul berilishidan oldin",
     "modelsTitle": "Mumkin boʻlgan turlar",
@@ -1220,7 +1220,8 @@
     "fundBadge": "«Tasdiqlangan fond» belgisini olishi mumkin",
     "step": "{{n}}-qadam",
     "closing": "Ezgu ishingiz uchun mablagʻ yigʻishga tayyormisiz?",
-    "capNote": "Birinchi yigʻim: {{cap}} gacha"
+    "capNote": "Birinchi yigʻim: {{cap}} gacha",
+    "soonOrganizers": "YaTT va kompaniyalar (MChJ)"
   },
   "time": {
     "now": "hozirgina",
