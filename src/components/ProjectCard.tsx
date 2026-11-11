@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { BadgeCheck, Bookmark, CheckCircle, Flame, ImageOff } from 'lucide-react';
+import { BadgeCheck, Bookmark, CheckCircle, Flame, ImageOff, MapPin } from 'lucide-react';
 import { DONATION_ONLY } from '@/lib/focus';
 import { responsiveImage } from '@/lib/supabase';
 import { paths } from '@/app/routes';
@@ -32,7 +32,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
             alt={title}
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+            className="w-full h-full object-cover"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-slate-300">
@@ -71,21 +71,17 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
 
       <div className="pt-4 flex-1 flex flex-col justify-between">
         <div>
-          <p className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-xs text-slate-500 mb-1.5">
-            {!DONATION_ONLY && (
-              <>
-                <span className="font-semibold text-ink">{t(`models.${project.model}.name`)}</span>
-                {nameOf(project.categoryId) && <span aria-hidden>·</span>}
-              </>
-            )}
+          {/* Category and place as separate items, spaced, not joined by dots */}
+          <p className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs text-slate-500 mb-1.5">
+            {!DONATION_ONLY && <span className="font-semibold text-ink">{t(`models.${project.model}.name`)}</span>}
             {nameOf(project.categoryId) && (
               <span className="font-medium text-slate-600">{nameOf(project.categoryId)}</span>
             )}
             {project.location && (
-              <>
-                <span aria-hidden>·</span>
-                <span>{project.location.split(',')[0]}</span>
-              </>
+              <span className="inline-flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5" aria-hidden />
+                {project.location.split(',')[0]}
+              </span>
             )}
           </p>
 
@@ -103,20 +99,17 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
             {text?.tagline}
           </p>
 
-          <p className="mt-2 flex flex-wrap items-center gap-1.5 text-xs text-slate-600">
-            <span>{t('project.by', { name: project.founderName })}</span>
-            {project.founderVerified && (
-              <CheckCircle className="w-3.5 h-3.5 text-ink" aria-label={t('project.verifiedFounder')} />
-            )}
+          <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-600">
+            <span className="inline-flex items-center gap-1">
+              {t('project.by', { name: project.founderName })}
+              {project.founderVerified && (
+                <CheckCircle className="w-3.5 h-3.5 text-ink" aria-label={t('project.verifiedFounder')} />
+              )}
+            </span>
             {project.score !== null && (
-              <>
-                <span aria-hidden className="text-slate-300">
-                  ·
-                </span>
-                <span className="font-mono-numbers" title={t('project.scoreHint')}>
-                  {t('project.score')} {project.score}/100
-                </span>
-              </>
+              <span className="font-mono-numbers" title={t('project.scoreHint')}>
+                {t('project.score')} {project.score}/100
+              </span>
             )}
           </p>
         </div>
@@ -141,16 +134,14 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
               {t('project.ofGoal', { goal: formatMoney(project.targetAmount, true) })}
             </span>
           </p>
-          <p className="mt-0.5 text-sm text-slate-600 font-mono-numbers">
+          <p className="mt-1 flex flex-wrap gap-x-4 gap-y-0.5 text-sm text-slate-600 font-mono-numbers">
             <strong className="font-semibold text-ink">{project.fundedPercent}%</strong>
-            <span aria-hidden className="mx-1.5 text-slate-300">
-              ·
+            <span>
+              {project.status === 'active' ? t('project.daysLeft', { count: days }) : t(`status.${project.status}`)}
             </span>
-            {project.status === 'active' ? t('project.daysLeft', { count: days }) : t(`status.${project.status}`)}
-            <span aria-hidden className="mx-1.5 text-slate-300">
-              ·
+            <span>
+              {t('project.backers', { count: project.backerCount, formatted: formatNumber(project.backerCount) })}
             </span>
-            {t('project.backers', { count: project.backerCount, formatted: formatNumber(project.backerCount) })}
           </p>
         </div>
       </div>

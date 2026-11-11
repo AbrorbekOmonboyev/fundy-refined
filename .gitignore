@@ -20,3 +20,6 @@ Thumbs.db
 !.vscode/extensions.json
 .idea/
 android-apk/
+
+# Hallmark audit records (local only)
+.hallmark/
