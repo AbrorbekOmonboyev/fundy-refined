@@ -151,7 +151,10 @@ function AccountSheet({ onClose }: { onClose: () => void }) {
         ) : (
           configured && (
             <div className="mt-4 grid grid-cols-2 gap-2">
-              <Link to={paths.login} className="py-3 text-center text-sm font-semibold text-white bg-night rounded-md">
+              <Link
+                to={paths.login}
+                className="py-3 text-center text-sm font-semibold text-white bg-brand rounded-full"
+              >
                 {t('account.login')}
               </Link>
               <Link

@@ -284,7 +284,7 @@ export function ExplorePage() {
               <button
                 type="button"
                 onClick={() => setSheetOpen(false)}
-                className="py-3 rounded-md bg-night text-white text-sm font-semibold"
+                className="py-3 rounded-full bg-brand text-white text-sm font-semibold"
               >
                 {t('explore.showResults', { formatted: formatNumber(total) })}
               </button>
@@ -314,7 +314,7 @@ export function ExplorePage() {
             <button
               type="button"
               onClick={clearAll}
-              className="px-4 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand rounded-md"
+              className="px-4 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand rounded-full"
             >
               {t('explore.clearFilters')}
             </button>

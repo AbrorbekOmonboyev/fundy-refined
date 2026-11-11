@@ -106,7 +106,7 @@ export function RewardsSection({
               type="button"
               onClick={() => setComparing(true)}
               disabled={compare.length < 2}
-              className="rounded-md bg-brand text-night px-4 py-2 text-sm font-semibold disabled:opacity-50 cursor-pointer"
+              className="rounded-full bg-brand text-white px-4 py-2 text-sm font-semibold disabled:opacity-50 cursor-pointer"
             >
               {t('rewards.compare')}
             </button>
@@ -284,7 +284,7 @@ function RewardCard({
               type="button"
               disabled={status !== 'available'}
               onClick={onChoose}
-              className="flex-1 min-w-32 py-2.5 rounded-md bg-night text-white text-sm font-semibold hover:bg-night-soft disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              className="flex-1 min-w-32 py-2.5 rounded-full bg-brand text-white text-sm font-semibold hover:bg-brand-deep disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {status === 'available'
                 ? inCart > 0
@@ -469,7 +469,7 @@ function RewardDetails({
               type="button"
               disabled={status !== 'available'}
               onClick={onChoose}
-              className="w-full py-3 rounded-md bg-night text-white font-semibold hover:bg-night-soft disabled:opacity-50 cursor-pointer"
+              className="w-full py-3 rounded-full bg-brand text-white font-semibold hover:bg-brand-deep disabled:opacity-50 cursor-pointer"
             >
               {status === 'available' ? t('rewards.addToCart') : t(`rewards.${status}`)}
             </button>

@@ -1,6 +1,6 @@
 /**
- * Basic form and feedback components.
- * Deliberately plain — they will be restyled when the final design arrives.
+ * Basic form and feedback components, in the Redesign system (DESIGN.md):
+ * green pill buttons, 16px inputs, one selected style.
  */
 import {
   useId,

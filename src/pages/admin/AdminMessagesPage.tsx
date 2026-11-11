@@ -148,7 +148,7 @@ function ContactInbox({ filter }: { filter: Filter }) {
               <div className="flex flex-wrap gap-2">
                 <a
                   href={`mailto:${m.email}?subject=${encodeURIComponent('Fundy')}`}
-                  className="rounded-md bg-night px-3 py-1.5 text-xs font-semibold text-white hover:bg-night-soft"
+                  className="rounded-full bg-brand px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-deep"
                 >
                   {t('admin.messages.reply')}
                 </a>
@@ -234,7 +234,7 @@ function FeedbackInbox({ filter }: { filter: Filter }) {
                     href={/^\/(?![/\\])/.test(f.page) ? f.page : '/'}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-md bg-night px-3 py-1.5 text-xs font-semibold text-white hover:bg-night-soft"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-brand px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-deep"
                   >
                     <ExternalLink className="w-3.5 h-3.5" aria-hidden />
                     {t('admin.feedback.openPage')}

@@ -15,7 +15,7 @@ export function NotFoundPage() {
       <div className="mt-8 flex justify-center gap-3">
         <Link
           to={paths.home}
-          className="px-4 py-2 text-sm font-semibold text-white bg-night hover:bg-night-soft rounded-md"
+          className="px-4 py-2 text-sm font-semibold text-white bg-brand hover:bg-brand-deep rounded-full"
         >
           {t('notFound.home')}
         </Link>

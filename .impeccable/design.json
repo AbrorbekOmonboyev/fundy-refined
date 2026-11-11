@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-10T00:00:00Z",
+  "title": "Design System: Fundy",
+  "extensions": {
+    "colorMeta": {
+      "fundy-green": { "role": "primary", "displayName": "Fundy Green", "canonical": "#0b6b45", "tonalRamp": ["#04241a", "#08553a", "#0b6b45", "#18804f", "#3fa673", "#6fd6a0", "#b9e6cc", "#e7f3ec"] },
+      "fundy-green-deep": { "role": "primary", "displayName": "Deep Fundy Green", "canonical": "#08553a" },
+      "green-tint": { "role": "primary", "displayName": "Green Tint", "canonical": "#e7f3ec" },
+      "green-on-dark": { "role": "primary", "displayName": "Green on Dark", "canonical": "#6fd6a0" },
+      "almost-amber": { "role": "secondary", "displayName": "Almost-There Amber", "canonical": "#e8952b", "tonalRamp": ["#3b2a12", "#7a4505", "#a8620f", "#e8952b", "#f0b25e", "#f6c27a", "#fbe0b6", "#fdf0dc"] },
+      "almost-amber-ground": { "role": "secondary", "displayName": "Amber Ground", "canonical": "#fdf0dc" },
+      "almost-amber-ink": { "role": "secondary", "displayName": "Amber Ink", "canonical": "#7a4505" },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#17201b" },
+      "forest": { "role": "neutral", "displayName": "Forest", "canonical": "#0f2a20" },
+      "forest-soft": { "role": "neutral", "displayName": "Forest Soft", "canonical": "#18392c" },
+      "card": { "role": "neutral", "displayName": "Card White", "canonical": "#ffffff" },
+      "warm-page": { "role": "neutral", "displayName": "Warm Page", "canonical": "#faf9f6" },
+      "track": { "role": "neutral", "displayName": "Track", "canonical": "#e3e8e4" },
+      "line": { "role": "neutral", "displayName": "Hairline", "canonical": "#e1e5e0", "tonalRamp": ["#1a201c", "#29312c", "#3d4741", "#525d56", "#5f6b63", "#97a29a", "#c9d0c9", "#f6f7f5"] },
+      "line-strong": { "role": "neutral", "displayName": "Strong Hairline", "canonical": "#c9d0c9" },
+      "muted-text": { "role": "neutral", "displayName": "Muted Text", "canonical": "#5f6b63" },
+      "body-secondary": { "role": "neutral", "displayName": "Secondary Text", "canonical": "#525d56" },
+      "body-strong": { "role": "neutral", "displayName": "Strong Body Text", "canonical": "#3d4741" },
+      "night-page": { "role": "neutral", "displayName": "Night Page (dark mode)", "canonical": "#0c1511" },
+      "night-card": { "role": "neutral", "displayName": "Night Card (dark mode)", "canonical": "#15211b" },
+      "night-ink": { "role": "neutral", "displayName": "Night Ink (dark mode)", "canonical": "#ecf1ed" },
+      "night-green": { "role": "primary", "displayName": "Night Green (dark mode)", "canonical": "#18804f" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Home hero line only; 2.5rem phone, 3rem tablet, 3.75rem desktop." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings and the campaign title." },
+      "title": { "displayName": "Title", "purpose": "Campaign card titles, two-line clamp." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs and lead text." },
+      "body-small": { "displayName": "Body small", "purpose": "Taglines, meta, secondary copy; reading-text floor (15px)." },
+      "label": { "displayName": "Label", "purpose": "Badges, tags, hints, captions; absolute floor (13.5px)." },
+      "money": { "displayName": "Money", "purpose": "Raised amounts and stats in tabular figures." }
+    },
+    "shadows": [
+      { "name": "rest-lift", "value": "0 1px 2px rgb(16 32 24 / 0.06)", "purpose": "Badges on photos, save button, hero button, small cards." },
+      { "name": "panel-lift", "value": "0 2px 6px rgb(16 32 24 / 0.07), 0 8px 24px rgb(16 32 24 / 0.06)", "purpose": "Money panel and example payout trail." },
+      { "name": "dark-hairline", "value": "outline: 1px solid rgb(255 255 255 / 0.07); outline-offset: -1px", "purpose": "Dark-mode edge on forest panels instead of shadow." }
+    ],
+    "motion": [
+      { "name": "progress-fill", "value": "scaleX(0) to 1, 700ms cubic-bezier(0.22, 1, 0.36, 1), once", "purpose": "Progress fills grow in on appear; none under reduced motion." },
+      { "name": "control-transition", "value": "150ms color/background/border/transform; active scale 0.98", "purpose": "Buttons." },
+      { "name": "photo-zoom", "value": "scale 1.03, 500ms ease-out on card hover", "purpose": "Campaign card photo; off under reduced motion." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one action colour: donate, browse causes, start a fundraiser.",
+      "html": "<button class=\"ds-btn-primary\">Donate now</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 20px; border: none; border-radius: 9999px; background: var(--color-brand, #0b6b45); color: #fff; font-family: Onest, system-ui, sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: background-color 150ms, transform 150ms; } .ds-btn-primary:hover { background: var(--color-brand-deep, #08553a); } .ds-btn-primary:active { transform: scale(0.98); } .ds-btn-primary:focus-visible { outline: 3px solid var(--color-ink, #17201b); outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Quiet outline pill beside a primary.",
+      "html": "<button class=\"ds-btn-secondary\">Start a fundraiser</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 20px; border: 1px solid var(--color-slate-300, #c9d0c9); border-radius: 9999px; background: var(--color-card, #fff); color: var(--color-ink, #17201b); font-family: Onest, system-ui, sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: border-color 150ms, background-color 150ms; } .ds-btn-secondary:hover { border-color: var(--color-ink, #17201b); background: var(--color-slate-50, #f6f7f5); } .ds-btn-secondary:focus-visible { outline: 3px solid var(--color-ink, #17201b); outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Labelled field with hint below.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Full name</span><input class=\"ds-input\" placeholder=\"Aziza Karimova\"><span class=\"ds-field-hint\">As on your card</span></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; font-family: Onest, system-ui, sans-serif; } .ds-field-label { font-size: 15px; font-weight: 500; color: var(--color-slate-700, #3d4741); } .ds-input { min-height: 44px; padding: 10px 14px; border: 1px solid var(--color-slate-300, #c9d0c9); border-radius: 10px; background: var(--color-card, #fff); color: var(--color-ink, #17201b); font: inherit; font-size: 16px; } .ds-input::placeholder { color: var(--color-slate-400, #97a29a); } .ds-input:focus { outline: none; border-color: var(--color-brand, #0b6b45); box-shadow: 0 0 0 2px rgb(11 107 69 / 0.3); } .ds-field-hint { font-size: 13.5px; color: var(--color-slate-500, #5f6b63); }"
+    },
+    {
+      "name": "Proof Chip",
+      "kind": "chip",
+      "refersTo": "proof-chip",
+      "description": "Hero proof: checked, stage by stage, receipts.",
+      "html": "<span class=\"ds-proof\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\"/><path d=\"m9 12 2 2 4-4\"/></svg>Every campaign checked</span>",
+      "css": ".ds-proof { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 6px 12px; border-radius: 9999px; background: var(--color-brand-soft, #e7f3ec); color: var(--color-ink, #17201b); font-family: Onest, system-ui, sans-serif; font-size: 15px; font-weight: 600; } .ds-proof svg { color: var(--color-brand, #0b6b45); flex-shrink: 0; }"
+    },
+    {
+      "name": "Almost There Badge",
+      "kind": "chip",
+      "refersTo": "almost-there-badge",
+      "description": "Only for live campaigns at 75-99% of goal.",
+      "html": "<span class=\"ds-almost\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#e8952b\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z\"/></svg>Almost there</span>",
+      "css": ".ds-almost { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 9999px; background: var(--color-warm-soft, #fdf0dc); color: var(--color-warm-ink, #7a4505); font-family: Onest, system-ui, sans-serif; font-size: 13.5px; font-weight: 600; box-shadow: 0 1px 2px rgb(16 32 24 / 0.06); }"
+    },
+    {
+      "name": "Amount Preset",
+      "kind": "custom",
+      "refersTo": "amount-preset",
+      "description": "Donate dialog preset tiles; the suggested one carries a green pill tag.",
+      "html": "<div class=\"ds-presets\"><button class=\"ds-preset\">50 000</button><button class=\"ds-preset is-selected\" aria-pressed=\"true\">100 000<span class=\"ds-preset-tag\">Suggested</span></button><button class=\"ds-preset\">200 000</button><button class=\"ds-preset\">500 000</button></div>",
+      "css": ".ds-presets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding-top: 8px; font-family: Onest, system-ui, sans-serif; } .ds-preset { position: relative; min-height: 56px; border: 1px solid var(--color-slate-200, #e1e5e0); border-radius: 16px; background: var(--color-card, #fff); color: var(--color-slate-700, #3d4741); font: inherit; font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; cursor: pointer; transition: border-color 150ms, background-color 150ms; } .ds-preset:hover { border-color: var(--color-slate-400, #97a29a); } .ds-preset:focus-visible { outline: 3px solid var(--color-ink, #17201b); outline-offset: 2px; } .ds-preset.is-selected { border-color: var(--color-brand, #0b6b45); background: var(--color-brand-soft, #e7f3ec); color: var(--color-ink, #17201b); box-shadow: 0 0 0 1px var(--color-brand, #0b6b45); } .ds-preset-tag { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); white-space: nowrap; padding: 2px 8px; border-radius: 9999px; background: var(--color-brand, #0b6b45); color: #fff; font-size: 13.5px; font-weight: 600; line-height: 1.25; }"
+    },
+    {
+      "name": "Campaign Card",
+      "kind": "card",
+      "refersTo": "campaign-card-photo",
+      "description": "Photo-led card: the photo and the numbers do the work.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-photo\"></div><p class=\"ds-card-meta\">Education · Samarkand</p><h3 class=\"ds-card-title\"><a href=\"#\">New desks for School 14</a></h3><p class=\"ds-card-tag\">Forty classrooms, one winter.</p><div class=\"ds-bar\"><div class=\"ds-bar-fill\" style=\"width:82%\"></div></div><p class=\"ds-card-money\"><b>41 mln so'm</b> <span>of 50 mln</span></p><p class=\"ds-card-stats\"><b>82%</b> · 12 days left · 318 donors</p></article>",
+      "css": ".ds-card { max-width: 360px; font-family: Onest, system-ui, sans-serif; color: var(--color-ink, #17201b); } .ds-card-photo { aspect-ratio: 4/3; border-radius: 16px; background: var(--color-slate-100, #eef0ec); } .ds-card-meta { margin: 16px 0 6px; font-size: 13.5px; color: var(--color-slate-500, #5f6b63); } .ds-card-title { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.375; } .ds-card-title a { color: inherit; text-decoration: none; } .ds-card-title a:focus-visible { outline: 3px solid var(--color-ink, #17201b); outline-offset: 2px; } .ds-card:hover .ds-card-title a { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: var(--color-brand-deep, #08553a); } .ds-card-tag { margin: 6px 0 16px; font-size: 15px; color: var(--color-slate-600, #525d56); } .ds-bar { height: 8px; border-radius: 9999px; background: var(--color-track, #e3e8e4); overflow: hidden; } .ds-bar-fill { height: 100%; border-radius: 9999px; background: var(--color-brand, #0b6b45); } .ds-card-money { margin: 10px 0 2px; font-variant-numeric: tabular-nums; } .ds-card-money b { font-size: 16px; } .ds-card-money span { font-size: 15px; color: var(--color-slate-500, #5f6b63); } .ds-card-stats { margin: 0; font-size: 15px; color: var(--color-slate-600, #525d56); font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "header",
+      "description": "Sticky white bar; active link carries a 3px green underline.",
+      "html": "<nav class=\"ds-nav\"><strong class=\"ds-nav-logo\">Fundy</strong><a class=\"is-active\" href=\"#\">Explore</a><a href=\"#\">Learn</a><a href=\"#\">Trust &amp; safety</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 20px; height: 64px; padding: 0 24px; background: var(--color-card, #fff); border-bottom: 1px solid var(--color-slate-200, #e1e5e0); font-family: Onest, system-ui, sans-serif; font-size: 15px; font-weight: 500; } .ds-nav-logo { margin-right: 16px; font-size: 20px; color: var(--color-brand, #0b6b45); } .ds-nav a { color: var(--color-slate-600, #525d56); text-decoration: none; transition: color 150ms; } .ds-nav a:hover { color: var(--color-ink, #17201b); } .ds-nav a:focus-visible { outline: 3px solid var(--color-ink, #17201b); outline-offset: 2px; } .ds-nav a.is-active { color: var(--color-ink, #17201b); font-weight: 600; text-decoration: underline; text-decoration-color: var(--color-brand, #0b6b45); text-decoration-thickness: 3px; text-underline-offset: 10px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Checked Giving Page",
+    "overview": "Fundy is built to the donation-site standard (GoFundMe, charity: water, Kitabisa, JustGiving): real photos, plain numbers, one green action, and Fundy's proof (checked campaigns, stage-by-stage payouts, public receipts) set exactly where the donor decides. Warm white grounds, near-black ink with a green cast, generous tap targets, and a single typeface carry the whole site. Novelty metaphors and the old navy-heavy institutional look are rejected.\n\nThe system is phone first and serves donors young and old equally: body text never below 15px, nothing smaller than 13.5px, 44px minimum targets, WCAG AA contrast, meaning never carried by colour alone, reduced motion respected. Dark mode is a deep forest night where green is the light.",
+    "keyCharacteristics": [
+      "Fundy green is the only action and progress colour; amber appears only for \"almost there\".",
+      "Onest everywhere (Latin, Uzbek oʻ gʻ, Cyrillic); tabular figures for money.",
+      "Photo-led campaign cards with 16px corners and thick rounded progress bars.",
+      "Pill buttons and chips; 10px corners for inputs.",
+      "Flat at rest; soft shadows only on lifted panels and floating things."
+    ],
+    "rules": [
+      { "name": "The One Action Colour Rule", "body": "Green is the only colour that means \"do this\" or \"progress\". No second action hue.", "section": "colors" },
+      { "name": "The Amber Is Momentum Rule", "body": "Amber appears only for a live campaign at 75-99% of its goal. It is a badge ground and an icon, never body text on white.", "section": "colors" },
+      { "name": "The 13.5 Floor Rule", "body": "The smallest text is 13.5px (the overridden `text-xs`); small body text is 15px. Do not use arbitrary smaller sizes.", "section": "typography" },
+      { "name": "The Tabular Money Rule", "body": "Every amount, percentage and count that can sit beside another is set in tabular figures.", "section": "typography" },
+      { "name": "The Soft-Only Rule", "body": "Depth is diffuse and tinted; no hard offset shadows, no coloured glows.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use Fundy green for every primary action and every progress fill, with white text on it.",
+      "Do keep text at 15px or larger for reading and never below 13.5px for labels.",
+      "Do make every tap target at least 44px tall.",
+      "Do set money, percentages and counts in tabular figures.",
+      "Do use pills for buttons, chips and toggles, and 16px corners for photos and cards.",
+      "Do show selected state as green border plus green tint plus a 1px green ring.",
+      "Do carry state with shape or pattern as well as colour (solid vs dashed trail).",
+      "Do let progress fills grow in once (700ms, cubic-bezier(0.22, 1, 0.36, 1)) and stay still under reduced motion."
+    ],
+    "donts": [
+      "Don't introduce a second action colour or return to navy as a primary surface.",
+      "Don't use amber for text on white or outside the 75-99% \"almost there\" state.",
+      "Don't add a second typeface; hierarchy comes from Onest's weights.",
+      "Don't use hard offset shadows or coloured glows.",
+      "Don't put small uppercase kicker labels above headings.",
+      "Don't use coloured side stripes on cards or alerts."
+    ]
+  }
+}

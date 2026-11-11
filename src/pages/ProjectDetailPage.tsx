@@ -750,7 +750,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
           <button
             type="button"
             onClick={() => setCartOpen(true)}
-            className="shrink-0 rounded-md bg-brand text-night px-4 py-2 text-sm font-semibold cursor-pointer"
+            className="shrink-0 rounded-full bg-brand text-white px-4 py-2 text-sm font-semibold cursor-pointer"
           >
             {t('cart.view')}
           </button>
@@ -762,7 +762,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
         <button
           type="button"
           onClick={() => setCartOpen(true)}
-          className="hidden lg:inline-flex fixed z-30 right-6 bottom-6 items-center gap-2 rounded-md bg-night text-white pl-4 pr-5 py-3 shadow-xl hover:bg-night-soft cursor-pointer"
+          className="hidden lg:inline-flex fixed z-30 right-6 bottom-6 items-center gap-2 rounded-full bg-brand text-white pl-4 pr-5 py-3 shadow-xl hover:bg-brand-deep cursor-pointer"
         >
           <ShoppingBag className="w-5 h-5 text-brand-light" aria-hidden />
           <span className="text-sm font-semibold font-mono-numbers">{cartLabel}</span>

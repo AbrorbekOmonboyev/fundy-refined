@@ -286,7 +286,7 @@ export function CartDrawer({
               ) : (
                 <Link
                   to={`${paths.login}?next=${encodeURIComponent(`${location.pathname}?cart=open`)}`}
-                  className="block w-full py-3.5 rounded-md bg-night text-white text-center font-semibold hover:bg-night-soft"
+                  className="block w-full py-3.5 rounded-full bg-brand text-white text-center font-semibold hover:bg-brand-deep"
                 >
                   {t('cart.loginToPay')}
                 </Link>
