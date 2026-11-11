@@ -1,3 +1,4 @@
+import { useEffect, useRef, type PointerEvent } from 'react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { BadgeCheck, Bookmark, CheckCircle, Flame, ImageOff, MapPin } from 'lucide-react';
@@ -9,8 +10,39 @@ import { useSavedProjects } from '@/features/projects/hooks';
 import { useCategories } from '@/features/reference/useReference';
 import { formatMoney, formatNumber } from '@/lib/money';
 
+/**
+ * Phones have no hover: the card passing through the middle of the screen while scrolling
+ * gets the glass instead (data-focus). Wide screens use :hover in CSS (.card-glass).
+ */
+function useCenterFocus() {
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !window.matchMedia('(hover: none)').matches || !('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) el.dataset.focus = '';
+        else delete el.dataset.focus;
+      },
+      { rootMargin: '-42% 0px -42% 0px' },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return ref;
+}
+
+/** The light catches the glass where the pointer is. */
+function followPointer(e: PointerEvent<HTMLElement>) {
+  if (e.pointerType !== 'mouse') return;
+  const r = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`);
+  e.currentTarget.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`);
+}
+
 export function ProjectCard({ project }: { project: ProjectCardData }) {
   const { t, i18n } = useTranslation();
+  const glassRef = useCenterFocus();
   const { nameOf } = useCategories();
   const saved = useSavedProjects();
   const { text } = pickText(project.translations, i18n.resolvedLanguage ?? 'uz', project.originalLanguage);
@@ -23,7 +55,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
 
   return (
     // Plain card in the style of the big platforms: the photo and the numbers do the work.
-    <article className="group relative flex flex-col">
+    <article ref={glassRef} onPointerMove={followPointer} className="card-glass group relative flex flex-col">
       <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100">
         {project.coverUrl ? (
           <img
