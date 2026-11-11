@@ -8,7 +8,7 @@ import { useSyncExternalStore } from 'react';
 export type Theme = 'light' | 'dark';
 
 const STORAGE_KEY = 'fundy-theme';
-const THEME_COLORS: Record<Theme, string> = { light: '#FAF9F6', dark: '#0B1726' };
+const THEME_COLORS: Record<Theme, string> = { light: '#FAF9F6', dark: '#121413' };
 const listeners = new Set<() => void>();
 
 export function getTheme(): Theme {

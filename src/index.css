@@ -139,34 +139,36 @@
 }
 
 /* ===========================================================================
- * Dark mode: deep forest night, green as the light.
+ * Dark mode: neutral charcoal (like the big giving sites at night), so green stays
+ * the one signal: buttons, progress and "checked" marks. No green tint in the grounds.
  * The theme is switched by the .dark class on <html> (see src/lib/theme.ts).
- * Most of the site re-colours itself through these variables.
  * ======================================================================== */
 .dark {
   color-scheme: dark;
 
-  --color-ink: #ecf1ed;
-  --color-card: #15211b;
-  --color-page: #0c1511;
-  --color-track: #26352d;
+  --color-ink: #eef0ef;
+  --color-card: #1b1e1d;
+  --color-page: #121413;
+  --color-track: #2c302e;
+  --color-night: #191c1b; /* footer and dark bands: one step off the page */
+  --color-night-soft: #232725;
   --color-brand: #18804f; /* a touch brighter so buttons stand off the dark page (white text 4.9:1) */
   --color-brand-deep: #136b42;
-  --color-brand-soft: rgb(63 191 127 / 0.14);
+  --color-brand-soft: rgb(63 191 127 / 0.12);
   --color-warm-soft: #3b2a12; /* opaque so it reads over photos */
   --color-warm-ink: #f6c27a;
 
-  /* Greys with a hint of forest. Light shades become dark and back. */
-  --color-slate-50: #16231c;
-  --color-slate-100: #1b2a22;
-  --color-slate-200: #24352c;
-  --color-slate-300: #34483d;
-  --color-slate-400: #74887c;
-  --color-slate-500: #93a499;
-  --color-slate-600: #b0bdb4;
-  --color-slate-700: #c9d3cc;
-  --color-slate-800: #e0e7e2;
-  --color-slate-900: #f0f4f1;
+  /* Neutral greys. Light shades become dark and back. */
+  --color-slate-50: #1c1f1e;
+  --color-slate-100: #222524;
+  --color-slate-200: #2c302e;
+  --color-slate-300: #3d4240;
+  --color-slate-400: #7d8481;
+  --color-slate-500: #9aa09d;
+  --color-slate-600: #b5bab8;
+  --color-slate-700: #ccd0ce;
+  --color-slate-800: #e2e5e3;
+  --color-slate-900: #f1f3f2;
 
   /* Message boxes: soft glows instead of pastel blocks; text gets lighter. */
   --color-rose-50: rgb(244 63 94 / 0.12);
