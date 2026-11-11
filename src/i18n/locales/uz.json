@@ -10,7 +10,7 @@
     "howItWorks": "Qanday ishlaydi",
     "learn": "Xayriya qanday ishlaydi",
     "trustSafety": "Ishonch va xavfsizlik",
-    "startProject": "Loyiha boshlash"
+    "startProject": "Yigʻim boshlash"
   },
   "header": {
     "notifications": "Bildirishnomalar",
@@ -38,7 +38,7 @@
     "musharakah": "Mushoraka (ulush)",
     "calculator": "Foyda taqsimoti kalkulyatori",
     "discover": "Loyihalarni koʻrish",
-    "startCampaign": "Loyiha joylash",
+    "startCampaign": "Yigʻim boshlash",
     "founderDashboard": "Asoschi kabineti",
     "backerDashboard": "Homiy kabineti",
     "verification": "Ishonch va xavfsizlik",
@@ -457,7 +457,7 @@
       "title": "Koʻrinib turadigan yordam",
       "text": "Oʻzbekistondagi tekshirilgan ezgu ishlarga komissiyasiz xayriya qiling. Pul bosqichma-bosqich beriladi, har bir bosqich cheklar bilan hisobot qilinadi.",
       "explore": "Loyihalarni koʻrish",
-      "start": "Loyiha boshlash",
+      "start": "Yigʻim boshlash",
       "cardKicker": "Hozir mablagʻ yigʻmoqda",
       "statsRaised": "Toʻplangan mablagʻ",
       "statsBackers": "Homiylar",
@@ -525,7 +525,7 @@
     },
     "final": {
       "title": "Ezgu ish uchun mablagʻ yigʻyapsizmi?",
-      "start": "Loyiha boshlash",
+      "start": "Yigʻim boshlash",
       "text": "Savollaringiz boʻlsa, bizga yozing — javob beramiz.",
       "contact": "Bizga yozing"
     },
@@ -1184,21 +1184,21 @@
     "removeReceipt": "{{n}}-chekni olib tashlash"
   },
   "start": {
-    "title": "Fundyʼda loyiha joylash",
-    "intro": "Ariza 20–30 daqiqa oladi. Qoralama saqlanib turadi, istalgan vaqtda davom ettirasiz.",
+    "title": "Ezgu ish uchun xayriya yigʻimini boshlang",
+    "intro": "Tashkilotchilar uchun bepul. Fundy yigʻimingizni tekshiradi, shuning uchun xayriyachilar ishonadi: pul bosqichma-bosqich, ochiq hisobot va cheklar bilan beriladi.",
     "needTitle": "Nima kerak boʻladi",
     "timeTitle": "Qancha vaqt oladi",
     "time1Title": "Ariza",
     "time1Text": "20–30 daqiqa",
     "time2Title": "Tekshiruv va baholash",
     "time2Text": "odatda 3–5 ish kuni",
-    "time3Title": "Mablagʻ yigʻish",
+    "time3Title": "Xayriya yigʻish",
     "time3Text": "7 dan 90 kungacha, oʻzingiz tanlaysiz",
     "time4Title": "Bosqichlar boʻyicha pul",
     "time4Text": "har bir bosqich dalili tekshirilgach",
-    "feesTitle": "Xarajatlar",
-    "fees": "Demo davrida Fundy hech qanday toʻlov olmaydi. Haqiqiy toʻlovlar ishga tushganda komissiya shu sahifada oldindan eʼlon qilinadi.",
-    "cta": "Arizani boshlash",
+    "feesTitle": "Bu qancha turadi",
+    "fees": "Fundy xayriyalardan komissiya olmaydi: yigʻimingiz har bir xayriya qilingan soʻmni oladi. Xayriyachilar xohlasa Fundyʼga ixtiyoriy hissa qoʻshishi mumkin — u platformani yuritishga ketadi. Demo davrida barcha toʻlovlar simulyatsiya qilinadi.",
+    "cta": "Yigʻimni boshlash",
     "ctaHint": "Avval kirasiz yoki roʻyxatdan oʻtasiz. Bu bir daqiqa oladi.",
     "whoTitle": "Pulni kim yigʻyapti?",
     "whoHint": "Javobingizga qarab qaysi hujjatlar kerakligi belgilanadi.",
@@ -1210,7 +1210,13 @@
     "needStages": "Bosqichlar (odatda 3–6 ta): nima, qachon qilinadi va pulning qancha ulushi beriladi",
     "needStory": "Muqova rasmi va loyiha hikoyasi (kamida 200 belgi)",
     "continueDraft": "Qoralamani davom ettirish: {{title}}",
-    "donationOnly": "Xayriya. Hozircha Fundyʼda faqat xayriya yigʻimlari oʻtkaziladi; mukofot va mushoraka keyinroq qoʻshiladi."
+    "donationOnly": "Xayriya. Hozircha Fundyʼda faqat xayriya yigʻimlari oʻtkaziladi; mukofot va mushoraka keyinroq qoʻshiladi.",
+    "perk1": "Xayriyalardan komissiya yoʻq",
+    "perk2": "Roʻyxatdagi fondlar uchun «Tasdiqlangan fond» belgisi",
+    "perk3": "Har bir xayriyachiga kvitansiya",
+    "fundBadge": "«Tasdiqlangan fond» belgisini olishi mumkin",
+    "step": "{{n}}-qadam",
+    "closing": "Ezgu ishingiz uchun mablagʻ yigʻishga tayyormisiz?"
   },
   "time": {
     "now": "hozirgina",
@@ -1382,7 +1388,7 @@
     },
     "ngo": {
       "name": "Notijorat tashkilot (NNT)",
-      "short": "Roʻyxatdan oʻtgan xayriya fondi yoki NNT. Tasdiqlangan fond belgisini olishi mumkin.",
+      "short": "Roʻyxatdan oʻtgan xayriya fondi yoki NNT.",
       "apply": "Tashkilotning roʻyxat raqami (STIR)",
       "payout": "Tashkilot nomidagi bank hisobi",
       "numberHint": "NNT roʻyxat raqami yoki STIR."

@@ -10,7 +10,7 @@
     "howItWorks": "How It Works",
     "learn": "How giving works",
     "trustSafety": "Trust & Safety",
-    "startProject": "Start a project"
+    "startProject": "Start a fundraiser"
   },
   "header": {
     "notifications": "Notifications",
@@ -38,7 +38,7 @@
     "musharakah": "Musharakah (Equity)",
     "calculator": "Profit-Sharing Calculator",
     "discover": "Browse projects",
-    "startCampaign": "Start a project",
+    "startCampaign": "Start a fundraiser",
     "founderDashboard": "Founder Dashboard",
     "backerDashboard": "Backer Dashboard",
     "verification": "Trust & Safety",
@@ -457,7 +457,7 @@
       "title": "Help that you can see",
       "text": "Give to checked causes in Uzbekistan, with no commission. The money is paid out stage by stage, and every stage is reported with receipts.",
       "explore": "Browse projects",
-      "start": "Start a project",
+      "start": "Start a fundraiser",
       "cardKicker": "Raising now",
       "statsRaised": "Raised",
       "statsBackers": "Backers",
@@ -525,7 +525,7 @@
     },
     "final": {
       "title": "Raising money for a good cause?",
-      "start": "Start a project",
+      "start": "Start a fundraiser",
       "text": "Questions? Write to us and we’ll answer.",
       "contact": "Write to us"
     },
@@ -1184,8 +1184,8 @@
     "removeReceipt": "Remove receipt {{n}}"
   },
   "start": {
-    "title": "Post a project on Fundy",
-    "intro": "The application takes 20–30 minutes. Your draft is saved, so you can continue any time.",
+    "title": "Start a fundraiser for a good cause",
+    "intro": "Free for organisers. Fundy checks your campaign, so donors trust it: the money is paid out stage by stage, with public reports and receipts.",
     "needTitle": "What you'll need",
     "timeTitle": "How long it takes",
     "time1Title": "Application",
@@ -1196,9 +1196,9 @@
     "time3Text": "7 to 90 days, your choice",
     "time4Title": "Money by stage",
     "time4Text": "after each stage's proof is checked",
-    "feesTitle": "Fees",
-    "fees": "During the demo Fundy charges nothing. When real payments start, the fee will be published on this page in advance.",
-    "cta": "Start the application",
+    "feesTitle": "What it costs",
+    "fees": "Fundy takes no commission from donations: your campaign gets every so'm donated. Donors can add an optional tip for Fundy, which keeps the platform running. During the demo all payments are simulated.",
+    "cta": "Start your fundraiser",
     "ctaHint": "You'll log in or sign up first. It takes a minute.",
     "whoTitle": "Who is raising the money?",
     "whoHint": "Your answer decides which documents you need.",
@@ -1210,7 +1210,13 @@
     "needStages": "Stages (usually 3–6): what gets done, when, and what share of the money",
     "needStory": "A cover photo and the project story (at least 200 characters)",
     "continueDraft": "Continue your draft: {{title}}",
-    "donationOnly": "Donations. For now Fundy runs donation campaigns only; rewards and Musharakah will come later."
+    "donationOnly": "Donations. For now Fundy runs donation campaigns only; rewards and Musharakah will come later.",
+    "perk1": "No commission on donations",
+    "perk2": "Verified fund badge for registered funds",
+    "perk3": "A receipt for every donor",
+    "fundBadge": "Can get the Verified fund badge",
+    "step": "Step {{n}}",
+    "closing": "Ready to raise money for your cause?"
   },
   "time": {
     "now": "just now",
@@ -1382,7 +1388,7 @@
     },
     "ngo": {
       "name": "Non-profit (NNT)",
-      "short": "A registered charitable fund or NGO. Can be marked as a verified fund.",
+      "short": "A registered charitable fund or NGO.",
       "apply": "The organisation's registration number (STIR)",
       "payout": "A bank account in the organisation's name",
       "numberHint": "NNT registration number or STIR (TIN)."
