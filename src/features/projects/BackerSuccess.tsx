@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useState, type CSSProperties, type ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { Check } from 'lucide-react';
@@ -47,8 +47,16 @@ export function BackerSuccess({
 
   return (
     <div className="flex-1 overflow-y-auto px-6 py-10 flex flex-col items-center text-center">
-      <span className="w-24 h-24 rounded-full bg-brand flex items-center justify-center">
-        <Check className="w-12 h-12 text-night" strokeWidth={3} aria-hidden />
+      {/* The check pops in and a few sparks fly out along arcs, once */}
+      <span className="relative w-24 h-24">
+        <span aria-hidden className="success-burst absolute inset-0">
+          {Array.from({ length: 8 }, (_, i) => (
+            <span key={i} style={{ '--a': `${i * 45}deg` } as CSSProperties} />
+          ))}
+        </span>
+        <span className="success-pop relative w-24 h-24 rounded-full bg-brand flex items-center justify-center">
+          <Check className="w-12 h-12 text-white" strokeWidth={3} aria-hidden />
+        </span>
       </span>
       <h3 className="mt-6 text-[1.75rem] leading-tight text-ink">{t('contribute.backerTitle')}</h3>
       <p className="mt-3 text-sm text-slate-600 max-w-xs">{detail}</p>
@@ -59,7 +67,7 @@ export function BackerSuccess({
         <button
           type="button"
           onClick={() => void share()}
-          className="w-full py-3.5 rounded-full bg-night text-white text-sm font-semibold cursor-pointer dark:bg-brand dark:text-night"
+          className="w-full min-h-12 py-3.5 rounded-full bg-brand hover:bg-brand-deep text-white text-base font-semibold cursor-pointer transition-[transform,background-color] duration-150 active:scale-[0.97]"
         >
           {t('contribute.shareFriends')}
         </button>
@@ -69,7 +77,7 @@ export function BackerSuccess({
             onClose();
             navigate(paths.home);
           }}
-          className="w-full py-3.5 rounded-full border border-ink text-ink text-sm font-semibold cursor-pointer"
+          className="w-full min-h-12 py-3.5 rounded-full border border-ink text-ink text-base font-semibold cursor-pointer transition-transform duration-150 active:scale-[0.97]"
         >
           {t('contribute.backHome')}
         </button>

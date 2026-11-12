@@ -6,7 +6,7 @@ import { contribute, type ProjectDetail } from '@/features/projects/api';
 import { projectKeys } from '@/features/projects/hooks';
 import { rewardStatus } from '@/features/projects/rewards';
 import { errorKey } from '@/features/auth/errors';
-import { formatDate, formatMoney, formatNumber } from '@/lib/money';
+import { formatDate, formatMoney, formatNumber, parseAmount } from '@/lib/money';
 import { Alert, Button } from '@/components/ui';
 import type { Database } from '@/lib/database.types';
 import { BackerSuccess } from '@/features/projects/BackerSuccess';
@@ -62,6 +62,8 @@ export function ContributeDialog({
   const [amount, setAmount] = useState<number>(
     initialTier?.amount ?? suggested ?? amountPresets[0] ?? project.minContribution,
   );
+  // What the person is typing; null shows the parsed amount, neatly grouped ("100 000").
+  const [amountText, setAmountText] = useState<string | null>(null);
   const [method, setMethod] = useState<PaymentMethod>('click');
   const [anonymous, setAnonymous] = useState(false);
   const [acceptedRisk, setAcceptedRisk] = useState(project.model !== 'equity');
@@ -244,7 +246,10 @@ export function ContributeDialog({
                   <button
                     key={p}
                     type="button"
-                    onClick={() => setAmount(p)}
+                    onClick={() => {
+                      setAmount(p);
+                      setAmountText(null);
+                    }}
                     aria-pressed={amount === p}
                     className={`relative min-h-14 rounded-2xl border text-base font-semibold font-mono-numbers transition-colors cursor-pointer ${
                       amount === p
@@ -264,13 +269,15 @@ export function ContributeDialog({
               <label className="block">
                 <span className="sr-only">{t('contribute.customAmount')}</span>
                 <input
-                  type="number"
+                  type="text"
                   inputMode="numeric"
-                  min={minimum}
-                  max={capped ? remaining : undefined}
-                  step={1000}
-                  value={amount || ''}
-                  onChange={e => setAmount(Math.round(Number(e.target.value)))}
+                  autoComplete="off"
+                  value={amountText ?? (amount ? formatNumber(amount) : '')}
+                  onChange={e => {
+                    setAmountText(e.target.value);
+                    setAmount(parseAmount(e.target.value));
+                  }}
+                  onBlur={() => setAmountText(null)}
                   className="w-full min-h-12 rounded-2xl border border-slate-300 bg-card px-4 py-3 text-lg font-semibold font-mono-numbers text-ink focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                 />
               </label>

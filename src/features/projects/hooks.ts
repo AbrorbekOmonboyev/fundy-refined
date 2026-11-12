@@ -41,6 +41,17 @@ export function useProject(slug: string | undefined) {
   });
 }
 
+/** Loads a project page in the background (hover, touch, focus) so opening it feels instant. */
+export function usePrefetchProject() {
+  const queryClient = useQueryClient();
+  return (slug: string) =>
+    void queryClient.prefetchQuery({
+      queryKey: projectKeys.detail(slug),
+      queryFn: () => getProject(slug),
+      staleTime: 30_000,
+    });
+}
+
 export function usePlatformStats() {
   return useQuery({ queryKey: projectKeys.stats, queryFn: getPlatformStats, staleTime: 5 * 60_000 });
 }

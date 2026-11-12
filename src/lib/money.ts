@@ -42,6 +42,38 @@ export function formatNumber(value: number, decimals = 0): string {
   return format(value, decimals);
 }
 
+/**
+ * Reads an amount the way people type it (Postel's law): "100 000", "100,000", "100.000",
+ * "100k", "100 ming", "1.5 mln", "2 млн", "50 000 so'm". Returns whole so'm, or 0 when there is
+ * no number in it.
+ */
+export function parseAmount(input: string): number {
+  const text = input
+    .toLowerCase()
+    .replace(/so['ʻʼ’`]?m|сум|uzs/g, '')
+    .trim();
+  const match = text.match(/^([\d\s.,]*\d)\s*([a-zа-яʻ]*)$/u);
+  if (!match) return 0;
+  const [, digits, unit] = match;
+  const multiplier = /^(k|ming|тыс)/.test(unit)
+    ? 1e3
+    : /^(m|mln|млн)/.test(unit)
+      ? 1e6
+      : /^(b|mlrd|млрд)/.test(unit)
+        ? 1e9
+        : 1;
+  const compact = digits.replace(/\s/g, '');
+  let value: number;
+  if (multiplier > 1) {
+    // "1.5 mln" / "1,5 mln": the separator is a decimal point
+    value = Number(compact.replace(',', '.'));
+  } else {
+    // "100,000" / "100.000" / "100 000": separators group thousands
+    value = Number(compact.replace(/[.,]/g, ''));
+  }
+  return Number.isFinite(value) ? Math.round(value * multiplier) : 0;
+}
+
 /** "188 000 000 so'm", or compact: "188 mln so'm". */
 export function formatMoney(amount: number, compact = false): string {
   const currency = i18n.t('money.currency');

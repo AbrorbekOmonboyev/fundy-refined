@@ -6,7 +6,7 @@ import { DONATION_ONLY } from '@/lib/focus';
 import { responsiveImage } from '@/lib/supabase';
 import { paths } from '@/app/routes';
 import { daysLeft, pickText, type ProjectCardData } from '@/features/projects/api';
-import { useSavedProjects } from '@/features/projects/hooks';
+import { usePrefetchProject, useSavedProjects } from '@/features/projects/hooks';
 import { useCategories } from '@/features/reference/useReference';
 import { formatMoney, formatNumber } from '@/lib/money';
 
@@ -49,6 +49,7 @@ function followPointer(e: PointerEvent<HTMLElement>) {
 export function ProjectCard({ project }: { project: ProjectCardData }) {
   const { t, i18n } = useTranslation();
   const glassRef = useCenterFocus();
+  const prefetch = usePrefetchProject();
   const { nameOf } = useCategories();
   const saved = useSavedProjects();
   const { text } = pickText(project.translations, i18n.resolvedLanguage ?? 'uz', project.originalLanguage);
@@ -61,7 +62,14 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
 
   return (
     // Plain card in the style of the big platforms: the photo and the numbers do the work.
-    <article ref={glassRef} onPointerMove={followPointer} className="card-glass group relative flex flex-col h-full">
+    <article
+      ref={glassRef}
+      onPointerMove={followPointer}
+      onPointerEnter={() => prefetch(project.slug)}
+      onTouchStart={() => prefetch(project.slug)}
+      onFocus={() => prefetch(project.slug)}
+      className="card-glass group relative flex flex-col h-full"
+    >
       <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100">
         {project.coverUrl ? (
           <img
@@ -103,7 +111,10 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
           title={isSaved ? t('project.unsave') : t('project.save')}
           className="absolute top-2.5 right-2.5 z-20 w-11 h-11 rounded-full bg-card/95 shadow-sm flex items-center justify-center text-slate-700 hover:text-ink cursor-pointer"
         >
-          <Bookmark className={`w-[18px] h-[18px] ${isSaved ? 'fill-brand text-brand' : ''}`} />
+          <Bookmark
+            key={isSaved ? 'saved' : 'not-saved'}
+            className={`w-[18px] h-[18px] ${isSaved ? 'fill-brand text-brand pop-in' : ''}`}
+          />
         </button>
       </div>
 

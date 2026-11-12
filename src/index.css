@@ -104,7 +104,8 @@
   /* Progress fills grow in once when they appear; still under reduced motion. */
   .progress-fill {
     transform-origin: left;
-    animation: progress-fill 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    /* slow in, slow out, with a little follow-through past the mark before it settles */
+    animation: progress-fill 650ms cubic-bezier(0.34, 1.35, 0.64, 1) both;
   }
   @keyframes progress-fill {
     from {
@@ -254,9 +255,9 @@
   --mx: 30%;
   --my: 20%;
   transition:
-    transform 380ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 300ms ease,
-    filter 300ms ease;
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 200ms ease,
+    filter 200ms ease;
 }
 .card-glass::before {
   content: '';
@@ -268,8 +269,8 @@
   opacity: 0;
   transform: scale(0.97);
   transition:
-    opacity 300ms ease,
-    transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 200ms ease,
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
   background:
     radial-gradient(260px circle at var(--mx) var(--my), rgb(255 255 255 / 0.75), transparent 60%),
     linear-gradient(145deg, rgb(255 255 255 / 0.62), rgb(231 243 236 / 0.38) 55%, rgb(255 255 255 / 0.5));
@@ -328,6 +329,85 @@
   .card-glass::before,
   .card-glass:hover::before {
     transform: none;
+  }
+}
+
+/* ===========================================================================
+ * Small moments (UI motion laws): under 300ms, eased, exaggerated just enough to land,
+ * and only on rare events. Everything stills under reduced motion.
+ * ======================================================================== */
+/* Saving a project: the bookmark squashes and stretches into place. */
+.pop-in {
+  animation: pop-in 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes pop-in {
+  0% {
+    transform: scale(0.6, 0.6);
+  }
+  45% {
+    transform: scale(1.3, 0.85);
+  }
+  75% {
+    transform: scale(0.92, 1.1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+/* A donation went through: the check pops (anticipation dip, overshoot, settle)… */
+.success-pop {
+  animation: success-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes success-pop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/* …and eight sparks fly out along curved paths (rotation + distance = an arc). */
+.success-burst > span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px;
+  border-radius: 9999px;
+  background: var(--color-brand);
+  opacity: 0;
+  animation: spark 700ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+}
+.success-burst > span:nth-child(even) {
+  background: var(--color-warm);
+  width: 6px;
+  height: 6px;
+  margin: -3px;
+}
+@keyframes spark {
+  0% {
+    transform: rotate(var(--a)) translateY(0) scale(0.4);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(calc(var(--a) + 40deg)) translateY(-78px) scale(0);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pop-in,
+  .success-pop {
+    animation: none;
+  }
+  .success-burst {
+    display: none;
   }
 }
 

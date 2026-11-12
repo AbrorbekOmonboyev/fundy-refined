@@ -186,7 +186,7 @@ function Hero() {
           <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-3">
             <Link
               to={paths.explore}
-              className="inline-flex items-center justify-center gap-2 min-h-13 px-8 text-[1.0625rem] font-semibold text-white bg-brand hover:bg-brand-deep rounded-full shadow-sm transition-colors"
+              className="inline-flex items-center justify-center gap-2 min-h-13 px-8 text-[1.0625rem] font-semibold text-white bg-brand hover:bg-brand-deep rounded-full shadow-sm transition-[transform,background-color] duration-150 active:scale-[0.97]"
             >
               {t('home.hero.give')}
               <ArrowRight className="w-5 h-5" aria-hidden />
