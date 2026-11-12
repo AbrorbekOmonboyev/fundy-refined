@@ -18,12 +18,6 @@ type PaymentMethod = Database['public']['Enums']['payment_method'];
 const TIP_PERCENTS = [0, 5, 10, 15] as const;
 const tipFor = (amount: number, percent: number) => Math.round((amount * percent) / 100 / 1000) * 1000;
 const METHODS: PaymentMethod[] = ['click', 'payme', 'uzcard', 'humo', 'bank_wire'];
-/**
- * Which preset starts selected and carries the "Suggested" tag. Research on suggested amounts
- * (Goswami & Urminsky 2016): a low default brings more donors, a high one a bigger average;
- * a middle preset keeps both.
- */
-const SUGGESTED = 1;
 
 function presets(project: ProjectDetail): number[] {
   if (project.model === 'equity' && project.equity) {
@@ -58,9 +52,9 @@ export function ContributeDialog({
   const initialTier = project.rewards.find(r => r.id === initialRewardId) ?? null;
   const [rewardId, setRewardId] = useState<string | null>(initialTier?.id ?? null);
   const amountPresets = presets(project);
-  const suggested = project.model === 'donation' ? (amountPresets[SUGGESTED] ?? null) : null;
+  // Donors choose their own amount: nothing is pre-selected or recommended.
   const [amount, setAmount] = useState<number>(
-    initialTier?.amount ?? suggested ?? amountPresets[0] ?? project.minContribution,
+    initialTier?.amount ?? (project.model === 'donation' ? 0 : (amountPresets[0] ?? project.minContribution)),
   );
   // What the person is typing; null shows the parsed amount, neatly grouped ("100 000").
   const [amountText, setAmountText] = useState<string | null>(null);
@@ -241,7 +235,7 @@ export function ContributeDialog({
 
             <fieldset className="space-y-2">
               <legend className="text-sm font-medium text-slate-700 mb-1">{t('contribute.amount')}</legend>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 {amountPresets.map(p => (
                   <button
                     key={p}
@@ -258,11 +252,6 @@ export function ContributeDialog({
                     }`}
                   >
                     {formatMoney(p, true)}
-                    {p === suggested && (
-                      <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-brand text-white px-2 py-0.5 text-xs font-semibold leading-tight">
-                        {t('contribute.suggested')}
-                      </span>
-                    )}
                   </button>
                 ))}
               </div>

@@ -777,8 +777,7 @@
       "none": "Kerak emas",
       "summary": "Fundyʼga hissa: {{tip}}. Jami toʻlov: {{total}}."
     },
-    "upTo": "{{left}} gacha (maqsadgacha qolgani)",
-    "suggested": "Tavsiya"
+    "upTo": "{{left}} gacha (maqsadgacha qolgani)"
   },
   "dashboard": {
     "backer": {

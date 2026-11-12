@@ -777,8 +777,7 @@
       "none": "No tip",
       "summary": "Tip for Fundy: {{tip}}. You pay {{total}} in total."
     },
-    "upTo": "up to {{left}} (left until the goal)",
-    "suggested": "Suggested"
+    "upTo": "up to {{left}} (left until the goal)"
   },
   "dashboard": {
     "backer": {
