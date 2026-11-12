@@ -18,7 +18,13 @@ function useCenterFocus() {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
     const el = ref.current;
-    if (!el || !window.matchMedia('(hover: none)').matches || !('IntersectionObserver' in window)) return;
+    // Only on one-column phone layouts: in a grid (tablets) a whole row would light up at once.
+    if (
+      !el ||
+      !window.matchMedia('(hover: none) and (max-width: 767px)').matches ||
+      !('IntersectionObserver' in window)
+    )
+      return;
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) el.dataset.focus = '';
@@ -55,7 +61,7 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
 
   return (
     // Plain card in the style of the big platforms: the photo and the numbers do the work.
-    <article ref={glassRef} onPointerMove={followPointer} className="card-glass group relative flex flex-col">
+    <article ref={glassRef} onPointerMove={followPointer} className="card-glass group relative flex flex-col h-full">
       <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100">
         {project.coverUrl ? (
           <img

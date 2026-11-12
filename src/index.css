@@ -261,7 +261,7 @@
 .card-glass::before {
   content: '';
   position: absolute;
-  inset: -12px;
+  inset: -10px;
   z-index: -1;
   border-radius: 1.75rem;
   pointer-events: none;
