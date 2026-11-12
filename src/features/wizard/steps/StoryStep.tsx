@@ -146,21 +146,6 @@ export function StoryStep({ draft }: { draft: Draft }) {
 
         {photoWarning && <Alert variant="warning">{photoWarning}</Alert>}
         {uploadError && <Alert variant="error">{uploadError}</Alert>}
-
-        {/* How the project will look in lists */}
-        {coverUrl && (
-          <div className="pt-2 space-y-2">
-            <p className="text-xs font-medium text-slate-500">{t('wizard.story.coverCardPreview')}</p>
-            <div className="w-full max-w-64" aria-hidden>
-              <div className="aspect-[16/10] rounded-2xl overflow-hidden bg-slate-100">
-                <img src={coverUrl} alt="" className="w-full h-full object-cover" />
-              </div>
-              <p className="mt-2 text-xs font-semibold text-ink">{t(`models.${draft.project.model}.name`)}</p>
-              <p className="text-sm font-bold text-ink leading-snug line-clamp-2">{draft.text?.title}</p>
-              <div className="mt-2 h-1.5 rounded-full bg-track" />
-            </div>
-          </div>
-        )}
       </div>
 
       <TextAreaField
@@ -188,6 +173,21 @@ export function StoryStep({ draft }: { draft: Draft }) {
         value={risks}
         onChange={e => setRisks(e.target.value)}
       />
+
+      {/* How the project will look in lists */}
+      {coverUrl && (
+        <div className="pt-2 space-y-2">
+          <p className="text-xs font-medium text-slate-500">{t('wizard.story.coverCardPreview')}</p>
+          <div className="w-full max-w-64" aria-hidden>
+            <div className="aspect-[16/10] rounded-2xl overflow-hidden bg-slate-100">
+              <img src={coverUrl} alt="" className="w-full h-full object-cover" />
+            </div>
+            <p className="mt-2 text-xs font-semibold text-ink">{t(`models.${draft.project.model}.name`)}</p>
+            <p className="text-sm font-bold text-ink leading-snug line-clamp-2">{draft.text?.title}</p>
+            <div className="mt-2 h-1.5 rounded-full bg-track" />
+          </div>
+        </div>
+      )}
 
       {/* Other languages: optional, folded away so the step stays short */}
       <details

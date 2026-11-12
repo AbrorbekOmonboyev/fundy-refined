@@ -94,18 +94,6 @@ export function WizardShell({
           </details>
         )}
 
-        {draft && (
-          <a
-            href={paths.project(draft.project.slug)}
-            target="_blank"
-            rel="noopener"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink underline underline-offset-4"
-          >
-            <Eye className="w-4 h-4" aria-hidden />
-            {t('wizard.preview')}
-          </a>
-        )}
-
         {draft?.project.status === 'changes_requested' && draft.project.review_note && (
           <Alert variant="warning">
             <strong>{t('wizard.changesRequested')}</strong> {draft.project.review_note}
@@ -113,6 +101,19 @@ export function WizardShell({
         )}
 
         {children}
+
+        {/* The preview comes after the fields: fill them in first, then look */}
+        {draft && (
+          <a
+            href={paths.project(draft.project.slug)}
+            target="_blank"
+            rel="noopener"
+            className="inline-flex items-center gap-2 min-h-11 px-4 rounded-full border border-slate-300 text-sm font-semibold text-ink hover:border-ink"
+          >
+            <Eye className="w-4 h-4" aria-hidden />
+            {t('wizard.preview')}
+          </a>
+        )}
 
         {error && <Alert variant="error">{error}</Alert>}
 
