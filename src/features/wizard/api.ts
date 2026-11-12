@@ -49,6 +49,8 @@ export type ProjectDocument = Tables['project_documents']['Row'];
 export type Draft = {
   project: DraftProject;
   text: DraftText | null;
+  /** Optional texts in the other site languages. */
+  otherTexts: DraftText[];
   budget: BudgetItem[];
   milestones: Milestone[];
   rewards: RewardTier[];
@@ -72,13 +74,18 @@ export async function getDraft(projectId: string, userId: string, { anyOwner = f
   fail(error);
   if (!project || (!anyOwner && project.owner_id !== userId)) return null;
 
-  const [text, budget, milestones, rewards, equity, documents, founder] = await Promise.all([
+  const [text, otherTexts, budget, milestones, rewards, equity, documents, founder] = await Promise.all([
     db()
       .from('project_translations')
       .select('*')
       .eq('project_id', projectId)
       .eq('language', project.original_language)
       .maybeSingle(),
+    db()
+      .from('project_translations')
+      .select('*')
+      .eq('project_id', projectId)
+      .neq('language', project.original_language),
     db().from('budget_items').select('category, description, amount').eq('project_id', projectId).order('position'),
     db()
       .from('milestones')
@@ -90,12 +97,13 @@ export async function getDraft(projectId: string, userId: string, { anyOwner = f
     db().from('project_documents').select('*').eq('project_id', projectId).order('created_at'),
     db().from('founder_profiles').select('*').eq('user_id', project.owner_id).maybeSingle(),
   ]);
-  for (const r of [text, budget, milestones, rewards, equity, documents, founder]) fail(r.error);
+  for (const r of [text, otherTexts, budget, milestones, rewards, equity, documents, founder]) fail(r.error);
 
   const equityRow = equity.data;
   return {
     project,
     text: text.data,
+    otherTexts: otherTexts.data ?? [],
     budget: budget.data ?? [],
     milestones: milestones.data ?? [],
     rewards: (rewards.data ?? []).map(({ reward_components, ...r }) => ({
@@ -211,6 +219,30 @@ export async function saveText(draft: Draft, fields: TextFields, language: Langu
           story: fields.story ?? draft.text?.story ?? '',
           risks: fields.risks ?? draft.text?.risks ?? '',
         });
+  fail(error);
+}
+
+export type OtherText = Pick<DraftText, 'title' | 'tagline' | 'summary' | 'story' | 'risks'>;
+
+/**
+ * An optional text in another language. All fields empty removes it; otherwise it needs a
+ * title (5–140 characters, a database rule) and every other field may stay empty, in which
+ * case visitors see the original language for that field.
+ */
+export async function saveOtherText(draft: Draft, language: Language, fields: OtherText) {
+  const clean = Object.fromEntries(Object.entries(fields).map(([k, v]) => [k, v.trim()])) as OtherText;
+  if (Object.values(clean).every(v => !v)) {
+    const { error } = await db()
+      .from('project_translations')
+      .delete()
+      .eq('project_id', draft.project.id)
+      .eq('language', language);
+    fail(error);
+    return;
+  }
+  const { error } = await db()
+    .from('project_translations')
+    .upsert({ project_id: draft.project.id, language, ...clean }, { onConflict: 'project_id,language' });
   fail(error);
 }
 

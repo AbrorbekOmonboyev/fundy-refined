@@ -135,7 +135,7 @@
     "spentInvalid": "Enter the amount spent in so'm, 0 or more.",
     "amountAboveRemaining": "Only {{left}} is left until the goal. Please pledge that much or less.",
     "organizerNotOpen": "For now only registered funds and people can start fundraisers. Sole traders and companies come with rewards and Musharakah.",
-    "individualCap": "A person's first fundraiser can raise up to 50 million so'm. After a finished campaign with reports, you can set a larger goal."
+    "individualCap": "A person's first fundraiser can raise up to 100 million so'm. After a finished campaign with reports, you can set a larger goal."
   },
   "auth": {
     "fields": {
@@ -886,7 +886,11 @@
       "coverTip3": "Landscape, at least 1600 pixels wide",
       "coverSmall": "This photo is small ({{w}}×{{h}} pixels). One at least 1600 pixels wide will look sharper.",
       "coverPortrait": "This photo is upright. Its top and bottom will be cut off on the project page and card.",
-      "coverCardPreview": "How it looks in the project list"
+      "coverCardPreview": "How it looks in the project list",
+      "otherTitle": "Other languages",
+      "optional": "optional",
+      "otherHint": "Write your project in Uzbek, Russian or English too. Visitors who switch the site language see it in theirs. Anything you leave empty is shown in your main language.",
+      "otherTitleError": "The {{language}} text needs a project name (5–140 characters), or leave all its fields empty."
     },
     "budget": {
       "title": "Budget",

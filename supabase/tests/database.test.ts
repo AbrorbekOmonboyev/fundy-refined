@@ -2118,9 +2118,9 @@ describe('donation focus', () => {
       const trader = await createDraft(alice, 'focus-yatt', { organizer: 'yatt' });
       await rejects(as(db, user(alice), `select public.submit_project($1)`, [trader]), /organizer_not_open/);
 
-      const big = await createDraft(kamola, 'focus-person-big', { target: 60_000_000 });
+      const big = await createDraft(kamola, 'focus-person-big', { target: 120_000_000 });
       await rejects(as(db, user(kamola), `select public.submit_project($1)`, [big]), /individual_cap_exceeded/);
-      const small = await createDraft(kamola, 'focus-person-small', { target: 50_000_000 });
+      const small = await createDraft(kamola, 'focus-person-small', { target: 100_000_000 });
       await as(db, user(kamola), `select public.submit_project($1)`, [small]);
 
       // A fund has no cap; a person with a completed campaign neither.

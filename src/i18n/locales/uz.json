@@ -135,7 +135,7 @@
     "spentInvalid": "Sarflangan summani soʻmda kiriting, 0 yoki undan koʻp.",
     "amountAboveRemaining": "Maqsadgacha faqat {{left}} qoldi. Shuncha yoki kamroq summa kiriting.",
     "organizerNotOpen": "Hozircha faqat roʻyxatdagi fondlar va shaxslar yigʻim boshlay oladi. YaTT va kompaniyalar mukofot va mushoraka bilan qoʻshiladi.",
-    "individualCap": "Shaxsning birinchi yigʻimi 50 mln soʻmgacha boʻlishi mumkin. Hisobotlari bilan yakunlangan yigʻimdan keyin kattaroq maqsad qoʻyishingiz mumkin."
+    "individualCap": "Shaxsning birinchi yigʻimi 100 mln soʻmgacha boʻlishi mumkin. Hisobotlari bilan yakunlangan yigʻimdan keyin kattaroq maqsad qoʻyishingiz mumkin."
   },
   "auth": {
     "fields": {
@@ -886,7 +886,11 @@
       "coverTip3": "Gorizontal, kamida 1600 piksel kenglikda",
       "coverSmall": "Rasm kichik ({{w}}×{{h}} piksel). Kamida 1600 piksel kenglikdagi rasm tiniqroq koʻrinadi.",
       "coverPortrait": "Rasm tik turibdi. Loyiha sahifasi va kartochkada uning yuqori va pastki qismi kesiladi.",
-      "coverCardPreview": "Loyihalar roʻyxatida shunday koʻrinadi"
+      "coverCardPreview": "Loyihalar roʻyxatida shunday koʻrinadi",
+      "otherTitle": "Boshqa tillar",
+      "optional": "ixtiyoriy",
+      "otherHint": "Loyihangizni oʻzbek, rus yoki ingliz tilida ham yozing. Sayt tilini almashtirgan kishi uni oʻz tilida koʻradi. Boʻsh qoldirgan qismlaringiz asosiy tilingizda koʻrinadi.",
+      "otherTitleError": "{{language}} matni uchun loyiha nomi kerak (5–140 belgi) yoki uning barcha maydonlarini boʻsh qoldiring."
     },
     "budget": {
       "title": "Byudjet",

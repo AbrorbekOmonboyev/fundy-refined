@@ -24,9 +24,20 @@ function client() {
 }
 
 /** The translation in `lang`, else the original language, else any. */
+/**
+ * The project text in the visitor's language. Translations are optional and may be partial
+ * (say, only a title and summary): any field left empty falls back to the original language.
+ */
 export function pickText<T extends { language: Language }>(rows: T[], lang: string, original: Language) {
-  const chosen = rows.find(r => r.language === lang) ?? rows.find(r => r.language === original) ?? rows[0];
-  return { text: chosen, isFallback: !!chosen && chosen.language !== lang };
+  const own = rows.find(r => r.language === lang);
+  const base = rows.find(r => r.language === original) ?? rows[0];
+  if (!own) return { text: base, isFallback: !!base && base.language !== lang };
+  if (!base || base === own) return { text: own, isFallback: false };
+  const merged: T = { ...base };
+  for (const [key, value] of Object.entries(own)) {
+    if (typeof value !== 'string' || value.trim()) (merged as Record<string, unknown>)[key] = value;
+  }
+  return { text: merged, isFallback: false };
 }
 
 export function daysLeft(endsAt: string | null): number {

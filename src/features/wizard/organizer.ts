@@ -25,7 +25,7 @@ export const ORGANIZERS_IN_ORDER: readonly OrganizerType[] = [
   ...ORGANIZERS.filter(o => !OPEN_ORGANIZERS.includes(o)),
 ];
 /** A person's first donation campaign is capped (private.settings 'individual_first_cap'). */
-export const INDIVIDUAL_FIRST_CAP = 50_000_000;
+export const INDIVIDUAL_FIRST_CAP = 100_000_000;
 
 const ALLOWED: Record<OrganizerType, readonly FundingModel[]> = {
   individual: ['donation', 'reward', 'equity'],
