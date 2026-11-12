@@ -29,12 +29,12 @@
     "short": "Toʻlovlar hozircha simulyatsiya."
   },
   "footer": {
-    "about": "Oʻzbekistondagi ezgu loyihalar uchun kraudfanding. Tekshirilgan fondlar va jamoalar xayriya yigʻadi, har bir bosqich boʻyicha hisobot beriladi.",
+    "about": "Oʻzbekistondagi ezgu ishlar uchun kraudfanding. Tekshirilgan fondlar va jamoalar xayriya yigʻadi, har bir bosqich boʻyicha hisobot beriladi.",
     "simulated": "Demo versiya · Oʻzbekiston uchun yaratilgan",
     "models": "Modellar",
     "platform": "Platforma",
     "donation": "Xayriya",
-    "reward": "Mukofotli",
+    "reward": "Mukofotlar",
     "musharakah": "Mushoraka (ulush)",
     "calculator": "Foyda taqsimoti kalkulyatori",
     "discover": "Loyihalarni koʻrish",
@@ -102,7 +102,7 @@
     "amountAboveMaximum": "Bu summa bir martalik hissa chegarasidan oshadi.",
     "amountBelowRewardPrice": "Summa tanlangan mukofot narxidan kam.",
     "rewardSoldOut": "Bu mukofot tugagan.",
-    "projectClosed": "Bu loyiha endi yordam qabul qilmaydi.",
+    "projectClosed": "Bu yigʻim endi xayriya qabul qilmaydi.",
     "ownProject": "Oʻz loyihangizni qoʻllab-quvvatlay olmaysiz.",
     "cannotReviewOwn": "Bu sizning loyihangiz. Uni boshqa admin baholashi va qaror qabul qilishi kerak.",
     "cannotVerifySelf": "Oʻz asoschi profilingizni tasdiqlay olmaysiz. Buni boshqa admin qilishi kerak.",
@@ -129,7 +129,7 @@
     "contributionNotFound": "Bu vaʼda topilmadi.",
     "donationOnly": "Hozircha Fundy faqat xayriya yigʻimlarini qabul qiladi. 1-qadamda moliyalashtirish turini xayriyaga oʻzgartiring.",
     "notAFund": "Faqat nodavlat notijorat tashkiloti (NNT) loyihasini tasdiqlangan fond deb belgilash mumkin.",
-    "tipInvalid": "Bu hissa miqdorini qoʻllab boʻlmaydi. Boshqa summani kiriting yoki nol qoldiring.",
+    "tipInvalid": "Bu qoʻshimcha hissa summasini qabul qilib boʻlmaydi. Boshqa summa kiriting yoki nol qoldiring.",
     "receiptUpload": "Chek rasmini biriktirib boʻlmadi. Uni qayta yuklang.",
     "tooManyReceipts": "Har bir bosqichga 10 tagacha chek rasmi biriktirish mumkin.",
     "spentInvalid": "Sarflangan summani soʻmda kiriting, 0 yoki undan koʻp.",
@@ -161,7 +161,7 @@
       "title": "Hisob yaratish",
       "haveAccount": "Hisobingiz bormi?",
       "loginLink": "Kirish",
-      "terms": "Men quyidagilarga roziman:",
+      "terms": "Roziman:",
       "termsLink": "shartlar va risklar haqida maʼlumot",
       "submit": "Hisob yaratish",
       "checkEmailTitle": "Pochtangizni tekshiring",
@@ -240,7 +240,7 @@
     "review": {
       "queueHint": "Qaror kutayotgan loyihalar, eng eskisi birinchi.",
       "empty": "Hozircha koʻrib chiqadigan narsa yoʻq.",
-      "submittedOn": "{{date}} da yuborilgan",
+      "submittedOn": "Yuborilgan sana: {{date}}",
       "overview": "Umumiy",
       "nothing": "Hech narsa kiritilmagan.",
       "incomplete": "Baʼzi qadamlar toʻliq emas. Tasdiqlash oʻrniga oʻzgartirish soʻrang.",
@@ -312,7 +312,7 @@
       "removeAdmin": "Adminlikdan olish",
       "confirmBlock": "{{name}} bloklansinmi? U izoh yoza, hissa qoʻsha yoki loyiha yarata olmaydi.",
       "confirmUnblock": "{{name}} blokdan chiqarilsinmi?",
-      "confirmMakeAdmin": "{{name}} ga toʻliq admin huquqlari berilsinmi?",
+      "confirmMakeAdmin": "{{name}}ga toʻliq admin huquqlari berilsinmi?",
       "confirmRemoveAdmin": "{{name}} admin huquqlaridan mahrum qilinsinmi?"
     },
     "audit": {
@@ -424,30 +424,30 @@
     "changes_requested": "Oʻzgartirish soʻraldi",
     "rejected": "Rad etilgan",
     "active": "Faol",
-    "funded": "Moliyalashtirildi",
+    "funded": "Maqsadga yetdi",
     "unsuccessful": "Maqsadga yetmadi",
     "completed": "Yakunlangan"
   },
   "models": {
     "donation": {
       "name": "Xayriya",
-      "subtitle": "Ijtimoiy foyda uchun",
+      "subtitle": "Jamiyat uchun ezgu ishlar",
       "text": "Homiylar hech narsa kutmasdan yordam beradi. Maktab laboratoriyalari, koʻkalamzorlashtirish, sogʻliqni saqlash va jamoat tashabbuslari uchun.",
       "point1": "Har bir soʻm eʼlon qilingan byudjetga sarflanadi",
       "point2": "Tekshirilgan tashkilotlar va jamoalar",
-      "cta": "Xayriya loyihalarini koʻrish"
+      "cta": "Xayriya yigʻimlarini koʻrish"
     },
     "reward": {
-      "name": "Mukofotli",
-      "subtitle": "Oldindan buyurtma va hunarmand sovgʻalari",
+      "name": "Mukofot",
+      "subtitle": "Ishlab chiqaruvchilardan oldindan buyurtma",
       "text": "Homiylar qoʻl mehnati mahsulotlari, hunarmandchilik buyumlari va yangi mahalliy mahsulotlarni bozorga chiqishidan oldin buyurtma qiladi.",
       "point1": "Aniq ishlab chiqarish va yetkazish muddati",
       "point2": "Mukofotlar butun Oʻzbekiston boʻylab yetkaziladi",
-      "cta": "Mukofotli loyihalarni koʻrish"
+      "cta": "Mukofotli yigʻimlarni koʻrish"
     },
     "equity": {
       "name": "Mushoraka",
-      "subtitle": "Islomiy foyda taqsimoti hamkorligi",
+      "subtitle": "Foydani taqsimlashga asoslangan islomiy sheriklik",
       "text": "Homiylar issiqxona, quyosh sovutgichi yoki elektr transport kabi haqiqiy bizneslarga sherik boʻladi. Foyda ham, zarar ham ulushga qarab boʻlinadi.",
       "point1": "Tekshirilgan natijalardan muntazam foyda taqsimoti",
       "point2": "Aktivlar bilan taʼminlangan, shariatga mos shartlar",
@@ -456,8 +456,8 @@
   },
   "home": {
     "hero": {
-      "title": "Koʻrinib turadigan yordam",
-      "text": "Oʻzbekistondagi tekshirilgan ezgu ishlarga xayriya qiling. Har bir bosqich cheklar bilan hisobot qilinadi.",
+      "title": "Har bir soʻmingiz koʻz oldingizda",
+      "text": "Oʻzbekistondagi tekshirilgan ezgu ishlarga xayriya qiling. Har bir bosqich boʻyicha cheklar bilan hisobot beriladi.",
       "explore": "Loyihalarni koʻrish",
       "start": "Yigʻim boshlash",
       "cardKicker": "Hozir mablagʻ yigʻmoqda",
@@ -484,7 +484,7 @@
       "viewAll": "Barcha loyihalar"
     },
     "how": {
-      "title": "Pul qanday yoʻl bosadi",
+      "title": "Pul qanday yoʻldan oʻtadi",
       "step1Title": "Asoschi ariza beradi",
       "step1Text": "Shaxsingiz (OneID), soʻmdagi byudjet va bosqichlar. Kompaniya va YaTT roʻyxat raqamini qoʻshadi.",
       "step2Title": "Biz tekshiramiz va baholaymiz",
@@ -505,7 +505,7 @@
       "start": "Talablarni koʻrish"
     },
     "projects": {
-      "title": "Qoʻllab-quvvatlash uchun yigʻimlar",
+      "title": "Yordamingizni kutayotgan yigʻimlar",
       "empty": "Birinchi loyihalar tez orada shu yerda boʻladi.",
       "emptyCta": "Birinchilardan boʻling",
       "soonTitle": "Birinchi loyihalar tekshiruvdan oʻtmoqda",
@@ -514,26 +514,26 @@
       "errorTitle": "Loyihalarni yuklab boʻlmadi",
       "errorText": "Internet aloqasini tekshirib, qayta urinib koʻring.",
       "retry": "Qayta urinish",
-      "sub": "Har biri tekshirilgan. Aynan sizning xayriyangiz uni yakunlashi mumkin."
+      "sub": "Har biri tekshirilgan. Ehtimol, aynan sizning xayriyangiz yigʻimni yakunlaydi."
     },
     "simple": {
       "title": "Xayriyangiz qanday himoyalanadi",
-      "s1Title": "Joylang",
-      "s1Text": "Fond yoki jamoa loyihani joylaydi, biz uni tekshiramiz.",
-      "s2Title": "Ulashing",
-      "s2Text": "Odamlar oʻzlariga yaqin loyihalarga xayriya qiladi.",
-      "s3Title": "Bosqichma-bosqich",
-      "s3Text": "Pul bosqichma-bosqich, sarflangan xarajatlar hisoboti bilan beriladi.",
+      "s1Title": "Tekshiruv",
+      "s1Text": "Fond yoki jamoa yigʻim ochadi, biz uni tekshiramiz.",
+      "s2Title": "Xayriya",
+      "s2Text": "Odamlar oʻzlariga yaqin ezgu ishlarga xayriya qiladi.",
+      "s3Title": "Hisobot",
+      "s3Text": "Pul bosqichma-bosqich beriladi, har bosqichda xarajatlar hisoboti eʼlon qilinadi.",
       "more": "Qanday ishlashi haqida batafsil"
     },
     "final": {
-      "title": "Ezgu ish uchun mablagʻ yigʻyapsizmi?",
+      "title": "Ezgu ish uchun mablagʻ yigʻmoqchimisiz?",
       "start": "Yigʻim boshlash",
       "text": "Savollaringiz boʻlsa, bizga yozing — javob beramiz.",
       "contact": "Bizga yozing"
     },
     "causes": {
-      "title": "Oʻzingizga yaqin ezgu ishni toping"
+      "title": "Oʻzingizga yaqin ezgu ishni tanlang"
     },
     "safe": {
       "title": "Pul qayerda",
@@ -541,13 +541,13 @@
       "collected": "Pul yigʻildi",
       "collectedNote": "Birinchi bosqich boshlanguncha saqlanadi",
       "stage1": "1-bosqich bajarildi · cheklar bilan hisobot",
-      "stage1Note": "Fundy tekshirgan, loyiha sahifasida hammaga ochiq",
+      "stage1Note": "Fundy tekshirgan, yigʻim sahifasida hammaga ochiq",
       "stage2": "2-bosqich · kutilmoqda",
-      "stage2Note": "Faqat 1-bosqich hisoboti bilan beriladi"
+      "stage2Note": "Faqat 1-bosqich hisobotidan keyin beriladi"
     }
   },
   "explore": {
-    "title": "Qoʻllab-quvvatlash uchun ezgu ish toping",
+    "title": "Kimga yordam berishni tanlang",
     "subtitle": "Oʻzbekiston boʻylab tekshirilgan yigʻimlar. Pul bosqichma-bosqich, cheklar bilan beriladi.",
     "search": "Loyihalarni qidirish",
     "searchPlaceholder": "Ezgu ish yoki joy boʻyicha qidiring (masalan, Fargʻona)…",
@@ -560,11 +560,11 @@
     "status": {
       "all": "Barcha loyihalar",
       "live": "Hozir faol",
-      "funded": "Moliyalashtirilgan"
+      "funded": "Maqsadga yetganlar"
     },
     "sortLabel": "Saralash",
     "sort": {
-      "most_funded": "Eng koʻp toʻplangan (%)",
+      "most_funded": "Maqsadga eng yaqin (%)",
       "newest": "Eng yangi",
       "ending_soon": "Tez tugaydigan",
       "most_backers": "Eng koʻp homiy",
@@ -580,8 +580,8 @@
     "pagination": "Sahifalar",
     "previous": "Oldingi sahifa",
     "next": "Keyingi sahifa",
-    "pageOf": "{{page}}-sahifa, jami {{pages}}",
-    "filters": "Filtr",
+    "pageOf": "{{page}} / {{pages}} sahifa",
+    "filters": "Filtrlar",
     "closeFilters": "Yopish",
     "showResults": "Koʻrsatish ({{formatted}})"
   },
@@ -595,7 +595,7 @@
     "verifiedFounder": "Tasdiqlangan asoschi",
     "score": "Ball",
     "funded": "{{percent}}% toʻplandi",
-    "ofGoal": "{{goal}} dan",
+    "ofGoal": "/ {{goal}}",
     "backers_one": "{{formatted}} homiy",
     "backers_other": "{{formatted}} homiy",
     "breadcrumb": "Yoʻl",
@@ -604,7 +604,7 @@
     "experience": "Tajriba",
     "years_one": "{{count}} yil",
     "years_other": "{{count}} yil",
-    "raisedOf": "{{goal}} maqsaddan toʻplandi",
+    "raisedOf": "maqsad: {{goal}}",
     "backersLabel": "Homiylar",
     "timeLeft": "Qolgan vaqt",
     "statusLabel": "Holat",
@@ -614,14 +614,14 @@
     },
     "schedule": {
       "quarterly": "har chorakda",
-      "biannually": "yarim yilda bir",
-      "annually": "yilda bir"
+      "biannually": "yarim yilda bir marta",
+      "annually": "yilda bir marta"
     },
     "equitySummary": "Tekshirilgan sof foydaning {{percent}}% {{years}} yil davomida {{schedule}} homiylarga taqsimlanadi.",
     "minInvestment": "Minimal: {{amount}}",
     "projectedReturn": "Prognoz: {{value}}",
     "youOwnThis": "Bu sizning loyihangiz.",
-    "notAccepting": "Bu loyiha hozir yordam qabul qilmayapti.",
+    "notAccepting": "Bu yigʻim hozir xayriya qabul qilmayapti.",
     "copyLink": "Havolani nusxalash",
     "copied": "Havola nusxalandi!",
     "shareTelegram": "Telegramda ulashish",
@@ -650,7 +650,7 @@
     "soldOut": "Tugagan",
     "selectReward": "Bu mukofotni tanlash",
     "budgetTitle": "Mablagʻ qayerga sarflanadi",
-    "budgetText": "{{goal}} maqsadning har bir soʻmi oldindan rejalashtirilgan va eʼlon qilingan.",
+    "budgetText": "{{goal}} maqsadning har bir soʻmi oldindan rejalashtirilgan va ochiq eʼlon qilingan.",
     "budgetItem": "Band",
     "budgetDescription": "Tavsif",
     "budgetAmount": "Summa",
@@ -662,10 +662,10 @@
       "submitted": "Koʻrib chiqilmoqda",
       "approved": "Bajarildi"
     },
-    "release": "mablagʻning {{percent}}%",
+    "release": "mablagʻning {{percent}}% qismi",
     "evaluationNote": "Ballarni Fundy koʻrib chiqish jamoasi biznes reja, hujjatlar va asoschini tekshirgach beradi. Ushbu demoda ular namunaviy maʼlumotlar.",
     "evaluationTitle": "Loyihani baholash",
-    "evaluatedOn": "{{date}} da baholangan",
+    "evaluatedOn": "Baholangan sana: {{date}}",
     "pillars": {
       "businessPlan": "Biznes reja",
       "team": "Jamoa",
@@ -701,10 +701,10 @@
       "released": "Asoschiga berildi",
       "review": "Dalil tekshirilmoqda",
       "held": "Bosqichni kutmoqda",
-      "raisingNote": "Mablagʻ yigʻilmoqda. Maqsadga yetguncha pul hech kimga berilmaydi. Yetmasa, pul homiylarga qaytariladi. Yetsa, har bir bosqich bajarilgach oʻz ulushi beriladi."
+      "raisingNote": "Mablagʻ yigʻilmoqda. Maqsadga yetguncha pul hech kimga berilmaydi. Yetmasa, pul homiylarga qaytariladi. Yetsa, har bir bosqich bajarilgach uning ulushi beriladi."
     },
     "checks": {
-      "title": "Fundy nimani tekshirdi",
+      "title": "Fundy nimalarni tekshirdi",
       "identity": "Asoschining shaxsi tasdiqlangan",
       "registration": "Roʻyxatdan oʻtgan: {{number}}",
       "budget_one": "Byudjet {{count}} ta bandga boʻlib eʼlon qilingan",
@@ -755,10 +755,10 @@
     "anonymous": "Ismimni ochiq koʻrsatmang",
     "equityShare": "Taxminiy ulushingiz: foydaning {{share}}% (barcha homiylarga ajratilgan {{pool}}% dan).",
     "equityRisk": "Mushoraka hamkorlik ekanini tushunaman: foyda va zararni baham koʻraman, daromad kafolatlanmagan.",
-    "submit": "{{amount}} ni tasdiqlash",
+    "submit": "Tasdiqlash: {{amount}}",
     "demoNote": "Demo: haqiqiy pul yechilmaydi.",
     "successTitle": "Rahmat!",
-    "successText": "“{{project}}” uchun {{amount}} qayd etildi.",
+    "successText": "«{{project}}» uchun {{amount}} xayriyangiz qabul qilindi.",
     "successReward": "Mukofot: {{reward}}",
     "completesGoal": "Bu summa loyihani maqsadga yetkazadi! 🎉",
     "bringsCloser": "Bu summa loyihani maqsadga yana {{percent}}% yaqinlashtiradi.",
@@ -768,12 +768,12 @@
     "backerTitle": "Siz homiysiz!",
     "backerFollow": "Loyiha qanday borayotganini sizga xabar qilib turamiz.",
     "shareFriends": "Doʻstlarga ulashish",
-    "backHome": "Bosh sahifaga",
+    "backHome": "Bosh sahifaga qaytish",
     "submitPledge": "{{amount}} vaʼda qilish",
     "pledgeSuccess": "«{{project}}» uchun {{amount}} vaʼdangiz qayd etildi. Hech narsa olinmadi. Kartangizdan pul {{date}} kuni yechiladi, faqat asoschi shu kungacha kompaniya ochsa.",
     "tip": {
       "title": "Fundyʼga ixtiyoriy hissa",
-      "hint": "Fundy komissiya olmaydi. Loyiha xayriyangizning hammasini oladi; hissangiz platformani yuritishga ketadi.",
+      "hint": "Fundy komissiya olmaydi. Yigʻimga xayriyangizning hammasi yetib boradi; qoʻshimcha hissangiz platformani yuritishga sarflanadi.",
       "none": "Kerak emas",
       "summary": "Fundyʼga hissa: {{tip}}. Jami toʻlov: {{total}}."
     },
@@ -800,9 +800,9 @@
       "emptySaved": "Saqlangan loyihalar yoʻq. Saqlash uchun loyihadagi xatchoʻp belgisini bosing.",
       "money": {
         "title": "Pulingiz",
-        "waiting": "Maqsad kutilmoqda",
+        "waiting": "Maqsadga yetishi kutilmoqda",
         "refunded": "Qaytarildi",
-        "refunding": "Qaytariladi",
+        "refunding": "Qaytarilmoqda",
         "released": "Asoschiga {{percent}}% berildi",
         "nextPayout": "Keyingi foyda taqsimoti: {{date}}"
       }
@@ -830,7 +830,7 @@
   },
   "wizard": {
     "steps": "Bosqichlar",
-    "stepOf": "{{total}} dan {{step}}-qadam",
+    "stepOf": "{{step}}-qadam, jami {{total}} ta",
     "back": "Orqaga",
     "saveContinue": "Saqlash va davom etish",
     "remove": "Oʻchirish",
@@ -904,9 +904,9 @@
       "name": "Bosqich",
       "when": "Qachon",
       "whenPlaceholder": "masalan, 2-oy",
-      "release": "Foiz %",
+      "release": "Ulush %",
       "add": "Bosqich qoʻshish",
-      "total": "Jami: 100% dan {{total}}%",
+      "total": "Jami: {{total}}% (100% boʻlishi kerak)",
       "rowError": "Har bir bosqichda nom va 1 dan 100 gacha foiz boʻlishi kerak."
     },
     "terms": {
@@ -1023,7 +1023,7 @@
       "registration_number_missing": "6-qadamda roʻyxat raqamini kiriting.",
       "registration_document_missing": "6-qadamda roʻyxatdan oʻtganlik guvohnomasini yuklang."
     },
-    "preview": "Homiy koʻzi bilan koʻrish",
+    "preview": "Xayriyachi sifatida koʻrish",
     "example": {
       "title": "Yaxshi namuna",
       "show": "ochish",
@@ -1082,8 +1082,8 @@
     "project_unsuccessful": "{{project}} maqsadga yetmay tugadi",
     "new_contribution": "{{project}} uchun yangi hissa: {{amount}}",
     "contribution_confirmed": "{{project}} uchun {{amount}} qayd etildi",
-    "new_comment": "{{project}} da yangi savol",
-    "comment_reply": "Asoschi {{project}} dagi izohingizga javob berdi",
+    "new_comment": "«{{project}}» yigʻimida yangi savol",
+    "comment_reply": "Asoschi «{{project}}» yigʻimidagi izohingizga javob berdi",
     "new_update": "{{project}} yangilik eʼlon qildi",
     "milestone_approved": "{{project}} bosqichlaridan biri bajarildi",
     "contact_message": "Aloqa sahifasidan yangi xabar",
@@ -1197,23 +1197,23 @@
     "time2Text": "odatda 3–5 ish kuni",
     "time3Title": "Xayriya yigʻish",
     "time3Text": "7 dan 90 kungacha, oʻzingiz tanlaysiz",
-    "time4Title": "Bosqichlar boʻyicha pul",
+    "time4Title": "Pul bosqichma-bosqich",
     "time4Text": "har bir bosqich dalili tekshirilgach",
     "feesTitle": "Bu qancha turadi",
-    "fees": "Fundy xayriyalardan komissiya olmaydi: yigʻimingiz har bir xayriya qilingan soʻmni oladi. Xayriyachilar xohlasa Fundyʼga ixtiyoriy hissa qoʻshishi mumkin — u platformani yuritishga ketadi. Demo davrida barcha toʻlovlar simulyatsiya qilinadi.",
+    "fees": "Fundy xayriyalardan komissiya olmaydi: yigʻimingizga xayriya qilingan har bir soʻm yetib boradi. Xayriyachilar xohlasa Fundyʼga ixtiyoriy hissa qoʻshishi mumkin — bu platformani yuritishga sarflanadi. Demo davrida barcha toʻlovlar simulyatsiya qilinadi.",
     "cta": "Yigʻimni boshlash",
     "ctaHint": "Avval kirasiz yoki roʻyxatdan oʻtasiz. Bu bir daqiqa oladi.",
     "whoTitle": "Pulni kim yigʻyapti?",
-    "whoHint": "Javobingizga qarab qaysi hujjatlar kerakligi belgilanadi.",
+    "whoHint": "Javobingizga qarab qaysi hujjatlar kerakligi aniqlanadi.",
     "applyTitle": "Ariza uchun",
     "payoutTitle": "Pul berilishidan oldin",
-    "modelsTitle": "Mumkin boʻlgan turlar",
+    "modelsTitle": "Yigʻim turlari",
     "needId": "OneID (id.egov.uz) orqali shaxsingizni tasdiqlash. Pasport yuklanmaydi; OneID ulanguncha qisqa videoqoʻngʻiroq",
     "needBudget": "Soʻmdagi byudjet, har bir xarajat alohida qatorda",
     "needStages": "Bosqichlar (odatda 3–6 ta): nima, qachon qilinadi va pulning qancha ulushi beriladi",
     "needStory": "Muqova rasmi va loyiha hikoyasi (kamida 200 belgi)",
     "continueDraft": "Qoralamani davom ettirish: {{title}}",
-    "donationOnly": "Hozir xayriya ochiq. Mukofot va mushoraka yoʻlda.",
+    "donationOnly": "Hozir xayriya yigʻimlari ochiq. Mukofot va mushoraka tez orada qoʻshiladi.",
     "perk1": "Xayriyalardan komissiya yoʻq",
     "perk2": "Roʻyxatdagi fondlar uchun «Tasdiqlangan fond» belgisi",
     "perk3": "Har bir xayriyachiga kvitansiya",
@@ -1289,7 +1289,7 @@
     "addonHint": "Asosiy mukofot bilan birga olinadi."
   },
   "cart": {
-    "title": "Homiyligim",
+    "title": "Tanlovim",
     "empty": "Savat boʻsh. Mukofot tanlang yoki pastda qoʻshimcha summa bilan qoʻllab-quvvatlang.",
     "gone": "Bu mahsulot endi mavjud emas",
     "less": "Kamaytirish",
@@ -1323,7 +1323,7 @@
     "label": "Ilova menyusi",
     "home": "Bosh sahifa",
     "explore": "Loyihalar",
-    "start": "Joylash",
+    "start": "Yigʻim ochish",
     "account": "Profil",
     "theme": "Tungi rejim",
     "back": "Orqaga",
@@ -1363,7 +1363,7 @@
     "cancel": "Bekor qilish",
     "close": "Yopish",
     "thanks": "Rahmat! Fikringiz jamoaga yetib bordi.",
-    "thanksHint": "Shu kabi xabarlar Fundy’ni yaxshiroq qiladi.",
+    "thanksHint": "Shunday xabarlar Fundyʼni yaxshiroq qiladi.",
     "another": "Yana yozish",
     "tooShort": "Kamida 3 ta belgi yozing."
   },
@@ -1442,7 +1442,7 @@
       "paying": "Kartalardan pul yechildi. Toʻlovi oʻtmagan sarmoyadorlar {{date}} gacha toʻlashi mumkin; shundan keyin ularning vaʼdasi chiqarib tashlanadi.",
       "confirmed": "Kompaniya tasdiqlandi. Sarmoyadorlar kartasidan pul {{date}} kuni yechiladi."
     },
-    "allowCharge": "Fundy’ga {{date}} kuni kartamdan pul yechishga ruxsat beraman, faqat asoschi shu kungacha kompaniya ochsa. Yechib boʻlmasa, qoʻlda toʻlash uchun 7 kunim boʻladi."
+    "allowCharge": "Fundyʼga {{date}} kuni kartamdan pul yechishga ruxsat beraman, faqat asoschi shu kungacha kompaniya ochsa. Yechib boʻlmasa, qoʻlda toʻlash uchun 7 kunim boʻladi."
   },
   "spending": {
     "title": "Xarajatlar hisoboti",
@@ -1483,7 +1483,7 @@
     "reward": "Homiylar ishlab chiqaruvchilardan mahsulotni oldindan buyurtma qiladi. Xayriyadan keyin qoʻshiladi.",
     "equity": "Real bizneslarga foizsiz sarmoya va foydani taqsimlash. Xayriyadan keyin qoʻshiladi.",
     "organizer": "Tez kunda, mukofot va mushoraka bilan birga.",
-    "homeTitle": "Fundyʼda keyingi qadamlar",
+    "homeTitle": "Fundyʼda tez orada",
     "homeText": "Biz xayriyadan boshlaymiz. Keyin Oʻzbekistonda ezgu ishlarni moliyalashning yana ikki usuli qoʻshiladi — xuddi shu tekshiruv va bosqichma-bosqich toʻlovlar bilan."
   }
 }

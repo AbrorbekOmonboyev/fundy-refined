@@ -38,7 +38,7 @@ export const privacy: Localized<Article> = {
         id: 'visible',
         heading: 'Boshqalar nimani koʻradi',
         paragraphs: [
-          'Ismingiz, shahringiz va rasmingiz izohlar va asoschi profilida koʻrinadi. Elektron pochtangiz va hujjatlaringiz hech qachon ochiq koʻrsatilmaydi. Hissa qoʻshayotganda "ismimni koʻrsatmang" ni tanlashingiz mumkin.',
+          'Ismingiz, shahringiz va rasmingiz izohlar va asoschi profilida koʻrinadi. Elektron pochtangiz va hujjatlaringiz hech qachon ochiq koʻrsatilmaydi. Hissa qoʻshayotganda «ismimni koʻrsatmang» ni tanlashingiz mumkin.',
         ],
       },
       {
@@ -61,8 +61,8 @@ export const privacy: Localized<Article> = {
         id: 'rights',
         heading: 'Sizning huquqlaringiz',
         bullets: [
-          'Maʼlumotlaringizni koʻrish va tuzatish — "Sozlamalar" sahifasida.',
-          'Hisobni oʻchirish — "Sozlamalar" sahifasida. Hissa yoki loyihasi bor hisoblar moliyaviy hisobot uchun saqlanadi; ularni yopish uchun biz bilan bogʻlaning.',
+          'Maʼlumotlaringizni koʻrish va tuzatish — «Sozlamalar» sahifasida.',
+          'Hisobni oʻchirish — «Sozlamalar» sahifasida. Hissa yoki loyihasi bor hisoblar moliyaviy hisobot uchun saqlanadi; ularni yopish uchun biz bilan bogʻlaning.',
           'Maʼlumotlaringiz nusxasini soʻrash yoki boshqa savollar — aloqa sahifasi orqali.',
         ],
       },

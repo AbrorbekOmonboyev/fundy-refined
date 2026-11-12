@@ -20,7 +20,7 @@ export const trust: Localized<Article> = {
       },
       {
         id: 'verified',
-        heading: '"Tasdiqlangan asoschi" belgisi',
+        heading: '«Tasdiqlangan asoschi» belgisi',
         paragraphs: [
           'Belgi asoschining shaxsi va roʻyxatdan oʻtganligi hujjatlar bilan tasdiqlanganini bildiradi. Bu loyiha muvaffaqiyatli boʻlishiga kafolat emas.',
           'Adminlar oʻz loyihalarini baholay olmaydi va oʻzlarini tasdiqlay olmaydi. Buni boshqa admin qilishi shart.',
@@ -48,7 +48,7 @@ export const trust: Localized<Article> = {
         id: 'report',
         heading: 'Muammo haqida xabar berish',
         paragraphs: [
-          'Agar loyiha yoki izoh shubhali koʻrinsa, aloqa sahifasi orqali "Muammo haqida xabar berish" mavzusini tanlab yozing. Adminlar har bir xabarni koʻrib chiqadi; nomaqbul izohlar yashiriladi, qoidabuzar foydalanuvchilar bloklanadi.',
+          'Agar loyiha yoki izoh shubhali koʻrinsa, aloqa sahifasi orqali «Muammo haqida xabar berish» mavzusini tanlab yozing. Adminlar har bir xabarni koʻrib chiqadi; nomaqbul izohlar yashiriladi, qoidabuzar foydalanuvchilar bloklanadi.',
           'Har bir admin harakati oʻzgartirib boʻlmaydigan jurnalga yoziladi.',
         ],
       },

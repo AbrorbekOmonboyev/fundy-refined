@@ -62,7 +62,7 @@ export const terms: Localized<Article> = {
         id: 'liability',
         heading: '6. Javobgarlik',
         paragraphs: [
-          'Fundy platformani "boricha" taqdim etadi. Qonun ruxsat bergan darajada Fundy loyihalarning muvaffaqiyatsizligi, kechikishi yoki asoschilar harakatlari uchun javobgar emas.',
+          'Fundy platformani «boricha» taqdim etadi. Qonun ruxsat bergan darajada Fundy loyihalarning muvaffaqiyatsizligi, kechikishi yoki asoschilar harakatlari uchun javobgar emas.',
         ],
       },
       {
