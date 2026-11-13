@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import {
@@ -21,7 +20,6 @@ import {
 } from 'lucide-react';
 import { paths } from '@/app/routes';
 import { ProjectCard, ProjectGridSkeleton } from '@/components/ProjectCard';
-import { PHOTO_CREDITS } from '@/data/photoCredits';
 import { useProjectList } from '@/features/projects/hooks';
 import { useCategories } from '@/features/reference/useReference';
 import { usePageMeta } from '@/lib/usePageMeta';
@@ -142,23 +140,13 @@ export function HomePage() {
   );
 }
 
-/** Free-licence photos from the sample campaigns, credited below the hero. */
-const PHOTOS = [
-  { src: '/images/projects/rashidov-classroom', alt: '' },
-  { src: '/images/projects/aral-saxaul', alt: '' },
-  { src: '/images/projects/registan', alt: '' },
-  { src: '/images/projects/zarafshan-fruit', alt: '' },
-  { src: '/images/projects/chust-knives', alt: '' },
-] as const;
-
 function Hero() {
   const { t } = useTranslation();
-  const [showCredits, setShowCredits] = useState(false);
 
   return (
     <section className="relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 lg:pt-16 lg:pb-4 grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] gap-10 lg:gap-14 items-center">
-        <div className="text-left">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 lg:pt-28 pb-6 lg:pb-16">
+        <div className="max-w-3xl text-left">
           <h1 className="text-[2.5rem] sm:text-5xl lg:text-[3.75rem] leading-[1.04] font-extrabold tracking-[-0.03em] text-ink text-balance">
             {t('home.hero.title')}
           </h1>
@@ -204,51 +192,6 @@ function Hero() {
             ))}
           </ul>
         </div>
-
-        {/* Real faces and places: one large photo and four small, like the big giving sites */}
-        <div aria-hidden className="hidden lg:grid grid-cols-3 grid-rows-[repeat(2,minmax(0,1fr))] gap-3 h-[520px]">
-          {PHOTOS.map((p, i) => (
-            <img
-              key={p.src}
-              src={`${p.src}-${i === 0 ? '1280' : '640'}.webp`}
-              alt=""
-              loading={i === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-              className={`w-full h-full object-cover rounded-2xl ${i === 0 ? 'col-span-2 row-span-2' : ''}`}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* CC BY / CC BY-SA need the authors named */}
-      <div className="hidden lg:block max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2 text-sm text-slate-600 text-right">
-        <button
-          type="button"
-          onClick={() => setShowCredits(v => !v)}
-          aria-expanded={showCredits}
-          className="min-h-11 underline underline-offset-2 hover:text-ink cursor-pointer"
-        >
-          {t('home.hero.photos')}
-        </button>
-        {showCredits && (
-          <ul className="mt-1 space-y-1">
-            {PHOTOS.map(p => {
-              const c = PHOTO_CREDITS[`${p.src}.jpg`];
-              return c ? (
-                <li key={p.src}>
-                  <a
-                    href={c.source}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ink underline-offset-2 hover:underline"
-                  >
-                    {c.author} · {c.license}
-                  </a>
-                </li>
-              ) : null;
-            })}
-          </ul>
-        )}
       </div>
     </section>
   );
