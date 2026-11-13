@@ -6,10 +6,10 @@
     "uzCyrl": "Uzbek (Cyrillic)"
   },
   "nav": {
-    "explore": "Explore Projects",
-    "howItWorks": "How It Works",
-    "learn": "How giving works",
-    "trustSafety": "Trust & Safety",
+    "explore": "Explore",
+    "howItWorks": "How it works",
+    "learn": "Giving guide",
+    "trustSafety": "Trust & safety",
     "startProject": "Start a fundraiser"
   },
   "header": {
@@ -24,12 +24,12 @@
     "lightMode": "Light mode"
   },
   "banner": {
-    "label": "Demonstration Prototype:",
-    "full": "Designed for the Uzbekistan market. All payments and projects are simulations.",
-    "short": "Payments are simulated."
+    "label": "DEMO VERSION",
+    "full": "Explore how Fundy works. Projects and payments are simulated. No real money is involved.",
+    "short": "Demo only. No real payments."
   },
   "footer": {
-    "about": "Crowdfunding for good causes in Uzbekistan. Checked funds and teams raise donations, and every stage is reported.",
+    "about": "A platform for supporting projects across Uzbekistan. Follow each project's progress and see how funds are used.",
     "simulated": "Demo version · Built for Uzbekistan",
     "models": "Models",
     "platform": "Platform",
@@ -456,8 +456,8 @@
   },
   "home": {
     "hero": {
-      "title": "Help that you can see",
-      "text": "Give to checked causes in Uzbekistan. Every stage is reported with receipts.",
+      "title": "Good ideas deserve support.",
+      "text": "Discover projects across Uzbekistan, support the ones that matter to you, and follow their progress every step of the way.",
       "explore": "Browse projects",
       "start": "Start a fundraiser",
       "cardKicker": "Raising now",
@@ -466,11 +466,11 @@
       "statsLive": "Live projects",
       "photos": "Photo credits",
       "trust1": "No commission",
-      "trust2": "Every project is checked",
-      "trust3": "Money is paid out stage by stage",
-      "give": "Donate to a cause",
-      "trust4": "A receipt for every donation",
-      "orStart": "or start a fundraiser"
+      "trust2": "Projects reviewed before approval",
+      "trust3": "Funds released in stages",
+      "give": "Explore projects",
+      "trust4": "Spending reports with receipts",
+      "orStart": "Start a fundraiser"
     },
     "pick": {
       "label": "Fundy pick",
@@ -505,16 +505,16 @@
       "start": "See the requirements"
     },
     "projects": {
-      "title": "Causes to support",
+      "title": "Projects worth supporting",
       "empty": "The first projects will be here soon.",
       "emptyCta": "Be one of the first",
-      "soonTitle": "The first projects are being checked",
-      "soonText": "We check every project — its documents, plan and team. Approved ones will appear here.",
-      "soonHow": "How projects are checked",
+      "soonTitle": "The first projects are being reviewed.",
+      "soonText": "We're reviewing project details, budgets and teams. Approved projects will appear here.",
+      "soonHow": "How project review works",
       "errorTitle": "Couldn’t load projects",
       "errorText": "Check your internet connection and try again.",
       "retry": "Try again",
-      "sub": "Pick one close to its goal — your gift can be the one that finishes it."
+      "sub": "Discover projects from people and organisations across Uzbekistan."
     },
     "simple": {
       "title": "How your donation stays safe",
@@ -527,13 +527,13 @@
       "more": "More on how it works"
     },
     "final": {
-      "title": "Raising money for a good cause?",
+      "title": "Have a project in mind?",
       "start": "Start a fundraiser",
-      "text": "Questions? Write to us and we’ll answer.",
-      "contact": "Write to us"
+      "text": "Learn what you need to start a fundraiser on Fundy.",
+      "contact": "Start a fundraiser"
     },
     "causes": {
-      "title": "Find a cause you care about"
+      "title": "Explore by category"
     },
     "safe": {
       "title": "Where the money is",
@@ -547,10 +547,10 @@
     }
   },
   "explore": {
-    "title": "Find a cause to support",
-    "subtitle": "Checked campaigns across Uzbekistan. Money is paid out stage by stage, with receipts.",
+    "title": "Find a project worth supporting.",
+    "subtitle": "Explore projects across Uzbekistan. See their goals, progress, and how contributions will be used.",
     "search": "Search projects",
-    "searchPlaceholder": "Search causes or places (e.g. Fergana)…",
+    "searchPlaceholder": "Search projects or locations…",
     "clearSearch": "Clear search",
     "model": "Funding model",
     "allModels": "All models",
@@ -559,24 +559,24 @@
     "statusLabel": "Status",
     "status": {
       "all": "All projects",
-      "live": "Live now",
+      "live": "Raising funds",
       "funded": "Funded"
     },
     "sortLabel": "Sort by",
     "sort": {
-      "most_funded": "Most funded (%)",
+      "most_funded": "Closest to goal",
       "newest": "Newest",
       "ending_soon": "Ending soon",
-      "most_backers": "Most donors",
-      "target_low": "Smallest goal"
+      "most_backers": "Most supported",
+      "target_low": "Lowest funding goal"
     },
     "category": "Category",
     "all": "All",
     "clearFilters": "Clear filters",
     "resultCount_one": "{{formatted}} project",
     "resultCount_other": "{{formatted}} projects",
-    "emptyTitle": "No projects found",
-    "emptyText": "Try another search or remove some filters.",
+    "emptyTitle": "No matching projects",
+    "emptyText": "Try a different search or clear your filters.",
     "pagination": "Pages",
     "previous": "Previous page",
     "next": "Next page",
@@ -604,9 +604,9 @@
     "experience": "Experience",
     "years_one": "{{count}} year",
     "years_other": "{{count}} years",
-    "raisedOf": "raised of {{goal}} goal",
+    "raisedOf": "raised of {{goal}}",
     "backersLabel": "Donors",
-    "timeLeft": "Time left",
+    "timeLeft": "Days remaining",
     "statusLabel": "Status",
     "contract": {
       "musharakah": "Musharakah partnership",
@@ -649,14 +649,14 @@
     "claimedOf": "{{claimed}} of {{limit}} chosen",
     "soldOut": "Sold out",
     "selectReward": "Choose this reward",
-    "budgetTitle": "Where the money goes",
-    "budgetText": "Every so'm of the {{goal}} goal is planned in advance and published.",
+    "budgetTitle": "How funds will be used",
+    "budgetText": "See the project's planned expenses and how the funding goal is divided.",
     "budgetItem": "Item",
     "budgetDescription": "Description",
     "budgetAmount": "Amount",
     "budgetTotal": "Total goal",
-    "milestonesTitle": "Milestones",
-    "milestonesText": "Money is released to the organiser in stages, after each stage is checked. Approved stages show what was spent, with receipts.",
+    "milestonesTitle": "Project milestones",
+    "milestonesText": "Follow each stage of the project, including its progress, spending reports, and supporting receipts.",
     "milestoneStatus": {
       "pending": "Upcoming",
       "submitted": "Under review",
@@ -678,10 +678,10 @@
     "watchedRisks": "Risks we watch",
     "risksTitle": "Risks and challenges",
     "risksText": "Founders must describe the risks openly before anyone backs their project.",
-    "updatesTitle": "Updates from the founder",
+    "updatesTitle": "Project updates",
     "noUpdates": "No updates yet.",
     "postedBy": "Posted by {{name}}",
-    "commentsTitle": "Questions and comments",
+    "commentsTitle": "Questions & comments",
     "commentsText": "Ask the founder about the budget, timeline or anything else.",
     "commentPlaceholder": "Write a question or a message of support…",
     "postComment": "Post",
@@ -704,8 +704,8 @@
       "raisingNote": "Still raising: until the goal is reached, nobody gets the money. If it isn't reached, donors are refunded. If it is, each part is paid once its stage is done."
     },
     "checks": {
-      "title": "What Fundy checked",
-      "identity": "Founder's identity confirmed",
+      "title": "Project verification",
+      "identity": "Organiser's identity verified",
       "registration": "Registered: {{number}}",
       "budget_one": "Budget published in {{count}} line",
       "budget_other": "Budget published in {{count}} lines",
@@ -720,7 +720,7 @@
     "demoBadge": "Sample",
     "verifiedFund": "Verified fund",
     "verifiedFundNumber": "Verified fund · registration {{number}}",
-    "almostThere": "Almost there",
+    "almostThere": "Nearly funded",
     "fundedLabel": "funded",
     "daysLeftLabel": "days left",
     "almostThereText": "Almost there: only {{left}} left until the goal.",
@@ -756,17 +756,17 @@
     "equityShare": "Your estimated share: {{share}}% of profit (from the {{pool}}% shared with all backers).",
     "equityRisk": "I understand that Musharakah is a partnership: I share in profits and losses, and returns are not guaranteed.",
     "submit": "Confirm {{amount}}",
-    "demoNote": "Demo: no real money is charged.",
-    "successTitle": "Thank you!",
-    "successText": "Your {{amount}} for “{{project}}” has been recorded.",
+    "demoNote": "Demo only. No real payment will be made.",
+    "successTitle": "Contribution recorded",
+    "successText": "Your simulated contribution of {{amount}} to “{{project}}” has been recorded.",
     "successReward": "Reward: {{reward}}",
     "completesGoal": "This amount takes the project to its goal! 🎉",
     "bringsCloser": "This brings the project {{percent}}% closer to its goal.",
     "shareTitle": "Help find one more donor",
     "shareText": "Send it to friends. One share often brings a new donor.",
-    "shareMessage": "I donated to \"{{project}}\". Join me:",
-    "backerTitle": "Thank you for your donation!",
-    "backerFollow": "We'll keep you posted on its progress.",
+    "shareMessage": "I found a project on Fundy worth supporting: “{{project}}”",
+    "backerTitle": "Contribution recorded",
+    "backerFollow": "Explore the project and follow its progress.",
     "shareFriends": "Share with friends",
     "backHome": "Back to home",
     "submitPledge": "Pledge {{amount}}",
