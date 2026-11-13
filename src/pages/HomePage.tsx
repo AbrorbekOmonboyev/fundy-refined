@@ -42,7 +42,7 @@ export function HomePage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Causes to support, nearest to their goal first */}
-        <section className="mt-10 lg:mt-24" aria-labelledby="home-projects">
+        <section className="mt-8 lg:mt-14" aria-labelledby="home-projects">
           <div className="flex items-end justify-between gap-4 mb-6">
             <div>
               <h2 id="home-projects" className="text-[1.625rem] sm:text-3xl text-ink">
@@ -145,15 +145,17 @@ function Hero() {
 
   return (
     <section className="relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 lg:pt-28 pb-6 lg:pb-16">
-        <div className="max-w-3xl text-left">
-          <h1 className="text-[2.5rem] sm:text-5xl lg:text-[3.75rem] leading-[1.04] font-extrabold tracking-[-0.03em] text-ink text-balance">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 lg:pt-20 pb-8 lg:pb-10">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-[2.75rem] sm:text-6xl lg:text-[4.5rem] leading-[1.02] font-extrabold tracking-[-0.03em] text-ink text-balance">
             {t('home.hero.title')}
           </h1>
-          <p className="mt-5 text-lg sm:text-xl text-slate-700 leading-relaxed max-w-xl">{t('home.hero.text')}</p>
+          <p className="mt-5 text-lg sm:text-xl text-slate-700 leading-relaxed max-w-2xl mx-auto">
+            {t('home.hero.text')}
+          </p>
 
           {/* One clear action; starting a fundraiser is a quiet second path on phones */}
-          <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-center gap-4 sm:gap-3">
             <Link
               to={paths.explore}
               className="inline-flex items-center justify-center gap-2 min-h-13 px-8 text-[1.0625rem] font-semibold text-white bg-brand hover:bg-brand-deep rounded-md shadow-sm transition-[transform,background-color] duration-150 active:scale-[0.97]"
@@ -177,7 +179,7 @@ function Hero() {
 
           {/* Why it is safe: checked, stage by stage, receipts */}
           {/* Wide screens only: on phones the safety story has its own section further down */}
-          <ul className="hidden sm:flex mt-6 flex-wrap gap-2 text-sm font-semibold text-ink">
+          <ul className="hidden sm:flex mt-6 flex-wrap justify-center gap-2 text-sm font-semibold text-ink">
             {(
               [
                 [ShieldCheck, 'trust2'],
