@@ -254,7 +254,7 @@ export function ExplorePage() {
             aria-modal="true"
             aria-label={t('explore.filters')}
             onClick={e => e.stopPropagation()}
-            className="w-full max-h-[85vh] overflow-y-auto bg-card rounded-t-3xl p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] space-y-5"
+            className="w-full max-h-[85vh] overflow-y-auto bg-card rounded-t-2xl p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] space-y-5"
           >
             <div className="flex items-center justify-between">
               <h2 className="text-lg text-ink">{t('explore.filters')}</h2>
@@ -284,7 +284,7 @@ export function ExplorePage() {
               <button
                 type="button"
                 onClick={() => setSheetOpen(false)}
-                className="py-3 rounded-full bg-brand text-white text-sm font-semibold"
+                className="py-3 rounded-md bg-brand text-white text-sm font-semibold"
               >
                 {t('explore.showResults', { formatted: formatNumber(total) })}
               </button>
@@ -314,7 +314,7 @@ export function ExplorePage() {
             <button
               type="button"
               onClick={clearAll}
-              className="px-4 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand rounded-full"
+              className="px-4 py-2 text-xs font-semibold text-ink bg-brand-soft hover:bg-brand rounded-md"
             >
               {t('explore.clearFilters')}
             </button>

@@ -13,7 +13,7 @@ export const giving: Localized<Article> = {
         heading: 'Xayriya qanday amalga oshadi',
         bullets: [
           'Loyihani tanlang va istalgan summani xayriya qiling (kamida 10 000 soʻm).',
-          'Click, Payme, Uzcard yoki Humo orqali toʻlang.',
+          'Toʻlov usulini tanlang — Click, Payme, Uzcard yoki Humo (hozircha demoda simulyatsiya qilinadi).',
           'Loyiha yangiliklari va bosqichlar hisobotini kuzatib boring.',
         ],
       },
@@ -21,7 +21,7 @@ export const giving: Localized<Article> = {
         id: 'checks',
         heading: 'Yigʻimlar qanday tekshiriladi',
         bullets: [
-          'Tashkilotchining shaxsi OneID orqali (OneID ulanguncha — video qoʻngʻiroq orqali) tasdiqlanadi.',
+          'Fundy jamoasi har bir tashkilotchini kampaniya chiqishidan oldin koʻrib chiqadi. Davlat ID tekshiruvi (OneID) tez orada ulanadi.',
           'Har bir loyihada soʻmdagi byudjet va bosqichlar boʻladi: nima qilinadi, qachon va pulning qancha qismi.',
           '«Tasdiqlangan fond» belgisi: jamoamiz fondning roʻyxatdan oʻtish raqamini tekshirgan va u loyiha sahifasida koʻrsatiladi.',
         ],
@@ -65,7 +65,7 @@ export const giving: Localized<Article> = {
         heading: 'Как сделать пожертвование',
         bullets: [
           'Выберите проект и пожертвуйте любую сумму (от 10 000 сумов).',
-          'Оплатите через Click, Payme, Uzcard или Humo.',
+          'Выберите способ оплаты — Click, Payme, Uzcard или Humo (пока что в демо имитируется).',
           'Следите за новостями проекта и отчётами по этапам.',
         ],
       },
@@ -73,7 +73,7 @@ export const giving: Localized<Article> = {
         id: 'checks',
         heading: 'Как мы проверяем сборы',
         bullets: [
-          'Личность организатора подтверждается через OneID (пока OneID не подключён — по видеозвонку).',
+          'Команда Fundy проверяет каждого организатора до запуска кампании. Проверка личности через OneID скоро появится.',
           'У каждого проекта есть бюджет в сумах и этапы: что будет сделано, когда и какая часть денег.',
           'Отметка «Проверенный фонд»: наша команда проверила регистрационный номер фонда, и он указан на странице проекта.',
         ],
@@ -117,7 +117,7 @@ export const giving: Localized<Article> = {
         heading: 'How to donate',
         bullets: [
           'Pick a campaign and give any amount (from 10,000 so’m).',
-          'Pay with Click, Payme, Uzcard or Humo.',
+          'Choose a payment method — Click, Payme, Uzcard or Humo (simulated in the demo for now).',
           'Follow the campaign’s updates and its stage reports.',
         ],
       },
@@ -125,7 +125,7 @@ export const giving: Localized<Article> = {
         id: 'checks',
         heading: 'How we check campaigns',
         bullets: [
-          'The organiser’s identity is confirmed with OneID (by video call until OneID is connected).',
+          "Fundy's team reviews every organiser before the campaign goes live. Government ID verification (OneID) is coming.",
           'Every campaign has a budget in so’m and stages: what gets done, when, and what share of the money.',
           '“Verified fund”: our team has checked the fund’s registration number, and it is shown on the campaign page.',
         ],

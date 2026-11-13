@@ -62,7 +62,7 @@ export function AdminProjectsPage() {
             type="button"
             aria-pressed={status === f}
             onClick={() => setStatus(f)}
-            className={`whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold ${
+            className={`whitespace-nowrap rounded-md px-3 py-1.5 text-xs font-semibold ${
               status === f ? 'bg-night text-white' : 'bg-card text-slate-600 border border-slate-200 hover:border-ink'
             }`}
           >

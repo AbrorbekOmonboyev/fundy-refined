@@ -108,7 +108,7 @@ export function WizardShell({
             href={paths.project(draft.project.slug)}
             target="_blank"
             rel="noopener"
-            className="inline-flex items-center gap-2 min-h-11 px-4 rounded-full border border-slate-300 text-sm font-semibold text-ink hover:border-ink"
+            className="inline-flex items-center gap-2 min-h-11 px-4 rounded-md border border-slate-300 text-sm font-semibold text-ink hover:border-ink"
           >
             <Eye className="w-4 h-4" aria-hidden />
             {t('wizard.preview')}

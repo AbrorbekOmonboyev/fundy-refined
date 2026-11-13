@@ -67,7 +67,7 @@ export function BackerSuccess({
         <button
           type="button"
           onClick={() => void share()}
-          className="w-full min-h-12 py-3.5 rounded-full bg-brand hover:bg-brand-deep text-white text-base font-semibold cursor-pointer transition-[transform,background-color] duration-150 active:scale-[0.97]"
+          className="w-full min-h-12 py-3.5 rounded-md bg-brand hover:bg-brand-deep text-white text-base font-semibold cursor-pointer transition-[transform,background-color] duration-150 active:scale-[0.97]"
         >
           {t('contribute.shareFriends')}
         </button>
@@ -77,7 +77,7 @@ export function BackerSuccess({
             onClose();
             navigate(paths.home);
           }}
-          className="w-full min-h-12 py-3.5 rounded-full border border-ink text-ink text-base font-semibold cursor-pointer transition-transform duration-150 active:scale-[0.97]"
+          className="w-full min-h-12 py-3.5 rounded-md border border-ink text-ink text-base font-semibold cursor-pointer transition-transform duration-150 active:scale-[0.97]"
         >
           {t('contribute.backHome')}
         </button>
@@ -85,7 +85,7 @@ export function BackerSuccess({
           <Link
             to={receiptHref}
             onClick={onClose}
-            className="block w-full py-3.5 rounded-full border border-slate-300 text-ink text-sm font-semibold"
+            className="block w-full py-3.5 rounded-md border border-slate-300 text-ink text-sm font-semibold"
           >
             {t('receipt.open')}
           </Link>

@@ -5,7 +5,7 @@ export const about: Localized<Article> = {
     kicker: 'Biz haqimizda',
     title: 'Nega biz Fundyʼni qurmoqdamiz',
     intro:
-      'Fundy — Oʻzbekiston uchun foizsiz kraudfanding platformasi. Biz gʻoyasi bor odamlarni ularni qoʻllab-quvvatlashga tayyor hamjamiyat bilan bogʻlaymiz. Qarzsiz va foizsiz.',
+      'Fundy — Oʻzbekistondagi ezgu ishlar uchun xayriya platformasi. Biz yordam bermoqchi boʻlganlarni ishonchli loyihalar bilan bogʻlaymiz — har bir kampaniya tekshiriladi, pul esa bosqichma-bosqich, hisobotlar bilan sarflanadi.',
     sections: [
       {
         id: 'why',
@@ -46,7 +46,7 @@ export const about: Localized<Article> = {
     kicker: 'О нас',
     title: 'Почему мы делаем Fundy',
     intro:
-      'Fundy — беспроцентная краудфандинговая платформа для Узбекистана. Мы соединяем людей с идеями и сообщество, готовое их поддержать. Без долгов и без процентов.',
+      'Fundy — платформа пожертвований для добрых дел в Узбекистане. Мы соединяем тех, кто хочет помочь, с проверенными проектами — каждая кампания проверяется, а деньги расходуются поэтапно и с отчётами.',
     sections: [
       {
         id: 'why',
@@ -87,7 +87,7 @@ export const about: Localized<Article> = {
     kicker: 'About us',
     title: "Why we're building Fundy",
     intro:
-      'Fundy is an interest-free crowdfunding platform for Uzbekistan. We connect people with ideas to a community ready to back them, without debt and without interest.',
+      'Fundy is a donation platform for good causes in Uzbekistan. We connect people who want to help with causes they can trust — every campaign is checked, and the money is reported stage by stage.',
     sections: [
       {
         id: 'why',

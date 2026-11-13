@@ -91,7 +91,7 @@ function StatusBadge({ status }: { status: 'new' | 'handled' }) {
   const { t } = useTranslation();
   return (
     <span
-      className={`rounded-full px-2.5 py-1 text-xs font-semibold ${status === 'new' ? 'bg-brand text-ink' : 'bg-page text-slate-600'}`}
+      className={`rounded-md px-2.5 py-1 text-xs font-semibold ${status === 'new' ? 'bg-brand text-ink' : 'bg-page text-slate-600'}`}
     >
       {t(`admin.messages.status.${status}`)}
     </span>
@@ -148,7 +148,7 @@ function ContactInbox({ filter }: { filter: Filter }) {
               <div className="flex flex-wrap gap-2">
                 <a
                   href={`mailto:${m.email}?subject=${encodeURIComponent('Fundy')}`}
-                  className="rounded-full bg-brand px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-deep"
+                  className="rounded-md bg-brand px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-deep"
                 >
                   {t('admin.messages.reply')}
                 </a>
@@ -215,7 +215,7 @@ function FeedbackInbox({ filter }: { filter: Filter }) {
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div className="min-w-0">
                     <p className="font-semibold text-ink break-all">
-                      <span className="mr-2 inline-block rounded-full bg-page px-2 py-0.5 text-xs font-semibold text-slate-700 align-middle">
+                      <span className="mr-2 inline-block rounded-md bg-page px-2 py-0.5 text-xs font-semibold text-slate-700 align-middle">
                         {t(`feedback.kinds.${kind}`)}
                       </span>
                       {f.page}
@@ -234,7 +234,7 @@ function FeedbackInbox({ filter }: { filter: Filter }) {
                     href={/^\/(?![/\\])/.test(f.page) ? f.page : '/'}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full bg-brand px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-deep"
+                    className="inline-flex items-center gap-1.5 rounded-md bg-brand px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-deep"
                   >
                     <ExternalLink className="w-3.5 h-3.5" aria-hidden />
                     {t('admin.feedback.openPage')}

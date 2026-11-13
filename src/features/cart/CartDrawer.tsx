@@ -144,7 +144,7 @@ export function CartDrawer({
                       </div>
                       <div className="flex items-center justify-between gap-3">
                         {l.reward && !l.problem ? (
-                          <div className="inline-flex items-center rounded-full border border-slate-300">
+                          <div className="inline-flex items-center rounded-md border border-slate-300">
                             <button
                               type="button"
                               onClick={() => actions.setQuantity(l.rewardId, l.quantity - 1)}
@@ -286,7 +286,7 @@ export function CartDrawer({
               ) : (
                 <Link
                   to={`${paths.login}?next=${encodeURIComponent(`${location.pathname}?cart=open`)}`}
-                  className="block w-full py-3.5 rounded-full bg-brand text-white text-center font-semibold hover:bg-brand-deep"
+                  className="block w-full py-3.5 rounded-md bg-brand text-white text-center font-semibold hover:bg-brand-deep"
                 >
                   {t('cart.loginToPay')}
                 </Link>

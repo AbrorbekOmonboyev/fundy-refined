@@ -25,7 +25,7 @@
   },
   "banner": {
     "label": "Demonstration Prototype:",
-    "full": "Designed for the Uzbekistan market. All transactions, profit distributions, and projects are simulations.",
+    "full": "Designed for the Uzbekistan market. All payments and projects are simulations.",
     "short": "Payments are simulated."
   },
   "footer": {
@@ -40,7 +40,7 @@
     "discover": "Browse projects",
     "startCampaign": "Start a fundraiser",
     "founderDashboard": "Founder Dashboard",
-    "backerDashboard": "Backer Dashboard",
+    "backerDashboard": "My donations",
     "verification": "Trust & Safety",
     "terms": "Terms of Use",
     "copyright": "© {{year}} Fundy (demo version). All rights reserved.",
@@ -134,7 +134,7 @@
     "tooManyReceipts": "You can attach up to 10 receipt photos per stage.",
     "spentInvalid": "Enter the amount spent in so'm, 0 or more.",
     "amountAboveRemaining": "Only {{left}} is left until the goal. Please pledge that much or less.",
-    "organizerNotOpen": "For now only registered funds and people can start fundraisers. Sole traders and companies come with rewards and Musharakah.",
+    "organizerNotOpen": "For now, registered funds and individuals can start donation fundraisers. Sole traders and companies are coming soon.",
     "individualCap": "A person's first fundraiser can raise up to 100 million so'm. After a finished campaign with reports, you can set a larger goal."
   },
   "auth": {
@@ -432,7 +432,7 @@
     "donation": {
       "name": "Donation",
       "subtitle": "For community causes",
-      "text": "Backers give without expecting anything back. Used for school labs, tree planting, health care and local causes.",
+      "text": "Donors give without expecting anything back. Used for school labs, tree planting, health care and local causes.",
       "point1": "Every so'm goes to the published budget",
       "point2": "Verified organisations and teams",
       "cta": "Explore donation projects"
@@ -462,7 +462,7 @@
       "start": "Start a fundraiser",
       "cardKicker": "Raising now",
       "statsRaised": "Raised",
-      "statsBackers": "Backers",
+      "statsBackers": "Donors",
       "statsLive": "Live projects",
       "photos": "Photo credits",
       "trust1": "No commission",
@@ -514,7 +514,7 @@
       "errorTitle": "Couldn’t load projects",
       "errorText": "Check your internet connection and try again.",
       "retry": "Try again",
-      "sub": "Every one is checked. Your gift can be the one that finishes it."
+      "sub": "Pick one close to its goal — your gift can be the one that finishes it."
     },
     "simple": {
       "title": "How your donation stays safe",
@@ -567,7 +567,7 @@
       "most_funded": "Most funded (%)",
       "newest": "Newest",
       "ending_soon": "Ending soon",
-      "most_backers": "Most backers",
+      "most_backers": "Most donors",
       "target_low": "Smallest goal"
     },
     "category": "Category",
@@ -596,8 +596,8 @@
     "score": "Score",
     "funded": "{{percent}}% funded",
     "ofGoal": "of {{goal}}",
-    "backers_one": "{{formatted}} backer",
-    "backers_other": "{{formatted}} backers",
+    "backers_one": "{{formatted}} donor",
+    "backers_other": "{{formatted}} donors",
     "breadcrumb": "Breadcrumb",
     "home": "Home",
     "originalLanguage": "Shown in the original language ({{language}}).",
@@ -605,7 +605,7 @@
     "years_one": "{{count}} year",
     "years_other": "{{count}} years",
     "raisedOf": "raised of {{goal}} goal",
-    "backersLabel": "Backers",
+    "backersLabel": "Donors",
     "timeLeft": "Time left",
     "statusLabel": "Status",
     "contract": {
@@ -687,7 +687,7 @@
     "postComment": "Post",
     "loginToComment": " to ask a question.",
     "noComments": "No questions yet. Ask the first one.",
-    "backerBadge": "Backer",
+    "backerBadge": "Donor",
     "founderReply": "{{name}} (founder)",
     "reply": "Reply",
     "related": "Similar projects",
@@ -701,7 +701,7 @@
       "released": "Paid to the founder",
       "review": "Proof being checked",
       "held": "Waiting for its stage",
-      "raisingNote": "Still raising: until the goal is reached, nobody gets the money. If it isn't reached, backers are refunded. If it is, each part is paid once its stage is done."
+      "raisingNote": "Still raising: until the goal is reached, nobody gets the money. If it isn't reached, donors are refunded. If it is, each part is paid once its stage is done."
     },
     "checks": {
       "title": "What Fundy checked",
@@ -712,7 +712,7 @@
       "score": "Expert score: {{score}}/100 (5 criteria)",
       "verifiedFund": "Verified fund: Fundy checked its registration ({{number}})"
     },
-    "recentBackers": "Recent backers",
+    "recentBackers": "Recent donors",
     "backedFrom": "{{name}}, {{city}}",
     "backed": "{{name}}",
     "previewTitle": "Preview.",
@@ -762,10 +762,10 @@
     "successReward": "Reward: {{reward}}",
     "completesGoal": "This amount takes the project to its goal! 🎉",
     "bringsCloser": "This brings the project {{percent}}% closer to its goal.",
-    "shareTitle": "Help find one more backer",
-    "shareText": "Send it to friends. One share often brings a new backer.",
-    "shareMessage": "I backed \"{{project}}\". Join me:",
-    "backerTitle": "You're a backer!",
+    "shareTitle": "Help find one more donor",
+    "shareText": "Send it to friends. One share often brings a new donor.",
+    "shareMessage": "I donated to \"{{project}}\". Join me:",
+    "backerTitle": "Thank you for your donation!",
     "backerFollow": "We'll keep you posted on its progress.",
     "shareFriends": "Share with friends",
     "backHome": "Back to home",
@@ -795,7 +795,7 @@
       "anonymous": "Hidden from public",
       "refunded": "Refunded",
       "simulated": "simulated",
-      "emptyContributions": "You haven't backed any project yet.",
+      "emptyContributions": "You haven't donated to any project yet.",
       "emptySaved": "No saved projects yet. Tap the bookmark on any project to save it.",
       "money": {
         "title": "Your money",
@@ -820,7 +820,7 @@
       "deleteConfirm": "Delete this draft permanently?",
       "updateTitle": "Update title",
       "updateBody": "What happened?",
-      "updateHint": "Everyone who backed or saved the project will be notified.",
+      "updateHint": "Everyone who donated to or saved the project will be notified.",
       "publish": "Publish update",
       "withdraw": "Withdraw submission",
       "withdrawConfirm": "Take this project back from review? It becomes an editable draft again.",
@@ -1026,7 +1026,7 @@
       "registration_number_missing": "In step 6, add your registration number.",
       "registration_document_missing": "In step 6, upload your registration certificate."
     },
-    "preview": "See it as a backer",
+    "preview": "See it as a donor",
     "example": {
       "title": "A good example",
       "show": "open",

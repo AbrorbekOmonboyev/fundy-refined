@@ -38,7 +38,7 @@ export function AdminReportsPage() {
             type="button"
             aria-pressed={filter === f}
             onClick={() => setFilter(f)}
-            className={`rounded-full px-3 py-1.5 text-xs font-semibold ${filter === f ? 'bg-night text-white' : 'bg-card text-slate-600 border border-slate-200 hover:border-ink'}`}
+            className={`rounded-md px-3 py-1.5 text-xs font-semibold ${filter === f ? 'bg-night text-white' : 'bg-card text-slate-600 border border-slate-200 hover:border-ink'}`}
           >
             {t(`admin.reports.filter.${f}`)}
           </button>

@@ -58,12 +58,13 @@
   --text-sm: 0.9375rem;
   --text-sm--line-height: calc(1.4 / 0.9375);
 
-  /* Friendly, rounded shapes like the big donation sites: 10px controls, 16px cards. */
-  --radius-md: 0.625rem; /* buttons, inputs */
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem; /* panels */
-  --radius-2xl: 1rem; /* cards, images */
-  --radius-3xl: 1.5rem;
+  /* Crisp, nearly-square shapes: 4px controls, 12px cards, 16px large panels. */
+  --radius-sm: 0.125rem; /* 2px: tiny inner details */
+  --radius-md: 0.25rem; /* 4px: buttons, inputs, chips, badges */
+  --radius-lg: 0.375rem; /* 6px: alerts, option cards */
+  --radius-xl: 0.75rem; /* 12px: cards, photos, panels */
+  --radius-2xl: 0.75rem; /* 12px: cards, images (same as xl) */
+  --radius-3xl: 1rem; /* 16px: large lifted panels */
 
   /* Cards sit on a soft lift; floating things (menus, dialogs) keep bigger shadows. */
   --shadow-sm: 0 1px 2px rgb(16 32 24 / 0.06);

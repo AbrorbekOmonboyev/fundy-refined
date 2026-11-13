@@ -61,7 +61,7 @@ export function IdentityCard({ userId }: { userId: string }) {
           {t('identity.verifyOneId')}
         </Button>
         {!oneIdEnabled && (
-          <span className="text-xs font-semibold text-slate-500 rounded-full bg-slate-100 px-2.5 py-1">
+          <span className="text-xs font-semibold text-slate-500 rounded-md bg-slate-100 px-2.5 py-1">
             {t('identity.comingSoon')}
           </span>
         )}

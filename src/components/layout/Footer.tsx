@@ -83,7 +83,7 @@ export function Footer() {
                     ) : (
                       <span className="inline-flex items-center gap-2 min-h-10 text-slate-400">
                         {link.label}
-                        <span className="whitespace-nowrap rounded-full border border-white/20 px-2 py-0.5 text-xs text-slate-300">
+                        <span className="whitespace-nowrap rounded-md border border-white/20 px-2 py-0.5 text-xs text-slate-300">
                           {t('soon.tag')}
                         </span>
                       </span>

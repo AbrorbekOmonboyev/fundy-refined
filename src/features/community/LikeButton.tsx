@@ -51,7 +51,7 @@ export function LikeButton({
       }
       disabled={toggle.isPending}
       title={liked ? t('community.unlike') : t('community.like')}
-      className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold transition-colors ${
+      className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition-colors ${
         liked ? 'bg-brand text-ink' : 'text-slate-500 hover:bg-page hover:text-ink'
       }`}
     >

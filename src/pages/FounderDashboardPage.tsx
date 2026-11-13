@@ -45,7 +45,7 @@ export function FounderDashboardPage() {
         <h1 className="text-[1.75rem] sm:text-4xl text-ink">{t('account.projects')}</h1>
         <Link
           to={paths.newProject}
-          className="px-4 py-2 text-xs font-semibold text-white bg-brand hover:bg-brand-deep rounded-full self-start sm:self-auto"
+          className="px-4 py-2 text-xs font-semibold text-white bg-brand hover:bg-brand-deep rounded-md self-start sm:self-auto"
         >
           + {t('dashboard.founder.newProject')}
         </Link>
@@ -63,7 +63,7 @@ export function FounderDashboardPage() {
           <p className="text-sm text-slate-600 max-w-md mx-auto">{t('dashboard.founder.emptyText')}</p>
           <Link
             to={paths.newProject}
-            className="inline-block px-4 py-2 text-xs font-semibold text-white bg-brand hover:bg-brand-deep rounded-full"
+            className="inline-block px-4 py-2 text-xs font-semibold text-white bg-brand hover:bg-brand-deep rounded-md"
           >
             {t('nav.startProject')}
           </Link>
@@ -159,7 +159,7 @@ function ProjectRow({ project: p }: { project: MyProject }) {
         {editable && (
           <Link
             to={paths.editProject(p.id, 'review')}
-            className="px-3 py-1.5 text-xs font-semibold text-white bg-brand hover:bg-brand-deep rounded-full"
+            className="px-3 py-1.5 text-xs font-semibold text-white bg-brand hover:bg-brand-deep rounded-md"
           >
             {t('dashboard.founder.continue')}
           </Link>

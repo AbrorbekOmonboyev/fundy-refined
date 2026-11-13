@@ -4,11 +4,7 @@ import { useTranslation } from 'react-i18next';
 import {
   ArrowRight,
   BookOpen,
-  Check,
   ClipboardCheck,
-  Clock,
-  Gift,
-  Handshake,
   HeartHandshake,
   Leaf,
   ListChecks,
@@ -18,7 +14,6 @@ import {
   ShieldCheck,
   Sprout,
   Stethoscope,
-  Users,
   Utensils,
   Cpu,
   Sun,
@@ -30,13 +25,12 @@ import { PHOTO_CREDITS } from '@/data/photoCredits';
 import { useProjectList } from '@/features/projects/hooks';
 import { useCategories } from '@/features/reference/useReference';
 import { usePageMeta } from '@/lib/usePageMeta';
-import { DONATION_ONLY } from '@/lib/focus';
 
 /**
  * Home page in the donation-site standard (GoFundMe, charity: water, Kitabisa, JustGiving):
  * a donor-first hero with real photos → causes close to their goal → browse by cause →
- * how a donation stays safe (shown as a real stage trail, not claimed) → a closing band.
- * Phone first. Research notes live in src/index.css and PRODUCT.md.
+ * one quiet nudge for would-be organisers. Phone first; the safety promise lives in the hero
+ * chips and on the Trust & Safety / How-it-works pages. Research notes in src/index.css and PRODUCT.md.
  */
 export function HomePage() {
   const { t } = useTranslation();
@@ -73,7 +67,7 @@ export function HomePage() {
               <button
                 type="button"
                 onClick={() => void projects.refetch()}
-                className="mt-4 inline-flex items-center gap-2 min-h-11 px-5 rounded-full border-2 border-ink text-ink font-semibold hover:bg-page cursor-pointer"
+                className="mt-4 inline-flex items-center gap-2 min-h-11 px-5 rounded-md border-2 border-ink text-ink font-semibold hover:bg-page cursor-pointer"
               >
                 <RefreshCw className="w-4 h-4" aria-hidden />
                 {t('home.projects.retry')}
@@ -91,7 +85,7 @@ export function HomePage() {
               </div>
               <Link
                 to={paths.explore}
-                className="sm:hidden mt-8 flex items-center justify-center gap-2 min-h-12 rounded-full border border-slate-300 bg-card text-base font-semibold text-ink"
+                className="sm:hidden mt-8 flex items-center justify-center gap-2 min-h-12 rounded-md border border-slate-300 bg-card text-base font-semibold text-ink"
               >
                 {t('home.featured.viewAll')}
                 <ArrowRight className="w-4 h-4" aria-hidden />
@@ -119,13 +113,9 @@ export function HomePage() {
         </section>
 
         <Causes />
-
-        <SafeGiving />
-
-        {DONATION_ONLY && <ComingSoon />}
       </div>
 
-      {/* Closing band for organisers and donors */}
+      {/* Closing band: a single nudge for would-be organisers */}
       <section className="mt-16 lg:mt-28 bg-night text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
           <div className="max-w-xl">
@@ -140,20 +130,12 @@ export function HomePage() {
               </Link>
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-            <Link
-              to={paths.startProject}
-              className="inline-flex items-center justify-center min-h-12 px-8 text-base font-semibold text-white bg-brand hover:bg-brand-deep rounded-full"
-            >
-              {t('nav.startProject')}
-            </Link>
-            <Link
-              to={paths.explore}
-              className="inline-flex items-center justify-center min-h-12 px-8 text-base font-semibold text-white border border-white/40 hover:border-white rounded-full"
-            >
-              {t('home.hero.give')}
-            </Link>
-          </div>
+          <Link
+            to={paths.startProject}
+            className="shrink-0 inline-flex items-center justify-center min-h-12 px-8 text-base font-semibold text-white bg-brand hover:bg-brand-deep rounded-md"
+          >
+            {t('nav.startProject')}
+          </Link>
         </div>
       </section>
     </div>
@@ -186,7 +168,7 @@ function Hero() {
           <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-3">
             <Link
               to={paths.explore}
-              className="inline-flex items-center justify-center gap-2 min-h-13 px-8 text-[1.0625rem] font-semibold text-white bg-brand hover:bg-brand-deep rounded-full shadow-sm transition-[transform,background-color] duration-150 active:scale-[0.97]"
+              className="inline-flex items-center justify-center gap-2 min-h-13 px-8 text-[1.0625rem] font-semibold text-white bg-brand hover:bg-brand-deep rounded-md shadow-sm transition-[transform,background-color] duration-150 active:scale-[0.97]"
             >
               {t('home.hero.give')}
               <ArrowRight className="w-5 h-5" aria-hidden />
@@ -199,7 +181,7 @@ function Hero() {
             </Link>
             <Link
               to={paths.startProject}
-              className="hidden sm:inline-flex items-center justify-center min-h-13 px-8 text-[1.0625rem] font-semibold text-ink bg-card border border-slate-300 hover:border-ink rounded-full transition-colors"
+              className="hidden sm:inline-flex items-center justify-center min-h-13 px-8 text-[1.0625rem] font-semibold text-ink bg-card border border-slate-300 hover:border-ink rounded-md transition-colors"
             >
               {t('nav.startProject')}
             </Link>
@@ -215,7 +197,7 @@ function Hero() {
                 [Receipt, 'trust4'],
               ] as const
             ).map(([Icon, key]) => (
-              <li key={key} className="inline-flex items-center gap-1.5 min-h-9 rounded-full bg-brand-soft px-3 py-1.5">
+              <li key={key} className="inline-flex items-center gap-1.5 min-h-9 rounded-md bg-brand-soft px-3 py-1.5">
                 <Icon className="w-4 h-4 shrink-0 text-brand dark:text-brand-light" aria-hidden />
                 {t(`home.hero.${key}`)}
               </li>
@@ -310,133 +292,6 @@ function Causes() {
             </li>
           );
         })}
-      </ul>
-    </section>
-  );
-}
-
-/** How a donation stays safe: the three steps beside an example of a real stage trail. */
-function SafeGiving() {
-  const { t } = useTranslation();
-  const steps = [
-    [1, ClipboardCheck],
-    [2, Users],
-    [3, ListChecks],
-  ] as const;
-
-  return (
-    <section
-      id="how-it-works"
-      className="mt-16 lg:mt-28 scroll-mt-24 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center"
-      aria-labelledby="home-simple"
-    >
-      <div>
-        <h2 id="home-simple" className="text-[1.625rem] sm:text-3xl text-ink">
-          {t('home.simple.title')}
-        </h2>
-        <ol className="mt-8 space-y-6">
-          {steps.map(([i, Icon]) => (
-            <li key={i} className="flex gap-4">
-              <span className="w-12 h-12 shrink-0 rounded-2xl bg-brand-soft text-brand dark:text-brand-light flex items-center justify-center">
-                <Icon className="w-6 h-6" aria-hidden />
-              </span>
-              <div>
-                <h3 className="text-lg font-bold text-ink">{t(`home.simple.s${i}Title`)}</h3>
-                <p className="mt-1 text-base text-slate-700 leading-relaxed">{t(`home.simple.s${i}Text`)}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-        <div className="mt-8">
-          <SeeAll to={`${paths.education}#how-it-works`} label={t('home.simple.more')} />
-        </div>
-      </div>
-
-      {/* An example trail, built from the same parts as a campaign page. Marked as an example. */}
-      <figure className="rounded-3xl bg-card border border-slate-200 shadow-md p-6 sm:p-8">
-        <figcaption className="flex items-center justify-between gap-3">
-          <span className="text-base font-bold text-ink">{t('home.safe.title')}</span>
-          <span className="rounded-full bg-slate-100 text-slate-600 px-2.5 py-1 text-xs font-semibold">
-            {t('home.safe.example')}
-          </span>
-        </figcaption>
-        <ol className="mt-6">
-          <TrailStep done icon={Check} title={t('home.safe.collected')} note={t('home.safe.collectedNote')} />
-          <TrailStep done icon={Receipt} title={t('home.safe.stage1')} note={t('home.safe.stage1Note')} />
-          <TrailStep last title={t('home.safe.stage2')} note={t('home.safe.stage2Note')} />
-        </ol>
-      </figure>
-    </section>
-  );
-}
-
-function TrailStep({
-  done = false,
-  last = false,
-  icon: Icon,
-  title,
-  note,
-}: {
-  done?: boolean;
-  last?: boolean;
-  icon?: LucideIcon;
-  title: string;
-  note: string;
-}) {
-  return (
-    <li className="relative flex gap-4 pb-7 last:pb-0">
-      {/* Solid line = done, dashed = still to come, so the state never depends on colour alone */}
-      {!last && (
-        <span
-          aria-hidden
-          className={`absolute left-[15px] top-9 bottom-1 w-0 border-l-[3px] ${done ? 'border-brand' : 'border-dashed border-slate-300'}`}
-        />
-      )}
-      <span
-        className={`relative w-[33px] h-[33px] shrink-0 rounded-full flex items-center justify-center ${
-          done ? 'bg-brand text-white' : 'border-[3px] border-dashed border-slate-300 bg-card'
-        }`}
-      >
-        {Icon && <Icon className="w-4 h-4" aria-hidden />}
-      </span>
-      <div className="pt-1 min-w-0">
-        <p className="text-base font-semibold text-ink">{title}</p>
-        <p className="mt-0.5 text-sm text-slate-600">{note}</p>
-      </div>
-    </li>
-  );
-}
-
-/** On the roadmap: shown so visitors (and reviewers) see what comes after donations. Not selectable yet. */
-function ComingSoon() {
-  const { t } = useTranslation();
-  const items = [
-    ['reward', Gift],
-    ['equity', Handshake],
-  ] as const;
-  return (
-    <section className="mt-16 lg:mt-28" aria-labelledby="home-soon">
-      <h2 id="home-soon" className="text-[1.625rem] sm:text-3xl text-ink">
-        {t('soon.homeTitle')}
-      </h2>
-      <p className="mt-2 text-base text-slate-600 max-w-2xl">{t('soon.homeText')}</p>
-      <ul className="mt-6 grid gap-4 md:grid-cols-2">
-        {items.map(([m, Icon]) => (
-          <li key={m} className="rounded-3xl border border-dashed border-slate-300 p-6 sm:p-8">
-            <div className="flex items-center justify-between gap-3">
-              <span className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center">
-                <Icon className="w-6 h-6" aria-hidden />
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-warm-soft text-warm-ink px-2.5 py-1 text-xs font-semibold">
-                <Clock className="w-3.5 h-3.5" aria-hidden />
-                {t('soon.tag')}
-              </span>
-            </div>
-            <h3 className="mt-5 text-xl font-bold text-ink">{t(`models.${m}.name`)}</h3>
-            <p className="mt-1 text-sm font-semibold text-slate-600">{t(`models.${m}.subtitle`)}</p>
-            <p className="mt-3 text-base text-slate-700 leading-relaxed">{t(`models.${m}.text`)}</p>
-          </li>
-        ))}
       </ul>
     </section>
   );

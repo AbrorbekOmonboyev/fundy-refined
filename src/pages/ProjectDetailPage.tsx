@@ -220,7 +220,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
         <p className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-sm text-slate-500">
           {!(DONATION_ONLY && project.model === 'donation') && (
             <>
-              <span className="font-semibold text-ink [.app-mode_&]:bg-brand [.app-mode_&]:text-night [.app-mode_&]:px-2.5 [.app-mode_&]:py-0.5 [.app-mode_&]:rounded-full">
+              <span className="font-semibold text-ink [.app-mode_&]:bg-brand [.app-mode_&]:text-night [.app-mode_&]:px-2.5 [.app-mode_&]:py-0.5 [.app-mode_&]:rounded-md">
                 {t(`models.${project.model}.name`)}
               </span>
               <span aria-hidden>·</span>
@@ -380,7 +380,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
               )}
             </div>
 
-            {project.equity && (
+            {!DONATION_ONLY && project.equity && (
               <div className="p-4 border border-slate-200 rounded-xl text-sm space-y-2">
                 <p className="flex items-center gap-1.5 font-bold text-ink">
                   {t(`project.contract.${project.equity.contract_type}`)}
@@ -750,7 +750,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
           <button
             type="button"
             onClick={() => setCartOpen(true)}
-            className="shrink-0 rounded-full bg-brand text-white px-4 py-2 text-sm font-semibold cursor-pointer"
+            className="shrink-0 rounded-md bg-brand text-white px-4 py-2 text-sm font-semibold cursor-pointer"
           >
             {t('cart.view')}
           </button>
@@ -762,7 +762,7 @@ function ProjectView({ project }: { project: ProjectDetail }) {
         <button
           type="button"
           onClick={() => setCartOpen(true)}
-          className="hidden lg:inline-flex fixed z-30 right-6 bottom-6 items-center gap-2 rounded-full bg-brand text-white pl-4 pr-5 py-3 shadow-xl hover:bg-brand-deep cursor-pointer"
+          className="hidden lg:inline-flex fixed z-30 right-6 bottom-6 items-center gap-2 rounded-md bg-brand text-white pl-4 pr-5 py-3 shadow-xl hover:bg-brand-deep cursor-pointer"
         >
           <ShoppingBag className="w-5 h-5 text-brand-light" aria-hidden />
           <span className="text-sm font-semibold font-mono-numbers">{cartLabel}</span>

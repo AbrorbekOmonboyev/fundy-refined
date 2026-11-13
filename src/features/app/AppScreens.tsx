@@ -43,13 +43,13 @@ function WelcomeScreen({ onDone }: { onDone: () => void }) {
       <div className="flex-1 flex items-center justify-center">
         <img src="/brand/fundy-symbol-on-chartreuse.svg" alt="Fundy" className="w-40 h-40" />
       </div>
-      <div className="bg-card rounded-t-3xl px-6 pt-8 pb-[max(2rem,env(safe-area-inset-bottom))] space-y-4">
+      <div className="bg-card rounded-t-2xl px-6 pt-8 pb-[max(2rem,env(safe-area-inset-bottom))] space-y-4">
         <h1 className="text-[2rem] leading-[1.1] text-ink">{t('appWelcome.title')}</h1>
         <p className="text-base text-slate-600">{t('appWelcome.text')}</p>
         <button
           type="button"
           onClick={() => finish()}
-          className="w-full mt-2 py-4 rounded-full bg-night text-brand-light text-base font-semibold cursor-pointer"
+          className="w-full mt-2 py-4 rounded-md bg-night text-brand-light text-base font-semibold cursor-pointer"
         >
           {t('appWelcome.start')}
         </button>
@@ -133,7 +133,7 @@ export function AppHomePage() {
     navigate(q ? `${paths.explore}?q=${encodeURIComponent(q)}` : paths.explore);
   };
   const chip = (active: boolean) =>
-    `shrink-0 px-4 py-2 rounded-full text-sm font-semibold cursor-pointer ${
+    `shrink-0 px-4 py-2 rounded-md text-sm font-semibold cursor-pointer ${
       active ? 'bg-night text-white dark:bg-brand dark:text-night' : 'bg-card border border-slate-200 text-ink'
     }`;
 
@@ -149,7 +149,7 @@ export function AppHomePage() {
           onChange={e => setQuery(e.target.value)}
           placeholder={t('header.search')}
           aria-label={t('header.search')}
-          className="w-full h-12 pl-11 pr-4 rounded-full bg-slate-100 border-0 text-base text-ink placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-ink"
+          className="w-full h-12 pl-11 pr-4 rounded-md bg-slate-100 border-0 text-base text-ink placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-ink"
         />
       </form>
 
@@ -212,7 +212,7 @@ export function SavedPage() {
           <p className="text-sm text-slate-600">{t('appSaved.loginText')}</p>
           <Link
             to={`${paths.login}?next=${encodeURIComponent('/saved')}`}
-            className="inline-block px-6 py-3 rounded-full bg-night text-white text-sm font-semibold dark:bg-brand dark:text-night"
+            className="inline-block px-6 py-3 rounded-md bg-night text-white text-sm font-semibold dark:bg-brand dark:text-night"
           >
             {t('account.login')}
           </Link>

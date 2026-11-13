@@ -11,6 +11,7 @@ import { ProjectCard } from '@/components/ProjectCard';
 import { Alert, Button, PageSpinner } from '@/components/ui';
 import { formatDate, formatMoney, formatNumber } from '@/lib/money';
 import { usePageMeta } from '@/lib/usePageMeta';
+import { DONATION_ONLY } from '@/lib/focus';
 
 type Tab = 'contributions' | 'saved';
 
@@ -33,8 +34,13 @@ export function BackerDashboardPage() {
   const tiles = [
     { label: t('dashboard.backer.total'), value: formatMoney(total, true) },
     { label: t('dashboard.backer.projects'), value: formatNumber(projectsBacked) },
-    { label: t('dashboard.backer.musharakah'), value: formatMoney(musharakah, true) },
-    { label: t('dashboard.backer.rewards'), value: formatNumber(rewards) },
+    // Musharakah and rewards are hidden while the site is donation-only (they would always read 0)
+    ...(DONATION_ONLY
+      ? []
+      : [
+          { label: t('dashboard.backer.musharakah'), value: formatMoney(musharakah, true) },
+          { label: t('dashboard.backer.rewards'), value: formatNumber(rewards) },
+        ]),
   ];
 
   return (
@@ -48,7 +54,7 @@ export function BackerDashboardPage() {
         </div>
         <Link
           to={paths.explore}
-          className="px-4 py-2 text-xs font-semibold text-white bg-brand hover:bg-brand-deep rounded-full self-start sm:self-auto"
+          className="px-4 py-2 text-xs font-semibold text-white bg-brand hover:bg-brand-deep rounded-md self-start sm:self-auto"
         >
           {t('home.hero.explore')}
         </Link>
@@ -214,7 +220,7 @@ function Empty({ text }: { text: string }) {
       <p className="text-sm text-slate-600">{text}</p>
       <Link
         to={paths.explore}
-        className="inline-block px-4 py-2 text-sm font-semibold text-white bg-brand hover:bg-brand-deep rounded-full"
+        className="inline-block px-4 py-2 text-sm font-semibold text-white bg-brand hover:bg-brand-deep rounded-md"
       >
         {t('home.hero.explore')}
       </Link>
@@ -264,7 +270,7 @@ function MoneyStatus({ c }: { c: MyContribution }) {
 function Badge({ tone, children }: { tone: 'rose' | 'slate'; children: ReactNode }) {
   const style = tone === 'rose' ? 'bg-rose-50 text-rose-700' : 'bg-slate-100 text-slate-700';
   return (
-    <span className={`inline-block rounded-full px-2.5 py-1 font-semibold whitespace-nowrap ${style}`}>{children}</span>
+    <span className={`inline-block rounded-md px-2.5 py-1 font-semibold whitespace-nowrap ${style}`}>{children}</span>
   );
 }
 

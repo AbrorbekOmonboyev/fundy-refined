@@ -95,12 +95,12 @@ export function AdminUsersPage() {
                       <p className="font-semibold text-ink">
                         {u.full_name || '—'}
                         {u.role === 'admin' && (
-                          <span className="ml-2 rounded-full bg-night text-brand-light px-2 py-0.5 text-xs font-semibold align-middle">
+                          <span className="ml-2 rounded-md bg-night text-brand-light px-2 py-0.5 text-xs font-semibold align-middle">
                             {t('admin.users.admin')}
                           </span>
                         )}
                         {u.is_blocked && (
-                          <span className="ml-2 rounded-full bg-rose-100 text-rose-800 px-2 py-0.5 text-xs font-semibold align-middle">
+                          <span className="ml-2 rounded-md bg-rose-100 text-rose-800 px-2 py-0.5 text-xs font-semibold align-middle">
                             {t('admin.users.blocked')}
                           </span>
                         )}

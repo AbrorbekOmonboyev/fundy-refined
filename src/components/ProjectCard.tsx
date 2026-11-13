@@ -89,13 +89,13 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
         {(almost || project.verifiedFund !== null) && (
           <div className="absolute left-2.5 bottom-2.5 z-20 flex flex-wrap gap-1.5">
             {almost && (
-              <span className="inline-flex items-center gap-1 rounded-full bg-warm-soft text-warm-ink px-2.5 py-1 text-xs font-semibold shadow-sm">
+              <span className="inline-flex items-center gap-1 rounded-md bg-warm-soft text-warm-ink px-2.5 py-1 text-xs font-semibold shadow-sm">
                 <Flame className="w-3.5 h-3.5 text-warm" aria-hidden />
                 {t('project.almostThere')}
               </span>
             )}
             {project.verifiedFund !== null && (
-              <span className="inline-flex items-center gap-1 rounded-full bg-card text-brand-deep px-2.5 py-1 text-xs font-semibold shadow-sm">
+              <span className="inline-flex items-center gap-1 rounded-md bg-card text-brand-deep px-2.5 py-1 text-xs font-semibold shadow-sm">
                 <BadgeCheck className="w-3.5 h-3.5" aria-hidden />
                 {t('project.verifiedFund')}
               </span>

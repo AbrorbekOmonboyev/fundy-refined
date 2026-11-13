@@ -202,7 +202,7 @@ export function PageFeedback() {
                         type="button"
                         aria-pressed={kind === k}
                         onClick={() => setKind(k)}
-                        className={`rounded-full px-3.5 py-1.5 text-sm font-medium border transition-colors cursor-pointer ${
+                        className={`rounded-md px-3.5 py-1.5 text-sm font-medium border transition-colors cursor-pointer ${
                           kind === k
                             ? 'bg-night text-white border-night'
                             : 'bg-card text-slate-700 border-slate-300 hover:border-ink'

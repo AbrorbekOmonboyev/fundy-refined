@@ -37,7 +37,7 @@ function CrashMessage() {
       <button
         type="button"
         onClick={() => window.location.reload()}
-        className="px-4 py-2 text-sm font-semibold text-white bg-brand hover:bg-brand-deep rounded-full"
+        className="px-4 py-2 text-sm font-semibold text-white bg-brand hover:bg-brand-deep rounded-md"
       >
         {t('errors.reload')}
       </button>

@@ -212,7 +212,7 @@ export function StoryStep({ draft }: { draft: Draft }) {
                 role="tab"
                 aria-selected={otherLang === l}
                 onClick={() => setOtherLang(l)}
-                className={`min-h-11 px-4 rounded-full border text-sm font-semibold cursor-pointer ${
+                className={`min-h-11 px-4 rounded-md border text-sm font-semibold cursor-pointer ${
                   otherLang === l
                     ? 'border-brand bg-brand-soft text-ink ring-1 ring-brand'
                     : 'border-slate-200 text-slate-700 hover:border-slate-400'

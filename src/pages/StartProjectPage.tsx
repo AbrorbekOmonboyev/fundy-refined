@@ -85,7 +85,7 @@ export function StartLandingPage() {
     <div className="flex flex-col sm:flex-row sm:items-center gap-x-5 gap-y-3">
       <Link
         to={`${paths.newProject}?as=${who}`}
-        className="inline-flex items-center justify-center gap-2 min-h-13 px-8 text-[1.0625rem] font-semibold text-white bg-brand hover:bg-brand-deep rounded-full shadow-sm transition-colors"
+        className="inline-flex items-center justify-center gap-2 min-h-13 px-8 text-[1.0625rem] font-semibold text-white bg-brand hover:bg-brand-deep rounded-md shadow-sm transition-colors"
       >
         {t('start.cta')}
         <ArrowRight className="w-5 h-5" aria-hidden />
@@ -120,7 +120,7 @@ export function StartLandingPage() {
                 [Receipt, 'start.perk3'],
               ] as const
             ).map(([Icon, key]) => (
-              <li key={key} className="inline-flex items-center gap-1.5 min-h-9 rounded-full bg-brand-soft px-3 py-1.5">
+              <li key={key} className="inline-flex items-center gap-1.5 min-h-9 rounded-md bg-brand-soft px-3 py-1.5">
                 <Icon className="w-4 h-4 shrink-0 text-brand dark:text-brand-light" aria-hidden />
                 {t(key)}
               </li>
@@ -261,7 +261,7 @@ export function StartLandingPage() {
                         </span>
                       </span>
                       {m === 'donation' ? (
-                        <span className="shrink-0 rounded-full bg-brand-soft text-brand-deep dark:text-brand-light px-2.5 py-1 text-xs font-semibold">
+                        <span className="shrink-0 rounded-md bg-brand-soft text-brand-deep dark:text-brand-light px-2.5 py-1 text-xs font-semibold">
                           {t('soon.open')}
                         </span>
                       ) : (
@@ -343,7 +343,7 @@ export function StartLandingPage() {
           <h2 className="text-3xl sm:text-4xl text-white max-w-xl text-balance">{t('start.closing')}</h2>
           <Link
             to={`${paths.newProject}?as=${who}`}
-            className="inline-flex items-center justify-center gap-2 min-h-13 px-8 text-[1.0625rem] font-semibold text-white bg-brand hover:bg-brand-deep rounded-full shrink-0"
+            className="inline-flex items-center justify-center gap-2 min-h-13 px-8 text-[1.0625rem] font-semibold text-white bg-brand hover:bg-brand-deep rounded-md shrink-0"
           >
             {t('start.cta')}
             <ArrowRight className="w-5 h-5" aria-hidden />
@@ -358,7 +358,7 @@ export function StartLandingPage() {
 function SoonTag() {
   const { t } = useTranslation();
   return (
-    <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-warm-soft text-warm-ink px-2.5 py-1 text-xs font-semibold">
+    <span className="shrink-0 inline-flex items-center gap-1 rounded-md bg-warm-soft text-warm-ink px-2.5 py-1 text-xs font-semibold">
       <Clock className="w-3.5 h-3.5" aria-hidden />
       {t('soon.tag')}
     </span>

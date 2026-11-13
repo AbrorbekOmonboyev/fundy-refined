@@ -69,7 +69,7 @@ function Review({ draft, evaluation }: { draft: Draft; evaluation: Evaluation | 
   return (
     <div className="space-y-6">
       <AdminHeader title={text?.title ?? p.slug} hint={text?.tagline}>
-        <span className="rounded-full bg-brand px-3 py-1 text-xs font-semibold text-ink self-start">
+        <span className="rounded-md bg-brand px-3 py-1 text-xs font-semibold text-ink self-start">
           {t(`status.${p.status}`)}
         </span>
       </AdminHeader>

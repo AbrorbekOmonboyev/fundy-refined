@@ -79,7 +79,7 @@ export function AdminCommentsPage() {
                   {c.parent_id && <> · {t('project.reply')}</>}
                 </span>
                 {c.is_hidden && (
-                  <span className="rounded-full bg-rose-100 text-rose-800 px-2 py-0.5 font-semibold">
+                  <span className="rounded-md bg-rose-100 text-rose-800 px-2 py-0.5 font-semibold">
                     {t('admin.comments.hidden')}
                   </span>
                 )}

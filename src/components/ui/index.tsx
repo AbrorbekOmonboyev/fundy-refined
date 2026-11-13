@@ -1,6 +1,6 @@
 /**
  * Basic form and feedback components, in the Redesign system (DESIGN.md):
- * green pill buttons, 16px inputs, one selected style.
+ * green buttons with 4px corners, 16px-text inputs, one selected style.
  */
 import {
   useId,
@@ -47,7 +47,7 @@ export function Button({
       type={type}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
-      className={`inline-flex items-center justify-center gap-2 rounded-full text-sm font-semibold transition-[color,background-color,border-color,transform] duration-150 active:scale-[0.98] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100 ${
+      className={`inline-flex items-center justify-center gap-2 rounded-md text-sm font-semibold transition-[color,background-color,border-color,transform] duration-150 active:scale-[0.98] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100 ${
         variant === 'link' ? '' : 'min-h-11 px-5 py-2.5'
       } ${BUTTON_STYLES[variant]} ${fullWidth ? 'w-full' : ''} ${className}`}
       {...rest}
@@ -197,7 +197,7 @@ export function ChoiceGroup<T extends string>({
               <span className="flex flex-wrap items-center gap-x-2 gap-y-1 font-medium text-ink">
                 {o.label}
                 {o.tag && (
-                  <span className="rounded-full bg-warm-soft text-warm-ink px-2 py-0.5 text-xs font-semibold">
+                  <span className="rounded-md bg-warm-soft text-warm-ink px-2 py-0.5 text-xs font-semibold">
                     {o.tag}
                   </span>
                 )}

@@ -12,6 +12,7 @@ import type { Database } from '@/lib/database.types';
 import { BackerSuccess } from '@/features/projects/BackerSuccess';
 import { paths } from '@/app/routes';
 import { PAYMENT_DAYS, REGISTRATION_DAYS, expectedChargeDate } from '@/features/wizard/organizer';
+import { DONATION_ONLY } from '@/lib/focus';
 
 type PaymentMethod = Database['public']['Enums']['payment_method'];
 /** Optional tip for Fundy, as a share of the donation. Starts at 0: the donor chooses. */
@@ -245,7 +246,7 @@ export function ContributeDialog({
                       setAmountText(null);
                     }}
                     aria-pressed={amount === p}
-                    className={`relative min-h-14 rounded-2xl border text-base font-semibold font-mono-numbers transition-colors cursor-pointer ${
+                    className={`relative min-h-14 rounded-md border text-base font-semibold font-mono-numbers transition-colors cursor-pointer ${
                       amount === p
                         ? 'border-brand bg-brand-soft text-ink ring-1 ring-brand'
                         : 'border-slate-200 text-slate-700 hover:border-slate-400'
@@ -267,7 +268,7 @@ export function ContributeDialog({
                     setAmount(parseAmount(e.target.value));
                   }}
                   onBlur={() => setAmountText(null)}
-                  className="w-full min-h-12 rounded-2xl border border-slate-300 bg-card px-4 py-3 text-lg font-semibold font-mono-numbers text-ink focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
+                  className="w-full min-h-12 rounded-md border border-slate-300 bg-card px-4 py-3 text-lg font-semibold font-mono-numbers text-ink focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                 />
               </label>
               <p className="text-xs text-slate-500">
@@ -277,7 +278,7 @@ export function ContributeDialog({
               {impact && <p className="text-sm font-medium text-ink">{impact}</p>}
             </fieldset>
 
-            {project.equity && (
+            {!DONATION_ONLY && project.equity && (
               <div className="rounded-lg bg-page border border-slate-200 p-3 text-xs text-ink">
                 {t('contribute.equityShare', {
                   share: formatNumber(share, 2),
@@ -297,7 +298,7 @@ export function ContributeDialog({
                       type="button"
                       onClick={() => setTipPercent(p)}
                       aria-pressed={tipPercent === p}
-                      className={`min-h-11 rounded-full border text-sm font-semibold font-mono-numbers cursor-pointer ${
+                      className={`min-h-11 rounded-md border text-sm font-semibold font-mono-numbers cursor-pointer ${
                         tipPercent === p
                           ? 'border-brand bg-brand-soft text-ink ring-1 ring-brand'
                           : 'border-slate-200 text-slate-700 hover:bg-slate-50'
@@ -330,7 +331,7 @@ export function ContributeDialog({
                       type="button"
                       aria-pressed={method === m}
                       onClick={() => setMethod(m)}
-                      className={`min-h-11 px-4 rounded-full border text-sm font-semibold cursor-pointer ${
+                      className={`min-h-11 px-4 rounded-md border text-sm font-semibold cursor-pointer ${
                         method === m
                           ? 'border-brand bg-brand-soft text-ink ring-1 ring-brand'
                           : 'border-slate-200 text-slate-700 hover:bg-slate-50'
@@ -353,7 +354,7 @@ export function ContributeDialog({
               {t('contribute.anonymous')}
             </label>
 
-            {project.model === 'equity' && (
+            {!DONATION_ONLY && project.model === 'equity' && (
               <label className="flex items-start gap-2 text-xs text-slate-700 rounded-lg border border-amber-200 bg-amber-50 p-3">
                 <input
                   type="checkbox"

@@ -25,7 +25,7 @@
   },
   "banner": {
     "label": "Demo versiya:",
-    "full": "Oʻzbekiston bozori uchun ishlab chiqilgan. Toʻlovlar, foyda taqsimoti va loyihalar hozircha simulyatsiya.",
+    "full": "Oʻzbekiston bozori uchun moʻljallangan. Barcha toʻlovlar va loyihalar simulyatsiya.",
     "short": "Toʻlovlar hozircha simulyatsiya."
   },
   "footer": {
@@ -40,7 +40,7 @@
     "discover": "Loyihalarni koʻrish",
     "startCampaign": "Yigʻim boshlash",
     "founderDashboard": "Asoschi kabineti",
-    "backerDashboard": "Homiy kabineti",
+    "backerDashboard": "Xayriyalarim",
     "verification": "Ishonch va xavfsizlik",
     "terms": "Foydalanish shartlari",
     "copyright": "© {{year}} Fundy (demo versiya). Barcha huquqlar himoyalangan.",
@@ -134,7 +134,7 @@
     "tooManyReceipts": "Har bir bosqichga 10 tagacha chek rasmi biriktirish mumkin.",
     "spentInvalid": "Sarflangan summani soʻmda kiriting, 0 yoki undan koʻp.",
     "amountAboveRemaining": "Maqsadgacha faqat {{left}} qoldi. Shuncha yoki kamroq summa kiriting.",
-    "organizerNotOpen": "Hozircha faqat roʻyxatdagi fondlar va shaxslar yigʻim boshlay oladi. YaTT va kompaniyalar mukofot va mushoraka bilan qoʻshiladi.",
+    "organizerNotOpen": "Hozircha roʻyxatdan oʻtgan fondlar va jismoniy shaxslar xayriya yigʻimlarini boshlashi mumkin. YaTT va kompaniyalar tez orada qoʻshiladi.",
     "individualCap": "Shaxsning birinchi yigʻimi 100 mln soʻmgacha boʻlishi mumkin. Hisobotlari bilan yakunlangan yigʻimdan keyin kattaroq maqsad qoʻyishingiz mumkin."
   },
   "auth": {
@@ -432,7 +432,7 @@
     "donation": {
       "name": "Xayriya",
       "subtitle": "Jamiyat uchun ezgu ishlar",
-      "text": "Homiylar hech narsa kutmasdan yordam beradi. Maktab laboratoriyalari, koʻkalamzorlashtirish, sogʻliqni saqlash va jamoat tashabbuslari uchun.",
+      "text": "Xayriyachilar evaziga hech narsa kutmasdan yordam beradi. Maktab laboratoriyalari, koʻkalamzorlashtirish, sogʻliqni saqlash va jamoat tashabbuslari uchun.",
       "point1": "Har bir soʻm eʼlon qilingan byudjetga sarflanadi",
       "point2": "Tekshirilgan tashkilotlar va jamoalar",
       "cta": "Xayriya yigʻimlarini koʻrish"
@@ -462,7 +462,7 @@
       "start": "Yigʻim boshlash",
       "cardKicker": "Hozir mablagʻ yigʻmoqda",
       "statsRaised": "Toʻplangan mablagʻ",
-      "statsBackers": "Homiylar",
+      "statsBackers": "Xayriyachilar",
       "statsLive": "Faol loyihalar",
       "photos": "Foto mualliflari",
       "trust1": "Komissiyasiz",
@@ -514,7 +514,7 @@
       "errorTitle": "Loyihalarni yuklab boʻlmadi",
       "errorText": "Internet aloqasini tekshirib, qayta urinib koʻring.",
       "retry": "Qayta urinish",
-      "sub": "Har biri tekshirilgan. Ehtimol, aynan sizning xayriyangiz yigʻimni yakunlaydi."
+      "sub": "Maqsadiga yaqin birini tanlang — ehtimol, aynan sizning xayriyangiz yigʻimni yakunlaydi."
     },
     "simple": {
       "title": "Xayriyangiz qanday himoyalanadi",
@@ -567,7 +567,7 @@
       "most_funded": "Maqsadga eng yaqin (%)",
       "newest": "Eng yangi",
       "ending_soon": "Tez tugaydigan",
-      "most_backers": "Eng koʻp homiy",
+      "most_backers": "Eng koʻp xayriyachi",
       "target_low": "Eng kichik maqsad"
     },
     "category": "Kategoriya",
@@ -596,8 +596,8 @@
     "score": "Ball",
     "funded": "{{percent}}% toʻplandi",
     "ofGoal": "/ {{goal}}",
-    "backers_one": "{{formatted}} homiy",
-    "backers_other": "{{formatted}} homiy",
+    "backers_one": "{{formatted}} xayriyachi",
+    "backers_other": "{{formatted}} xayriyachi",
     "breadcrumb": "Yoʻl",
     "home": "Bosh sahifa",
     "originalLanguage": "Asl tilda koʻrsatilmoqda ({{language}}).",
@@ -605,7 +605,7 @@
     "years_one": "{{count}} yil",
     "years_other": "{{count}} yil",
     "raisedOf": "maqsad: {{goal}}",
-    "backersLabel": "Homiylar",
+    "backersLabel": "Xayriyachilar",
     "timeLeft": "Qolgan vaqt",
     "statusLabel": "Holat",
     "contract": {
@@ -687,7 +687,7 @@
     "postComment": "Yuborish",
     "loginToComment": " va savol bering.",
     "noComments": "Hozircha savollar yoʻq. Birinchi boʻlib soʻrang.",
-    "backerBadge": "Homiy",
+    "backerBadge": "Xayriyachi",
     "founderReply": "{{name}} (asoschi)",
     "reply": "Javob berish",
     "related": "Oʻxshash loyihalar",
@@ -701,7 +701,7 @@
       "released": "Asoschiga berildi",
       "review": "Dalil tekshirilmoqda",
       "held": "Bosqichni kutmoqda",
-      "raisingNote": "Mablagʻ yigʻilmoqda. Maqsadga yetguncha pul hech kimga berilmaydi. Yetmasa, pul homiylarga qaytariladi. Yetsa, har bir bosqich bajarilgach uning ulushi beriladi."
+      "raisingNote": "Hali yigʻilmoqda: maqsadga yetguncha pul hech kimga oʻtmaydi. Yetmasa, xayriyachilarga qaytariladi. Yetsa, har bir qism oʻz bosqichi bajarilgach toʻlanadi."
     },
     "checks": {
       "title": "Fundy nimalarni tekshirdi",
@@ -712,7 +712,7 @@
       "score": "Ekspert bahosi: {{score}}/100 (5 mezon)",
       "verifiedFund": "Tasdiqlangan fond: Fundy uning roʻyxatdan oʻtganini tekshirdi ({{number}})"
     },
-    "recentBackers": "Soʻnggi homiylar",
+    "recentBackers": "Soʻnggi xayriyachilar",
     "backedFrom": "{{name}}, {{city}}",
     "backed": "{{name}}",
     "previewTitle": "Oldindan koʻrish.",
@@ -762,10 +762,10 @@
     "successReward": "Mukofot: {{reward}}",
     "completesGoal": "Bu summa loyihani maqsadga yetkazadi! 🎉",
     "bringsCloser": "Bu summa loyihani maqsadga yana {{percent}}% yaqinlashtiradi.",
-    "shareTitle": "Yana bitta homiy topishga yordam bering",
-    "shareText": "Doʻstlaringizga yuboring. Bitta ulashish koʻpincha yangi homiy olib keladi.",
-    "shareMessage": "Men «{{project}}» loyihasini qoʻllab-quvvatladim. Siz ham qoʻshiling:",
-    "backerTitle": "Siz homiysiz!",
+    "shareTitle": "Yana bitta xayriyachi topishga yordam bering",
+    "shareText": "Doʻstlaringizga yuboring. Bitta ulashish koʻpincha yangi xayriyachi olib keladi.",
+    "shareMessage": "Men \"{{project}}\" loyihasiga xayriya qildim. Menga qoʻshiling:",
+    "backerTitle": "Xayriyangiz uchun rahmat!",
     "backerFollow": "Loyiha qanday borayotganini sizga xabar qilib turamiz.",
     "shareFriends": "Doʻstlarga ulashish",
     "backHome": "Bosh sahifaga qaytish",
@@ -795,7 +795,7 @@
       "anonymous": "Ochiq koʻrsatilmaydi",
       "refunded": "Qaytarilgan",
       "simulated": "simulyatsiya",
-      "emptyContributions": "Siz hali hech bir loyihani qoʻllab-quvvatlamagansiz.",
+      "emptyContributions": "Hali birorta loyihaga xayriya qilmagansiz.",
       "emptySaved": "Saqlangan loyihalar yoʻq. Saqlash uchun loyihadagi xatchoʻp belgisini bosing.",
       "money": {
         "title": "Pulingiz",
@@ -820,7 +820,7 @@
       "deleteConfirm": "Bu qoralama butunlay oʻchirilsinmi?",
       "updateTitle": "Yangilik sarlavhasi",
       "updateBody": "Nima boʻldi?",
-      "updateHint": "Loyihani qoʻllab-quvvatlagan yoki saqlagan barchaga xabar boradi.",
+      "updateHint": "Loyihaga xayriya qilgan yoki uni saqlagan har bir kishi xabardor qilinadi.",
       "publish": "Eʼlon qilish",
       "withdraw": "Yuborishni qaytarib olish",
       "withdrawConfirm": "Loyiha koʻrib chiqishdan qaytarib olinsinmi? U yana tahrirlanadigan qoralamaga aylanadi.",

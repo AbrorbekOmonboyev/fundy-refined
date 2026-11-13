@@ -12,7 +12,7 @@ export const trust: Localized<Article> = {
         heading: 'Loyihalar qanday tekshiriladi',
         paragraphs: ['Loyiha eʼlon qilinishidan oldin Fundy koʻrib chiqish jamoasi:'],
         bullets: [
-          'Asoschining shaxsini OneID orqali (ulanguncha esa videoqoʻngʻiroqda) va, agar tashkilot boʻlsa, uning roʻyxatdan oʻtganligini (MChJ, YaTT, NNT yoki STIR) tekshiradi. Kompaniyasi yoʻq asoschi birinchi toʻlovdan oldin roʻyxatdan oʻtadi; mushorakada sarmoyadorlar MChJ ochilgandan keyingina toʻlaydi.',
+          'Fundy jamoasi asoschini va loyihani jonli efirga chiqishidan oldin koʻrib chiqadi. Agar tashkilotchi roʻyxatdan oʻtgan fond yoki tashkilot boʻlsa, uning roʻyxatini (MChJ, YaTT, NNT yoki STIR) tekshiradi. Davlat ID tekshiruvi (OneID) tez orada ulanadi.',
           'Hujjatlarni koʻrib chiqadi: roʻyxatdan oʻtganlik guvohnomasi, biznes reja, moliyaviy hisobotlar.',
           'Byudjet maqsadga aniq teng ekanini va bosqichlar mantiqiy ekanini tekshiradi.',
           'Loyihani beshta yoʻnalish boʻyicha baholaydi (har biri 0–20 ball): biznes reja, jamoa, bozor, moliya va xavflarni boshqarish.',
@@ -72,7 +72,7 @@ export const trust: Localized<Article> = {
         heading: 'Как проверяются проекты',
         paragraphs: ['Перед публикацией команда проверки Fundy:'],
         bullets: [
-          'Проверяет личность автора через OneID (пока он не подключён, по видеозвонку) и, если есть организация, её регистрацию (ООО, ИП, ННО или ИНН). Автор без компании регистрируется до первой выплаты; в мушараке инвесторы платят только после регистрации ООО.',
+          'Команда Fundy проверяет автора и проект до публикации. Если организатор — зарегистрированный фонд или организация, Fundy проверяет его регистрацию (ООО, ИП, ННО или ИНН). Проверка личности через государственную систему OneID скоро появится.',
           'Изучает документы: свидетельство о регистрации, бизнес-план, финансовую отчётность.',
           'Проверяет, что бюджет точно равен цели, а этапы логичны.',
           'Оценивает проект по пяти направлениям (0–20 баллов каждое): бизнес-план, команда, рынок, финансы и управление рисками.',
@@ -132,7 +132,7 @@ export const trust: Localized<Article> = {
         heading: 'How projects are checked',
         paragraphs: ["Before a project goes live, Fundy's review team:"],
         bullets: [
-          "Checks the founder's identity with OneID (by video call until OneID is connected) and, if they have an organisation, its registration (MChJ, YaTT, NNT or TIN). A founder without a company registers before the first payout; in Musharakah, investors pay only after the MChJ is registered.",
+          "Fundy's team reviews the founder and the project before it goes live. If the organiser is a registered fund or organisation, Fundy checks its registration (MChJ, YaTT, NNT or TIN). Government ID verification (OneID) is coming.",
           'Reviews documents: registration certificate, business plan, financial statements.',
           'Checks that the budget exactly matches the goal and the milestones make sense.',
           'Scores the project in five areas (0–20 each): business plan, team, market, financials and risk management.',

@@ -118,18 +118,13 @@ export function BasicsStep({ draft }: { draft: Draft | null }) {
         }))}
       />
       {DONATION_ONLY ? (
-        <ChoiceGroup
-          label={t('wizard.basics.model')}
-          value={'donation' as const}
-          onChange={() => set('model', 'donation')}
-          options={(['donation', 'reward', 'equity'] as const).map(m => ({
-            value: m,
-            label: t(`models.${m}.name`),
-            description: m === 'donation' ? t('models.donation.subtitle') : t(`soon.${m}`),
-            disabled: m !== 'donation',
-            tag: m === 'donation' ? undefined : t('soon.tag'),
-          }))}
-        />
+        <div>
+          <p className="text-sm font-medium text-slate-700">{t('wizard.basics.model')}</p>
+          <p className="mt-1.5 flex items-center justify-between gap-3 rounded-md border border-slate-200 bg-page px-3.5 py-2.5 text-base font-semibold text-ink">
+            {t('models.donation.name')}
+            <span className="text-sm font-normal text-slate-500">{t('models.donation.subtitle')}</span>
+          </p>
+        </div>
       ) : (
         <ChoiceGroup
           label={t('wizard.basics.model')}
