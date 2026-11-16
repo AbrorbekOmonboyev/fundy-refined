@@ -120,6 +120,17 @@ async function telegram(method: string, body: unknown) {
   return { ok: res.ok, status: res.status };
 }
 
+/** Constant-time text comparison (hashes first so length is not leaked either). */
+async function safeEqual(a: string, b: string): Promise<boolean> {
+  const te = new TextEncoder();
+  const [x, y] = await Promise.all(
+    [a, b].map(async s => new Uint8Array(await crypto.subtle.digest('SHA-256', te.encode(s)))),
+  );
+  let diff = 0;
+  for (let i = 0; i < x.length; i++) diff |= x[i] ^ y[i];
+  return diff === 0;
+}
+
 const escapeHtml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 /** 1. Messages people send to the bot. */
@@ -322,7 +333,8 @@ Deno.serve(async req => {
   // It tells Telegram to send the bot's messages here.
   const setup = new URL(req.url).searchParams.get('setup');
   if (req.method === 'GET' && setup) {
-    if (!BOT_TOKEN || !WEBHOOK_SECRET || setup !== WEBHOOK_SECRET) return new Response('forbidden', { status: 403 });
+    if (!BOT_TOKEN || !WEBHOOK_SECRET || !(await safeEqual(setup, WEBHOOK_SECRET)))
+      return new Response('forbidden', { status: 403 });
     const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/setWebhook`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -342,7 +354,8 @@ Deno.serve(async req => {
   // Telegram webhook: it sends our secret in this header.
   const telegramSecret = req.headers.get('x-telegram-bot-api-secret-token');
   if (telegramSecret !== null) {
-    if (!WEBHOOK_SECRET || telegramSecret !== WEBHOOK_SECRET) return new Response('forbidden', { status: 403 });
+    if (!WEBHOOK_SECRET || !(await safeEqual(telegramSecret, WEBHOOK_SECRET)))
+      return new Response('forbidden', { status: 403 });
     await handleUpdate(await req.json());
     return new Response('ok');
   }

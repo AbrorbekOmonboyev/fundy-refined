@@ -12,14 +12,6 @@
 
 export const SITE_URL = 'https://www.fundy.uz';
 
-/** Bots that fetch pages to build link previews or search results. */
-export function isPreviewBot(userAgent: string | null): boolean {
-  if (!userAgent) return false;
-  return /telegrambot|facebookexternalhit|facebot|twitterbot|whatsapp|slackbot|linkedinbot|discordbot|vkshare|skypeuripreview|pinterest|redditbot|applebot|googlebot|bingbot|yandex|embedly|bot\b|crawler|spider/i.test(
-    userAgent,
-  );
-}
-
 export type PreviewProject = {
   slug: string;
   cover_image_path: string | null;

@@ -158,7 +158,7 @@ function Hero() {
           <div className="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-center gap-4 sm:gap-3">
             <Link
               to={paths.explore}
-              className="inline-flex items-center justify-center gap-2 min-h-13 px-8 text-[1.0625rem] font-semibold text-white bg-brand hover:bg-brand-deep rounded-md shadow-sm transition-[transform,background-color] duration-150 active:scale-[0.97]"
+              className="inline-flex items-center justify-center gap-2 min-h-13 px-8 text-[1.0625rem] font-semibold text-white bg-brand hover:bg-brand-deep rounded-[10px] shadow-sm transition-[transform,background-color] duration-150 active:scale-[0.97]"
             >
               {t('home.hero.give')}
               <ArrowRight className="w-5 h-5" aria-hidden />
@@ -171,7 +171,7 @@ function Hero() {
             </Link>
             <Link
               to={paths.startProject}
-              className="hidden sm:inline-flex items-center justify-center min-h-13 px-8 text-[1.0625rem] font-semibold text-ink bg-card border border-slate-300 hover:border-ink rounded-md transition-colors"
+              className="hidden sm:inline-flex items-center justify-center min-h-13 px-8 text-[1.0625rem] font-semibold text-ink bg-card border border-slate-300 hover:border-ink rounded-[10px] transition-colors"
             >
               {t('nav.startProject')}
             </Link>
