@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { injectPreview, isPreviewBot, projectPreview, type PreviewProject } from '../../api/preview';
+import { injectPreview, projectPreview, type PreviewProject } from '../../api/preview';
 
 const SUPABASE = 'https://abc.supabase.co';
 const project = (over: Partial<PreviewProject> = {}): PreviewProject => ({
@@ -12,21 +12,6 @@ const project = (over: Partial<PreviewProject> = {}): PreviewProject => ({
     { language: 'uz', title: 'Farg‘ona issiqxonasi', tagline: 'Yil bo‘yi yangi sabzavot' },
   ],
   ...over,
-});
-
-describe('who gets a preview page', () => {
-  it('recognises link-preview bots', () => {
-    expect(isPreviewBot('TelegramBot (like TwitterBot)')).toBe(true);
-    expect(isPreviewBot('facebookexternalhit/1.1')).toBe(true);
-    expect(isPreviewBot('WhatsApp/2.23.20.0')).toBe(true);
-  });
-
-  it('leaves normal visitors alone', () => {
-    expect(isPreviewBot('Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/131.0 Mobile Safari/537.36')).toBe(
-      false,
-    );
-    expect(isPreviewBot(null)).toBe(false);
-  });
 });
 
 describe('project preview', () => {

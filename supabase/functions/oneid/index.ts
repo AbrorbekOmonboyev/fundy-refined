@@ -71,9 +71,20 @@ async function makeState(userId: string, returnTo: string) {
 }
 async function readState(state: string): Promise<{ u: string; r: string } | null> {
   const [payload, sig] = state.split('.');
-  if (!payload || !sig || (await sign(payload)) !== sig) return null;
+  if (!payload || !sig || !(await safeEqual(await sign(payload), sig))) return null;
   const data = JSON.parse(atob(payload.replace(/-/g, '+').replace(/_/g, '/')));
   return Date.now() < data.e ? data : null;
+}
+
+/** Constant-time text comparison (hashes first so length is not leaked either). */
+async function safeEqual(a: string, b: string): Promise<boolean> {
+  const te = new TextEncoder();
+  const [x, y] = await Promise.all(
+    [a, b].map(async s => new Uint8Array(await crypto.subtle.digest('SHA-256', te.encode(s)))),
+  );
+  let diff = 0;
+  for (let i = 0; i < x.length; i++) diff |= x[i] ^ y[i];
+  return diff === 0;
 }
 
 /** Only paths on fundy.uz, e.g. /start/abc/founder. */
